@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>求职者注册</title>
+
+    <!--stylesheet-->
+    <link type="text/css" rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.css">
+    <link type="text/css" rel="stylesheet" href="stylesheet/main.css">
+    <!--javascript-->
+    <script src="javascript/jquery-3.2.1.js"></script>
+    <script src="bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+    <script src="javascript/register_person.js"></script>
+</head>
+<body>
+    <div class="container">
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Brand</a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li><a href="index.html">首页</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Action</a></li>
+                                <li><a href="#">Another action</a></li>
+                                <li><a href="#">Something else here</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="#">Separated link</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="#">One more separated link</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <form class="navbar-form navbar-left">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Search">
+                        </div>
+                        <button type="submit" class="btn btn-default">Submit</button>
+                    </form>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">登录<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+                                        会员登录
+                                    </button>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </nav>
+        <form>
+        <div class="row center-block">
+            <div class="col-md-2 col-sm-4">
+                <label>用&nbsp;户&nbsp;名:</label>
+            </div>
+            <div class="col-md-4">
+                <input type="text" id="job_nickname" placeholder="username">
+            </div>
+        </div>
+        <div class="row center-block">
+            <div class="col-md-2 col-sm-4">
+                <label>密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码:</label>
+            </div>
+            <div class="col-md-4">
+                <input type="password" id="job_password" placeholder="password">
+            </div>
+        </div>
+        <div class="row center-block">
+            <div class="col-md-2 col-sm-4">
+                <label>确认密码:</label>
+            </div>
+            <div class="col-md-6">
+                <input type="password" id="confirm_password" onkeyup="conf_pwd()" placeholder="password">
+                <span id="confirm_password_box" style="color: red"></span>
+            </div>
+        </div>
+        <div class="row center-block">
+            <div class="col-md-2 col-sm-4">
+                <label>真实姓名:</label>
+            </div>
+            <div class="col-md-4">
+                <input type="text" id="job_name" placeholder="name">
+            </div>
+        </div>
+        <div class="row center-block">
+            <div class="col-md-2 col-sm-4">
+                <label>联系电话:</label>
+            </div>
+            <div class="col-md-4">
+                <input type="text" id="job_telephone" placeholder="telephone">
+            </div>
+        </div>
+        <div class="row center-block">
+            <div class="col-md-2 col-sm-4">
+                <label>电子邮件:</label>
+            </div>
+            <div class="col-md-4">
+                <input type="text" id="job_email" placeholder="e-mail">
+            </div>
+        </div>
+            <input type="button" value="注册" onclick="register()">
+            <input type="reset" value="重置">
+        </form>
+
+    </div>
+
+</body>
+</html>
