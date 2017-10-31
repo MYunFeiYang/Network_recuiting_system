@@ -17,7 +17,7 @@ function register() {
     user.job_telephone=document.getElementById("job_telephone").value;
     user.job_email=document.getElementById("job_email").value;
     //alert(JSON.stringify(user));
-    ajax_register(JSON.stringify(user));
+    ajax_register(user);
 }
 function ajax_register(user) {
     $.ajax({
@@ -26,10 +26,10 @@ function ajax_register(user) {
         type:"POST",
         dataType:"JOSN",
         fail:function (result) {
-
+            console.log(result);
         },
         success:function (result) {
-
+            alert("1");
         }
 
     });
