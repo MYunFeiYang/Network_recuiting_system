@@ -23,14 +23,14 @@ function ajax_register(user) {
     $.ajax({
         url:"http://localhost:8080/Network_recuiting_system/register_person.do",
         data:user,
+        async:true,
         type:"POST",
-        dataType:"JOSN",
-        fail:function (result) {
-            console.log(result);
+        dataType:"JSON",
+        fail:function (data) {
+            alert("fail");
         },
-        success:function (result) {
-            alert("1");
+        success:function (data) {
+            alert("success");
         }
-
     });
 }
