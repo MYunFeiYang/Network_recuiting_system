@@ -41,6 +41,15 @@ table tr td {
     padding: 8px;
     border-radius:5px;
 }
+.alert-success{
+    margin: auto;
+    width: 60%;
+    text-align: center;
+    color: lightseagreen;
+    border: 1px solid lightseagreen;
+    padding: 8px;
+    border-radius:5px;
+}
 .alert-warning {
     animation: move 1s 3;
 }

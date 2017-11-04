@@ -86,7 +86,8 @@
                     <span class="input-group-btn">
                         <button class="btn btn-default glyphicon glyphicon-user"> 用户名</button>
                     </span>
-                    <input type="text" class="form-control" id="com_nickname" placeholder="用户名">
+                    <input type="text" class="form-control" id="com_nickname" onkeyup="reg_username()"
+                           placeholder="用户名">
                 </div>
             </div>
         </div>
@@ -96,7 +97,7 @@
                     <span class="input-group-btn">
                         <button class="btn btn-default glyphicon glyphicon-lock">密码</button>
                     </span>
-                    <input type="text" class="form-control" id="com_password" placeholder="密码">
+                    <input type="text" class="form-control" onkeyup="reg_pwd()" id="com_password" placeholder="密码">
                 </div>
             </div>
         </div>
@@ -145,9 +146,9 @@
             <div class="col-md-12">
                 <div class="input-group">
                     <span class="input-group-btn">
-                        <button class="btn btn-default glyphicon glyphicon-envelope">电子邮件</button>
+                        <button class="btn btn-default glyphicon glyphicon-envelope">QQ邮箱</button>
                     </span>
-                    <input type="text" class="form-control" id="com_email" placeholder="电子邮件">
+                    <input type="text" class="form-control" onkeyup="reg_email()" id="com_email" placeholder="电子邮件">
                 </div>
             </div>
         </div>
@@ -174,10 +175,12 @@
         </div>
         <div class="row center-block">
             <div class="col-md-6">
-                <input  style="padding: 5px 20px;margin: 10px auto" class="bg-primary center-block" type="button" value="注册" onclick="register()">
+                <input style="padding: 5px 20px;margin: 10px auto" class="bg-primary center-block" type="button"
+                       value="注册" onclick="register()">
             </div>
             <div class="col-md-6">
-                <input  style="padding: 5px 20px;margin-top: 10px" type="reset" class="bg-primary center-block" value="重置">
+                <input style="padding: 5px 20px;margin-top: 10px" type="reset" class="bg-primary center-block"
+                       value="重置">
             </div>
         </div>
     </form>

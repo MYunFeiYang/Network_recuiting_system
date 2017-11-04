@@ -87,7 +87,7 @@
                     <span class="input-group-btn">
                         <button class="btn btn-default glyphicon glyphicon-user">用户名</button>
                     </span>
-                    <input type="text" class="form-control" id="job_nickname" placeholder="用户名">
+                    <input type="text" class="form-control" id="job_nickname" onkeyup="reg_username()" placeholder="用户名">
                 </div>
             </div>
         </div>
@@ -97,7 +97,7 @@
                     <span class="input-group-btn">
                         <button class="btn btn-default glyphicon glyphicon-lock">密码</button>
                     </span>
-                    <input type="text" class="form-control" id="job_password" placeholder="密码">
+                    <input type="text" class="form-control" id="job_password" placeholder="密码" onkeyup="reg_pwd()">
                 </div>
             </div>
         </div>
@@ -135,9 +135,9 @@
             <div class="col-md-12">
                 <div class="input-group">
                     <span class="input-group-btn">
-                        <button class="btn btn-default glyphicon glyphicon-envelope">电子邮件</button>
+                        <button class="btn btn-default glyphicon glyphicon-envelope">QQ邮箱</button>
                     </span>
-                    <input type="text" class="form-control" id="job_email" placeholder="电子邮件">
+                    <input type="email" class="form-control" id="job_email" onclick="reg_email()" onkeyup="reg_email()" placeholder="电子邮件">
                 </div>
             </div>
         </div>
