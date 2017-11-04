@@ -1,5 +1,5 @@
 function conf_pwd() {
-    var password=document.getElementById("job_password").value;
+    var password=document.getElementById("com_password").value;
     var confirm_password=document.getElementById("confirm_password").value;
     //alert(confirm_password);
     if(password==confirm_password){
@@ -11,19 +11,22 @@ function conf_pwd() {
     }
 }
 function register() {
-    var user={};
-    user.job_nickname=document.getElementById("job_nickname").value;
-    user.job_password=document.getElementById("job_password").value;
-    user.job_name=document.getElementById("job_name").value;
-    user.job_telephone=document.getElementById("job_telephone").value;
-    user.job_email=document.getElementById("job_email").value;
-    //alert(JSON.stringify(user));
-    ajax_register(user);
+    var company={};
+    company.com_nickname=document.getElementById("com_nickname").value;
+    company.com_password=document.getElementById("com_password").value;
+    company.com_name=document.getElementById("com_name").value;
+    company.com_industry=document.getElementById("com_industry").value;
+    company.com_telephone=document.getElementById("com_telephone").value;
+    company.com_email=document.getElementById("com_email").value;
+    company.com_address=document.getElementById("com_address").value;
+    company.com_introduction=document.getElementById("com_introduction").value;
+    //alert(JSON.stringify(company));
+    ajax_register(company);
 }
-function ajax_register(user) {
+function ajax_register(company) {
     $.ajax({
-        url:"http://localhost:8080/Network_recuiting_system/register_person.do",
-        data:user,
+        url:"http://localhost:8080/Network_recuiting_system/register_enterprise.do",
+        data:company,
         async:true,
         type:"POST",
         dataType:"JSON",

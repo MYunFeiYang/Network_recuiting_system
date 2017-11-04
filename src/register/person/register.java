@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import connectionDB.connectionDB;
+
 @WebServlet("/register_person.do")
 public class register extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -44,7 +46,12 @@ public class register extends HttpServlet {
 			int tag = ps.executeUpdate();
 			ps.close();
 			if(tag==1){
-				String str = "{'msg':'成功','success':'true'}";
+				String str = "{\"msg\":\"成功\"}";
+		        response.getWriter().print(str);
+		        response.getWriter().flush();;
+		        response.getWriter().close();;
+			}else{
+				String str = "{\"msg\":\"失败\"}";
 		        response.getWriter().print(str);
 		        response.getWriter().flush();;
 		        response.getWriter().close();;
@@ -53,6 +60,5 @@ public class register extends HttpServlet {
 			// TODO 自动生成的 catch 块
 			e.printStackTrace();
 		}
-        //System.out.println(job_nickname);;
     }
 }

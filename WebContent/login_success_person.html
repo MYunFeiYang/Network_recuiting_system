@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>个人登陆成功</title>
+    <!--stylesheet-->
+    <link type="text/css" rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.css">
+    <link type="text/css" rel="stylesheet" href="stylesheet/main.css">
+    <!--javascript-->
+    <script src="javascript/jquery-3.2.1.js"></script>
+    <script src="bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+    <script src="javascript/change_display.js"></script>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3" style="position: relative;top: 30px">
+
+            <ul type="none" id="m">
+                <li onmouseover="show_div('person_data')" onmouseout="hidden_div('person_data')">
+                    个人资料
+                    <ul type="none" style="display: none" id="person_data">
+                        <li>
+                            <a>返回登录窗口</a>
+                        </li>
+                        <li>
+                            <a>修改密码</a>
+                        </li>
+                        <li>
+                            <a>创建个人简历</a>
+                        </li>
+                        <li>
+                            <a>修改我的简历</a>
+                        </li>
+                        <li>
+                            <a>浏览我的简历</a>
+                        </li>
+                    </ul>
+                </li>
+                <li onmouseover="show_div('person_inf')" onmouseout="hidden_div('person_inf')">
+                    个人信息
+                    <ul type="none" style="display: none" id="person_inf">
+                        <li>
+                            <a>个人信息设置</a>
+                        </li>
+                        <li>
+                            <a>修改个人信息</a>
+                        </li>
+                        <li>
+                            <a>收到面试通知</a>
+                        </li>
+                    </ul>
+                </li>
+                <li onmouseover="show_div('query_sys')" onmouseout="hidden_div('query_sys')">
+                   查询系统
+                    <ul type="none" style="display: none" id="query_sys">
+                        <li>
+                            <a href="">自动匹配查询</a>
+                        </li>
+                        <li>
+                            <a>快速查询</a>
+                        </li>
+                    </ul>
+                </li>
+                <li onmouseover="show_div('other')" onmouseout="hidden_div('other')">
+                    其他功能
+                    <ul type="none" style="display: none" id="other">
+                        <li>
+                            <a>退去招聘系统</a>
+                        </li>
+                    </ul>
+                </li>
+                <li style="height: 320px">
+
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-9" style="float: right">
+            <label>下面有适合你的<span></span>条招聘信息:</label>
+            <table>
+                <thead>
+                <tr>
+                    <td>招聘状态</td>
+                    <td>公司名称</td>
+                    <td>招聘职位</td>
+                    <td>所需学历</td>
+                    <td>工作时长</td>
+                    <td>工作地点</td>
+                    <td>操作</td>
+                </tr>
+
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+</div>
+
+</body>
+</html>
