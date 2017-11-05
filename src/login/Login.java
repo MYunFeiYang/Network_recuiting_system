@@ -24,33 +24,61 @@ public class Login extends HttpServlet {
         //以下两句为取消在本地的缓存
         response.setHeader("Cache-Control", "no-cache");
         response.setHeader("Pragma", "no-cache");
-        String job_nickname=request.getParameter("job_nickname");
-        String job_password=request.getParameter("job_password");
+        String login_type=request.getParameter("login_type");
+        System.out.println(login_type);
+        String nickname=request.getParameter("nickname");
+        String password=request.getParameter("password");
         
         connectionDB conndb=new connectionDB();
         Connection conn=conndb.connDB();
-        String sql="select job_id from occupy_registerinf where job_nickname=? and job_password=?";
-        try {
-			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setString(1, job_nickname);
-			ps.setString(2, job_password);
-			ResultSet rs = ps.executeQuery();
-			System.out.println(rs);
-			ps.close();
-			if(rs!=null){
-				String str = "{\"msg\":\"成功\"}";
-		        response.getWriter().print(str);
-		        response.getWriter().flush();;
-		        response.getWriter().close();;
-			}else{
-				String str = "{\"msg\":\"失败\"}";
-		        response.getWriter().print(str);
-		        response.getWriter().flush();;
-		        response.getWriter().close();;
-			}
-		} catch (SQLException e) {
-			// TODO 自动生成的 catch 块
-			e.printStackTrace();
-		}
+        if(login_type.equals("person")){
+        	System.out.println("person");
+        	String sql="select job_id from occupy_person where job_nickname=? and job_password=?";
+            try {
+    			PreparedStatement ps = conn.prepareStatement(sql);
+    			ps.setString(1, nickname);
+    			ps.setString(2, password);
+    			ResultSet rs = ps.executeQuery();
+    			if(rs.next()){
+    				String str = "{\"msg\":\"person_success\"}";
+    		        response.getWriter().print(str);
+    		        response.getWriter().flush();;
+    		        response.getWriter().close();;
+    			}else{
+    				String str = "{\"msg\":\"person_fail\"}";
+    		        response.getWriter().print(str);
+    		        response.getWriter().flush();;
+    		        response.getWriter().close();;
+    			}
+    			ps.close();
+    		} catch (SQLException e) {
+    			// TODO 自动生成的 catch 块
+    			e.printStackTrace();
+    		}
+        }else{
+        	System.out.println("enterprise");
+        	String sql="select com_id from occupy_company where com_nickname=? and com_password=?";
+            try {
+    			PreparedStatement ps = conn.prepareStatement(sql);
+    			ps.setString(1, nickname);
+    			ps.setString(2, password);
+    			ResultSet rs = ps.executeQuery();
+    			if(rs.next()){
+    				String str = "{\"msg\":\"enterprise_success\"}";
+    		        response.getWriter().print(str);
+    		        response.getWriter().flush();;
+    		        response.getWriter().close();;
+    			}else{
+    				String str = "{\"msg\":\"enterprise_fail\"}";
+    		        response.getWriter().print(str);
+    		        response.getWriter().flush();;
+    		        response.getWriter().close();;
+    			}
+    			ps.close();
+    		} catch (SQLException e) {
+    			// TODO 自动生成的 catch 块
+    			e.printStackTrace();
+    		}
+        }
     }
 }

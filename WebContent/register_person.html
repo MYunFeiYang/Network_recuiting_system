@@ -127,7 +127,10 @@
                     <span class="input-group-btn">
                         <button class="btn btn-default glyphicon glyphicon-erase">联系电话</button>
                     </span>
-                    <input type="text" class="form-control" id="job_telephone" placeholder="联系电话">
+                    <input type="text" class="form-control" onkeyup="reg_telephone()" id="job_telephone" placeholder="联系电话">
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" onclick="check_telephone()">验证</button>
+                    </span>
                 </div>
             </div>
         </div>
@@ -142,11 +145,14 @@
             </div>
         </div>
         <div class="row center-block">
-            <div class="col-md-6">
-                <input class="center-block bg-primary" style="padding: 5px 20px;margin-top: 10px" type="button" value="注册" onclick="register()">
+            <div class="col-md-4">
+                <input class="center-block bg-primary" style="padding: 5px 20px;margin-top: 10px" id="reg_btu" disabled="disabled" type="button" value="注册" onclick="register()">
             </div>
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <input class="center-block bg-primary" style="padding: 5px 20px;margin-top: 10px" type="reset" value="重置">
+            </div>
+            <div class="col-md-4">
+                <a href="index.html" style="width:40%;text-align:center;padding: 5px;margin-top: 10px" class="bg-primary center-block">返回登录</a>
             </div>
         </div>
         </div>
