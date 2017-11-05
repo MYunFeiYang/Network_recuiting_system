@@ -58,7 +58,7 @@ function reg_email() {
     if (ePattern.test(email)){
         document.getElementById("confirm_password_box").setAttribute("class","alert-success");
         document.getElementById("confirm_password_box").innerHTML="邮箱通过";
-        document.getElementById('reg_btu').removeAttribute('disabled');
+        document.getElementById("reg_btu").removeAttribute('disabled');
     }else {
         document.getElementById("confirm_password_box").setAttribute("class","alert-warning");
         document.getElementById("confirm_password_box").innerHTML="请输入正确邮箱";

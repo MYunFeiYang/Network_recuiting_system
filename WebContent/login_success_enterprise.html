@@ -14,69 +14,236 @@
 </head>
 <body>
 <div class="container-fluid">
-    <div>
-        <div class="main">
-        <div class="row">
-            <div class="col-md-3 nav_self">
-                <ul type="none" id="menu">
-                    <li onmouseover="show_div('enterprise_data')" onmouseout="hidden_div('enterprise_data')">
-                       企业信息
-                        <ul type="none" style="display: none" id="enterprise_data">
-                            <li><a>返回登录窗口</a></li>
-                            <li><a>修改密码</a></li>
-                            <li><a>创建企业信息</a></li>
-                            <li><a>修改企业信息</a></li>
-                            <li><a>浏览企业信息</a></li>
-                        </ul>
-                    </li>
-                    <li onmouseover="show_div('enterprise_inf')" onmouseout="hidden_div('enterprise_inf')">
-                        招聘信息
-                        <ul type="none" style="display: none" id="enterprise_inf">
-                            <li><a>发布招聘信息</a></li>
-                            <li><a>收到个人简历</a></li>
-                        </ul>
-                    </li>
-                    <li onmouseover="show_div('query_sys')" onmouseout="hidden_div('query_sys')">
-                        查询系统
-                        <ul type="none" style="display: none" id="query_sys">
-                            <li><a>自动匹配查询</a></li>
-                            <li><a>快速查询</a></li>
-                        </ul>
-                    </li>
-                    <li onmouseover="show_div('other')" onmouseout="hidden_div('other')">
-                        其他功能
-                        <ul type="none" style="display: none" id="other">
-                            <li><a>退去招聘系统</a></li>
-                        </ul>
-                    </li>
-                    <li style="height: 320px">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Brand</a>
+            </div>
 
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a href="index.html">首页</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="false">会员<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li title="该功能登录后可用"><a href="#">个人</a> </li>
+                            <li role="separator" class="divider"></li>
+                            <li title="该功能登录后可用"><a href="#">企业</a></li>
+                        </ul>
                     </li>
                 </ul>
-            </div>
-            <div class="col-md-9">
-                <label>下面是像您提交申请的个人信息</label>
-                <table>
-                    <thead>
-                        <tr>
-                            <td>姓名</td>
-                            <td>性别</td>
-                            <td>最高学历</td>
-                            <td>毕业院校</td>
-                            <td>求职状态</td>
-                            <td>求职职位</td>
-                            <td>联系电话</td>
-                            <td>操作</td>
-                        </tr>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="false">登录<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <!-- Button trigger modal -->
+                                <a data-toggle="modal" data-target="#myModal">
+                                    会员登录
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+    <div class="row">
+        <div class="col-md-3 nav_self">
+            <ul type="none" id="menu">
+                <li onmouseover="show_div('enterprise_data')" onmouseout="hidden_div('enterprise_data')">
+                    企业信息
+                    <ul type="none" style="display: none" id="enterprise_data">
+                        <li><a>返回登录窗口</a></li>
+                        <li><a>修改密码</a></li>
+                        <li><a>创建企业信息</a></li>
+                        <li><a>修改企业信息</a></li>
+                        <li><a>浏览企业信息</a></li>
+                    </ul>
+                </li>
+                <li onmouseover="show_div('enterprise_inf')" onmouseout="hidden_div('enterprise_inf')">
+                    招聘信息
+                    <ul type="none" style="display: none" id="enterprise_inf">
+                        <li><a>发布招聘信息</a></li>
+                        <li><a>收到个人简历</a></li>
+                    </ul>
+                </li>
+                <li onmouseover="show_div('query_sys')" onmouseout="hidden_div('query_sys')">
+                    查询系统
+                    <ul type="none" style="display: none" id="query_sys">
+                        <li><a>自动匹配查询</a></li>
+                        <li><a>快速查询</a></li>
+                    </ul>
+                </li>
+                <li onmouseover="show_div('other')" onmouseout="hidden_div('other')">
+                    其他功能
+                    <ul type="none" style="display: none" id="other">
+                        <li><a>退去招聘系统</a></li>
+                    </ul>
+                </li>
+                <li style="height: 320px">
 
-                    </thead>
-                    <tbody>
-
-                    </tbody>
-                </table>
-
-            </div>
+                </li>
+            </ul>
         </div>
+        <div class="col-md-8 main">
+            <div class="row center-block">
+                <div class="col-md-12 center-block">
+                    <div class="input-group">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default">姓名</button>
+                    </span>
+                        <input type="text" class="form-control" id="name" placeholder="姓名">
+                    </div>
+                </div>
+            </div>
+            <div class="row center-block">
+                <div class="col-md-12">
+                    <div class="input-group">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default">年龄</button>
+                    </span>
+                        <input type="text" class="form-control" id="age" placeholder="年龄">
+                    </div>
+                </div>
+            </div>
+            <div class="row center-block">
+                <div class="col-md-12">
+                    <div class="input-group">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default">性别</button>
+                    </span>
+                        <select class="form-control" id="sex">
+                            <option value="man">男</option>
+                            <option value="woman">女</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row center-block">
+                <div class="col-md-12">
+                    <div class="input-group">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default">籍贯</button>
+                    </span>
+                        <input type="text" class="form-control" id="native" placeholder="籍贯">
+                    </div>
+                </div>
+            </div>
+            <div class="row center-block">
+                <div class="col-md-12">
+                    <div class="input-group">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default">毕业学校</button>
+                    </span>
+                        <input type="text" class="form-control" id="collage" placeholder="毕业学校">
+                    </div>
+                </div>
+            </div>
+            <div class="row center-block">
+                <div class="col-md-12">
+                    <div class="input-group">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default">专业</button>
+                    </span>
+                        <input type="text" class="form-control" id="specialty" placeholder="专业">
+                    </div>
+                </div>
+            </div>
+            <div class="row center-block">
+                <div class="col-md-12">
+                    <div class="input-group">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default">教育程度</button>
+                    </span>
+                        <select class="form-control" id="degree">
+                            <option value="">小学</option>
+                            <option value="">初中</option>
+                            <option value="">高中</option>
+                            <option value="">专科</option>
+                            <option value="">本科</option>
+                            <option value="">硕士</option>
+                            <option value="">博士</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row center-block">
+                <div class="col-md-12">
+                    <div class="input-group">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default">入学时间</button>
+                    </span>
+                        <input type="date" class="form-control" id="admission_data">
+                    </div>
+                </div>
+            </div>
+            <div class="row center-block">
+                <div class="col-md-12">
+                    <div class="input-group">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default">毕业时间</button>
+                    </span>
+                        <input type="date" class="form-control" id="graduation_data">
+                    </div>
+                </div>
+            </div>
+            <div class="row center-block">
+                <div class="col-md-12">
+                    <div class="input-group">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default">联系电话</button>
+                    </span>
+                        <input type="text" class="form-control" id="telephone" placeholder="联系电话">
+                    </div>
+                </div>
+            </div>
+            <div class="row center-block">
+                <div class="col-md-12">
+                    <div class="input-group">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default">电子邮箱</button>
+                    </span>
+                        <input type="text" class="form-control" id="email" placeholder="电子邮箱">
+                    </div>
+                </div>
+            </div>
+            <div class="row center-block">
+                <div class="col-md-12">
+                    <div class="input-group">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default">上传简历</button>
+                    </span>
+                        <input type="file" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="row center-block">
+                <div class="col-md-4">
+                    <input class="center-block bg-primary" style="padding: 5px 20px;margin-top: 10px" id="reg_btu"
+                           disabled="disabled" type="button" value="新增岗位">
+                </div>
+                <div class="col-md-4">
+                    <input class="center-block bg-primary" style="padding: 5px 20px;margin-top: 10px" type="reset"
+                           value="修改岗位">
+                </div>
+                <div class="col-md-4">
+                    <input class="center-block bg-primary" style="padding: 5px 20px;margin-top: 10px" type="reset"
+                           value="暂存岗位">
+                </div>
+            </div>
+
         </div>
     </div>
 </div>
