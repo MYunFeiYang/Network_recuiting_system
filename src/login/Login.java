@@ -25,14 +25,12 @@ public class Login extends HttpServlet {
         response.setHeader("Cache-Control", "no-cache");
         response.setHeader("Pragma", "no-cache");
         String login_type=request.getParameter("login_type");
-        System.out.println(login_type);
         String nickname=request.getParameter("nickname");
         String password=request.getParameter("password");
         
         connectionDB conndb=new connectionDB();
         Connection conn=conndb.connDB();
         if(login_type.equals("person")){
-        	System.out.println("person");
         	String sql="select job_id from occupy_person where job_nickname=? and job_password=?";
             try {
     			PreparedStatement ps = conn.prepareStatement(sql);

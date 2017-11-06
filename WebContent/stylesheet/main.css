@@ -21,12 +21,13 @@ form, .main {
     border-radius: 5px;
     border: 1px solid darkseagreen;
 }
-#menu li ul li a{
-    color: #0f0f0f;
-    text-decoration: none;
-}
-#menu li ul li a:hover{
-    text-decoration: none;
+#menu li ul li button{
+    padding: 3px 15px;
+    text-align: center;
+    background-color: gainsboro;
+    border-radius: 5px;
+    border: 1px solid darkseagreen;
+    opacity: 0.5;
 }
 table tr td {
     padding: 5px 20px;

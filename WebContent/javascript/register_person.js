@@ -1,3 +1,4 @@
+
 function reg_username() {
     var uPattern = /^[a-zA-Z0-9_-]{4,16}$/;
     var username=document.getElementById('job_nickname').value;

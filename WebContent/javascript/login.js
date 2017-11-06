@@ -1,4 +1,6 @@
-
+window.onload=function () {
+    show_user();
+}
 function remember_user() {
     var radio=document.getElementById('remember_user').checked;
     if (radio){
@@ -13,11 +15,11 @@ function remember_user() {
     }
 }
 function show_user() {
-    var user_string=document.cookie.split("=")[1];
+    var user_string=document.cookie.split(";")[0].split("=")[1];
     var user=JSON.parse(user_string);
-    //alert(document.getElementById('nickname').innerHTML);
-    document.getElementById("nickname").innerHTML=user.nickname;
-    document.getElementById("password").innerHTML=user.password;
+    //alert(user.nickname);
+    document.getElementById("nickname").value=user.nickname;
+    document.getElementById("password").value=user.password;
 }
 function login() {
     var user={};
