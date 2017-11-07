@@ -1,7 +1,8 @@
 html, head, body {
     margin: 0px;
     padding: 0px;
-    background-color: gainsboro;
+    background-color: #d6e9c6;
+    opacity: 0.9;
 }
 
 .row {
@@ -17,21 +18,16 @@ form, .main {
 #menu li{
     padding: 3px 15px;
     text-align: center;
-    background-color: gainsboro;
     border-radius: 5px;
     border: 1px solid darkseagreen;
 }
-#menu li ul li button{
+#menu li ul li button,#menu li ul li a,.bg-primary{
     padding: 3px 15px;
     text-align: center;
-    background-color: gainsboro;
+    color: #0f0f0f;
     border-radius: 5px;
     border: 1px solid darkseagreen;
-    opacity: 0.5;
-}
-table tr td {
-    padding: 5px 20px;
-    border: 1px solid burlywood;
+    opacity: 0.9;
 }
 .alert-warning {
     margin: auto;
