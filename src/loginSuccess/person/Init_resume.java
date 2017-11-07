@@ -1,4 +1,4 @@
-package Login_success.person;
+package loginSuccess.person;
 
 import java.io.IOException;
 import java.sql.Connection;
