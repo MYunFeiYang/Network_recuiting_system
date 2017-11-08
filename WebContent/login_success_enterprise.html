@@ -14,7 +14,7 @@
 </head>
 <body>
 <div class="container-fluid">
-    <nav class="navbar navbar-default">
+    <nav class="navbar navbar-default col-md-12 navbar-fixed-top" style="z-index: 99999">
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
@@ -36,7 +36,7 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                            aria-expanded="false">会员<span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li title="该功能登录后可用"><a href="#">个人</a> </li>
+                            <li title="该功能登录后可用"><a href="#">个人</a></li>
                             <li role="separator" class="divider"></li>
                             <li title="该功能登录后可用"><a href="#">企业</a></li>
                         </ul>
@@ -45,11 +45,11 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                           aria-expanded="false">登录<span class="caret"></span></a>
+                           aria-expanded="false" id="login">登录<span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li>
+                            <li id="login_out">
                                 <!-- Button trigger modal -->
-                                <a data-toggle="modal" data-target="#myModal">
+                                <a>
                                     会员登录
                                 </a>
                             </li>
@@ -59,37 +59,41 @@
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
     </nav>
+    <ol class="breadcrumb col-md-2" style="position: fixed;top: 54px;margin-left: 36px;z-index: 9999">
+        <li><a href="#">会员</a></li>
+        <li><a href="#">企业</a></li>
+        <li class="active">Data</li>
+    </ol>
     <div class="row">
-        <div class="col-md-3 nav_self">
+        <div class="col-md-3 main" style="position: fixed;top: 120px">
             <ul type="none" id="menu">
                 <li onmouseover="show_div('enterprise_data')" onmouseout="hidden_div('enterprise_data')">
                     企业信息
                     <ul type="none" style="display: none" id="enterprise_data">
-                        <li><a>返回登录窗口</a></li>
-                        <li><a>修改密码</a></li>
-                        <li><a>创建企业信息</a></li>
-                        <li><a>修改企业信息</a></li>
-                        <li><a>浏览企业信息</a></li>
+                        <li><a class="bg-primary">修改注册信息</a></li>
+                        <li><a class="bg-primary">消息通知</a></li>
                     </ul>
                 </li>
                 <li onmouseover="show_div('enterprise_inf')" onmouseout="hidden_div('enterprise_inf')">
-                    招聘信息
+                    岗位信息
                     <ul type="none" style="display: none" id="enterprise_inf">
-                        <li><a>发布招聘信息</a></li>
-                        <li><a>收到个人简历</a></li>
+                        <li><a class="bg-primary">返回首页登录</a></li>
+                        <li><a class="bg-primary">发布招聘信息</a></li>
+                        <li><a class="bg-primary">修改招聘信息</a></li>
+                        <li><a class="bg-primary">浏览招聘信息</a></li>
                     </ul>
                 </li>
                 <li onmouseover="show_div('query_sys')" onmouseout="hidden_div('query_sys')">
                     查询系统
                     <ul type="none" style="display: none" id="query_sys">
-                        <li><a>自动匹配查询</a></li>
-                        <li><a>快速查询</a></li>
+                        <li><a class="bg-primary">自动匹配查询</a></li>
+                        <li><a class="bg-primary">快速查询</a></li>
                     </ul>
                 </li>
                 <li onmouseover="show_div('other')" onmouseout="hidden_div('other')">
                     其他功能
                     <ul type="none" style="display: none" id="other">
-                        <li><a>退去招聘系统</a></li>
+                        <li><a class="bg-primary">退去招聘系统</a></li>
                     </ul>
                 </li>
                 <li style="height: 320px">
@@ -97,150 +101,207 @@
                 </li>
             </ul>
         </div>
-        <div class="col-md-8 main">
-            <div class="row center-block">
-                <div class="col-md-12 center-block">
-                    <div class="input-group">
+        <div class="col-md-8" style="position: absolute;top: 60px;right: 50px">
+            <div class="col-md-12 main center-block" id="register_inf">
+                <div class="page-header">
+                    <h3 style="text-align: center">修改注册信息</h3>
+                </div>
+                <div class="row center-block">
+                    <div class="col-md-12">
+                        <div id="confirm_info_box"></div>
+                    </div>
+                </div>
+                <div class="center-block">
+                    <div class="row center-block">
+                        <div class="col-md-12">
+                            <div class="input-group">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default glyphicon glyphicon-user">用户名</button>
+                    </span>
+                                <input type="text" class="form-control" id="nickname"
+                                       placeholder="用户名">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row center-block">
+                        <div class="col-md-12">
+                            <div class="input-group">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default glyphicon glyphicon-lock">密码</button>
+                    </span>
+                                <input type="text" class="form-control" id="password" placeholder="密码">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row center-block">
+                        <div class="col-md-12">
+                            <div class="input-group">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default glyphicon glyphicon-lock">确认密码</button>
+                    </span>
+                                <input type="text" class="form-control" id="confirm_password" placeholder="确认密码">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row center-block">
+                        <div class="col-md-12">
+                            <div class="input-group">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default glyphicon glyphicon-envelope">QQ邮箱</button>
+                    </span>
+                                <input type="email" class="form-control" id="job_email" placeholder="电子邮件">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row center-block">
+                        <div class="col-md-6">
+                            <input class="btn btn-lg btn-primary center-block" type="button" onclick="reset_user(),init_user(),modify_user()"
+                                   value="确定修改">
+                        </div>
+                        <div class="col-md-6">
+                            <button href="index.html" class="btn btn-lg btn-primary center-block">退出修改</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 main center-block" id="jobs">
+                <div class="page-header">
+                    <h3 style="text-align: center">添加个人简历</h3>
+                </div>
+                <div class="row center-block">
+                    <div class="col-md-12 center-block">
+                        <div class="input-group">
                     <span class="input-group-btn">
                         <button class="btn btn-default">姓名</button>
                     </span>
-                        <input type="text" class="form-control" id="name" placeholder="姓名">
+                            <input type="text" class="form-control" id="name" placeholder="姓名">
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="row center-block">
-                <div class="col-md-12">
-                    <div class="input-group">
+                <div class="row center-block">
+                    <div class="col-md-12">
+                        <div class="input-group">
                     <span class="input-group-btn">
                         <button class="btn btn-default">年龄</button>
                     </span>
-                        <input type="text" class="form-control" id="age" placeholder="年龄">
+                            <input type="text" class="form-control" id="age" placeholder="年龄">
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="row center-block">
-                <div class="col-md-12">
-                    <div class="input-group">
+                <div class="row center-block">
+                    <div class="col-md-12">
+                        <div class="input-group">
                     <span class="input-group-btn">
                         <button class="btn btn-default">性别</button>
                     </span>
-                        <select class="form-control" id="sex">
-                            <option value="man">男</option>
-                            <option value="woman">女</option>
-                        </select>
+                            <select class="form-control" id="sex">
+                                <option value="man">男</option>
+                                <option value="woman">女</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="row center-block">
-                <div class="col-md-12">
-                    <div class="input-group">
+                <div class="row center-block">
+                    <div class="col-md-12">
+                        <div class="input-group">
                     <span class="input-group-btn">
                         <button class="btn btn-default">籍贯</button>
                     </span>
-                        <input type="text" class="form-control" id="native" placeholder="籍贯">
+                            <input type="text" class="form-control" id="origin" placeholder="籍贯">
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="row center-block">
-                <div class="col-md-12">
-                    <div class="input-group">
+                <div class="row center-block">
+                    <div class="col-md-12">
+                        <div class="input-group">
                     <span class="input-group-btn">
                         <button class="btn btn-default">毕业学校</button>
                     </span>
-                        <input type="text" class="form-control" id="collage" placeholder="毕业学校">
+                            <input type="text" class="form-control" id="collage" placeholder="毕业学校">
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="row center-block">
-                <div class="col-md-12">
-                    <div class="input-group">
+                <div class="row center-block">
+                    <div class="col-md-12">
+                        <div class="input-group">
                     <span class="input-group-btn">
                         <button class="btn btn-default">专业</button>
                     </span>
-                        <input type="text" class="form-control" id="specialty" placeholder="专业">
+                            <input type="text" class="form-control" id="specialty" placeholder="专业">
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="row center-block">
-                <div class="col-md-12">
-                    <div class="input-group">
+                <div class="row center-block">
+                    <div class="col-md-12">
+                        <div class="input-group">
                     <span class="input-group-btn">
                         <button class="btn btn-default">教育程度</button>
                     </span>
-                        <select class="form-control" id="degree">
-                            <option value="">小学</option>
-                            <option value="">初中</option>
-                            <option value="">高中</option>
-                            <option value="">专科</option>
-                            <option value="">本科</option>
-                            <option value="">硕士</option>
-                            <option value="">博士</option>
-                        </select>
+                            <select class="form-control" id="degree">
+                                <option value="小学">小学</option>
+                                <option value="初中">初中</option>
+                                <option value="高中">高中</option>
+                                <option value="专科">专科</option>
+                                <option value="本科">本科</option>
+                                <option value="硕士">硕士</option>
+                                <option value="博士">博士</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="row center-block">
-                <div class="col-md-12">
-                    <div class="input-group">
+                <div class="row center-block">
+                    <div class="col-md-12">
+                        <div class="input-group">
                     <span class="input-group-btn">
                         <button class="btn btn-default">入学时间</button>
                     </span>
-                        <input type="date" class="form-control" id="admission_data">
+                            <input type="date" class="form-control" id="admission_data">
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="row center-block">
-                <div class="col-md-12">
-                    <div class="input-group">
+                <div class="row center-block">
+                    <div class="col-md-12">
+                        <div class="input-group">
                     <span class="input-group-btn">
                         <button class="btn btn-default">毕业时间</button>
                     </span>
-                        <input type="date" class="form-control" id="graduation_data">
+                            <input type="date" class="form-control" id="graduation_data">
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="row center-block">
-                <div class="col-md-12">
-                    <div class="input-group">
+                <div class="row center-block">
+                    <div class="col-md-12">
+                        <div class="input-group">
                     <span class="input-group-btn">
                         <button class="btn btn-default">联系电话</button>
                     </span>
-                        <input type="text" class="form-control" id="telephone" placeholder="联系电话">
+                            <input type="text" class="form-control" id="telephone" placeholder="联系电话">
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="row center-block">
-                <div class="col-md-12">
-                    <div class="input-group">
+                <div class="row center-block">
+                    <div class="col-md-12">
+                        <div class="input-group">
                     <span class="input-group-btn">
                         <button class="btn btn-default">电子邮箱</button>
                     </span>
-                        <input type="text" class="form-control" id="email" placeholder="电子邮箱">
+                            <input type="text" class="form-control" id="email" placeholder="电子邮箱">
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="row center-block">
-                <div class="col-md-12">
-                    <div class="input-group">
-                    <span class="input-group-btn">
-                        <button class="btn btn-default">上传简历</button>
-                    </span>
-                        <input type="file" class="form-control">
+                <div class="row center-block">
+                    <div class="col-md-12">
+                        <div id="confirm_resume_box"></div>
                     </div>
                 </div>
-            </div>
-            <div class="row center-block">
-                <div class="col-md-4">
-                    <input class="center-block bg-primary" style="padding: 5px 20px;margin-top: 10px" id="reg_btu"
-                           disabled="disabled" type="button" value="新增岗位">
-                </div>
-                <div class="col-md-4">
-                    <input class="center-block bg-primary" style="padding: 5px 20px;margin-top: 10px" type="reset"
-                           value="修改岗位">
-                </div>
-                <div class="col-md-4">
-                    <input class="center-block bg-primary" style="padding: 5px 20px;margin-top: 10px" type="reset"
-                           value="暂存岗位">
+                <div class="row center-block">
+                    <div class="col-md-6">
+                        <input class="btn btn-lg btn-primary center-block"
+                               type="button" value="确定创建" onclick="add_resume()">
+                    </div>
+                    <div class="col-md-6">
+                        <input class="btn btn-lg btn-primary center-block" type="reset" value="退出创建">
+                    </div>
                 </div>
             </div>
 

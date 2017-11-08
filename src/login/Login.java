@@ -31,7 +31,7 @@ public class Login extends HttpServlet {
         connectionDB conndb=new connectionDB();
         Connection conn=conndb.connDB();
         if(login_type.equals("person")){
-        	String sql="select job_id from occupy_person where job_nickname=? and job_password=?";
+        	String sql="select job_telephone from occupy_person where job_nickname=? and job_password=?";
             try {
     			PreparedStatement ps = conn.prepareStatement(sql);
     			ps.setString(1, nickname);

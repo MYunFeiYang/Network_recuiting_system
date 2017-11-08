@@ -4,9 +4,12 @@ window.onload=function () {
 function remember_user() {
     var radio=document.getElementById('remember_user').checked;
     if (radio){
-        var user={};
+        var user_string = document.cookie.split(";")[0].split("=")[1];
+        var user = JSON.parse(user_string);
+        var telephone = user.telephone;
         user.nickname=document.getElementById('nickname').value;
         user.password=document.getElementById('password').value;
+        user.telephone=telephone;
         var user_string=JSON.stringify(user);
         var data=new Date();
         data.setDate(data.getDate()+180);

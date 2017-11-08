@@ -35,13 +35,6 @@ function conf_pwd() {
         document.getElementById("confirm_password_box").innerHTML="两次密码不一致";
     }
 }
-function check_telephone(){
-
-    var user={};
-    var telephone=document.getElementById("job_telephone").value;
-    user.telephone=telephone;
-    ajax_check_telephone(user);
-}
 function reg_telephone() {
     var telephone=document.getElementById("job_telephone").value;
     var mPattern = /^((13[0-9])|(14[5|7])|(15([0-3]|[5-9]))|(18[0,5-9]))\d{8}$/;
@@ -64,6 +57,47 @@ function reg_email() {
         document.getElementById("confirm_password_box").setAttribute("class","alert-warning");
         document.getElementById("confirm_password_box").innerHTML="请输入正确邮箱";
     }
+}
+function check_telephone(){
+    var user={};
+    var telephone=document.getElementById("job_telephone").value;
+    user.telephone=telephone;
+    ajax_check_telephone(user);
+}
+function ajax_check_telephone(user) {
+    $.ajax({
+        url:"http://localhost:8080/Network_recuiting_system/check_telephone.do",
+        data:user,
+        async:true,
+        type:"POST",
+        dataType:"JSON",
+        success:function (data) {
+            check_telephone_result(data)
+        },
+        fail:function (data) {
+            alert(data);
+        },
+    });
+}
+function check_telephone_result(data) {
+    if (data.msg=="telephone_exist"){
+        document.getElementById("confirm_password_box").setAttribute("class","alert-warning");
+        document.getElementById("confirm_password_box").innerHTML="请手机号已被注册";
+    }else {
+        document.getElementById("confirm_password_box").setAttribute("class","alert-success");
+        document.getElementById("confirm_password_box").innerHTML="该手机号通过验证";
+    }
+}
+function remember_user() {
+    var user={};
+        user.nickname=document.getElementById('job_nickname').value;
+        user.password=document.getElementById('job_password').value;
+        user.telephone=document.getElementById("job_telephone").value;
+        var user_string=JSON.stringify(user);
+        var data=new Date();
+        data.setDate(data.getDate()+180);
+        data.toDateString();
+        document.cookie="user="+user_string+";expires="+data;
 }
 function register() {
     var user={};
@@ -91,32 +125,9 @@ function ajax_register(user) {
         },
     });
 }
-function ajax_check_telephone(user) {
-    $.ajax({
-        url:"http://localhost:8080/Network_recuiting_system/check_telephone.do",
-        data:user,
-        async:true,
-        type:"POST",
-        dataType:"JSON",
-        success:function (data) {
-            check_telephone_result(data)
-        },
-        fail:function (data) {
-            alert(data);
-        },
-    });
-}
+
 function register_success(data) {
     if (data.msg=="成功"){
         location.href="index.html";
-    }
-}
-function check_telephone_result(data) {
-    if (data.msg=="成功"){
-        document.getElementById("confirm_password_box").setAttribute("class","alert-warning");
-        document.getElementById("confirm_password_box").innerHTML="请手机号已被注册";
-    }else {
-        document.getElementById("confirm_password_box").setAttribute("class","alert-success");
-        document.getElementById("confirm_password_box").innerHTML="该手机号通过验证";
     }
 }

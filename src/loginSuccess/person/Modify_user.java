@@ -1,10 +1,12 @@
-package register.person;
+package loginSuccess.person;
 
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,35 +16,39 @@ import javax.servlet.http.HttpServletResponse;
 
 import connectionDB.connectionDB;
 
-@WebServlet("/check_telephone.do")
-public class Check_telephone extends HttpServlet {
+@WebServlet("/modify_user.do")
+public class Modify_user extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/xml; charset=UTF-8");
         //以下两句为取消在本地的缓存
         response.setHeader("Cache-Control", "no-cache");
         response.setHeader("Pragma", "no-cache");
-        String job_telephone=request.getParameter("telephone");
-        System.out.println(job_telephone);
+        String telephone=request.getParameter("telephone");
+        String nickname=request.getParameter("nickname");
+        String password=request.getParameter("password");
+        String email=request.getParameter("email");
         
         connectionDB conndb=new connectionDB();
         Connection conn=conndb.connDB();
-        String sql="select job_name from occupy_person where job_telephone=?";
+        String sql="update occupy_person set job_nickname=?,job_password=?,job_email=? where job_telephone=?";
         try {
 			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setString(1, job_telephone);
-			ResultSet rs = ps.executeQuery();
-	        System.out.println(rs.getRow());
-			if(rs.next()){
-				String str = "{\"msg\":\"telephone_exist\"}";
+			ps.setString(1, nickname);
+			ps.setString(2, password);
+			ps.setString(3, email);
+			ps.setString(4, telephone);
+			boolean tag = ps.execute();
+			if(!tag){
+				String str = "{\"msg\":\"modify_user_success\"}";
 		        response.getWriter().print(str);
-		        response.getWriter().flush();
-		        response.getWriter().close();
+		        response.getWriter().flush();;
+		        response.getWriter().close();;
 			}else{
-				String str = "{\"msg\":\"telephone_not_exist\"}";
+				String str = "{\"msg\":\"modify_user_fail\"}";
 		        response.getWriter().print(str);
-		        response.getWriter().flush();
-		        response.getWriter().close();
+		        response.getWriter().flush();;
+		        response.getWriter().close();;
 			}
 			ps.close();
 		} catch (SQLException e) {
