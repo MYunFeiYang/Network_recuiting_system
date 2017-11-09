@@ -11,6 +11,8 @@
     <!--javascript-->
     <script src="javascript/jquery-3.2.1.js"></script>
     <script src="bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+    <script src="javascript/util/check_input.js"></script>
+    <script src="javascript/util/cookie_operation.js"></script>
     <script src="javascript/register_person.js"></script>
 </head>
 <body>
@@ -85,9 +87,9 @@
             <div class="col-md-12">
                 <div class="input-group">
                     <span class="input-group-btn">
-                        <button class="btn btn-default glyphicon glyphicon-user">用户名</button>
+                        <button type="button" class="btn btn-default glyphicon glyphicon-user">用户名</button>
                     </span>
-                    <input type="text" class="form-control" id="job_nickname" onkeyup="reg_username()" placeholder="用户名">
+                    <input type="text" class="form-control" id="nickname" onkeyup="reg_username()" placeholder="用户名">
                 </div>
             </div>
         </div>
@@ -95,9 +97,9 @@
             <div class="col-md-12">
                 <div class="input-group">
                     <span class="input-group-btn">
-                        <button class="btn btn-default glyphicon glyphicon-lock">密码</button>
+                        <button type="button" class="btn btn-default glyphicon glyphicon-lock">密码</button>
                     </span>
-                    <input type="text" class="form-control" id="job_password" placeholder="密码" onkeyup="reg_pwd()">
+                    <input type="text" class="form-control" id="password" placeholder="密码" onkeyup="reg_pwd()">
                 </div>
             </div>
         </div>
@@ -105,7 +107,7 @@
             <div class="col-md-12">
                 <div class="input-group">
                     <span class="input-group-btn">
-                        <button class="btn btn-default glyphicon glyphicon-lock">确认密码</button>
+                        <button type="button" class="btn btn-default glyphicon glyphicon-lock">确认密码</button>
                     </span>
                     <input type="text" class="form-control" id="confirm_password" onkeyup="conf_pwd()" placeholder="确认密码">
                 </div>
@@ -115,9 +117,9 @@
             <div class="col-md-12">
                 <div class="input-group">
                     <span class="input-group-btn">
-                        <button class="btn btn-default glyphicon glyphicon-user">真实姓名</button>
+                        <button type="button" class="btn btn-default glyphicon glyphicon-user">真实姓名</button>
                     </span>
-                    <input type="text" class="form-control" id="job_name" placeholder="真实姓名">
+                    <input type="text" class="form-control" id="name" placeholder="真实姓名">
                 </div>
             </div>
         </div>
@@ -125,9 +127,9 @@
             <div class="col-md-12">
                 <div class="input-group">
                     <span class="input-group-btn">
-                        <button class="btn btn-default glyphicon glyphicon-erase">联系电话</button>
+                        <button type="button" class="btn btn-default glyphicon glyphicon-erase">联系电话</button>
                     </span>
-                    <input type="text" class="form-control" onkeyup="reg_telephone()" id="job_telephone" placeholder="联系电话">
+                    <input type="text" class="form-control" onkeyup="reg_telephone()" id="telephone" placeholder="联系电话">
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-default" onclick="check_telephone()">验证</button>
                     </span>
@@ -138,9 +140,9 @@
             <div class="col-md-12">
                 <div class="input-group">
                     <span class="input-group-btn">
-                        <button class="btn btn-default glyphicon glyphicon-envelope">QQ邮箱</button>
+                        <button type="button" class="btn btn-default glyphicon glyphicon-envelope">QQ邮箱</button>
                     </span>
-                    <input type="email" class="form-control" id="job_email" onclick="reg_email()" onkeyup="reg_email()" placeholder="电子邮件">
+                    <input type="email" class="form-control" id="email" onclick="reg_email()" onkeyup="reg_email()" placeholder="电子邮件">
                 </div>
             </div>
         </div>

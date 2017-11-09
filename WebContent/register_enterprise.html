@@ -11,6 +11,7 @@
     <!--javascript-->
     <script src="javascript/jquery-3.2.1.js"></script>
     <script src="bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+    <script src="javascript/util/check_input.js"></script>
     <script src="javascript/register_enterprise.js"></script>
 </head>
 <body>
@@ -71,7 +72,7 @@
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
     </nav>
-    <form style="margin: auto;width: 80%;AutoScroll:True" >
+    <form style="margin: auto;width: 80%;" >
         <div class="page-header">
             <h2 style="padding-left: 100px">企业用户注册</h2>
         </div>
@@ -84,7 +85,7 @@
             <div class="col-md-12">
                 <div class="input-group">
                     <span class="input-group-btn">
-                        <button class="btn btn-default glyphicon glyphicon-user"> 用户名</button>
+                        <button type="button" class="btn btn-default glyphicon glyphicon-user"> 用户名</button>
                     </span>
                     <input type="text" class="form-control" id="com_nickname" onkeyup="reg_username()"
                            placeholder="用户名">
@@ -95,7 +96,7 @@
             <div class="col-md-12">
                 <div class="input-group">
                     <span class="input-group-btn">
-                        <button class="btn btn-default glyphicon glyphicon-lock">密码</button>
+                        <button type="button" class="btn btn-default glyphicon glyphicon-lock">密码</button>
                     </span>
                     <input type="text" class="form-control" onkeyup="reg_pwd()" id="com_password" placeholder="密码">
                 </div>
@@ -105,7 +106,7 @@
             <div class="col-md-12">
                 <div class="input-group">
                     <span class="input-group-btn">
-                        <button class="btn btn-default glyphicon glyphicon-lock">确认密码</button>
+                        <button type="button" class="btn btn-default glyphicon glyphicon-lock">确认密码</button>
                     </span>
                     <input type="text" class="form-control" id="confirm_password" onkeyup="conf_pwd()"
                            placeholder="确认密码">
@@ -116,7 +117,7 @@
             <div class="col-md-12">
                 <div class="input-group">
                     <span class="input-group-btn">
-                        <button class="btn btn-default glyphicon glyphicon-user">企业名称</button>
+                        <button type="button" class="btn btn-default glyphicon glyphicon-user">企业名称</button>
                     </span>
                     <input type="text" class="form-control" id="com_name" placeholder="企业名称">
                 </div>
@@ -126,7 +127,7 @@
             <div class="col-md-12">
                 <div class="input-group">
                     <span class="input-group-btn">
-                        <button class="btn btn-default glyphicon glyphicon-user">所属行业</button>
+                        <button type="button" class="btn btn-default glyphicon glyphicon-user">所属行业</button>
                     </span>
                     <input type="text" class="form-control" id="com_industry" placeholder="所属行业">
                 </div>
@@ -136,7 +137,7 @@
             <div class="col-md-12">
                 <div class="input-group">
                     <span class="input-group-btn">
-                        <button class="btn btn-default glyphicon glyphicon-erase">联系电话</button>
+                        <button type="button" class="btn btn-default glyphicon glyphicon-erase">联系电话</button>
                     </span>
                     <input type="text" class="form-control" onkeyup="reg_telephone()" id="com_telephone" placeholder="联系电话">
                     <span class="input-group-btn">
@@ -149,7 +150,7 @@
             <div class="col-md-12">
                 <div class="input-group">
                     <span class="input-group-btn">
-                        <button class="btn btn-default glyphicon glyphicon-envelope">QQ邮箱</button>
+                        <button type="button" class="btn btn-default glyphicon glyphicon-envelope">QQ邮箱</button>
                     </span>
                     <input type="text" class="form-control" onkeyup="reg_email()" id="com_email" placeholder="电子邮件">
                 </div>
@@ -159,7 +160,7 @@
             <div class="col-md-12">
                 <div class="input-group">
                     <span class="input-group-btn">
-                        <button class="btn btn-default glyphicon glyphicon-modal-window">企业地址</button>
+                        <button type="button" class="btn btn-default glyphicon glyphicon-modal-window">企业地址</button>
                     </span>
                     <input type="text" class="form-control" id="com_address" placeholder="企业地址">
                 </div>
@@ -169,24 +170,24 @@
             <div class="col-md-12">
                 <div class="input-group">
                     <span class="input-group-btn">
-                        <button class="btn btn-default glyphicon glyphicon-hand-up">企业简介</button>
+                        <button type="button" class="btn btn-default glyphicon glyphicon-hand-up">企业简介</button>
                     </span>
-                    <textarea class="form-control" id="com_introduction">
+                    <textarea class="form-control" id="com_introduction" rows="5">
                             </textarea>
                 </div>
             </div>
         </div>
         <div class="row center-block">
             <div class="col-md-4">
-                <input style="padding: 5px 20px;margin: 10px auto" class="bg-primary center-block" type="button"
-                       id="reg_btu" disabled="disabled" value="注册" onclick="register()">
+                <input style="padding: 5px 20px;margin: 10px auto" class="btn btn-lg btn-primary center-block" type="button"
+                       id="reg_btu" disabled="disabled" value="注册" onclick="remember_user(),register()">
             </div>
             <div class="col-md-4">
-                <input style="padding: 5px 20px;margin-top: 10px" type="reset" class="bg-primary center-block"
+                <input style="padding: 5px 20px;margin-top: 10px" type="reset" class="btn btn-lg btn-primary center-block"
                        value="重置">
             </div>
             <div class="col-md-4">
-                <a href="index.html" style="width:40%;text-align:center;padding: 5px;margin-top: 10px" class="bg-primary center-block">返回登录</a>
+                <a href="index.html" style="width:40%;text-align:center;padding: 5px;margin-top: 10px" class="btn btn-lg btn-primary center-block">返回登录</a>
             </div>
         </div>
     </form>
