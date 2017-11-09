@@ -22,15 +22,15 @@ public class Check_telephone extends HttpServlet {
         //以下两句为取消在本地的缓存
         response.setHeader("Cache-Control", "no-cache");
         response.setHeader("Pragma", "no-cache");
-        String job_telephone=request.getParameter("telephone");
-        System.out.println(job_telephone);
+        String telephone=request.getParameter("telephone");
+        System.out.println(telephone);
         
         connectionDB conndb=new connectionDB();
         Connection conn=conndb.connDB();
-        String sql="select job_name from occupy_person where job_telephone=?";
+        String sql="select name from occupy_person where telephone=?";
         try {
 			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setString(1, job_telephone);
+			ps.setString(1, telephone);
 			ResultSet rs = ps.executeQuery();
 	        System.out.println(rs.getRow());
 			if(rs.next()){

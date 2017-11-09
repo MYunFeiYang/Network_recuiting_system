@@ -31,7 +31,7 @@ public class Modify_user extends HttpServlet {
         
         connectionDB conndb=new connectionDB();
         Connection conn=conndb.connDB();
-        String sql="update occupy_person set job_nickname=?,job_password=?,job_email=? where job_telephone=?";
+        String sql="update occupy_person set nickname=?,password=?,email=? where telephone=?";
         try {
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, nickname);

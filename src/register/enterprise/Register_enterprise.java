@@ -23,30 +23,27 @@ public class Register_enterprise extends HttpServlet {
         //以下两句为取消在本地的缓存
         response.setHeader("Cache-Control", "no-cache");
         response.setHeader("Pragma", "no-cache");
-        String com_nickname=request.getParameter("com_nickname");
-        String com_password=request.getParameter("com_password");
-        String com_name=request.getParameter("com_name");
-        String com_industry=request.getParameter("com_industry");
-        String com_telephone=request.getParameter("com_telephone");
-        String com_email=request.getParameter("com_email");
-        String com_address=request.getParameter("com_address");
-        String com_introduction=request.getParameter("com_introduction");
+        String nickname=request.getParameter("nickname");
+        String password=request.getParameter("password");
+        String name=request.getParameter("name");
+        String industry=request.getParameter("industry");
+        String telephone=request.getParameter("telephone");
+        String email=request.getParameter("email");
+        String address=request.getParameter("address");
         
         connectionDB conndb=new connectionDB();
         Connection conn=conndb.connDB();
-        String sql="insert into occupy_company (com_nickname,com_password,com_name,com_industry,"
-        		+ "com_telephone,com_email,com_address,com_introduction) values(?,?,?,?,?,?,?,?)";
+        String sql="insert into occupy_company (nickname,password,name,industry,"
+        		+ "telephone,email,address) values(?,?,?,?,?,?,?)";
         try {
 			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setString(1, com_nickname);
-			ps.setString(2, com_password);
-			ps.setString(3, com_name);
-			ps.setString(4, com_industry);
-			ps.setString(5, com_telephone);
-			ps.setString(6, com_email);
-			ps.setString(7, com_address);
-			ps.setString(8, com_introduction);
-			
+			ps.setString(1, nickname);
+			ps.setString(2, password);
+			ps.setString(3, name);
+			ps.setString(4, industry);
+			ps.setString(5, telephone);
+			ps.setString(6, email);
+			ps.setString(7, address);
 			int tag = ps.executeUpdate();
 			ps.close();
 			if(tag==1){

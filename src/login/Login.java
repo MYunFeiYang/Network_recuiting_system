@@ -31,7 +31,7 @@ public class Login extends HttpServlet {
         connectionDB conndb=new connectionDB();
         Connection conn=conndb.connDB();
         if(login_type.equals("person")){
-        	String sql="select job_telephone from occupy_person where job_nickname=? and job_password=?";
+        	String sql="select telephone from occupy_person where nickname=? and password=?";
             try {
     			PreparedStatement ps = conn.prepareStatement(sql);
     			ps.setString(1, nickname);
@@ -55,7 +55,7 @@ public class Login extends HttpServlet {
     		}
         }else{
         	System.out.println("enterprise");
-        	String sql="select com_id from occupy_company where com_nickname=? and com_password=?";
+        	String sql="select id from occupy_company where nickname=? and password=?";
             try {
     			PreparedStatement ps = conn.prepareStatement(sql);
     			ps.setString(1, nickname);

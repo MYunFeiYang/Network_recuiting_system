@@ -22,14 +22,14 @@ public class Check_telephone extends HttpServlet {
         //以下两句为取消在本地的缓存
         response.setHeader("Cache-Control", "no-cache");
         response.setHeader("Pragma", "no-cache");
-        String com_telephone=request.getParameter("com_telephone");
+        String telephone=request.getParameter("telephone");
         
         connectionDB conndb=new connectionDB();
         Connection conn=conndb.connDB();
-        String sql="select com_id from occupy_company where com_telephone=?";
+        String sql="select name from occupy_company where telephone=?";
         try {
 			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setString(1, com_telephone);
+			ps.setString(1, telephone);
 			ResultSet rs = ps.executeQuery();
 			if(rs.next()){
 				String str = "{\"msg\":\"成功\"}";

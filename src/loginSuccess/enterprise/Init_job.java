@@ -1,4 +1,4 @@
-package loginSuccess.person;
+package loginSuccess.enterprise;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -16,7 +16,7 @@ import connectionDB.connectionDB;
 import net.sf.json.JSONObject;
 
 @WebServlet("/init_resume.do")
-public class Init_resume extends HttpServlet {
+public class Init_job extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
@@ -30,20 +30,22 @@ public class Init_resume extends HttpServlet {
 		connectionDB conndb = new connectionDB();
 		Connection conn = conndb.connDB();
 		try {
-			String sql = "select name,telephone,email from occupy_person where nickname=? and password=?";
+			String sql = "select name,address,industry£¬email from occupy_company where nickname=? and password=?";
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, nickname);
 			ps.setString(2, password);
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
 				String name = rs.getString("name");
-				String telephone = rs.getString("telephone");
+				String address = rs.getString("address");
+				String industry = rs.getString("industry");
 				String email = rs.getString("email");
-				JSONObject user = new JSONObject();
-				user.put("name", name);
-				user.put("telephone", telephone);
-				user.put("email", email);
-				response.getWriter().print(user.toString());
+				JSONObject job = new JSONObject();
+				job.put("name", name);
+				job.put("address", address);
+				job.put("industry", industry);
+				job.put("email", email);
+				response.getWriter().print(job.toString());
 				response.getWriter().flush();
 				response.getWriter().close();
 				ps.close();

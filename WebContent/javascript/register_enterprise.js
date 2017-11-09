@@ -32,15 +32,13 @@ function check_telephone_result(data) {
 }
 function register() {
     var company={};
-    company.com_nickname=document.getElementById("com_nickname").value;
-    company.com_password=document.getElementById("com_password").value;
-    company.com_name=document.getElementById("com_name").value;
-    company.com_industry=document.getElementById("com_industry").value;
-    company.com_telephone=document.getElementById("com_telephone").value;
-    company.com_email=document.getElementById("com_email").value;
-    company.com_address=document.getElementById("com_address").value;
-    company.com_introduction=document.getElementById("com_introduction").value;
-    //alert(JSON.stringify(company));
+    company.nickname=document.getElementById("nickname").value;
+    company.password=document.getElementById("password").value;
+    company.name=document.getElementById("name").value;
+    company.industry=document.getElementById("industry").value;
+    company.telephone=document.getElementById("telephone").value;
+    company.email=document.getElementById("email").value;
+    company.address=document.getElementById("address").value;
     ajax_register(company);
 }
 function ajax_register(company) {

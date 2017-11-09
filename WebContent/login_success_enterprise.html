@@ -12,6 +12,7 @@
     <script src="bootstrap-3.3.7-dist/js/bootstrap.js"></script>
     <script src="javascript/change_display.js"></script>
     <script src="javascript/util/cookie_operation.js"></script>
+    <script src="javascript/login_success_enterprise.js"></script>
 </head>
 <body onload="init_user()">
 <div class="container-fluid">
@@ -79,7 +80,7 @@
                     岗位信息
                     <ul type="none" style="display: none" id="enterprise_inf">
                         <li><a class="bg-primary">返回首页登录</a></li>
-                        <li><a class="bg-primary">发布招聘信息</a></li>
+                        <li><a class="bg-primary" onclick="init_job()">发布招聘信息</a></li>
                         <li><a class="bg-primary">修改招聘信息</a></li>
                         <li><a class="bg-primary">浏览招聘信息</a></li>
                     </ul>
