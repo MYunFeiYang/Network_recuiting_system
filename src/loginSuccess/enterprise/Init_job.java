@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import connectionDB.connectionDB;
 import net.sf.json.JSONObject;
 
-@WebServlet("/init_resume.do")
+@WebServlet("/init_job.do")
 public class Init_job extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -26,11 +26,11 @@ public class Init_job extends HttpServlet {
 		response.setHeader("Pragma", "no-cache");
 		String nickname = request.getParameter("nickname");
 		String password = request.getParameter("password");
-		// System.out.println(nickname);
+		System.out.println(nickname);
 		connectionDB conndb = new connectionDB();
 		Connection conn = conndb.connDB();
 		try {
-			String sql = "select name,address,industry£¬email from occupy_company where nickname=? and password=?";
+			String sql = "select name,address,industry,email from occupy_company where nickname=? and password=?";
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, nickname);
 			ps.setString(2, password);

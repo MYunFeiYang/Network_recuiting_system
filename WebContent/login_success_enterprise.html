@@ -72,30 +72,30 @@
                 <li onmouseover="show_div('enterprise_data')" onmouseout="hidden_div('enterprise_data')">
                     企业信息
                     <ul type="none" style="display: none" id="enterprise_data">
-                        <li><a class="bg-primary">修改注册信息</a></li>
-                        <li><a class="bg-primary">消息通知</a></li>
+                        <li><button class="bg-primary">修改注册信息</button></li>
+                        <li><button class="bg-primary">消息通知</button></li>
                     </ul>
                 </li>
                 <li onmouseover="show_div('enterprise_inf')" onmouseout="hidden_div('enterprise_inf')">
                     岗位信息
                     <ul type="none" style="display: none" id="enterprise_inf">
-                        <li><a class="bg-primary">返回首页登录</a></li>
-                        <li><a class="bg-primary" onclick="init_job()">发布招聘信息</a></li>
-                        <li><a class="bg-primary">修改招聘信息</a></li>
-                        <li><a class="bg-primary">浏览招聘信息</a></li>
+                        <li><button class="bg-primary">返回首页登录</button></li>
+                        <li><button class="bg-primary" onclick="init_job()">发布招聘信息</button></li>
+                        <li><button class="bg-primary">修改招聘信息</button></li>
+                        <li><button class="bg-primary">浏览招聘信息</button></li>
                     </ul>
                 </li>
                 <li onmouseover="show_div('query_sys')" onmouseout="hidden_div('query_sys')">
                     查询系统
                     <ul type="none" style="display: none" id="query_sys">
-                        <li><a class="bg-primary">自动匹配查询</a></li>
-                        <li><a class="bg-primary">快速查询</a></li>
+                        <li><button class="bg-primary">自动匹配查询</button></li>
+                        <li><button class="bg-primary">快速查询</button></li>
                     </ul>
                 </li>
                 <li onmouseover="show_div('other')" onmouseout="hidden_div('other')">
                     其他功能
                     <ul type="none" style="display: none" id="other">
-                        <li><a class="bg-primary">退去招聘系统</a></li>
+                        <li><button class="bg-primary">退去招聘系统</button></li>
                     </ul>
                 </li>
                 <li style="height: 320px">
@@ -245,7 +245,7 @@
                     <span class="input-group-btn">
                         <button class="btn btn-default">有效时间</button>
                     </span>
-                            <input type="text" class="form-control" id="effective" placeholder="有效时间">
+                            <input type="text" class="form-control" id="effective_time" placeholder="有效时间">
                         </div>
                     </div>
                 </div>
@@ -261,13 +261,13 @@
                 </div>
                 <div class="row center-block">
                     <div class="col-md-12">
-                        <div id="confirm_resume_box"></div>
+                        <div id="confirm_job_box"></div>
                     </div>
                 </div>
                 <div class="row center-block">
                     <div class="col-md-6">
                         <input class="btn btn-lg btn-primary center-block"
-                               type="button" value="确定发布" onclick="add_resume()">
+                               type="button" value="确定发布" onclick="add_job()">
                     </div>
                     <div class="col-md-6">
                         <input class="btn btn-lg btn-primary center-block" type="reset" value="退出发布">

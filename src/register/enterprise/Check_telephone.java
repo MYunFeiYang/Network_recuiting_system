@@ -32,13 +32,13 @@ public class Check_telephone extends HttpServlet {
 			ps.setString(1, telephone);
 			ResultSet rs = ps.executeQuery();
 			if(rs.next()){
-				String str = "{\"msg\":\"³É¹¦\"}";
+				String str = "{\"msg\":\"telephone_exist\"}";
 		        response.getWriter().print(str);
 		        response.getWriter().flush();
 		        response.getWriter().close();
 		        System.out.println(rs);
 			}else{
-				String str = "{\"msg\":\"Ê§°Ü\"}";
+				String str = "{\"msg\":\"telephone_not_exist\"}";
 		        response.getWriter().print(str);
 		        response.getWriter().flush();
 		        response.getWriter().close();

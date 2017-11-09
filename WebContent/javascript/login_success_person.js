@@ -143,8 +143,13 @@ function add_resume_ajax(data) {
 }
 
 function add_resume_result(data) {
+    var confirm_resume_box=document.getElementById("confirm_resume_box")
     if (data.msg=="add_resume_success"){
-        alert("简历添加成功");
+        confirm_resume_box.innerHTML="简历添加成功";
+        confirm_resume_box.setAttribute("class","alert-success");
+    }else {
+        confirm_resume_box.innerHTML="简历添加失败";
+        confirm_resume_box.setAttribute("class","alert-warning");
     }
 }
 

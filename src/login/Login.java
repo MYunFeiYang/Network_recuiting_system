@@ -55,7 +55,7 @@ public class Login extends HttpServlet {
     		}
         }else{
         	System.out.println("enterprise");
-        	String sql="select id from occupy_company where nickname=? and password=?";
+        	String sql="select name from occupy_company where nickname=? and password=?";
             try {
     			PreparedStatement ps = conn.prepareStatement(sql);
     			ps.setString(1, nickname);

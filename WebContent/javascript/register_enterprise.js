@@ -22,7 +22,7 @@ function ajax_check_telephone(user) {
 }
 
 function check_telephone_result(data) {
-    if (data.msg=="成功"){
+    if (data.msg=="telephone_exist"){
         document.getElementById("confirm_password_box").setAttribute("class","alert-warning");
         document.getElementById("confirm_password_box").innerHTML="请手机号已被注册";
     }else {
