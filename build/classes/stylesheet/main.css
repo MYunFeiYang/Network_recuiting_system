@@ -6,10 +6,7 @@ html, head, body {
 }
 
 .row {
-    margin: 10px 30px;
-}
-.modal{
-    margin-top: 30px;
+    margin-top: 10px;
 }
 form, .main {
     height: auto;
@@ -17,13 +14,13 @@ form, .main {
     box-shadow: 2px 2px 2px 2px;
     border-radius: 8px;
 }
-.menu li{
+#menu li{
     padding: 3px 15px;
     text-align: center;
     border-radius: 5px;
     border: 1px solid darkseagreen;
 }
-.menu li ul li button,.menu li ul li a,.bg-primary{
+#menu li ul li button,#menu li ul li a,.bg-primary{
     padding: 3px 15px;
     text-align: center;
     color: #0f0f0f;
@@ -69,7 +66,4 @@ form, .main {
     100% {
         transform: translate(0px, 0px);
     }
-}
-.margin-bottom{
-    margin-bottom: 20px;
 }

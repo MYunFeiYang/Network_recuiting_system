@@ -2,8 +2,8 @@
 function login() {
     var user={};
     user.login_type=document.getElementById('login_type').value;
-    user.nickname=document.getElementById('login-nickname').value;
-    user.password=document.getElementById('login-password').value;
+    user.nickname=document.getElementById('nickname').value;
+    user.password=document.getElementById('password').value;
     //alert(JSON.stringify(user));
     login_ajax(user)
 }
@@ -29,7 +29,7 @@ function login_result(data) {
         location.href="login_success_enterprise.html";
     }
     else {
-        document.getElementById("confirm_login_box").innerHTML="用户名或密码错误";
-        document.getElementById("confirm_login_box").setAttribute('class','alert-warning');
+        document.getElementById("confirm_password_box").innerHTML="用户名或密码错误";
+        document.getElementById("confirm_password_box").setAttribute('class','alert-warning');
     }
 }
