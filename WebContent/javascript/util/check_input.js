@@ -1,3 +1,4 @@
+
 function reg_username(nickname,confirm_box) {
     var uPattern = /^[a-zA-Z0-9_-]{4,16}$/;
     var username=document.getElementById(nickname).value;
@@ -41,15 +42,14 @@ function reg_email(email,confirm_box) {
     if (ePattern.test(email)){
         confirm.setAttribute("class","alert-success");
         confirm.innerHTML="邮箱通过";
-        document.getElementById('reg_btu').removeAttribute('disabled');
     }else {
         confirm.setAttribute("class","alert-warning");
         confirm.innerHTML="请输入正确邮箱";
     }
 }
-function conf_pwd(password,confirm_box) {
+function conf_pwd(password,confirm_password,confirm_box) {
     var password=document.getElementById(password).value;
-    var confirm_password=document.getElementById("confirm_password").value;
+    var confirm_password=document.getElementById(confirm_password).value;
     var confirm=document.getElementById(confirm_box);
     //alert(confirm_password);
     if(password==confirm_password){
@@ -60,4 +60,58 @@ function conf_pwd(password,confirm_box) {
         confirm.setAttribute("class","alert-warning");
         confirm.innerHTML="两次密码不一致";
     }
+}
+function check_telephone(telephone,confirm_box,url){
+    var user={};
+    var telephone=document.getElementById(telephone).value;
+    user.telephone=telephone;
+    ajax_check_telephone(user,confirm_box,url,reg_btu);
+}
+function ajax_check_telephone(user,confirm_box,url) {
+    $.ajax({
+        url:url,
+        data:user,
+        async:true,
+        type:"POST",
+        dataType:"JSON",
+        success:function (data) {
+            check_telephone_result(data,confirm_box)
+        },
+        fail:function (data) {
+            alert(data);
+        },
+    });
+}
+function check_telephone_result(data,confirm_box) {
+    if (data.msg=="telephone_exist"){
+        document.getElementById(confirm_box).setAttribute("class","alert-warning");
+        document.getElementById(confirm_box).innerHTML="请手机号已被注册";
+    }else {
+        document.getElementById(confirm_box).setAttribute("class","alert-success");
+        document.getElementById(confirm_box).innerHTML="该手机号通过验证";
+    }
+}
+function btu_disable_person(reg_btu){
+	var nickname=document.getElementById("person_nickname").value;
+	var password=document.getElementById("person_password").value;
+	var confirm_password=document.getElementById("person_confirm_password").value;
+	var name=document.getElementById("person_name").value;
+	var telephone=document.getElementById("person_name").value;
+	var email=document.getElementById("person_email").value;
+	if(nickname==""||password==""||confirm_password==""||name==""||telephone==""||email!=""){
+	    document.getElementById(reg_btu).setAttribute("disabled","disabled");
+    }
+}
+function btu_able_enterprise(){
+    var nickname=document.getElementById("enterprise_nickname").value;
+    var password=document.getElementById("enterprise_password").value;
+    var confirm_password=document.getElementById("enterprise_confirm_password").value;
+    var name=document.getElementById("enterprise_name").value;
+    var industry=document.getElementById("enterprise_industry").value;
+    var telephone=document.getElementById("enterprise_name").value;
+    var email=document.getElementById("enterprise_email").value;
+    var address=document.getElementById("enterprise_address").value;
+}
+function btu_able(reg_btu) {
+    document.getElementById(reg_btu).removeAttribute("disabled");
 }

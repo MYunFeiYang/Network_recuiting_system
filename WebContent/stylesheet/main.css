@@ -11,7 +11,7 @@ html, head, body {
 .modal{
     margin-top: 30px;
 }
-form, .main {
+.main {
     height: auto;
     margin-top: 20px;
     box-shadow: 2px 2px 2px 2px;

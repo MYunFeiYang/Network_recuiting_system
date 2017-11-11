@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import connectionDB.connectionDB;
 
-@WebServlet("/check_telephone.do")
+@WebServlet("/check_telephone_person.do")
 public class Check_telephone extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");

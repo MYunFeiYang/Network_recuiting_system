@@ -1,9 +1,9 @@
 
-function remember_user() {
+function remember_user(nickname,password,telephone) {
     var user={};
-    user.nickname=document.getElementById('nickname').value;
-    user.password=document.getElementById('password').value;
-    user.telephone=document.getElementById("telephone").value;
+    user.nickname=document.getElementById(nickname).value;
+    user.password=document.getElementById(password).value;
+    user.telephone=document.getElementById(telephone).value;
     var user_string=JSON.stringify(user);
     var data=new Date();
     data.setDate(data.getDate()+180);
@@ -27,19 +27,19 @@ function remember_user_login() {
     }
 }
 
-function show_user() {
+function show_user(nickname,password) {
     var user_string=document.cookie.split(";")[0].split("=")[1];
     var user=JSON.parse(user_string);
     //alert(user.nickname);
-    document.getElementById("nickname").value=user.nickname;
-    document.getElementById("password").value=user.password;
+    document.getElementById(nickname).value=user.nickname;
+    document.getElementById(password).value=user.password;
 }
 
 function init_user() {
     var user_string = document.cookie.split(";")[0].split("=")[1];
     var user = JSON.parse(user_string);
     var nickname = user.nickname;
-    document.getElementById("login").innerHTML = nickname;
+    document.getElementById("login_btu").innerHTML = nickname;
     document.getElementById("login_out").innerHTML = "<a href='index.html'>退出登录</a>";
 }
 function reset_user() {
