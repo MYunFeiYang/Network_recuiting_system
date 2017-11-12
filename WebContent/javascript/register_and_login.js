@@ -65,8 +65,8 @@ function register_result_person(data) {
 function login() {
     var user={};
     user.login_type=document.getElementById('login_type').value;
-    user.nickname=document.getElementById('login-nickname').value;
-    user.password=document.getElementById('login-password').value;
+    user.nickname=document.getElementById('login_nickname').value;
+    user.password=document.getElementById('login_password').value;
     //alert(JSON.stringify(user));
     login_ajax(user)
 }
@@ -86,10 +86,10 @@ function login_ajax(data) {
 }
 function login_result(data) {
     if(data.msg=="person_success"){
-        location.href="login_success_person.html";
+        location.href="index.html";
     }
     else if(data.msg=="enterprise_success"){
-        location.href="login_success_enterprise.html";
+        location.href="index.html";
     }
     else {
         document.getElementById("confirm_login_box").innerHTML="用户名或密码错误";

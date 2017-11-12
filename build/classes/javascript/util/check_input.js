@@ -91,27 +91,35 @@ function check_telephone_result(data,confirm_box) {
         document.getElementById(confirm_box).innerHTML="该手机号通过验证";
     }
 }
-function btu_disable_person(reg_btu){
+function btu_disable_person(reg_btu,check_box){
 	var nickname=document.getElementById("person_nickname").value;
 	var password=document.getElementById("person_password").value;
 	var confirm_password=document.getElementById("person_confirm_password").value;
 	var name=document.getElementById("person_name").value;
-	var telephone=document.getElementById("person_name").value;
+	var telephone=document.getElementById("person_telephone").value;
 	var email=document.getElementById("person_email").value;
-	if(nickname==""||password==""||confirm_password==""||name==""||telephone==""||email!=""){
+	if(nickname==""||password==""||confirm_password==""||name==""||telephone==""||email==""){
 	    document.getElementById(reg_btu).setAttribute("disabled","disabled");
+        document.getElementById(check_box).innerHTML="请先填完注册信息";
+        document.getElementById(check_box).setAttribute("class","alert-warning");
     }
 }
-function btu_able_enterprise(){
+function btu_disable_enterprise(reg_btu,check_box){
     var nickname=document.getElementById("enterprise_nickname").value;
     var password=document.getElementById("enterprise_password").value;
-    var confirm_password=document.getElementById("enterprise_confirm_password").value;
+    var confirm_password=document.getElementById("confirm_enterprise_password").value;
     var name=document.getElementById("enterprise_name").value;
     var industry=document.getElementById("enterprise_industry").value;
-    var telephone=document.getElementById("enterprise_name").value;
+    var telephone=document.getElementById("enterprise_telephone").value;
     var email=document.getElementById("enterprise_email").value;
     var address=document.getElementById("enterprise_address").value;
+    if(nickname==""||password==""||confirm_password==""||name==""||industry==""||telephone==""||email==""||address==""){
+        document.getElementById(reg_btu).setAttribute("disabled","disabled");
+        document.getElementById(check_box).innerHTML="请先填完注册信息";
+        document.getElementById(check_box).setAttribute("class","alert-warning");
+    }
 }
-function btu_able(reg_btu) {
+function btu_able(reg_btu,check_box) {
     document.getElementById(reg_btu).removeAttribute("disabled");
+    document.getElementById(check_box).innerHTML="";
 }

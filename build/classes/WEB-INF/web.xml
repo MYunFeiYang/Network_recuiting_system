@@ -10,16 +10,11 @@
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
   <servlet>
-<!-- Servlet 注册的名字 -->
-<servlet-name>Fileupload</servlet-name>
-<!-- Servlet 的全类名 -->
-<servlet-class>file.Fileupload</servlet-class>
-</servlet>
-
-<servlet-mapping>
-<!-- 需要和某一个 servlet 节点的 serlvet-name 子节点的文本节点一致 -->
-<servlet-name>Fileupload</servlet-name>
-<!-- 映射具体的访问路径: / 代表当前 WEB 应用的根目录. -->
-<url-pattern>/file/Fileupload</url-pattern>
-</servlet-mapping>
+    <servlet-name>Fileupload</servlet-name>
+    <servlet-class>file.Fileupload</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Fileupload</servlet-name>
+    <url-pattern>/file/Fileupload</url-pattern>
+  </servlet-mapping>
 </web-app>

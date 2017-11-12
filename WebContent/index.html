@@ -11,14 +11,14 @@
     <!--javascript-->
     <script src="javascript/jquery-3.2.1.js"></script>
     <script src="bootstrap-3.3.7-dist/js/bootstrap.js"></script>
-    <script src="javascript/util/cookie_operation.js"></script>
+    <script src="javascript/util/cookie_and_session.js"></script>
     <script src="javascript/util/check_input.js"></script>
     <script src="javascript/util/change_display.js"></script>
     <script src="javascript/login_success_enterprise.js"></script>
     <script src="javascript/login_success_person.js"></script>
     <script src="javascript/register_and_login.js"></script>
 </head>
-<body onload="show_user('login_nickname','login_password'),init_user()">
+<body onload="show_user('login_nickname','login_password'),login_session({'login':'refresh'})">
 <div class="container" style="margin-top: 100px">
     <nav class="navbar navbar-inverse navbar-fixed-top" style="z-index:99999;">
         <div class="container-fluid">
@@ -132,7 +132,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12 center-block">
-                            <input type="radio" checked="checked" id="remember_user">选中我记住用户名和密码180天
+                            <input type="radio" checked="checked" id="remember_user">选中我记住登录状态
                         </div>
                     </div>
                     <div class="row">
@@ -144,7 +144,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
                     <button type="button" class="btn btn-primary"
-                            onclick="remember_user_login('logon-nickname','login-password'),login()">登录
+                            onclick="login_session({'login':'login'}),login()">登录
                     </button>
                 </div>
             </div>
@@ -194,14 +194,15 @@
                                 <div id="confirm_person_box"></div>
                             </div>
                         </div>
-                        <div class="center-block">
+                        <div class="center-block" onmouseover="btu_able('person_reg_btu','confirm_person_box')">
                             <div class="row center-block">
                                 <div class="col-md-12">
                                     <div class="input-group">
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-default glyphicon glyphicon-user">用户名</button>
                     </span>
-                                        <input type="text" class="form-control" id="person_nickname" onkeyup="reg_username('person-nickname','confirm_person_box')"
+                                        <input type="text" class="form-control" id="person_nickname"
+                                               onkeyup="reg_username('person_nickname','confirm_person_box')"
                                                placeholder="用户名">
                                     </div>
                                 </div>
@@ -269,15 +270,16 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row center-block margin-bottom">
-                                <div class="col-md-6">
-                                    <input class="btn btn-lg btn-primary center-block" id="person_reg_btu"
-                                           type="button" value="注册" onmouseover="btu_disable_person('person_reg_btu')" onmouseout="btu_able('person_reg_btu')"
-                                           onclick="remember_user('person_nickname','person_password','person_telephone'),register_person()">
-                                </div>
-                                <div class="col-md-6">
-                                    <input class="btn btn-lg btn-danger center-block" type="reset" value="重置">
-                                </div>
+                        </div>
+                        <div class="row center-block margin-bottom">
+                            <div class="col-md-6">
+                                <input class="btn btn-lg btn-primary center-block" id="person_reg_btu"
+                                       type="button" value="注册"
+                                       onmouseover="btu_disable_person('person_reg_btu','confirm_person_box')"
+                                       onclick="remember_user('person_nickname','person_password','person_telephone'),register_person()">
+                            </div>
+                            <div class="col-md-6">
+                                <input class="btn btn-lg btn-danger center-block" type="reset" value="重置">
                             </div>
                         </div>
                     </form>
@@ -303,6 +305,7 @@
                             <div id="confirm_enterprise_box"></div>
                         </div>
                     </div>
+                    <div onmouseover="btu_able('reg_btu','confirm_enterprise_box')">
                     <div class="row center-block">
                         <div class="col-md-12">
                             <div class="input-group">
@@ -401,10 +404,11 @@
                             </div>
                         </div>
                     </div>
+                    </div>
                     <div class="row center-block margin-bottom">
                         <div class="col-md-6">
                             <input class="btn btn-lg btn-primary center-block" type="button"
-                                   id="reg_btu" disabled="disabled" value="注册"
+                                   id="reg_btu" value="注册" onmouseover="btu_disable_enterprise('reg_btu','confirm_enterprise_box')"
                                    onclick="remember_user('enterprise_nickname','enterprise_password','enterprise_telephone'),register_enterprise()">
                         </div>
                         <div class="col-md-6">
