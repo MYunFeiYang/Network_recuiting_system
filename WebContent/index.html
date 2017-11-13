@@ -19,8 +19,8 @@
     <script src="javascript/register_and_login.js"></script>
 </head>
 <body onload="show_user('login_nickname','login_password'),login_session({'login':'refresh'})">
-<div class="container" style="margin-top: 100px">
-    <nav class="navbar navbar-inverse navbar-fixed-top" style="z-index:99999;">
+<div class="container-fluid" style="margin-top: 100px">
+    <nav class="navbar navbar-inverse navbar-fixed-top" style="z-index:99999;font-size: 20px">
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
@@ -424,7 +424,7 @@
         </div>
     </div>
     <!--end Modal-->
-    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" style="position: fixed;width: 100%;height: 100%">
         <!-- Indicators -->
         <ol class="carousel-indicators">
             <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
@@ -435,7 +435,7 @@
         <!-- Wrapper for slides -->
         <div class="carousel-inner" role="listbox">
             <div class="item active">
-                <img class="img-responsive" style="width: 100%" height="300px" src="image/1.jpg" alt="...">
+                <img class="img-responsive" style="width: 100%;height:100%" src="image/1.jpg" alt="...">
                 <div class="carousel-caption">
                     ...
                 </div>
@@ -464,10 +464,11 @@
             <span class="sr-only">Next</span>
         </a>
     </div>
-    <div class="row" id="person" style="background-color: #9acfea;margin-top: 20px">
+    <div class="container">
+    <div class="row" id="person" >
         <div class="col-md-12">
             <div class="col-md-3 main">
-                <ul type="none" class="menu">
+                <ul style="list-style: none" class="menu">
                     <li onmouseover="show_div('person_inf')" onmouseout="hidden_div('person_inf')">
                         个人信息
                         <ul type="none" style="display: none" id="person_inf">
@@ -523,7 +524,7 @@
                     </li>
                 </ul>
             </div>
-            <div class="col-md-8 center-block">
+            <div class="col-md-9 center-block">
                 <div class="col-md-12 main center-block " id="register_inf">
                     <div class="page-header">
                         <h3 style="text-align: center">修改注册信息</h3>
@@ -730,7 +731,7 @@
             </div>
         </div>
     </div>
-    <div class="row" id="enterprise" style="background-color: #9acfea;margin-top: 20px">
+    <div class="row" id="enterprise" >
         <div class="col-md-12">
             <div class="col-md-3 main">
                 <ul type="none" class="menu">
@@ -786,7 +787,7 @@
                     </li>
                 </ul>
             </div>
-            <div class="col-md-8">
+            <div class="col-md-9">
                 <div class="col-md-12 main center-block hidden" id="register_inf">
                     <div class="page-header">
                         <h3 style="text-align: center">修改注册信息</h3>
@@ -960,6 +961,7 @@
 
             </div>
         </div>
+    </div>
     </div>
 </div>
 </body>
