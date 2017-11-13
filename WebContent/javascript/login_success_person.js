@@ -20,7 +20,6 @@ function modify_user() {
     modify_user.email=email;
     modify_user_ajax(modify_user);
 }
-
 function modify_user_ajax(user) {
     $.ajax({
         url: 'http://localhost:8080/Network_recuiting_system/modify_user.do',
@@ -35,7 +34,6 @@ function modify_user_ajax(user) {
         }
     })
 }
-
 function modify_user_result(data) {
     var confirm_info_box=document.getElementById("confirm_info_box");
     if (data.msg=="modify_user_success"){
@@ -46,15 +44,12 @@ function modify_user_result(data) {
         confirm_info_box.setAttribute("class","alert-warning");
     }
 }
-
-
 function init_resume() {
     document.getElementById("resume").style.display = "block";
     var user_string = document.cookie.split(";")[0].split("=")[1];
     var user = JSON.parse(user_string);
     init_resume_ajax(user);
 }
-
 function init_resume_ajax(user) {
     $.ajax({
         url: 'http://localhost:8080/Network_recuiting_system/init_resume.do',
@@ -69,13 +64,11 @@ function init_resume_ajax(user) {
         }
     })
 }
-
 function init_resume_result(data) {
     document.getElementById("resume_name").value = data.name;
     document.getElementById("telephone").value = data.telephone;
     document.getElementById("resume_email").value = data.email;
 }
-
 function add_resume() {
     var user_string = document.cookie.split(";")[0].split("=")[1];
     var user = JSON.parse(user_string);
