@@ -1,21 +1,25 @@
 html, head, body {
     margin: 0px;
     padding: 0px;
-    background-color: #870eff;
-    color: white;
 }
-
+h3{
+    background-color: white;
+    padding: 10px;
+    border-radius: 5px;
+}
 .row {
     margin: 10px 30px;
 }
 .modal{
-    margin-top: 30px;
+    margin-top: 25px;
 }
 .main {
     height: auto;
     box-shadow: 2px 2px 2px 2px;
-    border-radius: 8px;
-    background-color: #5249b7;
+    border-radius: 5px;
+}
+.menu,.menu li ul{
+    list-style: none;
 }
 .menu li{
     padding: 3px 5px;
@@ -24,6 +28,7 @@ html, head, body {
     border-radius: 5px;
     border: 1px solid darkseagreen;
     font-size: 18px;
+    background-color: white;
 }
 .menu li ul li button,.menu li ul li a,.bg-primary{
     padding: 3px 15px;
@@ -32,6 +37,9 @@ html, head, body {
     border-radius: 5px;
     border: 1px solid darkseagreen;
     opacity: 0.9;
+}
+#resume,#jobs{
+    display: none;
 }
 .alert-warning {
     margin: auto;

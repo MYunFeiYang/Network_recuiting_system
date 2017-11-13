@@ -1,5 +1,11 @@
 
-
+function modify_user_person() {
+    document.getElementById("myregister-person").innerHTML="修改个人注册信息";
+    document.getElementById("person_name_group").style.display="none";
+    document.getElementById("person_telephone_group").style.display="none";
+    document.getElementById("person_reg_btu").value="提交修改";
+    document.getElementById("person_reg_btu").setAttribute("onclick","modify_user");
+}
 function modify_user() {
     var user_string = document.cookie.split(";")[0].split("=")[1];
     var user = JSON.parse(user_string);
@@ -65,9 +71,9 @@ function init_resume_ajax(user) {
 }
 
 function init_resume_result(data) {
-    document.getElementById("name").value = data.name;
+    document.getElementById("resume_name").value = data.name;
     document.getElementById("telephone").value = data.telephone;
-    document.getElementById("email").value = data.email;
+    document.getElementById("resume_email").value = data.email;
 }
 
 function add_resume() {
@@ -75,7 +81,7 @@ function add_resume() {
     var user = JSON.parse(user_string);
     var nickname = user.nickname;
     var password = user.password;
-    var name = document.getElementById("name").value;
+    var name = document.getElementById("resume_name").value;
     var age = document.getElementById("age").value;
     var sex = document.getElementById("sex").value;
     var origin = document.getElementById("origin").value;
@@ -85,7 +91,7 @@ function add_resume() {
     var admission_data = document.getElementById("admission_data").value;
     var graduation_data = document.getElementById("graduation_data").value;
     var telephone = document.getElementById("telephone").value;
-    var email = document.getElementById("email").value;
+    var email = document.getElementById("resume_email").value;
     var confirm_resume_box = document.getElementById("confirm_resume_box");
     if (age == "") {
         confirm_resume_box.innerHTML = "请输入年龄";
