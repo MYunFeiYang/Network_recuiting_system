@@ -18,7 +18,7 @@
     <script src="javascript/login_success_person.js"></script>
     <script src="javascript/register_and_login.js"></script>
 </head>
-<body onload="show_user('login_nickname','login_password'),login_session({'login':'refresh'})">
+<body onload="show_user('login_nickname','login_password'),login_session('refresh')">
 <div class="container-fluid">
     <nav class="navbar navbar-inverse navbar-fixed-top" style="z-index:99999;font-size: 20px">
         <div class="container-fluid">
@@ -45,10 +45,10 @@
                            aria-expanded="false">会员<span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li title="该功能登录后可用">
-                                <a href="#" onclick="show_div('person')">个人</a></li>
+                                <a href="#" id="person_btu">个人</a></li>
                             <li role="separator" class="divider"></li>
                             <li title="该功能登录后可用">
-                                <a href="#" onclick="show_div('enterprise')">企业</a></li>
+                                <a href="#" id="enterprise_btu">企业</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -128,7 +128,7 @@
                         <div class="col-md-12 center-block">
                             <div class="input-group">
                                 <span class="input-group-addon glyphicon glyphicon-lock">密码</span>
-                                <input type="text" id="login_password" class="form-control" placeholder="密码">
+                                <input type="password" id="login_password" class="form-control" placeholder="密码">
                             </div>
                         </div>
                     </div>
@@ -146,7 +146,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
                     <button type="button" class="btn btn-primary"
-                            onclick="login_session({'login':'login'}),login()">登录
+                            onclick="login_session('login'),login()">登录
                     </button>
                 </div>
             </div>
@@ -215,7 +215,7 @@
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-default glyphicon glyphicon-lock">密码</button>
                     </span>
-                                        <input type="text" class="form-control" id="person_password" placeholder="密码"
+                                        <input type="password" class="form-control" id="person_password" placeholder="密码"
                                                onkeyup="reg_pwd('person_password','confirm_person_box')">
                                     </div>
                                 </div>
@@ -226,7 +226,7 @@
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-default glyphicon glyphicon-lock">确认密码</button>
                     </span>
-                                        <input type="text" class="form-control" id="person_confirm_password"
+                                        <input type="password" class="form-control" id="person_confirm_password"
                                                onkeyup="conf_pwd('person_password','person_confirm_password','confirm_person_box')"
                                                placeholder="确认密码">
                                     </div>
@@ -325,7 +325,7 @@
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-default glyphicon glyphicon-lock">密码</button>
                     </span>
-                                <input type="text" class="form-control"
+                                <input type="password" class="form-control"
                                        onkeyup="reg_pwd('enterprise_password','confirm_enterprise_box')"
                                        id="enterprise_password"
                                        placeholder="密码">
@@ -338,7 +338,7 @@
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-default glyphicon glyphicon-lock">确认密码</button>
                     </span>
-                                <input type="text" class="form-control" id="confirm_enterprise_password"
+                                <input type="password" class="form-control" id="confirm_enterprise_password"
                                        onkeyup="conf_pwd('enterprise_password','confirm_enterprise_password','confirm_enterprise_box')"
                                        placeholder="确认密码">
                             </div>
@@ -840,7 +840,7 @@
             </div>
         </div>
     </div>
-        <div id="tourists">
+        <div id="tourists" class="hidden">
             <div class="row">
                 <div class="col-sm-6 col-md-4">
                     <div class="thumbnail">

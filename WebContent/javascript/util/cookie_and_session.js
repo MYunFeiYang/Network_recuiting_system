@@ -13,7 +13,10 @@ function remember_user(nickname,password,telephone) {
 function login_session(data) {
     var radio=document.getElementById('remember_user').checked;
     if (radio){
-        ajax_login_session(data);
+        var user={};
+        user.login=data;
+        user.login_type=document.getElementById("login_type").value;
+        ajax_login_session(user);
     }
 }
 function ajax_login_session(data) {
@@ -34,6 +37,13 @@ function ajax_login_session(data) {
 function login_session_result(data) {
     if (data.msg=="session创建成功"||data.msg=="session之前存在") {
         init_user();
+        if (data.login_type=="person"){
+            var person_btu=document.getElementById("person_btu")
+            person_btu.setAttribute("onclick","show_div('person')");
+        }else {
+            var enterprise_btu=document.getElementById("enterprise_btu");
+            enterprise_btu.setAttribute("onclick","show_div('enterprise')");
+        }
     }
 }
 function show_user(nickname,password) {
@@ -53,7 +63,7 @@ function init_user() {
     login_out.innerHTML="";
     var a=document.createElement("a");
     a.text="退出登录";
-    a.setAttribute("onclick","login_session({'login':'delete'})");
+    a.setAttribute("onclick","login_session('delete')");
     a.setAttribute("href","index.html");
     login_out.appendChild(a);
 }
