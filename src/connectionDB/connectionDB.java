@@ -6,22 +6,22 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class connectionDB  {
-	public Connection connDB() throws IOException {
-		Connection conn = null;
-	try {  
-        // ¼ÓÔØÊı¾İ¿âÇı¶¯£¬×¢²áµ½Çı¶¯¹ÜÀíÆ÷  
-        Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");  
-        // Êı¾İ¿âÁ¬½Ó×Ö·û´®  
-        String url = "jdbc:sqlserver://localhost:1433;databaseName=Network-recuiting-system";  
-        // Êı¾İ¿âÓÃ»§Ãû  
-        String username = "sa";  
-        // Êı¾İ¿âÃÜÂë  
-        String password = "420222aa";  
-        // ´´½¨ConnectionÁ¬½Ó  
-        conn = DriverManager.getConnection(url, username, password);  
-	}catch (SQLException | ClassNotFoundException e) {  
-        e.printStackTrace();  
+    public Connection connDB() throws IOException {
+        Connection conn = null;
+        try {
+            // åŠ è½½æ•°æ®åº“é©±åŠ¨ï¼Œæ³¨å†Œåˆ°é©±åŠ¨ç®¡ç†å™¨
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            // æ•°æ®åº“è¿æ¥å­—ç¬¦ä¸²
+            String url = "jdbc:sqlserver://localhost:1433;databaseName=Network-recuiting-system";
+            // æ•°æ®åº“ç”¨æˆ·å
+            String username = "sa";
+            // æ•°æ®åº“å¯†ç 
+            String password = "420222aa";
+            // åˆ›å»ºConnectionè¿æ¥
+            conn = DriverManager.getConnection(url, username, password);
+        }catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return conn;
     }
-	return conn;  
-	}
 }

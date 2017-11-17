@@ -18,29 +18,29 @@ import javafx.scene.chart.PieChart.Data;
 
 @WebServlet("/add_job.do")
 public class Add_job extends HttpServlet {
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
-        response.setContentType("text/xml; charset=UTF-8");
-        //ÒÔÏÂÁ½¾äÎªÈ¡ÏûÔÚ±¾µØµÄ»º´æ
-        response.setHeader("Cache-Control", "no-cache");
-        response.setHeader("Pragma", "no-cache");
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/xml; charset=UTF-8");
+		//ä»¥ä¸‹ä¸¤å¥ä¸ºå–æ¶ˆåœ¨æœ¬åœ°çš„ç¼“å­˜
+		response.setHeader("Cache-Control", "no-cache");
+		response.setHeader("Pragma", "no-cache");
 
-        String name=request.getParameter("name");
-        String address=request.getParameter("address");
-        String industry=request.getParameter("industry");
-        String job=request.getParameter("job_name");
-        String number=request.getParameter("number");
-        String salary=request.getParameter("salary");
-        String publish_time=request.getParameter("publish_time");
-        String effective_time=request.getParameter("effective_time");
-        String telephone=request.getParameter("telephone");
-        String email=request.getParameter("email");
-      
-        connectionDB conndb=new connectionDB();
-        Connection conn=conndb.connDB();
-        String sql="insert into occupy_jobs (telephone,name,address,industry,job,number,salary,publish_time,"
-        		+ "effective_time,email) values(?,?,?,?,?,?,?,?,?,?)";
-        try {
+		String name=request.getParameter("name");
+		String address=request.getParameter("address");
+		String industry=request.getParameter("industry");
+		String job=request.getParameter("job_name");
+		String number=request.getParameter("number");
+		String salary=request.getParameter("salary");
+		String publish_time=request.getParameter("publish_time");
+		String effective_time=request.getParameter("effective_time");
+		String telephone=request.getParameter("telephone");
+		String email=request.getParameter("email");
+
+		connectionDB conndb=new connectionDB();
+		Connection conn=conndb.connDB();
+		String sql="insert into occupy_jobs (telephone,name,address,industry,job,number,salary,publish_time,"
+				+ "effective_time,email) values(?,?,?,?,?,?,?,?,?,?)";
+		try {
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, telephone);
 			ps.setString(2, name);
@@ -56,18 +56,18 @@ public class Add_job extends HttpServlet {
 			ps.close();
 			if(tag==1){
 				String str = "{\"msg\":\"add_job_success\"}";
-		        response.getWriter().print(str);
-		        response.getWriter().flush();
-		        response.getWriter().close();
+				response.getWriter().print(str);
+				response.getWriter().flush();
+				response.getWriter().close();
 			}else{
 				String str = "{\"msg\":\"add_job_fail\"}";
-		        response.getWriter().print(str);
-		        response.getWriter().flush();
-		        response.getWriter().close();
+				response.getWriter().print(str);
+				response.getWriter().flush();
+				response.getWriter().close();
 			}
 		} catch (SQLException e) {
-			// TODO ×Ô¶¯Éú³ÉµÄ catch ¿é
+			// TODO è‡ªåŠ¨ç”Ÿæˆçš„ catch å—
 			e.printStackTrace();
 		}
-    }
+	}
 }

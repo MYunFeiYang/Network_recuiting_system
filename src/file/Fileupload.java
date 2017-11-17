@@ -10,97 +10,99 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+
 @WebServlet("/upload.do")
 public class Fileupload extends HttpServlet {
 
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-                //µÃµ½ÉÏ´«ÎÄ¼şµÄ±£´æÄ¿Â¼£¬½«ÉÏ´«µÄÎÄ¼ş´æ·ÅÓÚWEB-INFÄ¿Â¼ÏÂ£¬²»ÔÊĞíÍâ½çÖ±½Ó·ÃÎÊ£¬±£Ö¤ÉÏ´«ÎÄ¼şµÄ°²È«
-                String savePath = this.getServletContext().getRealPath("/WEB-INF/upload");
-                File file = new File(savePath);
-                //ÅĞ¶ÏÉÏ´«ÎÄ¼şµÄ±£´æÄ¿Â¼ÊÇ·ñ´æÔÚ
-                if (!file.exists() && !file.isDirectory()) {
-                    System.out.println(savePath+"Ä¿Â¼²»´æÔÚ£¬ĞèÒª´´½¨");
-                    //´´½¨Ä¿Â¼
-                    file.mkdir();
-                }
-                //ÏûÏ¢ÌáÊ¾
-                String message = "";
-                try{
-                    //Ê¹ÓÃApacheÎÄ¼şÉÏ´«×é¼ş´¦ÀíÎÄ¼şÉÏ´«²½Öè£º
-                    //1¡¢´´½¨Ò»¸öDiskFileItemFactory¹¤³§
-                    DiskFileItemFactory factory = new DiskFileItemFactory();
-                    //2¡¢´´½¨Ò»¸öÎÄ¼şÉÏ´«½âÎöÆ÷
-                    ServletFileUpload upload = new ServletFileUpload(factory);
-                     //½â¾öÉÏ´«ÎÄ¼şÃûµÄÖĞÎÄÂÒÂë
-                    upload.setHeaderEncoding("UTF-8"); 
-                    //3¡¢ÅĞ¶ÏÌá½»ÉÏÀ´µÄÊı¾İÊÇ·ñÊÇÉÏ´«±íµ¥µÄÊı¾İ
-                  //System.out.print(request);
+        //å¾—åˆ°ä¸Šä¼ æ–‡ä»¶çš„ä¿å­˜ç›®å½•ï¼Œå°†ä¸Šä¼ çš„æ–‡ä»¶å­˜æ”¾äºWEB-INFç›®å½•ä¸‹ï¼Œä¸å…è®¸å¤–ç•Œç›´æ¥è®¿é—®ï¼Œä¿è¯ä¸Šä¼ æ–‡ä»¶çš„å®‰å…¨
+        String savePath = this.getServletContext().getRealPath("/WEB-INF/upload");
+        File file = new File(savePath);
+        //åˆ¤æ–­ä¸Šä¼ æ–‡ä»¶çš„ä¿å­˜ç›®å½•æ˜¯å¦å­˜åœ¨
+        if (!file.exists() && !file.isDirectory()) {
+            System.out.println(savePath + "ç›®å½•ä¸å­˜åœ¨ï¼Œéœ€è¦åˆ›å»º");
+            //åˆ›å»ºç›®å½•
+            file.mkdir();
+        }
+        //æ¶ˆæ¯æç¤º
+        String message = "";
+        try {
+            //ä½¿ç”¨Apacheæ–‡ä»¶ä¸Šä¼ ç»„ä»¶å¤„ç†æ–‡ä»¶ä¸Šä¼ æ­¥éª¤ï¼š
+            //1ã€åˆ›å»ºä¸€ä¸ªDiskFileItemFactoryå·¥å‚
+            DiskFileItemFactory factory = new DiskFileItemFactory();
+            //2ã€åˆ›å»ºä¸€ä¸ªæ–‡ä»¶ä¸Šä¼ è§£æå™¨
+            ServletFileUpload upload = new ServletFileUpload(factory);
+            //è§£å†³ä¸Šä¼ æ–‡ä»¶åçš„ä¸­æ–‡ä¹±ç 
+            upload.setHeaderEncoding("UTF-8");
+            //3ã€åˆ¤æ–­æäº¤ä¸Šæ¥çš„æ•°æ®æ˜¯å¦æ˜¯ä¸Šä¼ è¡¨å•çš„æ•°æ®
+            //System.out.print(request);
 //                    if(!ServletFileUpload.isMultipartContent(request)){
-//                        //°´ÕÕ´«Í³·½Ê½»ñÈ¡Êı¾İ
+//                        //æŒ‰ç…§ä¼ ç»Ÿæ–¹å¼è·å–æ•°æ®
 //                        return;
 //                    }
-                    System.out.println(ServletFileUpload.isMultipartContent(request));
-                    //4¡¢Ê¹ÓÃServletFileUpload½âÎöÆ÷½âÎöÉÏ´«Êı¾İ£¬½âÎö½á¹û·µ»ØµÄÊÇÒ»¸öList<FileItem>¼¯ºÏ£¬
-                    //Ã¿Ò»¸öFileItem¶ÔÓ¦Ò»¸öForm±íµ¥µÄÊäÈëÏî
-                    //@SuppressWarnings("unchecked")
-					List<FileItem> list = upload.parseRequest(request);
-                    System.out.println(savePath);
-                    for(FileItem item : list){
-                        //Èç¹ûfileitemÖĞ·â×°µÄÊÇÆÕÍ¨ÊäÈëÏîµÄÊı¾İ
-                        if(item.isFormField()){
-                            String name = item.getFieldName();
-                            //½â¾öÆÕÍ¨ÊäÈëÏîµÄÊı¾İµÄÖĞÎÄÂÒÂëÎÊÌâ
-                            String value = item.getString("UTF-8");
-                            //value = new String(value.getBytes("iso8859-1"),"UTF-8");
-                            System.out.println(name + "=" + value);
-                        }else{
-                        	//Èç¹ûfileitemÖĞ·â×°µÄÊÇÉÏ´«ÎÄ¼ş
-                            //µÃµ½ÉÏ´«µÄÎÄ¼şÃû³Æ£¬
-                            String filename = item.getName();
-                            System.out.println(filename);
-                            if(filename==null || filename.trim().equals("")){
-                                continue;
-                            }
-                            //×¢Òâ£º²»Í¬µÄä¯ÀÀÆ÷Ìá½»µÄÎÄ¼şÃûÊÇ²»Ò»ÑùµÄ£¬ÓĞĞ©ä¯ÀÀÆ÷Ìá½»ÉÏÀ´µÄÎÄ¼şÃûÊÇ´øÓĞÂ·¾¶µÄ£¬
-                            //Èç£º  c:\a\b\1.txt£¬¶øÓĞĞ©Ö»ÊÇµ¥´¿µÄÎÄ¼şÃû£¬Èç£º1.txt
-                            //´¦Àí»ñÈ¡µ½µÄÉÏ´«ÎÄ¼şµÄÎÄ¼şÃûµÄÂ·¾¶²¿·Ö£¬Ö»±£ÁôÎÄ¼şÃû²¿·Ö
-                            filename = filename.substring(filename.lastIndexOf("\\")+1);
-                            //»ñÈ¡itemÖĞµÄÉÏ´«ÎÄ¼şµÄÊäÈëÁ÷
-                            InputStream in = item.getInputStream();
-                            //´´½¨Ò»¸öÎÄ¼şÊä³öÁ÷
-                            FileOutputStream out = new FileOutputStream(savePath + "\\" + filename);
-                            //´´½¨Ò»¸ö»º³åÇø
-                            byte buffer[] = new byte[1024];
-                            //ÅĞ¶ÏÊäÈëÁ÷ÖĞµÄÊı¾İÊÇ·ñÒÑ¾­¶ÁÍêµÄ±êÊ¶
-                            int len = 0;
-                            //Ñ­»·½«ÊäÈëÁ÷¶ÁÈëµ½»º³åÇøµ±ÖĞ£¬(len=in.read(buffer))>0¾Í±íÊ¾inÀïÃæ»¹ÓĞÊı¾İ
-                            while((len=in.read(buffer))>0){
-                                //Ê¹ÓÃFileOutputStreamÊä³öÁ÷½«»º³åÇøµÄÊı¾İĞ´Èëµ½Ö¸¶¨µÄÄ¿Â¼
-                            	//(savePath + "\\" + filename)µ±ÖĞ
-                                out.write(buffer, 0, len);
-                            }
-                            //¹Ø±ÕÊäÈëÁ÷
-                            in.close();
-                            //¹Ø±ÕÊä³öÁ÷
-                            out.close();
-                            //É¾³ı´¦ÀíÎÄ¼şÉÏ´«Ê±Éú³ÉµÄÁÙÊ±ÎÄ¼ş
-                            item.delete();
-                            message = "ÎÄ¼şÉÏ´«³É¹¦£¡";
-                        }
+            System.out.println(ServletFileUpload.isMultipartContent(request));
+            //4ã€ä½¿ç”¨ServletFileUploadè§£æå™¨è§£æä¸Šä¼ æ•°æ®ï¼Œè§£æç»“æœè¿”å›çš„æ˜¯ä¸€ä¸ªList<FileItem>é›†åˆï¼Œ
+            //æ¯ä¸€ä¸ªFileItemå¯¹åº”ä¸€ä¸ªFormè¡¨å•çš„è¾“å…¥é¡¹
+            //@SuppressWarnings("unchecked")
+            List<FileItem> list = upload.parseRequest(request);
+            System.out.println(savePath);
+            for (FileItem item : list) {
+                //å¦‚æœfileitemä¸­å°è£…çš„æ˜¯æ™®é€šè¾“å…¥é¡¹çš„æ•°æ®
+                if (item.isFormField()) {
+                    String name = item.getFieldName();
+                    //è§£å†³æ™®é€šè¾“å…¥é¡¹çš„æ•°æ®çš„ä¸­æ–‡ä¹±ç é—®é¢˜
+                    String value = item.getString("UTF-8");
+                    //value = new String(value.getBytes("iso8859-1"),"UTF-8");
+                    System.out.println(name + "=" + value);
+                } else {
+                    //å¦‚æœfileitemä¸­å°è£…çš„æ˜¯ä¸Šä¼ æ–‡ä»¶
+                    //å¾—åˆ°ä¸Šä¼ çš„æ–‡ä»¶åç§°ï¼Œ
+                    String filename = item.getName();
+                    System.out.println(filename);
+                    if (filename == null || filename.trim().equals("")) {
+                        continue;
                     }
-                }catch (Exception e) {
-                    message= "ÎÄ¼şÉÏ´«Ê§°Ü£¡";
-                    e.printStackTrace();
-                    
+                    //æ³¨æ„ï¼šä¸åŒçš„æµè§ˆå™¨æäº¤çš„æ–‡ä»¶åæ˜¯ä¸ä¸€æ ·çš„ï¼Œæœ‰äº›æµè§ˆå™¨æäº¤ä¸Šæ¥çš„æ–‡ä»¶åæ˜¯å¸¦æœ‰è·¯å¾„çš„ï¼Œ
+                    //å¦‚ï¼š  c:\a\b\1.txtï¼Œè€Œæœ‰äº›åªæ˜¯å•çº¯çš„æ–‡ä»¶åï¼Œå¦‚ï¼š1.txt
+                    //å¤„ç†è·å–åˆ°çš„ä¸Šä¼ æ–‡ä»¶çš„æ–‡ä»¶åçš„è·¯å¾„éƒ¨åˆ†ï¼Œåªä¿ç•™æ–‡ä»¶åéƒ¨åˆ†
+                    filename = filename.substring(filename.lastIndexOf("\\") + 1);
+                    //è·å–itemä¸­çš„ä¸Šä¼ æ–‡ä»¶çš„è¾“å…¥æµ
+                    InputStream in = item.getInputStream();
+                    //åˆ›å»ºä¸€ä¸ªæ–‡ä»¶è¾“å‡ºæµ
+                    FileOutputStream out = new FileOutputStream(savePath + "\\" + filename);
+                    //åˆ›å»ºä¸€ä¸ªç¼“å†²åŒº
+                    byte buffer[] = new byte[1024];
+                    //åˆ¤æ–­è¾“å…¥æµä¸­çš„æ•°æ®æ˜¯å¦å·²ç»è¯»å®Œçš„æ ‡è¯†
+                    int len = 0;
+                    //å¾ªç¯å°†è¾“å…¥æµè¯»å…¥åˆ°ç¼“å†²åŒºå½“ä¸­ï¼Œ(len=in.read(buffer))>0å°±è¡¨ç¤ºiné‡Œé¢è¿˜æœ‰æ•°æ®
+                    while ((len = in.read(buffer)) > 0) {
+                        //ä½¿ç”¨FileOutputStreamè¾“å‡ºæµå°†ç¼“å†²åŒºçš„æ•°æ®å†™å…¥åˆ°æŒ‡å®šçš„ç›®å½•
+                        //(savePath + "\\" + filename)å½“ä¸­
+                        out.write(buffer, 0, len);
+                    }
+                    //å…³é—­è¾“å…¥æµ
+                    in.close();
+                    //å…³é—­è¾“å‡ºæµ
+                    out.close();
+                    //åˆ é™¤å¤„ç†æ–‡ä»¶ä¸Šä¼ æ—¶ç”Ÿæˆçš„ä¸´æ—¶æ–‡ä»¶
+                    item.delete();
+                    message = "æ–‡ä»¶ä¸Šä¼ æˆåŠŸï¼";
                 }
+            }
+        } catch (Exception e) {
+            message = "æ–‡ä»¶ä¸Šä¼ å¤±è´¥ï¼";
+            e.printStackTrace();
+
+        }
 //                response.getWriter().print("{\"msg\":\"1\"}");
 //                response.sendRedirect("/login_success_person.jsp");
-               request.setAttribute("message",message);
-               request.getRequestDispatcher("/redirect.jsp").forward(request, response);
+        request.setAttribute("message", message);
+        request.getRequestDispatcher("/redirect.jsp").forward(request, response);
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)

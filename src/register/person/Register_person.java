@@ -17,25 +17,25 @@ import connectionDB.connectionDB;
 
 @WebServlet("/register_person.do")
 public class Register_person extends HttpServlet {
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
-        response.setContentType("text/xml; charset=UTF-8");
-        //ÒÔÏÂÁ½¾äÎªÈ¡ÏûÔÚ±¾µØµÄ»º´æ
-        response.setHeader("Cache-Control", "no-cache");
-        response.setHeader("Pragma", "no-cache");
-        String nickname=request.getParameter("nickname");
-        String password=request.getParameter("password");
-        String name=request.getParameter("name");
-        String telephone=request.getParameter("telephone");
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");//ÉèÖÃÈÕÆÚ¸ñÊ½
-        String dataString=df.format(new Date());// new Date()Îª»ñÈ¡µ±Ç°ÏµÍ³Ê±¼ä
-        String email=request.getParameter("email");
-        
-        connectionDB conndb=new connectionDB();
-        Connection conn=conndb.connDB();
-        String sql="insert into occupy_person (nickname,password,"
-        		+ "name,telephone,email,regrime) values(?,?,?,?,?,?)";
-        try {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/xml; charset=UTF-8");
+		//ä»¥ä¸‹ä¸¤å¥ä¸ºå–æ¶ˆåœ¨æœ¬åœ°çš„ç¼“å­˜
+		response.setHeader("Cache-Control", "no-cache");
+		response.setHeader("Pragma", "no-cache");
+		String nickname=request.getParameter("nickname");
+		String password=request.getParameter("password");
+		String name=request.getParameter("name");
+		String telephone=request.getParameter("telephone");
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");//è®¾ç½®æ—¥æœŸæ ¼å¼
+		String dataString=df.format(new Date());// new Date()ä¸ºè·å–å½“å‰ç³»ç»Ÿæ—¶é—´
+		String email=request.getParameter("email");
+
+		connectionDB conndb=new connectionDB();
+		Connection conn=conndb.connDB();
+		String sql="insert into occupy_person (nickname,password,"
+				+ "name,telephone,email,regrime) values(?,?,?,?,?,?)";
+		try {
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, nickname);
 			ps.setString(2, password);
@@ -46,19 +46,19 @@ public class Register_person extends HttpServlet {
 			int tag = ps.executeUpdate();
 			ps.close();
 			if(tag==1){
-				String str = "{\"msg\":\"³É¹¦\"}";
-		        response.getWriter().print(str);
-		        response.getWriter().flush();;
-		        response.getWriter().close();;
+				String str = "{\"msg\":\"æˆåŠŸ\"}";
+				response.getWriter().print(str);
+				response.getWriter().flush();;
+				response.getWriter().close();;
 			}else{
-				String str = "{\"msg\":\"Ê§°Ü\"}";
-		        response.getWriter().print(str);
-		        response.getWriter().flush();;
-		        response.getWriter().close();;
+				String str = "{\"msg\":\"å¤±è´¥\"}";
+				response.getWriter().print(str);
+				response.getWriter().flush();;
+				response.getWriter().close();;
 			}
 		} catch (SQLException e) {
-			// TODO ×Ô¶¯Éú³ÉµÄ catch ¿é
+			// TODO è‡ªåŠ¨ç”Ÿæˆçš„ catch å—
 			e.printStackTrace();
 		}
-    }
+	}
 }

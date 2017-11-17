@@ -18,30 +18,30 @@ public class LoginSession extends HttpServlet {
 		String login = request.getParameter("login");
 		String login_type=request.getParameter("login_type");
 		if (login.equals("login")) {
-			// ´´½¨session
-			// Ê¹ÓÃrequest¶ÔÏóµÄgetSession()»ñÈ¡session£¬Èç¹ûsession²»´æÔÚÔò´´½¨Ò»¸ö
+			// åˆ›å»ºsession
+			// ä½¿ç”¨requestå¯¹è±¡çš„getSession()è·å–sessionï¼Œå¦‚æœsessionä¸å­˜åœ¨åˆ™åˆ›å»ºä¸€ä¸ª
 			HttpSession session = request.getSession();
 			JSONObject user = new JSONObject();
-			user.put("msg", "session´´½¨³É¹¦");
+			user.put("msg", "sessionåˆ›å»ºæˆåŠŸ");
 			user.put("login_type", login_type);
 			response.getWriter().print(user.toString());
 		} else if (login.equals("refresh")) {
-			// ÅĞ¶ÏsessionÖ®Ç°ÊÇ·ñ´æÔÚ£¬»òÕßËµÊÇ·ñĞÂ½¨
+			// åˆ¤æ–­sessionä¹‹å‰æ˜¯å¦å­˜åœ¨ï¼Œæˆ–è€…è¯´æ˜¯å¦æ–°å»º
 			HttpSession session = request.getSession();
 			if (session.isNew()) {
-				response.getWriter().print("{\"msg\":\"sessionÖ®Ç°²»´æÔÚ\"}");
+				response.getWriter().print("{\"msg\":\"sessionä¹‹å‰ä¸å­˜åœ¨\"}");
 				session.invalidate();
 			} else {
 				JSONObject user = new JSONObject();
-				user.put("msg", "sessionÖ®Ç°´æÔÚ");
+				user.put("msg", "sessionä¹‹å‰å­˜åœ¨");
 				user.put("login_type", login_type);
 				response.getWriter().print(user.toString());
 			}
 		} else {
-			// É¾³ısession
+			// åˆ é™¤session
 			HttpSession session = request.getSession();
 			session.invalidate();
-			response.getWriter().print("{\"msg\":\"sessionÉ¾³ı\"}");
+			response.getWriter().print("{\"msg\":\"sessionåˆ é™¤\"}");
 		}
 
 	}

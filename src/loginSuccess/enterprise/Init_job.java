@@ -21,7 +21,7 @@ public class Init_job extends HttpServlet {
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/xml; charset=UTF-8");
-		// ÒÔÏÂÁ½¾äÎªÈ¡ÏûÔÚ±¾µØµÄ»º´æ
+		// ä»¥ä¸‹ä¸¤å¥ä¸ºå–æ¶ˆåœ¨æœ¬åœ°çš„ç¼“å­˜
 		response.setHeader("Cache-Control", "no-cache");
 		response.setHeader("Pragma", "no-cache");
 		String nickname = request.getParameter("nickname");
@@ -51,7 +51,7 @@ public class Init_job extends HttpServlet {
 				ps.close();
 			}
 		} catch (SQLException e) {
-			// TODO ×Ô¶¯Éú³ÉµÄ catch ¿é
+			// TODO è‡ªåŠ¨ç”Ÿæˆçš„ catch å—
 			e.printStackTrace();
 		}
 
