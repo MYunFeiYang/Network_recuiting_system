@@ -1,6 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="war" name="Network_recuiting_system">
-    <output-path>$PROJECT_DIR$/classes/artifacts/Network_recuiting_system</output-path>
-    <root id="archive" name="Network_recuiting_system.war" />
-  </artifact>
-</component>
