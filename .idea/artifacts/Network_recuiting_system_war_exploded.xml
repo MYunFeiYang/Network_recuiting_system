@@ -1,0 +1,27 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="Network_recuiting_system:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/Network_recuiting_system_war_exploded</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="Network_recuiting_system" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="module" name="commons-beanutils.jar" module-name="Network_recuiting_system" />
+          <element id="library" level="module" name="commons-collections-3.1.jar" module-name="Network_recuiting_system" />
+          <element id="library" level="module" name="commons-logging-1.1.1.jar" module-name="Network_recuiting_system" />
+          <element id="library" level="module" name="ezmorph-1.0.6.jar" module-name="Network_recuiting_system" />
+          <element id="library" level="module" name="jackson-core-2.7.0.jar" module-name="Network_recuiting_system" />
+          <element id="library" level="module" name="jackson-databind-2.7.0.jar" module-name="Network_recuiting_system" />
+          <element id="library" level="module" name="json-lib-2.1.jar" module-name="Network_recuiting_system" />
+          <element id="library" level="module" name="sqljdbc42.jar" module-name="Network_recuiting_system" />
+          <element id="library" level="module" name="commons-lang-2.6.jar" module-name="Network_recuiting_system" />
+          <element id="library" level="module" name="commons-fileupload-1.2.1.jar" module-name="Network_recuiting_system" />
+          <element id="library" level="module" name="commons-io-1.4.jar" module-name="Network_recuiting_system" />
+        </element>
+      </element>
+      <element id="javaee-facet-resources" facet="Network_recuiting_system/web/Web" />
+      <element id="directory" name="folder" />
+    </root>
+  </artifact>
+</component>
