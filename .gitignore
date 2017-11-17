@@ -2,6 +2,6 @@
 .settings/
 build/
 out/
-.classpath/
-.project/
+.classpath
+.project
 *.iml
