@@ -13,35 +13,34 @@ import net.sf.json.JSONObject;
 public class LoginSession extends HttpServlet {
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setCharacterEncoding("UTF=8");
+		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=UTF-8");
 		String login = request.getParameter("login");
 		String login_type=request.getParameter("login_type");
+		String login_nickname=request.getParameter("nickname");
+		String login_password=request.getParameter("password");
 		if (login.equals("login")) {
 			// 创建session
 			// 使用request对象的getSession()获取session，如果session不存在则创建一个
 			HttpSession session = request.getSession();
 			JSONObject user = new JSONObject();
-			user.put("msg", "session创建成功");
 			user.put("login_type", login_type);
+			user.put("nickname",login_nickname);
+			user.put("password",login_password);
+			session.setAttribute("user",user);
 			response.getWriter().print(user.toString());
 		} else if (login.equals("refresh")) {
 			// 判断session之前是否存在，或者说是否新建
 			HttpSession session = request.getSession();
 			if (session.isNew()) {
-				response.getWriter().print("{\"msg\":\"session之前不存在\"}");
 				session.invalidate();
 			} else {
-				JSONObject user = new JSONObject();
-				user.put("msg", "session之前存在");
-				user.put("login_type", login_type);
-				response.getWriter().print(user.toString());
+				response.getWriter().print(session.getAttribute("user"));
 			}
 		} else {
 			// 删除session
 			HttpSession session = request.getSession();
 			session.invalidate();
-			response.getWriter().print("{\"msg\":\"session删除\"}");
 		}
 
 	}
