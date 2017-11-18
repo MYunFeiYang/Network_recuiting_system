@@ -10,11 +10,27 @@
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
   <servlet>
-    <servlet-name>Fileupload</servlet-name>
+    <servlet-name>upload.do</servlet-name>
     <servlet-class>file.Fileupload</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>Fileupload</servlet-name>
-    <url-pattern>/file/Fileupload</url-pattern>
+    <servlet-name>upload.do</servlet-name>
+    <url-pattern>/upload.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>login_session</servlet-name>
+    <servlet-class>login.LoginSession</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>login_session</servlet-name>
+    <url-pattern>/login_session</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>login.do</servlet-name>
+    <servlet-class>login.Login</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>login.do</servlet-name>
+    <url-pattern>/login.do</url-pattern>
   </servlet-mapping>
 </web-app>

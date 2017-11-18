@@ -2,6 +2,7 @@
 .settings/
 build/
 out/
+WebContent/WEB-INF/classes/
 .classpath
 .project
 *.iml
