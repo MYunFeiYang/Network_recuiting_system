@@ -1,20 +1,19 @@
-package register.enterprise;
+package util;
 
-import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import DBO.connectionDB;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
-import connectionDB.connectionDB;
-
-@WebServlet("/check_telephone_enterprise.do")
+@WebServlet("/check_telephone.do")
 public class Check_telephone extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
@@ -23,20 +22,21 @@ public class Check_telephone extends HttpServlet {
 		response.setHeader("Cache-Control", "no-cache");
 		response.setHeader("Pragma", "no-cache");
 		String telephone=request.getParameter("telephone");
+		System.out.println(telephone);
 
 		connectionDB conndb=new connectionDB();
-		Connection conn=conndb.connDB();
-		String sql="select name from occupy_company where telephone=?";
+		Connection conn=conndb.getConn();
+		String sql="select telephone from occupy_person,occupy_enterprise where telephone=?";
 		try {
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, telephone);
 			ResultSet rs = ps.executeQuery();
+			System.out.println(rs.getRow());
 			if(rs.next()){
 				String str = "{\"msg\":\"telephone_exist\"}";
 				response.getWriter().print(str);
 				response.getWriter().flush();
 				response.getWriter().close();
-				System.out.println(rs);
 			}else{
 				String str = "{\"msg\":\"telephone_not_exist\"}";
 				response.getWriter().print(str);

@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,8 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import connectionDB.connectionDB;
-import javafx.scene.chart.PieChart.Data;
+import DBO.connectionDB;
 
 @WebServlet("/add_resume.do")
 public class Add_resume extends HttpServlet {
@@ -39,7 +36,7 @@ public class Add_resume extends HttpServlet {
 		String email=request.getParameter("email");
 
 		connectionDB conndb=new connectionDB();
-		Connection conn=conndb.connDB();
+		Connection conn=conndb.getConn();
 		String sql="insert into occupy_resume (nickname,password,name,age,sex,origin,collage,specialty,"
 				+ "degree,admission_data,graduation_data,telephone,email) values(?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		try {

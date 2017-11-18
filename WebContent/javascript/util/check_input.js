@@ -61,15 +61,15 @@ function conf_pwd(password,confirm_password,confirm_box) {
         confirm.innerHTML="两次密码不一致";
     }
 }
-function check_telephone(telephone,confirm_box,url){
+function check_telephone(telephone,confirm_box){
     var user={};
     var telephone=document.getElementById(telephone).value;
     user.telephone=telephone;
     ajax_check_telephone(user,confirm_box,url,reg_btu);
 }
-function ajax_check_telephone(user,confirm_box,url) {
+function ajax_check_telephone(user,confirm_box) {
     $.ajax({
-        url:url,
+        url:'/check_telephone',
         data:user,
         async:true,
         type:"POST",

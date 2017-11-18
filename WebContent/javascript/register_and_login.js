@@ -12,7 +12,7 @@ function register_enterprise() {
 }
 function ajax_register_enterprise(company) {
     $.ajax({
-        url:"http://localhost:8080/register_enterprise.do",
+        url:"/register_enterprise",
         data:company,
         async:true,
         type:"POST",
@@ -43,7 +43,7 @@ function register_person() {
 }
 function ajax_register_person(user) {
     $.ajax({
-        url:"http://localhost:8080/register_person.do",
+        url:"/register_person",
         data:user,
         async:true,
         type:"POST",
@@ -72,7 +72,7 @@ function login() {
 }
 function login_ajax(data) {
     $.ajax({
-        url:'http://localhost:8080/login.do',
+        url:'/login',
         data:data,
         type:'POST',
         dataType:'JSON',

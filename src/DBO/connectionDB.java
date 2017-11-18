@@ -1,4 +1,4 @@
-package connectionDB;
+package DBO;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -6,8 +6,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class connectionDB  {
-    public Connection connDB() throws IOException {
-        Connection conn = null;
+    Connection conn = null;
+    public Connection getConn() throws IOException {
         try {
             // 加载数据库驱动，注册到驱动管理器
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");

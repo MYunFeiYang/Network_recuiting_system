@@ -164,7 +164,7 @@
                 <div class="modal-body">
                     <div class="row center-block">
                         <div class="col-md-12">
-                            <form action="/Network_recuiting_system/file/Fileupload" enctype="multipart/form-data"
+                            <form action="/upload" enctype="multipart/form-data"
                                   method="post">
 
                                 <input type="file" class="form-control" name="file1">
@@ -254,7 +254,7 @@
                                                placeholder="联系电话">
                                         <span class="input-group-btn">
                         <button type="button" class="btn btn-default"
-                                onclick="check_telephone('person_telephone','confirm_person_box','http://localhost:8080/Network_recuiting_system/check_telephone_person.do')">验证</button>
+                                onclick="check_telephone('person_telephone','confirm_person_box')">验证</button>
                     </span>
                                     </div>
                                 </div>
@@ -376,7 +376,7 @@
                                        placeholder="联系电话">
                                 <span class="input-group-btn">
                         <button type="button"
-                                onclick="check_telephone('enterprise_telephone','confirm_enterprise_box','http://localhost:8080/Network_recuiting_system/check_telephone_enterprise.do','reg_btu')"
+                                onclick="check_telephone('enterprise_telephone','confirm_enterprise_box')"
                                 class="btn btn-default">验证</button>
                     </span>
                             </div>

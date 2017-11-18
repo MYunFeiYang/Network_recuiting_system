@@ -5,8 +5,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,7 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import connectionDB.connectionDB;
+import DBO.connectionDB;
 
 @WebServlet("/login.do")
 public class Login extends HttpServlet {
@@ -29,7 +27,7 @@ public class Login extends HttpServlet {
 		String password=request.getParameter("password");
 
 		connectionDB conndb=new connectionDB();
-		Connection conn=conndb.connDB();
+		Connection conn=conndb.getConn();
 		if(login_type.equals("person")){
 			String sql="select telephone from occupy_person where nickname=? and password=?";
 			try {

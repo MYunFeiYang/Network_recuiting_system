@@ -3,10 +3,7 @@ package loginSuccess.person;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,7 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import connectionDB.connectionDB;
+import DBO.connectionDB;
 
 @WebServlet("/modify_user.do")
 public class Modify_user extends HttpServlet {
@@ -30,7 +27,7 @@ public class Modify_user extends HttpServlet {
 		String email=request.getParameter("email");
 
 		connectionDB conndb=new connectionDB();
-		Connection conn=conndb.connDB();
+		Connection conn=conndb.getConn();
 		String sql="update occupy_person set nickname=?,password=?,email=? where telephone=?";
 		try {
 			PreparedStatement ps = conn.prepareStatement(sql);

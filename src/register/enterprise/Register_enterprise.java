@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,14 +11,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import connectionDB.connectionDB;
+import DBO.connectionDB;
 
 @WebServlet("/register_enterprise.do")
 public class Register_enterprise extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/xml; charset=UTF-8");
-		//ÒÔÏÂÁ½¾äÎªÈ¡ÏûÔÚ±¾µØµÄ»º´æ
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÎªÈ¡ï¿½ï¿½ï¿½Ú±ï¿½ï¿½ØµÄ»ï¿½ï¿½ï¿½
 		response.setHeader("Cache-Control", "no-cache");
 		response.setHeader("Pragma", "no-cache");
 		String nickname=request.getParameter("nickname");
@@ -32,7 +30,7 @@ public class Register_enterprise extends HttpServlet {
 		String address=request.getParameter("address");
 
 		connectionDB conndb=new connectionDB();
-		Connection conn=conndb.connDB();
+		Connection conn=conndb.getConn();
 		String sql="insert into occupy_company (nickname,password,name,industry,telephone,email,address) values(?,?,?,?,?,?,?)";
 		try {
 			PreparedStatement ps = conn.prepareStatement(sql);
@@ -46,18 +44,18 @@ public class Register_enterprise extends HttpServlet {
 			int tag = ps.executeUpdate();
 			ps.close();
 			if(tag==1){
-				String str = "{\"msg\":\"³É¹¦\"}";
+				String str = "{\"msg\":\"ï¿½É¹ï¿½\"}";
 				response.getWriter().print(str);
 				response.getWriter().flush();
 				response.getWriter().close();
 			}else{
-				String str = "{\"msg\":\"Ê§°Ü\"}";
+				String str = "{\"msg\":\"Ê§ï¿½ï¿½\"}";
 				response.getWriter().print(str);
 				response.getWriter().flush();
 				response.getWriter().close();
 			}
 		} catch (SQLException e) {
-			// TODO ×Ô¶¯Éú³ÉµÄ catch ¿é
+			// TODO ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½Éµï¿½ catch ï¿½ï¿½
 			e.printStackTrace();
 		}
 	}

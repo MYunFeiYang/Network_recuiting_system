@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import connectionDB.connectionDB;
+import DBO.connectionDB;
 
 @WebServlet("/register_person.do")
 public class Register_person extends HttpServlet {
@@ -32,7 +32,7 @@ public class Register_person extends HttpServlet {
 		String email=request.getParameter("email");
 
 		connectionDB conndb=new connectionDB();
-		Connection conn=conndb.connDB();
+		Connection conn=conndb.getConn();
 		String sql="insert into occupy_person (nickname,password,"
 				+ "name,telephone,email,regrime) values(?,?,?,?,?,?)";
 		try {

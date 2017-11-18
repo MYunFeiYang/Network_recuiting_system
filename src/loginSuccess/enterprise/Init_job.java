@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import connectionDB.connectionDB;
+import DBO.connectionDB;
 import net.sf.json.JSONObject;
 
 @WebServlet("/init_job.do")
@@ -28,7 +28,7 @@ public class Init_job extends HttpServlet {
 		String password = request.getParameter("password");
 		System.out.println(nickname);
 		connectionDB conndb = new connectionDB();
-		Connection conn = conndb.connDB();
+		Connection conn = conndb.getConn();
 		try {
 			String sql = "select name,address,industry,email from occupy_company where nickname=? and password=?";
 			PreparedStatement ps = conn.prepareStatement(sql);
