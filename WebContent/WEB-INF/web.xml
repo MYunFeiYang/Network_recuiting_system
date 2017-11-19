@@ -10,51 +10,35 @@
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
   <servlet>
-    <servlet-name>check_telephone.do</servlet-name>
-    <servlet-class>util.Check_telephone</servlet-class>
+    <servlet-name>servletPerson</servlet-name>
+    <servlet-class>servlet.servletPerson</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>check_telephone.do</servlet-name>
-    <url-pattern>/check_telephone</url-pattern>
+    <servlet-name>servletPerson</servlet-name>
+    <url-pattern>/servletPerson</url-pattern>
   </servlet-mapping>
   <servlet>
-    <servlet-name>register_person.do</servlet-name>
-    <servlet-class>register.person.Register_person</servlet-class>
+    <servlet-name>enterprise</servlet-name>
+    <servlet-class>servlet.servletEnterprise</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>register_person.do</servlet-name>
-    <url-pattern>/register_person</url-pattern>
+    <servlet-name>enterprise</servlet-name>
+    <url-pattern>/enterprise</url-pattern>
   </servlet-mapping>
   <servlet>
-    <servlet-name>register_enterprise.do</servlet-name>
-    <servlet-class>register.enterprise.Register_enterprise</servlet-class>
+    <servlet-name>public</servlet-name>
+    <servlet-class>servlet.servletPublic</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>register_enterprise.do</servlet-name>
-    <url-pattern>/register_enterprise</url-pattern>
+    <servlet-name>public</servlet-name>
+    <url-pattern>/public</url-pattern>
   </servlet-mapping>
   <servlet>
-    <servlet-name>login_session.do</servlet-name>
-    <servlet-class>login.LoginSession</servlet-class>
+    <servlet-name>Fileupload</servlet-name>
+    <servlet-class>servlet.servletFileupload</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>login_session.do</servlet-name>
-    <url-pattern>/login_session</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <servlet-name>login.do</servlet-name>
-    <servlet-class>login.Login</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>login.do</servlet-name>
-    <url-pattern>/login</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <servlet-name>upload.do</servlet-name>
-    <servlet-class>file.Fileupload</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>upload.do</servlet-name>
+    <servlet-name>Fileupload</servlet-name>
     <url-pattern>/upload</url-pattern>
   </servlet-mapping>
 </web-app>

@@ -1,4 +1,34 @@
-
+function register_person() {
+    var user={};
+    user.nickname=document.getElementById("person_nickname").value;
+    user.password=document.getElementById("person_password").value;
+    user.name=document.getElementById("person_name").value;
+    user.telephone=document.getElementById("person_telephone").value;
+    user.email=document.getElementById("person_email").value;
+    //alert(JSON.stringify(user));
+    ajax_register_person(user);
+}
+function ajax_register_person(user) {
+    $.ajax({
+        url:"/register_person",
+        data:user,
+        async:true,
+        type:"POST",
+        dataType:"JSON",
+        success:function (data) {
+            register_result_person(data);
+            //setTimeout('register_success(data)', 3000);
+        },
+        fail:function (data) {
+            alert(data);
+        },
+    });
+}
+function register_result_person(data) {
+    if (data.msg=="成功"){
+        location.href="index.html";
+    }
+}
 function modify_user_person() {
     document.getElementById("myregister-person").innerHTML="修改个人注册信息";
     document.getElementById("person_name_group").style.display="none";
@@ -125,7 +155,6 @@ function add_resume() {
         add_resume_ajax(resume);
     }
 }
-
 function add_resume_ajax(data) {
     $.ajax({
         url: 'http://localhost:8080/add_resume.do',
@@ -140,7 +169,6 @@ function add_resume_ajax(data) {
         }
     })
 }
-
 function add_resume_result(data) {
     var confirm_resume_box=document.getElementById("confirm_resume_box")
     if (data.msg=="add_resume_success"){
@@ -151,15 +179,12 @@ function add_resume_result(data) {
         confirm_resume_box.setAttribute("class","alert-warning");
     }
 }
-
-
 function browse_resume() {
     document.getElementById("add_resume").style.display = "none";
     var user_string = document.cookie.split(";")[0].split("=")[1];
     var user = JSON.parse(user_string);
     browse_resume_ajax(user);
 }
-
 function browse_resume_ajax(user) {
     $.ajax({
         url: 'http://localhost:8080/init_resume.do',
@@ -174,7 +199,6 @@ function browse_resume_ajax(user) {
         }
     })
 }
-
 function browse_resume_result(data) {
     document.getElementById("name").value = data.name;
     document.getElementById("telephone").value = data.telephone;

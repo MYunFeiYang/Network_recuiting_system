@@ -1,4 +1,35 @@
-
+function register_enterprise() {
+    var company={};
+    company.nickname=document.getElementById("enterprise_nickname").value;
+    company.password=document.getElementById("enterprise_password").value;
+    company.name=document.getElementById("enterprise_name").value;
+    company.industry=document.getElementById("enterprise_industry").value;
+    company.telephone=document.getElementById("enterprise_telephone").value;
+    company.email=document.getElementById("enterprise_email").value;
+    company.address=document.getElementById("enterprise_address").value;
+    ajax_register_enterprise(company);
+}
+function ajax_register_enterprise(company) {
+    $.ajax({
+        url:"/register_enterprise",
+        data:company,
+        async:true,
+        type:"POST",
+        dataType:"JSON",
+        success:function (data) {
+            register_result_enterprise(data);
+            //setTimeout('register_success(data)', 3000);
+        },
+        fail:function (data) {
+            alert(data);
+        },
+    });
+}
+function register_result_enterprise(data) {
+    if (data.msg=="成功"){
+        location.href="index.html";
+    }
+}
 function modify_user_enterprise() {
     document.getElementById("myregister-enterprise").innerHTML="修改企业注册信息";
     document.getElementById("enterprise_telephone_group").style.display="none";

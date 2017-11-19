@@ -1,31 +1,28 @@
-package file;
-
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.List;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+package servlet;
 
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
-@WebServlet("/upload.do")
-public class Fileupload extends HttpServlet {
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.List;
 
-    public void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+@WebServlet(name = "servletFileupload")
+public class servletFileupload extends HttpServlet {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //得到上传文件的保存目录，将上传的文件存放于WEB-INF目录下，不允许外界直接访问，保证上传文件的安全
         String savePath = this.getServletContext().getRealPath("/WEB-INF/upload");
         File file = new File(savePath);
         //判断上传文件的保存目录是否存在
         if (!file.exists() && !file.isDirectory()) {
-            System.out.println(savePath + "目录不存在，需要创建");
             //创建目录
             file.mkdir();
         }
@@ -39,13 +36,6 @@ public class Fileupload extends HttpServlet {
             ServletFileUpload upload = new ServletFileUpload(factory);
             //解决上传文件名的中文乱码
             upload.setHeaderEncoding("UTF-8");
-            //3、判断提交上来的数据是否是上传表单的数据
-            //System.out.print(request);
-//                    if(!ServletFileUpload.isMultipartContent(request)){
-//                        //按照传统方式获取数据
-//                        return;
-//                    }
-            System.out.println(ServletFileUpload.isMultipartContent(request));
             //4、使用ServletFileUpload解析器解析上传数据，解析结果返回的是一个List<FileItem>集合，
             //每一个FileItem对应一个Form表单的输入项
             //@SuppressWarnings("unchecked")
@@ -99,14 +89,7 @@ public class Fileupload extends HttpServlet {
             e.printStackTrace();
 
         }
-//                response.getWriter().print("{\"msg\":\"1\"}");
-//                response.sendRedirect("/login_success_person.jsp");
         request.setAttribute("message", message);
         request.getRequestDispatcher("/redirect.jsp").forward(request, response);
-    }
-
-    public void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        doGet(request, response);
     }
 }
