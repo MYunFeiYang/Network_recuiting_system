@@ -6,17 +6,17 @@ function register_person() {
     user.telephone=document.getElementById("person_telephone").value;
     user.email=document.getElementById("person_email").value;
     //alert(JSON.stringify(user));
-    ajax_register_person(user);
+    ajax_register(user);
 }
-function ajax_register_person(user) {
+function ajax_register(user) {
     $.ajax({
-        url:"/register_person",
+        url:"/person?person=register",
         data:user,
         async:true,
         type:"POST",
         dataType:"JSON",
         success:function (data) {
-            register_result_person(data);
+            register_result(data);
             //setTimeout('register_success(data)', 3000);
         },
         fail:function (data) {
@@ -24,7 +24,7 @@ function ajax_register_person(user) {
         },
     });
 }
-function register_result_person(data) {
+function register_result(data) {
     if (data.msg=="成功"){
         location.href="index.html";
     }
@@ -52,7 +52,7 @@ function modify_user() {
 }
 function modify_user_ajax(user) {
     $.ajax({
-        url: 'http://localhost:8080/modify_user.do',
+        url: '/person?person=modifyUser',
         data: user,
         type: 'POST',
         dataType: 'JSON',
@@ -82,7 +82,7 @@ function init_resume() {
 }
 function init_resume_ajax(user) {
     $.ajax({
-        url: 'http://localhost:8080/init_resume.do',
+        url: '/person?person=initResume',
         data: user,
         type: 'POST',
         dataType: 'JSON',
@@ -157,7 +157,7 @@ function add_resume() {
 }
 function add_resume_ajax(data) {
     $.ajax({
-        url: 'http://localhost:8080/add_resume.do',
+        url: '/person?person=addResume',
         data: data,
         type: 'POST',
         dataType: 'JSON',
@@ -187,7 +187,7 @@ function browse_resume() {
 }
 function browse_resume_ajax(user) {
     $.ajax({
-        url: 'http://localhost:8080/init_resume.do',
+        url: '/person?person=browseResume',
         data: user,
         type: 'POST',
         dataType: 'JSON',

@@ -61,36 +61,6 @@ function conf_pwd(password,confirm_password,confirm_box) {
         confirm.innerHTML="两次密码不一致";
     }
 }
-function check_telephone(telephone,confirm_box){
-    var user={};
-    var telephone=document.getElementById(telephone).value;
-    user.telephone=telephone;
-    ajax_check_telephone(user,confirm_box,url,reg_btu);
-}
-function ajax_check_telephone(user,confirm_box) {
-    $.ajax({
-        url:'/check_telephone',
-        data:user,
-        async:true,
-        type:"POST",
-        dataType:"JSON",
-        success:function (data) {
-            check_telephone_result(data,confirm_box)
-        },
-        fail:function (data) {
-            alert(data);
-        },
-    });
-}
-function check_telephone_result(data,confirm_box) {
-    if (data.msg=="telephone_exist"){
-        document.getElementById(confirm_box).setAttribute("class","alert-warning");
-        document.getElementById(confirm_box).innerHTML="请手机号已被注册";
-    }else {
-        document.getElementById(confirm_box).setAttribute("class","alert-success");
-        document.getElementById(confirm_box).innerHTML="该手机号通过验证";
-    }
-}
 function btu_disable_person(reg_btu,check_box){
 	var nickname=document.getElementById("person_nickname").value;
 	var password=document.getElementById("person_password").value;

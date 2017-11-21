@@ -18,20 +18,6 @@ function show_user(nickname,password) {
     document.getElementById(nickname).value=user.nickname;
     document.getElementById(password).value=user.password;
 }
-
-function init_user() {
-    var user_string = document.cookie.split(";")[0].split("=")[1];
-    var user = JSON.parse(user_string);
-    var nickname = user.nickname;
-    document.getElementById("login_btu").text = nickname;
-    var login_out=document.getElementById("login_out");
-    login_out.innerHTML="";
-    var a=document.createElement("a");
-    a.text="退出登录";
-    a.setAttribute("onclick","login_session('delete')");
-    a.setAttribute("href","index.html");
-    login_out.appendChild(a);
-}
 function reset_user() {
     var user_string = document.cookie.split(";")[0].split("=")[1];
     var user = JSON.parse(user_string);

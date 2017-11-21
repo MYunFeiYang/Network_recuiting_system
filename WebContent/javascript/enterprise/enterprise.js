@@ -11,7 +11,7 @@ function register_enterprise() {
 }
 function ajax_register_enterprise(company) {
     $.ajax({
-        url:"/register_enterprise",
+        url:"/enterprise?enterprise=register",
         data:company,
         async:true,
         type:"POST",
@@ -52,7 +52,7 @@ function modify_user() {
 }
 function modify_user_ajax(user) {
     $.ajax({
-        url: 'http://localhost:8080/modify_user.do',
+        url: '/enterprise?enterprise=modifyUser',
         data: user,
         type: 'POST',
         dataType: 'JSON',
@@ -82,7 +82,7 @@ function init_job() {
 }
 function init_job_ajax(user) {
     $.ajax({
-        url: 'http://localhost:8080/init_job.do',
+        url: '/enterprise?enterprise=initJob',
         data: user,
         type: 'POST',
         dataType: 'JSON',
@@ -128,7 +128,7 @@ function add_job() {
 }
 function add_job_ajax(job) {
     $.ajax({
-        url: 'http://localhost:8080/add_job.do',
+        url: '/enetrprise?enterprise=addJob',
         data: job,
         type: 'POST',
         dataType: 'JSON',

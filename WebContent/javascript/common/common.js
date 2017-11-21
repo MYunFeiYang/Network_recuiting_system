@@ -1,4 +1,33 @@
-
+function check_telephone(telephone,confirm_box){
+    var user={};
+    var telephone=document.getElementById(telephone).value;
+    user.telephone=telephone;
+    ajax_check_telephone(user,confirm_box);
+}
+function ajax_check_telephone(user,confirm_box) {
+    $.ajax({
+        url:'/public?public=checkTelephone',
+        data:user,
+        async:true,
+        type:"POST",
+        dataType:"JSON",
+        success:function (data) {
+            check_telephone_result(data,confirm_box)
+        },
+        fail:function (data) {
+            alert(data);
+        },
+    });
+}
+function check_telephone_result(data,confirm_box) {
+    if (data.msg=="telephone_exist"){
+        document.getElementById(confirm_box).setAttribute("class","alert-warning");
+        document.getElementById(confirm_box).innerHTML="请手机号已被注册";
+    }else {
+        document.getElementById(confirm_box).setAttribute("class","alert-success");
+        document.getElementById(confirm_box).innerHTML="该手机号通过验证";
+    }
+}
 function login() {
     var user={};
     user.login_type=document.getElementById('login_type').value;
@@ -9,7 +38,7 @@ function login() {
 }
 function login_ajax(data) {
     $.ajax({
-        url:'/login',
+        url:'/public?public=login',
         data:data,
         type:'POST',
         dataType:'JSON',
@@ -23,9 +52,11 @@ function login_ajax(data) {
 }
 function login_result(data) {
     if(data.msg=="person_success"){
+        login_session('login');
         location.href="index.html";
     }
     else if(data.msg=="enterprise_success"){
+        login_session('login');
         location.href="index.html";
     }
     else {
@@ -43,7 +74,7 @@ function login_session(data) {
 }
 function ajax_login_session(data) {
     $.ajax({
-        url:'/login_session',
+        url:'/public?public=loginSession',
         async:true,
         data:data,
         type:"POST",
@@ -67,4 +98,22 @@ function login_session_result(data) {
             enterprise_btu.setAttribute("onclick","show_div('enterprise')");
         }
     }
+}
+function init_user() {
+    var user_string = document.cookie.split(";")[0].split("=")[1];
+    var user = JSON.parse(user_string);
+    var nickname = user.nickname;
+    document.getElementById("vip").classList.remove("hidden");
+    document.getElementById("register_btu").innerHTML="";
+    document.getElementById("login_btu").text = nickname;
+    var login_out=document.getElementById("login_out");
+    login_out.innerHTML="";
+    var a=document.createElement("a");
+    a.text="退出登录";
+    a.setAttribute("onclick","login_session('delete')");
+    a.setAttribute("href","index.html");
+    login_out.appendChild(a);
+}
+function query() {
+
 }

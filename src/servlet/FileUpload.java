@@ -15,11 +15,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
-@WebServlet(name = "servletFileupload")
-public class servletFileupload extends HttpServlet {
+@WebServlet(name = "fileupload")
+public class FileUpload extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //得到上传文件的保存目录，将上传的文件存放于WEB-INF目录下，不允许外界直接访问，保证上传文件的安全
-        String savePath = this.getServletContext().getRealPath("/WEB-INF/upload");
+        String savePath = this.getServletContext().getRealPath("/WEB-INF/files");
         File file = new File(savePath);
         //判断上传文件的保存目录是否存在
         if (!file.exists() && !file.isDirectory()) {

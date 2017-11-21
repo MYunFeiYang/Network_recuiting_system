@@ -21,16 +21,15 @@ public class Common {
         response.setHeader("Cache-Control", "no-cache");
         response.setHeader("Pragma", "no-cache");
         String telephone=request.getParameter("telephone");
-        System.out.println(telephone);
 
         connectionDB conndb=new connectionDB();
         Connection conn=conndb.getConn();
-        String sql="select telephone from occupy_person,occupy_enterprise where telephone=?";
         try {
+            String sql="select occupy_person.telephone,occupy_company.telephone from occupy_person,occupy_company where occupy_person.telephone=? OR occupy_company.telephone=?";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, telephone);
+            ps.setString(2, telephone);
             ResultSet rs = ps.executeQuery();
-            System.out.println(rs.getRow());
             if(rs.next()){
                 String str = "{\"msg\":\"telephone_exist\"}";
                 response.getWriter().print(str);
@@ -61,8 +60,8 @@ public class Common {
         connectionDB conndb=new connectionDB();
         Connection conn=conndb.getConn();
         if(login_type.equals("person")){
-            String sql="select telephone from occupy_person where nickname=? and password=?";
             try {
+                String sql="select telephone from occupy_person where nickname=? and password=?";
                 PreparedStatement ps = conn.prepareStatement(sql);
                 ps.setString(1, nickname);
                 ps.setString(2, password);
@@ -84,7 +83,6 @@ public class Common {
                 e.printStackTrace();
             }
         }else{
-            System.out.println("enterprise");
             String sql="select name from occupy_company where nickname=? and password=?";
             try {
                 PreparedStatement ps = conn.prepareStatement(sql);

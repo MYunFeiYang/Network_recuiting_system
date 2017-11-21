@@ -34,11 +34,19 @@
     <url-pattern>/public</url-pattern>
   </servlet-mapping>
   <servlet>
-    <servlet-name>Fileupload</servlet-name>
-    <servlet-class>servlet.servletFileupload</servlet-class>
+    <servlet-name>fileupload</servlet-name>
+    <servlet-class>servlet.FileUpload</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>Fileupload</servlet-name>
+    <servlet-name>fileupload</servlet-name>
     <url-pattern>/upload</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>fileDownload</servlet-name>
+    <servlet-class>servlet.FileDownload</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>fileDownload</servlet-name>
+    <url-pattern>/download</url-pattern>
   </servlet-mapping>
 </web-app>
