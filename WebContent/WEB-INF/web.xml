@@ -10,12 +10,12 @@
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
   <servlet>
-    <servlet-name>servletPerson</servlet-name>
+    <servlet-name>person</servlet-name>
     <servlet-class>servlet.servletPerson</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>servletPerson</servlet-name>
-    <url-pattern>/servletPerson</url-pattern>
+    <servlet-name>person</servlet-name>
+    <url-pattern>/person</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>enterprise</servlet-name>

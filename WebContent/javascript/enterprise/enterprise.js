@@ -26,7 +26,7 @@ function ajax_register_enterprise(company) {
     });
 }
 function register_result_enterprise(data) {
-    if (data.msg=="成功"){
+    if (data.msg=="success"){
         location.href="index.html";
     }
 }

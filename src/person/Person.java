@@ -42,12 +42,12 @@ public class Person {
             int tag = ps.executeUpdate();
             ps.close();
             if(tag==1){
-                String str = "{\"msg\":\"成功\"}";
+                String str = "{\"msg\":\"success\"}";
                 response.getWriter().print(str);
                 response.getWriter().flush();;
                 response.getWriter().close();;
             }else{
-                String str = "{\"msg\":\"失败\"}";
+                String str = "{\"msg\":\"fail\"}";
                 response.getWriter().print(str);
                 response.getWriter().flush();;
                 response.getWriter().close();;

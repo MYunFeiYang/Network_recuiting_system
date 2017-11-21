@@ -1,31 +1,31 @@
-function check_telephone(telephone,confirm_box){
+function check_email(email,confirm_box){
     var user={};
-    var telephone=document.getElementById(telephone).value;
-    user.telephone=telephone;
-    ajax_check_telephone(user,confirm_box);
+    var email=document.getElementById(email).value;
+    user.email=email;
+    ajax_check_email(user,confirm_box);
 }
-function ajax_check_telephone(user,confirm_box) {
+function ajax_check_email(user,confirm_box) {
     $.ajax({
-        url:'/public?public=checkTelephone',
+        url:'/public?public=checkemail',
         data:user,
         async:true,
         type:"POST",
         dataType:"JSON",
         success:function (data) {
-            check_telephone_result(data,confirm_box)
+            check_email_result(data,confirm_box)
         },
         fail:function (data) {
             alert(data);
         },
     });
 }
-function check_telephone_result(data,confirm_box) {
-    if (data.msg=="telephone_exist"){
+function check_email_result(data,confirm_box) {
+    if (data.msg=="email_exist"){
         document.getElementById(confirm_box).setAttribute("class","alert-warning");
-        document.getElementById(confirm_box).innerHTML="请手机号已被注册";
+        document.getElementById(confirm_box).innerHTML="请邮箱已被注册";
     }else {
         document.getElementById(confirm_box).setAttribute("class","alert-success");
-        document.getElementById(confirm_box).innerHTML="该手机号通过验证";
+        document.getElementById(confirm_box).innerHTML="该邮箱通过验证";
     }
 }
 function login() {
@@ -116,4 +116,71 @@ function init_user() {
 }
 function query() {
 
+}
+function resetPassword() {
+    var email=document.getElementById("email").value;
+    var user={};
+    user.email=email;
+    ajax_resetPassword(user);
+}
+function ajax_resetPassword(user) {
+    $.ajax({
+        url:'/public?public=resetPassword',
+        data:user,
+        async:true,
+        type:"POST",
+        dataType:"JSON",
+        success:function (data) {
+            resetPassword_result(data)
+        },
+        fail:function (data) {
+            alert(data);
+        },
+    });
+}
+function resetPassword_result(data) {
+    if (data.msg=="email_not_exist"){
+        document.getElementById("confirm_box").setAttribute("class","alert-warning");
+        document.getElementById("confirm_box").innerHTML="该邮箱未注册";
+        document.getElementById("other").innerHTML="<a class=\"btn btn-primary\" href='index.html'>返回注册</a>"
+    }else if(data.msg!=""){
+        document.getElementById("confirm_box").setAttribute("class","alert-warning");
+        document.getElementById("confirm_box").innerHTML="注意接收重置密码邮件";
+        document.getElementById("basic-addon1").innerHTML="请输入验证码";
+        document.cookie="Authentication="+JSON.stringify(data);
+        document.getElementById("btu_resetPassword").setAttribute("onclick","check_code()");
+        document.getElementById("email").value="";
+    }else {
+        return;
+    }
+}
+function check_code() {
+    var authentication=JSON.parse(document.cookie.split(";")[1].split("=")[1]);
+    var code=document.getElementById("email").value;
+    if (code==authentication.msg){
+        document.getElementById("confirm_box").setAttribute("class","alert-success");
+        document.getElementById("confirm_box").innerHTML="验证码正确";
+        document.getElementById("group_reset").innerHTML="" +
+            "<span class=\"input-group-addon\" id=\"basic-addon1\">密码</span>\n" +
+            "<input type=\"password\" id=\"password\" class=\"form-control\" aria-describedby=\"basic-addon1\">\n" +
+            "<span class=\"input-group-addon\" id=\"basic-addon1\">确认密码</span>\n" +
+            "<input type=\"password\" id=\"password2\" class=\"form-control\" aria-describedby=\"basic-addon1\">\n" +;
+        var btu_resetPassword=document.getElementById("btu_resetPassword");
+        btu_resetPassword.innerHTML="确认";
+        btu_resetPassword.setAttribute("onclick","updatePassword()");
+    }
+    else {
+        document.getElementById("confirm_box").setAttribute("class","alert-warning");
+        document.getElementById("confirm_box").innerHTML="验证码错误";
+    }
+}
+function updatePassword() {
+    var password=document.getElementById("password").value;
+    var password2=document.getElementById("password2").value;
+    if (password!=password2){
+        document.getElementById("confirm_box").setAttribute("class","alert-warning");
+        document.getElementById("confirm_box").innerHTML="密码不一致";
+    }else {
+
+    }
 }

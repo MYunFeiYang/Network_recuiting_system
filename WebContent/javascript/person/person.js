@@ -25,7 +25,7 @@ function ajax_register(user) {
     });
 }
 function register_result(data) {
-    if (data.msg=="成功"){
+    if (data.msg=="success"){
         location.href="index.html";
     }
 }

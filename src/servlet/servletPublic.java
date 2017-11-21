@@ -14,12 +14,14 @@ public class servletPublic extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String public_type=request.getParameter("public");
         Common common=new Common();
-        if (public_type.equals("checkTelephone")){
-            common.CheckTelephone(request,response);
+        if (public_type.equals("checkemail")){
+            common.CheckEmail(request,response);
         }else if (public_type.equals("loginSession")){
             common.LoginSession(request,response);
         }else if (public_type.equals("login")){
             common.Login(request,response);
+        }else if (public_type.equals("resetPassword")){
+            common.resetPassword(request,response);
         }else {
             return;
         }

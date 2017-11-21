@@ -187,7 +187,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-4 col-sm-12">
-                            <a class="btn btn-lg btn-primary center-block">找回密码</a>
+                            <a href="resetPassword.html" class="btn btn-lg btn-primary center-block">找回密码</a>
                         </div>
                     </div>
                 </div>
@@ -290,19 +290,19 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row center-block" id="person_telephone_group">
+                            <div class="row center-block" id="person_email_group">
                                 <div class="col-md-12">
                                     <div class="input-group">
                     <span class="input-group-btn">
-                        <button type="button" class="btn btn-default glyphicon glyphicon-erase">联系电话</button>
+                        <button type="button" class="btn btn-default glyphicon glyphicon-erase">电子邮件</button>
                     </span>
-                                        <input type="text" class="form-control"
-                                               onkeyup="reg_telephone('person_telephone','confirm_person_box')"
-                                               id="person_telephone"
-                                               placeholder="联系电话">
+                                        <input type="email" class="form-control"
+                                               onkeyup="reg_email('person_email','confirm_person_box')"
+                                               id="person_email"
+                                               placeholder="电子邮箱">
                                         <span class="input-group-btn">
                         <button type="button" class="btn btn-default"
-                                onclick="check_telephone('person_telephone','confirm_person_box')">验证</button>
+                                onclick="check_email('person_email','confirm_person_box')">验证</button>
                     </span>
                                     </div>
                                 </div>
@@ -311,12 +311,12 @@
                                 <div class="col-md-12">
                                     <div class="input-group">
                     <span class="input-group-btn">
-                        <button type="button" class="btn btn-default glyphicon glyphicon-envelope">QQ邮箱</button>
+                        <button type="button" class="btn btn-default glyphicon glyphicon-envelope">手机号码</button>
                     </span>
-                                        <input type="email" class="form-control" id="person_email"
-                                               onclick="reg_email('person_email','confirm_person_box')"
-                                               onkeyup="reg_email('person_email','confirm_person_box')"
-                                               placeholder="电子邮件">
+                                        <input type="text" class="form-control" id="person_telephone"
+                                               onclick="reg_telephone('person_email','confirm_person_box')"
+                                               onkeyup="reg_telephone('person_email','confirm_person_box')"
+                                               placeholder="手机号码">
                                     </div>
                                 </div>
                             </div>
@@ -418,13 +418,13 @@
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-default glyphicon glyphicon-erase">联系电话</button>
                     </span>
-                                <input type="text" class="form-control"
-                                       onkeyup="reg_telephone('enterprise_telephone','confirm_enterprise_box')"
-                                       id="enterprise_telephone"
-                                       placeholder="联系电话">
+                                <input type="email" class="form-control"
+                                       onkeyup="reg_telephone('enterprise_email','confirm_enterprise_box')"
+                                       id="enterprise_email"
+                                       placeholder="电子邮箱">
                                 <span class="input-group-btn">
                         <button type="button"
-                                onclick="check_telephone('enterprise_telephone','confirm_enterprise_box')"
+                                onclick="check_email('enterprise_email','confirm_enterprise_box')"
                                 class="btn btn-default">验证</button>
                     </span>
                             </div>
@@ -434,12 +434,12 @@
                         <div class="col-md-12">
                             <div class="input-group">
                     <span class="input-group-btn">
-                        <button type="button" class="btn btn-default glyphicon glyphicon-envelope">QQ邮箱</button>
+                        <button type="button" class="btn btn-default glyphicon glyphicon-envelope">手机电话</button>
                     </span>
                                 <input type="text" class="form-control"
-                                       onkeyup="reg_email('enterprise_email','confirm_enterprise_box')"
-                                       id="enterprise_email"
-                                       placeholder="电子邮件">
+                                       onkeyup="reg_telephone('enterprise_telephone','confirm_enterprise_box')"
+                                       id="enterprise_telephone"
+                                       placeholder="手机电话">
                             </div>
                         </div>
                     </div>
