@@ -219,4 +219,44 @@ public class Common {
         }
         return true;
     }
+    public void updatePassword(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/xml; charset=UTF-8");
+        //以下两句为取消在本地的缓存
+        response.setHeader("Cache-Control", "no-cache");
+        response.setHeader("Pragma", "no-cache");
+        String email=request.getParameter("email");
+        String password=request.getParameter("password");
+
+        connectionDB conndb=new connectionDB();
+        Connection conn=conndb.getConn();
+        try {
+            String sql1="UPDATE occupy_person SET password=? WHERE email=?";
+            String sql2="UPDATE occupy_company SET password=? WHERE email=?";
+            PreparedStatement ps1 = conn.prepareStatement(sql1);
+            PreparedStatement ps2 = conn.prepareStatement(sql2);
+            ps1.setString(1, password);
+            ps1.setString(2, email);
+            ps2.setString(1, password);
+            ps2.setString(2, email);
+            int rs1 = ps1.executeUpdate();
+            int rs2 = ps2.executeUpdate();
+            if(rs1==1||rs2==1){
+                String str = "{\"msg\":\"updatePassword_success\"}";
+                response.getWriter().print(str);
+                response.getWriter().flush();
+                response.getWriter().close();
+            }else{
+                String str = "{\"msg\":\"updatePassword_fail\"}";
+                response.getWriter().print(str);
+                response.getWriter().flush();
+                response.getWriter().close();
+            }
+            ps1.close();
+            ps2.close();
+        } catch (SQLException e) {
+            // TODO 自动生成的 catch 块
+            e.printStackTrace();
+        }
+    }
 }

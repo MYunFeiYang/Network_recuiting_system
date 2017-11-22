@@ -314,8 +314,8 @@
                         <button type="button" class="btn btn-default glyphicon glyphicon-envelope">手机号码</button>
                     </span>
                                         <input type="text" class="form-control" id="person_telephone"
-                                               onclick="reg_telephone('person_email','confirm_person_box')"
-                                               onkeyup="reg_telephone('person_email','confirm_person_box')"
+                                               onclick="reg_telephone('person_telephone','confirm_person_box')"
+                                               onkeyup="reg_telephone('person_telephone','confirm_person_box')"
                                                placeholder="手机号码">
                                     </div>
                                 </div>
@@ -326,7 +326,7 @@
                                 <input class="btn btn-lg btn-primary center-block" id="person_reg_btu"
                                        type="button" value="注册"
                                        onmouseover="btu_disable_person('person_reg_btu','confirm_person_box')"
-                                       onclick="remember_user('person_nickname','person_password','person_telephone'),register_person()">
+                                       onclick="remember_user('person_nickname','person_password','person_email'),register_person()">
                             </div>
                             <div class="col-md-6">
                                 <input class="btn btn-lg btn-danger center-block" type="reset" value="重置">

@@ -139,15 +139,21 @@ function ajax_resetPassword(user) {
     });
 }
 function resetPassword_result(data) {
+    var confirm_box=document.getElementById("confirm_box");
     if (data.msg=="email_not_exist"){
-        document.getElementById("confirm_box").setAttribute("class","alert-warning");
-        document.getElementById("confirm_box").innerHTML="该邮箱未注册";
+        confirm_box.setAttribute("class","alert-warning");
+        confirm_box.innerHTML="该邮箱未注册";
         document.getElementById("other").innerHTML="<a class=\"btn btn-primary\" href='index.html'>返回注册</a>"
     }else if(data.msg!=""){
-        document.getElementById("confirm_box").setAttribute("class","alert-warning");
-        document.getElementById("confirm_box").innerHTML="注意接收重置密码邮件";
+        confirm_box.setAttribute("class","alert-warning");
+        confirm_box.innerHTML="注意接收重置密码邮件";
         document.getElementById("basic-addon1").innerHTML="请输入验证码";
-        document.cookie="Authentication="+JSON.stringify(data);
+        var user_string=document.cookie.split(";")[0].split("=")[1];
+        var user=JSON.parse(user_string);
+        user.code=data.msg;
+        var data=new Date();
+        data.setDate(data.getDate()+180);
+        document.cookie="user="+JSON.stringify(user)+";expires="+data.toDateString();
         document.getElementById("btu_resetPassword").setAttribute("onclick","check_code()");
         document.getElementById("email").value="";
     }else {
@@ -155,32 +161,69 @@ function resetPassword_result(data) {
     }
 }
 function check_code() {
-    var authentication=JSON.parse(document.cookie.split(";")[1].split("=")[1]);
+    var user=JSON.parse(document.cookie.split(";")[0].split("=")[1]);
     var code=document.getElementById("email").value;
-    if (code==authentication.msg){
-        document.getElementById("confirm_box").setAttribute("class","alert-success");
-        document.getElementById("confirm_box").innerHTML="验证码正确";
+    var confirm_box=document.getElementById("confirm_box");
+    if (code==user.code){
+        confirm_box.setAttribute("class","alert-success");
+        confirm_box.innerHTML="验证码正确";
         document.getElementById("group_reset").innerHTML="" +
             "<span class=\"input-group-addon\" id=\"basic-addon1\">密码</span>\n" +
             "<input type=\"password\" id=\"password\" class=\"form-control\" aria-describedby=\"basic-addon1\">\n" +
             "<span class=\"input-group-addon\" id=\"basic-addon1\">确认密码</span>\n" +
-            "<input type=\"password\" id=\"password2\" class=\"form-control\" aria-describedby=\"basic-addon1\">\n" +;
+            "<input type=\"password\" id=\"password2\" class=\"form-control\" aria-describedby=\"basic-addon1\">\n";
         var btu_resetPassword=document.getElementById("btu_resetPassword");
         btu_resetPassword.innerHTML="确认";
         btu_resetPassword.setAttribute("onclick","updatePassword()");
     }
     else {
-        document.getElementById("confirm_box").setAttribute("class","alert-warning");
-        document.getElementById("confirm_box").innerHTML="验证码错误";
+        confirm_box.setAttribute("class","alert-warning");
+        confirm_box.innerHTML="验证码错误";
     }
 }
 function updatePassword() {
     var password=document.getElementById("password").value;
     var password2=document.getElementById("password2").value;
+    var confirm_box=document.getElementById("confirm_box");
     if (password!=password2){
-        document.getElementById("confirm_box").setAttribute("class","alert-warning");
-        document.getElementById("confirm_box").innerHTML="密码不一致";
+        confirm_box.setAttribute("class","alert-warning");
+        confirm_box.innerHTML="密码不一致";
     }else {
+        confirm_box.setAttribute("class","alert-success");
+        confirm_box.innerHTML="密码通过";
+        var user_string=document.cookie.split(";")[0].split("=")[1];
+        var user=JSON.parse(user_string);
+        user.password=password;
+        var data=new Date();
+        data.setDate(data.getDate()+180);
+        document.cookie="user="+JSON.stringify(user)+";expires="+data.toDateString();
+        updatePassword_ajax(user);
 
+    }
+}
+function updatePassword_ajax(user) {
+    $.ajax({
+        url:'/public?public=updatePassword',
+        data:user,
+        type:'POST',
+        dataType:'JSON',
+        success:function (data) {
+            updatePassword_result(data);
+        },
+        fail:function () {
+
+        }
+
+    })
+}
+function updatePassword_result(data) {
+    var confirm_box=document.getElementById("confirm_box");
+    if (data.msg=="updatePassword_success"){
+        confirm_box.setAttribute("class","alert-success");
+        confirm_box.innerHTML="密码修改成功";
+        document.getElementById("other").innerHTML="";
+        document.getElementById("btu_resetPassword").innerHTML="<a href='index.html' style='color: white'>返回登录</a>"
+    }else {
+        return;
     }
 }

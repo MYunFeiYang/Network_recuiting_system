@@ -1,14 +1,13 @@
 
-function remember_user(nickname,password,telephone) {
+function remember_user(nickname,password,email) {
     var user={};
     user.nickname=document.getElementById(nickname).value;
     user.password=document.getElementById(password).value;
-    user.telephone=document.getElementById(telephone).value;
+    user.email=document.getElementById(email).value;
     var user_string=JSON.stringify(user);
     var data=new Date();
     data.setDate(data.getDate()+180);
-    data.toDateString();
-    document.cookie="user="+user_string+";expires="+data;
+    document.cookie="user="+user_string+";expires="+data.toDateString();
 }
 
 function show_user(nickname,password) {
@@ -21,13 +20,10 @@ function show_user(nickname,password) {
 function reset_user() {
     var user_string = document.cookie.split(";")[0].split("=")[1];
     var user = JSON.parse(user_string);
-    var telephone=user.telephone;
     user.nickname=document.getElementById("login_nickname").value;
     user.password=document.getElementById("login_password").value;
-    user.telephone=telephone;
     var user_string=JSON.stringify(user);
     var data=new Date();
     data.setDate(data.getDate()+180);
-    data.toDateString();
-    document.cookie="user="+user_string+";expires="+data;
+    document.cookie="user="+user_string+";expires="+data.toDateString();
 }

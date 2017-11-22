@@ -22,7 +22,10 @@ public class servletPublic extends HttpServlet {
             common.Login(request,response);
         }else if (public_type.equals("resetPassword")){
             common.resetPassword(request,response);
-        }else {
+        }else if (public_type.equals("updatePassword")){
+            common.updatePassword(request,response);
+        }
+        else {
             return;
         }
     }
