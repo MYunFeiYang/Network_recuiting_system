@@ -252,8 +252,11 @@
                         <button type="button" class="btn btn-default glyphicon glyphicon-user">用户名</button>
                     </span>
                                         <input type="text" class="form-control" id="person_nickname"
-                                               onkeyup="reg_username('person_nickname','confirm_person_box')"
+                                               onmouseout="reg_username('person_nickname','btu_person_username')"
                                                placeholder="用户名">
+                                        <span class="input-group-btn">
+                        <button type="button" class="btn btn-default " id="btu_person_username">填</button>
+                    </span>
                                     </div>
                                 </div>
                             </div>
@@ -264,7 +267,10 @@
                         <button type="button" class="btn btn-default glyphicon glyphicon-lock">密码</button>
                     </span>
                                         <input type="password" class="form-control" id="person_password" placeholder="密码"
-                                               onkeyup="reg_pwd('person_password','confirm_person_box')">
+                                               onmouseout="reg_pwd('person_password','btu_person_password')">
+                                        <span class="input-group-btn">
+                        <button type="button" class="btn btn-default " id="btu_person_password">完</button>
+                    </span>
                                     </div>
                                 </div>
                             </div>
@@ -275,8 +281,11 @@
                         <button type="button" class="btn btn-default glyphicon glyphicon-lock">确认密码</button>
                     </span>
                                         <input type="password" class="form-control" id="person_confirm_password"
-                                               onkeyup="conf_pwd('person_password','person_confirm_password','confirm_person_box')"
+                                               onmouseout="conf_pwd('person_password','person_confirm_password','btu_person_conf_password')"
                                                placeholder="确认密码">
+                                        <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" id="btu_person_conf_password">整</button>
+                    </span>
                                     </div>
                                 </div>
                             </div>
@@ -297,12 +306,15 @@
                         <button type="button" class="btn btn-default glyphicon glyphicon-erase">电子邮件</button>
                     </span>
                                         <input type="email" class="form-control"
-                                               onkeyup="reg_email('person_email','confirm_person_box')"
+                                               onmouseout="reg_email('person_email','btu_person_email')"
                                                id="person_email"
                                                placeholder="电子邮箱">
                                         <span class="input-group-btn">
+                        <button type="button" class="btn btn-default " id="btu_person_email">@</button>
+                    </span>
+                                        <span class="input-group-btn">
                         <button type="button" class="btn btn-default"
-                                onclick="check_email('person_email','confirm_person_box')">验证</button>
+                                onclick="check_email('person_email','btu_person_email')">验证</button>
                     </span>
                                     </div>
                                 </div>
@@ -314,9 +326,11 @@
                         <button type="button" class="btn btn-default glyphicon glyphicon-envelope">手机号码</button>
                     </span>
                                         <input type="text" class="form-control" id="person_telephone"
-                                               onclick="reg_telephone('person_telephone','confirm_person_box')"
-                                               onkeyup="reg_telephone('person_telephone','confirm_person_box')"
+                                               onmouseout="reg_telephone('person_telephone','btu_person_telephone')"
                                                placeholder="手机号码">
+                                        <span class="input-group-btn">
+                        <button type="button" class="btn btn-default " id="btu_person_telephone">哦</button>
+                    </span>
                                     </div>
                                 </div>
                             </div>
@@ -362,8 +376,11 @@
                         <button type="button" class="btn btn-default glyphicon glyphicon-user"> 用户名</button>
                     </span>
                                 <input type="text" class="form-control" id="enterprise_nickname"
-                                       onkeyup="reg_username('enterprise_nickname','confirm_enterprise_box')"
+                                       onmouseout="reg_username('enterprise_nickname','btu_enterprise_username')"
                                        placeholder="用户名">
+                                <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" id="btu_enterprise_username">填</button>
+                    </span>
                             </div>
                         </div>
                     </div>
@@ -374,9 +391,12 @@
                         <button type="button" class="btn btn-default glyphicon glyphicon-lock">密码</button>
                     </span>
                                 <input type="password" class="form-control"
-                                       onkeyup="reg_pwd('enterprise_password','confirm_enterprise_box')"
+                                       onmouseout="reg_pwd('enterprise_password','btu_enterprise_password')"
                                        id="enterprise_password"
                                        placeholder="密码">
+                                <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" id="btu_enterprise_password">完</button>
+                    </span>
                             </div>
                         </div>
                     </div>
@@ -387,8 +407,11 @@
                         <button type="button" class="btn btn-default glyphicon glyphicon-lock">确认密码</button>
                     </span>
                                 <input type="password" class="form-control" id="confirm_enterprise_password"
-                                       onkeyup="conf_pwd('enterprise_password','confirm_enterprise_password','confirm_enterprise_box')"
+                                       onmouseout="conf_pwd('enterprise_password','confirm_enterprise_password','btu_enterprise_conf_password')"
                                        placeholder="确认密码">
+                                <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" id="btu_enterprise_conf_password">整</button>
+                    </span>
                             </div>
                         </div>
                     </div>
@@ -416,15 +439,18 @@
                         <div class="col-md-12">
                             <div class="input-group">
                     <span class="input-group-btn">
-                        <button type="button" class="btn btn-default glyphicon glyphicon-erase">联系电话</button>
+                        <button type="button" class="btn btn-default glyphicon glyphicon-erase">电子邮箱</button>
                     </span>
                                 <input type="email" class="form-control"
-                                       onkeyup="reg_telephone('enterprise_email','confirm_enterprise_box')"
+                                       onmouseout="reg_email('enterprise_email','btu_enterprise_email')"
                                        id="enterprise_email"
                                        placeholder="电子邮箱">
                                 <span class="input-group-btn">
+                        <button type="button" class="btn btn-default " id="btu_enterprise_email">@</button>
+                    </span>
+                                <span class="input-group-btn">
                         <button type="button"
-                                onclick="check_email('enterprise_email','confirm_enterprise_box')"
+                                onclick="check_email('enterprise_email','btu_enterprise_email')"
                                 class="btn btn-default">验证</button>
                     </span>
                             </div>
@@ -437,9 +463,12 @@
                         <button type="button" class="btn btn-default glyphicon glyphicon-envelope">手机电话</button>
                     </span>
                                 <input type="text" class="form-control"
-                                       onkeyup="reg_telephone('enterprise_telephone','confirm_enterprise_box')"
+                                       onmouseout="reg_telephone('enterprise_telephone','btu_enterprise_telephone')"
                                        id="enterprise_telephone"
                                        placeholder="手机电话">
+                                <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" id="btu_enterprise_telephone">哦</button>
+                    </span>
                             </div>
                         </div>
                     </div>

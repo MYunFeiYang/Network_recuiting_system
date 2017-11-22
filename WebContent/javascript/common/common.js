@@ -1,33 +1,4 @@
-function check_email(email,confirm_box){
-    var user={};
-    var email=document.getElementById(email).value;
-    user.email=email;
-    ajax_check_email(user,confirm_box);
-}
-function ajax_check_email(user,confirm_box) {
-    $.ajax({
-        url:'/public?public=checkemail',
-        data:user,
-        async:true,
-        type:"POST",
-        dataType:"JSON",
-        success:function (data) {
-            check_email_result(data,confirm_box)
-        },
-        fail:function (data) {
-            alert(data);
-        },
-    });
-}
-function check_email_result(data,confirm_box) {
-    if (data.msg=="email_exist"){
-        document.getElementById(confirm_box).setAttribute("class","alert-warning");
-        document.getElementById(confirm_box).innerHTML="请邮箱已被注册";
-    }else {
-        document.getElementById(confirm_box).setAttribute("class","alert-success");
-        document.getElementById(confirm_box).innerHTML="该邮箱通过验证";
-    }
-}
+
 function login() {
     var user={};
     user.login_type=document.getElementById('login_type').value;
@@ -144,20 +115,23 @@ function resetPassword_result(data) {
         confirm_box.setAttribute("class","alert-warning");
         confirm_box.innerHTML="该邮箱未注册";
         document.getElementById("other").innerHTML="<a class=\"btn btn-primary\" href='index.html'>返回注册</a>"
-    }else if(data.msg!=""){
-        confirm_box.setAttribute("class","alert-warning");
-        confirm_box.innerHTML="注意接收重置密码邮件";
-        document.getElementById("basic-addon1").innerHTML="请输入验证码";
-        var user_string=document.cookie.split(";")[0].split("=")[1];
-        var user=JSON.parse(user_string);
-        user.code=data.msg;
-        var data=new Date();
-        data.setDate(data.getDate()+180);
-        document.cookie="user="+JSON.stringify(user)+";expires="+data.toDateString();
-        document.getElementById("btu_resetPassword").setAttribute("onclick","check_code()");
-        document.getElementById("email").value="";
-    }else {
+    }else if(data.msg!="") {
+        confirm_box.setAttribute("class", "alert-warning");
+        confirm_box.innerHTML = "注意接收重置密码邮件";
+        document.getElementById("basic-addon1").innerHTML = "请输入验证码";
+        if (document.cookie != "") {
+            var user_string = document.cookie.split(";")[0].split("=")[1];
+            var user = JSON.parse(user_string);
+            user.code = data.msg;
+            var data = new Date();
+            data.setDate(data.getDate() + 180*24*3600*1000);
+            document.cookie = "user=" + JSON.stringify(user) + ";expires=" + data.toDateString();
+            document.getElementById("btu_resetPassword").setAttribute("onclick", "check_code()");
+            document.getElementById("email").value = "";
+        }
+        else {
         return;
+    }
     }
 }
 function check_code() {
@@ -191,13 +165,17 @@ function updatePassword() {
     }else {
         confirm_box.setAttribute("class","alert-success");
         confirm_box.innerHTML="密码通过";
-        var user_string=document.cookie.split(";")[0].split("=")[1];
-        var user=JSON.parse(user_string);
-        user.password=password;
-        var data=new Date();
-        data.setDate(data.getDate()+180);
-        document.cookie="user="+JSON.stringify(user)+";expires="+data.toDateString();
-        updatePassword_ajax(user);
+        if (document.cookie!="") {
+            var user_string = document.cookie.split(";")[0].split("=")[1];
+            var user = JSON.parse(user_string);
+            user.password = password;
+            var data = new Date();
+            data.setDate(data.getDate() + 180*24*3600*1000);
+            document.cookie = "user=" + JSON.stringify(user) + ";expires=" + data.toDateString();
+            updatePassword_ajax(user);
+        }else {
+            return;
+        }
 
     }
 }
