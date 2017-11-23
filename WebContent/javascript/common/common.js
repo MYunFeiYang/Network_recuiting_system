@@ -59,21 +59,18 @@ function ajax_login_session(data) {
     });
 }
 function login_session_result(data) {
+    init_user(data.nickname);
     if (data.nickname!="") {
-        init_user();
         if (data.login_type=="person"){
             var person_btu=document.getElementById("person_btu")
             person_btu.setAttribute("onclick","show_div('person')");
-        }else {
+        }else if(data.login_type="person"){
             var enterprise_btu=document.getElementById("enterprise_btu");
             enterprise_btu.setAttribute("onclick","show_div('enterprise')");
         }
     }
 }
-function init_user() {
-    var user_string = document.cookie.split(";")[0].split("=")[1];
-    var user = JSON.parse(user_string);
-    var nickname = user.nickname;
+function init_user(nickname) {
     document.getElementById("vip").classList.remove("hidden");
     document.getElementById("register_btu").innerHTML="";
     document.getElementById("login_btu").text = nickname;
@@ -123,9 +120,7 @@ function resetPassword_result(data) {
             var user_string = document.cookie.split(";")[0].split("=")[1];
             var user = JSON.parse(user_string);
             user.code = data.msg;
-            var data = new Date();
-            data.setDate(data.getDate() + 180*24*3600*1000);
-            document.cookie = "user=" + JSON.stringify(user) + ";expires=" + data.toDateString();
+            setCookie("user",JSON.stringify(user),180);
             document.getElementById("btu_resetPassword").setAttribute("onclick", "check_code()");
             document.getElementById("email").value = "";
         }
@@ -169,9 +164,7 @@ function updatePassword() {
             var user_string = document.cookie.split(";")[0].split("=")[1];
             var user = JSON.parse(user_string);
             user.password = password;
-            var data = new Date();
-            data.setDate(data.getDate() + 180*24*3600*1000);
-            document.cookie = "user=" + JSON.stringify(user) + ";expires=" + data.toDateString();
+            setCookie("user",JSON.stringify(user),180)
             updatePassword_ajax(user);
         }else {
             return;

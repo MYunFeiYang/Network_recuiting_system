@@ -143,3 +143,24 @@ function btu_disable_enterprise(reg_btu,check_box){
 function btu_able(reg_btu) {
     document.getElementById(reg_btu).removeAttribute("disabled");
 }
+function btu_disable_person_modify(reg_btu,check_box){
+    if(btu_register_status){
+        document.getElementById(check_box).innerHTML="信息已填写完整";
+        document.getElementById(check_box).setAttribute("class","alert-success");
+    }
+    else {
+        document.getElementById(reg_btu).setAttribute("disabled","disabled");
+        document.getElementById(check_box).innerHTML="请先填完注册信息";
+        document.getElementById(check_box).setAttribute("class","alert-warning");
+    }
+}
+function btu_disable_enterprise_modify(reg_btu,check_box){
+    if(btu_register_status){
+        document.getElementById(check_box).innerHTML="信息已填写完整";
+        document.getElementById(check_box).setAttribute("class","alert-success");
+    }else {
+        document.getElementById(reg_btu).setAttribute("disabled","disabled");
+        document.getElementById(check_box).innerHTML="请先填完注册信息";
+        document.getElementById(check_box).setAttribute("class","alert-warning");
+    }
+}

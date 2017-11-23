@@ -13,7 +13,7 @@
     <script src="bootstrap-3.3.7-dist/js/bootstrap.js"></script>
     <script src="javascript/util/cookie_and_session.js"></script>
     <script src="javascript/util/check_input.js"></script>
-    <script src="javascript/util/change_display.js"></script>
+    <script src="javascript/util/div_operate.js"></script>
     <script src="javascript/common/common.js"></script>
     <script src="javascript/person/person.js"></script>
     <script src="javascript/enterprise/enterprise.js"></script>
@@ -131,7 +131,7 @@
                     <div class="form-group navbar-left">
                         <input type="text" class="form-control" placeholder="Search" id="search-con">
                     </div>
-                    <button type="button" class="navbar-right btn btn-default glyphicon glyphicon-search" onclick="query()">
+                    <button type="button" class="navbar-right btn btn-default glyphicon glyphicon-search" onmouseover="change_width('search-con','750px')" onclick="query()">
 
                     </button>
                 </form>
@@ -340,7 +340,7 @@
                                 <input class="btn btn-lg btn-primary center-block" id="person_reg_btu"
                                        type="button" value="注册"
                                        onmouseover="btu_disable_person('person_reg_btu','confirm_person_box')"
-                                       onclick="remember_user('person_nickname','person_password','person_email'),register_person()">
+                                       onclick="remember_user('person_nickname','person_password'),register_person()">
                             </div>
                             <div class="col-md-6">
                                 <input class="btn btn-lg btn-danger center-block" type="reset" value="重置">
@@ -487,7 +487,7 @@
                         <div class="col-md-6">
                             <input class="btn btn-lg btn-primary center-block" type="button"
                                    id="reg_btu" value="注册" onmouseover="btu_disable_enterprise('reg_btu','confirm_enterprise_box')"
-                                   onclick="remember_user('enterprise_nickname','enterprise_password','enterprise_telephone'),register_enterprise()">
+                                   onclick="remember_user('enterprise_nickname','enterprise_password'),register_enterprise()">
                         </div>
                         <div class="col-md-6">
                             <input type="reset" class="btn btn-lg btn-danger center-block"

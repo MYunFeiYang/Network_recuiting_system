@@ -32,8 +32,9 @@ function register_result(data) {
 function modify_user_person() {
     document.getElementById("myregister-person").innerHTML="修改个人注册信息";
     document.getElementById("person_name_group").style.display="none";
-    document.getElementById("person_telephone_group").style.display="none";
+    document.getElementById("person_email_group").style.display="none";
     document.getElementById("person_reg_btu").value="提交修改";
+    document.getElementById("person_reg_btu").setAttribute("onmouseover","btu_disable_person_modify")
     document.getElementById("person_reg_btu").setAttribute("onclick","modify_user");
 }
 function modify_user() {
