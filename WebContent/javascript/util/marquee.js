@@ -1,6 +1,6 @@
 
-function marquee() {
-        var ul=document.getElementById("marquee").getElementsByTagName("ul")[0];
+function marquee(target) {
+        var ul=document.getElementById(target).getElementsByTagName("ul")[0];
         var liList=ul.getElementsByTagName("li");
         var ulOffset=ul.offsetTop;
         for (var i=0;i<liList.length;i++){
@@ -25,5 +25,5 @@ function marquee() {
         };
     }
 function marquee_control() {
-    setInterval(marquee,1000);
+    setInterval("marquee(\"marquee1\"),marquee(\"marquee\")",1000);
 }
