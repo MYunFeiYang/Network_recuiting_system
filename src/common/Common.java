@@ -125,7 +125,6 @@ public class Common {
             // 创建session
             // 使用request对象的getSession()获取session，如果session不存在则创建一个
             HttpSession session = request.getSession();
-            session.setMaxInactiveInterval(15552000);
             JSONObject user = new JSONObject();
             user.put("login_type", login_type);
             user.put("nickname",login_nickname);

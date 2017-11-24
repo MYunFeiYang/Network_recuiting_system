@@ -1,4 +1,10 @@
-
+function setCookie(c_name,value,expireDays)
+{
+    var existDate=new Date();
+    existDate.setDate(existDate.getDate()+expireDays);
+    document.cookie=c_name+ "=" +value+
+        ((expireDays==null) ? "" : ";expires="+existDate.toGMTString());
+}
 function login() {
     var user={};
     user.login_type=document.getElementById('login_type').value;
@@ -23,12 +29,12 @@ function login_ajax(data) {
 }
 function login_result(data) {
     if(data.msg=="person_success"){
+        document.getElementById("close_login").click();
         login_session('login');
-        location.href="index.html";
     }
     else if(data.msg=="enterprise_success"){
+        document.getElementById("close_login").click();
         login_session('login');
-        location.href="index.html";
     }
     else {
         document.getElementById("confirm_login_box").innerHTML="用户名或密码错误";
@@ -86,8 +92,20 @@ function query() {
 
 }
 function resetPassword() {
+    if (document.cookie!="") {
+        var user_string = document.cookie.split(";")[0].split("=")[1];
+        var user = JSON.parse(user_string);
+        var email=document.getElementById("email").value;
+        user.email=email;
+        setCookie("user",JSON.stringify(user),180)
+        updatePassword_ajax(user);
+    }else {
+        var confirm_box=document.getElementById("confirm_box");
+        confirm_box.setAttribute("class","alert-warning");
+        confirm_box.innerHTML="请先尝试登录";
+        document.getElementById("other").innerHTML="<a class=\"btn btn-primary\" href='index.html'>返回登录</a>"
+    }
     var email=document.getElementById("email").value;
-    var user={};
     user.email=email;
     ajax_resetPassword(user);
 }

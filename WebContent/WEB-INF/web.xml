@@ -49,4 +49,7 @@
     <servlet-name>fileDownload</servlet-name>
     <url-pattern>/download</url-pattern>
   </servlet-mapping>
+  <!--<session-config>-->
+    <!--<session-timeout>259200</session-timeout>-->
+  <!--</session-config>-->
 </web-app>

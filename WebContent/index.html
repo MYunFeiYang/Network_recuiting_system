@@ -14,6 +14,7 @@
     <script src="javascript/util/cookie_and_session.js"></script>
     <script src="javascript/util/check_input.js"></script>
     <script src="javascript/util/div_operate.js"></script>
+    <script src="javascript/util/marquee.js"></script>
     <script src="javascript/common/common.js"></script>
     <script src="javascript/person/person.js"></script>
     <script src="javascript/enterprise/enterprise.js"></script>
@@ -192,7 +193,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal" id="close_login">关闭</button>
                     <button type="button" class="btn btn-primary"
                             onclick="reset_user(),login()">登录
                     </button>
@@ -549,18 +550,48 @@
                             </li>
                         </ul>
                     </li>
-                    <li onmouseover="show_div('other')" onmouseout="hidden_div('other')">
-                        其他功能
-                        <ul style="display: none" id="other">
-                            <li>
-                                <a class="bg-primary">退出招聘系统</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li style="height: 320px">
-
-                    </li>
                 </ul>
+                <div id="marquee">
+                    <ul>
+                        <li><a href="#">新闻公告一新闻公告一二新闻公告</a></li>
+                        <li><a href="#">新闻公告二新闻公告二新闻公告二</a></li>
+                        <li><a href="#">新闻公告三新闻公告三新闻公告三</a></li>
+                        <li><a href="#">新闻公告四新闻公告四新闻公告四</a></li>
+                        <li><a href="#">新闻公告五新闻公告五新闻公告五</a></li>
+                        <li><a href="#">新闻公告六新闻公告六新闻公告六</a></li>
+                        <li><a href="#">新闻公告一新闻公告一</a></li>
+                        <li><a href="#">新闻公告二新闻公告二新闻公告二</a></li>
+                        <li><a href="#">新闻公告三新闻公告三新闻公告三</a></li>
+                        <li><a href="#">新闻公告四新闻公告四新闻公告四</a></li>
+                        <li><a href="#">新闻公告五新闻公告五新闻公告五</a></li>
+                        <li><a href="#">新闻公告六新闻公告六新闻公告六</a></li>
+                        <li><a href="#">新闻公告一新闻公告一</a></li>
+                        <li><a href="#">新闻公告二新闻公告二新闻公告二</a></li>
+                        <li><a href="#">新闻公告三新闻公告三新闻公告三</a></li>
+                        <li><a href="#">新闻公告四新闻公告四新闻公告四</a></li>
+                        <li><a href="#">新闻公告五新闻公告五新闻公告五</a></li>
+                        <li><a href="#">新闻公告六新闻公告六新闻公告六</a></li>
+                        <li><a href="#">新闻公告一新闻公告一二新闻公告</a></li>
+                        <li><a href="#">新闻公告二新闻公告二新闻公告二</a></li>
+                        <li><a href="#">新闻公告三新闻公告三新闻公告三</a></li>
+                        <li><a href="#">新闻公告四新闻公告四新闻公告四</a></li>
+                        <li><a href="#">新闻公告五新闻公告五新闻公告五</a></li>
+                        <li><a href="#">新闻公告六新闻公告六新闻公告六</a></li>
+                        <li><a href="#">新闻公告一新闻公告一</a></li>
+                        <li><a href="#">新闻公告二新闻公告二新闻公告二</a></li>
+                        <li><a href="#">新闻公告三新闻公告三新闻公告三</a></li>
+                        <li><a href="#">新闻公告四新闻公告四新闻公告四</a></li>
+                        <li><a href="#">新闻公告五新闻公告五新闻公告五</a></li>
+                        <li><a href="#">新闻公告六新闻公告六新闻公告六</a></li>
+                        <li><a href="#">新闻公告一新闻公告一</a></li>
+                        <li><a href="#">新闻公告二新闻公告二新闻公告二</a></li>
+                        <li><a href="#">新闻公告三新闻公告三新闻公告三</a></li>
+                        <li><a href="#">新闻公告四新闻公告四新闻公告四</a></li>
+                        <li><a href="#">新闻公告五新闻公告五新闻公告五</a></li>
+                        <li><a href="#">新闻公告六新闻公告六新闻公告六</a></li>
+                    </ul>
+                </div>
+                <button onclick="marquee()">点我</button>
             </div>
             <div class="col-md-9 center-block">
                 <div class="col-md-12 main center-block" id="resume">
@@ -750,16 +781,12 @@
                             </li>
                         </ul>
                     </li>
-                    <li onmouseover="show_div('other_enterprise')" onmouseout="hidden_div('other_enterprise')">
-                        其他功能
-                        <ul style="display: none" id="other_enterprise">
-                            <li>
-                                <button class="bg-primary">退去招聘系统</button>
-                            </li>
-                        </ul>
-                    </li>
                     <li style="height: 320px">
-
+                        <ul>
+                            <li>测试</li>
+                            <li>测试</li>
+                            <li>测试</li>
+                        </ul>
                     </li>
                 </ul>
             </div>
