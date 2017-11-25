@@ -6,7 +6,7 @@ function marquee(target) {
         for (var i=0;i<liList.length;i++){
             var top=liList[i].style.top;
             top=top.replace(/\s+|px/gi,"");
-            top-=1;
+            top-=0.5;
             liList[i].style.top=top+"px";
             var liOffset=liList[i].offsetTop;
             var marginTop=ulOffset-liOffset;
@@ -25,5 +25,5 @@ function marquee(target) {
         };
     }
 function marquee_control() {
-    setInterval("marquee(\"marquee1\"),marquee(\"marquee\")",1000);
+    setInterval("marquee(\"marquee1\"),marquee(\"marquee\")",1500);
 }

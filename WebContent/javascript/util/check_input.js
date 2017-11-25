@@ -68,7 +68,7 @@ function reg_pwd(password,confirm_box) {
 }
 function reg_telephone(telephone,confirm_box) {
     var telephone=document.getElementById(telephone).value;
-    var mPattern = /^((13[0-9])|(14[5|7])|(15([0-3]|[5-9]))|(18[0,5-9]))\d{8}$/;
+    var mPattern = /^1[3|4|5|8][0-9]\d{4,8}$/;
     var confirm=document.getElementById(confirm_box);
     if (mPattern.test(telephone)){
         confirm.innerHTML="";
@@ -78,7 +78,7 @@ function reg_telephone(telephone,confirm_box) {
         return btu_register_status=true;
     }else {
         confirm.setAttribute("style","color:red");
-        confirm.innerHTML="请输入11位规范手机号";
+        confirm.innerHTML="手机号不完整或前七位不正确";
         return btu_register_status=false;
     }
 }

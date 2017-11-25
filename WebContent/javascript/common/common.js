@@ -69,10 +69,10 @@ function login_session_result(data) {
     if (data.nickname!="") {
         if (data.login_type=="person"){
             var person_btu=document.getElementById("person_btu")
-            person_btu.setAttribute("onclick","show_div('person')");
+            person_btu.setAttribute("onclick","show_div('person'),change_footer_position()");
         }else if(data.login_type="person"){
             var enterprise_btu=document.getElementById("enterprise_btu");
-            enterprise_btu.setAttribute("onclick","show_div('enterprise')");
+            enterprise_btu.setAttribute("onclick","show_div('enterprise'),change_footer_position()");
         }
     }
 }
@@ -89,7 +89,8 @@ function init_user(nickname) {
     login_out.appendChild(a);
 }
 function query() {
-
+    var search=document.getElementById("search-con").value;
+    alert(search);
 }
 function resetPassword() {
     if (document.cookie!="") {
