@@ -1,6 +1,6 @@
 package person;
 
-import DBO.connectionDB;
+import DBO.ConnectionDB;
 import net.sf.json.JSONObject;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -27,7 +27,7 @@ public class Person {
         String dataString=df.format(new Date());// new Date()为获取当前系统时间
         String email=request.getParameter("email");
 
-        connectionDB conndb=new connectionDB();
+        ConnectionDB conndb=new ConnectionDB();
         Connection conn=conndb.getConn();
         String sql="insert into occupy_person (nickname,password,"
                 + "name,telephone,email,regrime) values(?,?,?,?,?,?)";
@@ -68,7 +68,7 @@ public class Person {
         String password=request.getParameter("password");
         String email=request.getParameter("email");
 
-        connectionDB conndb=new connectionDB();
+        ConnectionDB conndb=new ConnectionDB();
         Connection conn=conndb.getConn();
         String sql="update occupy_person set nickname=?,password=?,email=? where telephone=?";
         try {
@@ -104,7 +104,7 @@ public class Person {
         String nickname = request.getParameter("nickname");
         String password = request.getParameter("password");
         // System.out.println(nickname);
-        connectionDB conndb = new connectionDB();
+        ConnectionDB conndb = new ConnectionDB();
         Connection conn = conndb.getConn();
         try {
             String sql = "select name,telephone,email from occupy_person where nickname=? and password=?";
@@ -151,7 +151,7 @@ public class Person {
         String telephone=request.getParameter("telephone");
         String email=request.getParameter("email");
 
-        connectionDB conndb=new connectionDB();
+        ConnectionDB conndb=new ConnectionDB();
         Connection conn=conndb.getConn();
         String sql="insert into occupy_resume (nickname,password,name,age,sex,origin,collage,specialty,"
                 + "degree,admission_data,graduation_data,telephone,email) values(?,?,?,?,?,?,?,?,?,?,?,?,?)";

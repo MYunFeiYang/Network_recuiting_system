@@ -1,6 +1,6 @@
 package enterprise;
 
-import DBO.connectionDB;
+import DBO.ConnectionDB;
 import net.sf.json.JSONObject;
 
 import javax.servlet.ServletException;
@@ -26,7 +26,7 @@ public class Enterprise {
         String email=request.getParameter("email");
         String address=request.getParameter("address");
 
-        connectionDB conndb=new connectionDB();
+        ConnectionDB conndb=new ConnectionDB();
         Connection conn=conndb.getConn();
         String sql="insert into occupy_company (nickname,password,name,industry,telephone,email,address) values(?,?,?,?,?,?,?)";
         try {
@@ -65,7 +65,7 @@ public class Enterprise {
         String nickname = request.getParameter("nickname");
         String password = request.getParameter("password");
         System.out.println(nickname);
-        connectionDB conndb = new connectionDB();
+        ConnectionDB conndb = new ConnectionDB();
         Connection conn = conndb.getConn();
         try {
             String sql = "select name,address,industry,email from occupy_company where nickname=? and password=?";
@@ -112,7 +112,7 @@ public class Enterprise {
         String telephone=request.getParameter("telephone");
         String email=request.getParameter("email");
 
-        connectionDB conndb=new connectionDB();
+        ConnectionDB conndb=new ConnectionDB();
         Connection conn=conndb.getConn();
         String sql="insert into occupy_jobs (telephone,name,address,industry,job,number,salary,publish_time,"
                 + "effective_time,email) values(?,?,?,?,?,?,?,?,?,?)";

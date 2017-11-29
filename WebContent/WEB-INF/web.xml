@@ -34,6 +34,14 @@
     <url-pattern>/public</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>school</servlet-name>
+    <servlet-class>servlet.servletSchool</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>school</servlet-name>
+    <url-pattern>/school/*</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>fileupload</servlet-name>
     <servlet-class>servlet.FileUpload</servlet-class>
   </servlet>
@@ -49,7 +57,5 @@
     <servlet-name>fileDownload</servlet-name>
     <url-pattern>/download</url-pattern>
   </servlet-mapping>
-  <!--<session-config>-->
-    <!--<session-timeout>259200</session-timeout>-->
-  <!--</session-config>-->
+
 </web-app>

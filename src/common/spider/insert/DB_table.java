@@ -1,6 +1,6 @@
 package common.spider.insert;
 
-import DBO.connectionDB;
+import DBO.ConnectionDB;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -10,7 +10,7 @@ import java.sql.SQLException;
 
 public class DB_table {
     public void school_rercuit(String company,String position,String address,String time) throws IOException {
-        connectionDB conndb=new connectionDB();
+        ConnectionDB conndb=new ConnectionDB();
         Connection conn=conndb.getConn();
         String sql="INSERT INTO school_rercuit (company,position,address,time) VALUES (?,?,?,?)";
         try {
@@ -30,7 +30,7 @@ public class DB_table {
         }
     }
     public void filter_job(String href,String text) throws IOException {
-        connectionDB conndb=new connectionDB();
+        ConnectionDB conndb=new ConnectionDB();
         Connection conn=conndb.getConn();
         String sql="INSERT INTO filter_job (href,text) VALUES (?,?)";
         try {
@@ -48,7 +48,7 @@ public class DB_table {
         }
     }
     public void filter_address(String href,String text) throws IOException {
-        connectionDB conndb=new connectionDB();
+        ConnectionDB conndb=new ConnectionDB();
         Connection conn=conndb.getConn();
         String sql="INSERT INTO filter_address (href,text) VALUES (?,?)";
         try {

@@ -1,6 +1,6 @@
 package common;
 
-import DBO.connectionDB;
+import DBO.ConnectionDB;
 import net.sf.json.JSONObject;
 
 import javax.mail.Message;
@@ -29,7 +29,7 @@ public class Common {
         response.setHeader("Pragma", "no-cache");
         String email=request.getParameter("email");
 
-        connectionDB conndb=new connectionDB();
+        ConnectionDB conndb=new ConnectionDB();
         Connection conn=conndb.getConn();
         try {
             String sql="select occupy_person.email,occupy_company.email from occupy_person,occupy_company where occupy_person.email=? OR occupy_company.email=?";
@@ -64,7 +64,7 @@ public class Common {
         String nickname=request.getParameter("nickname");
         String password=request.getParameter("password");
 
-        connectionDB conndb=new connectionDB();
+        ConnectionDB conndb=new ConnectionDB();
         Connection conn=conndb.getConn();
         if(login_type.equals("person")){
             try {
@@ -154,7 +154,7 @@ public class Common {
         response.setHeader("Pragma", "no-cache");
         String email=request.getParameter("email");
 
-        connectionDB conndb=new connectionDB();
+        ConnectionDB conndb=new ConnectionDB();
         Connection conn=conndb.getConn();
         try {
             String sql="select occupy_person.email,occupy_company.email from occupy_person,occupy_company where occupy_person.email=? OR occupy_company.email=?";
@@ -228,7 +228,7 @@ public class Common {
         String email=request.getParameter("email");
         String password=request.getParameter("password");
 
-        connectionDB conndb=new connectionDB();
+        ConnectionDB conndb=new ConnectionDB();
         Connection conn=conndb.getConn();
         try {
             String sql1="UPDATE occupy_person SET password=? WHERE email=?";

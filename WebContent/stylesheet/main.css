@@ -16,8 +16,9 @@ h3{
 .main ,.marquee,footer,header,#carousel-example-generic{
     width: 100%;
     height: auto;
-    box-shadow: 2px 2px 2px 2px;
+    box-shadow: 1px 1px 1px 1px;
     border-radius: 5px;
+    padding: 10px;
 }
 nav{
     z-index:99999;
@@ -39,7 +40,7 @@ nav{
     border-left: 1px solid gray;
     padding: 0px 10px;
 }
-.menu,.menu li ul,.marquee ul ,.marquee{
+.menu,.menu li ul,.marquee ul ,.marquee,#fliter_job_left ul,#fliter_job_left ul li{
     list-style: none;
     padding: 5px;
 }
