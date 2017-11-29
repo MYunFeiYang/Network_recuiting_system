@@ -20,315 +20,331 @@
     <script src="javascript/enterprise/enterprise.js"></script>
 </head>
 <body>
-    <nav class="navbar navbar-fixed-top">
-        <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                        data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
+<nav class="navbar navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">
+                <img class="img-circle" alt="Brand" width="20px" height="20px" src="image/brand.jpg">
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li><a href="index.html">首页</a></li>
+                <li class="dropdown hidden" id="vip">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">会员<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="#" id="person_btu">个人</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li>
+                            <a href="#" id="enterprise_btu">企业</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" id="login_btu" data-toggle="dropdown" role="button"
+                       aria-haspopup="true"
+                       aria-expanded="false">登录<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li id="login_out">
+                            <!-- Button trigger modal -->
+                            <a data-toggle="modal" data-target="#login">
+                                会员登录
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown" id="register_btu">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">注册<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <!-- Button trigger modal -->
+                            <a data-toggle="modal" data-target="#register-person">
+                                个人注册
+                            </a>
+                        </li>
+                        <li role="separator" class="divider"></li>
+                        <li>
+                            <a data-toggle="modal" data-target="#register-enterprise">
+                                企业注册
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right" id="tool">
+                <li><span class="glyphicon glyphicon-share" onmouseover="open_share()"></span></li>
+                <li><span class="glyphicon glyphicon-star"></span></li>
+                <li><span class="glyphicon glyphicon-asterisk"></span></li>
+                <li></li>
+            </ul>
+            <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group navbar-left">
+                    <input type="text" class="form-control" id="search-con">
+                </div>
+                <button type="button" class="navbar-right btn btn-default glyphicon glyphicon-search"
+                        onmouseover="open_search('search-con','550px')" onclick="query()">
+
                 </button>
-                <a class="navbar-brand" href="#">
-                    <img class="img-circle" alt="Brand" width="24px" height="24px" src="image/brand.jpg">
-                </a>
+            </form>
+            <div class="bdsharebuttonbox hidden">
+                <a class="bds_mshare" data-cmd="mshare"></a>
+                <a class="bds_qzone" data-cmd="qzone" href="#"></a>
+                <a class="bds_tsina" data-cmd="tsina"></a>
+                <a class="bds_baidu" data-cmd="baidu"></a>
+                <a class="bds_renren" data-cmd="renren"></a>
+                <a class="bds_tqq" data-cmd="tqq"></a>
+                <a href="#" class="bds_more" data-cmd="more">更多</a>
             </div>
-
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li><a href="index.html">首页</a></li>
-                    <li class="dropdown hidden" id="vip">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                           aria-expanded="false">会员<span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <a href="#" id="person_btu">个人</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li>
-                                <a href="#" id="enterprise_btu">企业</a></li>
-                        </ul>
-                    </li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" id="login_btu" data-toggle="dropdown" role="button"
-                           aria-haspopup="true"
-                           aria-expanded="false">登录<span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li id="login_out">
-                                <!-- Button trigger modal -->
-                                <a data-toggle="modal" data-target="#login">
-                                    会员登录
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="dropdown" id="register_btu">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                           aria-expanded="false">注册<span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <!-- Button trigger modal -->
-                                <a data-toggle="modal" data-target="#register-person">
-                                    个人注册
-                                </a>
-                            </li>
-                            <li role="separator" class="divider"></li>
-                            <li>
-                                <a data-toggle="modal" data-target="#register-enterprise">
-                                    企业注册
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-                <form class="navbar-form navbar-right" role="search" id="search">
-                    <div class="form-group navbar-left">
-                        <input type="text" class="form-control" id="search-con">
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+<!-- Modal start -->
+<div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="mylogin">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="mylogin">登录</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row center-block">
+                    <div class="col-md-12">
+                        <div id="confirm_login_box"></div>
                     </div>
-                    <button type="button" class="navbar-right btn btn-default glyphicon glyphicon-search" onmouseover="open_search('search-con','750px')" onclick="query()">
-
-                    </button>
-                </form>
-            </div><!-- /.navbar-collapse -->
-        </div><!-- /.container-fluid -->
-    </nav>
-    <!-- Modal start -->
-    <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="mylogin">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                            aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="mylogin">登录</h4>
                 </div>
-                <div class="modal-body">
-                    <div class="row center-block">
-                        <div class="col-md-12">
-                            <div id="confirm_login_box"></div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12 center-block">
-                            <div class="input-group">
-                                <span class="input-group-addon glyphicon glyphicon-user">用户类型:</span>
-                                <select id="login_type" class="form-control">
-                                    <option value="person">个人用户</option>
-                                    <option value="enterprise">企业用户</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12 center-block">
-                            <div class="input-group">
-                                <span class="input-group-addon glyphicon glyphicon-user">用户名</span>
-                                <input type="text" id="login_nickname" class="form-control" placeholder="用户名">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12 center-block">
-                            <div class="input-group">
-                                <span class="input-group-addon glyphicon glyphicon-lock">密码</span>
-                                <input type="password" id="login_password" class="form-control" placeholder="密码">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12 center-block">
-                            <input type="radio" checked="checked" id="remember_user">选中我记住登录状态
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4 col-sm-12">
-                            <a href="resetPassword.html" class="btn btn-lg btn-primary center-block">找回密码</a>
+                <div class="row">
+                    <div class="col-md-12 center-block">
+                        <div class="input-group">
+                            <span class="input-group-addon glyphicon glyphicon-user">用户类型:</span>
+                            <select id="login_type" class="form-control">
+                                <option value="person">个人用户</option>
+                                <option value="enterprise">企业用户</option>
+                            </select>
                         </div>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal" id="close_login">关闭</button>
-                    <button type="button" class="btn btn-primary"
-                            onclick="reset_user(),login()">登录
-                    </button>
+                <div class="row">
+                    <div class="col-md-12 center-block">
+                        <div class="input-group">
+                            <span class="input-group-addon glyphicon glyphicon-user">用户名</span>
+                            <input type="text" id="login_nickname" class="form-control" placeholder="用户名">
+                        </div>
+                    </div>
                 </div>
+                <div class="row">
+                    <div class="col-md-12 center-block">
+                        <div class="input-group">
+                            <span class="input-group-addon glyphicon glyphicon-lock">密码</span>
+                            <input type="password" id="login_password" class="form-control" placeholder="密码">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 center-block">
+                        <input type="radio" checked="checked" id="remember_user">选中我记住登录状态
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 col-sm-12">
+                        <a href="resetPassword.html" class="btn btn-lg btn-primary center-block">找回密码</a>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" id="close_login">关闭</button>
+                <button type="button" class="btn btn-primary"
+                        onclick="reset_user(),login()">登录
+                </button>
             </div>
         </div>
     </div>
-    <div class="modal fade" id="upload" tabindex="-1" role="dialog" aria-labelledby="myupload"
-         style="margin-top: 100px">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                            aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myupload">上传本地简历</h4>
-                </div>
-                <div class="modal-body">
-                    <div class="row center-block">
-                        <div class="col-md-12">
-                            <form action="/upload" enctype="multipart/form-data"
-                                  method="post">
+</div>
+<div class="modal fade" id="upload" tabindex="-1" role="dialog" aria-labelledby="myupload"
+     style="margin-top: 100px">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myupload">上传本地简历</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row center-block">
+                    <div class="col-md-12">
+                        <form action="/upload" enctype="multipart/form-data"
+                              method="post">
 
-                                <input type="file" class="form-control" name="file1">
-                                <span class="input-group-btn">
+                            <input type="file" class="form-control" name="file1">
+                            <span class="input-group-btn">
         							<input type="submit" class="btn btn-default" value="提交">
         						</span>
-                            </form>
-                        </div>
+                        </form>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
             </div>
         </div>
     </div>
-    <div class="modal fade" id="register-person" tabindex="-1" role="dialog" aria-labelledby="myregister-person">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                            aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myregister-person">个人注册</h4>
-                </div>
-                <div class="modal-body">
-                    <form>
+</div>
+<div class="modal fade" id="register-person" tabindex="-1" role="dialog" aria-labelledby="myregister-person">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myregister-person">个人注册</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="row center-block">
+                        <div class="col-md-12">
+                            <div id="confirm_person_box"></div>
+                        </div>
+                    </div>
+                    <div class="center-block" onmouseover="btu_able('person_reg_btu','confirm_person_box')">
                         <div class="row center-block">
                             <div class="col-md-12">
-                                <div id="confirm_person_box"></div>
-                            </div>
-                        </div>
-                        <div class="center-block" onmouseover="btu_able('person_reg_btu','confirm_person_box')">
-                            <div class="row center-block">
-                                <div class="col-md-12">
-                                    <div class="input-group">
+                                <div class="input-group">
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-default glyphicon glyphicon-user">用户名</button>
                     </span>
-                                        <input type="text" class="form-control" id="person_nickname"
-                                               onmouseout="reg_username('person_nickname','btu_person_username')"
-                                               placeholder="用户名">
-                                        <span class="input-group-btn">
+                                    <input type="text" class="form-control" id="person_nickname"
+                                           onmouseout="reg_username('person_nickname','btu_person_username')"
+                                           placeholder="用户名">
+                                    <span class="input-group-btn">
                         <button type="button" class="btn btn-default " id="btu_person_username">填</button>
                     </span>
-                                    </div>
                                 </div>
                             </div>
-                            <div class="row center-block">
-                                <div class="col-md-12">
-                                    <div class="input-group">
+                        </div>
+                        <div class="row center-block">
+                            <div class="col-md-12">
+                                <div class="input-group">
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-default glyphicon glyphicon-lock">密码</button>
                     </span>
-                                        <input type="password" class="form-control" id="person_password" placeholder="密码"
-                                               onmouseout="reg_pwd('person_password','btu_person_password')">
-                                        <span class="input-group-btn">
+                                    <input type="password" class="form-control" id="person_password" placeholder="密码"
+                                           onmouseout="reg_pwd('person_password','btu_person_password')">
+                                    <span class="input-group-btn">
                         <button type="button" class="btn btn-default " id="btu_person_password">完</button>
                     </span>
-                                    </div>
                                 </div>
                             </div>
-                            <div class="row center-block">
-                                <div class="col-md-12">
-                                    <div class="input-group">
+                        </div>
+                        <div class="row center-block">
+                            <div class="col-md-12">
+                                <div class="input-group">
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-default glyphicon glyphicon-lock">确认密码</button>
                     </span>
-                                        <input type="password" class="form-control" id="person_confirm_password"
-                                               onmouseout="conf_pwd('person_password','person_confirm_password','btu_person_conf_password')"
-                                               placeholder="确认密码">
-                                        <span class="input-group-btn">
+                                    <input type="password" class="form-control" id="person_confirm_password"
+                                           onmouseout="conf_pwd('person_password','person_confirm_password','btu_person_conf_password')"
+                                           placeholder="确认密码">
+                                    <span class="input-group-btn">
                         <button type="button" class="btn btn-default" id="btu_person_conf_password">整</button>
                     </span>
-                                    </div>
                                 </div>
                             </div>
-                            <div class="row center-block" id="person_name_group">
-                                <div class="col-md-12">
-                                    <div class="input-group">
+                        </div>
+                        <div class="row center-block" id="person_name_group">
+                            <div class="col-md-12">
+                                <div class="input-group">
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-default glyphicon glyphicon-user">真实姓名</button>
                     </span>
-                                        <input type="text" class="form-control" id="person_name" placeholder="真实姓名">
-                                    </div>
+                                    <input type="text" class="form-control" id="person_name" placeholder="真实姓名">
                                 </div>
                             </div>
-                            <div class="row center-block" id="person_email_group">
-                                <div class="col-md-12">
-                                    <div class="input-group">
+                        </div>
+                        <div class="row center-block" id="person_email_group">
+                            <div class="col-md-12">
+                                <div class="input-group">
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-default glyphicon glyphicon-erase">电子邮件</button>
                     </span>
-                                        <input type="email" class="form-control"
-                                               onmouseout="reg_email('person_email','btu_person_email')"
-                                               id="person_email"
-                                               placeholder="电子邮箱">
-                                        <span class="input-group-btn">
+                                    <input type="email" class="form-control"
+                                           onmouseout="reg_email('person_email','btu_person_email')"
+                                           id="person_email"
+                                           placeholder="电子邮箱">
+                                    <span class="input-group-btn">
                         <button type="button" class="btn btn-default " id="btu_person_email">@</button>
                     </span>
-                                        <span class="input-group-btn">
+                                    <span class="input-group-btn">
                         <button type="button" class="btn btn-default"
                                 onclick="check_email('person_email','btu_person_email')">验证</button>
                     </span>
-                                    </div>
                                 </div>
                             </div>
-                            <div class="row center-block">
-                                <div class="col-md-12">
-                                    <div class="input-group">
+                        </div>
+                        <div class="row center-block">
+                            <div class="col-md-12">
+                                <div class="input-group">
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-default glyphicon glyphicon-envelope">手机号码</button>
                     </span>
-                                        <input type="text" class="form-control" id="person_telephone"
-                                               onmouseout="reg_telephone('person_telephone','btu_person_telephone')"
-                                               placeholder="手机号码">
-                                        <span class="input-group-btn">
+                                    <input type="text" class="form-control" id="person_telephone"
+                                           onmouseout="reg_telephone('person_telephone','btu_person_telephone')"
+                                           placeholder="手机号码">
+                                    <span class="input-group-btn">
                         <button type="button" class="btn btn-default " id="btu_person_telephone">哦</button>
                     </span>
-                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="row center-block margin-bottom">
-                            <div class="col-md-6">
-                                <input class="btn btn-lg btn-primary center-block" id="person_reg_btu"
-                                       type="button" value="注册"
-                                       onmouseover="btu_disable_person('person_reg_btu','confirm_person_box')"
-                                       onclick="remember_user('person_nickname','person_password'),register_person()">
-                            </div>
-                            <div class="col-md-6">
-                                <input class="btn btn-lg btn-danger center-block" type="reset" value="重置">
-                            </div>
+                    </div>
+                    <div class="row center-block margin-bottom">
+                        <div class="col-md-6">
+                            <input class="btn btn-lg btn-primary center-block" id="person_reg_btu"
+                                   type="button" value="注册"
+                                   onmouseover="btu_disable_person('person_reg_btu','confirm_person_box')"
+                                   onclick="remember_user('person_nickname','person_password'),register_person()">
                         </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                </div>
+                        <div class="col-md-6">
+                            <input class="btn btn-lg btn-danger center-block" type="reset" value="重置">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
             </div>
         </div>
     </div>
-    <div class="modal fade" id="register-enterprise" tabindex="-1" role="dialog" aria-labelledby="myregister-enterprise">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                            aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myregister-enterprise">企业用户注册</h4>
-                </div>
-                <div class="modal-body">
-                    <div class="row center-block">
-                        <div class="col-md-12">
-                            <div id="confirm_enterprise_box"></div>
-                        </div>
+</div>
+<div class="modal fade" id="register-enterprise" tabindex="-1" role="dialog" aria-labelledby="myregister-enterprise">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myregister-enterprise">企业用户注册</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row center-block">
+                    <div class="col-md-12">
+                        <div id="confirm_enterprise_box"></div>
                     </div>
-                    <div onmouseover="btu_able('reg_btu','confirm_enterprise_box')">
+                </div>
+                <div onmouseover="btu_able('reg_btu','confirm_enterprise_box')">
                     <div class="row center-block">
                         <div class="col-md-12">
                             <div class="input-group">
@@ -442,68 +458,94 @@
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class="row center-block margin-bottom">
+                    <div class="col-md-6">
+                        <input class="btn btn-lg btn-primary center-block" type="button"
+                               id="reg_btu" value="注册"
+                               onmouseover="btu_disable_enterprise('reg_btu','confirm_enterprise_box')"
+                               onclick="remember_user('enterprise_nickname','enterprise_password'),register_enterprise()">
                     </div>
-                    <div class="row center-block margin-bottom">
-                        <div class="col-md-6">
-                            <input class="btn btn-lg btn-primary center-block" type="button"
-                                   id="reg_btu" value="注册" onmouseover="btu_disable_enterprise('reg_btu','confirm_enterprise_box')"
-                                   onclick="remember_user('enterprise_nickname','enterprise_password'),register_enterprise()">
-                        </div>
-                        <div class="col-md-6">
-                            <input type="reset" class="btn btn-lg btn-danger center-block"
-                                   value="重置">
-                        </div>
+                    <div class="col-md-6">
+                        <input type="reset" class="btn btn-lg btn-danger center-block"
+                               value="重置">
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
             </div>
         </div>
     </div>
-    <!--end Modal-->
-    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" onclick="close_search('search-con','40px')" >
-        <!-- Indicators -->
-        <ol class="carousel-indicators">
-            <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-            <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-            <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-        </ol>
+</div>
+<!--end Modal-->
+<div id="carousel-example-generic" class="carousel slide" data-ride="carousel"
+     onclick="close_search('search-con','40px'),close_share()">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+        <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+    </ol>
 
-        <!-- Wrapper for slides -->
-        <div class="carousel-inner" role="listbox">
-            <div class="item active" >
-                <img class="img-responsive" src="image/1.jpg" alt="...">
-                <div class="carousel-caption">
-                    ...
-                </div>
-            </div>
-            <div class="item">
-                <img src="image/2.jpg" alt="...">
-                <div class="carousel-caption">
-                    ...
-                </div>
-            </div>
-            <div class="item">
-                <img src="image/3.jpg" alt="...">
-                <div class="carousel-caption">
-                    ...
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+        <div class="item active">
+            <img class="img-responsive" src="image/1.jpg" alt="...">
+            <div class="carousel-caption">
+                <div>
+                    <h1>Hello, world!</h1>
+                    <p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to
+                        featured content or information.</p>
+                    <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
                 </div>
             </div>
         </div>
-
-        <!-- Controls -->
-        <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-        </a>
+        <div class="item">
+            <img src="image/2.jpg" alt="...">
+            <div class="carousel-caption">
+                <div>
+                <h1>Hello, world!</h1>
+                <p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to
+                    featured content or information.</p>
+                <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
+            </div>
+            </div>
+        </div>
+        <div class="item">
+            <img src="image/3.jpg" alt="...">
+            <div class="carousel-caption">
+                <div>
+                <h1>Hello, world!</h1>
+                <p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to
+                    featured content or information.</p>
+                <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
+            </div>
+            </div>
+        </div>
     </div>
-    <div class="container" style="margin-top: 55px">
-        <div class="row" id="person" >
+
+    <!-- Controls -->
+    <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
+<div class="container" style="margin-top: 55px">
+    <div class="bdsharebuttonbox hidden">
+        <a class="bds_mshare" data-cmd="mshare"></a>
+        <a class="bds_qzone" data-cmd="qzone" href="#"></a>
+        <a class="bds_tsina" data-cmd="tsina"></a>
+        <a class="bds_baidu" data-cmd="baidu"></a>
+        <a class="bds_renren" data-cmd="renren"></a>
+        <a class="bds_tqq" data-cmd="tqq"></a>
+        <a href="#" class="bds_more" data-cmd="more">更多</a>
+    </div>
+    <div class="row" id="person">
         <div class="col-md-12">
             <div class="col-md-3">
                 <ul class="menu main">
@@ -511,7 +553,9 @@
                         个人信息
                         <ul style="display: none" id="person_inf">
                             <li>
-                                <button class="bg-primary" data-toggle="modal" data-target="#register-person" onclick="modify_user_person()">修改注册信息</button>
+                                <button class="bg-primary" data-toggle="modal" data-target="#register-person"
+                                        onclick="modify_user_person()">修改注册信息
+                                </button>
                             </li>
                             <li>
                                 <button class="bg-primary">消息通知</button>
@@ -520,7 +564,7 @@
                     </li>
                     <li class="bg-primary" onmouseover="show_div('person_data')" onmouseout="hidden_div('person_data')">
                         个人简历
-                        <ul  style="display: none" id="person_data">
+                        <ul style="display: none" id="person_data">
                             <li>
                                 <a href="index.html" class="bg-primary">返回首页登录</a>
                             </li>
@@ -710,22 +754,25 @@
                                    type="button" value="确定创建" onclick="add_resume()">
                         </div>
                         <div class="col-md-6">
-                            <input class="btn btn-lg btn-danger center-block" onclick="hidden_div('resume')" value="退出创建">
+                            <input class="btn btn-lg btn-danger center-block" onclick="hidden_div('resume')"
+                                   value="退出创建">
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-        <div class="row" id="enterprise" >
+    <div class="row" id="enterprise">
         <div class="col-md-12">
             <div class="col-md-3">
                 <ul class="menu main">
-                    <li class="bg-primary" onmouseover="show_div('enterprise_data')" onmouseout="hidden_div('enterprise_data')">
+                    <li class="bg-primary" onmouseover="show_div('enterprise_data')"
+                        onmouseout="hidden_div('enterprise_data')">
                         企业信息
                         <ul style="display: none" id="enterprise_data">
                             <li>
-                                <a class="bg-primary" data-toggle="modal" data-target="#register-enterprise" onclick="modify_user_enterprise()">
+                                <a class="bg-primary" data-toggle="modal" data-target="#register-enterprise"
+                                   onclick="modify_user_enterprise()">
                                     修改注册信息</a>
                             </li>
                             <li>
@@ -733,7 +780,8 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="bg-primary" onmouseover="show_div('enterprise_inf')" onmouseout="hidden_div('enterprise_inf')">
+                    <li class="bg-primary" onmouseover="show_div('enterprise_inf')"
+                        onmouseout="hidden_div('enterprise_inf')">
                         岗位信息
                         <ul style="display: none" id="enterprise_inf">
                             <li>
@@ -750,7 +798,8 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="bg-primary" onmouseover="show_div('query_sys_enterprise')" onmouseout="hidden_div('query_sys_enterprise')">
+                    <li class="bg-primary" onmouseover="show_div('query_sys_enterprise')"
+                        onmouseout="hidden_div('query_sys_enterprise')">
                         查询系统
                         <ul style="display: none" id="query_sys_enterprise">
                             <li>
@@ -899,104 +948,127 @@
             </div>
         </div>
     </div>
-        <div id="tourists" class="hidden">
-            <div class="row">
-                <div class="col-sm-6 col-md-4">
-                    <div class="thumbnail">
-                        <img src="image/1.jpg" alt="...">
-                        <div class="caption">
-                            <h3>Thumbnail label</h3>
-                            <p>...</p>
-                            <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-                        </div>
+    <div id="tourists" class="hidden">
+        <div class="row">
+            <div class="col-sm-6 col-md-4">
+                <div class="thumbnail">
+                    <img src="image/1.jpg" alt="...">
+                    <div class="caption">
+                        <h3>Thumbnail label</h3>
+                        <p>...</p>
+                        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#"
+                                                                                           class="btn btn-default"
+                                                                                           role="button">Button</a></p>
                     </div>
                 </div>
-                <div class="col-sm-6 col-md-4">
-                    <div class="thumbnail">
-                        <img src="image/1.jpg" alt="...">
-                        <div class="caption">
-                            <h3>Thumbnail label</h3>
-                            <p>...</p>
-                            <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-                        </div>
+            </div>
+            <div class="col-sm-6 col-md-4">
+                <div class="thumbnail">
+                    <img src="image/1.jpg" alt="...">
+                    <div class="caption">
+                        <h3>Thumbnail label</h3>
+                        <p>...</p>
+                        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#"
+                                                                                           class="btn btn-default"
+                                                                                           role="button">Button</a></p>
                     </div>
                 </div>
-                <div class="col-sm-6 col-md-4">
-                    <div class="thumbnail">
-                        <img src="image/1.jpg" alt="...">
-                        <div class="caption">
-                            <h3>Thumbnail label</h3>
-                            <p>...</p>
-                            <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-                        </div>
+            </div>
+            <div class="col-sm-6 col-md-4">
+                <div class="thumbnail">
+                    <img src="image/1.jpg" alt="...">
+                    <div class="caption">
+                        <h3>Thumbnail label</h3>
+                        <p>...</p>
+                        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#"
+                                                                                           class="btn btn-default"
+                                                                                           role="button">Button</a></p>
                     </div>
                 </div>
-                <div class="col-sm-6 col-md-4">
-                    <div class="thumbnail">
-                        <img src="image/1.jpg" alt="...">
-                        <div class="caption">
-                            <h3>Thumbnail label</h3>
-                            <p>...</p>
-                            <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-                        </div>
+            </div>
+            <div class="col-sm-6 col-md-4">
+                <div class="thumbnail">
+                    <img src="image/1.jpg" alt="...">
+                    <div class="caption">
+                        <h3>Thumbnail label</h3>
+                        <p>...</p>
+                        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#"
+                                                                                           class="btn btn-default"
+                                                                                           role="button">Button</a></p>
                     </div>
                 </div>
-                <div class="col-sm-6 col-md-4">
-                    <div class="thumbnail">
-                        <img src="image/1.jpg" alt="...">
-                        <div class="caption">
-                            <h3>Thumbnail label</h3>
-                            <p>...</p>
-                            <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-                        </div>
+            </div>
+            <div class="col-sm-6 col-md-4">
+                <div class="thumbnail">
+                    <img src="image/1.jpg" alt="...">
+                    <div class="caption">
+                        <h3>Thumbnail label</h3>
+                        <p>...</p>
+                        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#"
+                                                                                           class="btn btn-default"
+                                                                                           role="button">Button</a></p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <footer id="footer">
-        <div class="row">
-            <div class="col-md-3">
-                <address>
-                    Written by <a href="https://github.com/MYunFeiYang/Network_recuiting_system">think道</a>.<br>
-                    Visit me at: <br>
-                    github.com/MYunFeiYang<br>
-                    CHINA
-                </address>
-            </div>
-            <div class="col-md-3">
-                <address>
-                    Written by <a href="https://github.com/MYunFeiYang/Network_recuiting_system">think道</a>.<br>
-                    Visit me at: <br>
-                    github.com/MYunFeiYang<br>
-                    CHINA
-                </address>
-            </div>
-            <div class="col-md-3">
-                <address>
-                    Written by <a href="https://github.com/MYunFeiYang/Network_recuiting_system">think道</a>.<br>
-                    Visit me at: <br>
-                    github.com/MYunFeiYang<br>
-                    CHINA
-                </address>
-            </div>
-            <div class="col-md-3">
-                <address>
-                    Written by <a href="https://github.com/MYunFeiYang/Network_recuiting_system">think道</a>.<br>
-                    Visit me at: <br>
-                    github.com/MYunFeiYang<br>
-                    CHINA
-                </address>
-            </div>
+</div>
+<footer id="footer">
+    <div class="row">
+        <div class="col-md-3">
+            <address>
+                Written by <a href="https://github.com/MYunFeiYang/Network_recuiting_system">think道</a>.<br>
+                Visit me at: <br>
+                github.com/MYunFeiYang<br>
+                CHINA
+            </address>
         </div>
-    </footer>
-</body>
+        <div class="col-md-3">
+            <address>
+                Written by <a href="https://github.com/MYunFeiYang/Network_recuiting_system">think道</a>.<br>
+                Visit me at: <br>
+                github.com/MYunFeiYang<br>
+                CHINA
+            </address>
+        </div>
+        <div class="col-md-3">
+            <address>
+                Written by <a href="https://github.com/MYunFeiYang/Network_recuiting_system">think道</a>.<br>
+                Visit me at: <br>
+                github.com/MYunFeiYang<br>
+                CHINA
+            </address>
+        </div>
+        <div class="col-md-3">
+            <address>
+                Written by <a href="https://github.com/MYunFeiYang/Network_recuiting_system">think道</a>.<br>
+                Visit me at: <br>
+                github.com/MYunFeiYang<br>
+                CHINA
+            </address>
+        </div>
+    </div>
+</footer>
 <script>
-    window.onload=function () {
-        show_user('login_nickname','login_password');
+    window.onload = function () {
+        show_user('login_nickname', 'login_password');
         login_session('refresh');
         marquee_control();
         modify_height();
     }
-</script>
+    window._bd_share_config = {
+        "common": {
+            "bdSnsKey": {},
+            "bdText": "",
+            "bdMini": "2",
+            "bdPic": "",
+            "bdStyle": "0",
+            "bdSize": "16"
+        },
+        "share": {},
+        "image": {"viewList": ["qzone", "tsina", "tqq", "renren", "weixin"], "viewText": "分享到：", "viewSize": "16"},
+        "selectShare": {"bdContainerClass": null, "bdSelectMiniList": ["qzone", "tsina", "tqq", "renren", "weixin"]}
+    };
+    with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];</script>
+</body>
 </html>

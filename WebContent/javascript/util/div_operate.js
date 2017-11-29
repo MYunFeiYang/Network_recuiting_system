@@ -25,3 +25,10 @@ function change_footer_position(){
         document.getElementById("carousel-example-generic").style.bottom="0px"
     }
 }
+function open_share() {
+    document.getElementsByClassName("bdsharebuttonbox")[0].classList.remove("hidden");
+}
+function close_share() {
+    document.getElementsByClassName("bdsharebuttonbox")[0].classList.add("hidden");
+
+}

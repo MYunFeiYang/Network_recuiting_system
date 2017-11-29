@@ -78,6 +78,7 @@ function reg_telephone(telephone,confirm_box) {
         return btu_register_status=true;
     }else {
         confirm.setAttribute("style","color:red");
+        confirm.innerHTML="";
         confirm.innerHTML="手机号不完整或前七位不正确";
         return btu_register_status=false;
     }

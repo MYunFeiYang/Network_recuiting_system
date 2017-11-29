@@ -100,7 +100,6 @@ nav{
 #carousel-example-generic{
     position: fixed;
     left: 0px;
-    opacity: 0.3;
 }
 .alert-warning {
     margin: auto;
@@ -157,5 +156,27 @@ nav{
     border-radius:20px;
     margin-left: -20px;
     opacity: 0.5;
+}
+.bdsharebuttonbox{
+    padding: 10px;
+    text-align: center;
+    position: fixed;
+    top: 80px;
+    right: 200px;
+    height: auto;
+    background-color: gainsboro;
+    border-radius: 5px;
+    border: 1px solid gray;
+    box-shadow: 2px 2px 2px 2px gray;
+    font-size: 18px;
+}
+#tool{
+    padding: 12px 0px;
+}
+#tool li{
+    padding: 0px 10px;
+}
+#tool li:hover{
+    color: #2aabd2;
 }
 

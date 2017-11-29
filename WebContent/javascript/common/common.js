@@ -90,7 +90,6 @@ function init_user(nickname) {
 }
 function query() {
     var search=document.getElementById("search-con").value;
-    alert(search);
 }
 function resetPassword() {
     if (document.cookie!="") {
