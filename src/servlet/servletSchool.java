@@ -20,6 +20,8 @@ public class servletSchool extends HttpServlet {
             school.init_filter_job(request,response);
         }else if (url.indexOf("address")!=-1){
             school.init_filter_address(request,response);
+        }else if (url.indexOf("company")!=-1){
+            school.init_filter_company(request,response);
         }else {
             return;
         }
