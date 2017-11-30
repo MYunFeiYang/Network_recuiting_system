@@ -1,4 +1,4 @@
-
+var timer
 function marquee(target) {
         var ul=document.getElementById(target).getElementsByTagName("ul")[0];
         var liList=ul.getElementsByTagName("li");
@@ -25,5 +25,9 @@ function marquee(target) {
         };
     }
 function marquee_control() {
-    setInterval("marquee(\"marquee1\"),marquee(\"marquee\")",1500);
+    timer=setInterval("marquee(\"marquee\"),change_footer_position()",1000);
 }
+function closeInterval() {
+    clearInterval(timer);
+}
+

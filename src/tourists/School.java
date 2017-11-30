@@ -66,7 +66,7 @@ public class School {
     public void init_filter_company(HttpServletRequest request, HttpServletResponse response) throws IOException{
         ConnectionDB connectionDB=new ConnectionDB();
         Connection conn=connectionDB.getConn();
-        String sql="SELECT company,position, address,time FROM (SELECT ROW_NUMBER() OVER(ORDER BY id ASC) AS ROWID,* FROM school_rercuit)AS TEMP WHERE ROWID<10";
+        String sql="SELECT company,position, address,time FROM (SELECT ROW_NUMBER() OVER(ORDER BY id ASC) AS ROWID,* FROM school_rercuit)AS TEMP WHERE ROWID<=12";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();

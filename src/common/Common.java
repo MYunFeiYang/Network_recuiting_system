@@ -1,6 +1,7 @@
 package common;
 
 import DBO.ConnectionDB;
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 import javax.mail.Message;
@@ -259,4 +260,36 @@ public class Common {
             e.printStackTrace();
         }
     }
+    public void getNews(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/xml; charset=UTF-8");
+        //以下两句为取消在本地的缓存
+        response.setHeader("Cache-Control", "no-cache");
+        response.setHeader("Pragma", "no-cache");
+        String user_login=request.getParameter("user_type");
+        ConnectionDB conndb=new ConnectionDB();
+        Connection conn=conndb.getConn();
+        String sql;
+        if (user_login.equals("person")){
+            sql="SELECT company FROM (SELECT ROW_NUMBER() OVER(ORDER BY id ASC) AS ROWID,* FROM school_rercuit)AS TEMP WHERE ROWID<=25";
+        }else {
+            sql="SELECT company FROM (SELECT ROW_NUMBER() OVER(ORDER BY id ASC) AS ROWID,* FROM school_rercuit)AS TEMP WHERE ROWID<=25";
+        }
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            JSONArray companys=new JSONArray();
+            JSONObject company=new JSONObject();
+            while (rs.next()){
+                company.put("company",rs.getString(1));
+                companys.add(company);
+            }
+            response.getWriter().print(companys.toString());
+            ps.close();
+        } catch (SQLException e) {
+            // TODO 自动生成的 catch 块
+            e.printStackTrace();
+        }
+    }
+
 }
