@@ -16,6 +16,7 @@
     <script src="javascript/util/div_operate.js"></script>
     <script src="javascript/util/marquee.js"></script>
     <script src="javascript/common/common.js"></script>
+    <script src="javascript/common/query.js"></script>
     <script src="javascript/person/person.js"></script>
     <script src="javascript/enterprise/enterprise.js"></script>
     <script src="javascript/tourists/tourits.js"></script>
@@ -94,7 +95,10 @@
             </ul>
             <form class="navbar-form navbar-right" role="search" id="search">
                 <div class="form-group navbar-left">
-                    <input type="text" class="form-control" id="search-con">
+                    <input type="text" class="form-control" id="search-con" onkeyup="complete_content()">
+                    <div id="preselected_search">
+
+                    </div>
                 </div>
                 <button type="button" class="navbar-right btn btn-default glyphicon glyphicon-search"
                         onmouseover="open_search('search-con','550px')" onclick="query()">
@@ -791,7 +795,7 @@
             <div class="row" id="filter">
                 <div class="col-md-12">
                     <div class="col-md-1">
-                        <span style="display:block">岗位类别：</span>
+                        <span style="display:block;padding: 20px">岗位类别：</span>
                     </div>
                     <div class="col-md-11">
                         <div class="row" id="filter_job">
@@ -799,7 +803,7 @@
                         </div>
                     </div>
                     <div class="col-md-1" style="clear: both">
-                        <span style="display:block">涉及城市：</span>
+                        <span style="display:block;padding: 20px">涉及城市：</span>
                     </div>
                     <div class="col-md-11">
                         <div class="row" id="filter_address">

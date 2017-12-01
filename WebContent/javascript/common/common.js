@@ -144,9 +144,6 @@ function init_user(nickname) {
     log_out.setAttribute("onclick","login_session('delete')");
     log_out.setAttribute("href","index.html");
 }
-function query() {
-    var search=document.getElementById("search-con").value;
-}
 function resetPassword() {
     if (document.cookie!="") {
         var user_string = document.cookie.split(";")[0].split("=")[1];

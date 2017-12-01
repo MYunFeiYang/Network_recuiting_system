@@ -3,7 +3,7 @@ html, head, body {
     padding: 0px;
 }
 /*public*/
-.col-md-2,.col-md-3,.col-md-7{
+.col-md-2,.col-md-3,.col-md-7,.col-md-1,.col-md-11{
     padding-left: 0px;
     padding-right: 0px;
 }
@@ -17,7 +17,7 @@ html, head, body {
     background-color: gainsboro;
     opacity: 0.8;
 }
-.marquee ul ,.marquee,#filter ul li,#job_class ul li,#hotRecurit ul li{
+.marquee ul ,.marquee,#filter ul li,#job_class ul li,#hotRecurit ul li,#preselected_search ul li{
     list-style: none;
     padding: 1px 5px;
 }
@@ -32,7 +32,7 @@ html, head, body {
     text-decoration: none;
     color: black;
 }
-#filter ul li:hover,#company tr:hover,#job_class ul li:hover{
+#filter ul li:hover,#company tr:hover,#job_class ul li:hover,#preselected_search ul li:hover{
     background-color: grey;
 }
 #jobs,#resume,#marquee,#filter{
@@ -61,6 +61,22 @@ nav{
     margin-left: -20px;
     opacity: 0.5;
 }
+#preselected_search{
+    background-color: white;
+    width: 32%;
+    height: auto;
+    position: absolute;
+    left: 40%;
+    display: none;
+    border:solid 5px gainsboro;
+    border-top:none ;
+    overflow-y: scroll;
+}
+#preselected_search ul li a{
+    font-size: 14px;
+    text-decoration: none;
+    color: black;
+}
 #tool{
     padding: 12px 0px;
 }
@@ -81,7 +97,7 @@ nav{
 }
 /*main*/
 table thead tr td,table tbody tr td{
-    border: 1px solid gainsboro;
+    border: 1px solid white;
 }
 table tbody tr td a{
     display: inline-block;

@@ -26,6 +26,8 @@ public class servletPublic extends HttpServlet {
             common.updatePassword(request,response);
         }else if (public_type.equals("get_news")){
             common.getNews(request,response);
+        }else if (public_type.equals("query")){
+            common.query(request,response);
         }
         else {
             return;
