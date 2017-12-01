@@ -297,6 +297,7 @@ function show_news(data) {
         var a=document.createElement("a");
         li.appendChild(a);
         a.text=data[i].company;
+        a.href=data[i].href;
         var span =document.createElement("span");
         span.setAttribute("class","glyphicon glyphicon-log-in");
         li.appendChild(span);

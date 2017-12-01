@@ -271,9 +271,9 @@ public class Common {
         Connection conn=conndb.getConn();
         String sql;
         if (user_login.equals("person")){
-            sql="SELECT company FROM (SELECT ROW_NUMBER() OVER(ORDER BY id ASC) AS ROWID,* FROM school_rercuit)AS TEMP WHERE ROWID<=25";
+            sql="SELECT company,href FROM (SELECT ROW_NUMBER() OVER(ORDER BY id ASC) AS ROWID,* FROM Hot_recruitment)AS TEMP WHERE ROWID<=50";
         }else {
-            sql="SELECT company FROM (SELECT ROW_NUMBER() OVER(ORDER BY id ASC) AS ROWID,* FROM school_rercuit)AS TEMP WHERE ROWID<=25";
+            sql="SELECT company,href FROM (SELECT ROW_NUMBER() OVER(ORDER BY id ASC) AS ROWID,* FROM Hot_recruitment)AS TEMP WHERE ROWID<=50";
         }
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -282,6 +282,7 @@ public class Common {
             JSONObject company=new JSONObject();
             while (rs.next()){
                 company.put("company",rs.getString(1));
+                company.put("href",rs.getString(2));
                 companys.add(company);
             }
             response.getWriter().print(companys.toString());

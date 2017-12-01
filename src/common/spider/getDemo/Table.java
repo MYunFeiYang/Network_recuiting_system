@@ -1,6 +1,6 @@
 package common.spider.getDemo;
 
-import common.spider.insert.DB_table;
+import common.spider.insertDB.DB_table;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -12,7 +12,7 @@ import java.io.IOException;
 public class Table {
     public static void main(String args[]) throws IOException{
         Table table =new Table();
-        table.filter_address();
+        table.getNews();
     }
 
     public void school_rercuit() throws IOException {
@@ -63,5 +63,13 @@ public class Table {
             DB_table filter=new DB_table();
             filter.filter_address(linkHref,linkText);
         }
+    }
+    public void getNews() throws IOException {
+        String url = "https://www.haitou.cc/";
+        Connection conn = Jsoup.connect(url).timeout(10000).ignoreContentType(true); // 建立与url中页面的连接
+        Document doc = Jsoup.parse(conn.get().toString()); // 解析页面
+        Elements elements=doc.getElementsByClass("top-recruit");
+        Elements img =elements.select("img");
+       System.out.println(img);
     }
     }

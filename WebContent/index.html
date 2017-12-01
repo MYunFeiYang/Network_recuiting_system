@@ -46,7 +46,7 @@
                        aria-expanded="false">招聘<span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a onclick="init_filter()">校招</a></li>
+                            <a onclick="init_filter_address(),init_company()">校招</a></li>
                         <li role="separator" class="divider"></li>
                     </ul>
                 </li>
@@ -515,7 +515,7 @@
         <span class="sr-only">Next</span>
     </a>
 </div>
-<div class="container" style="margin-top: 55px;background-color: white" onclick="close_search('search-con','40px'),close_share()">
+<div class="container-fluid" style="margin-top: 55px;background-color: white" onclick="close_search('search-con','40px'),close_share()">
     <div class="bdsharebuttonbox hidden">
         <a class="bds_mshare" data-cmd="mshare"></a>
         <a class="bds_qzone" data-cmd="qzone" href="#"></a>
@@ -525,327 +525,374 @@
         <a class="bds_tqq" data-cmd="tqq"></a>
         <a href="#" class="bds_more" data-cmd="more">更多</a>
     </div>
-    <div class="row" id="vip">
-        <div class="col-md-12">
-            <div class="col-md-4">
-                <div id="marquee" class="marquee" onmouseover="closeInterval()" onmouseout="marquee_control()">
-                    <ul>
+    <div class="row">
+        <div class="col-md-2" id="left">
+            <div class="row" >
+            <div class="col-md-12" id="job_class" >
 
-                    </ul>
-                </div>
             </div>
-            <div class="col-md-8 center-block" style="background-color: white">
-                <div class="col-md-12 main center-block" id="resume">
-                    <div class="page-header">
-                        <h3 style="text-align: center">创建个人简历</h3>
-                    </div>
-                    <div class="row center-block">
-                        <div class="col-md-12 center-block">
-                            <div class="input-group">
+            </div>
+        </div>
+        <div class="col-md-7" id="main">
+            <div class="row">
+            <div class="col-md-12 main center-block" id="resume">
+                <div class="page-header">
+                    <h3 style="text-align: center">创建个人简历</h3>
+                </div>
+                <div class="row center-block">
+                    <div class="col-md-12 center-block">
+                        <div class="input-group">
                     <span class="input-group-btn">
                         <button class="btn btn-default">姓名</button>
                     </span>
-                                <input type="text" class="form-control" id="resume_name" placeholder="姓名">
-                            </div>
+                            <input type="text" class="form-control" id="resume_name" placeholder="姓名">
                         </div>
                     </div>
-                    <div class="row center-block">
-                        <div class="col-md-12">
-                            <div class="input-group">
+                </div>
+                <div class="row center-block">
+                    <div class="col-md-12">
+                        <div class="input-group">
                     <span class="input-group-btn">
                         <button class="btn btn-default">年龄</button>
                     </span>
-                                <input type="text" class="form-control" id="age" placeholder="年龄">
-                            </div>
+                            <input type="text" class="form-control" id="age" placeholder="年龄">
                         </div>
                     </div>
-                    <div class="row center-block">
-                        <div class="col-md-12">
-                            <div class="input-group">
+                </div>
+                <div class="row center-block">
+                    <div class="col-md-12">
+                        <div class="input-group">
                     <span class="input-group-btn">
                         <button class="btn btn-default">性别</button>
                     </span>
-                                <select class="form-control" id="sex">
-                                    <option value="man">男</option>
-                                    <option value="woman">女</option>
-                                </select>
-                            </div>
+                            <select class="form-control" id="sex">
+                                <option value="man">男</option>
+                                <option value="woman">女</option>
+                            </select>
                         </div>
                     </div>
-                    <div class="row center-block">
-                        <div class="col-md-12">
-                            <div class="input-group">
+                </div>
+                <div class="row center-block">
+                    <div class="col-md-12">
+                        <div class="input-group">
                     <span class="input-group-btn">
                         <button class="btn btn-default">籍贯</button>
                     </span>
-                                <input type="text" class="form-control" id="origin" placeholder="籍贯">
-                            </div>
+                            <input type="text" class="form-control" id="origin" placeholder="籍贯">
                         </div>
                     </div>
-                    <div class="row center-block">
-                        <div class="col-md-12">
-                            <div class="input-group">
+                </div>
+                <div class="row center-block">
+                    <div class="col-md-12">
+                        <div class="input-group">
                     <span class="input-group-btn">
                         <button class="btn btn-default">毕业学校</button>
                     </span>
-                                <input type="text" class="form-control" id="collage" placeholder="毕业学校">
-                            </div>
+                            <input type="text" class="form-control" id="collage" placeholder="毕业学校">
                         </div>
                     </div>
-                    <div class="row center-block">
-                        <div class="col-md-12">
-                            <div class="input-group">
+                </div>
+                <div class="row center-block">
+                    <div class="col-md-12">
+                        <div class="input-group">
                     <span class="input-group-btn">
                         <button class="btn btn-default">专业</button>
                     </span>
-                                <input type="text" class="form-control" id="specialty" placeholder="专业">
-                            </div>
+                            <input type="text" class="form-control" id="specialty" placeholder="专业">
                         </div>
                     </div>
-                    <div class="row center-block">
-                        <div class="col-md-12">
-                            <div class="input-group">
+                </div>
+                <div class="row center-block">
+                    <div class="col-md-12">
+                        <div class="input-group">
                     <span class="input-group-btn">
                         <button class="btn btn-default">教育程度</button>
                     </span>
-                                <select class="form-control" id="degree">
-                                    <option value="小学">小学</option>
-                                    <option value="初中">初中</option>
-                                    <option value="高中">高中</option>
-                                    <option value="专科">专科</option>
-                                    <option value="本科">本科</option>
-                                    <option value="硕士">硕士</option>
-                                    <option value="博士">博士</option>
-                                </select>
-                            </div>
+                            <select class="form-control" id="degree">
+                                <option value="小学">小学</option>
+                                <option value="初中">初中</option>
+                                <option value="高中">高中</option>
+                                <option value="专科">专科</option>
+                                <option value="本科">本科</option>
+                                <option value="硕士">硕士</option>
+                                <option value="博士">博士</option>
+                            </select>
                         </div>
                     </div>
-                    <div class="row center-block">
-                        <div class="col-md-12">
-                            <div class="input-group">
+                </div>
+                <div class="row center-block">
+                    <div class="col-md-12">
+                        <div class="input-group">
                     <span class="input-group-btn">
                         <button class="btn btn-default">入学时间</button>
                     </span>
-                                <input type="date" class="form-control" id="admission_data">
-                            </div>
+                            <input type="date" class="form-control" id="admission_data">
                         </div>
                     </div>
-                    <div class="row center-block">
-                        <div class="col-md-12">
-                            <div class="input-group">
+                </div>
+                <div class="row center-block">
+                    <div class="col-md-12">
+                        <div class="input-group">
                     <span class="input-group-btn">
                         <button class="btn btn-default">毕业时间</button>
                     </span>
-                                <input type="date" class="form-control" id="graduation_data">
-                            </div>
+                            <input type="date" class="form-control" id="graduation_data">
                         </div>
                     </div>
-                    <div class="row center-block">
-                        <div class="col-md-12">
-                            <div class="input-group">
+                </div>
+                <div class="row center-block">
+                    <div class="col-md-12">
+                        <div class="input-group">
                     <span class="input-group-btn">
                         <button class="btn btn-default">联系电话</button>
                     </span>
-                                <input type="text" class="form-control" id="telephone" placeholder="联系电话">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row center-block">
-                        <div class="col-md-12">
-                            <div class="input-group">
-                    <span class="input-group-btn">
-                        <button class="btn btn-default">电子邮箱</button>
-                    </span>
-                                <input type="text" class="form-control" id="resume_email" placeholder="电子邮箱">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row center-block">
-                        <div class="col-md-12">
-                            <div id="confirm_resume_box"></div>
-                        </div>
-                    </div>
-                    <div class="row center-block margin-bottom">
-                        <div class="col-md-6">
-                            <input class="btn btn-lg btn-primary center-block"
-                                   type="button" value="确定创建" onclick="add_resume()">
-                        </div>
-                        <div class="col-md-6">
-                            <input class="btn btn-lg btn-danger center-block" onclick="hidden_div('resume')"
-                                   value="退出创建">
+                            <input type="text" class="form-control" id="telephone" placeholder="联系电话">
                         </div>
                     </div>
                 </div>
-                <div class="col-md-12 main center-block" id="jobs">
-                    <div class="page-header">
-                        <h3 style="text-align: center">添加招聘岗位</h3>
+                <div class="row center-block">
+                    <div class="col-md-12">
+                        <div class="input-group">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default">电子邮箱</button>
+                    </span>
+                            <input type="text" class="form-control" id="resume_email" placeholder="电子邮箱">
+                        </div>
                     </div>
-                    <div class="row center-block">
-                        <div class="col-md-12 center-block">
-                            <div class="input-group">
+                </div>
+                <div class="row center-block">
+                    <div class="col-md-12">
+                        <div id="confirm_resume_box"></div>
+                    </div>
+                </div>
+                <div class="row center-block margin-bottom">
+                    <div class="col-md-6">
+                        <input class="btn btn-lg btn-primary center-block"
+                               type="button" value="确定创建" onclick="add_resume()">
+                    </div>
+                    <div class="col-md-6">
+                        <input class="btn btn-lg btn-danger center-block" onclick="hidden_div('resume')"
+                               value="退出创建">
+                    </div>
+                </div>
+            </div>
+            </div>
+            <div class="row">
+            <div class="col-md-12 main center-block" id="jobs">
+                <div class="page-header">
+                    <h3 style="text-align: center">添加招聘岗位</h3>
+                </div>
+                <div class="row center-block">
+                    <div class="col-md-12 center-block">
+                        <div class="input-group">
                     <span class="input-group-btn">
                         <button class="btn btn-default">公司名称</button>
                     </span>
-                                <input type="text" class="form-control" id="name" placeholder="公司名称">
-                            </div>
+                            <input type="text" class="form-control" id="name" placeholder="公司名称">
                         </div>
                     </div>
-                    <div class="row center-block">
-                        <div class="col-md-12">
-                            <div class="input-group">
+                </div>
+                <div class="row center-block">
+                    <div class="col-md-12">
+                        <div class="input-group">
                     <span class="input-group-btn">
                         <button class="btn btn-default">公司地点</button>
                     </span>
-                                <input type="text" class="form-control" id="address" placeholder="公司地点">
-                            </div>
+                            <input type="text" class="form-control" id="address" placeholder="公司地点">
                         </div>
                     </div>
-                    <div class="row center-block">
-                        <div class="col-md-12">
-                            <div class="input-group">
+                </div>
+                <div class="row center-block">
+                    <div class="col-md-12">
+                        <div class="input-group">
                     <span class="input-group-btn">
                         <button class="btn btn-default">所属行业</button>
                     </span>
-                                <input type="text" class="form-control" id="industry" placeholder="所属行业">
-                            </div>
+                            <input type="text" class="form-control" id="industry" placeholder="所属行业">
                         </div>
                     </div>
-                    <div class="row center-block">
-                        <div class="col-md-12">
-                            <div class="input-group">
+                </div>
+                <div class="row center-block">
+                    <div class="col-md-12">
+                        <div class="input-group">
                     <span class="input-group-btn">
                         <button class="btn btn-default">招聘岗位</button>
                     </span>
-                                <input type="text" class="form-control" id="job" placeholder="招聘岗位">
-                            </div>
+                            <input type="text" class="form-control" id="job" placeholder="招聘岗位">
                         </div>
                     </div>
-                    <div class="row center-block">
-                        <div class="col-md-12">
-                            <div class="input-group">
+                </div>
+                <div class="row center-block">
+                    <div class="col-md-12">
+                        <div class="input-group">
                     <span class="input-group-btn">
                         <button class="btn btn-default">招聘人数</button>
                     </span>
-                                <input type="text" class="form-control" id="number" placeholder="招聘人数">
-                            </div>
+                            <input type="text" class="form-control" id="number" placeholder="招聘人数">
                         </div>
                     </div>
-                    <div class="row center-block">
-                        <div class="col-md-12">
-                            <div class="input-group">
+                </div>
+                <div class="row center-block">
+                    <div class="col-md-12">
+                        <div class="input-group">
                     <span class="input-group-btn">
                         <button class="btn btn-default">薪资情况</button>
                     </span>
-                                <input type="text" class="form-control" id="salary" placeholder="薪资情况">
-                            </div>
+                            <input type="text" class="form-control" id="salary" placeholder="薪资情况">
                         </div>
                     </div>
-                    <div class="row center-block">
-                        <div class="col-md-12">
-                            <div class="input-group">
+                </div>
+                <div class="row center-block">
+                    <div class="col-md-12">
+                        <div class="input-group">
                     <span class="input-group-btn">
                         <button class="btn btn-default">发布岗位时间</button>
                     </span>
-                                <input type="date" class="form-control" id="publish_time">
-                            </div>
+                            <input type="date" class="form-control" id="publish_time">
                         </div>
                     </div>
-                    <div class="row center-block">
-                        <div class="col-md-12">
-                            <div class="input-group">
+                </div>
+                <div class="row center-block">
+                    <div class="col-md-12">
+                        <div class="input-group">
                     <span class="input-group-btn">
                         <button class="btn btn-default">有效时间</button>
                     </span>
-                                <input type="text" class="form-control" id="effective_time" placeholder="有效时间">
-                            </div>
+                            <input type="text" class="form-control" id="effective_time" placeholder="有效时间">
                         </div>
                     </div>
-                    <div class="row center-block">
-                        <div class="col-md-12">
-                            <div class="input-group">
+                </div>
+                <div class="row center-block">
+                    <div class="col-md-12">
+                        <div class="input-group">
                     <span class="input-group-btn">
                         <button class="btn btn-default">电子邮箱</button>
                     </span>
-                                <input type="text" class="form-control" id="email" placeholder="电子邮箱">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row center-block">
-                        <div class="col-md-12">
-                            <div id="confirm_job_box"></div>
-                        </div>
-                    </div>
-                    <div class="row center-block">
-                        <div class="col-md-6">
-                            <input class="btn btn-lg btn-primary center-block"
-                                   type="button" value="确定发布" onclick="add_job()">
-                        </div>
-                        <div class="col-md-6">
-                            <input class="btn btn-lg btn-danger center-block" onclick="hidden_div('jobs')" value="退出发布">
+                            <input type="text" class="form-control" id="email" placeholder="电子邮箱">
                         </div>
                     </div>
                 </div>
+                <div class="row center-block">
+                    <div class="col-md-12">
+                        <div id="confirm_job_box"></div>
+                    </div>
+                </div>
+                <div class="row center-block">
+                    <div class="col-md-6">
+                        <input class="btn btn-lg btn-primary center-block"
+                               type="button" value="确定发布" onclick="add_job()">
+                    </div>
+                    <div class="col-md-6">
+                        <input class="btn btn-lg btn-danger center-block" onclick="hidden_div('jobs')" value="退出发布">
+                    </div>
+                </div>
+            </div>
+            </div>
+            <div class="row" id="filter">
+                <div class="col-md-12">
+                    <div class="col-md-1">
+                        <span style="display:block">岗位类别：</span>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="row" id="filter_job">
 
+                        </div>
+                    </div>
+                    <div class="col-md-1" style="clear: both">
+                        <span style="display:block">涉及城市：</span>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="row" id="filter_address">
+
+                        </div>
+                    </div>
+                    <table style="width: 100%">
+                        <thead>
+                        <tr class="row">
+                            <td class="col-md-2">公司标题</td>
+                            <td class="col-md-6">招聘岗位</td>
+                            <td class="col-md-2">涉及城市</td>
+                            <td class="col-md-2">发布时间</td>
+                        </tr>
+                        </thead>
+                        <tbody id="company">
+
+                        </tbody>
+                    </table>
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination" style="margin:0px auto;float: right">
+                            <li>
+                                <a href="#" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            <li><a href="#">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">4</a></li>
+                            <li><a href="#">5</a></li>
+                            <li>
+                                <a href="#" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
             </div>
         </div>
-    </div>
-    <div id="tourists" class="hidden">
-        <div class="row">
-            <div class="col-md-2" id="fliter_job_left" style="background-color: white">
-
+        <div class="col-md-3" id="right">
+            <div class="row">
+            <div class="col-md-12" id="hotRecurit">
+                <h3>热门校招</h3>
+                <ul>
+                    <li>
+                        <img src="image/hotRecurit/1.png">
+                    </li>
+                    <li>
+                        <img src="image/hotRecurit/2.png">
+                    </li>
+                    <li>
+                        <img src="image/hotRecurit/3.jpg">
+                    </li>
+                    <li>
+                        <img src="image/hotRecurit/4.png">
+                    </li>
+                    <li>
+                        <img src="image/hotRecurit/5.jpg">
+                    </li>
+                    <li>
+                        <img src="image/hotRecurit/6.png">
+                    </li>
+                    <li>
+                        <img src="image/hotRecurit/7.png">
+                    </li>
+                    <li>
+                        <img src="image/hotRecurit/8.jpg">
+                    </li>
+                    <li>
+                        <img src="image/hotRecurit/9.png">
+                    </li>
+                    <li>
+                        <img src="image/hotRecurit/10.png">
+                    </li>
+                    <li>
+                        <img src="image/hotRecurit/11.gif">
+                    </li>
+                    <li>
+                        <img src="image/hotRecurit/12.png">
+                    </li>
+                </ul>
             </div>
-            <div class="col-md-10" style="background-color: white">
-                <div class="col-md-1">
-                    <span style="display:block;margin: 20px auto">岗位类别：</span>
-                </div>
-                <div class="col-md-11">
-                    <div class="row" id="fliter_job_right">
+            </div>
+            <div class="row">
+            <div id="marquee" class="marquee" onmouseover="closeInterval()" onmouseout="marquee_control()">
+                <ul>
 
-                    </div>
-                </div>
-                <div class="col-md-1">
-                    <span style="display:block;margin: 20px auto">涉及城市：</span>
-                </div>
-                <div class="col-md-11">
-                    <div class="row" id="fliter_address">
-
-                    </div>
-                </div>
-                <table style="width: 100%">
-                    <thead>
-                    <tr class="row">
-                        <td class="col-md-2">公司标题</td>
-                        <td class="col-md-6">招聘岗位</td>
-                        <td class="col-md-2">涉及城市</td>
-                        <td class="col-md-2">发布时间</td>
-                    </tr>
-                    </thead>
-                    <tbody id="company">
-
-                    </tbody>
-                </table>
-                <nav aria-label="Page navigation">
-                    <ul class="pagination" style="margin:0px auto;float: right">
-                        <li>
-                            <a href="#" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                            </a>
-                        </li>
-                        <li><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">5</a></li>
-                        <li>
-                            <a href="#" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-                </div>
+                </ul>
+            </div>
+            </div>
         </div>
-
     </div>
 </div>
 <footer id="footer">
@@ -887,6 +934,7 @@
         marquee_control();
         modify_height();
         change_footer_position();
+        init_filter_job();
     }
     window._bd_share_config = {
         "common": {

@@ -1,4 +1,4 @@
-package common.spider.insert;
+package common.spider.insertDB;
 
 import DBO.ConnectionDB;
 
@@ -51,6 +51,24 @@ public class DB_table {
         ConnectionDB conndb=new ConnectionDB();
         Connection conn=conndb.getConn();
         String sql="INSERT INTO filter_address (href,text) VALUES (?,?)";
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, href);
+            ps.setString(2, text);
+            boolean rs=ps.execute();
+            if (rs){
+                System.out.println(rs);
+            }
+            ps.close();
+        } catch (SQLException e) {
+            // TODO 自动生成的 catch 块
+            e.printStackTrace();
+        }
+    }
+    public void setNews(String href,String text) throws IOException {
+        ConnectionDB conndb=new ConnectionDB();
+        Connection conn=conndb.getConn();
+        String sql="INSERT INTO Hot_recruitment (href,company) VALUES (?,?)";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, href);

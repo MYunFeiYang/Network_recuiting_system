@@ -2,11 +2,24 @@ html, head, body {
     margin: 0px;
     padding: 0px;
 }
+/*public*/
+.col-md-2,.col-md-3,.col-md-7{
+    padding-left: 0px;
+    padding-right: 0px;
+}
 .row {
-    margin: 2px 30px;
+    margin: 2px 10px;
 }
 .modal{
-    margin-top: 25px;
+    margin-top: 50px;
+}
+.modal-content{
+    background-color: gainsboro;
+    opacity: 0.8;
+}
+.marquee ul ,.marquee,#filter ul li,#job_class ul li,#hotRecurit ul li{
+    list-style: none;
+    padding: 1px 5px;
 }
 .main ,.marquee,footer,header,#carousel-example-generic{
     width: 100%;
@@ -15,64 +28,97 @@ html, head, body {
     border-radius: 5px;
     padding: 10px;
 }
+#tourists ul li a,#company tr td a{
+    text-decoration: none;
+    color: black;
+}
+#filter ul li:hover,#company tr:hover,#job_class ul li:hover{
+    background-color: grey;
+}
+#jobs,#resume,#marquee,#filter{
+    display: none;
+    background-color: gainsboro;
+    opacity: 0.8;
+}
+
+/*header*/
 nav{
     z-index:99999;
     font-size: 20px;
     color: black;
     border-bottom: 1px solid gray;
 }
-#footer{
-    position: fixed;
-    bottom: 0px;
-    left: 0px;
-    z-index: 0;
-    background-color: white;
-    color: black;
+#search-con {
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    margin-right: -20px;
 }
-#footer address{
-    margin: 5px auto;
-    border-right: 1px solid gray;
-    border-left: 1px solid gray;
-    padding: 0px 20px;
+#search .btn{
+    width: 40px;
+    height: 40px;
+    border-radius:20px;
+    margin-left: -20px;
+    opacity: 0.5;
 }
-.menu,.menu li ul,.marquee ul ,.marquee,#tourists ul,#tourists ul li{
-    list-style: none;
-    padding: 1px 5px;
+#tool{
+    padding: 12px 0px;
 }
-#tourists ul li a,#company tr td a{
-    text-decoration: none;
-    color: black;
+#tool li{
+    padding: 0px 10px;
 }
-#fliter_job_left ul li{
-    padding:3px 5px;
+#tool li:hover{
+    color: #2aabd2;
 }
-#tourists ul li:hover,table tr:hover{
+/*left*/
+#job_class{
+    display: block;
+    background-color: black;
+    opacity: 0.8;
+}
+#job_class ul li{
+    padding:2px 5px;
+}
+/*main*/
+table thead tr td,table tbody tr td{
+    border: 1px solid gainsboro;
+}
+table tbody tr td a{
+    display: inline-block;
+    width: 100%;
+    overflow: hidden;
+    height: 20px;
+    line-height: 20px;
+    font-size: 10px;
+    text-align: center;
+}
+
+/*right*/
+#hotRecurit{
+    margin-top: 20px;
     background-color: gainsboro;
+    opacity: 0.8;
 }
-.menu li{
-    padding: 3px 0px;
-    text-align: center;
-    border-radius: 5px;
-    border: 1px solid darkseagreen;
-    font-size: 18px;
+#hotRecurit h3{
+    background-color: beige;
+    padding: 5px;
 }
-.menu li ul li button,.menu li ul li a,.bg-primary{
-    padding: 3px 15px;
-    text-align: center;
-    color: #0f0f0f;
-    border-radius: 5px;
-    border: 1px solid darkseagreen;
-    opacity: 0.9;
+#hotRecurit ul li{
+    width: 28%;
+    float: left;
+    margin: 2%;
 }
 .marquee {
     background-color: white;
     width:100%;
+    height: 540px;
     overflow: hidden;
 }
 .marquee ul li{
     position: relative;
     top:0px;
     padding-left:3px ;
+    background-color: white;
 }
 .marquee ul li a:link{
     color: black;
@@ -94,10 +140,23 @@ nav{
     font-size: 1em;
     padding: 1px 3px;
 }
-
-#resume,#jobs,#marquee{
-    display: none;
+/*footer*/
+#footer{
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    z-index: 0;
+    background-color: gainsboro;
+    color: black;
+    opacity: 0.8;
 }
+#footer address{
+    margin: 5px auto;
+    border-right: 1px solid gray;
+    border-left: 1px solid gray;
+    padding: 0px 20px;
+}
+/*otherwise*/
 .carousel-inner,.item,img{
     width: 100%;
     height: 100%;
@@ -143,25 +202,8 @@ nav{
         transform: translate(0px, 0px);
     }
 }
-.margin-bottom{
-    margin-bottom: 20px;
-}
-#search{
-    margin-right:30px;
-}
-#search-con {
-    width: 40px;
-    height: 40px;
-    border-radius: 20px;
-    margin-right: -20px;
-}
-#search .btn{
-    width: 40px;
-    height: 40px;
-    border-radius:20px;
-    margin-left: -20px;
-    opacity: 0.5;
-}
+
+
 .bdsharebuttonbox{
     padding: 10px;
     text-align: center;
@@ -175,24 +217,5 @@ nav{
     box-shadow: 2px 2px 2px 2px gray;
     font-size: 18px;
 }
-#tool{
-    padding: 12px 0px;
-}
-#tool li{
-    padding: 0px 10px;
-}
-#tool li:hover{
-    color: #2aabd2;
-}
-table thead tr td,table tbody tr td{
-    border: 1px solid gainsboro;
-}
-table tbody tr td a{
-    display: inline-block;
-    width: 100%;
-    overflow: hidden;
-    height: 20px;
-    line-height: 20px;
-    font-size: 14px;
-    text-align: center;
-}
+
+

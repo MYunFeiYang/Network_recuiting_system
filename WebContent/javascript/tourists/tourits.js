@@ -1,4 +1,5 @@
-function init_filter() {
+
+function init_filter_job() {
     $.ajax({
         url:"/school/job",
         type:"POST",
@@ -10,6 +11,8 @@ function init_filter() {
 
         }
     });
+}
+function init_filter_address() {
     $.ajax({
         url:"/school/address",
         type:"POST",
@@ -21,6 +24,8 @@ function init_filter() {
 
         }
     });
+}
+function init_company() {
     $.ajax({
         url:"/school/company",
         type:"POST",
@@ -34,16 +39,15 @@ function init_filter() {
     });
 }
 function insert_filter_job(data) {
-    document.getElementById("tourists").classList.remove("hidden")
-    var fliter_job_left=document.getElementById("fliter_job_left");
-    fliter_job_left.innerHTML="";
+    var job_class=document.getElementById("job_class");
+    job_class.innerHTML="";
     var ul=document.createElement("ul");
     ul.setAttribute("class","main")
-    fliter_job_left.appendChild(ul);
-    var fliter_job_right=document.getElementById("fliter_job_right");
-    fliter_job_right.innerHTML="";
+    job_class.appendChild(ul);
+    var fliter_job=document.getElementById("filter_job");
+    fliter_job.innerHTML="";
     var ul1=document.createElement("ul");
-    fliter_job_right.appendChild(ul1);
+    fliter_job.appendChild(ul1);
     for (var i=0;i<data.length;i++){
         var href=data[i].href;
         var text=data[i].text;
@@ -71,10 +75,11 @@ function insert_filter_job(data) {
     change_footer_position();
 }
 function insert_filter_address(data) {
-    var fliter_address=document.getElementById("fliter_address");
-    fliter_address.html="";
+    document.getElementById("filter").style.display="block";
+    var filter_address=document.getElementById("filter_address");
+    filter_address.html="";
     var ul=document.createElement("ul");
-    fliter_address.appendChild(ul);
+    filter_address.appendChild(ul);
     for (var i=0;i<data.length;i++) {
         var href = data[i].href;
         var text = data[i].text;
@@ -126,10 +131,11 @@ function init_school(data) {
         a2.setAttribute("title",position);
         a3.setAttribute("title",address);
         a4.setAttribute("title",time);
-        a1.setAttribute("onclick","return false")
-        a2.setAttribute("onclick","return false")
-        a3.setAttribute("onclick","return false")
-        a3.setAttribute("onclick","return false")
+        a1.setAttribute("onclick","return false");
+        a2.setAttribute("onclick","return false");
+        a3.setAttribute("onclick","return false");
+        a4.setAttribute("onclick","return false");
+        a4.setAttribute("style","font-size:6px");
     }
 }
 
