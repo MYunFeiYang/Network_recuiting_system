@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <title>首页</title>
+    <title>问道网</title>
     <link rel="shortcut icon" href="image/brand.jpg">
     <!--stylesheet-->
     <link type="text/css" rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.css">
@@ -22,7 +22,7 @@
     <script src="javascript/tourists/tourits.js"></script>
 </head>
 <body>
-<nav class="navbar navbar-default navbar-fixed-top">
+<nav class="navbar navbar-default" id="top">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
@@ -34,7 +34,7 @@
                 <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="#">
-                <img class="img-circle" alt="Brand" width="20px" height="20px" src="image/brand.jpg">
+                <img class="img-circle" alt="Brand" src="image/brand.jpg">
             </a>
         </div>
 
@@ -96,13 +96,11 @@
             <form class="navbar-form navbar-right" role="search" id="search">
                 <div class="form-group navbar-left">
                     <input type="text" class="form-control" id="search-con" onkeyup="complete_content()">
-                    <div id="preselected_search">
-
+                    <div id="preselected_search" onkeyup="query()">
                     </div>
                 </div>
                 <button type="button" class="navbar-right btn btn-default glyphicon glyphicon-search"
                         onmouseover="open_search('search-con','550px')" onclick="query()">
-
                 </button>
             </form>
             <div class="bdsharebuttonbox hidden">
@@ -118,7 +116,7 @@
     </div><!-- /.container-fluid -->
 </nav>
 <!-- Modal start -->
-<div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="mylogin">
+<div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="mylogin" onkeyup="key_down_event('login')">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -208,7 +206,7 @@
         </div>
     </div>
 </div>
-<div class="modal fade" id="register-person" tabindex="-1" role="dialog" aria-labelledby="myregister-person">
+<div class="modal fade" id="register-person" tabindex="-1" role="dialog" aria-labelledby="myregister-person" onkeyup="direction_key_event('register-person')">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -333,7 +331,7 @@
         </div>
     </div>
 </div>
-<div class="modal fade" id="register-enterprise" tabindex="-1" role="dialog" aria-labelledby="myregister-enterprise">
+<div class="modal fade" id="register-enterprise" tabindex="-1" role="dialog" aria-labelledby="myregister-enterprise" onkeyup="direction_key_event('register-enterprise')">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -519,7 +517,7 @@
         <span class="sr-only">Next</span>
     </a>
 </div>
-<div class="container-fluid" style="margin-top: 55px;background-color: white" onclick="close_search('search-con','40px'),close_share()">
+<div class="container-fluid" onclick="close_search('search-con','40px'),close_share(),close_preselected_search()" >
     <div class="bdsharebuttonbox hidden">
         <a class="bds_mshare" data-cmd="mshare"></a>
         <a class="bds_qzone" data-cmd="qzone" href="#"></a>
@@ -539,7 +537,7 @@
         </div>
         <div class="col-md-7" id="main">
             <div class="row">
-            <div class="col-md-12 main center-block" id="resume">
+            <div class="col-md-12 main center-block" id="resume" onkeyup="direction_key_event('resume')">
                 <div class="page-header">
                     <h3 style="text-align: center">创建个人简历</h3>
                 </div>
@@ -682,7 +680,7 @@
             </div>
             </div>
             <div class="row">
-            <div class="col-md-12 main center-block" id="jobs">
+            <div class="col-md-12 main center-block" id="jobs" onkeyup="direction_key_event('jobs')">
                 <div class="page-header">
                     <h3 style="text-align: center">添加招聘岗位</h3>
                 </div>
@@ -899,33 +897,39 @@
         </div>
     </div>
 </div>
+<div id="toTop">
+    <a href="#top"></a>
+</div>
 <footer id="footer">
     <div class="row">
         <div class="col-md-3">
             <address>
-                Written by <a href="https://github.com/MYunFeiYang/Network_recuiting_system">think道</a>.<br>
-                Visit me at:github.com/MYunFeiYang<br>
+                Written by <a target="_blank" href="https://github.com/MYunFeiYang/Network_recuiting_system">think道</a>.<br>
+                Visit me at:<a target="_blank" href="https://github.com/MYunFeiYang/Network_recuiting_system">github.com/MYunFeiYang</a><br>
                 CHINA
             </address>
         </div>
         <div class="col-md-3">
             <address>
-                Written by <a href="https://github.com/MYunFeiYang/Network_recuiting_system">think道</a>.<br>
-                Visit me at:github.com/MYunFeiYang<br>
+                网站运营：<br>
+                <a target="_blank" href="http://www.chinaz.com/tags/yunyinggongju.shtml">站长之家</a><br>
+                <a target="_blank" href="http://union.baidu.com/">百度联盟</a><br>
                 CHINA
             </address>
         </div>
         <div class="col-md-3">
             <address>
-                Written by <a href="https://github.com/MYunFeiYang/Network_recuiting_system">think道</a>.<br>
-                Visit me at:github.com/MYunFeiYang<br>
+                项目部署：<br>
+                <a target="_blank" href="https://www.aliyun.com/">阿里云计算</a><br>
+                <a target="_blank" href="http://www.miitbeian.gov.cn/">工信部域名备案管理</a><br>
                 CHINA
             </address>
         </div>
         <div class="col-md-3">
             <address>
-                Written by <a href="https://github.com/MYunFeiYang/Network_recuiting_system">think道</a>.<br>
-                Visit me at:github.com/MYunFeiYang<br>
+                友情链接：<br>
+                <a target="_blank" href="http://v3.bootcss.com/">bootstrap中文网</a><br>
+                <a target="_blank" href="http://glyphicons.com/">Glyphicons </a>Halflings字体图标<br>
                 CHINA
             </address>
         </div>

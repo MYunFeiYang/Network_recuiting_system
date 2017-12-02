@@ -72,6 +72,8 @@ function insert_filter_job(data) {
         a1.setAttribute("onclick","return false")
         li1.appendChild(a1);
     }
+    ul.children[0].style.backgroundColor="gainsboro";
+    ul1.children[0].style.backgroundColor="grey";
     change_footer_position();
 }
 function insert_filter_address(data) {
@@ -92,6 +94,7 @@ function insert_filter_address(data) {
         a.setAttribute("onclick","return false")
         a.text=text;
     }
+    ul.children[0].style.backgroundColor="grey";
 }
 function init_school(data) {
     var companys=document.getElementById("company");

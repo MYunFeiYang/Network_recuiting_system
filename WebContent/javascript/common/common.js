@@ -1,5 +1,5 @@
-function setCookie(c_name,value,expireDays)
-{
+"use strict"
+function setCookie(c_name,value,expireDays) {
     var existDate=new Date();
     existDate.setDate(existDate.getDate()+expireDays);
     document.cookie=c_name+ "=" +value+
@@ -98,7 +98,15 @@ function login_session_result(data) {
             upload_resume.appendChild(upload_resume_a);
             upload_resume_a.text="上传本地简历";
             upload_resume_a.setAttribute("data-toggle","modal");
-            upload_resume_a.setAttribute("data-target","#upload")
+            upload_resume_a.setAttribute("data-target","#upload");
+            var li1=document.createElement("li");
+            user_center.appendChild(li1)
+            var log_out=document.createElement("a");
+            li1.appendChild(log_out);
+            log_out.text="退出登录";
+            log_out.setAttribute("style","color:red");
+            log_out.setAttribute("onclick","login_session('delete')");
+            log_out.setAttribute("href","index.html");
         }else if(data.login_type="person"){
             modify_user.setAttribute("data-toggle","modal");
             modify_user.setAttribute("data-target","#register-enterprise");
@@ -121,6 +129,14 @@ function login_session_result(data) {
             browse_job.appendChild(browse_job_a);
             browse_job_a.text="浏览招聘信息";
             browse_job_a.setAttribute("onclick","");
+            var li1=document.createElement("li");
+            user_center.appendChild(li1)
+            var log_out=document.createElement("a");
+            li1.appendChild(log_out);
+            log_out.text="退出登录";
+            log_out.setAttribute("style","color:red");
+            log_out.setAttribute("onclick","login_session('delete')");
+            log_out.setAttribute("href","index.html");
         }
     }
 }
@@ -135,14 +151,6 @@ function init_user(nickname) {
     li2.appendChild(modify_user);
     modify_user.setAttribute("id","modify_user");
     modify_user.text="修改注册信息"
-    var li1=document.createElement("li");
-    user_center.appendChild(li1)
-    var log_out=document.createElement("a");
-    li1.appendChild(log_out);
-    log_out.text="退出登录";
-    log_out.setAttribute("style","color:red");
-    log_out.setAttribute("onclick","login_session('delete')");
-    log_out.setAttribute("href","index.html");
 }
 function resetPassword() {
     if (document.cookie!="") {
@@ -300,4 +308,53 @@ function show_news(data) {
         li.appendChild(span);
         span.setAttribute("style","float:right")
     }
+}
+function key_down_event(id) {
+    document.getElementById(id).onkeyup = function (e) {
+        if (window.event)//如果window.event对象存在，就以此事件对象为准
+            e = window.event;
+        var code = e.charCode || e.keyCode;
+        if (code == 13) {
+            if (id=="login"){
+                login();
+            } else if (id=="preselected_search"){
+                query();
+            }else {
+                return;
+            }
+        }
+    }
+}
+function direction_key_event(id) {
+    document.getElementById(id).onkeyup = function (e) {
+        if (window.event)//如果window.event对象存在，就以此事件对象为准
+            e = window.event;
+        var code = e.charCode || e.keyCode;
+        var inputs=document.getElementById(id).getElementsByTagName("input");
+        var i=0;
+        for(; i<inputs.length; i++)
+        {
+            if(inputs[i].id==document.activeElement.id) {
+                break;
+            }
+        }
+        if (code == 37) {//左方向键
+            return;
+        }else if (code==38){//上方向键
+            if (i>0) {
+                i--;
+                inputs[i].focus();
+            }
+        }else if (code==39){//右方向键
+            return;
+        }else if (code==40){//下方向键
+            if (i<inputs.length) {
+                i++;
+                inputs[i].focus();
+            }
+        }else {
+            return;
+        }
+    }
+    
 }

@@ -28,12 +28,15 @@ html, head, body {
     border-radius: 5px;
     padding: 10px;
 }
-#tourists ul li a,#company tr td a{
+#filter ul li a,#company tr td a,#job_class a{
     text-decoration: none;
     color: black;
 }
 #filter ul li:hover,#company tr:hover,#job_class ul li:hover,#preselected_search ul li:hover{
     background-color: grey;
+}
+#filter ul li a,#company tr td a ,#preselected_search ul li a{
+    color: black;
 }
 #jobs,#resume,#marquee,#filter{
     display: none;
@@ -47,6 +50,10 @@ nav{
     font-size: 20px;
     color: black;
     border-bottom: 1px solid gray;
+}
+#search{
+    margin-top: 6px;
+    margin-right: 20px;
 }
 #search-con {
     width: 40px;
@@ -63,10 +70,9 @@ nav{
 }
 #preselected_search{
     background-color: white;
-    width: 32%;
+    width: 95%;
+    margin-left: 5%;
     height: auto;
-    position: absolute;
-    left: 40%;
     display: none;
     border:solid 5px gainsboro;
     border-top:none ;
@@ -95,6 +101,9 @@ nav{
 #job_class ul li{
     padding:2px 5px;
 }
+#job_class ul li a{
+    color: white;
+}
 /*main*/
 table thead tr td,table tbody tr td{
     border: 1px solid white;
@@ -111,7 +120,7 @@ table tbody tr td a{
 
 /*right*/
 #hotRecurit{
-    margin-top: 20px;
+    margin-top: 2px;
     background-color: gainsboro;
     opacity: 0.8;
 }
@@ -171,6 +180,22 @@ table tbody tr td a{
     border-right: 1px solid gray;
     border-left: 1px solid gray;
     padding: 0px 20px;
+}
+#toTop a{
+    width: 20px;
+    height: 72px;
+    position: absolute;
+    right: 0px;
+    bottom: 50px;
+    border-radius: 36px;
+    background: url(../image/toTop.jpg) no-repeat 0px 9px;
+    background-color: white;
+    overflow: hidden;
+    box-shadow: 1px 1px 1px 1px grey;
+}
+#toTop a:hover{
+    width: 72px;
+    box-shadow: 2px 2px 2px 2px slategray;
 }
 /*otherwise*/
 .carousel-inner,.item,img{
