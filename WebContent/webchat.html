@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>问道空间</title>
+    <link rel="shortcut icon" href="image/brand.jpg">
+    <!--stylesheet-->
+    <link type="text/css" rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.css">
+    <link type="text/css" rel="stylesheet" href="stylesheet/webchat.css">
+    <!--javascript-->
+    <script src="javascript/jquery-3.2.1.js"></script>
+    <script src="bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+    <script src="javascript/common/webchat.js"></script>
+</head>
+<body onload="init()">
+<div class="container-fluid">
+    <div class="main row">
+        <div class="col-md-1 user_center">
+            <ul>
+                <li type="button" class="btn btn-primary" onclick="init()">连接</li>
+            </ul>
+        </div>
+        <div class="col-md-8 chat_content">
+            <div class="row">
+                <div class="col-md-12" id="show_content">
+                    <h2>问道空间</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-10" id="editor">
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="content">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button" onclick="emit()">
+                                发送</button>
+                            </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 person_list">
+            <h2>在线人员列表</h2>
+            <ul id="list">
+
+            </ul>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

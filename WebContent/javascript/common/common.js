@@ -99,11 +99,14 @@ function login_session_result(data) {
             upload_resume_a.text="上传本地简历";
             upload_resume_a.setAttribute("data-toggle","modal");
             upload_resume_a.setAttribute("data-target","#upload");
+            var chat=document.createElement("li");
+            user_center.appendChild(chat)
+            chat.innerHTML="<a target='_parent' href='webchat.html'>问道空间</a>";
             var li1=document.createElement("li");
             user_center.appendChild(li1)
             var log_out=document.createElement("a");
             li1.appendChild(log_out);
-            log_out.text="退出登录";
+            log_out.text="退出";
             log_out.setAttribute("style","color:red");
             log_out.setAttribute("onclick","login_session('delete')");
             log_out.setAttribute("href","index.html");
@@ -129,11 +132,14 @@ function login_session_result(data) {
             browse_job.appendChild(browse_job_a);
             browse_job_a.text="浏览招聘信息";
             browse_job_a.setAttribute("onclick","");
+            var chat=document.createElement("li");
+            user_center.appendChild(chat)
+            chat.innerHTML="<a target='_parent' href='webchat.html'>问道空间</a>";
             var li1=document.createElement("li");
             user_center.appendChild(li1)
             var log_out=document.createElement("a");
             li1.appendChild(log_out);
-            log_out.text="退出登录";
+            log_out.text="退出";
             log_out.setAttribute("style","color:red");
             log_out.setAttribute("onclick","login_session('delete')");
             log_out.setAttribute("href","index.html");
@@ -296,6 +302,7 @@ function get_news(user_type) {
 function show_news(data) {
     document.getElementById("marquee").style.display="block";
     var ul=document.getElementById("marquee").children[0];
+    ul.innerHTML="";
     for (var i=0;i<data.length;i++){
         var li=document.createElement("li");
         ul.appendChild(li);
@@ -357,4 +364,16 @@ function direction_key_event(id) {
         }
     }
     
+}
+function set_marquee_left() {
+    var left=document.getElementById("left");
+    var marquee=document.getElementById("marquee");
+    left.getElementsByClassName("row")[0].appendChild(marquee);
+    get_news("person");
+}
+function set_marquee_right() {
+    var right=document.getElementById("right");
+    var marquee=document.getElementById("marquee");
+    right.getElementsByClassName("row")[0].appendChild(marquee);
+    get_news("person");
 }

@@ -1,0 +1,22 @@
+.col-md-3,.col-md-9,.col-md-12{
+    padding: 0px;
+}
+h2{
+    padding-left: 50px;
+}
+.person_list,#show_content{
+    overflow-y:scroll;
+}
+.person_list,#show_content{
+    border: 1px solid gainsboro;
+    height: 540px;
+}
+#show_content{
+    height: 480px;
+}
+.user_center ul{
+    list-style-type: none;
+}
+.user_center ul li{
+    display: inline-block;
+}

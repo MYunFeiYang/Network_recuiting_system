@@ -19,10 +19,10 @@
     <script src="javascript/common/query.js"></script>
     <script src="javascript/person/person.js"></script>
     <script src="javascript/enterprise/enterprise.js"></script>
-    <script src="javascript/tourists/tourits.js"></script>
 </head>
 <body>
-<nav class="navbar navbar-default" id="top">
+<div class="container-fluid">
+<nav class="navbar navbar-default" id="top" style="z-index: 99999">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
@@ -47,7 +47,7 @@
                        aria-expanded="false">招聘<span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a onclick="init_filter_address(),init_company()">校招</a></li>
+                            <a onclick="query_job_class(),set_marquee_right()">校招</a></li>
                         <li role="separator" class="divider"></li>
                     </ul>
                 </li>
@@ -133,7 +133,7 @@
                 <div class="row">
                     <div class="col-md-12 center-block">
                         <div class="input-group">
-                            <span class="input-group-addon glyphicon glyphicon-user">用户类型:</span>
+                            <span class="input-group-addon glyphicon glyphicon-user">用户类型</span>
                             <select id="login_type" class="form-control">
                                 <option value="person">个人用户</option>
                                 <option value="enterprise">企业用户</option>
@@ -144,7 +144,7 @@
                 <div class="row">
                     <div class="col-md-12 center-block">
                         <div class="input-group">
-                            <span class="input-group-addon glyphicon glyphicon-user">用户名</span>
+                            <span class="input-group-addon glyphicon glyphicon-user">用户昵称</span>
                             <input type="text" id="login_nickname" class="form-control" placeholder="用户名">
                         </div>
                     </div>
@@ -152,7 +152,7 @@
                 <div class="row">
                     <div class="col-md-12 center-block">
                         <div class="input-group">
-                            <span class="input-group-addon glyphicon glyphicon-lock">密码</span>
+                            <span class="input-group-addon glyphicon glyphicon-lock">密&nbsp;&nbsp;码</span>
                             <input type="password" id="login_password" class="form-control" placeholder="密码">
                         </div>
                     </div>
@@ -164,7 +164,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-4 col-sm-12">
-                        <a href="resetPassword.html" class="btn btn-lg btn-primary center-block">找回密码</a>
+                        <a target="_top" href="resetPassword.html" class="btn btn-lg btn-primary">找回密码</a>
                     </div>
                 </div>
             </div>
@@ -226,11 +226,10 @@
                             <div class="col-md-12">
                                 <div class="input-group">
                     <span class="input-group-btn">
-                        <button type="button" class="btn btn-default glyphicon glyphicon-user">用户名</button>
+                        <button type="button" class="btn btn-default glyphicon glyphicon-user">用户昵称</button>
                     </span>
                                     <input type="text" class="form-control" id="person_nickname"
-                                           onmouseout="reg_username('person_nickname','btu_person_username')"
-                                           placeholder="用户名">
+                                           onmouseout="reg_username('person_nickname','btu_person_username')">
                                     <span class="input-group-btn">
                         <button type="button" class="btn btn-default " id="btu_person_username">填</button>
                     </span>
@@ -241,9 +240,9 @@
                             <div class="col-md-12">
                                 <div class="input-group">
                     <span class="input-group-btn">
-                        <button type="button" class="btn btn-default glyphicon glyphicon-lock">密码</button>
+                        <button type="button" class="btn btn-default glyphicon glyphicon-lock">密&nbsp;&nbsp;码</button>
                     </span>
-                                    <input type="password" class="form-control" id="person_password" placeholder="密码"
+                                    <input type="password" class="form-control" id="person_password"
                                            onmouseout="reg_pwd('person_password','btu_person_password')">
                                     <span class="input-group-btn">
                         <button type="button" class="btn btn-default " id="btu_person_password">完</button>
@@ -258,8 +257,7 @@
                         <button type="button" class="btn btn-default glyphicon glyphicon-lock">确认密码</button>
                     </span>
                                     <input type="password" class="form-control" id="person_confirm_password"
-                                           onmouseout="conf_pwd('person_password','person_confirm_password','btu_person_conf_password')"
-                                           placeholder="确认密码">
+                                           onmouseout="conf_pwd('person_password','person_confirm_password','btu_person_conf_password')">
                                     <span class="input-group-btn">
                         <button type="button" class="btn btn-default" id="btu_person_conf_password">整</button>
                     </span>
@@ -272,7 +270,7 @@
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-default glyphicon glyphicon-user">真实姓名</button>
                     </span>
-                                    <input type="text" class="form-control" id="person_name" placeholder="真实姓名">
+                                    <input type="text" class="form-control" id="person_name" >
                                 </div>
                             </div>
                         </div>
@@ -284,8 +282,7 @@
                     </span>
                                     <input type="email" class="form-control"
                                            onmouseout="reg_email('person_email','btu_person_email')"
-                                           id="person_email"
-                                           placeholder="电子邮箱">
+                                           id="person_email">
                                     <span class="input-group-btn">
                         <button type="button" class="btn btn-default " id="btu_person_email">@</button>
                     </span>
@@ -303,8 +300,7 @@
                         <button type="button" class="btn btn-default glyphicon glyphicon-envelope">手机号码</button>
                     </span>
                                     <input type="text" class="form-control" id="person_telephone"
-                                           onmouseout="reg_telephone('person_telephone','btu_person_telephone')"
-                                           placeholder="手机号码">
+                                           onmouseout="reg_telephone('person_telephone','btu_person_telephone')">
                                     <span class="input-group-btn">
                         <button type="button" class="btn btn-default " id="btu_person_telephone">哦</button>
                     </span>
@@ -350,11 +346,10 @@
                         <div class="col-md-12">
                             <div class="input-group">
                     <span class="input-group-btn">
-                        <button type="button" class="btn btn-default glyphicon glyphicon-user"> 用户名</button>
+                        <button type="button" class="btn btn-default glyphicon glyphicon-user">&nbsp;用户名</button>
                     </span>
                                 <input type="text" class="form-control" id="enterprise_nickname"
-                                       onmouseout="reg_username('enterprise_nickname','btu_enterprise_username')"
-                                       placeholder="用户名">
+                                       onmouseout="reg_username('enterprise_nickname','btu_enterprise_username')">
                                 <span class="input-group-btn">
                         <button type="button" class="btn btn-default" id="btu_enterprise_username">填</button>
                     </span>
@@ -365,12 +360,11 @@
                         <div class="col-md-12">
                             <div class="input-group">
                     <span class="input-group-btn">
-                        <button type="button" class="btn btn-default glyphicon glyphicon-lock">密码</button>
+                        <button type="button" class="btn btn-default glyphicon glyphicon-lock">密&nbsp;&nbsp;码</button>
                     </span>
                                 <input type="password" class="form-control"
                                        onmouseout="reg_pwd('enterprise_password','btu_enterprise_password')"
-                                       id="enterprise_password"
-                                       placeholder="密码">
+                                       id="enterprise_password">
                                 <span class="input-group-btn">
                         <button type="button" class="btn btn-default" id="btu_enterprise_password">完</button>
                     </span>
@@ -384,8 +378,7 @@
                         <button type="button" class="btn btn-default glyphicon glyphicon-lock">确认密码</button>
                     </span>
                                 <input type="password" class="form-control" id="confirm_enterprise_password"
-                                       onmouseout="conf_pwd('enterprise_password','confirm_enterprise_password','btu_enterprise_conf_password')"
-                                       placeholder="确认密码">
+                                       onmouseout="conf_pwd('enterprise_password','confirm_enterprise_password','btu_enterprise_conf_password')">
                                 <span class="input-group-btn">
                         <button type="button" class="btn btn-default" id="btu_enterprise_conf_password">整</button>
                     </span>
@@ -398,7 +391,7 @@
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-default glyphicon glyphicon-user">企业名称</button>
                     </span>
-                                <input type="text" class="form-control" id="enterprise_name" placeholder="企业名称">
+                                <input type="text" class="form-control" id="enterprise_name">
                             </div>
                         </div>
                     </div>
@@ -408,7 +401,7 @@
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-default glyphicon glyphicon-user">所属行业</button>
                     </span>
-                                <input type="text" class="form-control" id="enterprise_industry" placeholder="所属行业">
+                                <input type="text" class="form-control" id="enterprise_industry">
                             </div>
                         </div>
                     </div>
@@ -420,8 +413,7 @@
                     </span>
                                 <input type="email" class="form-control"
                                        onmouseout="reg_email('enterprise_email','btu_enterprise_email')"
-                                       id="enterprise_email"
-                                       placeholder="电子邮箱">
+                                       id="enterprise_email">
                                 <span class="input-group-btn">
                         <button type="button" class="btn btn-default " id="btu_enterprise_email">@</button>
                     </span>
@@ -441,8 +433,7 @@
                     </span>
                                 <input type="text" class="form-control"
                                        onmouseout="reg_telephone('enterprise_telephone','btu_enterprise_telephone')"
-                                       id="enterprise_telephone"
-                                       placeholder="手机电话">
+                                       id="enterprise_telephone">
                                 <span class="input-group-btn">
                         <button type="button" class="btn btn-default" id="btu_enterprise_telephone">哦</button>
                     </span>
@@ -480,7 +471,7 @@
     </div>
 </div>
 <!--end Modal-->
-<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+<div id="carousel-example-generic" class="carousel slide" data-ride="carousel" style="z-index: 0">
     <!-- Indicators -->
     <ol class="carousel-indicators">
         <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
@@ -529,14 +520,13 @@
     </div>
     <div class="row">
         <div class="col-md-2" id="left">
-            <div class="row" >
+            <div class="row">
             <div class="col-md-12" id="job_class" >
 
             </div>
             </div>
         </div>
-        <div class="col-md-7" id="main">
-            <div class="row">
+        <div class="col-md-8" id="main">
             <div class="col-md-12 main center-block" id="resume" onkeyup="direction_key_event('resume')">
                 <div class="page-header">
                     <h3 style="text-align: center">创建个人简历</h3>
@@ -678,8 +668,6 @@
                     </div>
                 </div>
             </div>
-            </div>
-            <div class="row">
             <div class="col-md-12 main center-block" id="jobs" onkeyup="direction_key_event('jobs')">
                 <div class="page-header">
                     <h3 style="text-align: center">添加招聘岗位</h3>
@@ -789,11 +777,10 @@
                     </div>
                 </div>
             </div>
-            </div>
             <div class="row" id="filter">
                 <div class="col-md-12">
                     <div class="col-md-1">
-                        <span style="display:block;padding: 20px">岗位类别：</span>
+                        <span style="display:block;padding: 10px 20px">岗位类别：</span>
                     </div>
                     <div class="col-md-11">
                         <div class="row" id="filter_job">
@@ -801,7 +788,7 @@
                         </div>
                     </div>
                     <div class="col-md-1" style="clear: both">
-                        <span style="display:block;padding: 20px">涉及城市：</span>
+                        <span style="display:block;padding:10px 20px">涉及城市：</span>
                     </div>
                     <div class="col-md-11">
                         <div class="row" id="filter_address">
@@ -843,7 +830,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-3" id="right">
+        <div class="col-md-2" id="right">
             <div class="row">
             <div class="col-md-12" id="hotRecurit">
                 <h3>热门校招</h3>
@@ -888,7 +875,7 @@
             </div>
             </div>
             <div class="row">
-            <div id="marquee" class="marquee" onmouseover="closeInterval()" onmouseout="marquee_control()">
+                <div id="marquee" class="marquee" onmouseover="closeInterval()" onmouseout="marquee_control()">
                 <ul>
 
                 </ul>
@@ -935,6 +922,7 @@
         </div>
     </div>
 </footer>
+</div>
 <script>
     window.onload = function () {
         show_user('login_nickname', 'login_password');
@@ -942,7 +930,7 @@
         marquee_control();
         modify_height();
         change_footer_position();
-        init_filter_job();
+        set_marquee_left();
     }
     window._bd_share_config = {
         "common": {
