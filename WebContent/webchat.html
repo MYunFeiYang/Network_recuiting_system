@@ -10,21 +10,38 @@
     <!--javascript-->
     <script src="javascript/jquery-3.2.1.js"></script>
     <script src="bootstrap-3.3.7-dist/js/bootstrap.js"></script>
-    <script src="javascript/common/webchat.js"></script>
+    <script src="javascript/common/webchat/webchat_listen.js"></script>
+    <script src="javascript/common/webchat/webchat_logic.js"></script>
+    <script src="javascript/util/night.js"></script>
 </head>
-<body onload="init()">
+<body onload="init(),show_status()">
 <div class="container-fluid">
     <div class="main row">
-        <div class="col-md-1 user_center">
+        <div class="col-md-2 user_center">
             <ul>
-                <li type="button" class="btn btn-primary" onclick="init()">连接</li>
-                <li type="button" class="btn btn-primary" onclick="closeSocket()">关闭连接</li>
+                <li onclick="show_status()">登录状态 <span id="status"></span></li>
+                <li type="button" onclick="init()">打开连接
+                <span class="glyphicon glyphicon-ok"></span></li>
+                <li type="button" onclick="closeSocket()">关闭连接
+                <span class="glyphicon glyphicon-remove"></span></li>
+                <li type="button" onclick="open_night()">打开夜间模式
+                    <span class="glyphicon glyphicon-resize-full"></span></li>
+                <li type="button" onclick="close_night()">关闭夜间模式
+                    <span class="glyphicon glyphicon-resize-small"></span></li>
+                <li type="button" onclick="bigger()">增加亮度
+                    <span class="glyphicon glyphicon-arrow-up"></span></li>
+                <li type="button" onclick="smaller()">降低亮度
+                    <span class="glyphicon glyphicon-arrow-down"></span></li>
+                <li type="button" onclick="smaller()">修改头像
+                    <span class="glyphicon glyphicon-user"></span></li>
+                <li type="button" onclick="smaller()">我的好友
+                    <span class="glyphicon glyphicon-user"></span></li>
             </ul>
         </div>
-        <div class="col-md-8 chat_content">
+        <div class="col-md-7 chat_content">
             <div class="row">
                 <div class="col-md-12" id="show_content">
-                    <h2>问道空间</h2>
+
                 </div>
             </div>
             <div class="row">
@@ -44,6 +61,11 @@
             <ul id="list">
 
             </ul>
+            <div id="refresh">
+                <span class="glyphicon glyphicon-refresh" onclick="refresh_online_list()">
+
+                </span>
+            </div>
         </div>
     </div>
 </div>

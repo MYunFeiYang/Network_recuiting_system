@@ -26,7 +26,8 @@ function ajax_register(user) {
 }
 function register_result(data) {
     if (data.msg=="success"){
-        location.href="index.html";
+        document.getElementById("myregister-person").innerHTML="注册成功";
+        document.getElementById("person_reg_btu").setAttribute("disabled","true");
     }
 }
 function modify_user_person() {

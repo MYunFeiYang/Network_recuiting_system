@@ -5,30 +5,11 @@ body{
 .col-md-3,.col-md-9,.col-md-12{
     padding: 0px;
 }
-h2{
-    padding-left: 50px;
+.user_center ul li:hover,.person_list ul li:hover{
+    background-color: gainsboro;
 }
 .user_center{
-    padding: 0px;
-}
-.user_center #nickname{
-    width: 100%;
-    border: 1px solid dodgerblue;
-    border-radius: 3px;
     padding: 5px;
-}
-.person_list,#show_content{
-    overflow-y:scroll;
-}
-#show_content h2{
-    position: fixed;
-}
-.person_list,#show_content{
-    border: 1px solid white;
-    height: 500px;
-}
-#show_content{
-    height: 420px;
 }
 .user_center ul,#list{
     list-style-type: none;
@@ -36,12 +17,80 @@ h2{
 }
 .user_center ul li{
     display: block;
+    margin: 2px;
+    border-radius: 2px;
+    border: 1px solid dodgerblue;
+    box-shadow: 1px 1px 1px 1px white;
+    padding: 5px 15px;
+    background-color: white;
 }
-kbd{
-    display: block;
+.user_center ul li span{
+    float: right;
+    color: #2aabd2;
+}
+.person_list,#show_content,.user_center{
+    overflow-y:scroll;
+}.person_list h2{
+    background-color: white;
+    border-bottom: 1px solid grey;
+    font-size: 18px;
     padding: 5px;
-    clear: both;
-    background-color: #2aabd2;
-    margin-right: 10px;
+    margin: 5px;
+ }
+
+.person_list,#show_content,.user_center{
+    border: 1px solid white;
+    height: 500px;
+}
+.person_list ul li{
+    margin:5px;
+    background-color:white;
+    padding:5px
+}
+.person_list ul li a{
+    text-decoration: none;
+}
+#show_content{
+    height: 420px;
+}
+#show_content .system_message，#show_content .self{
+    display: block;
+    padding: 10px;
+    background-color: white;
     text-align: center;
+    margin-top: 10px;
+    border: 1px solid dodgerblue;
+    opacity: 0.7;
+}
+#show_content .chatBox{
+    clear: none;
+    margin-left: 2px;
+}
+#show_content .photo{
+    font-size: 36px;
+    margin-left: 2px;
+}
+#show_content .username,#show_content .message{
+    padding: 10px;
+}
+#show_content .message{
+    background-color: white;
+}
+#refresh{
+    position: absolute;
+    bottom: 20px;
+    right:10px;
+}
+#refresh span{
+    font-size: 24px;
+}
+#refresh span:hover{
+    color: #2aabd2;
+}
+/*旋转*/
+@keyframes  go{
+    0% {
+        transform: rotateZ(0);
+    }
+    100% {transform: rotateZ(360deg); }
 }

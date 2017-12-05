@@ -30,8 +30,12 @@ public class webChatServer {
     public void onOpen(Session session) {
         this.session = session;
         webSocketSet.add(this);
-        if (users.size()!=0){
-            broadcast(users.toString());
+        try {
+            synchronized (webChatServer.class) {
+                session.getBasicRemote().sendText(users.toString());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
     /*
@@ -39,20 +43,30 @@ public class webChatServer {
          */
     @OnMessage
     public void onMessage(String message, Session session) {
+        //服务器会接到几类信息：群聊信息（包含用户名和信息主体message）
+        //用户发送连接请求时带的用户名
+        //请求最新在线列表（refresh）
         try{
-            if (message.indexOf("nickname")!=-1){
+            //如果信息中有message字段则是群聊信息
+            if (message.indexOf("message")==-1){
                 for (webChatServer w:webSocketSet){
                     if (w.session==session){
                         JSONObject jsonObject=JSONObject.fromObject(message);
                         nickname=jsonObject.getString("nickname");
-                        setJson(nickname,session);
+                        //将用户名存成静态类变量
+                        addNicknameToJson(nickname,session);
+                        //系统通知
                         JSONObject msg=new JSONObject();
                         msg.put("message",nickname+"加入群聊");
                         broadcast(msg.toString());
                     }
                 }
             }else {
-                broadcast(message);
+                if (message.indexOf("refresh")!=-1) {
+                    session.getBasicRemote().sendText(users.toString());
+                }else {
+                    broadcast(message);
+                }
             }
         }catch(Exception e){
             e.printStackTrace();
@@ -62,11 +76,13 @@ public class webChatServer {
 *用户断开链接后的回调，注意这个方法必须是客户端调用了断开链接方法后才会回调
 */
     @OnClose
-    public void onClose() {
+    public void onClose(Session session) {
         webSocketSet.remove(this);
         JSONObject message=new JSONObject();
         message.put("message",nickname+"离开群聊");
         broadcast(message.toString());
+        //用户断开连接，删除users中存储的对应用户
+        deleteUserFormJson(session);
     }
     //完成群发
     private void broadcast(String info){
@@ -78,7 +94,6 @@ public class webChatServer {
                     }
                 }
             } catch (IOException e) {
-                System.out.println("向客户端"+w.nickname+"发送消息失败");
                 webSocketSet.remove(w);
                 try {
                     w.session.close();
@@ -100,12 +115,19 @@ public class webChatServer {
     //连接错误时执行
     @OnError
     public void onError(Throwable t) {
-        t.printStackTrace();
+//        t.printStackTrace();
     }
-    public void setJson(String nickname,Session session){
+    public void addNicknameToJson(String nickname,Session session){
         JSONObject user=new JSONObject();
         user.element("session",session.toString());
         user.element("nickname",nickname);
         users.add(user);
+    }
+    public void deleteUserFormJson(Session session){
+        for (int i=0;i<users.size();i++){
+            if (session.toString().equals(users.getJSONObject(i).getString("session"))){
+                users.remove(users.getJSONObject(i));
+            }
+        }
     }
 }
