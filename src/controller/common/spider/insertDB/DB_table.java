@@ -1,6 +1,6 @@
-package common.spider.insertDB;
+package controller.common.spider.insertDB;
 
-import DBO.ConnectionDB;
+import controller.common.DBManager;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -10,8 +10,8 @@ import java.sql.SQLException;
 
 public class DB_table {
     public void school_rercuit(String company,String position,String address,String time) throws IOException {
-        ConnectionDB conndb=new ConnectionDB();
-        Connection conn=conndb.getConn();
+        DBManager conndb=new DBManager();
+        Connection conn=conndb.getConnection();
         String sql="INSERT INTO school_rercuit (company,position,address,time) VALUES (?,?,?,?)";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -30,8 +30,8 @@ public class DB_table {
         }
     }
     public void filter_job(String href,String text) throws IOException {
-        ConnectionDB conndb=new ConnectionDB();
-        Connection conn=conndb.getConn();
+        DBManager conndb=new DBManager();
+        Connection conn=conndb.getConnection();
         String sql="INSERT INTO filter_job (href,text) VALUES (?,?)";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -48,8 +48,8 @@ public class DB_table {
         }
     }
     public void filter_address(String href,String text) throws IOException {
-        ConnectionDB conndb=new ConnectionDB();
-        Connection conn=conndb.getConn();
+        DBManager conndb=new DBManager();
+        Connection conn=conndb.getConnection();
         String sql="INSERT INTO filter_address (href,text) VALUES (?,?)";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -66,8 +66,8 @@ public class DB_table {
         }
     }
     public void setNews(String href,String text) throws IOException {
-        ConnectionDB conndb=new ConnectionDB();
-        Connection conn=conndb.getConn();
+        DBManager conndb=new DBManager();
+        Connection conn=conndb.getConnection();
         String sql="INSERT INTO Hot_recruitment (href,company) VALUES (?,?)";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);

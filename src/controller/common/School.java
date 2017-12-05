@@ -1,8 +1,7 @@
-package tourists;
+package controller.common;
 
-import DBO.ConnectionDB;
-import bean.Address;
-import bean.Job;
+import model.common.Address;
+import model.common.Job;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
@@ -18,8 +17,8 @@ import java.util.List;
 
 public class School {
     public void init_filter_job(HttpServletRequest request, HttpServletResponse response) throws IOException{
-        ConnectionDB connectionDB=new ConnectionDB();
-        Connection conn=connectionDB.getConn();
+        DBManager DBManager =new DBManager();
+        Connection conn= DBManager.getConnection();
         String sql="SELECT href,text FROM filter_job";
         List<Job> list=new ArrayList<Job>();
         try {
@@ -41,8 +40,8 @@ public class School {
         }
     }
     public void init_filter_address(HttpServletRequest request, HttpServletResponse response) throws IOException{
-        ConnectionDB connectionDB=new ConnectionDB();
-        Connection conn=connectionDB.getConn();
+        DBManager DBManager =new DBManager();
+        Connection conn= DBManager.getConnection();
         String sql="SELECT href,text FROM filter_address";
         List<Address> list=new ArrayList<Address>();
         try {
@@ -64,8 +63,8 @@ public class School {
         }
     }
     public void init_filter_company(HttpServletRequest request, HttpServletResponse response) throws IOException{
-        ConnectionDB connectionDB=new ConnectionDB();
-        Connection conn=connectionDB.getConn();
+        DBManager DBManager =new DBManager();
+        Connection conn= DBManager.getConnection();
         String sql="SELECT company,position, address,time FROM (SELECT ROW_NUMBER() OVER(ORDER BY id ASC) AS ROWID,* FROM school_rercuit)AS TEMP WHERE ROWID<=12";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);

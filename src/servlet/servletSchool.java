@@ -1,6 +1,6 @@
 package servlet;
 
-import tourists.School;
+import controller.common.School;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

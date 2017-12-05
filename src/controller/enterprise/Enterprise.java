@@ -1,6 +1,6 @@
-package enterprise;
+package controller.enterprise;
 
-import DBO.ConnectionDB;
+import controller.common.DBManager;
 import net.sf.json.JSONObject;
 
 import javax.servlet.ServletException;
@@ -26,8 +26,8 @@ public class Enterprise {
         String email=request.getParameter("email");
         String address=request.getParameter("address");
 
-        ConnectionDB conndb=new ConnectionDB();
-        Connection conn=conndb.getConn();
+        DBManager conndb=new DBManager();
+        Connection conn=conndb.getConnection();
         String sql="insert into occupy_company (nickname,password,name,industry,telephone,email,address) values(?,?,?,?,?,?,?)";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -65,8 +65,8 @@ public class Enterprise {
         String nickname = request.getParameter("nickname");
         String password = request.getParameter("password");
         System.out.println(nickname);
-        ConnectionDB conndb = new ConnectionDB();
-        Connection conn = conndb.getConn();
+        DBManager conndb = new DBManager();
+        Connection conn = conndb.getConnection();
         try {
             String sql = "select name,address,industry,email from occupy_company where nickname=? and password=?";
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -112,8 +112,8 @@ public class Enterprise {
         String telephone=request.getParameter("telephone");
         String email=request.getParameter("email");
 
-        ConnectionDB conndb=new ConnectionDB();
-        Connection conn=conndb.getConn();
+        DBManager conndb=new DBManager();
+        Connection conn=conndb.getConnection();
         String sql="insert into occupy_jobs (telephone,name,address,industry,job,number,salary,publish_time,"
                 + "effective_time,email) values(?,?,?,?,?,?,?,?,?,?)";
         try {

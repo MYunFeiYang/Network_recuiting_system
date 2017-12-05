@@ -1,6 +1,6 @@
 package servlet;
 
-import person.Person;
+import controller.person.Person;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "person")
+@WebServlet(name = "/person")
 public class servletPerson extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String person_type=request.getParameter("person");

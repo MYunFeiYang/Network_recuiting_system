@@ -1,6 +1,6 @@
 package servlet;
 
-import common.Common;
+import controller.common.Common;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

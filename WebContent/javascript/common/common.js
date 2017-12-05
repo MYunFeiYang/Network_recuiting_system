@@ -65,14 +65,14 @@ function ajax_login_session(data) {
     });
 }
 function login_session_result(data) {
-    init_user(data.nickname);
-    var user_center=document.getElementById("user_center");
-    var modify_user=document.getElementById("modify_user");
     get_news(data.login_type);
     if (data.nickname!="") {
-        if (data.login_type=="person"){
+        init_user(data.nickname);
+        var user_center=document.getElementById("user_center");
+        var modify_user=document.getElementById("modify_user");
+        if (data.login_type=="controller.person"){
             modify_user.setAttribute("data-toggle","modal");
-            modify_user.setAttribute("data-target","#register-person");
+            modify_user.setAttribute("data-target","#register-controller.person");
             modify_user.setAttribute("onclick","modify_user_person()");
             var add_resume=document.createElement("li");
             var add_resume_a=document.createElement("a");
@@ -101,7 +101,7 @@ function login_session_result(data) {
             upload_resume_a.setAttribute("data-target","#upload");
             var chat=document.createElement("li");
             user_center.appendChild(chat)
-            chat.innerHTML="<a target='_parent' href='webchat.html'>问道空间</a>";
+            chat.innerHTML="<a onclick='change_frame_content(),closeInterval()'>问道空间</a>";
             var li1=document.createElement("li");
             user_center.appendChild(li1)
             var log_out=document.createElement("a");
@@ -110,9 +110,9 @@ function login_session_result(data) {
             log_out.setAttribute("style","color:red");
             log_out.setAttribute("onclick","login_session('delete')");
             log_out.setAttribute("href","index.html");
-        }else if(data.login_type="person"){
+        }else if(data.login_type="controller.person"){
             modify_user.setAttribute("data-toggle","modal");
-            modify_user.setAttribute("data-target","#register-enterprise");
+            modify_user.setAttribute("data-target","#register-controller.enterprise");
             modify_user.setAttribute("onclick","modify_user_enterprise()");
             var add_job=document.createElement("li");
             var add_job_a=document.createElement("a");
@@ -134,7 +134,7 @@ function login_session_result(data) {
             browse_job_a.setAttribute("onclick","");
             var chat=document.createElement("li");
             user_center.appendChild(chat)
-            chat.innerHTML="<a target='_parent' href='webchat.html'>问道空间</a>";
+            chat.innerHTML="<a onclick='change_frame_content(),closeInterval()'>问道空间</a>";
             var li1=document.createElement("li");
             user_center.appendChild(li1)
             var log_out=document.createElement("a");
@@ -323,6 +323,7 @@ function key_down_event(id) {
         var code = e.charCode || e.keyCode;
         if (code == 13) {
             if (id=="login"){
+                reset_user();
                 login();
             } else if (id=="preselected_search"){
                 query();
@@ -369,11 +370,16 @@ function set_marquee_left() {
     var left=document.getElementById("left");
     var marquee=document.getElementById("marquee");
     left.getElementsByClassName("row")[0].appendChild(marquee);
-    get_news("person");
+    get_news("controller.person");
 }
 function set_marquee_right() {
     var right=document.getElementById("right");
     var marquee=document.getElementById("marquee");
     right.getElementsByClassName("row")[0].appendChild(marquee);
-    get_news("person");
+    get_news("controller.person");
+}
+function change_frame_content() {
+    var frame=document.getElementById("frame");
+    frame.innerHTML="<iframe style='position:relative;z-index: 999;opacity: 0.8;border: 10px solid white;' src=\"webchat.html\" width=\"100%\" height=\"500\" scrolling=\"auto\" frameborder=\"0\"> </iframe>";
+
 }

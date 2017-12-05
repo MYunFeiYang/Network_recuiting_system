@@ -1,6 +1,6 @@
-package bean;
+package model.common;
 
-public class Job {
+public class Address {
     String href;
     String text;
 

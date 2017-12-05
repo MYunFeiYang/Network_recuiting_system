@@ -118,33 +118,37 @@ table tbody tr td a{
 
 /*right*/
 #hotRecurit{
-    margin: 2px 0px;
     background-color: gainsboro;
     opacity: 0.8;
-    border: 20px solid white;
+    border: 10px solid white;
 }
 #hotRecurit h3{
     background-color: beige;
     padding: 5px;
 }
+#hotRecurit ul{
+    padding: 2%;
+}
 #hotRecurit ul li{
-    width: 28%;
+    width: 30%;
     float: left;
-    margin: 2%;
+    margin: 1%;
 }
 .marquee {
     margin:2px 0px;
-    background-color: white;
     width:100%;
     height: 480px;
     overflow: hidden;
-    border: 10px solid gainsboro;
+    border: 5px solid gainsboro;
+}
+.marquee ul{
+    padding: 10px;
+    background-color: white;
 }
 .marquee ul li{
     position: relative;
     top:0px;
     padding-left:3px ;
-    background-color: white;
 }
 .marquee ul li a:link{
     color: black;
@@ -212,6 +216,7 @@ table tbody tr td a{
 #carousel-example-generic{
     position: fixed;
     left: 0px;
+    z-index: 0;
 }
 .alert-warning {
     margin: auto;

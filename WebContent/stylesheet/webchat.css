@@ -1,22 +1,47 @@
+body{
+    background-color: gainsboro;
+    opacity: 0.9;
+}
 .col-md-3,.col-md-9,.col-md-12{
     padding: 0px;
 }
 h2{
     padding-left: 50px;
 }
+.user_center{
+    padding: 0px;
+}
+.user_center #nickname{
+    width: 100%;
+    border: 1px solid dodgerblue;
+    border-radius: 3px;
+    padding: 5px;
+}
 .person_list,#show_content{
     overflow-y:scroll;
 }
+#show_content h2{
+    position: fixed;
+}
 .person_list,#show_content{
-    border: 1px solid gainsboro;
-    height: 540px;
+    border: 1px solid white;
+    height: 500px;
 }
 #show_content{
-    height: 480px;
+    height: 420px;
 }
-.user_center ul{
+.user_center ul,#list{
     list-style-type: none;
+    padding: 5px;
 }
 .user_center ul li{
-    display: inline-block;
+    display: block;
+}
+kbd{
+    display: block;
+    padding: 5px;
+    clear: both;
+    background-color: #2aabd2;
+    margin-right: 10px;
+    text-align: center;
 }

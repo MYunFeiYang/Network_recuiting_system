@@ -1,6 +1,5 @@
-package common;
+package controller.common;
 
-import DBO.ConnectionDB;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
@@ -30,8 +29,8 @@ public class Common {
         response.setHeader("Pragma", "no-cache");
         String email=request.getParameter("email");
 
-        ConnectionDB conndb=new ConnectionDB();
-        Connection conn=conndb.getConn();
+        DBManager conndb=new DBManager();
+        Connection conn=conndb.getConnection();
         try {
             String sql="select occupy_person.email,occupy_company.email from occupy_person,occupy_company where occupy_person.email=? OR occupy_company.email=?";
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -64,9 +63,8 @@ public class Common {
         String login_type=request.getParameter("login_type");
         String nickname=request.getParameter("nickname");
         String password=request.getParameter("password");
-
-        ConnectionDB conndb=new ConnectionDB();
-        Connection conn=conndb.getConn();
+        DBManager conndb=new DBManager();
+        Connection conn=conndb.getConnection();
         if(login_type.equals("person")){
             try {
                 String sql="select email from occupy_person where nickname=? and password=?";
@@ -90,7 +88,7 @@ public class Common {
                 // TODO 自动生成的 catch 块
                 e.printStackTrace();
             }
-        }else{
+        }else if (login_type.equals("enterprise")){
             String sql="select name from occupy_company where nickname=? and password=?";
             try {
                 PreparedStatement ps = conn.prepareStatement(sql);
@@ -130,7 +128,7 @@ public class Common {
             user.put("login_type", login_type);
             user.put("nickname",login_nickname);
             user.put("password",login_password);
-            session.setAttribute("user",user);
+            session.setAttribute("user",user.toString());
             response.getWriter().print(user.toString());
         } else if (login.equals("refresh")) {
             // 判断session之前是否存在，或者说是否新建
@@ -155,8 +153,8 @@ public class Common {
         response.setHeader("Pragma", "no-cache");
         String email=request.getParameter("email");
 
-        ConnectionDB conndb=new ConnectionDB();
-        Connection conn=conndb.getConn();
+        DBManager conndb=new DBManager();
+        Connection conn=conndb.getConnection();
         try {
             String sql="select occupy_person.email,occupy_company.email from occupy_person,occupy_company where occupy_person.email=? OR occupy_company.email=?";
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -229,8 +227,8 @@ public class Common {
         String email=request.getParameter("email");
         String password=request.getParameter("password");
 
-        ConnectionDB conndb=new ConnectionDB();
-        Connection conn=conndb.getConn();
+        DBManager conndb=new DBManager();
+        Connection conn=conndb.getConnection();
         try {
             String sql1="UPDATE occupy_person SET password=? WHERE email=?";
             String sql2="UPDATE occupy_company SET password=? WHERE email=?";
@@ -267,10 +265,10 @@ public class Common {
         response.setHeader("Cache-Control", "no-cache");
         response.setHeader("Pragma", "no-cache");
         String user_login=request.getParameter("user_type");
-        ConnectionDB conndb=new ConnectionDB();
-        Connection conn=conndb.getConn();
+        DBManager conndb=new DBManager();
+        Connection conn=conndb.getConnection();
         String sql;
-        if (user_login.equals("person")){
+        if (user_login.equals("controller/person")){
             sql="SELECT company,href FROM (SELECT ROW_NUMBER() OVER(ORDER BY id ASC) AS ROWID,* FROM Hot_recruitment)AS TEMP WHERE ROWID<=50";
         }else {
             sql="SELECT company,href FROM (SELECT ROW_NUMBER() OVER(ORDER BY id ASC) AS ROWID,* FROM Hot_recruitment)AS TEMP WHERE ROWID<=50";
@@ -300,8 +298,8 @@ public class Common {
         response.setHeader("Pragma", "no-cache");
         String content=request.getParameter("content");
         content="%"+content+"%";
-        ConnectionDB conndb=new ConnectionDB();
-        Connection conn=conndb.getConn();
+        DBManager conndb=new DBManager();
+        Connection conn=conndb.getConnection();
         String sql="select top 20 company FROM Hot_recruitment WHERE company LIKE ?";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);

@@ -1,6 +1,6 @@
-package common.spider.getDemo;
+package controller.common.spider.getDemo;
 
-import common.spider.insertDB.DB_table;
+import controller.common.spider.insertDB.DB_table;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;

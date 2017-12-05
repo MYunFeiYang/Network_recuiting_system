@@ -1,6 +1,6 @@
-package person;
+package controller.person;
 
-import DBO.ConnectionDB;
+import controller.common.DBManager;
 import net.sf.json.JSONObject;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -27,8 +27,8 @@ public class Person {
         String dataString=df.format(new Date());// new Date()为获取当前系统时间
         String email=request.getParameter("email");
 
-        ConnectionDB conndb=new ConnectionDB();
-        Connection conn=conndb.getConn();
+        DBManager conndb=new DBManager();
+        Connection conn=conndb.getConnection();
         String sql="insert into occupy_person (nickname,password,"
                 + "name,telephone,email,regrime) values(?,?,?,?,?,?)";
         try {
@@ -68,8 +68,8 @@ public class Person {
         String password=request.getParameter("password");
         String email=request.getParameter("email");
 
-        ConnectionDB conndb=new ConnectionDB();
-        Connection conn=conndb.getConn();
+        DBManager conndb=new DBManager();
+        Connection conn=conndb.getConnection();
         String sql="update occupy_person set nickname=?,password=?,email=? where telephone=?";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -104,8 +104,8 @@ public class Person {
         String nickname = request.getParameter("nickname");
         String password = request.getParameter("password");
         // System.out.println(nickname);
-        ConnectionDB conndb = new ConnectionDB();
-        Connection conn = conndb.getConn();
+        DBManager conndb = new DBManager();
+        Connection conn = conndb.getConnection();
         try {
             String sql = "select name,telephone,email from occupy_person where nickname=? and password=?";
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -151,8 +151,8 @@ public class Person {
         String telephone=request.getParameter("telephone");
         String email=request.getParameter("email");
 
-        ConnectionDB conndb=new ConnectionDB();
-        Connection conn=conndb.getConn();
+        DBManager conndb=new DBManager();
+        Connection conn=conndb.getConnection();
         String sql="insert into occupy_resume (nickname,password,name,age,sex,origin,collage,specialty,"
                 + "degree,admission_data,graduation_data,telephone,email) values(?,?,?,?,?,?,?,?,?,?,?,?,?)";
         try {
