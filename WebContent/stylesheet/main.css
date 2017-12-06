@@ -12,7 +12,7 @@ html, head, body {
 }
 .modal-content{
     background-color: gainsboro;
-    opacity: 0.8;
+    opacity: 0.9;
 }
 .marquee ul ,.marquee,#filter ul li,#job_class ul li,#hotRecurit ul li,#preselected_search ul li{
     list-style: none;
@@ -37,7 +37,7 @@ html, head, body {
 #jobs,#resume,#marquee,#filter{
     display: none;
     background-color: gainsboro;
-    opacity: 0.8;
+    opacity: 0.9;
 }
 
 /*header*/
@@ -98,7 +98,7 @@ nav{
 #job_class{
     display: block;
     background-color: black;
-    opacity: 0.8;
+    opacity: 0.9;
 }
 #job_class ul li{
     padding:2px 5px;
@@ -130,7 +130,7 @@ table tbody tr td a{
 /*right*/
 #hotRecurit{
     background-color: gainsboro;
-    opacity: 0.8;
+    opacity: 0.9;
     border: 10px solid white;
 }
 #hotRecurit h3{
@@ -189,7 +189,7 @@ table tbody tr td a{
     z-index: 0;
     background-color: gainsboro;
     color: black;
-    opacity: 0.8;
+    opacity: 0.9;
 }
 #footer address{
     margin: 5px auto;

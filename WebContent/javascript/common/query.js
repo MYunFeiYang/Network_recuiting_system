@@ -82,7 +82,7 @@ function insert_job_class(data) {
         span.setAttribute("class","glyphicon glyphicon-chevron-right");
         span.setAttribute("style","float:right;border:none");
         li.appendChild(span);
-        li.setAttribute("onclick","change_checked(event,'job_class',insert_filter_job(),query_filter_address())");
+        li.setAttribute("onclick","change_checked(event,'job_class',insert_filter_job(),query_filter_address()),query_company()");
     }
     ul.children[0].classList.add("checked");
     change_footer_position();

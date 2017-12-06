@@ -27,22 +27,22 @@ public class Common {
         //以下两句为取消在本地的缓存
         response.setHeader("Cache-Control", "no-cache");
         response.setHeader("Pragma", "no-cache");
-        String email=request.getParameter("email");
+        String email = request.getParameter("email");
 
-        DBManager conndb=new DBManager();
-        Connection conn=conndb.getConnection();
+        DBManager conndb = new DBManager();
+        Connection conn = conndb.getConnection();
         try {
-            String sql="select occupy_person.email,occupy_company.email from occupy_person,occupy_company where occupy_person.email=? OR occupy_company.email=?";
+            String sql = "select occupy_person.email,occupy_company.email from occupy_person,occupy_company where occupy_person.email=? OR occupy_company.email=?";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, email);
             ps.setString(2, email);
             ResultSet rs = ps.executeQuery();
-            if(rs.next()){
+            if (rs.next()) {
                 String str = "{\"msg\":\"email_exist\"}";
                 response.getWriter().print(str);
                 response.getWriter().flush();
                 response.getWriter().close();
-            }else{
+            } else {
                 String str = "{\"msg\":\"email_not_exist\"}";
                 response.getWriter().print(str);
                 response.getWriter().flush();
@@ -56,85 +56,69 @@ public class Common {
             e.printStackTrace();
         }
     }
-    public void Login(HttpServletRequest request, HttpServletResponse response) throws ServletException,IOException {
+
+    public void Login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/xml; charset=UTF-8");
         //以下两句为取消在本地的缓存
         response.setHeader("Cache-Control", "no-cache");
         response.setHeader("Pragma", "no-cache");
-        String login_type=request.getParameter("login_type");
-        String nickname=request.getParameter("nickname");
-        String password=request.getParameter("password");
-        DBManager conndb=new DBManager();
-        Connection conn=conndb.getConnection();
-        if(login_type.equals("person")){
-            try {
-                String sql="select email from occupy_person where nickname=? and password=?";
-                PreparedStatement ps = conn.prepareStatement(sql);
-                ps.setString(1, nickname);
-                ps.setString(2, password);
-                ResultSet rs = ps.executeQuery();
-                if(rs.next()){
-                    String str = "{\"msg\":\"person_success\"}";
-                    response.getWriter().print(str);
-                    response.getWriter().flush();;
-                    response.getWriter().close();;
-                }else{
-                    String str = "{\"msg\":\"person_fail\"}";
-                    response.getWriter().print(str);
-                    response.getWriter().flush();;
-                    response.getWriter().close();;
-                }
-                rs.close();
-                ps.close();
-                conn.close();
-            } catch (SQLException e) {
-                // TODO 自动生成的 catch 块
-                e.printStackTrace();
+        String login_type = request.getParameter("login_type");
+        String nickname = request.getParameter("nickname");
+        String password = request.getParameter("password");
+        DBManager conndb = new DBManager();
+        Connection conn = conndb.getConnection();
+        String sql = null;
+        if (login_type.equals("person")) {
+            sql = "select email from occupy_person where nickname=? and password=?";
+        } else if (login_type.equals("enterprise")) {
+            sql = "select name from occupy_company where nickname=? and password=?";
+        }
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, nickname);
+            ps.setString(2, password);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                String str = "{\"msg\":\"person_success\"}";
+                response.getWriter().print(str);
+                response.getWriter().flush();
+                ;
+                response.getWriter().close();
+                ;
+            } else {
+                String str = "{\"msg\":\"person_fail\"}";
+                response.getWriter().print(str);
+                response.getWriter().flush();
+                ;
+                response.getWriter().close();
+                ;
             }
-        }else if (login_type.equals("enterprise")){
-            String sql="select name from occupy_company where nickname=? and password=?";
-            try {
-                PreparedStatement ps = conn.prepareStatement(sql);
-                ps.setString(1, nickname);
-                ps.setString(2, password);
-                ResultSet rs = ps.executeQuery();
-                if(rs.next()){
-                    String str = "{\"msg\":\"enterprise_success\"}";
-                    response.getWriter().print(str);
-                    response.getWriter().flush();;
-                    response.getWriter().close();;
-                }else{
-                    String str = "{\"msg\":\"enterprise_fail\"}";
-                    response.getWriter().print(str);
-                    response.getWriter().flush();;
-                    response.getWriter().close();;
-                }
-                rs.close();
-                ps.close();
-                conn.close();
-            } catch (SQLException e) {
-                // TODO 自动生成的 catch 块
-                e.printStackTrace();
-            }
+            rs.close();
+            ps.close();
+            conn.close();
+        } catch (SQLException e) {
+            // TODO 自动生成的 catch 块
+            e.printStackTrace();
         }
     }
+
     public void LoginSession(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
         String login = request.getParameter("login");
-        String login_type=request.getParameter("login_type");
-        String login_nickname=request.getParameter("nickname");
-        String login_password=request.getParameter("password");
+        String login_type = request.getParameter("login_type");
+        String login_nickname = request.getParameter("nickname");
+        String login_password = request.getParameter("password");
         if (login.equals("login")) {
             // 创建session
             // 使用request对象的getSession()获取session，如果session不存在则创建一个
             HttpSession session = request.getSession();
             JSONObject user = new JSONObject();
             user.put("login_type", login_type);
-            user.put("nickname",login_nickname);
-            user.put("password",login_password);
-            session.setAttribute("user",user.toString());
+            user.put("nickname", login_nickname);
+            user.put("password", login_password);
+            session.setAttribute("user", user.toString());
             response.getWriter().print(user.toString());
         } else if (login.equals("refresh")) {
             // 判断session之前是否存在，或者说是否新建
@@ -151,26 +135,27 @@ public class Common {
         }
 
     }
-    public void resetPassword(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+
+    public void resetPassword(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/xml; charset=UTF-8");
         //以下两句为取消在本地的缓存
         response.setHeader("Cache-Control", "no-cache");
         response.setHeader("Pragma", "no-cache");
-        String email=request.getParameter("email");
+        String email = request.getParameter("email");
 
-        DBManager conndb=new DBManager();
-        Connection conn=conndb.getConnection();
+        DBManager conndb = new DBManager();
+        Connection conn = conndb.getConnection();
         try {
-            String sql="select occupy_person.email,occupy_company.email from occupy_person,occupy_company where occupy_person.email=? OR occupy_company.email=?";
+            String sql = "select occupy_person.email,occupy_company.email from occupy_person,occupy_company where occupy_person.email=? OR occupy_company.email=?";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, email);
             ps.setString(2, email);
             ResultSet rs = ps.executeQuery();
-            if(rs.next()){
+            if (rs.next()) {
                 //邮箱匹配成功，向邮箱发邮件以重置密码
-                sendMail(email,response);
-            }else{
+                sendMail(email, response);
+            } else {
                 String str = "{\"msg\":\"email_not_exist\"}";
                 response.getWriter().print(str);
                 response.getWriter().flush();
@@ -184,15 +169,16 @@ public class Common {
             e.printStackTrace();
         }
     }
+
     public static boolean sendMail(String to, HttpServletResponse response) {
 
         try {
             Properties props = new Properties();
             props.put("username", "m_YunfeiYang@163.com");
             props.put("password", "420222AA");
-            props.put("mail.transport.protocol", "smtp" );
+            props.put("mail.transport.protocol", "smtp");
             props.put("mail.smtp.host", "smtp.163.com");
-            props.put("mail.smtp.port", "25" );
+            props.put("mail.smtp.port", "25");
 
             Session mailSession = Session.getDefaultInstance(props);
             //生成随机激活码
@@ -207,7 +193,7 @@ public class Common {
             msg.setFrom(new InternetAddress("m_YunFeiYang@163.com"));
             msg.addRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
             msg.setSubject("重置密码邮件");
-            msg.setContent("<h1>此邮件为官方重置密码邮件</h1>密码重置验证码:"+sb,"text/html;charset=UTF-8");
+            msg.setContent("<h1>此邮件为官方重置密码邮件</h1>密码重置验证码:" + sb, "text/html;charset=UTF-8");
 
             msg.saveChanges();
 
@@ -216,8 +202,8 @@ public class Common {
                     .getProperty("username"), props.getProperty("password"));
             transport.sendMessage(msg, msg.getAllRecipients());
             transport.close();
-            JSONObject mag=new JSONObject();
-            mag.put("msg",sb.toString());
+            JSONObject mag = new JSONObject();
+            mag.put("msg", sb.toString());
             response.getWriter().print(mag.toString());
         } catch (Exception e) {
             e.printStackTrace();
@@ -226,20 +212,21 @@ public class Common {
         }
         return true;
     }
-    public void updatePassword(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+
+    public void updatePassword(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/xml; charset=UTF-8");
         //以下两句为取消在本地的缓存
         response.setHeader("Cache-Control", "no-cache");
         response.setHeader("Pragma", "no-cache");
-        String email=request.getParameter("email");
-        String password=request.getParameter("password");
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
 
-        DBManager conndb=new DBManager();
-        Connection conn=conndb.getConnection();
+        DBManager conndb = new DBManager();
+        Connection conn = conndb.getConnection();
         try {
-            String sql1="UPDATE occupy_person SET password=? WHERE email=?";
-            String sql2="UPDATE occupy_company SET password=? WHERE email=?";
+            String sql1 = "UPDATE occupy_person SET password=? WHERE email=?";
+            String sql2 = "UPDATE occupy_company SET password=? WHERE email=?";
             PreparedStatement ps1 = conn.prepareStatement(sql1);
             PreparedStatement ps2 = conn.prepareStatement(sql2);
             ps1.setString(1, password);
@@ -248,12 +235,12 @@ public class Common {
             ps2.setString(2, email);
             int rs1 = ps1.executeUpdate();
             int rs2 = ps2.executeUpdate();
-            if(rs1==1||rs2==1){
+            if (rs1 == 1 || rs2 == 1) {
                 String str = "{\"msg\":\"updatePassword_success\"}";
                 response.getWriter().print(str);
                 response.getWriter().flush();
                 response.getWriter().close();
-            }else{
+            } else {
                 String str = "{\"msg\":\"updatePassword_fail\"}";
                 response.getWriter().print(str);
                 response.getWriter().flush();
@@ -267,29 +254,30 @@ public class Common {
             e.printStackTrace();
         }
     }
-    public void getNews(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+
+    public void getNews(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/xml; charset=UTF-8");
         //以下两句为取消在本地的缓存
         response.setHeader("Cache-Control", "no-cache");
         response.setHeader("Pragma", "no-cache");
-        String user_login=request.getParameter("user_type");
-        DBManager conndb=new DBManager();
-        Connection conn=conndb.getConnection();
+        String user_login = request.getParameter("user_type");
+        DBManager conndb = new DBManager();
+        Connection conn = conndb.getConnection();
         String sql;
-        if (user_login.equals("controller/person")){
-            sql="SELECT company,href FROM (SELECT ROW_NUMBER() OVER(ORDER BY id ASC) AS ROWID,* FROM Hot_recruitment)AS TEMP WHERE ROWID<=50";
-        }else {
-            sql="SELECT company,href FROM (SELECT ROW_NUMBER() OVER(ORDER BY id ASC) AS ROWID,* FROM Hot_recruitment)AS TEMP WHERE ROWID<=50";
+        if (user_login.equals("controller/person")) {
+            sql = "SELECT company,href FROM (SELECT ROW_NUMBER() OVER(ORDER BY id ASC) AS ROWID,* FROM Hot_recruitment)AS TEMP WHERE ROWID<=50";
+        } else {
+            sql = "SELECT company,href FROM (SELECT ROW_NUMBER() OVER(ORDER BY id ASC) AS ROWID,* FROM Hot_recruitment)AS TEMP WHERE ROWID<=50";
         }
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
-            JSONArray companys=new JSONArray();
-            JSONObject company=new JSONObject();
-            while (rs.next()){
-                company.put("company",rs.getString(1));
-                company.put("href",rs.getString(2));
+            JSONArray companys = new JSONArray();
+            JSONObject company = new JSONObject();
+            while (rs.next()) {
+                company.put("company", rs.getString(1));
+                company.put("href", rs.getString(2));
                 companys.add(company);
             }
             response.getWriter().print(companys.toString());
@@ -301,25 +289,26 @@ public class Common {
             e.printStackTrace();
         }
     }
-    public void query(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+
+    public void query(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/xml; charset=UTF-8");
         //以下两句为取消在本地的缓存
         response.setHeader("Cache-Control", "no-cache");
         response.setHeader("Pragma", "no-cache");
-        String content=request.getParameter("content");
-        content="%"+content+"%";
-        DBManager conndb=new DBManager();
-        Connection conn=conndb.getConnection();
-        String sql="select top 20 company FROM Hot_recruitment WHERE company LIKE ?";
+        String content = request.getParameter("content");
+        content = "%" + content + "%";
+        DBManager conndb = new DBManager();
+        Connection conn = conndb.getConnection();
+        String sql = "select top 20 company FROM Hot_recruitment WHERE company LIKE ?";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1,content);
+            ps.setString(1, content);
             ResultSet rs = ps.executeQuery();
-            JSONArray companys=new JSONArray();
-            JSONObject company=new JSONObject();
-            while (rs.next()){
-                company.put("company",rs.getString(1));
+            JSONArray companys = new JSONArray();
+            JSONObject company = new JSONObject();
+            while (rs.next()) {
+                company.put("company", rs.getString(1));
                 companys.add(company);
             }
             response.getWriter().print(companys.toString());

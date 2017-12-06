@@ -79,6 +79,8 @@ function login_session_result(data) {
             user_center.appendChild(add_resume);
             add_resume.appendChild(add_resume_a);
             add_resume_a.text="添加简历";
+            add_resume_a.setAttribute("data-toggle","modal");
+            add_resume_a.setAttribute("data-target","#resume");
             add_resume_a.setAttribute("onclick","init_resume()");
             var modify_resume=document.createElement("li");
             var modify_resume_a=document.createElement("a");
@@ -119,6 +121,8 @@ function login_session_result(data) {
             user_center.appendChild(add_job);
             add_job.appendChild(add_job_a);
             add_job_a.text="发布招聘信息";
+            add_job_a.setAttribute("data-toggle","modal");
+            add_job_a.setAttribute("data-target","#jobs");
             add_job_a.setAttribute("onclick","init_job()");
             var modify_job=document.createElement("li");
             var modify_job_a=document.createElement("a");
