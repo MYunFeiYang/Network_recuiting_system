@@ -383,7 +383,9 @@ function set_marquee_right() {
     get_news("person");
 }
 function change_frame_content() {
-    var frame=document.getElementById("frame");
+    document.getElementById("main").style.display="none";
+    var frame=document.getElementById("frame")
+    frame.style.display="block";
     frame.innerHTML="<iframe style='position:relative;z-index: 999;opacity: 0.8;border: 10px solid white;' src=\"webchat.html\" width=\"100%\" height=\"500\" scrolling=\"auto\" frameborder=\"0\"> </iframe>";
 
 }

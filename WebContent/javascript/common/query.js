@@ -50,6 +50,8 @@ function query() {
 }
 //filter query
 function query_job_class() {
+    document.getElementById("main").style.display="block";
+    document.getElementById("frame").style.display="none";
     $.ajax({
         url:"/query/job",
         type:"POST",
