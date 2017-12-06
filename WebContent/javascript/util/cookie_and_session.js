@@ -5,10 +5,11 @@ function setCookie(c_name,value,expireDays)
     document.cookie=c_name+ "=" +value+
         ((expireDays==null) ? "" : ";expires="+existDate.toGMTString());
 }
-function remember_user(nickname,password) {
+function remember_user(nickname,password,email) {
     var user={};
     user.nickname=document.getElementById(nickname).value;
     user.password=document.getElementById(password).value;
+    user.email=document.getElementById(email);
     setCookie("user",JSON.stringify(user),180);
 }
 function show_user(nickname,password) {

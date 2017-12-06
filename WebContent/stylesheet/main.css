@@ -85,8 +85,14 @@ nav{
 #tool li{
     padding: 0px 10px;
 }
-#tool li:hover{
+#share span:hover,#setting span:hover,#collection span:hover{
     color: #2aabd2;
+}
+#setting ul li,#collection ul li{
+    padding: 5px 15px;
+}
+#setting span{
+    float: right;
 }
 /*left*/
 #job_class{
@@ -103,6 +109,11 @@ nav{
     color: white;
 }
 /*main*/
+#filter_job ul li,#filter_address ul li{
+    float:left;
+    padding: 2px 10px;
+    list-style:none
+}
 table thead tr td,table tbody tr td{
     border: 1px solid white;
 }
@@ -149,25 +160,22 @@ table tbody tr td a{
     position: relative;
     top:0px;
     padding-left:3px ;
+    font-size: 10px;
 }
 .marquee ul li a:link{
     color: black;
-    font-size: 1em;
     padding: 1px 3px;
 }
 .marquee ul li a:visited{
     color: red;
-    font-size: 1em;
     padding: 1px 3px;
 }
 .marquee ul li a:hover{
     color: green;
-    font-size: 1em;
     padding: 1px 3px;
 }
 .marquee ul li a:active{
     color:blueviolet;
-    font-size: 1em;
     padding: 1px 3px;
 }
 /*footer*/
@@ -187,7 +195,8 @@ table tbody tr td a{
     margin: 5px auto;
     border-right: 1px solid gray;
     border-left: 1px solid gray;
-    padding: 0px 50px;
+    padding-top: 0px;
+    padding-left: 30px;
 }
 #toTop a{
     position: fixed;

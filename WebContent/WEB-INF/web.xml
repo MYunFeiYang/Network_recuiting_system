@@ -34,12 +34,12 @@
     <url-pattern>/public</url-pattern>
   </servlet-mapping>
   <servlet>
-    <servlet-name>school</servlet-name>
-    <servlet-class>servlet.servletSchool</servlet-class>
+    <servlet-name>query</servlet-name>
+    <servlet-class>servlet.servletQuery</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>school</servlet-name>
-    <url-pattern>/school/*</url-pattern>
+    <servlet-name>query</servlet-name>
+    <url-pattern>/query/*</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>fileupload</servlet-name>

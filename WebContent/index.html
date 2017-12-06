@@ -15,6 +15,7 @@
     <script src="javascript/util/check_input.js"></script>
     <script src="javascript/util/div_operate.js"></script>
     <script src="javascript/util/marquee.js"></script>
+    <script src="javascript/util/night.js"></script>
     <script src="javascript/common/common.js"></script>
     <script src="javascript/common/query.js"></script>
     <script src="javascript/person/person.js"></script>
@@ -87,11 +88,43 @@
                     </ul>
                 </li>
             </ul>
-            <ul class="nav navbar-nav navbar-right" id="tool">
-                <li><span class="glyphicon glyphicon-share" onmouseover="open_share()"></span></li>
-                <li><span class="glyphicon glyphicon-star"></span></li>
-                <li><span class="glyphicon glyphicon-asterisk"></span></li>
-                <li></li>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown" id="setting">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                       aria-haspopup="true"
+                       aria-expanded="false"><span class="glyphicon glyphicon-asterisk"></span></a>
+                    <ul class="dropdown-menu">
+                        <li type="button" onclick="open_night()">打开夜间模式
+                            <span class="glyphicon glyphicon-resize-full"></span></li>
+                        <li type="button" onclick="close_night()">关闭夜间模式
+                            <span class="glyphicon glyphicon-resize-small"></span></li>
+                        <li type="button" onclick="bigger()">增加亮度
+                            <span class="glyphicon glyphicon-arrow-up"></span></li>
+                        <li type="button" onclick="smaller()">降低亮度
+                            <span class="glyphicon glyphicon-arrow-down"></span></li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown" id="collection">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                       aria-haspopup="true"
+                       aria-expanded="false"><span class="glyphicon glyphicon-star"></span></a>
+                    <ul class="dropdown-menu">
+
+                    </ul>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown" id="share">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                       aria-haspopup="true"
+                       aria-expanded="false">
+                        <span class="glyphicon glyphicon-share" onmouseover="open_share()"></span></a>
+                    <ul class="dropdown-menu">
+
+                    </ul>
+                </li>
             </ul>
             <form class="navbar-form navbar-right" role="search" id="search">
                 <div class="form-group navbar-left">
@@ -313,7 +346,7 @@
                             <input class="btn btn-lg btn-primary center-block" id="person_reg_btu"
                                    type="button" value="注册"
                                    onmouseover="btu_disable_person('person_reg_btu','confirm_person_box')"
-                                   onclick="remember_user('person_nickname','person_password'),register_person()">
+                                   onclick="remember_user('person_nickname','person_password','person_email'),register_person()">
                         </div>
                         <div class="col-md-6">
                             <input class="btn btn-lg btn-danger center-block" type="reset" value="重置">
@@ -456,7 +489,7 @@
                         <input class="btn btn-lg btn-primary center-block" type="button"
                                id="reg_btu" value="注册"
                                onmouseover="btu_disable_enterprise('reg_btu','confirm_enterprise_box')"
-                               onclick="remember_user('enterprise_nickname','enterprise_password'),register_enterprise()">
+                               onclick="remember_user('enterprise_nickname','enterprise_password','enterprise_email'),register_enterprise()">
                     </div>
                     <div class="col-md-6">
                         <input type="reset" class="btn btn-lg btn-danger center-block"

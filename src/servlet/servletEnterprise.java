@@ -16,6 +16,8 @@ public class servletEnterprise extends HttpServlet {
         Enterprise enterprise=new Enterprise();
         if (enterprise_type.equals("register")){
             enterprise.register(request,response);
+        }else if (enterprise_type.equals("modifyUser")){
+            enterprise.modifyUser(request,response);
         }else if (enterprise_type.equals("initJob")){
             enterprise.initJob(request,response);
         }else if (enterprise_type.equals("addJob")){

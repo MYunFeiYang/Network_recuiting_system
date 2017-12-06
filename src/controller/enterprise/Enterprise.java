@@ -13,7 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Enterprise {
-   public void register(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void register(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/xml; charset=UTF-8");
         response.setHeader("Cache-Control", "no-cache");
@@ -51,11 +51,58 @@ public class Enterprise {
                 response.getWriter().flush();
                 response.getWriter().close();
             }
+            ps.close();
+            conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-   public void initJob(HttpServletRequest request, HttpServletResponse response)
+    public void modifyUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/xml; charset=UTF-8");
+        //以下两句为取消在本地的缓存
+        response.setHeader("Cache-Control", "no-cache");
+        response.setHeader("Pragma", "no-cache");
+        String telephone=request.getParameter("telephone");
+        String nickname=request.getParameter("nickname");
+        String name=request.getParameter("nickname");
+        String industry=request.getParameter("industry");
+        String address=request.getParameter("address");
+        String password=request.getParameter("password");
+
+        DBManager conndb=new DBManager();
+        Connection conn=conndb.getConnection();
+        String sql="update occupy_company set nickname=?,password=?,name=?,industry=?,telephone=?,address=? where nickname=? AND password=?";
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, nickname);
+            ps.setString(2, password);
+            ps.setString(3, name);
+            ps.setString(4, industry);
+            ps.setString(5, telephone);
+            ps.setString(6, address);
+            ps.setString(7, nickname);
+            ps.setString(8, password);
+            boolean tag = ps.execute();
+            if(!tag){
+                String str = "{\"msg\":\"modify_user_success\"}";
+                response.getWriter().print(str);
+                response.getWriter().flush();;
+                response.getWriter().close();;
+            }else{
+                String str = "{\"msg\":\"modify_user_fail\"}";
+                response.getWriter().print(str);
+                response.getWriter().flush();;
+                response.getWriter().close();;
+            }
+            ps.close();
+            conn.close();
+        } catch (SQLException e) {
+            // TODO 自动生成的 catch 块
+            e.printStackTrace();
+        }
+    }
+    public void initJob(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/xml; charset=UTF-8");
@@ -86,7 +133,9 @@ public class Enterprise {
                 response.getWriter().print(job.toString());
                 response.getWriter().flush();
                 response.getWriter().close();
+                rs.close();
                 ps.close();
+                conn.close();
             }
         } catch (SQLException e) {
             // TODO 自动生成的 catch 块
@@ -94,7 +143,7 @@ public class Enterprise {
         }
 
     }
-   public void addJob(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void addJob(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/xml; charset=UTF-8");
         //以下两句为取消在本地的缓存
@@ -129,7 +178,6 @@ public class Enterprise {
             ps.setString(9, effective_time);
             ps.setString(10, email);
             int tag = ps.executeUpdate();
-            ps.close();
             if(tag==1){
                 String str = "{\"msg\":\"add_job_success\"}";
                 response.getWriter().print(str);
@@ -141,6 +189,8 @@ public class Enterprise {
                 response.getWriter().flush();
                 response.getWriter().close();
             }
+            ps.close();
+            conn.close();
         } catch (SQLException e) {
             // TODO 自动生成的 catch 块
             e.printStackTrace();

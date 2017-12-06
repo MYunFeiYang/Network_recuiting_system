@@ -48,7 +48,9 @@ public class Common {
                 response.getWriter().flush();
                 response.getWriter().close();
             }
+            rs.close();
             ps.close();
+            conn.close();
         } catch (SQLException e) {
             // TODO 自动生成的 catch 块
             e.printStackTrace();
@@ -83,7 +85,9 @@ public class Common {
                     response.getWriter().flush();;
                     response.getWriter().close();;
                 }
+                rs.close();
                 ps.close();
+                conn.close();
             } catch (SQLException e) {
                 // TODO 自动生成的 catch 块
                 e.printStackTrace();
@@ -106,7 +110,9 @@ public class Common {
                     response.getWriter().flush();;
                     response.getWriter().close();;
                 }
+                rs.close();
                 ps.close();
+                conn.close();
             } catch (SQLException e) {
                 // TODO 自动生成的 catch 块
                 e.printStackTrace();
@@ -170,7 +176,9 @@ public class Common {
                 response.getWriter().flush();
                 response.getWriter().close();
             }
+            rs.close();
             ps.close();
+            conn.close();
         } catch (SQLException e) {
             // TODO 自动生成的 catch 块
             e.printStackTrace();
@@ -253,6 +261,7 @@ public class Common {
             }
             ps1.close();
             ps2.close();
+            conn.close();
         } catch (SQLException e) {
             // TODO 自动生成的 catch 块
             e.printStackTrace();
@@ -284,7 +293,9 @@ public class Common {
                 companys.add(company);
             }
             response.getWriter().print(companys.toString());
+            rs.close();
             ps.close();
+            conn.close();
         } catch (SQLException e) {
             // TODO 自动生成的 catch 块
             e.printStackTrace();
@@ -312,11 +323,12 @@ public class Common {
                 companys.add(company);
             }
             response.getWriter().print(companys.toString());
+            rs.close();
             ps.close();
+            conn.close();
         } catch (SQLException e) {
             // TODO 自动生成的 catch 块
             e.printStackTrace();
         }
     }
-
 }

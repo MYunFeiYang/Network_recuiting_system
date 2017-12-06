@@ -51,7 +51,7 @@ function query() {
 //filter query
 function query_job_class() {
     $.ajax({
-        url:"/school/job",
+        url:"/query/job",
         type:"POST",
         dataType:"JSON",
         success:function (data) {
@@ -82,65 +82,30 @@ function insert_job_class(data) {
         span.setAttribute("class","glyphicon glyphicon-chevron-right");
         span.setAttribute("style","float:right;border:none");
         li.appendChild(span);
-        li.setAttribute("onclick","query_filter_job(),query_filter_address(),query_company(),change_checked(event,'job_class')");
+        li.setAttribute("onclick","change_checked(event,'job_class',insert_filter_job(),query_filter_address())");
     }
     ul.children[0].classList.add("checked");
     change_footer_position();
 }
-function change_checked(event,id) {
-    var job_class=document.getElementById(id);
-    var ul=job_class.getElementsByTagName("ul");
-    var li=ul[0].getElementsByTagName("li");
-    var i=0;
-    for (;i<li.length;i++){
-        if (li[i].classList.toString().indexOf("checked")!=-1){
-            li[i].classList.remove("checked");
-        }
-    }
-    if (event.target.toString().indexOf("a")!=-1){
-        event.target.parentNode.classList.add("checked");
-    }else {
-        event.target.classList.add("checked");
-    }
-}
-function query_filter_job() {
-    $.ajax({
-        url:"/school/job",
-        type:"POST",
-        dataType:"JSON",
-        success:function (data) {
-            insert_filter_job(data);
-        },
-        fail:function () {
 
-        }
-    });
-}
-function insert_filter_job(data) {
+function insert_filter_job() {
     var filter_job=document.getElementById("filter_job");
     filter_job.innerHTML="";
-    var ul=document.createElement("ul");
-    filter_job.appendChild(ul);
-    for (var i=0;i<data.length;i++){
-        var href=data[i].href;
-        var text=data[i].text;
-        var li=document.createElement("li");
-        ul.appendChild(li);
-        li.setAttribute("style","float:left;padding: 2px 10px;list-style:none");
-        var a=document.createElement("a");
-        li.appendChild(a);
-        li.setAttribute("onclick","change_checked(event,'filter_job')")
-        a.text=text;
-        a.setAttribute("href",href)
-        a.setAttribute("onclick","return false");
+    var job_class=document.getElementById("job_class").innerHTML;
+    filter_job.innerHTML=job_class;
+    var ul=filter_job.getElementsByTagName("ul")[0];
+    ul.classList.remove("main");
+    var li=ul.getElementsByTagName("li");
+    for (var i=0;i<li.length;i++){
+        var span=li[i].getElementsByTagName("span")[0];
+        li[i].removeChild(span);
+        li[i].setAttribute("onclick","change_checked(event,'filter_job'),query_company()");
     }
-    ul.children[0].classList.add("checked");
     change_footer_position();
 }
-
 function query_filter_address() {
     $.ajax({
-        url:"/school/address",
+        url:"/query/address",
         type:"POST",
         dataType:"JSON",
         success:function (data) {
@@ -162,10 +127,9 @@ function insert_filter_address(data) {
         var text = data[i].text;
         var li=document.createElement("li");
         ul.appendChild(li);
-        li.setAttribute("style","float:left;padding: 2px 10px;list-style:none");
         var a=document.createElement("a");
         li.appendChild(a);
-        li.setAttribute("onclick","change_checked(event,'filter_address')")
+        li.setAttribute("onclick","change_checked(event,'filter_address'),query_company()");
         a.setAttribute("href",href);
         a.setAttribute("onclick","return false")
         a.text=text;
@@ -174,9 +138,25 @@ function insert_filter_address(data) {
 }
 
 function query_company() {
+    var filter={};
+    var filter_job=document.getElementById("filter_job");
+    var job=filter_job.getElementsByTagName("li");
+    for (var i=0;i<job.length;i++){
+        if (job[i].classList.toString().indexOf("checked")!=-1){
+            filter.job=job[i].firstChild.text;
+        }
+    };
+    var filter_address=document.getElementById("filter_address");
+    var address=filter_address.getElementsByTagName("li");
+    for (var i=0;i<address.length;i++){
+        if (address[i].classList.toString().indexOf("checked")!=-1){
+            filter.address=address[i].firstChild.text;
+        }
+    };
     $.ajax({
-        url:"/school/company",
+        url:"/query/company",
         type:"POST",
+        data:filter,
         dataType:"JSON",
         success:function (data) {
             insert_company(data)
@@ -188,6 +168,7 @@ function query_company() {
 }
 function insert_company(data) {
     var companys=document.getElementById("company");
+    companys.innerHTML="";
     for (var i=0;i<data.length;i++){
         var company=data[i].company;
         var position=data[i].position;
@@ -229,5 +210,21 @@ function insert_company(data) {
         a3.setAttribute("onclick","return false");
         a4.setAttribute("onclick","return false");
         a4.setAttribute("style","font-size:6px");
+    }
+}
+function change_checked(event,id) {
+    var job_class=document.getElementById(id);
+    var ul=job_class.getElementsByTagName("ul");
+    var li=ul[0].getElementsByTagName("li");
+    var i=0;
+    for (;i<li.length;i++){
+        if (li[i].classList.toString().indexOf("checked")!=-1){
+            li[i].classList.remove("checked");
+        }
+    }
+    if (event.target.toString().indexOf("a")!=-1){
+        event.target.parentNode.classList.add("checked");
+    }else {
+        event.target.classList.add("checked");
     }
 }

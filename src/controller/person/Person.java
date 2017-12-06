@@ -40,7 +40,6 @@ public class Person {
             ps.setString(5, email);
             ps.setString(6, dataString);
             int tag = ps.executeUpdate();
-            ps.close();
             if(tag==1){
                 String str = "{\"msg\":\"success\"}";
                 response.getWriter().print(str);
@@ -52,6 +51,8 @@ public class Person {
                 response.getWriter().flush();;
                 response.getWriter().close();;
             }
+            ps.close();
+            conn.close();
         } catch (SQLException e) {
             // TODO 自动生成的 catch 块
             e.printStackTrace();
@@ -66,17 +67,17 @@ public class Person {
         String telephone=request.getParameter("telephone");
         String nickname=request.getParameter("nickname");
         String password=request.getParameter("password");
-        String email=request.getParameter("email");
 
         DBManager conndb=new DBManager();
         Connection conn=conndb.getConnection();
-        String sql="update occupy_person set nickname=?,password=?,email=? where telephone=?";
+        String sql="update occupy_person set nickname=?,password=?,telephone=? where nickname=? AND password=?";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, nickname);
             ps.setString(2, password);
-            ps.setString(3, email);
-            ps.setString(4, telephone);
+            ps.setString(3,telephone);
+            ps.setString(4, nickname);
+            ps.setString(5, password);
             boolean tag = ps.execute();
             if(!tag){
                 String str = "{\"msg\":\"modify_user_success\"}";
@@ -90,6 +91,7 @@ public class Person {
                 response.getWriter().close();;
             }
             ps.close();
+            conn.close();
         } catch (SQLException e) {
             // TODO 自动生成的 catch 块
             e.printStackTrace();
@@ -123,8 +125,10 @@ public class Person {
                 response.getWriter().print(user.toString());
                 response.getWriter().flush();
                 response.getWriter().close();
-                ps.close();
             }
+            rs.close();
+            ps.close();
+            conn.close();
         } catch (SQLException e) {
             // TODO 自动生成的 catch 块
             e.printStackTrace();
@@ -171,7 +175,6 @@ public class Person {
             ps.setString(12, telephone);
             ps.setString(13, email);
             int tag = ps.executeUpdate();
-            ps.close();
             if(tag==1){
                 String str = "{\"msg\":\"add_resume_success\"}";
                 response.getWriter().print(str);
@@ -183,6 +186,8 @@ public class Person {
                 response.getWriter().flush();;
                 response.getWriter().close();;
             }
+            ps.close();
+            conn.close();
         } catch (SQLException e) {
             // TODO 自动生成的 catch 块
             e.printStackTrace();

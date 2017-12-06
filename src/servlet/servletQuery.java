@@ -1,6 +1,6 @@
 package servlet;
 
-import controller.common.School;
+import controller.common.Query;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,19 +9,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "school")
-public class servletSchool extends HttpServlet {
+@WebServlet(name = "query")
+public class servletQuery extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("utf-8");
         response.setContentType("text/html;charset=utf-8");
         String url=request.getRequestURI();
-        School school =new School();
+        Query query =new Query();
         if (url.indexOf("job")!=-1){
-            school.init_filter_job(request,response);
+            query.init_filter_job(request,response);
         }else if (url.indexOf("address")!=-1){
-            school.init_filter_address(request,response);
+            query.init_filter_address(request,response);
         }else if (url.indexOf("company")!=-1){
-            school.init_filter_company(request,response);
+            query.queryCompany(request,response);
         }else {
             return;
         }

@@ -15,7 +15,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class School {
+public class Query {
     public void init_filter_job(HttpServletRequest request, HttpServletResponse response) throws IOException{
         DBManager DBManager =new DBManager();
         Connection conn= DBManager.getConnection();
@@ -35,6 +35,7 @@ public class School {
             response.getWriter().close();
             rs.close();
             ps.close();
+            conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -58,16 +59,24 @@ public class School {
             response.getWriter().close();
             rs.close();
             ps.close();
+            conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-    public void init_filter_company(HttpServletRequest request, HttpServletResponse response) throws IOException{
+    public void queryCompany(HttpServletRequest request, HttpServletResponse response) throws IOException{
+        String job=request.getParameter("job");
+        String address=request.getParameter("address");
+        job="%"+job+"%";
+        address="%"+address+"%";
         DBManager DBManager =new DBManager();
         Connection conn= DBManager.getConnection();
-        String sql="SELECT company,position, address,time FROM (SELECT ROW_NUMBER() OVER(ORDER BY id ASC) AS ROWID,* FROM school_rercuit)AS TEMP WHERE ROWID<=12";
+        //分页查询
+//        String sql="SELECT company,position, address,time FROM (SELECT ROW_NUMBER() OVER(ORDER BY id ASC) AS ROWID,* FROM school_rercuit)AS TEMP WHERE ROWID<=12";
+        String sql="SELECT company, position, address, time FROM school_rercuit WHERE (address LIKE ?)";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1,address);
             ResultSet rs = ps.executeQuery();
             JSONArray companys=new JSONArray();
             JSONObject company=new JSONObject();
@@ -82,6 +91,7 @@ public class School {
             response.getWriter().close();
             rs.close();
             ps.close();
+            conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }

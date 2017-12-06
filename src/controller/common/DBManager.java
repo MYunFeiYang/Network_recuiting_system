@@ -7,10 +7,9 @@ import java.sql.SQLException;
 
 public class DBManager {
     private static DataSource datasource;
-
+    Connection conn = null;
     public Connection getConnection() {
         setupJdbcPool();
-        Connection conn = null;
         try {
             conn = datasource.getConnection();
         } catch (SQLException e) { }
@@ -22,15 +21,14 @@ public class DBManager {
         p.setUrl("jdbc:sqlserver://localhost:1433;databaseName=Network-recuiting-system");
         p.setUsername("sa");
         p.setPassword("420222aa");
-        p.setMaxActive(100);
-        p.setInitialSize(10);
-        p.setMaxWait(10000);
-        p.setMaxIdle(50);
-        p.setMinIdle(10);
-        p.setDefaultAutoCommit(false);
+        p.setMaxActive(20);
+        p.setInitialSize(5);
+        p.setMaxWait(30000);
+        p.setMaxIdle(10);
+        p.setMinIdle(2);
+        p.setDefaultAutoCommit(true);
         datasource = new DataSource();
         datasource.setPoolProperties(p);
-
     }
 
 }

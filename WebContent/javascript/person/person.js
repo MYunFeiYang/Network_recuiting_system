@@ -26,8 +26,8 @@ function ajax_register(user) {
 }
 function register_result(data) {
     if (data.msg=="success"){
-        document.getElementById("myregister-person").innerHTML="注册成功";
-        document.getElementById("person_reg_btu").setAttribute("disabled","true");
+        var div=document.getElementById("register-person");
+        div.getElementsByClassName("modal-content")[0].innerHTML="注册成功";
     }
 }
 function modify_user_person() {
@@ -36,38 +36,34 @@ function modify_user_person() {
     document.getElementById("person_email_group").style.display="none";
     document.getElementById("person_reg_btu").value="提交修改";
     document.getElementById("person_reg_btu").setAttribute("onmouseover","btu_disable_person_modify")
-    document.getElementById("person_reg_btu").setAttribute("onclick","modify_user");
+    document.getElementById("person_reg_btu").setAttribute("onclick","modify_person()");
 }
-function modify_user() {
-    var user_string = document.cookie.split(";")[0].split("=")[1];
-    var user = JSON.parse(user_string);
-    var telephone = user.telephone;
-    var nickname=document.getElementById("nickname").value;
-    var password=document.getElementById("password").value;
-    var email=document.getElementById("job_email").value;
+function modify_person() {
+    var nickname=document.getElementById("person_nickname").value;
+    var password=document.getElementById("person_password").value;
+    var telephone=document.getElementById("person_telephone").value;
     var modify_user={};
     modify_user.telephone=telephone;
     modify_user.nickname=nickname;
     modify_user.password=password;
-    modify_user.email=email;
-    modify_user_ajax(modify_user);
+    modify_person_ajax(modify_user);
 }
-function modify_user_ajax(user) {
+function modify_person_ajax(user) {
     $.ajax({
         url: '/person?person=modifyUser',
         data: user,
         type: 'POST',
         dataType: 'JSON',
         success: function (data) {
-            modify_user_result(data);
+            modify_person_result(data,"confirm_person_box");
         },
         fail: function () {
 
         }
     })
 }
-function modify_user_result(data) {
-    var confirm_info_box=document.getElementById("confirm_info_box");
+function modify_person_result(data,confirm_info_box) {
+    var confirm_info_box=document.getElementById(confirm_info_box);
     if (data.msg=="modify_user_success"){
         confirm_info_box.innerHTML="信息修改成功";
         confirm_info_box.setAttribute("class","alert-success");

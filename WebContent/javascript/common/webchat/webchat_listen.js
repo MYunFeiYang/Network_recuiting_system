@@ -31,7 +31,7 @@ function listen() {
         var nickname = getnickname();
         var msg = {"nickname": nickname};
         socket.send(JSON.stringify(msg));
-        $("#show_content").append("<div class='system_message col-md-4 col-md-offset-4'>欢迎加入群聊!</div>");
+        show_system_message_to_self("欢迎加入群聊");
     };
     //收到消息时触发
     socket.onmessage = function (evt) {
@@ -53,11 +53,11 @@ function listen() {
     };
     //关闭连接时触发
     socket.onclose = function (evt) {
-        $("#show_content").append("<div class='system_message col-md-4 col-md-offset-4'>" + "你已关闭连接!" + "</div>");
+        show_system_message_to_self("你已关闭连接")
     }
     //连接错误时触发
     socket.onerror = function (evt) {
-        $("#show_content").append("<div class='system_message col-md-4 col-md-offset-4'>" + "连接发生错误!" + "</div>");
+        show_system_message_to_self("链接发生错误")
     }
 }
 

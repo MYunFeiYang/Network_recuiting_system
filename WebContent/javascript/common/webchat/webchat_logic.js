@@ -3,18 +3,22 @@ function emit() {
 
     //encodeScript方法用来转义<>标签，防止脚本输入，方法内容在core.js里面
     var text = encodeScript($("#content").val());
-    var nickname=getnickname();
-    var msg = {
-        "message": text,
-        "nickname":nickname
-    };
-    msg = JSON.stringify(msg);
-    //向服务端发送消息
-    socket.send(msg);
-    //将自己发送的消息内容静态加载到html上，服务端实现自己发送的消息不会推送给自己
-    $("#show_content").append("<div class='self' style='margin-right: 2px'>" + text + "</div>");
-    //将消息文本框清空
-    $("#content").val("");
+    if (text==""){
+        return;
+    }else {
+        var nickname=getnickname();
+        var msg = {
+            "message": text,
+            "nickname":nickname
+        };
+        msg = JSON.stringify(msg);
+        //向服务端发送消息
+        socket.send(msg);
+        //将自己发送的消息内容静态加载到html上，服务端实现自己发送的消息不会推送给自己
+        add_self_message(text);
+        //将消息文本框清空
+        $("#content").val("");
+    }
 }
 
 //按下回车键时触发发送消息方法
@@ -81,18 +85,38 @@ function show_system_message(data) {
 }
 function show_chat_message(data) {
     var show_content = document.getElementById("show_content");
-    var div = document.createElement("div");
-    show_content.appendChild(div);
-    div.setAttribute("class","chatBox");
+    var chatBox = document.createElement("div");
+    show_content.appendChild(chatBox);
+    chatBox.setAttribute("class","chatBox");
+    var left=document.createElement("div");
+    var right=document.createElement("div");
+    chatBox.appendChild(left);
+    chatBox.appendChild(right);
+    left.setAttribute("style","display: inline-block;");
+    right.setAttribute("style","display: inline-block;");
     var photo = document.createElement("span");
     var username = document.createElement("span");
     var message = document.createElement("span");
-    div.appendChild(photo);
-    div.appendChild(username);
-    div.appendChild(message);
+    left.appendChild(photo);
+    right.appendChild(username);
+    right.appendChild(message);
     photo.setAttribute("class", "glyphicon glyphicon-user photo");
     username.setAttribute("class", "username");
     message.setAttribute("class", "message");
     username.innerHTML = data.nickname;
     message.innerHTML = data.message;
+}
+function add_self_message(text) {
+    var show_content=document.getElementById("show_content");
+    var div=document.createElement("div");
+    show_content.appendChild(div);
+    div.setAttribute("class","self");
+    div.innerHTML=text;
+}
+function show_system_message_to_self(text) {
+    var show_content=document.getElementById("show_content");
+    var div =document.createElement("div");
+    show_content.appendChild(div);
+    div.setAttribute("class","system_message");
+    div.innerHTML=text;
 }

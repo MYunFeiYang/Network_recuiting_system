@@ -70,9 +70,9 @@ function login_session_result(data) {
         init_user(data.nickname);
         var user_center=document.getElementById("user_center");
         var modify_user=document.getElementById("modify_user");
-        if (data.login_type=="controller.person"){
+        if (data.login_type=="person"){
             modify_user.setAttribute("data-toggle","modal");
-            modify_user.setAttribute("data-target","#register-controller.person");
+            modify_user.setAttribute("data-target","#register-person");
             modify_user.setAttribute("onclick","modify_user_person()");
             var add_resume=document.createElement("li");
             var add_resume_a=document.createElement("a");
@@ -110,9 +110,9 @@ function login_session_result(data) {
             log_out.setAttribute("style","color:red");
             log_out.setAttribute("onclick","login_session('delete')");
             log_out.setAttribute("href","index.html");
-        }else if(data.login_type="controller.person"){
+        }else if(data.login_type="person"){
             modify_user.setAttribute("data-toggle","modal");
-            modify_user.setAttribute("data-target","#register-controller.enterprise");
+            modify_user.setAttribute("data-target","#register-enterprise");
             modify_user.setAttribute("onclick","modify_user_enterprise()");
             var add_job=document.createElement("li");
             var add_job_a=document.createElement("a");
@@ -370,13 +370,13 @@ function set_marquee_left() {
     var left=document.getElementById("left");
     var marquee=document.getElementById("marquee");
     left.getElementsByClassName("row")[0].appendChild(marquee);
-    get_news("controller.person");
+    get_news("person");
 }
 function set_marquee_right() {
     var right=document.getElementById("right");
     var marquee=document.getElementById("marquee");
     right.getElementsByClassName("row")[0].appendChild(marquee);
-    get_news("controller.person");
+    get_news("person");
 }
 function change_frame_content() {
     var frame=document.getElementById("frame");
