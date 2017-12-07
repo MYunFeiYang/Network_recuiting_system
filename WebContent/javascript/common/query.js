@@ -84,7 +84,7 @@ function insert_job_class(data) {
         span.setAttribute("class","glyphicon glyphicon-chevron-right");
         span.setAttribute("style","float:right;border:none");
         li.appendChild(span);
-        li.setAttribute("onclick","change_checked(event,'job_class',insert_filter_job(),query_filter_address()),query_company()");
+        li.setAttribute("onclick","change_checked(event,'job_class',insert_filter_job(),query_filter_address())");
     }
     ul.children[0].classList.add("checked");
     change_footer_position();
@@ -101,7 +101,7 @@ function insert_filter_job() {
     for (var i=0;i<li.length;i++){
         var span=li[i].getElementsByTagName("span")[0];
         li[i].removeChild(span);
-        li[i].setAttribute("onclick","change_checked(event,'filter_job'),query_company()");
+        li[i].setAttribute("onclick","change_checked(event,'filter_job'),paging(1)");
     }
     change_footer_position();
 }
@@ -131,7 +131,7 @@ function insert_filter_address(data) {
         ul.appendChild(li);
         var a=document.createElement("a");
         li.appendChild(a);
-        li.setAttribute("onclick","change_checked(event,'filter_address'),query_company()");
+        li.setAttribute("onclick","change_checked(event,'filter_address'),paging(1)");
         a.setAttribute("href",href);
         a.setAttribute("onclick","return false")
         a.text=text;
@@ -139,79 +139,81 @@ function insert_filter_address(data) {
     ul.children[0].classList.add("checked");
 }
 
-function query_company() {
-    var filter={};
+function paging(pageNum) {
+    var page={};
+    page.pageSize=10;
+    page.pageNum=pageNum;
     var filter_job=document.getElementById("filter_job");
     var job=filter_job.getElementsByTagName("li");
     for (var i=0;i<job.length;i++){
         if (job[i].classList.toString().indexOf("checked")!=-1){
-            filter.job=job[i].firstChild.text;
+            page.job=job[i].firstChild.text;
         }
     };
     var filter_address=document.getElementById("filter_address");
     var address=filter_address.getElementsByTagName("li");
     for (var i=0;i<address.length;i++){
         if (address[i].classList.toString().indexOf("checked")!=-1){
-            filter.address=address[i].firstChild.text;
+            page.address=address[i].firstChild.text;
         }
     };
     $.ajax({
-        url:"/query/company",
+        url:"/public?public=paging",
+        data:page,
         type:"POST",
-        data:filter,
         dataType:"JSON",
         success:function (data) {
-            insert_company(data)
+            pagingResult(data);
         },
         fail:function () {
 
         }
-    });
+    })
 }
-function insert_company(data) {
-    var companys=document.getElementById("company");
-    companys.innerHTML="";
-    for (var i=0;i<data.length;i++){
-        var company=data[i].company;
-        var position=data[i].position;
-        var address=data[i].address;
-        var time=data[i].time;
+function pagingResult(data) {
+    var start=data[0].start;
+    var end=data[0].end;
+    var ul=document.getElementsByClassName("pagination")[0];
+    ul.innerHTML="";
+    for (var i=start;i<=end;i++){
+        var li=document.createElement("li");
+        var a=document.createElement("a");
+        ul.append(li);
+        li.appendChild(a);
+        a.setAttribute("onclick","paging(this.text)");
+        a.text=i;
+    };
+    var list=data[0].list;
+    var company=document.getElementById("company");
+    company.innerHTML="";
+    for (var i=0;i<list.length;i++){
         var tr=document.createElement("tr");
-        companys.appendChild(tr);
-        tr.setAttribute("class","row")
         var td1=document.createElement("td");
-        var a1=document.createElement("a");
-        a1.text=company;
-        tr.appendChild(td1);
-        td1.setAttribute("class","col-md-2");
-        td1.appendChild(a1);
         var td2=document.createElement("td");
-        var a2=document.createElement("a");
-        a2.text=position;
-        tr.appendChild(td2);
-        td2.setAttribute("class","col-md-6");
-        td2.appendChild(a2);
         var td3=document.createElement("td");
-        var a3=document.createElement("a");
-        a3.text=address;
-        tr.appendChild(td3);
-        td3.setAttribute("class","col-md-2");
-        td3.appendChild(a3);
         var td4=document.createElement("td");
-        var a4=document.createElement("a");
-        a4.text=time;
+        company.appendChild(tr);
+        tr.appendChild(td1);
+        tr.appendChild(td2);
+        tr.appendChild(td3);
         tr.appendChild(td4);
-        td4.setAttribute("class","col-md-2");
+        var a1=document.createElement("a");
+        var a2=document.createElement("a");
+        var a3=document.createElement("a");
+        var a4=document.createElement("a");
+        td1.appendChild(a1);
+        td2.appendChild(a2);
+        td3.appendChild(a3);
         td4.appendChild(a4);
-        a1.setAttribute("title",company);
-        a2.setAttribute("title",position);
-        a3.setAttribute("title",address);
-        a4.setAttribute("title",time);
-        a1.setAttribute("onclick","return false");
-        a2.setAttribute("onclick","return false");
-        a3.setAttribute("onclick","return false");
-        a4.setAttribute("onclick","return false");
-        a4.setAttribute("style","font-size:6px");
+        a1.innerHTML=list[i].name;
+        a2.innerHTML=list[i].position;
+        a3.innerHTML=list[i].address;
+        a4.innerHTML=list[i].time;
+        tr.setAttribute("class","row");
+        td1.setAttribute("class","col-md-2");
+        td2.setAttribute("class","col-md-6");
+        td3.setAttribute("class","col-md-2");
+        td4.setAttribute("class","col-md-2");
     }
 }
 function change_checked(event,id) {

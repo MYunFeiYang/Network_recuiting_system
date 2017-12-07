@@ -1,4 +1,4 @@
-package servlet;
+package controller;
 
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;

@@ -1,6 +1,6 @@
-package servlet;
+package controller;
 
-import controller.enterprise.Enterprise;
+import service.enterprise.Enterprise;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

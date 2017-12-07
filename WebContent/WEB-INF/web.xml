@@ -11,7 +11,7 @@
   </welcome-file-list>
   <servlet>
     <servlet-name>person</servlet-name>
-    <servlet-class>servlet.servletPerson</servlet-class>
+    <servlet-class>controller.servletPerson</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>person</servlet-name>
@@ -19,7 +19,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>enterprise</servlet-name>
-    <servlet-class>servlet.servletEnterprise</servlet-class>
+    <servlet-class>controller.servletEnterprise</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>enterprise</servlet-name>
@@ -27,7 +27,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>public</servlet-name>
-    <servlet-class>servlet.servletPublic</servlet-class>
+    <servlet-class>controller.servletPublic</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>public</servlet-name>
@@ -35,7 +35,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>query</servlet-name>
-    <servlet-class>servlet.servletQuery</servlet-class>
+    <servlet-class>controller.servletQuery</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>query</servlet-name>
@@ -43,7 +43,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>fileupload</servlet-name>
-    <servlet-class>servlet.FileUpload</servlet-class>
+    <servlet-class>controller.FileUpload</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>fileupload</servlet-name>
@@ -51,7 +51,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>fileDownload</servlet-name>
-    <servlet-class>servlet.FileDownload</servlet-class>
+    <servlet-class>controller.FileDownload</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>fileDownload</servlet-name>

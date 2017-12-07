@@ -1,6 +1,6 @@
-package controller.common.spider.getDemo;
+package service.common.spider.getDemo;
 
-import controller.common.spider.insertDB.DB_table;
+import service.common.spider.insertDB.DB_table;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -12,7 +12,7 @@ import java.io.IOException;
 public class Table {
     public static void main(String args[]) throws IOException{
         Table table =new Table();
-        table.getNews();
+        table.school_rercuit();
     }
 
     public void school_rercuit() throws IOException {

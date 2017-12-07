@@ -1,6 +1,6 @@
-package servlet;
+package controller;
 
-import controller.common.Common;
+import service.common.Common;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -28,6 +28,8 @@ public class servletPublic extends HttpServlet {
             common.getNews(request,response);
         }else if (public_type.equals("query")){
             common.query(request,response);
+        }else if (public_type.equals("paging")){
+            common.Paging(request,response);
         }
         else {
             return;

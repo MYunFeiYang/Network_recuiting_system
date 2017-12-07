@@ -1,9 +1,10 @@
-package controller.common;
+package service.common;
 
+import model.DBManager;
 import model.common.Address;
+import model.common.Company;
 import model.common.Job;
 import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -86,16 +87,17 @@ public class Query {
                 ps.setString(1, address);
             }
             ResultSet rs = ps.executeQuery();
-            JSONArray companys = new JSONArray();
-            JSONObject company = new JSONObject();
+            List<Company> list=new ArrayList<Company>();
+            Company company=new Company();
             while (rs.next()) {
-                company.put("company", rs.getString(1));
-                company.put("position", rs.getString(2));
-                company.put("address", rs.getString(3));
-                company.put("time", rs.getString(4));
-                companys.add(company);
+                company.setName(rs.getString(1));
+                company.setPosition(rs.getString(2));
+                company.setAddress(rs.getString(3));
+                company.setTime(rs.getString(4));
+                list.add(company);
+                list=JSONArray.fromObject(list);
             }
-            response.getWriter().print(companys.toString());
+            response.getWriter().print(list.toString());
             response.getWriter().close();
             rs.close();
             ps.close();

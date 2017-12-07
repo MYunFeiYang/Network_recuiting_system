@@ -1,8 +1,7 @@
-package controller.enterprise;
+package service.person;
 
-import controller.common.DBManager;
+import model.DBManager;
 import net.sf.json.JSONObject;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,49 +10,51 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
-public class Enterprise {
+import java.text.SimpleDateFormat;
+import java.util.Date;
+public class Person {
     public void register(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/xml; charset=UTF-8");
+        //以下两句为取消在本地的缓存
         response.setHeader("Cache-Control", "no-cache");
         response.setHeader("Pragma", "no-cache");
         String nickname=request.getParameter("nickname");
         String password=request.getParameter("password");
         String name=request.getParameter("name");
-        String industry=request.getParameter("industry");
         String telephone=request.getParameter("telephone");
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");//设置日期格式
+        String dataString=df.format(new Date());// new Date()为获取当前系统时间
         String email=request.getParameter("email");
-        String address=request.getParameter("address");
 
         DBManager conndb=new DBManager();
         Connection conn=conndb.getConnection();
-        String sql="insert into occupy_company (nickname,password,name,industry,telephone,email,address) values(?,?,?,?,?,?,?)";
+        String sql="insert into occupy_person (nickname,password,"
+                + "name,telephone,email,regrime) values(?,?,?,?,?,?)";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, nickname);
             ps.setString(2, password);
             ps.setString(3, name);
-            ps.setString(4, industry);
-            ps.setString(5, telephone);
-            ps.setString(6, email);
-            ps.setString(7, address);
+            ps.setString(4, telephone);
+            ps.setString(5, email);
+            ps.setString(6, dataString);
             int tag = ps.executeUpdate();
-            ps.close();
             if(tag==1){
                 String str = "{\"msg\":\"success\"}";
                 response.getWriter().print(str);
-                response.getWriter().flush();
-                response.getWriter().close();
+                response.getWriter().flush();;
+                response.getWriter().close();;
             }else{
                 String str = "{\"msg\":\"fail\"}";
                 response.getWriter().print(str);
-                response.getWriter().flush();
-                response.getWriter().close();
+                response.getWriter().flush();;
+                response.getWriter().close();;
             }
             ps.close();
             conn.close();
         } catch (SQLException e) {
+            // TODO 自动生成的 catch 块
             e.printStackTrace();
         }
     }
@@ -65,24 +66,18 @@ public class Enterprise {
         response.setHeader("Pragma", "no-cache");
         String telephone=request.getParameter("telephone");
         String nickname=request.getParameter("nickname");
-        String name=request.getParameter("nickname");
-        String industry=request.getParameter("industry");
-        String address=request.getParameter("address");
         String password=request.getParameter("password");
 
         DBManager conndb=new DBManager();
         Connection conn=conndb.getConnection();
-        String sql="update occupy_company set nickname=?,password=?,name=?,industry=?,telephone=?,address=? where nickname=? AND password=?";
+        String sql="update occupy_person set nickname=?,password=?,telephone=? where nickname=? AND password=?";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, nickname);
             ps.setString(2, password);
-            ps.setString(3, name);
-            ps.setString(4, industry);
-            ps.setString(5, telephone);
-            ps.setString(6, address);
-            ps.setString(7, nickname);
-            ps.setString(8, password);
+            ps.setString(3,telephone);
+            ps.setString(4, nickname);
+            ps.setString(5, password);
             boolean tag = ps.execute();
             if(!tag){
                 String str = "{\"msg\":\"modify_user_success\"}";
@@ -102,8 +97,7 @@ public class Enterprise {
             e.printStackTrace();
         }
     }
-    public void initJob(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    public void initResume(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/xml; charset=UTF-8");
         // 以下两句为取消在本地的缓存
@@ -111,83 +105,86 @@ public class Enterprise {
         response.setHeader("Pragma", "no-cache");
         String nickname = request.getParameter("nickname");
         String password = request.getParameter("password");
-        System.out.println(nickname);
+        // System.out.println(nickname);
         DBManager conndb = new DBManager();
         Connection conn = conndb.getConnection();
         try {
-            String sql = "select name,address,industry,email from occupy_company where nickname=? and password=?";
+            String sql = "select name,telephone,email from occupy_person where nickname=? and password=?";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, nickname);
             ps.setString(2, password);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 String name = rs.getString("name");
-                String address = rs.getString("address");
-                String industry = rs.getString("industry");
+                String telephone = rs.getString("telephone");
                 String email = rs.getString("email");
-                JSONObject job = new JSONObject();
-                job.put("name", name);
-                job.put("address", address);
-                job.put("industry", industry);
-                job.put("email", email);
-                response.getWriter().print(job.toString());
+                JSONObject user = new JSONObject();
+                user.put("name", name);
+                user.put("telephone", telephone);
+                user.put("email", email);
+                response.getWriter().print(user.toString());
                 response.getWriter().flush();
                 response.getWriter().close();
-                rs.close();
-                ps.close();
-                conn.close();
             }
+            rs.close();
+            ps.close();
+            conn.close();
         } catch (SQLException e) {
             // TODO 自动生成的 catch 块
             e.printStackTrace();
         }
 
     }
-    public void addJob(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void addResume(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/xml; charset=UTF-8");
         //以下两句为取消在本地的缓存
         response.setHeader("Cache-Control", "no-cache");
         response.setHeader("Pragma", "no-cache");
-
+        String nickname=request.getParameter("nickname");
+        String password=request.getParameter("password");
         String name=request.getParameter("name");
-        String address=request.getParameter("address");
-        String industry=request.getParameter("industry");
-        String job=request.getParameter("job_name");
-        String number=request.getParameter("number");
-        String salary=request.getParameter("salary");
-        String publish_time=request.getParameter("publish_time");
-        String effective_time=request.getParameter("effective_time");
+        String age=request.getParameter("age");
+        String sex=request.getParameter("sex");
+        String origin=request.getParameter("origin");
+        String collage=request.getParameter("collage");
+        String specialty=request.getParameter("specialty");
+        String degree=request.getParameter("degree");
+        String admission_data=request.getParameter("admission_data");
+        String graduation_data=request.getParameter("graduation_data");
         String telephone=request.getParameter("telephone");
         String email=request.getParameter("email");
 
         DBManager conndb=new DBManager();
         Connection conn=conndb.getConnection();
-        String sql="insert into occupy_jobs (telephone,name,address,industry,job,number,salary,publish_time,"
-                + "effective_time,email) values(?,?,?,?,?,?,?,?,?,?)";
+        String sql="insert into occupy_resume (nickname,password,name,age,sex,origin,collage,specialty,"
+                + "degree,admission_data,graduation_data,telephone,email) values(?,?,?,?,?,?,?,?,?,?,?,?,?)";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1, telephone);
-            ps.setString(2, name);
-            ps.setString(3, address);
-            ps.setString(4,industry);
-            ps.setString(5, job);
-            ps.setString(6, number);
-            ps.setString(7, salary);
-            ps.setString(8, publish_time);
-            ps.setString(9, effective_time);
-            ps.setString(10, email);
+            ps.setString(1, nickname);
+            ps.setString(2, password);
+            ps.setString(3, name);
+            ps.setString(4, age);
+            ps.setString(5, sex);
+            ps.setString(6, origin);
+            ps.setString(7, collage);
+            ps.setString(8, specialty);
+            ps.setString(9, degree);
+            ps.setString(10, admission_data);
+            ps.setString(11, graduation_data);
+            ps.setString(12, telephone);
+            ps.setString(13, email);
             int tag = ps.executeUpdate();
             if(tag==1){
-                String str = "{\"msg\":\"add_job_success\"}";
+                String str = "{\"msg\":\"add_resume_success\"}";
                 response.getWriter().print(str);
-                response.getWriter().flush();
-                response.getWriter().close();
+                response.getWriter().flush();;
+                response.getWriter().close();;
             }else{
-                String str = "{\"msg\":\"add_job_fail\"}";
+                String str = "{\"msg\":\"add_resume_fail\"}";
                 response.getWriter().print(str);
-                response.getWriter().flush();
-                response.getWriter().close();
+                response.getWriter().flush();;
+                response.getWriter().close();;
             }
             ps.close();
             conn.close();
@@ -196,5 +193,4 @@ public class Enterprise {
             e.printStackTrace();
         }
     }
-
 }

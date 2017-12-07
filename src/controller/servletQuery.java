@@ -1,6 +1,6 @@
-package servlet;
+package controller;
 
-import controller.common.Query;
+import service.common.Query;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

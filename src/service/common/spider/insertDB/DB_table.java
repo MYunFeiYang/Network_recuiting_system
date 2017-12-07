@@ -1,6 +1,6 @@
-package controller.common.spider.insertDB;
+package service.common.spider.insertDB;
 
-import controller.common.DBManager;
+import model.DBManager;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -23,7 +23,9 @@ public class DB_table {
             if (rs.next()){
                 System.out.println(rs);
             }
+            rs.close();
             ps.close();
+            conn.close();
         } catch (SQLException e) {
             // TODO 自动生成的 catch 块
             e.printStackTrace();
@@ -38,10 +40,8 @@ public class DB_table {
             ps.setString(1, href);
             ps.setString(2, text);
             boolean rs=ps.execute();
-            if (rs){
-                System.out.println(rs);
-            }
             ps.close();
+            conn.close();
         } catch (SQLException e) {
             // TODO 自动生成的 catch 块
             e.printStackTrace();
@@ -56,10 +56,8 @@ public class DB_table {
             ps.setString(1, href);
             ps.setString(2, text);
             boolean rs=ps.execute();
-            if (rs){
-                System.out.println(rs);
-            }
             ps.close();
+            conn.close();
         } catch (SQLException e) {
             // TODO 自动生成的 catch 块
             e.printStackTrace();
@@ -73,11 +71,8 @@ public class DB_table {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, href);
             ps.setString(2, text);
-            boolean rs=ps.execute();
-            if (rs){
-                System.out.println(rs);
-            }
             ps.close();
+            conn.close();
         } catch (SQLException e) {
             // TODO 自动生成的 catch 块
             e.printStackTrace();

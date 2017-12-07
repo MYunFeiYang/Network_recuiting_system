@@ -1,5 +1,8 @@
-package controller.common;
+package service.common;
 
+import model.DBManager;
+import model.common.Company;
+import model.common.PageBean;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
@@ -17,6 +20,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 import java.util.Random;
 
@@ -265,7 +270,7 @@ public class Common {
         DBManager conndb = new DBManager();
         Connection conn = conndb.getConnection();
         String sql;
-        if (user_login.equals("controller/person")) {
+        if (user_login.equals("service/person")) {
             sql = "SELECT company,href FROM (SELECT ROW_NUMBER() OVER(ORDER BY id ASC) AS ROWID,* FROM Hot_recruitment)AS TEMP WHERE ROWID<=50";
         } else {
             sql = "SELECT company,href FROM (SELECT ROW_NUMBER() OVER(ORDER BY id ASC) AS ROWID,* FROM Hot_recruitment)AS TEMP WHERE ROWID<=50";
@@ -317,6 +322,60 @@ public class Common {
             conn.close();
         } catch (SQLException e) {
             // TODO 自动生成的 catch 块
+            e.printStackTrace();
+        }
+    }
+
+    public void Paging(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/xml; charset=UTF-8");
+        //以下两句为取消在本地的缓存
+        response.setHeader("Cache-Control", "no-cache");
+        response.setHeader("Pragma", "no-cache");
+        int pageSize=Integer.parseInt(request.getParameter("pageSize"));
+        int pageNum=Integer.parseInt(request.getParameter("pageNum"));
+        String job=request.getParameter("job");
+        String address=request.getParameter("address");
+        address="%"+address+"%";
+        DBManager dbManager=new DBManager();
+        Connection conn=dbManager.getConnection();
+        List<Company> companyList=new ArrayList<Company>();
+        List<PageBean> pageBeanList=new ArrayList<PageBean>();
+        Company company=new Company();
+        String sql1 = "SELECT COUNT (company) FROM school_rercuit WHERE address LIKE ?";
+        String sql = "SELECT company,position, address,time FROM (SELECT ROW_NUMBER() OVER(ORDER BY id ASC) AS ROWID,* FROM school_rercuit WHERE address LIKE ?)AS TEMP WHERE (ROWID>? AND ROWID<=?)";
+        try {
+            PreparedStatement ps1=conn.prepareStatement(sql1);
+            ps1.setString(1,address);
+            ResultSet rs1=ps1.executeQuery();
+            int rowCount=0;
+            while (rs1.next()){
+                rowCount=rs1.getInt(1);
+            }
+            PreparedStatement ps=conn.prepareStatement(sql);
+            ps.setString(1,address);
+            ps.setString(2,(pageNum-1)*pageSize+"");
+            ps.setString(3,pageNum*pageSize+"");
+            ResultSet rs=ps.executeQuery();
+            while (rs.next()){
+                company.setName(rs.getString(1));
+                company.setPosition(rs.getString(2));
+                company.setAddress(rs.getString(3));
+                company.setTime(rs.getString(4));
+                companyList.add(company);
+            }
+            PageBean pageBean=new PageBean(pageNum,pageSize,rowCount);
+            pageBean.setPageNum(pageNum);
+            pageBean.setPageSize(pageSize);
+            pageBean.setList(companyList);
+            pageBeanList.add(pageBean);
+            response.getWriter().print(JSONArray.fromObject(pageBeanList).toString());
+            rs1.close();
+            rs.close();
+            ps1.close();
+            ps.close();
+            conn.close();
+        }catch (SQLException e){
             e.printStackTrace();
         }
     }

@@ -1,6 +1,6 @@
-package servlet;
+package controller;
 
-import controller.person.Person;
+import service.person.Person;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

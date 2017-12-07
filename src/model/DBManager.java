@@ -1,4 +1,4 @@
-package controller.common;
+package model;
 
 import org.apache.tomcat.jdbc.pool.DataSource;
 import org.apache.tomcat.jdbc.pool.PoolProperties;
