@@ -78,4 +78,23 @@ public class DB_table {
             e.printStackTrace();
         }
     }
+    public void setPosition(String job,String position) throws IOException {
+        DBManager conndb=new DBManager();
+        Connection conn=conndb.getConnection();
+        String sql="INSERT INTO filter_position (job,position) VALUES (?,?)";
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, job);
+            ps.setString(2, position);
+            boolean rs=ps.execute();
+            if (rs){
+                System.out.println("success");
+            }
+            ps.close();
+            conn.close();
+        } catch (SQLException e) {
+            // TODO 自动生成的 catch 块
+            e.printStackTrace();
+        }
+    }
 }

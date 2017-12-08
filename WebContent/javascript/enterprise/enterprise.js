@@ -102,6 +102,63 @@ function init_job_result(data) {
     document.getElementById("industry").value = data.industry;
     document.getElementById("email").value = data.email;
 }
+function infilling_address(data) {
+    var address=document.getElementById("address");
+    for (var i=1;i<data.length;i++){
+        var option=document.createElement("option");
+        address.appendChild(option);
+        option.value=data[i].text;
+        option.innerHTML=data[i].text;
+    }
+}
+function get_job() {
+    $.ajax({
+        url:"/query/job",
+        type:"POST",
+        dataType:"JSON",
+        success:function (data) {
+            infilling_job(data);
+        },
+        fail:function () {
+
+        }
+    });
+}
+function infilling_job(data) {
+    var position=document.getElementById("industry");
+    for (var i=1;i<data.length;i++){
+        var option=document.createElement("option");
+        position.appendChild(option);
+        option.value=data[i].text;
+        option.innerHTML=data[i].text;
+    }
+}
+function get_position() {
+    var job={};
+    var job_name=document.getElementById("industry").value;
+    job.job_name=job_name;
+    $.ajax({
+        url:"/query/position",
+        type:"POST",
+        data:job,
+        dataType:"JSON",
+        success:function (data) {
+            infilling_position(data);
+        },
+        fail:function () {
+
+        }
+    });
+}
+function infilling_position(data) {
+    var position=document.getElementById("job");
+    for (var i=1;i<data.length;i++){
+        var option=document.createElement("option");
+        position.appendChild(option);
+        option.value=data[i].position;
+        option.innerHTML=data[i].position;
+    }
+}
 function add_job() {
     var job={};
     var user_string = document.cookie.split(";")[0].split("=")[1];

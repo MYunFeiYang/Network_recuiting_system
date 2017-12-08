@@ -109,10 +109,17 @@ nav{
     color: white;
 }
 /*main*/
-#filter_job ul li,#filter_address ul li{
+#filter{
+    font-size: 10px;
+}
+#filter_job ul li,#filter_address ul li,#filter_position ul li{
     float:left;
     padding: 2px 10px;
-    list-style:none
+    list-style:none;
+}
+#filter_position{
+    background-color: black;
+    margin: 10px 0px;
 }
 table thead tr td,table tbody tr td{
     border: 1px solid white;
@@ -123,15 +130,14 @@ table tbody tr td a{
     overflow: hidden;
     height: 20px;
     line-height: 20px;
-    font-size: 10px;
     text-align: center;
 }
 
 /*right*/
 #hotRecurit{
-    background-color: gainsboro;
+    background-color: white;
     opacity: 0.9;
-    border: 10px solid white;
+    border: 10px solid gainsboro;
 }
 #hotRecurit h3{
     background-color: beige;

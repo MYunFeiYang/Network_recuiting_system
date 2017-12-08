@@ -114,8 +114,9 @@ public class webChatServer {
     }
     //连接错误时执行
     @OnError
-    public void onError(Throwable t) {
+    public void onError(Throwable t,Session session) {
 //        t.printStackTrace();
+        deleteUserFormJson(session);
     }
     public void addNicknameToJson(String nickname,Session session){
         JSONObject user=new JSONObject();

@@ -21,9 +21,9 @@
             <ul>
                 <li onclick="show_status()">登录状态 <span id="status"></span></li>
                 <li type="button" onclick="init()">打开连接
-                <span class="glyphicon glyphicon-ok"></span></li>
+                    <span class="glyphicon glyphicon-ok"></span></li>
                 <li type="button" onclick="closeSocket()">关闭连接
-                <span class="glyphicon glyphicon-remove"></span></li>
+                    <span class="glyphicon glyphicon-remove"></span></li>
                 <li type="button" onclick="open_night()">打开夜间模式
                     <span class="glyphicon glyphicon-resize-full"></span></li>
                 <li type="button" onclick="close_night()">关闭夜间模式
@@ -44,16 +44,12 @@
 
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-10" id="editor">
-                    <div class="input-group">
-                        <input type="text" class="form-control" id="content">
-                        <span class="input-group-btn">
-                            <button class="btn btn-default" type="button" onclick="emit()">
-                                发送</button>
-                            </span>
-                    </div>
-                </div>
+            <div class="col-md-12" id="editor">
+                <textarea id="content"></textarea>
+                <button class="btn btn-default" type="button" onclick="emit()">
+                    发送
+                </button>
+
             </div>
         </div>
         <div class="col-md-3 person_list">
@@ -68,7 +64,6 @@
             </div>
         </div>
     </div>
-</div>
 </div>
 </body>
 </html>

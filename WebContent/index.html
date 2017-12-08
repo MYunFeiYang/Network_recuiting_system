@@ -21,9 +21,9 @@
     <script src="javascript/person/person.js"></script>
     <script src="javascript/enterprise/enterprise.js"></script>
 </head>
-<body onclick="close_search('search-con','40px'),close_share(),close_preselected_search()">
+<body>
 <div class="container-fluid">
-    <nav class="navbar navbar-default" id="top" style="z-index: 99999">
+    <nav class="navbar navbar-default navbar-fixed-top" id="top" style="z-index: 99999">
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
@@ -48,7 +48,7 @@
                            aria-expanded="false">招聘<span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a onclick="query_job_class(),set_marquee_right()">校招</a></li>
+                                <a onclick="show_div('body'),query_job_class(),set_marquee_right()">校招</a></li>
                             <li role="separator" class="divider"></li>
                         </ul>
                     </li>
@@ -169,6 +169,7 @@
                             <div class="input-group">
                                 <span class="input-group-addon glyphicon glyphicon-user">用户类型</span>
                                 <select id="login_type" class="form-control">
+                                    <option value="admin">管理员</option>
                                     <option value="person">个人用户</option>
                                     <option value="enterprise">企业用户</option>
                                 </select>
@@ -662,7 +663,7 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                             aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">添加个人简历</h4>
+                    <h4 class="modal-title">发布招聘岗位</h4>
                 </div>
                 <div class="modal-body">
                     <div class="row center-block">
@@ -679,9 +680,11 @@
                         <div class="col-md-12">
                             <div class="input-group">
                     <span class="input-group-btn">
-                        <button class="btn btn-default">公司地点</button>
+                        <button class="btn btn-default">招聘地点</button>
                     </span>
-                                <input type="text" class="form-control" id="address" placeholder="公司地点">
+                                <select class="form-control" id="address">
+
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -691,7 +694,9 @@
                     <span class="input-group-btn">
                         <button class="btn btn-default">所属行业</button>
                     </span>
-                                <input type="text" class="form-control" id="industry" placeholder="所属行业">
+                                <select class="form-control" id="industry" onchange="get_position()">
+
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -699,9 +704,11 @@
                         <div class="col-md-12">
                             <div class="input-group">
                     <span class="input-group-btn">
-                        <button class="btn btn-default">招聘岗位</button>
+                        <button class="btn btn-default">招聘职位</button>
                     </span>
-                                <input type="text" class="form-control" id="job" placeholder="招聘岗位">
+                                <select class="form-control" id="job">
+
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -774,7 +781,8 @@
         </div>
     </div>
     <!--end Modal-->
-    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel"
+         onclick="close_search('search-con','40px'),close_share(),close_preselected_search()">
         <!-- Indicators -->
         <ol class="carousel-indicators">
             <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
@@ -811,119 +819,127 @@
             <span class="sr-only">Next</span>
         </a>
     </div>
-    <div id="body" class="container-fluid">
-        <div class="bdsharebuttonbox hidden">
-            <a class="bds_mshare" data-cmd="mshare"></a>
-            <a class="bds_qzone" data-cmd="qzone" href="#"></a>
-            <a class="bds_tsina" data-cmd="tsina"></a>
-            <a class="bds_baidu" data-cmd="baidu"></a>
-            <a class="bds_renren" data-cmd="renren"></a>
-            <a class="bds_tqq" data-cmd="tqq"></a>
-            <a href="#" class="bds_more" data-cmd="more">更多</a>
-        </div>
-        <div class="row">
-            <div class="col-md-2" id="left">
-                <div class="row">
-                    <div class="col-md-12" id="job_class">
+    <div class="container-fluid" style="margin-top: 56px"
+         onclick="close_search('search-con','40px'),close_share(),close_preselected_search()">
+        <div class="mypanel" id="body">
+            <div class="bdsharebuttonbox hidden">
+                <a class="bds_mshare" data-cmd="mshare"></a>
+                <a class="bds_qzone" data-cmd="qzone" href="#"></a>
+                <a class="bds_tsina" data-cmd="tsina"></a>
+                <a class="bds_baidu" data-cmd="baidu"></a>
+                <a class="bds_renren" data-cmd="renren"></a>
+                <a class="bds_tqq" data-cmd="tqq"></a>
+                <a href="#" class="bds_more" data-cmd="more">更多</a>
+            </div>
+            <div class="row">
+                <div class="col-md-2" id="left">
+                    <div class="row">
+                        <div class="col-md-12" id="job_class">
 
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-8" id="main">
-                <div class="row" id="filter">
-                    <div class="col-md-12">
-                        <div class="col-md-1">
-                            <span style="display:block;padding: 10px 20px">岗位类别：</span>
-                        </div>
-                        <div class="col-md-11">
-                            <div class="row" id="filter_job">
-
+                <div class="col-md-8" id="main">
+                    <div class="row" id="filter">
+                        <div class="col-md-12">
+                            <div class="col-md-1">
+                                <span style="display:block;padding: 5px 10px">岗位类别：</span>
                             </div>
-                        </div>
-                        <div class="col-md-1" style="clear: both">
-                            <span style="display:block;padding:10px 20px">涉及城市：</span>
-                        </div>
-                        <div class="col-md-11">
-                            <div class="row" id="filter_address">
+                            <div class="col-md-11">
+                                <div class="row" id="filter_job">
 
+                                </div>
                             </div>
-                        </div>
-                        <table style="width: 100%">
-                            <thead>
-                            <tr class="row">
-                                <td class="col-md-2">公司标题</td>
-                                <td class="col-md-6">招聘岗位</td>
-                                <td class="col-md-2">涉及城市</td>
-                                <td class="col-md-2">发布时间</td>
-                            </tr>
-                            </thead>
-                            <tbody id="company">
+                            <div class="col-md-1" style="clear: both">
+                                <span style="display:block;padding:5px 10px">涉及城市：</span>
+                            </div>
+                            <div class="col-md-11">
+                                <div class="row" id="filter_address">
 
-                            </tbody>
-                        </table>
-                        <nav aria-label="Page navigation">
-                            <ul class="pagination" style="margin:0px auto;float: right">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="row" id="filter_position">
+
+                                </div>
+                            </div>
+                            <table style="width: 100%">
+                                <thead>
+                                <tr class="row">
+                                    <td class="col-md-2">公司标题</td>
+                                    <td class="col-md-7">招聘岗位</td>
+                                    <td class="col-md-2">涉及城市</td>
+                                    <td class="col-md-1">发布时间</td>
+                                </tr>
+                                </thead>
+                                <tbody id="company">
+
+                                </tbody>
+                            </table>
+                            <nav aria-label="Page navigation">
+                                <ul class="pagination" style="margin:0px auto;float: right">
+
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2" id="right">
+                    <div class="row">
+                        <div class="col-md-12" id="hotRecurit">
+                            <h3>热门校招</h3>
+                            <ul>
+                                <li>
+                                    <img src="image/hotRecurit/1.png">
+                                </li>
+                                <li>
+                                    <img src="image/hotRecurit/2.png">
+                                </li>
+                                <li>
+                                    <img src="image/hotRecurit/3.jpg">
+                                </li>
+                                <li>
+                                    <img src="image/hotRecurit/4.png">
+                                </li>
+                                <li>
+                                    <img src="image/hotRecurit/5.jpg">
+                                </li>
+                                <li>
+                                    <img src="image/hotRecurit/6.png">
+                                </li>
+                                <li>
+                                    <img src="image/hotRecurit/7.png">
+                                </li>
+                                <li>
+                                    <img src="image/hotRecurit/8.jpg">
+                                </li>
+                                <li>
+                                    <img src="image/hotRecurit/9.png">
+                                </li>
+                                <li>
+                                    <img src="image/hotRecurit/10.png">
+                                </li>
+                                <li>
+                                    <img src="image/hotRecurit/11.gif">
+                                </li>
+                                <li>
+                                    <img src="image/hotRecurit/12.png">
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div id="marquee" class="marquee" onmouseover="closeInterval()" onmouseout="marquee_control()">
+                            <ul>
 
                             </ul>
-                        </nav>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-2" id="right">
-                <div class="row">
-                    <div class="col-md-12" id="hotRecurit">
-                        <h3>热门校招</h3>
-                        <ul>
-                            <li>
-                                <img src="image/hotRecurit/1.png">
-                            </li>
-                            <li>
-                                <img src="image/hotRecurit/2.png">
-                            </li>
-                            <li>
-                                <img src="image/hotRecurit/3.jpg">
-                            </li>
-                            <li>
-                                <img src="image/hotRecurit/4.png">
-                            </li>
-                            <li>
-                                <img src="image/hotRecurit/5.jpg">
-                            </li>
-                            <li>
-                                <img src="image/hotRecurit/6.png">
-                            </li>
-                            <li>
-                                <img src="image/hotRecurit/7.png">
-                            </li>
-                            <li>
-                                <img src="image/hotRecurit/8.jpg">
-                            </li>
-                            <li>
-                                <img src="image/hotRecurit/9.png">
-                            </li>
-                            <li>
-                                <img src="image/hotRecurit/10.png">
-                            </li>
-                            <li>
-                                <img src="image/hotRecurit/11.gif">
-                            </li>
-                            <li>
-                                <img src="image/hotRecurit/12.png">
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="row">
-                    <div id="marquee" class="marquee" onmouseover="closeInterval()" onmouseout="marquee_control()">
-                        <ul>
-
-                        </ul>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div id="frame" class="container-fluid">
+        <div class="mypanel" id="frame"></div>
+        <div class="mypanel" id="admin"></div>
     </div>
     <div id="toTop">
         <a href="#top"></a>

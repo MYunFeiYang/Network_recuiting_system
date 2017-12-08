@@ -40,7 +40,7 @@ body{
 
 .person_list,#show_content,.user_center{
     border: 1px solid white;
-    height: 500px;
+    height: 480px;
 }
 .person_list ul li{
     margin:5px;
@@ -51,7 +51,7 @@ body{
     text-decoration: none;
 }
 #show_content{
-    height: 420px;
+    height: 400px;
 }
 #show_content .system_message,#show_content .self,#show_content .message{
     display: block;
@@ -60,7 +60,7 @@ body{
     background-color: white;
     text-align: center;
     border: 1px solid dodgerblue;
-    opacity: 0.7;
+    opacity: 0.8;
 }
 #show_content .system_message{
     width: 30%;
@@ -81,6 +81,22 @@ body{
 }
 #show_content .username,#show_content .message{
     padding: 5px;
+}
+#editor{
+    height: 80px;
+    padding: 0px;
+}
+#editor textarea{
+    width: 100%;
+    height: 80px;
+    border: 1px solid dodgerblue;
+    border-radius: 3px;
+    padding: 5px 15px;
+}
+#editor button{
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
 }
 #refresh{
     position: absolute;

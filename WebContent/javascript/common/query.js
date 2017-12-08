@@ -35,7 +35,6 @@ function show_preselected_search(data) {
         li.appendChild(a);
         li.setAttribute(`onclick`,`add_preselected_search_to_search(${i})`);
     }
-    ul.children[0].focus();
 }
 function add_preselected_search_to_search(i) {
     var a=document.getElementById("preselected_search").children[0].children[i].children[0];
@@ -45,13 +44,25 @@ function close_preselected_search() {
     document.getElementById("preselected_search").style.display="none";
 }
 function query() {
-    alert("该功能还在完善");
-    var search=document.getElementById("search-con").value;
+    close_preselected_search();
+    var search_con=document.getElementById("search-con").value;
+    var search={};
+    search.content=search_con;
+    $.ajax({
+        url:"/public?public=query",
+        data:search,
+        type:"POST",
+        dataType:"JSON",
+        success:function () {
+            
+        },
+        fail:function () {
+            
+        }
+    })
 }
 //filter query
 function query_job_class() {
-    document.getElementById("main").style.display="block";
-    document.getElementById("frame").style.display="none";
     $.ajax({
         url:"/query/job",
         type:"POST",
@@ -84,7 +95,7 @@ function insert_job_class(data) {
         span.setAttribute("class","glyphicon glyphicon-chevron-right");
         span.setAttribute("style","float:right;border:none");
         li.appendChild(span);
-        li.setAttribute("onclick","change_checked(event,'job_class',insert_filter_job(),query_filter_address())");
+        li.setAttribute("onclick","change_checked(event,'job_class',insert_filter_job(),get_address(insert_filter_address))");
     }
     ul.children[0].classList.add("checked");
     change_footer_position();
@@ -101,17 +112,17 @@ function insert_filter_job() {
     for (var i=0;i<li.length;i++){
         var span=li[i].getElementsByTagName("span")[0];
         li[i].removeChild(span);
-        li[i].setAttribute("onclick","change_checked(event,'filter_job'),paging(1)");
+        li[i].setAttribute("onclick","change_checked(event,'filter_job'),query_filter_position(this.firstChild.text)");
     }
     change_footer_position();
 }
-function query_filter_address() {
+function get_address(event) {
     $.ajax({
         url:"/query/address",
         type:"POST",
         dataType:"JSON",
         success:function (data) {
-            insert_filter_address(data);
+            event(data);
         },
         fail:function () {
 
@@ -138,16 +149,47 @@ function insert_filter_address(data) {
     }
     ul.children[0].classList.add("checked");
 }
+function query_filter_position(text) {
+    var job={};
+    job.job_name=text;
+    $.ajax({
+        url:"/query/position",
+        type:"POST",
+        data:job,
+        dataType:"JSON",
+        success:function (data) {
+            insert_filter_position(data);
+        },
+        fail:function () {
+
+        }
+    });
+}
+function insert_filter_position(data) {
+    document.getElementById("filter").style.display="block";
+    var filter_position=document.getElementById("filter_position");
+    filter_position.innerHTML="";
+    var ul=document.createElement("ul");
+    filter_position.appendChild(ul);
+    filter_position.setAttribute("class","main");
+    for (var i=0;i<data.length;i++) {
+        var li=document.createElement("li");
+        ul.appendChild(li);
+        li.setAttribute("onclick","change_checked(event,'filter_position'),paging(1)");
+        li.innerHTML=data[i].position;
+    }
+    ul.children[0].classList.add("checked");
+}
 
 function paging(pageNum) {
     var page={};
     page.pageSize=10;
     page.pageNum=pageNum;
-    var filter_job=document.getElementById("filter_job");
-    var job=filter_job.getElementsByTagName("li");
-    for (var i=0;i<job.length;i++){
-        if (job[i].classList.toString().indexOf("checked")!=-1){
-            page.job=job[i].firstChild.text;
+    var filter_position=document.getElementById("filter_position");
+    var position=filter_position.getElementsByTagName("li");
+    for (var i=0;i<position.length;i++){
+        if (position[i].classList.toString().indexOf("checked")!=-1){
+            page.position=position[i].firstChild.text;
         }
     };
     var filter_address=document.getElementById("filter_address");
@@ -200,20 +242,18 @@ function pagingResult(data) {
         var a1=document.createElement("a");
         var a2=document.createElement("a");
         var a3=document.createElement("a");
-        var a4=document.createElement("a");
         td1.appendChild(a1);
         td2.appendChild(a2);
         td3.appendChild(a3);
-        td4.appendChild(a4);
         a1.innerHTML=list[i].name;
         a2.innerHTML=list[i].position;
         a3.innerHTML=list[i].address;
-        a4.innerHTML=list[i].time;
+        td4.innerHTML=list[i].time;
         tr.setAttribute("class","row");
         td1.setAttribute("class","col-md-2");
-        td2.setAttribute("class","col-md-6");
+        td2.setAttribute("class","col-md-7");
         td3.setAttribute("class","col-md-2");
-        td4.setAttribute("class","col-md-2");
+        td4.setAttribute("class","col-md-1");
     }
 }
 function change_checked(event,id) {

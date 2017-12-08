@@ -78,6 +78,8 @@ public class Common {
             sql = "select email from occupy_person where nickname=? and password=?";
         } else if (login_type.equals("enterprise")) {
             sql = "select name from occupy_company where nickname=? and password=?";
+        }else if(login_type.equals("admin")){
+            sql = "select nickname from admin where nickname=? and password=?";
         }
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -85,14 +87,14 @@ public class Common {
             ps.setString(2, password);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                String str = "{\"msg\":\"person_success\"}";
+                String str = "{\"msg\":\"login_success\"}";
                 response.getWriter().print(str);
                 response.getWriter().flush();
                 ;
                 response.getWriter().close();
                 ;
             } else {
-                String str = "{\"msg\":\"person_fail\"}";
+                String str = "{\"msg\":\"login_fail\"}";
                 response.getWriter().print(str);
                 response.getWriter().flush();
                 ;
@@ -334,8 +336,9 @@ public class Common {
         response.setHeader("Pragma", "no-cache");
         int pageSize=Integer.parseInt(request.getParameter("pageSize"));
         int pageNum=Integer.parseInt(request.getParameter("pageNum"));
-        String job=request.getParameter("job");
+        String position=request.getParameter("position");
         String address=request.getParameter("address");
+        position="%"+position+"%";
         address="%"+address+"%";
         DBManager dbManager=new DBManager();
         Connection conn=dbManager.getConnection();

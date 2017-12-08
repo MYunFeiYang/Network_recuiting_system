@@ -5,6 +5,7 @@ import model.common.Address;
 import model.common.Company;
 import model.common.Job;
 import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -58,6 +59,31 @@ public class Query {
                 list = JSONArray.fromObject(list);
             }
             response.getWriter().print(list.toString());
+            response.getWriter().close();
+            rs.close();
+            ps.close();
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void init_filter_position(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        DBManager DBManager = new DBManager();
+        Connection conn = DBManager.getConnection();
+        String job=request.getParameter("job_name");
+        String sql = "SELECT position FROM filter_position WHERE job=?";
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1,job);
+            ResultSet rs = ps.executeQuery();
+            JSONArray jsonArray=new JSONArray();
+            JSONObject jsonObject=new JSONObject();
+            while (rs.next()) {
+                jsonObject.element("position",rs.getString(1));
+                jsonArray.add(jsonObject);
+            }
+            response.getWriter().print(jsonArray.toString());
             response.getWriter().close();
             rs.close();
             ps.close();

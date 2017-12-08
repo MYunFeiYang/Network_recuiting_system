@@ -8,6 +8,7 @@ function open_search(target,width) {
     document.getElementById(target).style.width=width;
 }
 function close_search(target,width) {
+    document.getElementById("search-con").value="";
     document.getElementById(target).style.width=width;
 }
 function modify_height() {

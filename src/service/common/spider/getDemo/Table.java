@@ -16,7 +16,7 @@ public class Table {
     }
 
     public void school_rercuit() throws IOException {
-        String url = "https://xyzp.haitou.cc/trade-1";
+        String url = "https://xyzp.haitou.cc/trade-117";
         Connection conn = Jsoup.connect(url).timeout(10000).ignoreContentType(true); // 建立与url中页面的连接
         Document doc = Jsoup.parse(conn.get().toString()); // 解析页面
         Elements table=doc.getElementsByClass("table");
@@ -33,6 +33,7 @@ public class Table {
             String address=text_ellipsis.attr("title");
             String time=tr.getElementsByClass("cxxt-time").text();
             DB_table insert=new DB_table();
+//            System.out.println(company+position+address+time);
             insert.school_rercuit(company,position,address,time);
 
         }
@@ -71,5 +72,19 @@ public class Table {
         Elements elements=doc.getElementsByClass("top-recruit");
         Elements img =elements.select("img");
        System.out.println(img);
+    }
+    public void getPosition() throws IOException{
+        String url="https://xyzp.haitou.cc/trade-21";
+        Connection conn = Jsoup.connect(url).timeout(10000).ignoreContentType(true); // 建立与url中页面的连接
+        Document doc = Jsoup.parse(conn.get().toString()); // 解析页面
+        Elements elements=doc.getElementsByClass("second-positions");
+        Elements a=elements.select("a");
+        DB_table db_table=new DB_table();
+        for (Element a1:a){
+            String job="服务/职能";
+            String position=a1.text();
+            System.out.println(job+position);
+            db_table.setPosition(job,position);
+        }
     }
     }

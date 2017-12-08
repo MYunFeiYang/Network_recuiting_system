@@ -28,11 +28,7 @@ function login_ajax(data) {
     })
 }
 function login_result(data) {
-    if(data.msg=="person_success"){
-        document.getElementById("close_login").click();
-        login_session('login');
-    }
-    else if(data.msg=="enterprise_success"){
+    if(data.msg=="login_success"){
         document.getElementById("close_login").click();
         login_session('login');
     }
@@ -69,8 +65,12 @@ function login_session_result(data) {
     if (data.nickname!="") {
         init_user(data.nickname);
         var user_center=document.getElementById("user_center");
-        var modify_user=document.getElementById("modify_user");
         if (data.login_type=="person"){
+            var li2=document.createElement("li");
+            var modify_user=document.createElement("a");
+            user_center.appendChild(li2);
+            li2.appendChild(modify_user);
+            modify_user.text="修改注册信息";
             modify_user.setAttribute("data-toggle","modal");
             modify_user.setAttribute("data-target","#register-person");
             modify_user.setAttribute("onclick","modify_user_person()");
@@ -87,7 +87,9 @@ function login_session_result(data) {
             user_center.appendChild(modify_resume);
             modify_resume.appendChild(modify_resume_a);
             modify_resume_a.text="修改简历";
-            modify_resume_a.setAttribute("onclick","");
+            modify_resume_a.setAttribute("data-toggle","modal");
+            modify_resume_a.setAttribute("data-target","#resume")
+            modify_resume_a.setAttribute("onclick","init_resume()");
             var browse_resume=document.createElement("li");
             var browse_resume_a=document.createElement("a");
             user_center.appendChild(browse_resume);
@@ -103,7 +105,7 @@ function login_session_result(data) {
             upload_resume_a.setAttribute("data-target","#upload");
             var chat=document.createElement("li");
             user_center.appendChild(chat)
-            chat.innerHTML="<a onclick='change_frame_content(),closeInterval()'>问道空间</a>";
+            chat.innerHTML="<a onclick='show_div(`frame`),change_frame_content(),closeInterval()'>问道空间</a>";
             var li1=document.createElement("li");
             user_center.appendChild(li1)
             var log_out=document.createElement("a");
@@ -112,7 +114,13 @@ function login_session_result(data) {
             log_out.setAttribute("style","color:red");
             log_out.setAttribute("onclick","login_session('delete')");
             log_out.setAttribute("href","index.html");
-        }else if(data.login_type="person"){
+        }
+        else if(data.login_type=="enterprise"){
+            var li2=document.createElement("li");
+            var modify_user=document.createElement("a");
+            user_center.appendChild(li2);
+            li2.appendChild(modify_user);
+            modify_user.text="修改注册信息"
             modify_user.setAttribute("data-toggle","modal");
             modify_user.setAttribute("data-target","#register-enterprise");
             modify_user.setAttribute("onclick","modify_user_enterprise()");
@@ -123,22 +131,39 @@ function login_session_result(data) {
             add_job_a.text="发布招聘信息";
             add_job_a.setAttribute("data-toggle","modal");
             add_job_a.setAttribute("data-target","#jobs");
-            add_job_a.setAttribute("onclick","init_job()");
+            add_job_a.setAttribute("onclick","init_job(),get_address(infilling_address),get_job()");
             var modify_job=document.createElement("li");
             var modify_job_a=document.createElement("a");
             user_center.appendChild(modify_job);
             modify_job.appendChild(modify_job_a);
             modify_job_a.text="修改招聘信息";
-            modify_job_a.setAttribute("onclick","");
-            var browse_job=document.createElement("li");
-            var browse_job_a=document.createElement("a");
-            user_center.appendChild(browse_job);
-            browse_job.appendChild(browse_job_a);
-            browse_job_a.text="浏览招聘信息";
-            browse_job_a.setAttribute("onclick","");
+            modify_job_a.setAttribute("data-toggle","modal");
+            modify_job_a.setAttribute("data-target","#jobs")
+            modify_job_a.setAttribute("onclick","init_job(),get_address(infilling_address),get_job()");
             var chat=document.createElement("li");
             user_center.appendChild(chat)
-            chat.innerHTML="<a onclick='change_frame_content(),closeInterval()'>问道空间</a>";
+            chat.innerHTML="<a onclick='show_div(`frame`),change_frame_content(),closeInterval()'>问道空间</a>";
+            var li1=document.createElement("li");
+            user_center.appendChild(li1)
+            var log_out=document.createElement("a");
+            li1.appendChild(log_out);
+            log_out.text="退出";
+            log_out.setAttribute("style","color:red");
+            log_out.setAttribute("onclick","login_session('delete')");
+            log_out.setAttribute("href","index.html");
+        }
+        else if(data.login_type=="admin"){
+            show_div("admin");
+            show_admin();
+            var admin=document.createElement("li");
+            user_center.appendChild(admin);
+            var admin_a=document.createElement("a");
+            admin.appendChild(admin_a);
+            admin_a.text="后台管理";
+            admin_a.setAttribute("onclick","show_div('admin'),show_admin()");
+            var chat=document.createElement("li");
+            user_center.appendChild(chat)
+            chat.innerHTML="<a onclick='show_div(`frame`),change_frame_content(),closeInterval()'>问道空间</a>";
             var li1=document.createElement("li");
             user_center.appendChild(li1)
             var log_out=document.createElement("a");
@@ -155,12 +180,6 @@ function init_user(nickname) {
     document.getElementById("login_btu").text = nickname;
     var user_center=document.getElementById("user_center");
     user_center.innerHTML="";
-    var li2=document.createElement("li");
-    var modify_user=document.createElement("a");
-    user_center.appendChild(li2);
-    li2.appendChild(modify_user);
-    modify_user.setAttribute("id","modify_user");
-    modify_user.text="修改注册信息"
 }
 function resetPassword() {
     if (document.cookie!="") {
@@ -383,9 +402,19 @@ function set_marquee_right() {
     get_news("person");
 }
 function change_frame_content() {
-    document.getElementById("main").style.display="none";
     var frame=document.getElementById("frame")
-    frame.style.display="block";
     frame.innerHTML="<iframe style='position:relative;z-index: 999;opacity: 0.8;border: 10px solid white;' src=\"webchat.html\" width=\"100%\" height=\"500\" scrolling=\"auto\" frameborder=\"0\"> </iframe>";
 
+}
+function show_admin() {
+    var admin=document.getElementById("admin")
+    admin.innerHTML="<iframe style='position:relative;z-index: 999;opacity: 0.8;border: 10px solid white;' src=\"admin.html\" width=\"100%\" height=\"500\" scrolling=\"auto\" frameborder=\"0\"> </iframe>";
+
+}
+function show_div(id) {
+    var mypanel=document.getElementsByClassName("mypanel");
+    for (var i=0;i<mypanel.length;i++){
+        mypanel[i].style.display="none"
+    }
+    document.getElementById(id).style.display="block";
 }

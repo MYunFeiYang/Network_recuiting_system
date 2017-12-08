@@ -20,6 +20,8 @@ public class servletQuery extends HttpServlet {
             query.init_filter_job(request,response);
         }else if (url.indexOf("address")!=-1){
             query.init_filter_address(request,response);
+        }else if (url.indexOf("position")!=-1){
+            query.init_filter_position(request,response);
         }else if (url.indexOf("company")!=-1){
             query.queryCompany(request,response);
         }else {
