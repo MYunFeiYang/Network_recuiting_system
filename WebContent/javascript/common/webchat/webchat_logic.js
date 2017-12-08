@@ -2,12 +2,12 @@
 function emit() {
 
     //encodeScript方法用来转义<>标签，防止脚本输入，方法内容在core.js里面
-    var text = encodeScript($("#content").val());
+    let text = encodeScript($("#content").val());
     if (text==""){
         return;
     }else {
-        var nickname=getnickname();
-        var msg = {
+        let nickname=getnickname();
+        let msg = {
             "message": text,
             "nickname":nickname
         };
@@ -23,7 +23,7 @@ function emit() {
 
 //按下回车键时触发发送消息方法
 document.onkeydown = function (event) {
-    var e = event || window.event || arguments.callee.caller.arguments[0];
+    let e = event || window.event || arguments.callee.caller.arguments[0];
     if (e && e.keyCode == 13) { // enter 键
         emit();
     }
@@ -37,21 +37,21 @@ function encodeScript(data) {
 }
 
 function getnickname() {
-    var user = document.cookie.split(";")[0].split("=")[1];
-    var nickname = JSON.parse(user).nickname;
+    let user = document.cookie.split(";")[0].split("=")[1];
+    let nickname = JSON.parse(user).nickname;
     return nickname;
 }
 function refresh_online_list() {
-    var refresh=document.getElementById("refresh");
+    let refresh=document.getElementById("refresh");
     refresh.style="";
     refresh.style="animation-name:go;\n" +
         "    animation-duration:2s;\n" +
         "    animation-iteration-count: 3;";
-    var msg={"refresh":refresh};
+    let msg={"refresh":refresh};
     socket.send(JSON.stringify(msg));
 }
 function show_status() {
-    var status=document.getElementById("status");
+    let status=document.getElementById("status");
     if (socket.readyState==0){
         status.innerHTML="登录中";
         status.style.color="green"
@@ -67,36 +67,36 @@ function show_status() {
     }
 }
 function show_online_list(data) {
-    var ul = document.getElementById("list");
+    let ul = document.getElementById("list");
     ul.innerHTML = "";
-    for (var i = 0; i < data.length; i++) {
-        var li = document.createElement("li");
+    for (let i = 0; i < data.length; i++) {
+        let li = document.createElement("li");
         ul.appendChild(li);
         li.innerHTML = `<span class="glyphicon glyphicon-user"></span><a>${data[i].nickname}</a><span style="float: right" class="glyphicon glyphicon-star-empty"></span>`
     }
 }
 function show_system_message(data) {
-    var show_content=document.getElementById("show_content");
-    var div =document.createElement("div");
+    let show_content=document.getElementById("show_content");
+    let div =document.createElement("div");
     show_content.appendChild(div);
-    var span=document.createElement("span");
+    let span=document.createElement("span");
     span.setAttribute("class","message");
     span.innerHTML=data.message;
 }
 function show_chat_message(data) {
-    var show_content = document.getElementById("show_content");
-    var chatBox = document.createElement("div");
+    let show_content = document.getElementById("show_content");
+    let chatBox = document.createElement("div");
     show_content.appendChild(chatBox);
     chatBox.setAttribute("class","chatBox");
-    var left=document.createElement("div");
-    var right=document.createElement("div");
+    let left=document.createElement("div");
+    let right=document.createElement("div");
     chatBox.appendChild(left);
     chatBox.appendChild(right);
     left.setAttribute("style","display: inline-block;");
     right.setAttribute("style","display: inline-block;");
-    var photo = document.createElement("span");
-    var username = document.createElement("span");
-    var message = document.createElement("span");
+    let photo = document.createElement("span");
+    let username = document.createElement("span");
+    let message = document.createElement("span");
     left.appendChild(photo);
     right.appendChild(username);
     right.appendChild(message);
@@ -107,15 +107,15 @@ function show_chat_message(data) {
     message.innerHTML = data.message;
 }
 function add_self_message(text) {
-    var show_content=document.getElementById("show_content");
-    var div=document.createElement("div");
+    let show_content=document.getElementById("show_content");
+    let div=document.createElement("div");
     show_content.appendChild(div);
     div.setAttribute("class","self");
     div.innerHTML=text;
 }
 function show_system_message_to_self(text) {
-    var show_content=document.getElementById("show_content");
-    var div =document.createElement("div");
+    let show_content=document.getElementById("show_content");
+    let div =document.createElement("div");
     show_content.appendChild(div);
     div.setAttribute("class","system_message");
     div.innerHTML=text;

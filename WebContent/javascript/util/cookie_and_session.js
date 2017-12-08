@@ -1,12 +1,12 @@
 function setCookie(c_name,value,expireDays)
 {
-    var existDate=new Date();
+    let existDate=new Date();
     existDate.setDate(existDate.getDate()+expireDays);
     document.cookie=c_name+ "=" +value+
         ((expireDays==null) ? "" : ";expires="+existDate.toGMTString());
 }
 function remember_user(nickname,password,email) {
-    var user={};
+    let user={};
     user.nickname=document.getElementById(nickname).value;
     user.password=document.getElementById(password).value;
     user.email=document.getElementById(email);
@@ -14,8 +14,8 @@ function remember_user(nickname,password,email) {
 }
 function show_user(nickname,password) {
     if (document.cookie!="") {
-        var user_string =document.cookie.split(";")[0].split("=")[1];
-        var user = JSON.parse(user_string);
+        let user_string =document.cookie.split(";")[0].split("=")[1];
+        let user = JSON.parse(user_string);
         document.getElementById(nickname).value = user.nickname;
         document.getElementById(password).value = user.password;
     }else {
@@ -23,16 +23,16 @@ function show_user(nickname,password) {
     }
 }
 function reset_user() {
-    var nickname=document.getElementById("login_nickname").value;
-    var password=document.getElementById("login_password").value;
+    let nickname=document.getElementById("login_nickname").value;
+    let password=document.getElementById("login_password").value;
     if (document.cookie!="") {
-        var user_string = document.cookie.split(";")[0].split("=")[1];
-        var user = JSON.parse(user_string);
+        let user_string = document.cookie.split(";")[0].split("=")[1];
+        let user = JSON.parse(user_string);
         user.nickname = nickname;
         user.password = password;
         setCookie("user",JSON.stringify(user),180);
     }else {
-        var user={};
+        let user={};
         user.nickname=nickname;
         user.password=password;
         setCookie("user",JSON.stringify(user),180);

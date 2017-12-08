@@ -1,5 +1,5 @@
 function register_person() {
-    var user={};
+    let user={};
     user.nickname=document.getElementById("person_nickname").value;
     user.password=document.getElementById("person_password").value;
     user.name=document.getElementById("person_name").value;
@@ -26,7 +26,7 @@ function ajax_register(user) {
 }
 function register_result(data) {
     if (data.msg=="success"){
-        var div=document.getElementById("register-person");
+        let div=document.getElementById("register-person");
         div.getElementsByClassName("modal-content")[0].innerHTML="注册成功";
     }
 }
@@ -39,10 +39,10 @@ function modify_user_person() {
     document.getElementById("person_reg_btu").setAttribute("onclick","modify_person()");
 }
 function modify_person() {
-    var nickname=document.getElementById("person_nickname").value;
-    var password=document.getElementById("person_password").value;
-    var telephone=document.getElementById("person_telephone").value;
-    var modify_user={};
+    let nickname=document.getElementById("person_nickname").value;
+    let password=document.getElementById("person_password").value;
+    let telephone=document.getElementById("person_telephone").value;
+    let modify_user={};
     modify_user.telephone=telephone;
     modify_user.nickname=nickname;
     modify_user.password=password;
@@ -63,7 +63,7 @@ function modify_person_ajax(user) {
     })
 }
 function modify_person_result(data,confirm_info_box) {
-    var confirm_info_box=document.getElementById(confirm_info_box);
+    let confirm_info_box=document.getElementById(confirm_info_box);
     if (data.msg=="modify_user_success"){
         confirm_info_box.innerHTML="信息修改成功";
         confirm_info_box.setAttribute("class","alert-success");
@@ -74,8 +74,8 @@ function modify_person_result(data,confirm_info_box) {
 }
 function init_resume() {
     document.getElementById("resume").style.display = "block";
-    var user_string = document.cookie.split(";")[0].split("=")[1];
-    var user = JSON.parse(user_string);
+    let user_string = document.cookie.split(";")[0].split("=")[1];
+    let user = JSON.parse(user_string);
     init_resume_ajax(user);
 }
 function init_resume_ajax(user) {
@@ -98,22 +98,22 @@ function init_resume_result(data) {
     document.getElementById("resume_email").value = data.email;
 }
 function add_resume() {
-    var user_string = document.cookie.split(";")[0].split("=")[1];
-    var user = JSON.parse(user_string);
-    var nickname = user.nickname;
-    var password = user.password;
-    var name = document.getElementById("resume_name").value;
-    var age = document.getElementById("age").value;
-    var sex = document.getElementById("sex").value;
-    var origin = document.getElementById("origin").value;
-    var collage = document.getElementById("collage").value;
-    var specialty = document.getElementById("specialty").value;
-    var degree = document.getElementById("degree").value;
-    var admission_data = document.getElementById("admission_data").value;
-    var graduation_data = document.getElementById("graduation_data").value;
-    var telephone = document.getElementById("telephone").value;
-    var email = document.getElementById("resume_email").value;
-    var confirm_resume_box = document.getElementById("confirm_resume_box");
+    let user_string = document.cookie.split(";")[0].split("=")[1];
+    let user = JSON.parse(user_string);
+    let nickname = user.nickname;
+    let password = user.password;
+    let name = document.getElementById("resume_name").value;
+    let age = document.getElementById("age").value;
+    let sex = document.getElementById("sex").value;
+    let origin = document.getElementById("origin").value;
+    let collage = document.getElementById("collage").value;
+    let specialty = document.getElementById("specialty").value;
+    let degree = document.getElementById("degree").value;
+    let admission_data = document.getElementById("admission_data").value;
+    let graduation_data = document.getElementById("graduation_data").value;
+    let telephone = document.getElementById("telephone").value;
+    let email = document.getElementById("resume_email").value;
+    let confirm_resume_box = document.getElementById("confirm_resume_box");
     if (age == "") {
         confirm_resume_box.innerHTML = "请输入年龄";
         confirm_resume_box.setAttribute("class", "alert-warning");
@@ -136,7 +136,7 @@ function add_resume() {
     }else {
         confirm_resume_box.innerHTML = "通过验证";
         confirm_resume_box.setAttribute("class", "alert-success");
-        var resume = {};
+        let resume = {};
         resume.nickname = nickname;
         resume.password = password;
         resume.name = name;
@@ -168,7 +168,7 @@ function add_resume_ajax(data) {
     })
 }
 function add_resume_result(data) {
-    var confirm_resume_box=document.getElementById("confirm_resume_box")
+    let confirm_resume_box=document.getElementById("confirm_resume_box")
     if (data.msg=="add_resume_success"){
         confirm_resume_box.innerHTML="简历添加成功";
         confirm_resume_box.setAttribute("class","alert-success");
@@ -179,8 +179,8 @@ function add_resume_result(data) {
 }
 function browse_resume() {
     document.getElementById("add_resume").style.display = "none";
-    var user_string = document.cookie.split(";")[0].split("=")[1];
-    var user = JSON.parse(user_string);
+    let user_string = document.cookie.split(";")[0].split("=")[1];
+    let user = JSON.parse(user_string);
     browse_resume_ajax(user);
 }
 function browse_resume_ajax(user) {

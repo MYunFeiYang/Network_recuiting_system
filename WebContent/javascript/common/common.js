@@ -1,12 +1,12 @@
-"use strict"
+"use strict";
 function setCookie(c_name,value,expireDays) {
-    var existDate=new Date();
+    let existDate=new Date();
     existDate.setDate(existDate.getDate()+expireDays);
     document.cookie=c_name+ "=" +value+
         ((expireDays==null) ? "" : ";expires="+existDate.toGMTString());
 }
 function login() {
-    var user={};
+    let user={};
     user.login_type=document.getElementById('login_type').value;
     user.nickname=document.getElementById('login_nickname').value;
     user.password=document.getElementById('login_password').value;
@@ -38,7 +38,7 @@ function login_result(data) {
     }
 }
 function login_session(data) {
-    var user={};
+    let user={};
     user.login=data;
     user.nickname=document.getElementById("login_nickname").value;
     user.password=document.getElementById("login_password").value;
@@ -64,51 +64,51 @@ function login_session_result(data) {
     get_news(data.login_type);
     if (data.nickname!="") {
         init_user(data.nickname);
-        var user_center=document.getElementById("user_center");
+        let user_center=document.getElementById("user_center");
         if (data.login_type=="person"){
-            var li2=document.createElement("li");
-            var modify_user=document.createElement("a");
+            let li2=document.createElement("li");
+            let modify_user=document.createElement("a");
             user_center.appendChild(li2);
             li2.appendChild(modify_user);
             modify_user.text="修改注册信息";
             modify_user.setAttribute("data-toggle","modal");
             modify_user.setAttribute("data-target","#register-person");
             modify_user.setAttribute("onclick","modify_user_person()");
-            var add_resume=document.createElement("li");
-            var add_resume_a=document.createElement("a");
+            let add_resume=document.createElement("li");
+            let add_resume_a=document.createElement("a");
             user_center.appendChild(add_resume);
             add_resume.appendChild(add_resume_a);
             add_resume_a.text="添加简历";
             add_resume_a.setAttribute("data-toggle","modal");
             add_resume_a.setAttribute("data-target","#resume");
             add_resume_a.setAttribute("onclick","init_resume()");
-            var modify_resume=document.createElement("li");
-            var modify_resume_a=document.createElement("a");
+            let modify_resume=document.createElement("li");
+            let modify_resume_a=document.createElement("a");
             user_center.appendChild(modify_resume);
             modify_resume.appendChild(modify_resume_a);
             modify_resume_a.text="修改简历";
             modify_resume_a.setAttribute("data-toggle","modal");
-            modify_resume_a.setAttribute("data-target","#resume")
+            modify_resume_a.setAttribute("data-target","#resume");
             modify_resume_a.setAttribute("onclick","init_resume()");
-            var browse_resume=document.createElement("li");
-            var browse_resume_a=document.createElement("a");
+            let browse_resume=document.createElement("li");
+            let browse_resume_a=document.createElement("a");
             user_center.appendChild(browse_resume);
             browse_resume.appendChild(browse_resume_a);
             browse_resume_a.text="浏览简历";
             browse_resume_a.setAttribute("onclick","browse_resume()");
-            var upload_resume=document.createElement("li");
-            var upload_resume_a=document.createElement("a");
+            let upload_resume=document.createElement("li");
+            let upload_resume_a=document.createElement("a");
             user_center.appendChild(upload_resume);
             upload_resume.appendChild(upload_resume_a);
             upload_resume_a.text="上传本地简历";
             upload_resume_a.setAttribute("data-toggle","modal");
             upload_resume_a.setAttribute("data-target","#upload");
-            var chat=document.createElement("li");
-            user_center.appendChild(chat)
+            let chat=document.createElement("li");
+            user_center.appendChild(chat);
             chat.innerHTML="<a onclick='show_div(`frame`),change_frame_content(),closeInterval()'>问道空间</a>";
-            var li1=document.createElement("li");
-            user_center.appendChild(li1)
-            var log_out=document.createElement("a");
+            let li1=document.createElement("li");
+            user_center.appendChild(li1);
+            let log_out=document.createElement("a");
             li1.appendChild(log_out);
             log_out.text="退出";
             log_out.setAttribute("style","color:red");
@@ -116,36 +116,36 @@ function login_session_result(data) {
             log_out.setAttribute("href","index.html");
         }
         else if(data.login_type=="enterprise"){
-            var li2=document.createElement("li");
-            var modify_user=document.createElement("a");
+            let li2=document.createElement("li");
+            let modify_user=document.createElement("a");
             user_center.appendChild(li2);
             li2.appendChild(modify_user);
-            modify_user.text="修改注册信息"
+            modify_user.text="修改注册信息";
             modify_user.setAttribute("data-toggle","modal");
             modify_user.setAttribute("data-target","#register-enterprise");
             modify_user.setAttribute("onclick","modify_user_enterprise()");
-            var add_job=document.createElement("li");
-            var add_job_a=document.createElement("a");
+            let add_job=document.createElement("li");
+            let add_job_a=document.createElement("a");
             user_center.appendChild(add_job);
             add_job.appendChild(add_job_a);
             add_job_a.text="发布招聘信息";
             add_job_a.setAttribute("data-toggle","modal");
             add_job_a.setAttribute("data-target","#jobs");
             add_job_a.setAttribute("onclick","init_job(),get_address(infilling_address),get_job()");
-            var modify_job=document.createElement("li");
-            var modify_job_a=document.createElement("a");
+            let modify_job=document.createElement("li");
+            let modify_job_a=document.createElement("a");
             user_center.appendChild(modify_job);
             modify_job.appendChild(modify_job_a);
             modify_job_a.text="修改招聘信息";
             modify_job_a.setAttribute("data-toggle","modal");
-            modify_job_a.setAttribute("data-target","#jobs")
+            modify_job_a.setAttribute("data-target","#jobs");
             modify_job_a.setAttribute("onclick","init_job(),get_address(infilling_address),get_job()");
-            var chat=document.createElement("li");
-            user_center.appendChild(chat)
+            let chat=document.createElement("li");
+            user_center.appendChild(chat);
             chat.innerHTML="<a onclick='show_div(`frame`),change_frame_content(),closeInterval()'>问道空间</a>";
-            var li1=document.createElement("li");
-            user_center.appendChild(li1)
-            var log_out=document.createElement("a");
+            let li1=document.createElement("li");
+            user_center.appendChild(li1);
+            let log_out=document.createElement("a");
             li1.appendChild(log_out);
             log_out.text="退出";
             log_out.setAttribute("style","color:red");
@@ -155,18 +155,18 @@ function login_session_result(data) {
         else if(data.login_type=="admin"){
             show_div("admin");
             show_admin();
-            var admin=document.createElement("li");
+            let admin=document.createElement("li");
             user_center.appendChild(admin);
-            var admin_a=document.createElement("a");
+            let admin_a=document.createElement("a");
             admin.appendChild(admin_a);
             admin_a.text="后台管理";
             admin_a.setAttribute("onclick","show_div('admin'),show_admin()");
-            var chat=document.createElement("li");
-            user_center.appendChild(chat)
+            let chat=document.createElement("li");
+            user_center.appendChild(chat);
             chat.innerHTML="<a onclick='show_div(`frame`),change_frame_content(),closeInterval()'>问道空间</a>";
-            var li1=document.createElement("li");
-            user_center.appendChild(li1)
-            var log_out=document.createElement("a");
+            let li1=document.createElement("li");
+            user_center.appendChild(li1);
+            let log_out=document.createElement("a");
             li1.appendChild(log_out);
             log_out.text="退出";
             log_out.setAttribute("style","color:red");
@@ -178,24 +178,24 @@ function login_session_result(data) {
 function init_user(nickname) {
     document.getElementById("register_btu").innerHTML="";
     document.getElementById("login_btu").text = nickname;
-    var user_center=document.getElementById("user_center");
+    let user_center=document.getElementById("user_center");
     user_center.innerHTML="";
 }
 function resetPassword() {
     if (document.cookie!="") {
-        var user_string = document.cookie.split(";")[0].split("=")[1];
-        var user = JSON.parse(user_string);
-        var email=document.getElementById("email").value;
+        let user_string = document.cookie.split(";")[0].split("=")[1];
+        let user = JSON.parse(user_string);
+        let email=document.getElementById("email").value;
         user.email=email;
-        setCookie("user",JSON.stringify(user),180)
+        setCookie("user",JSON.stringify(user),180);
         updatePassword_ajax(user);
     }else {
-        var confirm_box=document.getElementById("confirm_box");
+        let confirm_box=document.getElementById("confirm_box");
         confirm_box.setAttribute("class","alert-warning");
         confirm_box.innerHTML="请先尝试登录";
         document.getElementById("other").innerHTML="<a class=\"btn btn-primary\" href='index.html'>返回登录</a>"
     }
-    var email=document.getElementById("email").value;
+    let email=document.getElementById("email").value;
     user.email=email;
     ajax_resetPassword(user);
 }
@@ -215,7 +215,7 @@ function ajax_resetPassword(user) {
     });
 }
 function resetPassword_result(data) {
-    var confirm_box=document.getElementById("confirm_box");
+    let confirm_box=document.getElementById("confirm_box");
     if (data.msg=="email_not_exist"){
         confirm_box.setAttribute("class","alert-warning");
         confirm_box.innerHTML="该邮箱未注册";
@@ -225,22 +225,19 @@ function resetPassword_result(data) {
         confirm_box.innerHTML = "注意接收重置密码邮件";
         document.getElementById("basic-addon1").innerHTML = "请输入验证码";
         if (document.cookie != "") {
-            var user_string = document.cookie.split(";")[0].split("=")[1];
-            var user = JSON.parse(user_string);
+            let user_string = document.cookie.split(";")[0].split("=")[1];
+            let user = JSON.parse(user_string);
             user.code = data.msg;
             setCookie("user",JSON.stringify(user),180);
             document.getElementById("btu_resetPassword").setAttribute("onclick", "check_code()");
             document.getElementById("email").value = "";
         }
-        else {
-        return;
-    }
     }
 }
 function check_code() {
-    var user=JSON.parse(document.cookie.split(";")[0].split("=")[1]);
-    var code=document.getElementById("email").value;
-    var confirm_box=document.getElementById("confirm_box");
+    let user=JSON.parse(document.cookie.split(";")[0].split("=")[1]);
+    let code=document.getElementById("email").value;
+    let confirm_box=document.getElementById("confirm_box");
     if (code==user.code){
         confirm_box.setAttribute("class","alert-success");
         confirm_box.innerHTML="验证码正确";
@@ -249,7 +246,7 @@ function check_code() {
             "<input type=\"password\" id=\"password\" class=\"form-control\" aria-describedby=\"basic-addon1\">\n" +
             "<span class=\"input-group-addon\" id=\"basic-addon1\">确认密码</span>\n" +
             "<input type=\"password\" id=\"password2\" class=\"form-control\" aria-describedby=\"basic-addon1\">\n";
-        var btu_resetPassword=document.getElementById("btu_resetPassword");
+        let btu_resetPassword=document.getElementById("btu_resetPassword");
         btu_resetPassword.innerHTML="确认";
         btu_resetPassword.setAttribute("onclick","updatePassword()");
     }
@@ -259,9 +256,9 @@ function check_code() {
     }
 }
 function updatePassword() {
-    var password=document.getElementById("password").value;
-    var password2=document.getElementById("password2").value;
-    var confirm_box=document.getElementById("confirm_box");
+    let password=document.getElementById("password").value;
+    let password2=document.getElementById("password2").value;
+    let confirm_box=document.getElementById("confirm_box");
     if (password!=password2){
         confirm_box.setAttribute("class","alert-warning");
         confirm_box.innerHTML="密码不一致";
@@ -269,8 +266,8 @@ function updatePassword() {
         confirm_box.setAttribute("class","alert-success");
         confirm_box.innerHTML="密码通过";
         if (document.cookie!="") {
-            var user_string = document.cookie.split(";")[0].split("=")[1];
-            var user = JSON.parse(user_string);
+            let user_string = document.cookie.split(";")[0].split("=")[1];
+            let user = JSON.parse(user_string);
             user.password = password;
             setCookie("user",JSON.stringify(user),180)
             updatePassword_ajax(user);
@@ -296,7 +293,7 @@ function updatePassword_ajax(user) {
     })
 }
 function updatePassword_result(data) {
-    var confirm_box=document.getElementById("confirm_box");
+    let confirm_box=document.getElementById("confirm_box");
     if (data.msg=="updatePassword_success"){
         confirm_box.setAttribute("class","alert-success");
         confirm_box.innerHTML="密码修改成功";
@@ -307,7 +304,7 @@ function updatePassword_result(data) {
     }
 }
 function get_news(user_type) {
-    var user={};
+    let user={};
     user.user_type=user_type;
     $.ajax({
         url:"/public?public=get_news",
@@ -324,16 +321,16 @@ function get_news(user_type) {
 }
 function show_news(data) {
     document.getElementById("marquee").style.display="block";
-    var ul=document.getElementById("marquee").children[0];
+    let ul=document.getElementById("marquee").children[0];
     ul.innerHTML="";
-    for (var i=0;i<data.length;i++){
-        var li=document.createElement("li");
+    for (let i=0;i<data.length;i++){
+        let li=document.createElement("li");
         ul.appendChild(li);
-        var a=document.createElement("a");
+        let a=document.createElement("a");
         li.appendChild(a);
         a.text=data[i].company;
         a.href=data[i].href;
-        var span =document.createElement("span");
+        let span =document.createElement("span");
         span.setAttribute("class","glyphicon glyphicon-log-in");
         li.appendChild(span);
         span.setAttribute("style","float:right")
@@ -343,7 +340,7 @@ function key_down_event(id) {
     document.getElementById(id).onkeyup = function (e) {
         if (window.event)//如果window.event对象存在，就以此事件对象为准
             e = window.event;
-        var code = e.charCode || e.keyCode;
+        let code = e.charCode || e.keyCode;
         if (code == 13) {
             if (id=="login"){
                 reset_user();
@@ -360,9 +357,9 @@ function direction_key_event(id) {
     document.getElementById(id).onkeyup = function (e) {
         if (window.event)//如果window.event对象存在，就以此事件对象为准
             e = window.event;
-        var code = e.charCode || e.keyCode;
-        var inputs=document.getElementById(id).getElementsByTagName("input");
-        var i=0;
+        let code = e.charCode || e.keyCode;
+        let inputs=document.getElementById(id).getElementsByTagName("input");
+        let i=0;
         for(; i<inputs.length; i++)
         {
             if(inputs[i].id==document.activeElement.id) {
@@ -390,30 +387,30 @@ function direction_key_event(id) {
     
 }
 function set_marquee_left() {
-    var left=document.getElementById("left");
-    var marquee=document.getElementById("marquee");
+    let left=document.getElementById("left");
+    let marquee=document.getElementById("marquee");
     left.getElementsByClassName("row")[0].appendChild(marquee);
     get_news("person");
 }
 function set_marquee_right() {
-    var right=document.getElementById("right");
-    var marquee=document.getElementById("marquee");
+    let right=document.getElementById("right");
+    let marquee=document.getElementById("marquee");
     right.getElementsByClassName("row")[0].appendChild(marquee);
     get_news("person");
 }
 function change_frame_content() {
-    var frame=document.getElementById("frame")
+    let frame=document.getElementById("frame")
     frame.innerHTML="<iframe style='position:relative;z-index: 999;opacity: 0.8;border: 10px solid white;' src=\"webchat.html\" width=\"100%\" height=\"500\" scrolling=\"auto\" frameborder=\"0\"> </iframe>";
 
 }
 function show_admin() {
-    var admin=document.getElementById("admin")
+    let admin=document.getElementById("admin")
     admin.innerHTML="<iframe style='position:relative;z-index: 999;opacity: 0.8;border: 10px solid white;' src=\"admin.html\" width=\"100%\" height=\"500\" scrolling=\"auto\" frameborder=\"0\"> </iframe>";
 
 }
 function show_div(id) {
-    var mypanel=document.getElementsByClassName("mypanel");
-    for (var i=0;i<mypanel.length;i++){
+    let mypanel=document.getElementsByClassName("mypanel");
+    for (let i=0;i<mypanel.length;i++){
         mypanel[i].style.display="none"
     }
     document.getElementById(id).style.display="block";

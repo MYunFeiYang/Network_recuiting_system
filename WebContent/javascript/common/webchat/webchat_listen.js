@@ -1,5 +1,5 @@
 //创建一个连接，这里的参数是服务端的链接
-var socket=new WebSocket("ws://localhost/init");
+let socket=new WebSocket("ws://localhost/init");
 $(function () {
     //初始化加载listen方法
     listen();
@@ -28,14 +28,14 @@ function closeSocket() {
 function listen() {
     //打开连接时触发
     socket.onopen = function () {
-        var nickname = getnickname();
-        var msg = {"nickname": nickname};
+        let nickname = getnickname();
+        let msg = {"nickname": nickname};
         socket.send(JSON.stringify(msg));
         show_system_message_to_self("欢迎加入群聊");
     };
     //收到消息时触发
     socket.onmessage = function (evt) {
-        var data = JSON.parse(evt.data);
+        let data = JSON.parse(evt.data);
         if (Object.prototype.toString.call(data) == "[object Array]") {
             //展示在线列表
             show_online_list(data);

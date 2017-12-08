@@ -1,7 +1,7 @@
-var btu_register_status=false;
+let btu_register_status=false;
 function check_email(email,confirm_box){
-    var user={};
-    var email=document.getElementById(email).value;
+    let user={};
+    let email=document.getElementById(email).value;
     user.email=email;
     ajax_check_email(user,confirm_box);
 }
@@ -21,7 +21,7 @@ function ajax_check_email(user,confirm_box) {
     });
 }
 function check_email_result(data,confirm_box) {
-    var confirm=document.getElementById(confirm_box)
+    let confirm=document.getElementById(confirm_box)
     if (data.msg=="email_exist"){
         confirm.setAttribute("style","color:red");
         confirm.innerHTML="请邮箱已被注册";
@@ -35,9 +35,9 @@ function check_email_result(data,confirm_box) {
     }
 }
 function reg_username(nickname,confirm_box) {
-    var uPattern = /^[a-zA-Z0-9_-]{4,16}$/;
-    var username=document.getElementById(nickname).value;
-    var confirm=document.getElementById(confirm_box);
+    let uPattern = /^[a-zA-Z0-9_-]{4,16}$/;
+    let username=document.getElementById(nickname).value;
+    let confirm=document.getElementById(confirm_box);
     if (uPattern.test(username)){
         confirm.innerHTML="";
         confirm.classList.add("glyphicon");
@@ -51,9 +51,9 @@ function reg_username(nickname,confirm_box) {
     }
 }
 function reg_pwd(password,confirm_box) {
-    var password=document.getElementById(password).value;
-    var reg = /^[A-Za-z0-9]{6,20}$/;
-    var confirm=document.getElementById(confirm_box);
+    let password=document.getElementById(password).value;
+    let reg = /^[A-Za-z0-9]{6,20}$/;
+    let confirm=document.getElementById(confirm_box);
     if (reg.test(password)){
         confirm.innerHTML="";
         confirm.classList.add("glyphicon");
@@ -67,9 +67,9 @@ function reg_pwd(password,confirm_box) {
     }
 }
 function reg_telephone(telephone,confirm_box) {
-    var telephone=document.getElementById(telephone).value;
-    var mPattern = /^1[3|4|5|8][0-9]\d{4,8}$/;
-    var confirm=document.getElementById(confirm_box);
+    let telephone=document.getElementById(telephone).value;
+    let mPattern = /^1[3|4|5|8][0-9]\d{4,8}$/;
+    let confirm=document.getElementById(confirm_box);
     if (mPattern.test(telephone)){
         confirm.innerHTML="";
         confirm.classList.add("glyphicon");
@@ -84,9 +84,9 @@ function reg_telephone(telephone,confirm_box) {
     }
 }
 function reg_email(email,confirm_box) {
-    var email=document.getElementById(email).value;
-    var ePattern = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
-    var confirm=document.getElementById(confirm_box);
+    let email=document.getElementById(email).value;
+    let ePattern = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+    let confirm=document.getElementById(confirm_box);
     if (ePattern.test(email)){
         confirm.innerHTML="";
         confirm.setAttribute("style","color:red");
@@ -99,9 +99,9 @@ function reg_email(email,confirm_box) {
     }
 }
 function conf_pwd(password,confirm_password,confirm_box) {
-    var password=document.getElementById(password).value;
-    var confirm_password=document.getElementById(confirm_password).value;
-    var confirm=document.getElementById(confirm_box);
+    let password=document.getElementById(password).value;
+    let confirm_password=document.getElementById(confirm_password).value;
+    let confirm=document.getElementById(confirm_box);
     //alert(confirm_password);
     if(password==confirm_password){
         confirm.innerHTML="";
@@ -117,7 +117,7 @@ function conf_pwd(password,confirm_password,confirm_box) {
     }
 }
 function btu_disable_person(reg_btu,check_box){
-	var name=document.getElementById("person_name").value;
+	let name=document.getElementById("person_name").value;
 	if(btu_register_status&&name!=""){
         document.getElementById(check_box).innerHTML="信息已填写完整";
         document.getElementById(check_box).setAttribute("class","alert-success");
@@ -129,9 +129,9 @@ function btu_disable_person(reg_btu,check_box){
     }
 }
 function btu_disable_enterprise(reg_btu,check_box){
-    var name=document.getElementById("enterprise_name").value;
-    var industry=document.getElementById("enterprise_industry").value;
-    var address=document.getElementById("enterprise_address").value;
+    let name=document.getElementById("enterprise_name").value;
+    let industry=document.getElementById("enterprise_industry").value;
+    let address=document.getElementById("enterprise_address").value;
     if(btu_register_status&&name!=""&&industry!=""&&address!=""){
         document.getElementById(check_box).innerHTML="信息已填写完整";
         document.getElementById(check_box).setAttribute("class","alert-success");

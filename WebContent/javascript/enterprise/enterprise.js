@@ -1,5 +1,5 @@
 function register_enterprise() {
-    var company={};
+    let company={};
     company.nickname=document.getElementById("enterprise_nickname").value;
     company.password=document.getElementById("enterprise_password").value;
     company.name=document.getElementById("enterprise_name").value;
@@ -37,13 +37,13 @@ function modify_user_enterprise() {
     document.getElementById("reg_btu").setAttribute("onclick","modify_enterprise()");
 }
 function modify_enterprise() {
-    var nickname=document.getElementById("enterprise_nickname").value;
-    var password=document.getElementById("enterprise_password").value;
-    var name=document.getElementById("enterprise_name").value;
-    var industry=document.getElementById("enterprise_industry").value;
-    var telephone=document.getElementById("enterprise_telephone").value;
-    var address=document.getElementById("enterprise_address").value;
-    var modify_user={};
+    let nickname=document.getElementById("enterprise_nickname").value;
+    let password=document.getElementById("enterprise_password").value;
+    let name=document.getElementById("enterprise_name").value;
+    let industry=document.getElementById("enterprise_industry").value;
+    let telephone=document.getElementById("enterprise_telephone").value;
+    let address=document.getElementById("enterprise_address").value;
+    let modify_user={};
     modify_user.telephone=telephone;
     modify_user.nickname=nickname;
     modify_user.name=name;
@@ -67,7 +67,7 @@ function modify_enterprise_ajax(user) {
     })
 }
 function modify_enterprise_result(data,confirm_info_box) {
-    var confirm_info_box=document.getElementById(confirm_info_box);
+    let confirm_info_box=document.getElementById(confirm_info_box);
     if (data.msg=="modify_user_success"){
         confirm_info_box.innerHTML="信息修改成功";
         confirm_info_box.setAttribute("class","alert-success");
@@ -78,8 +78,8 @@ function modify_enterprise_result(data,confirm_info_box) {
 }
 function init_job() {
     document.getElementById("jobs").style.display = "block";
-    var user_string = document.cookie.split(";")[0].split("=")[1];
-    var user = JSON.parse(user_string);
+    let user_string = document.cookie.split(";")[0].split("=")[1];
+    let user = JSON.parse(user_string);
     init_job_ajax(user);
 }
 function init_job_ajax(user) {
@@ -103,9 +103,9 @@ function init_job_result(data) {
     document.getElementById("email").value = data.email;
 }
 function infilling_address(data) {
-    var address=document.getElementById("address");
-    for (var i=1;i<data.length;i++){
-        var option=document.createElement("option");
+    let address=document.getElementById("address");
+    for (let i=1;i<data.length;i++){
+        let option=document.createElement("option");
         address.appendChild(option);
         option.value=data[i].text;
         option.innerHTML=data[i].text;
@@ -125,17 +125,17 @@ function get_job() {
     });
 }
 function infilling_job(data) {
-    var position=document.getElementById("industry");
-    for (var i=1;i<data.length;i++){
-        var option=document.createElement("option");
+    let position=document.getElementById("industry");
+    for (let i=1;i<data.length;i++){
+        let option=document.createElement("option");
         position.appendChild(option);
         option.value=data[i].text;
         option.innerHTML=data[i].text;
     }
 }
 function get_position() {
-    var job={};
-    var job_name=document.getElementById("industry").value;
+    let job={};
+    let job_name=document.getElementById("industry").value;
     job.job_name=job_name;
     $.ajax({
         url:"/query/position",
@@ -151,28 +151,28 @@ function get_position() {
     });
 }
 function infilling_position(data) {
-    var position=document.getElementById("job");
-    for (var i=1;i<data.length;i++){
-        var option=document.createElement("option");
+    let position=document.getElementById("job");
+    for (let i=1;i<data.length;i++){
+        let option=document.createElement("option");
         position.appendChild(option);
         option.value=data[i].position;
         option.innerHTML=data[i].position;
     }
 }
 function add_job() {
-    var job={};
-    var user_string = document.cookie.split(";")[0].split("=")[1];
-    var user = JSON.parse(user_string);
-    var telephone=user.telephone;
-    var name=document.getElementById("name").value;
-    var address=document.getElementById("address").value;
-    var industry=document.getElementById("industry").value;
-    var job_name=document.getElementById("job").value;
-    var number=document.getElementById("number").value;
-    var salary=document.getElementById("salary").value;
-    var publish_time=document.getElementById("publish_time").value;
-    var effective_time=document.getElementById("effective_time").value;
-    var email=document.getElementById("email").value;
+    let job={};
+    let user_string = document.cookie.split(";")[0].split("=")[1];
+    let user = JSON.parse(user_string);
+    let telephone=user.telephone;
+    let name=document.getElementById("name").value;
+    let address=document.getElementById("address").value;
+    let industry=document.getElementById("industry").value;
+    let job_name=document.getElementById("job").value;
+    let number=document.getElementById("number").value;
+    let salary=document.getElementById("salary").value;
+    let publish_time=document.getElementById("publish_time").value;
+    let effective_time=document.getElementById("effective_time").value;
+    let email=document.getElementById("email").value;
     job.telephone=telephone;
     job.name=name;
     job.address=address;
@@ -200,7 +200,7 @@ function add_job_ajax(job) {
     })
 }
 function add_job_result(data) {
-    var confirm_job_box=document.getElementById("confirm_job_box")
+    let confirm_job_box=document.getElementById("confirm_job_box")
     if (data.msg=="add_job_success"){
         confirm_job_box.innerHTML="岗位发布成功";
         confirm_job_box.setAttribute("class","alert-success");
