@@ -182,10 +182,11 @@ function init_user(nickname) {
     user_center.innerHTML="";
 }
 function resetPassword() {
+    let user;
+    let email=document.getElementById("email").value;
     if (document.cookie!="") {
         let user_string = document.cookie.split(";")[0].split("=")[1];
-        let user = JSON.parse(user_string);
-        let email=document.getElementById("email").value;
+        user = JSON.parse(user_string);
         user.email=email;
         setCookie("user",JSON.stringify(user),180);
         updatePassword_ajax(user);
@@ -195,7 +196,6 @@ function resetPassword() {
         confirm_box.innerHTML="请先尝试登录";
         document.getElementById("other").innerHTML="<a class=\"btn btn-primary\" href='index.html'>返回登录</a>"
     }
-    let email=document.getElementById("email").value;
     user.email=email;
     ajax_resetPassword(user);
 }
@@ -269,12 +269,9 @@ function updatePassword() {
             let user_string = document.cookie.split(";")[0].split("=")[1];
             let user = JSON.parse(user_string);
             user.password = password;
-            setCookie("user",JSON.stringify(user),180)
+            setCookie("user",JSON.stringify(user),180);
             updatePassword_ajax(user);
-        }else {
-            return;
         }
-
     }
 }
 function updatePassword_ajax(user) {
@@ -299,8 +296,6 @@ function updatePassword_result(data) {
         confirm_box.innerHTML="密码修改成功";
         document.getElementById("other").innerHTML="";
         document.getElementById("btu_resetPassword").innerHTML="<a href='index.html' style='color: white'>返回登录</a>"
-    }else {
-        return;
     }
 }
 function get_news(user_type) {
@@ -347,8 +342,6 @@ function key_down_event(id) {
                 login();
             } else if (id=="preselected_search"){
                 query();
-            }else {
-                return;
             }
         }
     }
@@ -367,21 +360,19 @@ function direction_key_event(id) {
             }
         }
         if (code == 37) {//左方向键
-            return;
+
         }else if (code==38){//上方向键
             if (i>0) {
                 i--;
                 inputs[i].focus();
             }
         }else if (code==39){//右方向键
-            return;
+
         }else if (code==40){//下方向键
             if (i<inputs.length) {
                 i++;
                 inputs[i].focus();
             }
-        }else {
-            return;
         }
     }
     
@@ -399,19 +390,19 @@ function set_marquee_right() {
     get_news("person");
 }
 function change_frame_content() {
-    let frame=document.getElementById("frame")
+    let frame=document.getElementById("frame");
     frame.innerHTML="<iframe style='position:relative;z-index: 999;opacity: 0.8;border: 10px solid white;' src=\"webchat.html\" width=\"100%\" height=\"500\" scrolling=\"auto\" frameborder=\"0\"> </iframe>";
 
 }
 function show_admin() {
-    let admin=document.getElementById("admin")
+    let admin=document.getElementById("admin");
     admin.innerHTML="<iframe style='position:relative;z-index: 999;opacity: 0.8;border: 10px solid white;' src=\"admin.html\" width=\"100%\" height=\"500\" scrolling=\"auto\" frameborder=\"0\"> </iframe>";
 
 }
 function show_div(id) {
     let mypanel=document.getElementsByClassName("mypanel");
     for (let i=0;i<mypanel.length;i++){
-        mypanel[i].style.display="none"
+        mypanel[i].style.display="none";
     }
     document.getElementById(id).style.display="block";
 }
