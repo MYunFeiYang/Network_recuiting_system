@@ -1,3 +1,4 @@
+"use strict";
 function register_person() {
     let user={};
     user.nickname=document.getElementById("person_nickname").value;
@@ -35,7 +36,7 @@ function modify_user_person() {
     document.getElementById("person_name_group").style.display="none";
     document.getElementById("person_email_group").style.display="none";
     document.getElementById("person_reg_btu").value="提交修改";
-    document.getElementById("person_reg_btu").setAttribute("onmouseover","btu_disable_person_modify")
+    document.getElementById("person_reg_btu").setAttribute("onmouseover","btu_disable_person_modify");
     document.getElementById("person_reg_btu").setAttribute("onclick","modify_person()");
 }
 function modify_person() {
@@ -168,7 +169,7 @@ function add_resume_ajax(data) {
     })
 }
 function add_resume_result(data) {
-    let confirm_resume_box=document.getElementById("confirm_resume_box")
+    let confirm_resume_box=document.getElementById("confirm_resume_box");
     if (data.msg=="add_resume_success"){
         confirm_resume_box.innerHTML="简历添加成功";
         confirm_resume_box.setAttribute("class","alert-success");
@@ -190,7 +191,7 @@ function browse_resume_ajax(user) {
         type: 'POST',
         dataType: 'JSON',
         success: function (data) {
-            browse_resume_result();
+            browse_resume_result(data);
         },
         fail: function () {
 

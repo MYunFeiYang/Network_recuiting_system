@@ -1,3 +1,4 @@
+"use strict";
 let timer;
 function marquee(target) {
         let ul=document.getElementById(target).getElementsByTagName("ul")[0];

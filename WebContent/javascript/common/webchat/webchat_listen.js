@@ -1,3 +1,4 @@
+"use strict";
 //创建一个连接，这里的参数是服务端的链接
 let socket=new WebSocket("ws://localhost/init");
 $(function () {
@@ -52,11 +53,11 @@ function listen() {
         document.getElementById("show_content").scrollTop = document.getElementById("show_content").scrollHeight;
     };
     //关闭连接时触发
-    socket.onclose = function (evt) {
-        show_system_message_to_self("你已关闭连接")
+    socket.onclose = function () {
+        show_system_message_to_self("你已关闭连接");
     }
     //连接错误时触发
-    socket.onerror = function (evt) {
+    socket.onerror = function () {
         show_system_message_to_self("链接发生错误")
     }
 }

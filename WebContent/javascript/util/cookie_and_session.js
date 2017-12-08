@@ -1,3 +1,4 @@
+"use strict";
 function setCookie(c_name,value,expireDays)
 {
     let existDate=new Date();
@@ -18,8 +19,6 @@ function show_user(nickname,password) {
         let user = JSON.parse(user_string);
         document.getElementById(nickname).value = user.nickname;
         document.getElementById(password).value = user.password;
-    }else {
-        return;
     }
 }
 function reset_user() {

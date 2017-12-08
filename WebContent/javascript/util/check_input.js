@@ -1,7 +1,8 @@
+"use strict";
 let btu_register_status=false;
-function check_email(email,confirm_box){
+function check_email(id,confirm_box){
     let user={};
-    let email=document.getElementById(email).value;
+    let email=document.getElementById(id).value;
     user.email=email;
     ajax_check_email(user,confirm_box);
 }
@@ -21,7 +22,7 @@ function ajax_check_email(user,confirm_box) {
     });
 }
 function check_email_result(data,confirm_box) {
-    let confirm=document.getElementById(confirm_box)
+    let confirm=document.getElementById(confirm_box);
     if (data.msg=="email_exist"){
         confirm.setAttribute("style","color:red");
         confirm.innerHTML="请邮箱已被注册";

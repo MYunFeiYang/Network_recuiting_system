@@ -1,3 +1,4 @@
+"use strict";
 function register_enterprise() {
     let company={};
     company.nickname=document.getElementById("enterprise_nickname").value;

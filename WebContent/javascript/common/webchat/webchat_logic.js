@@ -1,10 +1,11 @@
+"use strict";
 //向客户端发送消息，这里定义了一些参数用来设置消息的颜色字体，不过暂时没用到有兴趣的可以自己实现
 function emit() {
 
     //encodeScript方法用来转义<>标签，防止脚本输入，方法内容在core.js里面
     let text = encodeScript($("#content").val());
     if (text==""){
-        return;
+
     }else {
         let nickname=getnickname();
         let msg = {
@@ -23,7 +24,7 @@ function emit() {
 
 //按下回车键时触发发送消息方法
 document.onkeydown = function (event) {
-    let e = event || window.event || arguments.callee.caller.arguments[0];
+    var e = event || window.event || arguments.callee.caller.arguments[0];
     if (e && e.keyCode == 13) { // enter 键
         emit();
     }
@@ -38,8 +39,8 @@ function encodeScript(data) {
 
 function getnickname() {
     let user = document.cookie.split(";")[0].split("=")[1];
-    let nickname = JSON.parse(user).nickname;
-    return nickname;
+    let name = JSON.parse(user).nickname;
+    return name;
 }
 function refresh_online_list() {
     let refresh=document.getElementById("refresh");

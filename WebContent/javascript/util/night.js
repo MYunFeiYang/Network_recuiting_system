@@ -1,5 +1,5 @@
-var brightness;
-
+"use strict";
+let brightness;
 //显示遮罩
 function cover(brightness) {
     if (typeof(div) == 'undefined') {
