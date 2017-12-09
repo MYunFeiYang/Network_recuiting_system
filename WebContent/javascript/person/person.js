@@ -37,7 +37,7 @@ function modify_user_person() {
     document.getElementById("person_email_group").style.display="none";
     document.getElementById("person_reg_btu").value="提交修改";
     document.getElementById("person_reg_btu").setAttribute("onmouseover","btu_disable_person_modify");
-    document.getElementById("person_reg_btu").setAttribute("onclick","modify_person()");
+    document.getElementById("person_reg_btu").onclick=modify_person();
 }
 function modify_person() {
     let nickname=document.getElementById("person_nickname").value;
@@ -64,13 +64,13 @@ function modify_person_ajax(user) {
     })
 }
 function modify_person_result(data,confirm_info_box) {
-    let confirm_info_box=document.getElementById(confirm_info_box);
+    let m_confirm_info_box=document.getElementById(confirm_info_box);
     if (data.msg=="modify_user_success"){
-        confirm_info_box.innerHTML="信息修改成功";
-        confirm_info_box.setAttribute("class","alert-success");
+        m_confirm_info_box.innerHTML="信息修改成功";
+        m_confirm_info_box.setAttribute("class","alert-success");
     }else {
-        confirm_info_box.innerHTML="信息修改失败";
-        confirm_info_box.setAttribute("class","alert-warning");
+        m_confirm_info_box.innerHTML="信息修改失败";
+        m_confirm_info_box.setAttribute("class","alert-warning");
     }
 }
 function init_resume() {
@@ -177,29 +177,4 @@ function add_resume_result(data) {
         confirm_resume_box.innerHTML="简历添加失败";
         confirm_resume_box.setAttribute("class","alert-warning");
     }
-}
-function browse_resume() {
-    document.getElementById("add_resume").style.display = "none";
-    let user_string = document.cookie.split(";")[0].split("=")[1];
-    let user = JSON.parse(user_string);
-    browse_resume_ajax(user);
-}
-function browse_resume_ajax(user) {
-    $.ajax({
-        url: '/person?person=browseResume',
-        data: user,
-        type: 'POST',
-        dataType: 'JSON',
-        success: function (data) {
-            browse_resume_result(data);
-        },
-        fail: function () {
-
-        }
-    })
-}
-function browse_resume_result(data) {
-    document.getElementById("name").value = data.name;
-    document.getElementById("telephone").value = data.telephone;
-    document.getElementById("email").value = data.email;
 }

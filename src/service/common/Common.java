@@ -74,12 +74,16 @@ public class Common {
         DBManager conndb = new DBManager();
         Connection conn = conndb.getConnection();
         String sql = null;
-        if (login_type.equals("person")) {
-            sql = "select email from occupy_person where nickname=? and password=?";
-        } else if (login_type.equals("enterprise")) {
-            sql = "select name from occupy_company where nickname=? and password=?";
-        }else if(login_type.equals("admin")){
-            sql = "select nickname from admin where nickname=? and password=?";
+        switch (login_type) {
+            case "person":
+                sql = "select email from occupy_person where nickname=? and password=?";
+                break;
+            case "enterprise":
+                sql = "select name from occupy_company where nickname=? and password=?";
+                break;
+            case "admin":
+                sql = "select nickname from admin where nickname=? and password=?";
+                break;
         }
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -90,16 +94,12 @@ public class Common {
                 String str = "{\"msg\":\"login_success\"}";
                 response.getWriter().print(str);
                 response.getWriter().flush();
-                ;
                 response.getWriter().close();
-                ;
             } else {
                 String str = "{\"msg\":\"login_fail\"}";
                 response.getWriter().print(str);
                 response.getWriter().flush();
-                ;
                 response.getWriter().close();
-                ;
             }
             rs.close();
             ps.close();
@@ -117,30 +117,32 @@ public class Common {
         String login_type = request.getParameter("login_type");
         String login_nickname = request.getParameter("nickname");
         String login_password = request.getParameter("password");
-        if (login.equals("login")) {
-            // 创建session
-            // 使用request对象的getSession()获取session，如果session不存在则创建一个
-            HttpSession session = request.getSession();
-            JSONObject user = new JSONObject();
-            user.put("login_type", login_type);
-            user.put("nickname", login_nickname);
-            user.put("password", login_password);
-            session.setAttribute("user", user.toString());
-            response.getWriter().print(user.toString());
-        } else if (login.equals("refresh")) {
-            // 判断session之前是否存在，或者说是否新建
-            HttpSession session = request.getSession();
-            if (session.isNew()) {
+        // 创建session
+        // 使用request对象的getSession()获取session，如果session不存在则创建一个
+        HttpSession session = request.getSession();
+        switch (login) {
+            case "login":
+                JSONObject user = new JSONObject();
+                user.put("login_type", login_type);
+                user.put("nickname", login_nickname);
+                user.put("password", login_password);
+                session.setAttribute("user", user.toString());
+                response.getWriter().print(user.toString());
+                //System.out.println(session.getAttribute("user"));
+                break;
+            case "refresh":
+                // 判断session之前是否存在，或者说是否新建
+                if (session.isNew()) {
+                    session.invalidate();
+                } else {
+                    response.getWriter().print(session.getAttribute("user"));
+                }
+                break;
+            case "delete":
+                // 删除session
                 session.invalidate();
-            } else {
-                response.getWriter().print(session.getAttribute("user"));
-            }
-        } else {
-            // 删除session
-            HttpSession session = request.getSession();
-            session.invalidate();
+                break;
         }
-
     }
 
     public void resetPassword(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -273,9 +275,9 @@ public class Common {
         Connection conn = conndb.getConnection();
         String sql;
         if (user_login.equals("service/person")) {
-            sql = "SELECT company,href FROM (SELECT ROW_NUMBER() OVER(ORDER BY id ASC) AS ROWID,* FROM Hot_recruitment)AS TEMP WHERE ROWID<=50";
+            sql = "SELECT company,href FROM (SELECT ROW_NUMBER() OVER(ORDER BY id ASC) AS ROWID,* FROM Hot_recruitment)AS TEMP WHERE ROWID<=30";
         } else {
-            sql = "SELECT company,href FROM (SELECT ROW_NUMBER() OVER(ORDER BY id ASC) AS ROWID,* FROM Hot_recruitment)AS TEMP WHERE ROWID<=50";
+            sql = "SELECT company,href FROM (SELECT ROW_NUMBER() OVER(ORDER BY id ASC) AS ROWID,* FROM Hot_recruitment)AS TEMP WHERE ROWID<=30";
         }
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -328,46 +330,46 @@ public class Common {
         }
     }
 
-    public void Paging(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+    public void Paging(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/xml; charset=UTF-8");
         //以下两句为取消在本地的缓存
         response.setHeader("Cache-Control", "no-cache");
         response.setHeader("Pragma", "no-cache");
-        int pageSize=Integer.parseInt(request.getParameter("pageSize"));
-        int pageNum=Integer.parseInt(request.getParameter("pageNum"));
-        String position=request.getParameter("position");
-        String address=request.getParameter("address");
-        position="%"+position+"%";
-        address="%"+address+"%";
-        DBManager dbManager=new DBManager();
-        Connection conn=dbManager.getConnection();
-        List<Company> companyList=new ArrayList<Company>();
-        List<PageBean> pageBeanList=new ArrayList<PageBean>();
-        Company company=new Company();
+        int pageSize = Integer.parseInt(request.getParameter("pageSize"));
+        int pageNum = Integer.parseInt(request.getParameter("pageNum"));
+        String position = request.getParameter("position");
+        String address = request.getParameter("address");
+        position = "%" + position + "%";
+        address = "%" + address + "%";
+        DBManager dbManager = new DBManager();
+        Connection conn = dbManager.getConnection();
+        List<Company> companyList = new ArrayList<Company>();
+        List<PageBean> pageBeanList = new ArrayList<PageBean>();
+        Company company = new Company();
         String sql1 = "SELECT COUNT (company) FROM school_rercuit WHERE address LIKE ?";
         String sql = "SELECT company,position, address,time FROM (SELECT ROW_NUMBER() OVER(ORDER BY id ASC) AS ROWID,* FROM school_rercuit WHERE address LIKE ?)AS TEMP WHERE (ROWID>? AND ROWID<=?)";
         try {
-            PreparedStatement ps1=conn.prepareStatement(sql1);
-            ps1.setString(1,address);
-            ResultSet rs1=ps1.executeQuery();
-            int rowCount=0;
-            while (rs1.next()){
-                rowCount=rs1.getInt(1);
+            PreparedStatement ps1 = conn.prepareStatement(sql1);
+            ps1.setString(1, address);
+            ResultSet rs1 = ps1.executeQuery();
+            int rowCount = 0;
+            while (rs1.next()) {
+                rowCount = rs1.getInt(1);
             }
-            PreparedStatement ps=conn.prepareStatement(sql);
-            ps.setString(1,address);
-            ps.setString(2,(pageNum-1)*pageSize+"");
-            ps.setString(3,pageNum*pageSize+"");
-            ResultSet rs=ps.executeQuery();
-            while (rs.next()){
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, address);
+            ps.setString(2, (pageNum - 1) * pageSize + "");
+            ps.setString(3, pageNum * pageSize + "");
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
                 company.setName(rs.getString(1));
                 company.setPosition(rs.getString(2));
                 company.setAddress(rs.getString(3));
                 company.setTime(rs.getString(4));
                 companyList.add(company);
             }
-            PageBean pageBean=new PageBean(pageNum,pageSize,rowCount);
+            PageBean pageBean = new PageBean(pageNum, pageSize, rowCount);
             pageBean.setPageNum(pageNum);
             pageBean.setPageSize(pageSize);
             pageBean.setList(companyList);
@@ -378,7 +380,7 @@ public class Common {
             ps1.close();
             ps.close();
             conn.close();
-        }catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }

@@ -14,16 +14,13 @@
     <script src="javascript/util/cookie_and_session.js"></script>
     <script src="javascript/util/check_input.js"></script>
     <script src="javascript/util/div_operate.js"></script>
-    <script src="javascript/util/marquee.js"></script>
-    <script src="javascript/util/night.js"></script>
     <script src="javascript/common/common.js"></script>
-    <script src="javascript/common/query.js"></script>
     <script src="javascript/person/person.js"></script>
     <script src="javascript/enterprise/enterprise.js"></script>
 </head>
-<body>
+<body id="top">
 <div class="container-fluid">
-    <nav class="navbar navbar-default navbar-fixed-top" id="top" style="z-index: 99999">
+    <nav class="navbar navbar-default navbar-fixed-top" style="z-index: 99999">
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
@@ -48,7 +45,7 @@
                            aria-expanded="false">招聘<span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a onclick="show_div('body'),query_job_class(),set_marquee_right()">校招</a></li>
+                                <a onclick="show_div('hotRecurit'),show_hotRecurit(),change_footer_position()">校招</a></li>
                             <li role="separator" class="divider"></li>
                         </ul>
                     </li>
@@ -89,23 +86,6 @@
                     </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li class="dropdown" id="setting">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                           aria-haspopup="true"
-                           aria-expanded="false"><span class="glyphicon glyphicon-asterisk"></span></a>
-                        <ul class="dropdown-menu">
-                            <li type="button" onclick="open_night()">打开夜间模式
-                                <span class="glyphicon glyphicon-resize-full"></span></li>
-                            <li type="button" onclick="close_night()">关闭夜间模式
-                                <span class="glyphicon glyphicon-resize-small"></span></li>
-                            <li type="button" onclick="bigger()">增加亮度
-                                <span class="glyphicon glyphicon-arrow-up"></span></li>
-                            <li type="button" onclick="smaller()">降低亮度
-                                <span class="glyphicon glyphicon-arrow-down"></span></li>
-                        </ul>
-                    </li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown" id="collection">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                            aria-haspopup="true"
@@ -128,7 +108,7 @@
                 </ul>
                 <form class="navbar-form navbar-right" role="search" id="search">
                     <div class="form-group navbar-left">
-                        <input type="text" class="form-control" id="search-con" onkeyup="complete_content()">
+                        <input type="text" class="form-control" id="search-con" onkeyup="complete_content()" title="搜索">
                         <div id="preselected_search" onkeyup="query()">
                         </div>
                     </div>
@@ -821,124 +801,8 @@
     </div>
     <div class="container-fluid" style="margin-top: 56px"
          onclick="close_search('search-con','40px'),close_share(),close_preselected_search()">
-        <div class="mypanel" id="body">
-            <div class="bdsharebuttonbox hidden">
-                <a class="bds_mshare" data-cmd="mshare"></a>
-                <a class="bds_qzone" data-cmd="qzone" href="#"></a>
-                <a class="bds_tsina" data-cmd="tsina"></a>
-                <a class="bds_baidu" data-cmd="baidu"></a>
-                <a class="bds_renren" data-cmd="renren"></a>
-                <a class="bds_tqq" data-cmd="tqq"></a>
-                <a href="#" class="bds_more" data-cmd="more">更多</a>
-            </div>
-            <div class="row">
-                <div class="col-md-2" id="left">
-                    <div class="row">
-                        <div class="col-md-12" id="job_class">
-
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-8" id="main">
-                    <div class="row" id="filter">
-                        <div class="col-md-12">
-                            <div class="col-md-1">
-                                <span style="display:block;padding: 5px 10px">岗位类别：</span>
-                            </div>
-                            <div class="col-md-11">
-                                <div class="row" id="filter_job">
-
-                                </div>
-                            </div>
-                            <div class="col-md-1" style="clear: both">
-                                <span style="display:block;padding:5px 10px">涉及城市：</span>
-                            </div>
-                            <div class="col-md-11">
-                                <div class="row" id="filter_address">
-
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="row" id="filter_position">
-
-                                </div>
-                            </div>
-                            <table style="width: 100%">
-                                <thead>
-                                <tr class="row">
-                                    <td class="col-md-2">公司标题</td>
-                                    <td class="col-md-7">招聘岗位</td>
-                                    <td class="col-md-2">涉及城市</td>
-                                    <td class="col-md-1">发布时间</td>
-                                </tr>
-                                </thead>
-                                <tbody id="company">
-
-                                </tbody>
-                            </table>
-                            <nav aria-label="Page navigation">
-                                <ul class="pagination" style="margin:0px auto;float: right">
-
-                                </ul>
-                            </nav>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-2" id="right">
-                    <div class="row">
-                        <div class="col-md-12" id="hotRecurit">
-                            <h3>热门校招</h3>
-                            <ul>
-                                <li>
-                                    <img src="image/hotRecurit/1.png">
-                                </li>
-                                <li>
-                                    <img src="image/hotRecurit/2.png">
-                                </li>
-                                <li>
-                                    <img src="image/hotRecurit/3.jpg">
-                                </li>
-                                <li>
-                                    <img src="image/hotRecurit/4.png">
-                                </li>
-                                <li>
-                                    <img src="image/hotRecurit/5.jpg">
-                                </li>
-                                <li>
-                                    <img src="image/hotRecurit/6.png">
-                                </li>
-                                <li>
-                                    <img src="image/hotRecurit/7.png">
-                                </li>
-                                <li>
-                                    <img src="image/hotRecurit/8.jpg">
-                                </li>
-                                <li>
-                                    <img src="image/hotRecurit/9.png">
-                                </li>
-                                <li>
-                                    <img src="image/hotRecurit/10.png">
-                                </li>
-                                <li>
-                                    <img src="image/hotRecurit/11.gif">
-                                </li>
-                                <li>
-                                    <img src="image/hotRecurit/12.png">
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div id="marquee" class="marquee" onmouseover="closeInterval()" onmouseout="marquee_control()">
-                            <ul>
-
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="mypanel" id="frame"></div>
+        <div class="mypanel" id="hotRecurit"></div>
+        <div class="mypanel" id="webchat"></div>
         <div class="mypanel" id="admin"></div>
     </div>
     <div id="toTop">
@@ -985,10 +849,8 @@
     window.onload = function () {
         show_user('login_nickname', 'login_password');
         login_session('refresh');
-        marquee_control();
         modify_height();
         change_footer_position();
-        set_marquee_left();
     }
     window._bd_share_config = {
         "common": {

@@ -26,9 +26,10 @@ function marquee(target) {
         }
     }
 function marquee_control() {
-    timer=setInterval("marquee(\"marquee\"),change_footer_position()",1000);
+    timer=setInterval("marquee(\"marquee\")",1000);
 }
 function closeInterval() {
     clearInterval(timer);
 }
+
 

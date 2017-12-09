@@ -42,6 +42,14 @@
     <url-pattern>/query/*</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>admin</servlet-name>
+    <servlet-class>controller.servletAdmin</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>admin</servlet-name>
+    <url-pattern>/admin/*</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>fileupload</servlet-name>
     <servlet-class>controller.FileUpload</servlet-class>
   </servlet>

@@ -40,7 +40,7 @@ body{
 
 .person_list,#show_content,.user_center{
     border: 1px solid white;
-    height: 480px;
+    height: 600px;
 }
 .person_list ul li{
     margin:5px;
@@ -51,7 +51,7 @@ body{
     text-decoration: none;
 }
 #show_content{
-    height: 400px;
+    height: 480px;
 }
 #show_content .system_message,#show_content .self,#show_content .message{
     display: block;
@@ -83,7 +83,7 @@ body{
     padding: 5px;
 }
 #editor{
-    height: 80px;
+    height: 120px;
     padding: 0px;
 }
 #editor textarea{

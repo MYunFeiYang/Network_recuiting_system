@@ -35,7 +35,7 @@ function modify_user_enterprise() {
     document.getElementById("myregister-enterprise").innerHTML="修改企业注册信息";
     document.getElementById("enterprise_telephone_group").style.display="none";
     document.getElementById("reg_btu").value="提交修改";
-    document.getElementById("reg_btu").setAttribute("onclick","modify_enterprise()");
+    document.getElementById("reg_btu").onclick=modify_enterprise();
 }
 function modify_enterprise() {
     let nickname=document.getElementById("enterprise_nickname").value;
@@ -136,8 +136,8 @@ function infilling_job(data) {
 }
 function get_position() {
     let job={};
-    let job_name=document.getElementById("industry").value;
-    job.job_name=job_name;
+    let name=document.getElementById("industry").value;
+    job.job_name=name;
     $.ajax({
         url:"/query/position",
         type:"POST",
@@ -201,7 +201,7 @@ function add_job_ajax(job) {
     })
 }
 function add_job_result(data) {
-    let confirm_job_box=document.getElementById("confirm_job_box")
+    let confirm_job_box=document.getElementById("confirm_job_box");
     if (data.msg=="add_job_success"){
         confirm_job_box.innerHTML="岗位发布成功";
         confirm_job_box.setAttribute("class","alert-success");

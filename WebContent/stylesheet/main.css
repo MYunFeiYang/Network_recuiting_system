@@ -1,11 +1,11 @@
-html, head, body {
-    margin: 0px;
-    padding: 0px;
-}
+
 /*public*/
+.container-fluid{
+    padding: 0;
+}
 .col-md-2,.col-md-3,.col-md-7,.col-md-1,.col-md-11{
-    padding-left: 0px;
-    padding-right: 0px;
+    padding-left: 0;
+    padding-right: 0;
 }
 .modal{
     margin-top: 30px;
@@ -14,27 +14,24 @@ html, head, body {
     background-color: gainsboro;
     opacity: 0.9;
 }
-.marquee ul ,.marquee,#filter ul li,#job_class ul li,#hotRecurit ul li,#preselected_search ul li{
+#preselected_search ul li{
     list-style: none;
     padding: 1px 5px;
 }
-.main ,.marquee,footer,header,#carousel-example-generic{
+.main，footer,header,#carousel-example-generic{
     width: 100%;
     height: auto;
     box-shadow: 1px 1px 1px 1px;
     border-radius: 5px;
 }
-#filter ul li a,#company tr td a,#job_class a{
-    text-decoration: none;
-    color: black;
-}
-#filter ul li:hover,#company tr:hover,#job_class ul li:hover,#preselected_search ul li:hover{
+
+#preselected_search ul li:hover{
     background-color: grey;
 }
-#filter ul li a,#company tr td a ,#preselected_search ul li a{
+#preselected_search ul li a{
     color: black;
 }
-#jobs,#resume,#marquee,#filter{
+#jobs,#resume{
     display: none;
     background-color: gainsboro;
     opacity: 0.9;
@@ -45,7 +42,7 @@ nav{
     font-size: 20px;
     color: black;
     border-bottom: 1px solid gray;
-    margin: 0px;
+    margin: 0;
 }
 #search{
     margin-top: 6px;
@@ -80,10 +77,10 @@ nav{
     color: black;
 }
 #tool{
-    padding: 12px 0px;
+    padding: 12px 0;
 }
 #tool li{
-    padding: 0px 10px;
+    padding: 0 10px;
 }
 #share span:hover,#setting span:hover,#collection span:hover{
     color: #2aabd2;
@@ -119,7 +116,7 @@ nav{
 }
 #filter_position{
     background-color: black;
-    margin: 10px 0px;
+    margin: 10px 0;
 }
 table thead tr td,table tbody tr td{
     border: 1px solid white;
@@ -133,65 +130,15 @@ table tbody tr td a{
     text-align: center;
 }
 
-/*right*/
-#hotRecurit{
-    background-color: white;
-    opacity: 0.9;
-    border: 10px solid gainsboro;
-}
-#hotRecurit h3{
-    background-color: beige;
-    padding: 5px;
-}
-#hotRecurit ul{
-    padding: 2%;
-}
-#hotRecurit ul li{
-    width: 30%;
-    float: left;
-    margin: 1%;
-}
-.marquee {
-    margin:2px 0px;
-    width:100%;
-    height: 480px;
-    overflow: hidden;
-    border: 5px solid gainsboro;
-}
-.marquee ul{
-    padding: 10px;
-    background-color: white;
-}
-.marquee ul li{
-    position: relative;
-    top:0px;
-    padding-left:3px ;
-    font-size: 10px;
-}
-.marquee ul li a:link{
-    color: black;
-    padding: 1px 3px;
-}
-.marquee ul li a:visited{
-    color: red;
-    padding: 1px 3px;
-}
-.marquee ul li a:hover{
-    color: green;
-    padding: 1px 3px;
-}
-.marquee ul li a:active{
-    color:blueviolet;
-    padding: 1px 3px;
-}
+
 /*footer*/
 #footer{
     width: 100%;
-    margin: 0px;
+    margin: 0;
     padding: 10px 30px;
     position: fixed;
-    bottom: 0px;
-    left: 0px;
+    bottom: 0;
+    left: 0;
     z-index: 0;
     background-color: gainsboro;
     color: black;
@@ -201,12 +148,12 @@ table tbody tr td a{
     margin: 5px auto;
     border-right: 1px solid gray;
     border-left: 1px solid gray;
-    padding-top: 0px;
+    padding-top: 0;
     padding-left: 30px;
 }
 #toTop a{
     position: fixed;
-    right: 0px;
+    right: 0;
     bottom: 50px;
     z-index: 99999;
 }
@@ -214,7 +161,7 @@ table tbody tr td a{
     width: 20px;
     height: 72px;
     border-radius: 36px;
-    background: url(../image/toTop.jpg) no-repeat 0px 9px;
+    background: url(../image/toTop.jpg) no-repeat 0 9px;
     background-color: white;
     overflow: hidden;
     box-shadow: 1px 1px 1px 1px grey;
@@ -230,7 +177,7 @@ table tbody tr td a{
 }
 #carousel-example-generic{
     position: fixed;
-    left: 0px;
+    left: 0;
     z-index: 0;
 }
 .alert-warning {
@@ -285,9 +232,6 @@ table tbody tr td a{
     box-shadow: 2px 2px 2px 2px gray;
     font-size: 18px;
 }
-.checked{
-    background-color: #2b669a;
-    box-shadow: 1px 1px 1px 1px dodgerblue;
-}
+
 
 
