@@ -14,7 +14,9 @@
     <script src="javascript/jquery-3.2.1.js"></script>
     <script src="bootstrap-3.3.7-dist/js/bootstrap.js"></script>
     <script src="javascript/admin/admin.js"></script>
-    <script src="javascript/admin/power.js"></script>
+    <script src="javascript/admin/admin_power.js"></script>
+    <script src="javascript/admin/person_account.js"></script>
+    <script src="javascript/admin/enterprise_account.js"></script>
     <script src="javascript/util/night.js"></script>
 </head>
 <body>
@@ -35,7 +37,7 @@
                             <ul class="list-group">
                                 <li class="list-group-item">
                                     <!-- 利用data-target指定URL -->
-                                    <button class="menu-item-left" onclick="init_admin_ajax()">
+                                    <button class="menu-item-left" onclick="init_admin_ajax();change_div('power')">
                                         <span class="glyphicon glyphicon-triangle-right"></span>权限管理
                                     </button>
                                 </li>
@@ -55,7 +57,7 @@
                             <ul class="list-group">
                                 <li class="list-group-item">
                                     <!-- 利用data-target指定URL -->
-                                    <button class="menu-item-left" data-target="test2.html">
+                                    <button class="menu-item-left" onclick="change_div('person_account');init_person_account_ajax()">
                                         <span class="glyphicon glyphicon-triangle-right"></span>账号管理
                                     </button>
                                 </li>
@@ -77,7 +79,7 @@
                         <div id="collapseListGroup2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="collapseListGroupHeading2">
                             <ul class="list-group">
                                 <li class="list-group-item">
-                                    <button class="menu-item-left">
+                                    <button class="menu-item-left" onclick="change_div('enterprise_account');init_enterprise_account_ajax()">
                                         <span class="glyphicon glyphicon-triangle-right"></span>账号管理
                                     </button>
                                 </li>
@@ -151,7 +153,7 @@
                     <li><a href="#">Library</a></li>
                     <li class="active">Data</li>
                 </ol>
-                <table class="table table-bordered table-hover table-responsive">
+                <table id="power" class="hidden table table-bordered table-hover table-responsive">
                     <thead>
                     <tr>
                         <td>#</td>
@@ -162,6 +164,34 @@
                     </tr>
                     </thead>
                     <tbody id="admin">
+
+                    </tbody>
+                </table>
+                <table id="person_account" class="hidden table table-bordered table-hover table-responsive">
+                    <thead>
+                    <tr>
+                        <td>#</td>
+                        <td>账号</td>
+                        <td>密码</td>
+                        <td>最后登录时间</td>
+                        <td>操作</td>
+                    </tr>
+                    </thead>
+                    <tbody id="person">
+
+                    </tbody>
+                </table>
+                <table id="enterprise_account" class="hidden table table-bordered table-hover table-responsive">
+                    <thead>
+                    <tr>
+                        <td>#</td>
+                        <td>账号</td>
+                        <td>密码</td>
+                        <td>最后登录时间</td>
+                        <td>操作</td>
+                    </tr>
+                    </thead>
+                    <tbody id="enterprise">
 
                     </tbody>
                 </table>

@@ -59,7 +59,7 @@
                             <li>
                                 <!-- Button trigger modal -->
                                 <a data-toggle="modal" data-target="#login">
-                                    会员登录
+                                    登录
                                 </a>
                             </li>
                         </ul>
@@ -186,7 +186,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal" id="close_login">关闭</button>
                     <button type="button" class="btn btn-primary"
-                            onclick="reset_user(),login()">登录
+                            onclick="reset_user();login()">登录
                     </button>
                 </div>
             </div>
@@ -329,7 +329,7 @@
                                 <input class="btn btn-lg btn-primary center-block" id="person_reg_btu"
                                        type="button" value="注册"
                                        onmouseover="btu_disable_person('person_reg_btu','confirm_person_box')"
-                                       onclick="remember_user('person_nickname','person_password','person_email'),register_person()">
+                                       onclick="remember_user('person_nickname','person_password','person_email');register_person()">
                             </div>
                             <div class="col-md-6">
                                 <input class="btn btn-lg btn-danger center-block" type="reset" value="重置">
@@ -473,7 +473,7 @@
                             <input class="btn btn-lg btn-primary center-block" type="button"
                                    id="reg_btu" value="注册"
                                    onmouseover="btu_disable_enterprise('reg_btu','confirm_enterprise_box')"
-                                   onclick="remember_user('enterprise_nickname','enterprise_password','enterprise_email'),register_enterprise()">
+                                   onclick="remember_user('enterprise_nickname','enterprise_password','enterprise_email');register_enterprise()">
                         </div>
                         <div class="col-md-6">
                             <input type="reset" class="btn btn-lg btn-danger center-block"
@@ -762,7 +762,7 @@
     </div>
     <!--end Modal-->
     <div id="carousel-example-generic" class="carousel slide" data-ride="carousel"
-         onclick="close_search('search-con','40px'),close_share(),close_preselected_search()">
+         onclick="close_search('search-con','40px');close_share();close_preselected_search()">
         <!-- Indicators -->
         <ol class="carousel-indicators">
             <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
@@ -800,7 +800,7 @@
         </a>
     </div>
     <div class="container-fluid" style="margin-top: 56px"
-         onclick="close_search('search-con','40px'),close_share(),close_preselected_search()">
+         onclick="close_search('search-con','40px');close_share();close_preselected_search()">
         <div class="mypanel" id="hotRecurit"></div>
         <div class="mypanel" id="webchat"></div>
         <div class="mypanel" id="admin"></div>
@@ -852,20 +852,21 @@
         modify_height();
         show_div("hotRecurit");
         show_hotRecurit();
-    };
-    window._bd_share_config = {
-        "common": {
-            "bdSnsKey": {},
-            "bdText": "",
-            "bdMini": "2",
-            "bdPic": "",
-            "bdStyle": "0",
-            "bdSize": "16"
-        },
-        "share": {},
-        "image": {"viewList": ["qzone", "tsina", "tqq", "renren", "weixin"], "viewText": "分享到：", "viewSize": "16"},
-        "selectShare": {"bdContainerClass": null, "bdSelectMiniList": ["qzone", "tsina", "tqq", "renren", "weixin"]}
-    };
-    with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];</script>
+    }
+//    window._bd_share_config = {
+//        "common": {
+//            "bdSnsKey": {},
+//            "bdText": "",
+//            "bdMini": "2",
+//            "bdPic": "",
+//            "bdStyle": "0",
+//            "bdSize": "16"
+//        },
+//        "share": {},
+//        "image": {"viewList": ["qzone", "tsina", "tqq", "renren", "weixin"], "viewText": "分享到：", "viewSize": "16"},
+//        "selectShare": {"bdContainerClass": null, "bdSelectMiniList": ["qzone", "tsina", "tqq", "renren", "weixin"]}
+//    };
+//    with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];
+</script>
 </body>
 </html>

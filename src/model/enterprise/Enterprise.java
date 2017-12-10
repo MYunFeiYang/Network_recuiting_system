@@ -1,13 +1,14 @@
-package model.person;
+package model.enterprise;
 
-public class User {
+public class Enterprise {
     private String nickname;
     private String password;
-    private String login_time;
     private String name;
+    private String industry;
     private String telephone;
     private String email;
-    private String regrime;
+    private String address;
+    private String login_time;
 
     public String getNickname() {
         return nickname;
@@ -25,20 +26,20 @@ public class User {
         this.password = password;
     }
 
-    public String getLogin_time() {
-        return login_time;
-    }
-
-    public void setLogin_time(String login_time) {
-        this.login_time = login_time;
-    }
-
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getIndustry() {
+        return industry;
+    }
+
+    public void setIndustry(String industry) {
+        this.industry = industry;
     }
 
     public String getTelephone() {
@@ -57,12 +58,19 @@ public class User {
         this.email = email;
     }
 
-    public String getRegrime() {
-        return regrime;
+    public String getAddress() {
+        return address;
     }
 
-    public void setRegrime(String regrime) {
-        this.regrime = regrime;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
+    public String getLogin_time() {
+        return login_time;
+    }
+
+    public void setLogin_time(String login_time) {
+        this.login_time = login_time;
+    }
 }

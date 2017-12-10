@@ -346,7 +346,6 @@ public class Common {
         Connection conn = dbManager.getConnection();
         List<Company> companyList = new ArrayList<Company>();
         List<PageBean> pageBeanList = new ArrayList<PageBean>();
-        Company company = new Company();
         String sql1 = "SELECT COUNT (company) FROM school_rercuit WHERE address LIKE ?";
         String sql = "SELECT company,position, address,time FROM (SELECT ROW_NUMBER() OVER(ORDER BY id ASC) AS ROWID,* FROM school_rercuit WHERE address LIKE ?)AS TEMP WHERE (ROWID>? AND ROWID<=?)";
         try {
@@ -363,6 +362,7 @@ public class Common {
             ps.setString(3, pageNum * pageSize + "");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
+                Company company = new Company();
                 company.setName(rs.getString(1));
                 company.setPosition(rs.getString(2));
                 company.setAddress(rs.getString(3));

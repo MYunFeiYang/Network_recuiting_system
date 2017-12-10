@@ -114,8 +114,8 @@ public class Query {
             }
             ResultSet rs = ps.executeQuery();
             List<Company> list=new ArrayList<Company>();
-            Company company=new Company();
             while (rs.next()) {
+                Company company=new Company();
                 company.setName(rs.getString(1));
                 company.setPosition(rs.getString(2));
                 company.setAddress(rs.getString(3));
