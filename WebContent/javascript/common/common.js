@@ -98,10 +98,10 @@ function login_session_result(data) {
             upload_resume_a.setAttribute("data-target","#upload");
             let chat=document.createElement("li");
             user_center.appendChild(chat);
-            var chat_a=document.createElement("a");
+            let chat_a=document.createElement("a");
             chat.appendChild(chat_a);
             chat_a.text="问道空间";
-            chat_a.setAttribute("onclick","show_div('webchat');show_webchat();change_footer_position()");
+            chat_a.setAttribute("onclick","show_div('webchat');show_webchat()");
             let li1=document.createElement("li");
             user_center.appendChild(li1);
             let log_out=document.createElement("a");
@@ -138,10 +138,10 @@ function login_session_result(data) {
             modify_job_a.setAttribute("onclick","function(){init_job();get_address(infilling_address);get_job()}");
             let chat=document.createElement("li");
             user_center.appendChild(chat);
-            var chat_a=document.createElement("a");
+            let chat_a=document.createElement("a");
             chat.appendChild(chat_a);
             chat_a.text="问道空间";
-            chat_a.setAttribute("onclick","show_div('webchat');show_webchat();change_footer_position()");
+            chat_a.setAttribute("onclick","show_div('webchat');show_webchat()");
             let li1=document.createElement("li");
             user_center.appendChild(li1);
             let log_out=document.createElement("a");
@@ -159,20 +159,20 @@ function login_session_result(data) {
             let admin_a=document.createElement("a");
             admin.appendChild(admin_a);
             admin_a.text="后台管理";
-            admin_a.setAttribute("onclick","show_div('admin');show_admin();change_footer_position()");
+            admin_a.setAttribute("onclick","show_div('admin');show_admin()");
             let chat=document.createElement("li");
             user_center.appendChild(chat);
-            var chat_a=document.createElement("a");
+            let chat_a=document.createElement("a");
             chat.appendChild(chat_a);
             chat_a.text="问道空间";
-            chat_a.setAttribute("onclick","show_div('webchat');show_webchat();change_footer_position()");
+            chat_a.setAttribute("onclick","show_div('webchat');show_webchat()");
             let li1=document.createElement("li");
             user_center.appendChild(li1);
             let log_out=document.createElement("a");
             li1.appendChild(log_out);
             log_out.text="退出";
             log_out.setAttribute("style","color:red");
-            log_out.setAttribute("onclick","login_session('delete')")
+            log_out.setAttribute("onclick","login_session('delete')");
             log_out.setAttribute("href","index.html");
         }
     }
@@ -349,7 +349,6 @@ function direction_key_event(id) {
 function show_webchat() {
     let webchat=document.getElementById("webchat");
     webchat.innerHTML="<iframe style='opacity: 0.8;height: 600px' marginheight='0' marginwidth='0' src=\"webchat.html\" width=\"100%\" height=\"500\" scrolling=\"auto\" frameborder=\"0\"> </iframe>";
-
 }
 function show_admin() {
     let admin=document.getElementById("admin");

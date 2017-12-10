@@ -1,5 +1,6 @@
 body{
-    background-color: gainsboro;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 .col-md-2,.col-md-10{
     padding: 0;

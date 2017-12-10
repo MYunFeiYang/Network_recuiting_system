@@ -19,6 +19,12 @@ public class servletAdmin extends HttpServlet {
             Power power=new Power();
             if (url.contains("init")){
                 power.init_admin(request,response);
+            }else if (url.contains("modify")){
+                power.modify_admin(request,response);
+            }else if (url.contains("add")){
+                power.add_admin(request,response);
+            }else if (url.contains("delete")){
+                power.delete_admin(request,response);
             }
 
         }

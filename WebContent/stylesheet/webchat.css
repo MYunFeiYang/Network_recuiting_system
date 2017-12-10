@@ -1,9 +1,9 @@
 body{
-    background-color: gainsboro;
-    opacity: 0.9;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 .col-md-3,.col-md-9,.col-md-12{
-    padding: 0px;
+    padding: 0;
 }
 .user_center ul li:hover,.person_list ul li:hover{
     background-color: gainsboro;
@@ -84,7 +84,7 @@ body{
 }
 #editor{
     height: 120px;
-    padding: 0px;
+    padding: 0;
 }
 #editor textarea{
     width: 100%;

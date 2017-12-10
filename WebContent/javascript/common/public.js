@@ -1,5 +1,9 @@
 "use strict";
-
+let job_class;
+let filter_job;
+let filter_address;
+let filter_position;
+let company;
 function get_news(user_type) {
     let user = {};
     user.user_type = user_type;
@@ -51,7 +55,7 @@ function query_job_class() {
 }
 
 function insert_job_class(data) {
-    let job_class = document.getElementById("job_class");
+    job_class = document.getElementById("job_class");
     job_class.innerHTML = "";
     let ul = document.createElement("ul");
     ul.setAttribute("class", "main");
@@ -80,9 +84,9 @@ function insert_job_class(data) {
 }
 
 function insert_filter_job() {
-    let filter_job = document.getElementById("filter_job");
+    filter_job = document.getElementById("filter_job");
     filter_job.innerHTML = "";
-    let job_class = document.getElementById("job_class").innerHTML;
+    job_class = document.getElementById("job_class").innerHTML;
     filter_job.innerHTML = job_class;
     let ul = filter_job.getElementsByTagName("ul")[0];
     ul.classList.remove("main");
@@ -113,7 +117,7 @@ function get_address(event) {
 
 function insert_filter_address(data) {
     document.getElementById("filter").style.display = "block";
-    let filter_address = document.getElementById("filter_address");
+    filter_address = document.getElementById("filter_address");
     filter_address.innerHTML = "";
     let ul = document.createElement("ul");
     filter_address.appendChild(ul);
@@ -154,7 +158,7 @@ function query_filter_position(text) {
 
 function insert_filter_position(data) {
     document.getElementById("filter").style.display = "block";
-    let filter_position = document.getElementById("filter_position");
+    filter_position = document.getElementById("filter_position");
     filter_position.innerHTML = "";
     let ul = document.createElement("ul");
     filter_position.appendChild(ul);
@@ -176,14 +180,14 @@ function paging(pageNum) {
     let page = {};
     page.pageSize = 12;
     page.pageNum = pageNum;
-    let filter_position = document.getElementById("filter_position");
+    filter_position = document.getElementById("filter_position");
     let position = filter_position.getElementsByTagName("li");
     for (let i = 0; i < position.length; i++) {
         if (position[i].classList.toString().indexOf("checked") != -1) {
             page.position = position[i].firstChild.text;
         };
     };
-    let filter_address = document.getElementById("filter_address");
+    filter_address = document.getElementById("filter_address");
     let address = filter_address.getElementsByTagName("li");
     for (let i = 0; i < address.length; i++) {
         if (address[i].classList.toString().indexOf("checked") != -1) {
@@ -219,7 +223,7 @@ function pagingResult(data) {
     }
     ;
     let list = data[0].list;
-    let company = document.getElementById("company");
+    company = document.getElementById("company");
     company.innerHTML = "";
     for (let i = 0; i < list.length; i++) {
         let tr = document.createElement("tr");
@@ -242,11 +246,14 @@ function pagingResult(data) {
         a2.innerHTML = list[i].position;
         a3.innerHTML = list[i].address;
         td4.innerHTML = list[i].time;
-        tr.setAttribute("class", "row");
-        td1.setAttribute("class", "col-md-2");
-        td2.setAttribute("class", "col-md-7");
-        td3.setAttribute("class", "col-md-2");
-        td4.setAttribute("class", "col-md-1");
+        td1.width="16%";
+        td2.width="64%";
+        td3.width="10%";
+        td4.width="10%";
+        td1.height="20px";
+        td2.height="20px";
+        td2.height="20px";
+        td2.height="20px";
     }
 }
 

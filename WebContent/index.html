@@ -45,7 +45,7 @@
                            aria-expanded="false">招聘<span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a onclick="show_div('hotRecurit'),show_hotRecurit(),change_footer_position()">校招</a></li>
+                                <a onclick="show_div('hotRecurit');show_hotRecurit()">校招</a></li>
                             <li role="separator" class="divider"></li>
                         </ul>
                     </li>
@@ -850,8 +850,9 @@
         show_user('login_nickname', 'login_password');
         login_session('refresh');
         modify_height();
-        change_footer_position();
-    }
+        show_div("hotRecurit");
+        show_hotRecurit();
+    };
     window._bd_share_config = {
         "common": {
             "bdSnsKey": {},
