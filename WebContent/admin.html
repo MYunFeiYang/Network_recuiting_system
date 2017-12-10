@@ -27,7 +27,7 @@
                     <div class="panel panel-primary leftMenu">
                         <!-- 利用data-target指定要折叠的分组列表 -->
                         <div class="panel-heading" id="collapseListGroupHeading4" data-toggle="collapse" data-target="#collapseListGroup4" role="tab" >
-                            <h4 class="panel-title">
+                            <h4 class="panel-title path1" onclick="path_navigation(this)">
                                 管理员
                                 <span class="glyphicon glyphicon-chevron-up right"></span>
                             </h4>
@@ -37,7 +37,7 @@
                             <ul class="list-group">
                                 <li class="list-group-item">
                                     <!-- 利用data-target指定URL -->
-                                    <button class="menu-item-left" onclick="init_admin_ajax();change_div('power')">
+                                    <button class="menu-item-left path2" onclick="init_admin_ajax();change_div('power');path_navigation(this)">
                                         <span class="glyphicon glyphicon-triangle-right"></span>权限管理
                                     </button>
                                 </li>
@@ -47,7 +47,7 @@
                     <div class="panel panel-primary leftMenu">
                         <!-- 利用data-target指定要折叠的分组列表 -->
                         <div class="panel-heading" id="collapseListGroupHeading1" data-toggle="collapse" data-target="#collapseListGroup1" role="tab" >
-                            <h4 class="panel-title">
+                            <h4 class="panel-title path1" onclick="path_navigation(this)">
                                 个人管理
                                 <span class="glyphicon glyphicon-chevron-down right"></span>
                             </h4>
@@ -57,13 +57,8 @@
                             <ul class="list-group">
                                 <li class="list-group-item">
                                     <!-- 利用data-target指定URL -->
-                                    <button class="menu-item-left" onclick="change_div('person_account');init_person_account_ajax()">
+                                    <button class="menu-item-left path2" onclick="change_div('person_account');init_person_account_ajax();path_navigation(this)">
                                         <span class="glyphicon glyphicon-triangle-right"></span>账号管理
-                                    </button>
-                                </li>
-                                <li class="list-group-item">
-                                    <button class="menu-item-left">
-                                        <span class="glyphicon glyphicon-triangle-right"></span>简历管理
                                     </button>
                                 </li>
                             </ul>
@@ -71,7 +66,7 @@
                     </div>
                     <div class="panel panel-primary leftMenu">
                         <div class="panel-heading" id="collapseListGroupHeading2" data-toggle="collapse" data-target="#collapseListGroup2" role="tab" >
-                            <h4 class="panel-title">
+                            <h4 class="panel-title path1" onclick="path_navigation(this)">
                                 企业管理
                                 <span class="glyphicon glyphicon-chevron-down right"></span>
                             </h4>
@@ -79,13 +74,8 @@
                         <div id="collapseListGroup2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="collapseListGroupHeading2">
                             <ul class="list-group">
                                 <li class="list-group-item">
-                                    <button class="menu-item-left" onclick="change_div('enterprise_account');init_enterprise_account_ajax()">
+                                    <button class="menu-item-left path2" onclick="change_div('enterprise_account');init_enterprise_account_ajax();path_navigation(this)">
                                         <span class="glyphicon glyphicon-triangle-right"></span>账号管理
-                                    </button>
-                                </li>
-                                <li class="list-group-item">
-                                    <button class="menu-item-left">
-                                        <span class="glyphicon glyphicon-triangle-right"></span>岗位管理
                                     </button>
                                 </li>
                             </ul>
@@ -93,19 +83,19 @@
                     </div>
                     <div class="panel panel-primary leftMenu">
                         <div class="panel-heading" id="collapseListGroupHeading5" data-toggle="collapse" data-target="#collapseListGroup5" role="tab" >
-                            <h4 class="panel-title">
+                            <h4 class="panel-title path1" onclick="path_navigation(this)">
                                 推广管理
                                 <span class="glyphicon glyphicon-chevron-down right"></span>
                             </h4>
                         </div>
                         <div id="collapseListGroup5" class="panel-collapse collapse" role="tabpanel" aria-labelledby="collapseListGroupHeading5">
                             <ul class="list-group">
-                                <li class="list-group-item">
+                                <li class="list-group-item path2" onclick="path_navigation(this)">
                                     <button class="menu-item-left">
                                         <span class="glyphicon glyphicon-triangle-right"></span>个人使用分析
                                     </button>
                                 </li>
-                                <li class="list-group-item">
+                                <li class="list-group-item path2" onclick="path_navigation(this)">
                                     <button class="menu-item-left">
                                         <span class="glyphicon glyphicon-triangle-right"></span>企业使用分析
                                     </button>
@@ -115,29 +105,29 @@
                     </div>
                     <div class="panel panel-primary leftMenu">
                         <div class="panel-heading" id="collapseListGroupHeading3" data-toggle="collapse" data-target="#collapseListGroup3" role="tab" >
-                            <h4 class="panel-title">
+                            <h4 class="panel-title path1" onclick="path_navigation(this)">
                                 设置
                                 <span class="glyphicon glyphicon-chevron-down right"></span>
                             </h4>
                         </div>
                         <div id="collapseListGroup3" class="panel-collapse collapse" role="tabpanel" aria-labelledby="collapseListGroupHeading3">
                             <ul class="list-group">
-                                <li class="list-group-item">
+                                <li class="list-group-item path2" onclick="path_navigation(this)">
                                     <button class="menu-item-left" onclick="open_night()">
                                         <span class="glyphicon glyphicon-triangle-right"></span>开启夜间模式
                                     </button>
                                 </li>
-                                <li class="list-group-item">
+                                <li class="list-group-item path2" onclick="path_navigation(this)">
                                     <button class="menu-item-left" onclick="close_night()">
                                         <span class="glyphicon glyphicon-triangle-right"></span>关闭夜间模式
                                     </button>
                                 </li>
-                                <li class="list-group-item">
+                                <li class="list-group-item path2" onclick="path_navigation(this)">
                                     <button class="menu-item-left" onclick="bigger()">
                                         <span class="glyphicon glyphicon-triangle-right"></span>调高亮度
                                     </button>
                                 </li>
-                                <li class="list-group-item">
+                                <li class="list-group-item path2" onclick="path_navigation(this)">
                                     <button class="menu-item-left" onclick="smaller()">
                                         <span class="glyphicon glyphicon-triangle-right"></span>调低亮度
                                     </button>
@@ -149,9 +139,8 @@
             </div>
             <div class="col-md-10">
                 <ol class="breadcrumb">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Library</a></li>
-                    <li class="active">Data</li>
+                    <li><a>问道网</a></li>
+                    <li><a>后台管理</a></li>
                 </ol>
                 <table id="power" class="hidden table table-bordered table-hover table-responsive">
                     <thead>
