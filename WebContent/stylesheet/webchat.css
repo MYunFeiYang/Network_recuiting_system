@@ -1,110 +1,116 @@
+@media screen and (max-width: 760px) {
+    html {
+        font-size: 62.5%;
+    }
+}
+@media screen and (max-width: 1360px) and (min-width: 760px){
+    html {
+        font-size: 62.5%;
+    }
+}
 body{
     overflow-x: hidden;
     overflow-y: auto;
+    background: rgba(255,255,255, 0.1);
 }
-.col-md-3,.col-md-9,.col-md-12{
-    padding: 0;
+.person_list,#show_content,.user_center{
+    overflow-y:scroll;
+    border: 0.1rem solid white;
+    height: 500px;
 }
 .user_center ul li:hover,.person_list ul li:hover{
     background-color: gainsboro;
 }
 .user_center{
-    padding: 5px;
+    padding: 0.5rem;
 }
 .user_center ul,#list{
     list-style-type: none;
-    padding: 5px;
+    padding: 0.5rem;
 }
 .user_center ul li{
     display: block;
-    margin: 2px;
-    border-radius: 2px;
-    border: 1px solid dodgerblue;
-    box-shadow: 1px 1px 1px 1px white;
-    padding: 5px 15px;
+    margin: 0.2rem;
+    border-radius: 0.2rem;
+    border: 0.1rem solid grey;
+    box-shadow: 0.1rem 0.1rem 0.1rem 0.1rem white;
+    padding: 0.5rem 1.5rem;
     background-color: white;
 }
 .user_center ul li span{
     float: right;
     color: #2aabd2;
 }
-.person_list,#show_content,.user_center{
-    overflow-y:scroll;
-}.person_list h2{
+.person_list h2{
     background-color: white;
-    border-bottom: 1px solid grey;
-    font-size: 18px;
-    padding: 5px;
-    margin: 5px;
+    border-bottom: 0.1rem solid grey;
+    font-size: 1.8rem;
+    padding: 0.5rem;
+    margin: 0.5rem;
  }
-
-.person_list,#show_content,.user_center{
-    border: 1px solid white;
-    height: 600px;
-}
 .person_list ul li{
-    margin:5px;
+    margin:0.5rem;
     background-color:white;
-    padding:5px
+    padding:0.5rem
 }
 .person_list ul li a{
     text-decoration: none;
 }
 #show_content{
-    height: 480px;
+    height: 420px;
 }
 #show_content .system_message,#show_content .self,#show_content .message{
     display: block;
-    padding: 5px;
-    border-radius: 3px;
+    padding: 0.5rem;
+    border-radius: 0.3rem;
     background-color: white;
     text-align: center;
-    border: 1px solid dodgerblue;
+    border: 0.1rem solid dodgerblue;
     opacity: 0.8;
 }
 #show_content .system_message{
     width: 30%;
-    margin: 10px 35%;
+    margin: 1rem 35%;
 }
 #show_content .self{
     width: 40%;
-    margin-top: 10px;
+    margin-top: 1rem;
     margin-left: 58%;
 }
 #show_content .chatBox{
     width: 50%;
-    margin-top: 10px;
+    margin-top: 1rem;
     margin-left: 1%;
 }
 #show_content .photo{
-    font-size: 36px;
+    font-size: 3rem;
 }
 #show_content .username,#show_content .message{
-    padding: 5px;
+    padding: 0.5rem;
 }
 #editor{
-    height: 120px;
+    height: 80px;
     padding: 0;
 }
 #editor textarea{
     width: 100%;
-    height: 80px;
-    border: 1px solid dodgerblue;
-    border-radius: 3px;
-    padding: 5px 15px;
+    height: 8rem;
+    border: 0.1rem solid dodgerblue;
+    border-radius: 0.3rem;
+    padding: 0.5rem 1.5rem;
 }
 #editor button{
     position: absolute;
-    bottom: 2px;
-    right: 2px;
+    bottom: 0.2rem;
+    right: 0.2rem;
 }
 #refresh{
     position: absolute;
-    bottom: 30px;
-    right:10px;
+    bottom: 3rem;
+    right:1rem;
 }
 #refresh span{
-    font-size: 24px;
+    font-size: 2.4rem;
 }
 #refresh span:hover{
     color: #2aabd2;

@@ -14,10 +14,10 @@
     <script src="javascript/common/webchat/webchat_logic.js"></script>
     <script src="javascript/util/night.js"></script>
 </head>
-<body onload="init(),show_status()">
+<body onload="init();show_status()">
 <div class="container-fluid">
     <div class="main row">
-        <div class="col-md-2 user_center">
+        <div class="col-md-2 col-xs-6 user_center">
             <ul>
                 <li onclick="show_status()">登录状态 <span id="status"></span></li>
                 <li type="button" onclick="init()">打开连接
@@ -38,21 +38,21 @@
                     <span class="glyphicon glyphicon-user"></span></li>
             </ul>
         </div>
-        <div class="col-md-7 chat_content">
+        <div class="col-md-7 col-xs-12 chat_content">
             <div class="row">
                 <div class="col-md-12" id="show_content">
 
                 </div>
             </div>
             <div class="col-md-12" id="editor">
-                <textarea id="content"></textarea>
+                <textarea id="content" placeholder="输入聊天内容"></textarea>
                 <button class="btn btn-default" type="button" onclick="emit()">
                     发送
                 </button>
 
             </div>
         </div>
-        <div class="col-md-3 person_list">
+        <div class="col-md-3 col-xs-6 person_list">
             <h2>在线人员列表</h2>
             <ul id="list">
 

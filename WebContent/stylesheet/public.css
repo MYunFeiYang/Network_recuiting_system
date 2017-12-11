@@ -1,20 +1,27 @@
+@media screen and (max-width: 760px) {
+    html {
+        font-size: 32.5%;
+    }
+}
+@media screen and (max-width: 1360px) and (min-width: 760px){
+    html {
+        font-size: 62.5%;
+    }
+}
 body{
     overflow-x: hidden;
     overflow-y: auto;
-}
-.col-md-2,.col-md-3,.col-md-7,.col-md-1,.col-md-11{
-    padding-left: 0;
-    padding-right: 0;
+    background: rgba(255,255,255, 0.1);
 }
 .marquee ul ,.marquee,#filter ul li,#job_class ul li,#hotRecurit ul li{
     list-style: none;
-    padding: 1px 5px;
+    padding: 0.07rem 0.4rem;
 }
 .main ,.marquee,#hotRecurit{
     width: 100%;
     height: auto;
-    box-shadow: 1px 1px 1px 1px black;
-    border-radius: 5px;
+    box-shadow: 0.07rem 0.07rem 0.07rem 0.07rem black;
+    border-radius: 0.4rem;
 }
 #filter ul li a,#job_class a{
     text-decoration: none;
@@ -26,9 +33,9 @@ body{
 #filter ul li a{
     color: black;
 }
-#jobs,#resume,#marquee,#filter{
+#marquee,#filter{
     display: none;
-    opacity: 0.9;
+    background: rgba(255,255,255, 0.5);
 }
 
 /*left*/
@@ -38,12 +45,12 @@ body{
     opacity: 0.9;
 }
 #job_class ul{
-    padding-left: 5px;
+    padding-left: 0.4rem;
 }
 #job_class ul li{
-    padding:0 20px;
+    padding:0 1.5rem;
     margin: 6px 0;
-    box-shadow: 1px 1px 1px 1px gainsboro;
+    box-shadow: 0.07rem 0.07rem 0.07rem 0.07rem gainsboro;
     border-radius: 8px;
 }
 #job_class ul li a{
@@ -53,41 +60,42 @@ body{
 }
 /*main*/
 #filter{
-    font-size: 10px;
+    font-size: 0.7rem;
+    opacity: 0.9;
 }
 #filter_job,#filter_address{
-    margin-top: 5px;
+    margin-top: 0.4rem;
 }
 #filter_position {
     padding: 0;
     background-color: white;
-    margin: 5px;
-    border-radius: 5px;
+    margin: 0.4rem;
+    border-radius: 0.4rem;
 }
 #filter_position ul{
-    padding: 5px;
+    padding: 0.4rem;
     margin: 0;
 }
 
 #filter_job ul li,#filter_address ul li,#filter_position ul li{
     float:left;
-    padding: 2px 10px;
+    padding: 0.15rem 0.7rem;
     list-style:none;
     border-radius: 8px;
 }
 table tbody tr{
-    padding: 0 3px !important;
+    padding: 0 0.2rem !important;
 }
 table tbody tr td{
-    padding: 1px 5px !important;
-    height: 20px;
+    padding: 0.07rem 0.4rem !important;
+    height: 1.5rem;
 }
 table tbody tr td a{
     display: inline-block;
     width: 100%;
     overflow: hidden;
-    line-height: 20px;
-    height: 20px;
+    line-height: 1.5rem;
+    height: 1.5rem;
     text-align: center;
     color: black;
     text-decoration: none;
@@ -96,13 +104,13 @@ table tbody tr td a{
 #hotRecurit{
     background-color: gainsboro;
     opacity: 0.9;
-    border: 10px solid white;
+    border: 0.7rem solid white;
     padding: 0;
 }
 #hotRecurit h3{
-    margin: 2px;
+    margin: 0.15rem;
     background-color: beige;
-    padding: 5px;
+    padding: 0.4rem;
 }
 #hotRecurit ul{
     padding: 2%;
@@ -110,7 +118,7 @@ table tbody tr td a{
 #hotRecurit ul li{
     width: 32%;
     float: left;
-    border: 3px solid black;
+    border: 0.2rem solid black;
 }
 #hotRecurit ul li img{
     width: 100%;
@@ -119,37 +127,37 @@ table tbody tr td a{
 .marquee {
     margin:0;
     width:100%;
-    height: 320px;
+    height: 24rem;
     overflow: hidden;
-    border: 5px solid gainsboro;
+    border: 0.4rem solid gainsboro;
 }
 .marquee ul{
-    padding: 10px;
+    padding: 0.7rem;
     background-color: white;
 }
 .marquee ul li{
     position: relative;
     top:0;
-    padding-left:3px ;
-    font-size: 10px;
+    padding-left:0.2rem ;
+    font-size: 0.7rem;
 }
 .marquee ul li a:link{
     color: black;
-    padding: 1px 3px;
+    padding: 0.07rem 0.2rem;
 }
 .marquee ul li a:visited{
     color: red;
-    padding: 1px 3px;
+    padding: 0.07rem 0.2rem;
 }
 .marquee ul li a:hover{
     color: green;
-    padding: 1px 3px;
+    padding: 0.07rem 0.2rem;
 }
 .marquee ul li a:active{
     color:blueviolet;
-    padding: 1px 3px;
+    padding: 0.07rem 0.2rem;
 }
 .checked{
     background-color: #2b669a;
-    box-shadow: 1px 1px 1px 1px dodgerblue;
+    box-shadow: 0.07rem 0.07rem 0.07rem 0.07rem dodgerblue;
 }

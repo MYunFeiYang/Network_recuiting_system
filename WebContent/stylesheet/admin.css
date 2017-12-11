@@ -1,27 +1,35 @@
+@media screen and (max-width: 760px) {
+    html {
+        font-size: 32.5%;
+    }
+}
+@media screen and (max-width: 1360px) and (min-width: 760px){
+    html {
+        font-size: 62.5%;
+    }
+}
 body{
     overflow-x: hidden;
     overflow-y: auto;
-}
-.col-md-2,.col-md-10{
-    padding: 0;
+    background: rgba(255,255,255, 0.1);
 }
 .menu{
     overflow-y: scroll;
 }
 .panel-group {
-    max-height: 770px;
+    max-height: 50rem;
     overflow: auto;
 }
 
 .leftMenu {
-    margin-top: 1px;
+    margin-top: 0.1rem;
 }
 
 .leftMenu .panel-heading {
-    font-size: 14px;
-    padding-left: 20px;
-    height: 36px;
-    line-height: 36px;
+    font-size: 1rem;
+    padding-left: 1rem;
+    height: 3.6rem;
+    line-height: 3.6rem;
     color: white;
     position: relative;
     cursor: pointer;
@@ -32,18 +40,18 @@ body{
 /*转成手形图标*/
 .leftMenu .panel-heading span {
     position: absolute;
-    right: 10px;
-    top: 12px;
+    right: 1rem;
+    top: 1.2rem;
 }
 
 .leftMenu .menu-item-left {
-    padding: 2px;
+    padding: 0.2rem;
     background: transparent;
-    border: 1px solid black;
-    border-radius: 6px;
+    border: 0.1rem solid black;
+    border-radius: 0.6rem;
 }
 
 .leftMenu .menu-item-left:hover {
     background: grey;
-    border: 1px solid grey;
+    border: 0.1rem solid grey;
 }

@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>主页面</title>
-    <meta name="keywords" content="侧边导航菜单(可分组折叠)">
-    <meta name="description" content="侧边导航菜单(可分组折叠)"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="HandheldFriendly" content="True"/>
     <link rel="shortcut icon" href="image/brand.jpg">
     <!--stylesheet-->
@@ -14,19 +13,20 @@
     <script src="javascript/jquery-3.2.1.js"></script>
     <script src="bootstrap-3.3.7-dist/js/bootstrap.js"></script>
     <script src="javascript/util/marquee.js"></script>
+    <script src="javascript/util/responsive.js"></script>
     <script src="javascript/common/public.js"></script>
 </head>
-<body onload="marquee_control(),get_news('person'),query_job_class()">
+<body onload="marquee_control();get_news('person');query_job_class();welt_hidden()">
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-2" id="left">
+        <div class="col-md-2 col-xs-6 welt_hidden" id="left">
             <div class="row">
                 <div class="col-md-12" id="job_class">
 
                 </div>
             </div>
         </div>
-        <div class="col-md-8" id="main">
+        <div class="col-md-8 welt_hidden" id="main">
             <div class="row" id="filter">
                 <div class="col-md-12">
                     <div class="col-md-1">
@@ -71,7 +71,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-2" id="right">
+        <div class="col-md-2 col-xs-6 welt_hidden" id="right">
             <div class="row">
                 <div class="col-md-12" id="hotRecurit">
                     <h3>热门校招</h3>

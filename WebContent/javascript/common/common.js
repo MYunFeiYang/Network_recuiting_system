@@ -3,7 +3,7 @@ function setCookie(c_name,value,expireDays) {
     let existDate=new Date();
     existDate.setDate(existDate.getDate()+expireDays);
     document.cookie=c_name+ "=" +value+
-        ((expireDays==null) ? "" : ";expires="+existDate.toGMTString());
+        ((expireDays===null) ? "" : ";expires="+existDate.toGMTString());
 }
 function login() {
     let user={};
@@ -28,7 +28,7 @@ function login_ajax(data) {
     })
 }
 function login_result(data) {
-    if(data.msg=="login_success"){
+    if(data.msg==="login_success"){
         document.getElementById("close_login").click();
         login_session('login');
     }
@@ -61,10 +61,10 @@ function ajax_login_session(data) {
     });
 }
 function login_session_result(data) {
-    if (data.nickname!="") {
+    if (data.nickname!=="") {
         init_user(data.nickname);
         let user_center=document.getElementById("user_center");
-        if (data.login_type=="person"){
+        if (data.login_type==="person"){
             let li2=document.createElement("li");
             let modify_user=document.createElement("a");
             user_center.appendChild(li2);
@@ -101,7 +101,7 @@ function login_session_result(data) {
             let chat_a=document.createElement("a");
             chat.appendChild(chat_a);
             chat_a.text="问道空间";
-            chat_a.setAttribute("onclick","show_div('webchat');show_webchat()");
+            chat_a.setAttribute("onclick","show_webchat()");
             let li1=document.createElement("li");
             user_center.appendChild(li1);
             let log_out=document.createElement("a");
@@ -111,7 +111,7 @@ function login_session_result(data) {
             log_out.setAttribute("onclick","login_session('delete')");
             log_out.setAttribute("href","index.html");
         }
-        else if(data.login_type=="enterprise"){
+        else if(data.login_type==="enterprise"){
             let li2=document.createElement("li");
             let modify_user=document.createElement("a");
             user_center.appendChild(li2);
@@ -141,7 +141,7 @@ function login_session_result(data) {
             let chat_a=document.createElement("a");
             chat.appendChild(chat_a);
             chat_a.text="问道空间";
-            chat_a.setAttribute("onclick","show_div('webchat');show_webchat()");
+            chat_a.setAttribute("onclick","show_webchat()");
             let li1=document.createElement("li");
             user_center.appendChild(li1);
             let log_out=document.createElement("a");
@@ -151,21 +151,20 @@ function login_session_result(data) {
             log_out.setAttribute("onclick","login_session('delete')");
             log_out.setAttribute("href","index.html");
         }
-        else if(data.login_type=="admin"){
-            show_div("admin");
+        else if(data.login_type==="admin"){
             show_admin();
             let admin=document.createElement("li");
             user_center.appendChild(admin);
             let admin_a=document.createElement("a");
             admin.appendChild(admin_a);
             admin_a.text="后台管理";
-            admin_a.setAttribute("onclick","show_div('admin');show_admin()");
+            admin_a.setAttribute("onclick","show_admin()");
             let chat=document.createElement("li");
             user_center.appendChild(chat);
             let chat_a=document.createElement("a");
             chat.appendChild(chat_a);
             chat_a.text="问道空间";
-            chat_a.setAttribute("onclick","show_div('webchat');show_webchat()");
+            chat_a.setAttribute("onclick","show_webchat()");
             let li1=document.createElement("li");
             user_center.appendChild(li1);
             let log_out=document.createElement("a");
@@ -183,133 +182,16 @@ function init_user(nickname) {
     let user_center=document.getElementById("user_center");
     user_center.innerHTML="";
 }
-function resetPassword() {
-    let user;
-    let email=document.getElementById("email").value;
-    if (document.cookie!="") {
-        let user_string = document.cookie.split(";")[0].split("=")[1];
-        user = JSON.parse(user_string);
-        user.email=email;
-        setCookie("user",JSON.stringify(user),180);
-        updatePassword_ajax(user);
-    }else {
-        let confirm_box=document.getElementById("confirm_box");
-        confirm_box.setAttribute("class","alert-warning");
-        confirm_box.innerHTML="请先尝试登录";
-        document.getElementById("other").innerHTML="<a class=\"btn btn-primary\" href='index.html'>返回登录</a>"
-    }
-    user.email=email;
-    ajax_resetPassword(user);
-}
-function ajax_resetPassword(user) {
-    $.ajax({
-        url:'/public?public=resetPassword',
-        data:user,
-        async:true,
-        type:"POST",
-        dataType:"JSON",
-        success:function (data) {
-            resetPassword_result(data)
-        },
-        fail:function (data) {
-            alert(data);
-        },
-    });
-}
-function resetPassword_result(data) {
-    let confirm_box=document.getElementById("confirm_box");
-    if (data.msg=="email_not_exist"){
-        confirm_box.setAttribute("class","alert-warning");
-        confirm_box.innerHTML="该邮箱未注册";
-        document.getElementById("other").innerHTML="<a class=\"btn btn-primary\" href='index.html'>返回注册</a>"
-    }else if(data.msg!="") {
-        confirm_box.setAttribute("class", "alert-warning");
-        confirm_box.innerHTML = "注意接收重置密码邮件";
-        document.getElementById("basic-addon1").innerHTML = "请输入验证码";
-        if (document.cookie != "") {
-            let user_string = document.cookie.split(";")[0].split("=")[1];
-            let user = JSON.parse(user_string);
-            user.code = data.msg;
-            setCookie("user",JSON.stringify(user),180);
-            document.getElementById("btu_resetPassword").onclick=check_code();
-            document.getElementById("email").value = "";
-        }
-    }
-}
-function check_code() {
-    let user=JSON.parse(document.cookie.split(";")[0].split("=")[1]);
-    let code=document.getElementById("email").value;
-    let confirm_box=document.getElementById("confirm_box");
-    if (code==user.code){
-        confirm_box.setAttribute("class","alert-success");
-        confirm_box.innerHTML="验证码正确";
-        document.getElementById("group_reset").innerHTML="" +
-            "<span class=\"input-group-addon\" id=\"basic-addon1\">密码</span>\n" +
-            "<input type=\"password\" id=\"password\" class=\"form-control\" aria-describedby=\"basic-addon1\">\n" +
-            "<span class=\"input-group-addon\" id=\"basic-addon1\">确认密码</span>\n" +
-            "<input type=\"password\" id=\"password2\" class=\"form-control\" aria-describedby=\"basic-addon1\">\n";
-        let btu_resetPassword=document.getElementById("btu_resetPassword");
-        btu_resetPassword.innerHTML="确认";
-        btu_resetPassword.onclick=updatePassword();
-    }
-    else {
-        confirm_box.setAttribute("class","alert-warning");
-        confirm_box.innerHTML="验证码错误";
-    }
-}
-function updatePassword() {
-    let password=document.getElementById("password").value;
-    let password2=document.getElementById("password2").value;
-    let confirm_box=document.getElementById("confirm_box");
-    if (password!=password2){
-        confirm_box.setAttribute("class","alert-warning");
-        confirm_box.innerHTML="密码不一致";
-    }else {
-        confirm_box.setAttribute("class","alert-success");
-        confirm_box.innerHTML="密码通过";
-        if (document.cookie!="") {
-            let user_string = document.cookie.split(";")[0].split("=")[1];
-            let user = JSON.parse(user_string);
-            user.password = password;
-            setCookie("user",JSON.stringify(user),180);
-            updatePassword_ajax(user);
-        }
-    }
-}
-function updatePassword_ajax(user) {
-    $.ajax({
-        url:'/public?public=updatePassword',
-        data:user,
-        type:'POST',
-        dataType:'JSON',
-        success:function (data) {
-            updatePassword_result(data);
-        },
-        fail:function () {
-
-        }
-
-    })
-}
-function updatePassword_result(data) {
-    let confirm_box=document.getElementById("confirm_box");
-    if (data.msg=="updatePassword_success"){
-        confirm_box.setAttribute("class","alert-success");
-        confirm_box.innerHTML="密码修改成功";
-        document.getElementById("other").innerHTML="";
-        document.getElementById("btu_resetPassword").innerHTML="<a href='index.html' style='color: white'>返回登录</a>"
-    }
-}
 function key_down_event(id) {
     document.getElementById(id).onkeyup = function (e) {
         if (window.event)//如果window.event对象存在，就以此事件对象为准
             e = window.event;
         let code = e.charCode || e.keyCode;
-        if (code == 13) {
-            if (id=="login"){
+        if (code === 13) {
+            if (id==="login"){
                 reset_user();
                 login();
-            } else if (id=="preselected_search"){
+            } else if (id==="preselected_search"){
                 query();
             }
         }
@@ -324,20 +206,20 @@ function direction_key_event(id) {
         let i=0;
         for(; i<inputs.length; i++)
         {
-            if(inputs[i].id==document.activeElement.id) {
+            if(inputs[i].id===document.activeElement.id) {
                 break;
             }
         }
-        if (code == 37) {//左方向键
+        if (code === 37) {//左方向键
 
-        }else if (code==38){//上方向键
+        }else if (code===38){//上方向键
             if (i>0) {
                 i--;
                 inputs[i].focus();
             }
-        }else if (code==39){//右方向键
+        }else if (code===39){//右方向键
 
-        }else if (code==40){//下方向键
+        }else if (code===40){//下方向键
             if (i<inputs.length) {
                 i++;
                 inputs[i].focus();
@@ -347,31 +229,26 @@ function direction_key_event(id) {
     
 }
 function show_webchat() {
-    let webchat=document.getElementById("webchat");
-    webchat.innerHTML="<iframe style='opacity: 0.8;height: 600px' marginheight='0' marginwidth='0' src=\"webchat.html\" width=\"100%\" height=\"500\" scrolling=\"auto\" frameborder=\"0\"> </iframe>";
+    let iframe=document.getElementById("iframe");
+    iframe.src="webchat.html";
 }
 function show_admin() {
-    let admin=document.getElementById("admin");
-    admin.innerHTML="<iframe style='opacity: 0.8;height: 600px' marginheight='0' marginwidth='0' src=\"admin.html\" width=\"100%\" height=\"500\" scrolling=\"auto\" frameborder=\"0\"> </iframe>";
-
+    let iframe=document.getElementById("iframe");
+    iframe.src="admin.html";
 }
 function show_hotRecurit() {
-    let hotRecurit=document.getElementById("hotRecurit");
-    hotRecurit.innerHTML="<iframe style='opacity: 0.8;height: 600px' marginheight='0' marginwidth='0' src=\"public.html\" width=\"100%\" height=\"500\" scrolling=\"auto\" frameborder=\"0\"> </iframe>";
-
+    let iframe=document.getElementById("iframe");
+    iframe.src="public.html";
 }
-function show_div(id) {
-    let mypanel=document.getElementsByClassName("mypanel");
-    for (let i=0;i<mypanel.length;i++){
-        mypanel[i].style.display="none";
-    }
-    document.getElementById(id).style.display="block";
+function show_reset_password() {
+    let iframe=document.getElementById("iframe");
+    iframe.src="resetPassword.html";
 }
 // quick query
 function complete_content(){
     let query={};
     let content=document.getElementById("search-con").value;
-    if (content!=""){
+    if (content!==""){
         query.content=content;
         $.ajax({
             url:"/public?public=query",

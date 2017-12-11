@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>问道网</title>
     <link rel="shortcut icon" href="image/brand.jpg">
     <!--stylesheet-->
@@ -20,7 +20,7 @@
 </head>
 <body id="top">
 <div class="container-fluid">
-    <nav class="navbar navbar-default navbar-fixed-top" style="z-index: 99999">
+    <nav class="navbar navbar-default">
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
@@ -45,7 +45,7 @@
                            aria-expanded="false">招聘<span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a onclick="show_div('hotRecurit');show_hotRecurit()">校招</a></li>
+                                <a onclick="show_hotRecurit()">校招</a></li>
                             <li role="separator" class="divider"></li>
                         </ul>
                     </li>
@@ -67,7 +67,8 @@
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown" id="register_btu">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                           aria-haspopup="true"
                            aria-expanded="false">注册<span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li>
@@ -108,7 +109,8 @@
                 </ul>
                 <form class="navbar-form navbar-right" role="search" id="search">
                     <div class="form-group navbar-left">
-                        <input type="text" class="form-control" id="search-con" onkeyup="complete_content()" title="搜索">
+                        <input type="text" class="form-control" id="search-con" onkeyup="complete_content()"
+                               title="搜索">
                         <div id="preselected_search" onkeyup="query()">
                         </div>
                     </div>
@@ -139,16 +141,16 @@
                     <h4 class="modal-title" id="mylogin">登录</h4>
                 </div>
                 <div class="modal-body">
-                    <div class="row center-block">
+                    <div class="row">
                         <div class="col-md-12">
                             <div id="confirm_login_box"></div>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-12 center-block">
+                        <div class="col-md-12">
                             <div class="input-group">
                                 <span class="input-group-addon glyphicon glyphicon-user">用户类型</span>
-                                <select id="login_type" class="form-control">
+                                <select id="login_type" class="form-control" title="用户类型">
                                     <option value="admin">管理员</option>
                                     <option value="person">个人用户</option>
                                     <option value="enterprise">企业用户</option>
@@ -157,7 +159,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-12 center-block">
+                        <div class="col-md-12">
                             <div class="input-group">
                                 <span class="input-group-addon glyphicon glyphicon-user">用户昵称</span>
                                 <input type="text" id="login_nickname" class="form-control" placeholder="用户名">
@@ -165,26 +167,29 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-12 center-block">
+                        <div class="col-md-12">
                             <div class="input-group">
                                 <span class="input-group-addon glyphicon glyphicon-lock">密&nbsp;&nbsp;码</span>
-                                <input type="password" id="login_password" class="form-control" placeholder="密码">
+                                <input type="password" id="login_password" class="form-control"
+                                       placeholder="密码">
                             </div>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-12 center-block">
-                            <input type="radio" checked="checked" id="remember_user">选中我记住登录状态
+                        <div class="col-md-12">
+                            <input type="radio" checked="checked" id="remember_user" placeholder="记住密码">选中我记住登录状态
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-4 col-sm-12">
-                            <a target="_top" href="resetPassword.html" class="btn btn-lg btn-primary">找回密码</a>
+                            <a target="_top" class="btn btn-primary"
+                               onclick="show_reset_password()">找回密码</a>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal" id="close_login">关闭</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal" id="close_login">关闭
+                    </button>
                     <button type="button" class="btn btn-primary"
                             onclick="reset_user();login()">登录
                     </button>
@@ -202,7 +207,7 @@
                     <h4 class="modal-title" id="myupload">上传本地简历</h4>
                 </div>
                 <div class="modal-body">
-                    <div class="row center-block">
+                    <div class="row">
                         <div class="col-md-12">
                             <form action="/upload" enctype="multipart/form-data"
                                   method="post">
@@ -232,19 +237,19 @@
                 </div>
                 <div class="modal-body">
                     <form>
-                        <div class="row center-block">
+                        <div class="row">
                             <div class="col-md-12">
                                 <div id="confirm_person_box"></div>
                             </div>
                         </div>
                         <div class="center-block" onmouseover="btu_able('person_reg_btu','confirm_person_box')">
-                            <div class="row center-block">
+                            <div class="row">
                                 <div class="col-md-12">
                                     <div class="input-group">
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-default glyphicon glyphicon-user">用户昵称</button>
                     </span>
-                                        <input type="text" class="form-control" id="person_nickname"
+                                        <input type="text" class="form-control" id="person_nickname" placeholder="用户名"
                                                onmouseout="reg_username('person_nickname','btu_person_username')">
                                         <span class="input-group-btn">
                         <button type="button" class="btn btn-default " id="btu_person_username">填</button>
@@ -252,13 +257,13 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row center-block">
+                            <div class="row">
                                 <div class="col-md-12">
                                     <div class="input-group">
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-default glyphicon glyphicon-lock">密&nbsp;&nbsp;码</button>
                     </span>
-                                        <input type="password" class="form-control" id="person_password"
+                                        <input type="password" class="form-control" id="person_password" placeholder="密码"
                                                onmouseout="reg_pwd('person_password','btu_person_password')">
                                         <span class="input-group-btn">
                         <button type="button" class="btn btn-default " id="btu_person_password">完</button>
@@ -266,13 +271,13 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row center-block">
+                            <div class="row">
                                 <div class="col-md-12">
                                     <div class="input-group">
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-default glyphicon glyphicon-lock">确认密码</button>
                     </span>
-                                        <input type="password" class="form-control" id="person_confirm_password"
+                                        <input type="password" class="form-control" id="person_confirm_password" placeholder="确认密码"
                                                onmouseout="conf_pwd('person_password','person_confirm_password','btu_person_conf_password')">
                                         <span class="input-group-btn">
                         <button type="button" class="btn btn-default" id="btu_person_conf_password">整</button>
@@ -280,23 +285,23 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row center-block" id="person_name_group">
+                            <div class="row" id="person_name_group">
                                 <div class="col-md-12">
                                     <div class="input-group">
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-default glyphicon glyphicon-user">真实姓名</button>
                     </span>
-                                        <input type="text" class="form-control" id="person_name">
+                                        <input type="text" class="form-control" id="person_name" placeholder="真实姓名">
                                     </div>
                                 </div>
                             </div>
-                            <div class="row center-block" id="person_email_group">
+                            <div class="row" id="person_email_group">
                                 <div class="col-md-12">
                                     <div class="input-group">
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-default glyphicon glyphicon-erase">电子邮件</button>
                     </span>
-                                        <input type="email" class="form-control"
+                                        <input type="email" class="form-control" placeholder="电子邮件"
                                                onmouseout="reg_email('person_email','btu_person_email')"
                                                id="person_email">
                                         <span class="input-group-btn">
@@ -309,13 +314,13 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row center-block">
+                            <div class="row">
                                 <div class="col-md-12">
                                     <div class="input-group">
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-default glyphicon glyphicon-envelope">手机号码</button>
                     </span>
-                                        <input type="text" class="form-control" id="person_telephone"
+                                        <input type="text" class="form-control" id="person_telephone" placeholder="手机号码"
                                                onmouseout="reg_telephone('person_telephone','btu_person_telephone')">
                                         <span class="input-group-btn">
                         <button type="button" class="btn btn-default " id="btu_person_telephone">哦</button>
@@ -324,15 +329,15 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row center-block margin-bottom">
+                        <div class="row margin-bottom">
                             <div class="col-md-6">
-                                <input class="btn btn-lg btn-primary center-block" id="person_reg_btu"
+                                <input class="btn btn-lg btn-primary" id="person_reg_btu"
                                        type="button" value="注册"
                                        onmouseover="btu_disable_person('person_reg_btu','confirm_person_box')"
                                        onclick="remember_user('person_nickname','person_password','person_email');register_person()">
                             </div>
                             <div class="col-md-6">
-                                <input class="btn btn-lg btn-danger center-block" type="reset" value="重置">
+                                <input class="btn btn-lg btn-danger" type="reset" value="重置">
                             </div>
                         </div>
                     </form>
@@ -343,7 +348,8 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="register-enterprise" tabindex="-1" role="dialog" aria-labelledby="myregister-enterprise"
+    <div class="modal fade" id="register-enterprise" tabindex="-1" role="dialog"
+         aria-labelledby="myregister-enterprise"
          onkeyup="direction_key_event('register-enterprise')">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -353,19 +359,19 @@
                     <h4 class="modal-title" id="myregister-enterprise">企业用户注册</h4>
                 </div>
                 <div class="modal-body">
-                    <div class="row center-block">
+                    <div class="row">
                         <div class="col-md-12">
                             <div id="confirm_enterprise_box"></div>
                         </div>
                     </div>
                     <div onmouseover="btu_able('reg_btu','confirm_enterprise_box')">
-                        <div class="row center-block">
+                        <div class="row">
                             <div class="col-md-12">
                                 <div class="input-group">
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-default glyphicon glyphicon-user">&nbsp;用户名</button>
                     </span>
-                                    <input type="text" class="form-control" id="enterprise_nickname"
+                                    <input type="text" class="form-control" id="enterprise_nickname" placeholder="用户名"
                                            onmouseout="reg_username('enterprise_nickname','btu_enterprise_username')">
                                     <span class="input-group-btn">
                         <button type="button" class="btn btn-default" id="btu_enterprise_username">填</button>
@@ -373,13 +379,13 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row center-block">
+                        <div class="row">
                             <div class="col-md-12">
                                 <div class="input-group">
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-default glyphicon glyphicon-lock">密&nbsp;&nbsp;码</button>
                     </span>
-                                    <input type="password" class="form-control"
+                                    <input type="password" class="form-control" placeholder="密码"
                                            onmouseout="reg_pwd('enterprise_password','btu_enterprise_password')"
                                            id="enterprise_password">
                                     <span class="input-group-btn">
@@ -388,13 +394,13 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row center-block">
+                        <div class="row">
                             <div class="col-md-12">
                                 <div class="input-group">
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-default glyphicon glyphicon-lock">确认密码</button>
                     </span>
-                                    <input type="password" class="form-control" id="confirm_enterprise_password"
+                                    <input type="password" class="form-control" id="confirm_enterprise_password" placeholder="确认密码"
                                            onmouseout="conf_pwd('enterprise_password','confirm_enterprise_password','btu_enterprise_conf_password')">
                                     <span class="input-group-btn">
                         <button type="button" class="btn btn-default" id="btu_enterprise_conf_password">整</button>
@@ -402,33 +408,33 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row center-block">
+                        <div class="row">
                             <div class="col-md-12">
                                 <div class="input-group">
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-default glyphicon glyphicon-user">企业名称</button>
                     </span>
-                                    <input type="text" class="form-control" id="enterprise_name">
+                                    <input type="text" class="form-control" id="enterprise_name" placeholder="企业名称">
                                 </div>
                             </div>
                         </div>
-                        <div class="row center-block">
+                        <div class="row">
                             <div class="col-md-12">
                                 <div class="input-group">
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-default glyphicon glyphicon-user">所属行业</button>
                     </span>
-                                    <input type="text" class="form-control" id="enterprise_industry">
+                                    <input type="text" class="form-control" id="enterprise_industry" placeholder="所属行业">
                                 </div>
                             </div>
                         </div>
-                        <div class="row center-block" id="enterprise_telephone_group">
+                        <div class="row" id="enterprise_telephone_group">
                             <div class="col-md-12">
                                 <div class="input-group">
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-default glyphicon glyphicon-erase">电子邮箱</button>
                     </span>
-                                    <input type="email" class="form-control"
+                                    <input type="email" class="form-control" placeholder="电子邮箱"
                                            onmouseout="reg_email('enterprise_email','btu_enterprise_email')"
                                            id="enterprise_email">
                                     <span class="input-group-btn">
@@ -442,13 +448,13 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row center-block">
+                        <div class="row">
                             <div class="col-md-12">
                                 <div class="input-group">
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-default glyphicon glyphicon-envelope">手机电话</button>
                     </span>
-                                    <input type="text" class="form-control"
+                                    <input type="text" class="form-control" placeholder="手机电话"
                                            onmouseout="reg_telephone('enterprise_telephone','btu_enterprise_telephone')"
                                            id="enterprise_telephone">
                                     <span class="input-group-btn">
@@ -457,26 +463,27 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row center-block">
+                        <div class="row">
                             <div class="col-md-12">
                                 <div class="input-group">
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-default glyphicon glyphicon-modal-window">企业地址</button>
                     </span>
-                                    <input type="text" class="form-control" id="enterprise_address" placeholder="企业地址">
+                                    <input type="text" class="form-control" id="enterprise_address"
+                                           placeholder="企业地址">
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="row center-block margin-bottom">
+                    <div class="row margin-bottom">
                         <div class="col-md-6">
-                            <input class="btn btn-lg btn-primary center-block" type="button"
+                            <input class="btn btn-lg btn-primary" type="button"
                                    id="reg_btu" value="注册"
                                    onmouseover="btu_disable_enterprise('reg_btu','confirm_enterprise_box')"
                                    onclick="remember_user('enterprise_nickname','enterprise_password','enterprise_email');register_enterprise()">
                         </div>
                         <div class="col-md-6">
-                            <input type="reset" class="btn btn-lg btn-danger center-block"
+                            <input type="reset" class="btn btn-lg btn-danger"
                                    value="重置">
                         </div>
                     </div>
@@ -497,8 +504,8 @@
                     <h4 class="modal-title">创建个人简历</h4>
                 </div>
                 <div class="modal-body">
-                    <div class="row center-block">
-                        <div class="col-md-12 center-block">
+                    <div class="row">
+                        <div class="col-md-12">
                             <div class="input-group">
                     <span class="input-group-btn">
                         <button class="btn btn-default">姓名</button>
@@ -507,7 +514,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row center-block">
+                    <div class="row">
                         <div class="col-md-12">
                             <div class="input-group">
                     <span class="input-group-btn">
@@ -517,20 +524,20 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row center-block">
+                    <div class="row">
                         <div class="col-md-12">
                             <div class="input-group">
                     <span class="input-group-btn">
                         <button class="btn btn-default">性别</button>
                     </span>
-                                <select class="form-control" id="sex">
+                                <select class="form-control" id="sex" title="性别">
                                     <option value="man">男</option>
                                     <option value="woman">女</option>
                                 </select>
                             </div>
                         </div>
                     </div>
-                    <div class="row center-block">
+                    <div class="row">
                         <div class="col-md-12">
                             <div class="input-group">
                     <span class="input-group-btn">
@@ -540,7 +547,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row center-block">
+                    <div class="row">
                         <div class="col-md-12">
                             <div class="input-group">
                     <span class="input-group-btn">
@@ -550,7 +557,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row center-block">
+                    <div class="row">
                         <div class="col-md-12">
                             <div class="input-group">
                     <span class="input-group-btn">
@@ -560,13 +567,13 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row center-block">
+                    <div class="row">
                         <div class="col-md-12">
                             <div class="input-group">
                     <span class="input-group-btn">
                         <button class="btn btn-default">教育程度</button>
                     </span>
-                                <select class="form-control" id="degree">
+                                <select class="form-control" id="degree" title="教育程度">
                                     <option value="小学">小学</option>
                                     <option value="初中">初中</option>
                                     <option value="高中">高中</option>
@@ -578,27 +585,27 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row center-block">
+                    <div class="row">
                         <div class="col-md-12">
                             <div class="input-group">
                     <span class="input-group-btn">
                         <button class="btn btn-default">入学时间</button>
                     </span>
-                                <input type="date" class="form-control" id="admission_data">
+                                <input type="date" class="form-control" id="admission_data" placeholder="入学时间">
                             </div>
                         </div>
                     </div>
-                    <div class="row center-block">
+                    <div class="row">
                         <div class="col-md-12">
                             <div class="input-group">
                     <span class="input-group-btn">
                         <button class="btn btn-default">毕业时间</button>
                     </span>
-                                <input type="date" class="form-control" id="graduation_data">
+                                <input type="date" class="form-control" id="graduation_data" placeholder="毕业时间">
                             </div>
                         </div>
                     </div>
-                    <div class="row center-block">
+                    <div class="row">
                         <div class="col-md-12">
                             <div class="input-group">
                     <span class="input-group-btn">
@@ -608,7 +615,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row center-block">
+                    <div class="row">
                         <div class="col-md-12">
                             <div class="input-group">
                     <span class="input-group-btn">
@@ -618,14 +625,14 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row center-block">
+                    <div class="row">
                         <div class="col-md-12">
                             <div id="confirm_resume_box"></div>
                         </div>
                     </div>
-                    <div class="row center-block margin-bottom">
+                    <div class="row margin-bottom">
                         <div class="col-md-6">
-                            <input class="btn btn-lg btn-primary center-block"
+                            <input class="btn btn-lg btn-primary"
                                    type="button" value="确定创建" onclick="add_resume()">
                         </div>
                     </div>
@@ -646,8 +653,8 @@
                     <h4 class="modal-title">发布招聘岗位</h4>
                 </div>
                 <div class="modal-body">
-                    <div class="row center-block">
-                        <div class="col-md-12 center-block">
+                    <div class="row">
+                        <div class="col-md-12">
                             <div class="input-group">
                     <span class="input-group-btn">
                         <button class="btn btn-default">公司名称</button>
@@ -656,43 +663,43 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row center-block">
+                    <div class="row">
                         <div class="col-md-12">
                             <div class="input-group">
                     <span class="input-group-btn">
                         <button class="btn btn-default">招聘地点</button>
                     </span>
-                                <select class="form-control" id="address">
+                                <select class="form-control" id="address" title="地址">
 
                                 </select>
                             </div>
                         </div>
                     </div>
-                    <div class="row center-block">
+                    <div class="row">
                         <div class="col-md-12">
                             <div class="input-group">
                     <span class="input-group-btn">
                         <button class="btn btn-default">所属行业</button>
                     </span>
-                                <select class="form-control" id="industry" onchange="get_position()">
+                                <select class="form-control" id="industry" onchange="get_position()" title="行业">
 
                                 </select>
                             </div>
                         </div>
                     </div>
-                    <div class="row center-block">
+                    <div class="row">
                         <div class="col-md-12">
                             <div class="input-group">
                     <span class="input-group-btn">
                         <button class="btn btn-default">招聘职位</button>
                     </span>
-                                <select class="form-control" id="job">
+                                <select class="form-control" id="job" title="职位">
 
                                 </select>
                             </div>
                         </div>
                     </div>
-                    <div class="row center-block">
+                    <div class="row">
                         <div class="col-md-12">
                             <div class="input-group">
                     <span class="input-group-btn">
@@ -702,7 +709,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row center-block">
+                    <div class="row">
                         <div class="col-md-12">
                             <div class="input-group">
                     <span class="input-group-btn">
@@ -712,17 +719,17 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row center-block">
+                    <div class="row">
                         <div class="col-md-12">
                             <div class="input-group">
                     <span class="input-group-btn">
                         <button class="btn btn-default">发布岗位时间</button>
                     </span>
-                                <input type="date" class="form-control" id="publish_time">
+                                <input type="date" class="form-control" id="publish_time" placeholder="岗位发布时间">
                             </div>
                         </div>
                     </div>
-                    <div class="row center-block">
+                    <div class="row">
                         <div class="col-md-12">
                             <div class="input-group">
                     <span class="input-group-btn">
@@ -732,7 +739,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row center-block">
+                    <div class="row">
                         <div class="col-md-12">
                             <div class="input-group">
                     <span class="input-group-btn">
@@ -742,14 +749,14 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row center-block">
+                    <div class="row">
                         <div class="col-md-12">
                             <div id="confirm_job_box"></div>
                         </div>
                     </div>
-                    <div class="row center-block">
+                    <div class="row">
                         <div class="col-md-6">
-                            <input class="btn btn-lg btn-primary center-block"
+                            <input class="btn btn-lg btn-primary"
                                    type="button" value="确定发布" onclick="add_job()">
                         </div>
                     </div>
@@ -773,17 +780,17 @@
         <!-- Wrapper for slides -->
         <div class="carousel-inner" role="listbox">
             <div class="item active">
-                <img class="img-responsive" src="image/1.jpg" alt="...">
+                <img class="img-responsive center-block" src="image/1.jpg" alt="...">
                 <div class="carousel-caption">
                 </div>
             </div>
             <div class="item">
-                <img src="image/2.jpg" alt="...">
+                <img class="img-responsive center-block" src="image/1.jpg" alt="...">
                 <div class="carousel-caption">
                 </div>
             </div>
             <div class="item">
-                <img src="image/3.jpg" alt="...">
+                <img class="img-responsive center-block" src="image/1.jpg" alt="...">
                 <div class="carousel-caption">
                 </div>
             </div>
@@ -799,26 +806,27 @@
             <span class="sr-only">Next</span>
         </a>
     </div>
-    <div class="container-fluid" style="margin-top: 56px"
-         onclick="close_search('search-con','40px');close_share();close_preselected_search()">
-        <div class="mypanel" id="hotRecurit"></div>
-        <div class="mypanel" id="webchat"></div>
-        <div class="mypanel" id="admin"></div>
+    <div class="row">
+        <div class="col-md-12">
+            <iframe frameborder="0" marginheight="0" height="500px" id="iframe"></iframe>
+        </div>
     </div>
     <div id="toTop">
         <a href="#top"></a>
     </div>
     <footer id="footer">
         <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-3 hidden-xs">
                 <address>
                     Written by <a target="_blank"
-                                  href="https://github.com/MYunFeiYang/Network_recuiting_system">think道</a>.<br>
-                    Visit me at:<a target="_blank" href="https://github.com/MYunFeiYang/Network_recuiting_system">github.com/MYunFeiYang</a><br>
+                                  href="https://github.com/MYunFeiYang/Network_recuiting_system">think道</a><br>
+                    Visit me at:<br>
+                    <a target="_blank"
+                       href="https://github.com/MYunFeiYang/Network_recuiting_system">MYunFeiYang</a><br>
                     CHINA
                 </address>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3 hidden-xs">
                 <address>
                     网站运营：<br>
                     <a target="_blank" href="http://www.chinaz.com/tags/yunyinggongju.shtml">站长之家</a><br>
@@ -826,7 +834,7 @@
                     CHINA
                 </address>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3 hidden-xs">
                 <address>
                     项目部署：<br>
                     <a target="_blank" href="https://www.aliyun.com/">阿里云计算</a><br>
@@ -834,7 +842,7 @@
                     CHINA
                 </address>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3 hidden-xs">
                 <address>
                     友情链接：<br>
                     <a target="_blank" href="http://v3.bootcss.com/">bootstrap中文网</a><br>
@@ -850,23 +858,21 @@
         show_user('login_nickname', 'login_password');
         login_session('refresh');
         modify_height();
-        show_div("hotRecurit");
-        show_hotRecurit();
-    }
-//    window._bd_share_config = {
-//        "common": {
-//            "bdSnsKey": {},
-//            "bdText": "",
-//            "bdMini": "2",
-//            "bdPic": "",
-//            "bdStyle": "0",
-//            "bdSize": "16"
-//        },
-//        "share": {},
-//        "image": {"viewList": ["qzone", "tsina", "tqq", "renren", "weixin"], "viewText": "分享到：", "viewSize": "16"},
-//        "selectShare": {"bdContainerClass": null, "bdSelectMiniList": ["qzone", "tsina", "tqq", "renren", "weixin"]}
-//    };
-//    with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];
+    };
+    window._bd_share_config = {
+        "common": {
+            "bdSnsKey": {},
+            "bdText": "",
+            "bdMini": "2",
+            "bdPic": "",
+            "bdStyle": "0",
+            "bdSize": "16"
+        },
+        "share": {},
+        "image": {"viewList": ["qzone", "tsina", "tqq", "renren", "weixin"], "viewText": "分享到：", "viewSize": "16"},
+        "selectShare": {"bdContainerClass": null, "bdSelectMiniList": ["qzone", "tsina", "tqq", "renren", "weixin"]}
+    };
+    with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];
 </script>
 </body>
 </html>

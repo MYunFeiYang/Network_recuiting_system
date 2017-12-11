@@ -1,14 +1,24 @@
-
-/*public*/
-.container-fluid{
-    padding: 0;
+@media screen and (max-width: 760px) {
+    html {
+        font-size: 32.5%;
+    }
 }
-.col-md-2,.col-md-3,.col-md-7,.col-md-1,.col-md-11{
-    padding-left: 0;
-    padding-right: 0;
+@media screen and (max-width: 1360px) and (min-width: 760px){
+    html {
+        font-size: 62.5%;
+    }
+}
+/*public*/
+iframe{
+    margin: 0;
+    width: 100%;
+    left: 0;
+    z-index: 999;
+    background: rgba(255,255,255, 0.1);
+    border-radius: 0.5rem;
 }
 .modal{
-    margin-top: 30px;
+    margin-top: 2rem;
 }
 .modal-content{
     background-color: gainsboro;
@@ -16,13 +26,13 @@
 }
 #preselected_search ul li{
     list-style: none;
-    padding: 1px 5px;
+    padding: 0.1rem 0.3rem;
 }
 .main，footer,header,#carousel-example-generic{
     width: 100%;
     height: auto;
-    box-shadow: 1px 1px 1px 1px;
-    border-radius: 5px;
+    box-shadow: 0.1rem 0.1rem 0.1rem 0.1rem;
+    border-radius: 0.3rem;
 }
 
 #preselected_search ul li:hover{
@@ -39,26 +49,34 @@
 
 /*header*/
 nav{
-    font-size: 20px;
+    position: relative;
+    z-index: 99999;
+    font-size: 1.5rem;
     color: black;
-    border-bottom: 1px solid gray;
+    border-bottom: 0.1rem solid gray;
     margin: 0;
+}
+.navbar{
+    margin: 0;
+}
+nav ul li{
+    padding-left:0.3rem ;
 }
 #search{
     margin-top: 6px;
-    margin-right: 20px;
+    margin-right: 1.5rem;
 }
 #search-con {
-    width: 40px;
-    height: 40px;
-    border-radius: 20px;
-    margin-right: -20px;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 1.5rem;
+    margin-right: -1.5rem;
 }
 #search .btn{
-    width: 40px;
-    height: 40px;
-    border-radius:20px;
-    margin-left: -20px;
+    width: 3rem;
+    height: 3rem;
+    border-radius:1.5rem;
+    margin-left: -1.5rem;
     opacity: 0.5;
 }
 #preselected_search{
@@ -67,26 +85,20 @@ nav{
     margin-left: 5%;
     height: auto;
     display: none;
-    border:solid 5px gainsboro;
+    border:solid 0.3rem gainsboro;
     border-top:none ;
     overflow-y: scroll;
 }
 #preselected_search ul li a{
-    font-size: 14px;
+    font-size: 1rem;
     text-decoration: none;
     color: black;
-}
-#tool{
-    padding: 12px 0;
-}
-#tool li{
-    padding: 0 10px;
 }
 #share span:hover,#setting span:hover,#collection span:hover{
     color: #2aabd2;
 }
 #setting ul li,#collection ul li{
-    padding: 5px 15px;
+    padding: 0.3rem 0.3rem;
 }
 #setting span{
     float: right;
@@ -98,7 +110,7 @@ nav{
     opacity: 0.9;
 }
 #job_class ul li{
-    padding:2px 5px;
+    padding:0.2rem 0.3rem;
 }
 #job_class ul li a{
     display: inline-block;
@@ -107,26 +119,26 @@ nav{
 }
 /*main*/
 #filter{
-    font-size: 10px;
+    font-size: 0.7rem;
 }
 #filter_job ul li,#filter_address ul li,#filter_position ul li{
     float:left;
-    padding: 2px 10px;
+    padding: 0.2rem 0.7rem;
     list-style:none;
 }
 #filter_position{
     background-color: black;
-    margin: 10px 0;
+    margin: 0.7rem 0;
 }
 table thead tr td,table tbody tr td{
-    border: 1px solid white;
+    border: 0.1rem solid white;
 }
 table tbody tr td a{
     display: inline-block;
     width: 100%;
     overflow: hidden;
-    height: 20px;
-    line-height: 20px;
+    height: 1.5rem;
+    line-height: 1.5rem;
     text-align: center;
 }
 
@@ -135,40 +147,38 @@ table tbody tr td a{
 #footer{
     width: 100%;
     margin: 0;
-    padding: 10px 30px;
-    position: relative;
-    bottom: 0;
-    left: 0;
     z-index: 0;
     background-color: gainsboro;
     color: black;
     opacity: 0.9;
+    font-size: 1rem;
+    border-radius: 0.5rem;
+    padding: 0;
 }
 #footer address{
-    margin: 5px auto;
-    border-right: 1px solid gray;
-    border-left: 1px solid gray;
-    padding-top: 0;
-    padding-left: 30px;
+    padding: 0.5rem 2.5rem;
+    border-right: 0.01rem solid gainsboro;
+    border-left: 0.01rem solid gainsboro;
 }
+
 #toTop a{
     position: fixed;
     right: 0;
-    bottom: 50px;
+    bottom: 3.6rem;
     z-index: 99999;
+    background-color: white;
 }
 #toTop a{
-    width: 20px;
-    height: 72px;
-    border-radius: 36px;
-    background: url(../image/toTop.jpg) no-repeat 0 9px;
-    background-color: white;
+    width: 0.6rem;
+    height: 4rem;
+    border-radius: 2rem;
+    background: url(../image/toTop.jpg) no-repeat -1rem 0;
     overflow: hidden;
-    box-shadow: 1px 1px 1px 1px grey;
+    box-shadow: 0.1rem 0.1rem 0.1rem 0.1rem grey;
 }
 #toTop a:hover{
-    width: 72px;
-    box-shadow: 2px 2px 2px 2px slategray;
+    width: 4rem;
+    box-shadow: 0.2rem 0.2rem 0.2rem 0.2rem slategray;
 }
 /*otherwise*/
 .carousel-inner,.item,img{
@@ -177,6 +187,8 @@ table tbody tr td a{
 }
 #carousel-example-generic{
     position: fixed;
+    top: 0;
+    bottom: 0;
     left: 0;
     z-index: 0;
 }
@@ -184,17 +196,17 @@ table tbody tr td a{
     margin: auto;
     text-align: center;
     color: red;
-    border: 1px solid red;
-    padding: 8px;
-    border-radius:5px;
+    border: 0.1rem solid red;
+    padding: 0.9rem;
+    border-radius:0.3rem;
 }
 .alert-success{
     margin: auto;
     text-align: center;
     color: lightseagreen;
-    border: 1px solid lightseagreen;
-    padding: 8px;
-    border-radius:5px;
+    border: 0.1rem solid lightseagreen;
+    padding: 0.9rem;
+    border-radius:0.3rem;
 }
 .alert-warning {
     animation: move 1s 3;
@@ -205,32 +217,31 @@ table tbody tr td a{
         transform: translate(0px, 0px);
     }
     25% {
-        transform: translate(10px, 0px);
+        transform: translate(0.7rem, 0px);
     }
     50% {
-        transform: translate(0px, 10px);
+        transform: translate(0px, 0.7rem);
     }
     75% {
-        transform: translate(-10px, 0px);
+        transform: translate(-0.7rem, 0px);
     }
     100% {
         transform: translate(0px, 0px);
     }
 }
 
-
 .bdsharebuttonbox{
-    padding: 10px;
+    padding: 0.7rem;
     text-align: center;
     position: fixed;
-    top: 80px;
-    right: 200px;
+    top: 7rem;
+    right: 14rem;
     height: auto;
     background-color: gainsboro;
-    border-radius: 5px;
-    border: 1px solid gray;
-    box-shadow: 2px 2px 2px 2px gray;
-    font-size: 18px;
+    border-radius: 0.3rem;
+    border: 0.1rem solid gray;
+    box-shadow: 0.2rem 0.2rem 0.2rem 0.2rem gray;
+    font-size: 1.3rem;
 }
 
 
