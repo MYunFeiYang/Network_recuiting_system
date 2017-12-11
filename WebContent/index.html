@@ -263,7 +263,8 @@
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-default glyphicon glyphicon-lock">密&nbsp;&nbsp;码</button>
                     </span>
-                                        <input type="password" class="form-control" id="person_password" placeholder="密码"
+                                        <input type="password" class="form-control" id="person_password"
+                                               placeholder="密码"
                                                onmouseout="reg_pwd('person_password','btu_person_password')">
                                         <span class="input-group-btn">
                         <button type="button" class="btn btn-default " id="btu_person_password">完</button>
@@ -277,7 +278,8 @@
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-default glyphicon glyphicon-lock">确认密码</button>
                     </span>
-                                        <input type="password" class="form-control" id="person_confirm_password" placeholder="确认密码"
+                                        <input type="password" class="form-control" id="person_confirm_password"
+                                               placeholder="确认密码"
                                                onmouseout="conf_pwd('person_password','person_confirm_password','btu_person_conf_password')">
                                         <span class="input-group-btn">
                         <button type="button" class="btn btn-default" id="btu_person_conf_password">整</button>
@@ -400,7 +402,8 @@
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-default glyphicon glyphicon-lock">确认密码</button>
                     </span>
-                                    <input type="password" class="form-control" id="confirm_enterprise_password" placeholder="确认密码"
+                                    <input type="password" class="form-control" id="confirm_enterprise_password"
+                                           placeholder="确认密码"
                                            onmouseout="conf_pwd('enterprise_password','confirm_enterprise_password','btu_enterprise_conf_password')">
                                     <span class="input-group-btn">
                         <button type="button" class="btn btn-default" id="btu_enterprise_conf_password">整</button>
@@ -768,8 +771,7 @@
         </div>
     </div>
     <!--end Modal-->
-    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel"
-         onclick="close_search('search-con','40px');close_share();close_preselected_search()">
+    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
         <!-- Indicators -->
         <ol class="carousel-indicators">
             <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
@@ -795,20 +797,13 @@
                 </div>
             </div>
         </div>
-
-        <!-- Controls -->
-        <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-        </a>
     </div>
     <div class="row">
         <div class="col-md-12">
-            <iframe frameborder="0" marginheight="0" height="500px" id="iframe"></iframe>
+            <iframe frameborder="0" marginheight="0" id="iframe"
+                    onclick="close_search('search-con','40px');close_share();close_preselected_search()">
+
+            </iframe>
         </div>
     </div>
     <div id="toTop">

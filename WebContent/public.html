@@ -19,36 +19,21 @@
 <body onload="marquee_control();get_news('person');query_job_class();welt_hidden()">
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-2 col-xs-6 welt_hidden" id="left">
+        <div class="col-md-2 col-xs-12">
             <div class="row">
                 <div class="col-md-12" id="job_class">
 
                 </div>
             </div>
         </div>
-        <div class="col-md-8 welt_hidden" id="main">
+        <div class="col-md-8 col-xs-12">
             <div class="row" id="filter">
                 <div class="col-md-12">
-                    <div class="col-md-1">
-                        <span style="display:block;padding-top: 10px;text-align: center">岗位类别：</span>
-                    </div>
-                    <div class="col-md-11">
-                        <div class="row" id="filter_job">
+                    <div class="row hidden" id="filter_address">
 
-                        </div>
                     </div>
-                    <div class="col-md-1" style="clear: both">
-                        <span style="display:block;padding-top: 10px;text-align: center">涉及城市：</span>
-                    </div>
-                    <div class="col-md-11">
-                        <div class="row" id="filter_address">
+                    <div class="row hidden" id="filter_position">
 
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="row" id="filter_position">
-
-                        </div>
                     </div>
                     <table class="table table-bordered table-hover table-condensed table-responsive">
                         <thead>
@@ -71,9 +56,9 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-2 col-xs-6 welt_hidden" id="right">
+        <div class="col-md-2 col-xs-6 col-xs-offset-6">
             <div class="row">
-                <div class="col-md-12" id="hotRecurit">
+                <div class="col-xs-10" id="hotRecurit">
                     <h3>热门校招</h3>
                     <ul>
                         <li>
@@ -116,7 +101,7 @@
                 </div>
             </div>
             <div class="row">
-                <div id="marquee" class="marquee" onmouseover="closeInterval()" onmouseout="marquee_control()">
+                <div id="marquee" class="marquee col-xs-10" onmouseover="closeInterval()" onmouseout="marquee_control()">
                     <ul>
 
                     </ul>

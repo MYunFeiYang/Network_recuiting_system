@@ -1,6 +1,5 @@
 "use strict";
 let job_class;
-let filter_job;
 let filter_address;
 let filter_position;
 let company;
@@ -58,7 +57,6 @@ function insert_job_class(data) {
     job_class = document.getElementById("job_class");
     job_class.innerHTML = "";
     let ul = document.createElement("ul");
-    ul.setAttribute("class", "main");
     job_class.appendChild(ul);
     for (let i = 0; i < data.length; i++) {
         let href = data[i].href;
@@ -70,35 +68,13 @@ function insert_job_class(data) {
         a.text = text;
         a.setAttribute("href", href);
         a.setAttribute("onclick", "return false");
-        let span = document.createElement("span");
-        span.setAttribute("class", "glyphicon glyphicon-chevron-right");
-        span.setAttribute("style", "float:right;border:none");
-        li.appendChild(span);
         li.onclick = function () {
             change_checked(event, 'job_class');
-            insert_filter_job();
             get_address(insert_filter_address);
+            query_filter_position(this.innerText)
         };
     }
     ul.children[0].setAttribute("class", "checked");
-}
-
-function insert_filter_job() {
-    filter_job = document.getElementById("filter_job");
-    filter_job.innerHTML = "";
-    job_class = document.getElementById("job_class").innerHTML;
-    filter_job.innerHTML = job_class;
-    let ul = filter_job.getElementsByTagName("ul")[0];
-    ul.classList.remove("main");
-    let li = ul.getElementsByTagName("li");
-    for (let i = 0; i < li.length; i++) {
-        let span = li[i].getElementsByTagName("span")[0];
-        li[i].removeChild(span);
-        li[i].onclick=function(){
-            change_checked(event,'filter_job');
-            query_filter_position(this.firstChild.text);
-        }
-    }
 }
 
 function get_address(event) {
@@ -118,6 +94,7 @@ function get_address(event) {
 function insert_filter_address(data) {
     document.getElementById("filter").style.display = "block";
     filter_address = document.getElementById("filter_address");
+    filter_address.classList.remove("hidden");
     filter_address.innerHTML = "";
     let ul = document.createElement("ul");
     filter_address.appendChild(ul);
@@ -159,6 +136,7 @@ function query_filter_position(text) {
 function insert_filter_position(data) {
     document.getElementById("filter").style.display = "block";
     filter_position = document.getElementById("filter_position");
+    filter_position.classList.remove("hidden");
     filter_position.innerHTML = "";
     let ul = document.createElement("ul");
     filter_position.appendChild(ul);
@@ -171,7 +149,7 @@ function insert_filter_position(data) {
                 paging(1);
             };
             li.innerHTML = data[i].position;
-        };
+        }
         ul.children[0].setAttribute("class", "checked");
     }
 }
@@ -183,17 +161,17 @@ function paging(pageNum) {
     filter_position = document.getElementById("filter_position");
     let position = filter_position.getElementsByTagName("li");
     for (let i = 0; i < position.length; i++) {
-        if (position[i].classList.toString().indexOf("checked") != -1) {
+        if (position[i].classList.toString().indexOf("checked") !== -1) {
             page.position = position[i].firstChild.text;
-        };
-    };
+        }
+    }
     filter_address = document.getElementById("filter_address");
     let address = filter_address.getElementsByTagName("li");
     for (let i = 0; i < address.length; i++) {
-        if (address[i].classList.toString().indexOf("checked") != -1) {
+        if (address[i].classList.toString().indexOf("checked") !== -1) {
             page.address = address[i].firstChild.text;
-        };
-    };
+        }
+    }
     $.ajax({
         url: "/public?public=paging",
         data: page,
@@ -221,7 +199,6 @@ function pagingResult(data) {
         a.setAttribute("onclick", "paging(this.text)");
         a.text = i;
     }
-    ;
     let list = data[0].list;
     company = document.getElementById("company");
     company.innerHTML = "";
@@ -263,11 +240,11 @@ function change_checked(event, id) {
     let li = ul[0].getElementsByTagName("li");
     let i = 0;
     for (; i < li.length; i++) {
-        if (li[i].classList.toString().indexOf("checked") != -1) {
+        if (li[i].classList.toString().indexOf("checked") !== -1) {
             li[i].classList.remove("checked");
         }
     }
-    if (event.target.toString().indexOf("a") != -1) {
+    if (event.target.toString().indexOf("a") !==-1) {
         event.target.parentNode.classList.add("checked");
     } else {
         event.target.classList.add("checked");

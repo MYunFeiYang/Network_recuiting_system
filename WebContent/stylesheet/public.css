@@ -1,6 +1,18 @@
 @media screen and (max-width: 760px) {
     html {
-        font-size: 32.5%;
+        font-size: 62.5%;
+    }
+    #job_class,#filter_address,#filter_position{
+        margin: 5px 0;
+        width: 100%;
+        height: 60px;
+        overflow-y: inherit;
+        overflow-x: scroll;
+        box-shadow: 1px 1px 1px 1px gainsboro;
+        background: rgba(255,255,255,0.5);
+    }
+    #job_class ul li{
+        float: left;
     }
 }
 @media screen and (max-width: 1360px) and (min-width: 760px){
@@ -17,7 +29,7 @@ body{
     list-style: none;
     padding: 0.07rem 0.4rem;
 }
-.main ,.marquee,#hotRecurit{
+.marquee,#hotRecurit{
     width: 100%;
     height: auto;
     box-shadow: 0.07rem 0.07rem 0.07rem 0.07rem black;
@@ -27,9 +39,6 @@ body{
     text-decoration: none;
     color: black;
 }
-#filter ul li:hover,#job_class ul li:hover{
-    background-color: grey;
-}
 #filter ul li a{
     color: black;
 }
@@ -38,50 +47,26 @@ body{
     background: rgba(255,255,255, 0.5);
 }
 
-/*left*/
-#job_class{
+#job_class,#filter_position,#filter_address{
     display: block;
-    background-color: black;
-    opacity: 0.9;
 }
-#job_class ul{
-    padding-left: 0.4rem;
+#job_class ul,#filter_position ul,#filter_address ul{
+    padding-left: 0;
 }
-#job_class ul li{
-    padding:0 1.5rem;
-    margin: 6px 0;
+#job_class ul li,#filter_position ul li,#filter_address ul li{
+    margin: 5px;
+    text-align: center;
+    padding:0;
     box-shadow: 0.07rem 0.07rem 0.07rem 0.07rem gainsboro;
-    border-radius: 8px;
+    border-radius: 5px;
 }
 #job_class ul li a{
     display: inline-block;
     width: auto;
     color: white;
 }
-/*main*/
-#filter{
-    font-size: 0.7rem;
-    opacity: 0.9;
-}
-#filter_job,#filter_address{
-    margin-top: 0.4rem;
-}
-#filter_position {
-    padding: 0;
-    background-color: white;
-    margin: 0.4rem;
-    border-radius: 0.4rem;
-}
-#filter_position ul{
-    padding: 0.4rem;
-    margin: 0;
-}
-
-#filter_job ul li,#filter_address ul li,#filter_position ul li{
-    float:left;
-    padding: 0.15rem 0.7rem;
-    list-style:none;
-    border-radius: 8px;
+#filter_position ul li,#filter_address ul li{
+    float: left;
 }
 table tbody tr{
     padding: 0 0.2rem !important;
@@ -118,7 +103,7 @@ table tbody tr td a{
 #hotRecurit ul li{
     width: 32%;
     float: left;
-    border: 0.2rem solid black;
+    border: 0.5rem solid gainsboro;
 }
 #hotRecurit ul li img{
     width: 100%;
