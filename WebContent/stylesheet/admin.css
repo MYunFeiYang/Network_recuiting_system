@@ -1,15 +1,28 @@
-@media screen and (max-width: 760px) {
+@media screen and (max-width: 768px) {
     html {
-        font-size: 32.5%;
+        font-size: 62.5%;
     }
-    .leftMenu{
-        float: left;
+    .panel-group{
+        height: 45px;
     }
-    .panel-heading{
-        padding-right: 50px;
+    .panel-group:hover{
+        height: auto;
     }
 }
-@media screen and (max-width: 1360px) and (min-width: 760px){
+/*小屏幕*/
+@media screen and (min-width: 768px)and (max-width: 992px){
+    html{
+        font-size: 62.5%;
+    }
+}
+/*中等屏幕*/
+@media screen and (min-width: 992px)and (max-width: 1200px){
+    html{
+        font-size: 62.5%;
+    }
+}
+/*大屏幕*/
+@media screen and (min-width: 1200px){
     html {
         font-size: 62.5%;
     }
@@ -25,6 +38,7 @@ body{
 .panel-group {
     max-height: 50rem;
     overflow: auto;
+    font-size: 1rem;
 }
 
 .leftMenu {

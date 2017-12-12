@@ -13,11 +13,12 @@
     <script src="javascript/common/webchat/webchat_listen.js"></script>
     <script src="javascript/common/webchat/webchat_logic.js"></script>
     <script src="javascript/util/night.js"></script>
+    <script src="javascript/util/responsive.js"></script>
 </head>
-<body onload="init();show_status()">
+<body>
 <div class="container-fluid">
-    <div class="main row">
-        <div class="col-md-2 col-xs-6 user_center">
+    <div class="row" id="mylist">
+        <div class="col-md-2 col-lg-2 col-sm-3 col-xs-6 user_center">
             <ul>
                 <li onclick="show_status()">登录状态 <span id="status"></span></li>
                 <li type="button" onclick="init()">打开连接
@@ -38,7 +39,7 @@
                     <span class="glyphicon glyphicon-user"></span></li>
             </ul>
         </div>
-        <div class="col-md-7 col-xs-12 chat_content">
+        <div class="col-md-7 col-lg-7 col-sm-6 col-xs-12 chat_content">
             <div class="row">
                 <div class="col-md-12" id="show_content">
 
@@ -52,7 +53,7 @@
 
             </div>
         </div>
-        <div class="col-md-3 col-xs-6 person_list">
+        <div class="col-md-3 col-lg-3 col-sm-3 col-xs-6 person_list">
             <h2>在线人员列表</h2>
             <ul id="list">
 
@@ -64,6 +65,15 @@
             </div>
         </div>
     </div>
+    <button id="btu_left" onclick="mypre()"></button>
+    <button id="btu_right" onclick="mynext()"></button>
 </div>
 </body>
+<script>
+    window.onload=function () {
+        init();
+        show_status();
+        Carousel_figure(1);
+    }
+</script>
 </html>

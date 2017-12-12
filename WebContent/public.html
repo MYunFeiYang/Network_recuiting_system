@@ -16,17 +16,17 @@
     <script src="javascript/util/responsive.js"></script>
     <script src="javascript/common/public.js"></script>
 </head>
-<body onload="marquee_control();get_news('person');query_job_class();welt_hidden()">
+<body>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-2 col-xs-12">
+        <div class="col-md-2 col-lg-2 col-xs-12 col-sm-12">
             <div class="row">
                 <div class="col-md-12" id="job_class">
 
                 </div>
             </div>
         </div>
-        <div class="col-md-8 col-xs-12">
+        <div class="col-md-8 col-lg-8 col-xs-12 col-sm-12">
             <div class="row" id="filter">
                 <div class="col-md-12">
                     <div class="row hidden" id="filter_address">
@@ -56,7 +56,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-2 col-xs-6 col-xs-offset-6">
+        <div class="col-md-2 col-lg-2 col-xs-6 col-sm-4">
             <div class="row">
                 <div class="col-xs-10" id="hotRecurit">
                     <h3>热门校招</h3>
@@ -111,4 +111,12 @@
     </div>
 </div>
 </body>
+<script>
+    window.onload=function () {
+        marquee_control();
+        get_news('person');
+        query_job_class();
+        welt_hidden()
+    }
+</script>
 </html>

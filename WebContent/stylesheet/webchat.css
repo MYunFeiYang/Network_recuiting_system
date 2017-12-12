@@ -1,9 +1,22 @@
-@media screen and (max-width: 760px) {
+@media screen and (max-width: 768px) {
     html {
         font-size: 62.5%;
     }
 }
-@media screen and (max-width: 1360px) and (min-width: 760px){
+/*小屏幕*/
+@media screen and (min-width: 768px)and (max-width: 992px){
+    html{
+        font-size: 62.5%;
+    }
+}
+/*中等屏幕*/
+@media screen and (min-width: 992px)and (max-width: 1200px){
+    html{
+        font-size: 62.5%;
+    }
+}
+/*大屏幕*/
+@media screen and (min-width: 1200px){
     html {
         font-size: 62.5%;
     }
@@ -121,4 +134,18 @@ body{
         transform: rotateZ(0);
     }
     100% {transform: rotateZ(360deg); }
+}
+#btu_left,#btu_right{
+    width: 50%;
+    height: 420px;
+    background: rgba(255,255,255,0);
+    position: fixed;
+    top: 0px;
+    border: hidden;
+}
+#btu_left{
+    left: 0;
+}
+#btu_right{
+    right: 0;
 }
