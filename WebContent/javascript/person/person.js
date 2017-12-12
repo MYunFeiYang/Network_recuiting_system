@@ -26,7 +26,7 @@ function ajax_register(user) {
     });
 }
 function register_result(data) {
-    if (data.msg=="success"){
+    if (data.msg==="success"){
         let div=document.getElementById("register-person");
         div.getElementsByClassName("modal-content")[0].innerHTML="注册成功";
     }
@@ -37,7 +37,7 @@ function modify_user_person() {
     document.getElementById("person_email_group").style.display="none";
     document.getElementById("person_reg_btu").value="提交修改";
     document.getElementById("person_reg_btu").setAttribute("onmouseover","btu_disable_person_modify");
-    document.getElementById("person_reg_btu").onclick=modify_person();
+    document.getElementById("person_reg_btu").setAttribute("onclick","modify_person");
 }
 function modify_person() {
     let nickname=document.getElementById("person_nickname").value;
@@ -65,7 +65,7 @@ function modify_person_ajax(user) {
 }
 function modify_person_result(data,confirm_info_box) {
     let m_confirm_info_box=document.getElementById(confirm_info_box);
-    if (data.msg=="modify_user_success"){
+    if (data.msg==="modify_user_success"){
         m_confirm_info_box.innerHTML="信息修改成功";
         m_confirm_info_box.setAttribute("class","alert-success");
     }else {
@@ -115,22 +115,22 @@ function add_resume() {
     let telephone = document.getElementById("telephone").value;
     let email = document.getElementById("resume_email").value;
     let confirm_resume_box = document.getElementById("confirm_resume_box");
-    if (age == "") {
+    if (age === "") {
         confirm_resume_box.innerHTML = "请输入年龄";
         confirm_resume_box.setAttribute("class", "alert-warning");
-    } else if (origin == "") {
+    } else if (origin === "") {
         confirm_resume_box.innerHTML = "请输入籍贯";
         confirm_resume_box.setAttribute("class", "alert-warning");
-    } else if (collage == "") {
+    } else if (collage === "") {
         confirm_resume_box.innerHTML = "请输入毕业学校";
         confirm_resume_box.setAttribute("class", "alert-warning");
-    } else if (specialty == "") {
+    } else if (specialty === "") {
         confirm_resume_box.innerHTML = "请输入专业";
         confirm_resume_box.setAttribute("class", "alert-warning");
-    }  else if (admission_data == "") {
+    }  else if (admission_data === "") {
         confirm_resume_box.innerHTML = "请输入入学时间";
         confirm_resume_box.setAttribute("class", "alert-warning");
-    } else if(graduation_data == "")
+    } else if(graduation_data === "")
     {
         confirm_resume_box.innerHTML = "请输入毕业时间";
         confirm_resume_box.setAttribute("class", "alert-warning");
@@ -170,7 +170,7 @@ function add_resume_ajax(data) {
 }
 function add_resume_result(data) {
     let confirm_resume_box=document.getElementById("confirm_resume_box");
-    if (data.msg=="add_resume_success"){
+    if (data.msg==="add_resume_success"){
         confirm_resume_box.innerHTML="简历添加成功";
         confirm_resume_box.setAttribute("class","alert-success");
     }else {

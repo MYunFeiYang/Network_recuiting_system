@@ -1,4 +1,7 @@
 "use strict";
+let confirm_box="confirm_enterprise_box";
+let n_confirm_box;
+let name;
 function register_enterprise() {
     let company={};
     company.nickname=document.getElementById("enterprise_nickname").value;
@@ -27,7 +30,7 @@ function ajax_register_enterprise(company) {
     });
 }
 function register_result_enterprise(data) {
-    if (data.msg=="success"){
+    if (data.msg==="success"){
         location.href="index.html";
     }
 }
@@ -60,21 +63,21 @@ function modify_enterprise_ajax(user) {
         type: 'POST',
         dataType: 'JSON',
         success: function (data) {
-            modify_enterprise_result(data,"confirm_enterprise_box");
+            modify_enterprise_result(data);
         },
         fail: function () {
 
         }
     })
 }
-function modify_enterprise_result(data,confirm_info_box) {
-    let confirm_info_box=document.getElementById(confirm_info_box);
-    if (data.msg=="modify_user_success"){
-        confirm_info_box.innerHTML="信息修改成功";
-        confirm_info_box.setAttribute("class","alert-success");
+function modify_enterprise_result(data) {
+    n_confirm_box=document.getElementById(confirm_box);
+    if (data.msg==="modify_user_success"){
+        n_confirm_box.innerHTML="信息修改成功";
+        n_confirm_box.setAttribute("class","alert-success");
     }else {
-        confirm_info_box.innerHTML="信息修改失败";
-        confirm_info_box.setAttribute("class","alert-warning");
+        confirm_box.innerHTML="信息修改失败";
+        n_confirm_box.setAttribute("class","alert-warning");
     }
 }
 function init_job() {
@@ -102,6 +105,19 @@ function init_job_result(data) {
     document.getElementById("address").value = data.address;
     document.getElementById("industry").value = data.industry;
     document.getElementById("email").value = data.email;
+}
+function get_address() {
+    $.ajax({
+        url: "/query/address",
+        type: "POST",
+        dataType: "JSON",
+        success: function (data) {
+            infilling_address(data);
+        },
+        fail: function () {
+
+        }
+    });
 }
 function infilling_address(data) {
     let address=document.getElementById("address");
@@ -136,7 +152,7 @@ function infilling_job(data) {
 }
 function get_position() {
     let job={};
-    let name=document.getElementById("industry").value;
+    name=document.getElementById("industry").value;
     job.job_name=name;
     $.ajax({
         url:"/query/position",
@@ -202,7 +218,7 @@ function add_job_ajax(job) {
 }
 function add_job_result(data) {
     let confirm_job_box=document.getElementById("confirm_job_box");
-    if (data.msg=="add_job_success"){
+    if (data.msg==="add_job_success"){
         confirm_job_box.innerHTML="岗位发布成功";
         confirm_job_box.setAttribute("class","alert-success");
     }else {

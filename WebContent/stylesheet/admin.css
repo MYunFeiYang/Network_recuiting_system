@@ -76,3 +76,6 @@ body{
     background: grey;
     border: 0.1rem solid grey;
 }
+table{
+    background: rgba(255,255,255,0.6);
+}

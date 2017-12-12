@@ -6,8 +6,8 @@ $(function () {
     listen();
 });
 function init() {
-    if (socket.readyState==1) {
-        alert("你已处于连接状态");
+    if (socket.readyState===1) {
+
     } else {
         socket = new WebSocket("ws://localhost/init");
         $(function () {
@@ -37,11 +37,11 @@ function listen() {
     //收到消息时触发
     socket.onmessage = function (evt) {
         let data = JSON.parse(evt.data);
-        if (Object.prototype.toString.call(data) == "[object Array]") {
+        if (Object.prototype.toString.call(data) === "[object Array]") {
             //展示在线列表
             show_online_list(data);
-        } else if (Object.prototype.toString.call(data) == "[object Object]") {
-            if (data.nickname==undefined){
+        } else if (Object.prototype.toString.call(data) === "[object Object]") {
+            if (data.nickname===undefined){
                 //系统消息
                 show_system_message(data);
             }else {
@@ -55,7 +55,7 @@ function listen() {
     //关闭连接时触发
     socket.onclose = function () {
         show_system_message_to_self("你已关闭连接");
-    }
+    };
     //连接错误时触发
     socket.onerror = function () {
         show_system_message_to_self("链接发生错误")

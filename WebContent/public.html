@@ -26,7 +26,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-8 col-lg-8 col-xs-12 col-sm-12">
+        <div class="col-md-10 col-lg-10 col-xs-12 col-sm-12">
             <div class="row" id="filter">
                 <div class="col-md-12">
                     <div class="row hidden" id="filter_address">
@@ -56,67 +56,68 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-2 col-lg-2 col-xs-6 col-sm-4">
-            <div class="row">
-                <div class="col-xs-10" id="hotRecurit">
-                    <h3>热门校招</h3>
-                    <ul>
-                        <li>
-                            <img src="image/hotRecurit/1.png">
-                        </li>
-                        <li>
-                            <img src="image/hotRecurit/2.png">
-                        </li>
-                        <li>
-                            <img src="image/hotRecurit/3.jpg">
-                        </li>
-                        <li>
-                            <img src="image/hotRecurit/4.png">
-                        </li>
-                        <li>
-                            <img src="image/hotRecurit/5.jpg">
-                        </li>
-                        <li>
-                            <img src="image/hotRecurit/6.png">
-                        </li>
-                        <li>
-                            <img src="image/hotRecurit/7.png">
-                        </li>
-                        <li>
-                            <img src="image/hotRecurit/8.jpg">
-                        </li>
-                        <li>
-                            <img src="image/hotRecurit/9.png">
-                        </li>
-                        <li>
-                            <img src="image/hotRecurit/10.png">
-                        </li>
-                        <li>
-                            <img src="image/hotRecurit/11.gif">
-                        </li>
-                        <li>
-                            <img src="image/hotRecurit/12.png">
-                        </li>
-                    </ul>
-                </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-6 col-sm-5 col-md-4 col-lg-3">
+            <div id="hotRecurit">
+                <h3>热门校招</h3>
+                <ul>
+                    <li>
+                        <img src="image/hotRecurit/1.png">
+                    </li>
+                    <li>
+                        <img src="image/hotRecurit/2.png">
+                    </li>
+                    <li>
+                        <img src="image/hotRecurit/3.jpg">
+                    </li>
+                    <li>
+                        <img src="image/hotRecurit/4.png">
+                    </li>
+                    <li>
+                        <img src="image/hotRecurit/5.jpg">
+                    </li>
+                    <li>
+                        <img src="image/hotRecurit/6.png">
+                    </li>
+                    <li>
+                        <img src="image/hotRecurit/7.png">
+                    </li>
+                    <li>
+                        <img src="image/hotRecurit/8.jpg">
+                    </li>
+                    <li>
+                        <img src="image/hotRecurit/9.png">
+                    </li>
+                    <li>
+                        <img src="image/hotRecurit/10.png">
+                    </li>
+                    <li>
+                        <img src="image/hotRecurit/11.gif">
+                    </li>
+                    <li>
+                        <img src="image/hotRecurit/12.png">
+                    </li>
+                </ul>
             </div>
-            <div class="row">
-                <div id="marquee" class="marquee col-xs-10" onmouseover="closeInterval()" onmouseout="marquee_control()">
-                    <ul>
+        </div>
+        <div class="col-xs-6 col-sm-5 col-sm-offset-2 col- col-md-4 col-md-offset-4 col-lg-3 col-lg-offset-6">
+            <div class="marquee" id="marquee" onmouseover="closeInterval()"
+                 onmouseout="marquee_control()">
+                <ul>
 
-                    </ul>
-                </div>
+                </ul>
             </div>
         </div>
     </div>
 </div>
+
 </body>
 <script>
-    window.onload=function () {
+    window.onload = function () {
         marquee_control();
         get_news('person');
         query_job_class();
-        welt_hidden()
     }
 </script>
 </html>

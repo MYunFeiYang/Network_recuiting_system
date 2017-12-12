@@ -2,6 +2,9 @@
     html {
         font-size: 62.5%;
     }
+    .container-fluid{
+        height: 90%;
+    }
 }
 /*小屏幕*/
 @media screen and (min-width: 768px)and (max-width: 992px){
@@ -21,15 +24,23 @@
         font-size: 62.5%;
     }
 }
+html,body{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
 body{
     overflow-x: hidden;
     overflow-y: auto;
     background: rgba(255,255,255, 0.1);
 }
-.person_list,#show_content,.user_center{
+.container-fluid,.container-fluid .row{
+    height: 100%;
+}
+.person_list,.chat_content,.user_center{
     overflow-y:scroll;
     border: 0.1rem solid white;
-    height: 500px;
+    height: 100%;
 }
 .user_center ul li:hover,.person_list ul li:hover{
     background-color: gainsboro;
@@ -70,7 +81,7 @@ body{
     text-decoration: none;
 }
 #show_content{
-    height: 420px;
+    height: 80%;
 }
 #show_content .system_message,#show_content .self,#show_content .message{
     display: block;
@@ -102,12 +113,12 @@ body{
     padding: 0.5rem;
 }
 #editor{
-    height: 80px;
+    height: 20%;
     padding: 0;
 }
 #editor textarea{
     width: 100%;
-    height: 8rem;
+    height: 100%;
     border: 0.1rem solid dodgerblue;
     border-radius: 0.3rem;
     padding: 0.5rem 1.5rem;
@@ -140,7 +151,7 @@ body{
     height: 420px;
     background: rgba(255,255,255,0);
     position: fixed;
-    top: 0px;
+    top: 0;
     border: hidden;
 }
 #btu_left{
@@ -148,4 +159,12 @@ body{
 }
 #btu_right{
     right: 0;
+}
+.btu_group{
+    width: 100%;
+    height: 10%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    background: rgba(0,0,0,0.5);
 }

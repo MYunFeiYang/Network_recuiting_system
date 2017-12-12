@@ -44,13 +44,12 @@
                 <div class="col-md-12" id="show_content">
 
                 </div>
-            </div>
-            <div class="col-md-12" id="editor">
-                <textarea id="content" placeholder="输入聊天内容"></textarea>
-                <button class="btn btn-default" type="button" onclick="emit()">
-                    发送
-                </button>
-
+                <div class="col-md-12" id="editor">
+                    <textarea id="content" placeholder="输入聊天内容"></textarea>
+                    <button class="btn btn-default" type="button" onclick="emit()">
+                        发送
+                    </button>
+                </div>
             </div>
         </div>
         <div class="col-md-3 col-lg-3 col-sm-3 col-xs-6 person_list">
@@ -65,12 +64,15 @@
             </div>
         </div>
     </div>
-    <button id="btu_left" onclick="mypre()"></button>
-    <button id="btu_right" onclick="mynext()"></button>
+    <button class="hidden" id="btu_left" onclick="mypre()"></button>
+    <button class="hidden" id="btu_right" onclick="mynext()"></button>
+</div>
+<div class="btu_group">
+
 </div>
 </body>
 <script>
-    window.onload=function () {
+    window.onload = function () {
         init();
         show_status();
         Carousel_figure(1);
