@@ -20,10 +20,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Properties;
-import java.util.Random;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 public class Common {
     public void CheckEmail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -71,25 +69,47 @@ public class Common {
         String login_type = request.getParameter("login_type");
         String nickname = request.getParameter("nickname");
         String password = request.getParameter("password");
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");//设置日期格式
+        String dataString = df.format(new Date());// new Date()为获取当前系统时间
         DBManager conndb = new DBManager();
         Connection conn = conndb.getConnection();
         String sql = null;
+        String sql1 = null;
         switch (login_type) {
             case "person":
                 sql = "select email from occupy_person where nickname=? and password=?";
+                sql1 = "UPDATE occupy_person SET login_time=? WHERE (nickname=? AND password=?)";
                 break;
             case "enterprise":
                 sql = "select name from occupy_company where nickname=? and password=?";
+                sql1 = "UPDATE occupy_company SET login_time=? WHERE (nickname=? AND password=?)";
                 break;
             case "admin":
                 sql = "select nickname from admin where nickname=? and password=?";
                 break;
         }
         try {
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1, nickname);
-            ps.setString(2, password);
-            ResultSet rs = ps.executeQuery();
+            PreparedStatement ps;
+            PreparedStatement ps1=null;
+            ResultSet rs;
+            switch (login_type) {
+                case "admin":
+                    ps = conn.prepareStatement(sql);
+                    ps.setString(1, nickname);
+                    ps.setString(2, password);
+                    rs = ps.executeQuery();
+                    break;
+                default:
+                    ps = conn.prepareStatement(sql);
+                    ps1 = conn.prepareStatement(sql1);
+                    ps.setString(1, nickname);
+                    ps.setString(2, password);
+                    ps1.setString(1, dataString);
+                    ps1.setString(2, nickname);
+                    ps1.setString(3, password);
+                    rs = ps.executeQuery();
+                    ps1.executeUpdate();
+            }
             if (rs.next()) {
                 String str = "{\"msg\":\"login_success\"}";
                 response.getWriter().print(str);
@@ -102,6 +122,7 @@ public class Common {
                 response.getWriter().close();
             }
             rs.close();
+            ps1.close();
             ps.close();
             conn.close();
         } catch (SQLException e) {
@@ -179,8 +200,7 @@ public class Common {
         }
     }
 
-    public static boolean sendMail(String to, HttpServletResponse response) {
-
+    private static boolean sendMail(String to, HttpServletResponse response) {
         try {
             Properties props = new Properties();
             props.put("username", "m_YunfeiYang@163.com");
@@ -216,7 +236,6 @@ public class Common {
             response.getWriter().print(mag.toString());
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println(e);
             return false;
         }
         return true;
@@ -338,14 +357,14 @@ public class Common {
         response.setHeader("Pragma", "no-cache");
         int pageSize = Integer.parseInt(request.getParameter("pageSize"));
         int pageNum = Integer.parseInt(request.getParameter("pageNum"));
-        String position = request.getParameter("position");
+        //String position = request.getParameter("position");
         String address = request.getParameter("address");
-        position = "%" + position + "%";
+        //position = "%" + position + "%";
         address = "%" + address + "%";
         DBManager dbManager = new DBManager();
         Connection conn = dbManager.getConnection();
-        List<Company> companyList = new ArrayList<Company>();
-        List<PageBean> pageBeanList = new ArrayList<PageBean>();
+        List<Company> companyList = new ArrayList<>();
+        List<PageBean> pageBeanList = new ArrayList<>();
         String sql1 = "SELECT COUNT (company) FROM school_rercuit WHERE address LIKE ?";
         String sql = "SELECT company,position, address,time FROM (SELECT ROW_NUMBER() OVER(ORDER BY id ASC) AS ROWID,* FROM school_rercuit WHERE address LIKE ?)AS TEMP WHERE (ROWID>? AND ROWID<=?)";
         try {
