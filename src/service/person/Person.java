@@ -1,6 +1,8 @@
 package service.person;
 
 import model.DBManager;
+import model.person.Resume;
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -11,7 +13,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.Random;
+
 public class Person {
     public void register(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
@@ -43,13 +49,13 @@ public class Person {
             if(tag==1){
                 String str = "{\"msg\":\"success\"}";
                 response.getWriter().print(str);
-                response.getWriter().flush();;
-                response.getWriter().close();;
+                response.getWriter().flush();
+                response.getWriter().close();
             }else{
                 String str = "{\"msg\":\"fail\"}";
                 response.getWriter().print(str);
-                response.getWriter().flush();;
-                response.getWriter().close();;
+                response.getWriter().flush();
+                response.getWriter().close();
             }
             ps.close();
             conn.close();
@@ -82,13 +88,13 @@ public class Person {
             if(!tag){
                 String str = "{\"msg\":\"modify_user_success\"}";
                 response.getWriter().print(str);
-                response.getWriter().flush();;
-                response.getWriter().close();;
+                response.getWriter().flush();
+                response.getWriter().close();
             }else{
                 String str = "{\"msg\":\"modify_user_fail\"}";
                 response.getWriter().print(str);
-                response.getWriter().flush();;
-                response.getWriter().close();;
+                response.getWriter().flush();
+                response.getWriter().close();
             }
             ps.close();
             conn.close();
@@ -154,37 +160,39 @@ public class Person {
         String graduation_data=request.getParameter("graduation_data");
         String telephone=request.getParameter("telephone");
         String email=request.getParameter("email");
-
+        Random r=new Random();
+        String identification=nickname+password+r.nextInt(100);
         DBManager conndb=new DBManager();
         Connection conn=conndb.getConnection();
-        String sql="insert into occupy_resume (nickname,password,name,age,sex,origin,collage,specialty,"
-                + "degree,admission_data,graduation_data,telephone,email) values(?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        String sql="insert into resume (identification,nickname,password,name,age,sex,origin,collage,specialty,"
+                + "degree,admission_data,graduation_data,telephone,email) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1, nickname);
-            ps.setString(2, password);
-            ps.setString(3, name);
-            ps.setString(4, age);
-            ps.setString(5, sex);
-            ps.setString(6, origin);
-            ps.setString(7, collage);
-            ps.setString(8, specialty);
-            ps.setString(9, degree);
-            ps.setString(10, admission_data);
-            ps.setString(11, graduation_data);
-            ps.setString(12, telephone);
-            ps.setString(13, email);
+            ps.setString(1,identification);
+            ps.setString(2, nickname);
+            ps.setString(3, password);
+            ps.setString(4, name);
+            ps.setString(5, age);
+            ps.setString(6, sex);
+            ps.setString(7, origin);
+            ps.setString(8, collage);
+            ps.setString(9, specialty);
+            ps.setString(10, degree);
+            ps.setString(11, admission_data);
+            ps.setString(12, graduation_data);
+            ps.setString(13, telephone);
+            ps.setString(14, email);
             int tag = ps.executeUpdate();
             if(tag==1){
                 String str = "{\"msg\":\"add_resume_success\"}";
                 response.getWriter().print(str);
-                response.getWriter().flush();;
-                response.getWriter().close();;
+                response.getWriter().flush();
+                response.getWriter().close();
             }else{
                 String str = "{\"msg\":\"add_resume_fail\"}";
                 response.getWriter().print(str);
-                response.getWriter().flush();;
-                response.getWriter().close();;
+                response.getWriter().flush();
+                response.getWriter().close();
             }
             ps.close();
             conn.close();
@@ -192,5 +200,46 @@ public class Person {
             // TODO 自动生成的 catch 块
             e.printStackTrace();
         }
+    }
+    public void manageResume(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/xml; charset=UTF-8");
+        // 以下两句为取消在本地的缓存
+        response.setHeader("Cache-Control", "no-cache");
+        response.setHeader("Pragma", "no-cache");
+        String nickname = request.getParameter("nickname");
+        String password = request.getParameter("password");
+        DBManager conndb = new DBManager();
+        Connection conn = conndb.getConnection();
+        List<Resume> resumeList=new ArrayList<>();
+        try {
+            String sql = "select identification,name,age,sex,origin,collage,specialty,degree,admission_data,graduation_data from resume where (nickname=? and password=?)";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, nickname);
+            ps.setString(2, password);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Resume resume=new Resume();
+                resume.setIdentification(rs.getString(1));
+                resume.setName(rs.getString(2));
+                resume.setAge(rs.getString(3));
+                resume.setSex(rs.getString(4));
+                resume.setOrigin(rs.getString(5));
+                resume.setCollage(rs.getString(6));
+                resume.setSpecialty(rs.getString(7));
+                resume.setDegree(rs.getString(8));
+                resume.setAdmission_data(rs.getString(9));
+                resume.setGraduation_data(rs.getString(10));
+                resumeList.add(resume);
+            }
+            response.getWriter().print(JSONArray.fromObject(resumeList).toString());
+            rs.close();
+            ps.close();
+            conn.close();
+        } catch (SQLException e) {
+            // TODO 自动生成的 catch 块
+            e.printStackTrace();
+        }
+
     }
 }

@@ -103,10 +103,10 @@ function add_row() {
     row.appendChild(n_operate);
     c_xuhao = (++i);
     n_xuhao.innerHTML = c_xuhao;
-    n_nickname.innerHTML = `<input type='text' class=\"form-control\">`;
-    n_password.innerHTML = `<input type='text' class=\"form-control\">`;
-    n_power.innerHTML = `<select class=\"form-control\"><option value='super'>超级管理员</option><option value='admin'>管理员</option></select>`;
-    n_operate.innerHTML = `<button class=\"btn btn-primary\" onclick="add_admin(this)">保存</button><button class=\"btn btn-danger\" onclick="delete_admin(this)">删除</button><button class=\"btn btn-info\" onclick="add_row()">新增</button>`
+    n_nickname.innerHTML = `<input type='text' class=\"form-control input-sm\">`;
+    n_password.innerHTML = `<input type='text' class=\"form-control input-sm\">`;
+    n_power.innerHTML = `<select class=\"form-control input-sm\"><option value='super'>超级管理员</option><option value='admin'>管理员</option></select>`;
+    n_operate.innerHTML = `<button class=\"btn btn-primary btn-sm\" onclick="add_admin(this)">保存</button><button class=\"btn btn-danger btn-sm\" onclick="delete_admin(this)">删除</button><button class=\"btn btn-info btn-sm\" onclick="add_row()">新增</button>`
 
 }
 

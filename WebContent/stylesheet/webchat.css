@@ -160,11 +160,3 @@ body{
 #btu_right{
     right: 0;
 }
-.btu_group{
-    width: 100%;
-    height: 10%;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    background: rgba(0,0,0,0.5);
-}

@@ -18,7 +18,7 @@
     <script src="javascript/person/person.js"></script>
     <script src="javascript/enterprise/enterprise.js"></script>
 </head>
-<body id="top">
+<body id="top" onclick="close_share();close_search();close_preselected_search()">
 <div class="container-fluid">
     <nav class="navbar navbar-default">
         <div class="container-fluid">
@@ -45,7 +45,7 @@
                            aria-expanded="false">招聘<span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a onclick="show_hotRecurit()">校招</a></li>
+                                <a href="public.html" onclick="return change_iframe_src(this)">校招</a></li>
                             <li role="separator" class="divider"></li>
                         </ul>
                     </li>
@@ -182,8 +182,8 @@
                     </div>
                     <div class="row">
                         <div class="col-md-4 col-sm-12">
-                            <a target="_top" class="btn btn-primary"
-                               onclick="show_reset_password()">找回密码</a>
+                            <a href="resetPassword.html" target="_top" class="btn btn-primary"
+                               onclick="return change_iframe_src(this)">找回密码</a>
                         </div>
                     </div>
                 </div>
@@ -792,7 +792,7 @@
             </div>
         </div>
     </div>
-    <iframe frameborder="0" marginheight="0" src="public.html" id="iframe">
+    <iframe frameborder="0" marginheight="0" src="">
 
     </iframe>
     <div id="toTop">

@@ -123,23 +123,25 @@ table tbody tr td a{
 }
 /*right*/
 #hotRecurit{
-    background-color: gainsboro;
+    background:rgba(255,255,255,0.6);
     opacity: 0.9;
-    border: 10px solid white;
+    border: 5px solid white;
     padding: 0;
 }
 #hotRecurit h3{
     margin: 0.15rem;
-    background-color: beige;
+    background:rgba(255,255,255,0.8);
     padding: 5px;
 }
 #hotRecurit ul{
-    padding: 2%;
+    padding: 0 0 0 5%;
+    height: auto;
+    overflow: auto;
 }
 #hotRecurit ul li{
-    width: 32%;
+    width: 31%;
     float: left;
-    border: 7px solid gainsboro;
+    padding: 2%;
 }
 #hotRecurit ul li img{
     width: 100%;

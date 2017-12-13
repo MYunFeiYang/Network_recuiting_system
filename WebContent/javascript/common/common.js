@@ -80,15 +80,14 @@ function login_session_result(data) {
             add_resume_a.text="添加简历";
             add_resume_a.setAttribute("data-toggle","modal");
             add_resume_a.setAttribute("data-target","#resume");
-            add_resume_a.setAttribute("onclick","init_resume");
+            add_resume_a.setAttribute("onclick","init_resume()");
             let modify_resume=document.createElement("li");
             let modify_resume_a=document.createElement("a");
             user_center.appendChild(modify_resume);
             modify_resume.appendChild(modify_resume_a);
-            modify_resume_a.text="修改简历";
-            modify_resume_a.setAttribute("data-toggle","modal");
-            modify_resume_a.setAttribute("data-target","#resume");
-            modify_resume_a.setAttribute("onclick","init_resume()");
+            modify_resume_a.text="管理简历";
+            modify_resume_a.href="person.html";
+            modify_resume_a.setAttribute("onclick","return change_iframe_src(this)");
             let upload_resume=document.createElement("li");
             let upload_resume_a=document.createElement("a");
             user_center.appendChild(upload_resume);
@@ -101,7 +100,8 @@ function login_session_result(data) {
             let chat_a=document.createElement("a");
             chat.appendChild(chat_a);
             chat_a.text="问道空间";
-            chat_a.setAttribute("onclick","show_webchat()");
+            chat_a.href="webchat.html";
+            chat_a.setAttribute("onclick","return change_iframe_src(this)");
             let li1=document.createElement("li");
             user_center.appendChild(li1);
             let log_out=document.createElement("a");
@@ -141,7 +141,8 @@ function login_session_result(data) {
             let chat_a=document.createElement("a");
             chat.appendChild(chat_a);
             chat_a.text="问道空间";
-            chat_a.setAttribute("onclick","show_webchat()");
+            chat_a.href="webchat.html";
+            chat_a.setAttribute("onclick","return change_iframe_src(this)");
             let li1=document.createElement("li");
             user_center.appendChild(li1);
             let log_out=document.createElement("a");
@@ -152,19 +153,20 @@ function login_session_result(data) {
             log_out.setAttribute("href","index.html");
         }
         else if(data.login_type==="admin"){
-            show_admin();
             let admin=document.createElement("li");
             user_center.appendChild(admin);
             let admin_a=document.createElement("a");
             admin.appendChild(admin_a);
             admin_a.text="后台管理";
-            admin_a.setAttribute("onclick","show_admin()");
+            admin_a.href="admin.html";
+            admin_a.setAttribute("onclick","return change_iframe_src(this)");
             let chat=document.createElement("li");
             user_center.appendChild(chat);
             let chat_a=document.createElement("a");
             chat.appendChild(chat_a);
             chat_a.text="问道空间";
-            chat_a.setAttribute("onclick","show_webchat()");
+            chat_a.href="webchat.html";
+            chat_a.setAttribute("onclick","return change_iframe_src(this)");
             let li1=document.createElement("li");
             user_center.appendChild(li1);
             let log_out=document.createElement("a");
@@ -228,21 +230,9 @@ function direction_key_event(id) {
     }
     
 }
-function show_webchat() {
-    let iframe=document.getElementById("iframe");
-    iframe.src="webchat.html";
-}
-function show_admin() {
-    let iframe=document.getElementById("iframe");
-    iframe.src="admin.html";
-}
-function show_hotRecurit() {
-    let iframe=document.getElementById("iframe");
-    iframe.src="public.html";
-}
-function show_reset_password() {
-    let iframe=document.getElementById("iframe");
-    iframe.src="resetPassword.html";
+function change_iframe_src(obj) {
+    document.getElementsByTagName("iframe")[0].src=obj.href;
+    return false;
 }
 // quick query
 function complete_content(){

@@ -50,10 +50,10 @@ function init_person_account(data) {
             c_time = data[j].login_time;
             c_xuhao_p = (j + 1);
             n_xuhao_p.innerHTML = c_xuhao_p;
-            n_nickname_p.innerHTML = `<input type='text' readonly="readonly" class=\"form-control\" value=${c_nickname_p}>`;
-            n_password_p.innerHTML = `<input type='text' readonly="readonly" class=\"form-control\" value=${c_password_p}>`;
-            n_time.innerHTML = `<input type='text' readonly="readonly" class=\"form-control\" value=${c_time}>`;
-            n_operate_p.innerHTML = `<button class=\"btn btn-danger\" onclick="delete_account_p(this)">删除</button><button class=\"btn btn-info\" onclick="add_row_p()">新增</button>`;
+            n_nickname_p.innerHTML = `<input type='text' readonly="readonly" class=\"form-control input-sm\" value=${c_nickname_p}>`;
+            n_password_p.innerHTML = `<input type='text' readonly="readonly" class=\"form-control input-sm\" value=${c_password_p}>`;
+            n_time.innerHTML = `<input type='text' readonly="readonly" class=\"form-control input-sm\" value=${c_time}>`;
+            n_operate_p.innerHTML = `<button class=\"btn btn-danger btn-sm\" onclick="delete_account_p(this)">删除</button><button class=\"btn btn-info btn-sm\" onclick="add_row_p()">新增</button>`;
         }
     }
 }
@@ -75,10 +75,10 @@ function add_row_p() {
     row.appendChild(n_operate_p);
     c_xuhao_p = (++j);
     n_xuhao_p.innerHTML = c_xuhao_p;
-    n_nickname_p.innerHTML = `<input type='text' class=\"form-control\">`;
-    n_password_p.innerHTML = `<input type='text' class=\"form-control\">`;
-    n_time.innerHTML = `<input type='text' class=\"form-control\">`;
-    n_operate_p.innerHTML = `<button class=\"btn btn-primary\" onclick="add_account_p(this)">保存</button><button class=\"btn btn-danger\" onclick="delete_account_p(this)">删除</button><button class=\"btn btn-info\" onclick="add_row_p()">新增</button>`
+    n_nickname_p.innerHTML = `<input type='text' class=\"form-control input-sm\">`;
+    n_password_p.innerHTML = `<input type='text' class=\"form-control input-sm\">`;
+    n_time.innerHTML = `<input type='text' class=\"form-control input-sm\">`;
+    n_operate_p.innerHTML = `<button class=\"btn btn-primary btn-sm\" onclick="add_account_p(this)">保存</button><button class=\"btn btn-danger btn-sm\" onclick="delete_account_p(this)">删除</button><button class=\"btn btn-info btn-sm\" onclick="add_row_p()">新增</button>`
 
 }
 

@@ -50,10 +50,10 @@ function init_enterprise_account(data) {
             c_time_e = data[k].login_time;
             c_xuhao_e = (k + 1);
             n_xuhao_e.innerHTML = c_xuhao_e;
-            n_nickname_e.innerHTML = `<input type='text' readonly="readonly" class=\"form-control\" value=${c_nickname_e}>`;
-            n_password_e.innerHTML = `<input type='text' readonly="readonly" class=\"form-control\" value=${c_password_e}>`;
-            n_time_e.innerHTML = `<input type='text' readonly="readonly" class=\"form-control\" value=${c_time_e}>`;
-            n_operate_e.innerHTML = `<button class=\"btn btn-danger\" onclick="delete_account_e(this)">删除</button><button class=\"btn btn-info\" onclick="add_row_e()">新增</button>`;
+            n_nickname_e.innerHTML = `<input type='text' readonly="readonly" class=\"form-control input-sm\" value=${c_nickname_e}>`;
+            n_password_e.innerHTML = `<input type='text' readonly="readonly" class=\"form-control input-sm\" value=${c_password_e}>`;
+            n_time_e.innerHTML = `<input type='text' readonly="readonly" class=\"form-control input-sm\" value=${c_time_e}>`;
+            n_operate_e.innerHTML = `<button class=\"btn btn-danger btn-sm\" onclick="delete_account_e(this)">删除</button><button class=\"btn btn-info btn-sm\" onclick="add_row_e()">新增</button>`;
         }
     }
 }
@@ -75,10 +75,10 @@ function add_row_e() {
     row.appendChild(n_operate_e);
     c_xuhao_e = (++k);
     n_xuhao_e.innerHTML = c_xuhao_e;
-    n_nickname_e.innerHTML = `<input type='text' class=\"form-control\">`;
-    n_password_e.innerHTML = `<input type='text' class=\"form-control\">`;
-    n_time_e.innerHTML = `<input type='text' class=\"form-control\">`;
-    n_operate_e.innerHTML = `<button class=\"btn btn-primary\" onclick="add_account_e(this)">保存</button><button class=\"btn btn-danger\" onclick="delete_admin_e(this)">删除</button><button class=\"btn btn-info\" onclick="add_row_e()">新增</button>`
+    n_nickname_e.innerHTML = `<input type='text' class=\"form-control input-sm\">`;
+    n_password_e.innerHTML = `<input type='text' class=\"form-control input-sm\">`;
+    n_time_e.innerHTML = `<input type='text' class=\"form-control input-sm\">`;
+    n_operate_e.innerHTML = `<button class=\"btn btn-primary btn-sm\" onclick="add_account_e(this)">保存</button><button class=\"btn btn-danger btn-sm\" onclick="delete_admin_e(this)">删除</button><button class=\"btn btn-info btn-sm\" onclick="add_row_e()">新增</button>`
 
 }
 
