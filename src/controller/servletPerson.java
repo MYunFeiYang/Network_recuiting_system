@@ -17,14 +17,25 @@ public class servletPerson extends HttpServlet {
         switch (person_type) {
             case "register":
                 person.register(request, response);
+                break;
             case "modifyUser":
                 person.modifyUser(request, response);
+                break;
             case "initResume":
                 person.initResume(request, response);
+                break;
             case "addResume":
                 person.addResume(request, response);
+                break;
             case "manageResume":
                 person.manageResume(request, response);
+                break;
+            case "modifyResume":
+                person.modifyResume(request, response);
+                break;
+            case "deleteResume":
+                person.deleteResume(request, response);
+                break;
         }
     }
 }
