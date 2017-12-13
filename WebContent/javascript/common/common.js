@@ -127,15 +127,18 @@ function login_session_result(data) {
             add_job_a.text="发布招聘信息";
             add_job_a.setAttribute("data-toggle","modal");
             add_job_a.setAttribute("data-target","#jobs");
-            add_job_a.setAttribute("onclick","init_job();get_address();get_job()");
+            add_job_a.onclick=function () {
+                init_job();
+                get_address();
+                get_industry();
+            };
             let modify_job=document.createElement("li");
             let modify_job_a=document.createElement("a");
             user_center.appendChild(modify_job);
             modify_job.appendChild(modify_job_a);
-            modify_job_a.text="修改招聘信息";
-            modify_job_a.setAttribute("data-toggle","modal");
-            modify_job_a.setAttribute("data-target","#jobs");
-            modify_job_a.setAttribute("onclick","function(){init_job();get_address(infilling_address);get_job()}");
+            modify_job_a.text="管理招聘信息";
+            modify_job_a.href="enterprise.html";
+            modify_job_a.setAttribute("onclick","return change_iframe_src(this)");
             let chat=document.createElement("li");
             user_center.appendChild(chat);
             let chat_a=document.createElement("a");

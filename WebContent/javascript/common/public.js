@@ -39,13 +39,13 @@ function show_news(data) {
 }
 
 //filter query
-function query_job_class() {
+function query_industry() {
     $.ajax({
-        url: "/query/job",
+        url: "/query/industry",
         type: "POST",
         dataType: "JSON",
         success: function (data) {
-            insert_job_class(data);
+            insert_industry(data);
         },
         fail: function () {
 
@@ -53,8 +53,8 @@ function query_job_class() {
     });
 }
 
-function insert_job_class(data) {
-    job_class = document.getElementById("job_class");
+function insert_industry(data) {
+    job_class = document.getElementById("industry");
     job_class.innerHTML = "";
     let ul = document.createElement("ul");
     job_class.appendChild(ul);

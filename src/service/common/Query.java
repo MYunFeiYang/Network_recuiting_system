@@ -18,11 +18,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Query {
-    public void init_filter_job(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void init_filter_industry(HttpServletRequest request, HttpServletResponse response) throws IOException {
         DBManager DBManager = new DBManager();
         Connection conn = DBManager.getConnection();
-        String sql = "SELECT href,text FROM filter_job";
-        List<Job> list = new ArrayList<Job>();
+        String sql = "SELECT href,text FROM industry";
+        List<Job> list = new ArrayList<>();
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
@@ -31,9 +31,8 @@ public class Query {
                 job.setHref(rs.getString(1));
                 job.setText(rs.getString(2));
                 list.add(job);
-                list = JSONArray.fromObject(list);
             }
-            response.getWriter().print(list.toString());
+            response.getWriter().print(JSONArray.fromObject(list).toString());
             response.getWriter().close();
             rs.close();
             ps.close();
@@ -46,8 +45,8 @@ public class Query {
     public void init_filter_address(HttpServletRequest request, HttpServletResponse response) throws IOException {
         DBManager DBManager = new DBManager();
         Connection conn = DBManager.getConnection();
-        String sql = "SELECT href,text FROM filter_address";
-        List<Address> list = new ArrayList<Address>();
+        String sql = "SELECT href,text FROM address";
+        List<Address> list = new ArrayList<>();
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
@@ -56,9 +55,8 @@ public class Query {
                 address.setHref(rs.getString(1));
                 address.setText(rs.getString(2));
                 list.add(address);
-                list = JSONArray.fromObject(list);
             }
-            response.getWriter().print(list.toString());
+            response.getWriter().print(JSONArray.fromObject(list).toString());
             response.getWriter().close();
             rs.close();
             ps.close();
@@ -71,16 +69,16 @@ public class Query {
     public void init_filter_position(HttpServletRequest request, HttpServletResponse response) throws IOException {
         DBManager DBManager = new DBManager();
         Connection conn = DBManager.getConnection();
-        String job=request.getParameter("job_name");
-        String sql = "SELECT position FROM filter_position WHERE job=?";
+        String job = request.getParameter("job_name");
+        String sql = "SELECT position FROM position WHERE job=?";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1,job);
+            ps.setString(1, job);
             ResultSet rs = ps.executeQuery();
-            JSONArray jsonArray=new JSONArray();
-            JSONObject jsonObject=new JSONObject();
+            JSONArray jsonArray = new JSONArray();
+            JSONObject jsonObject = new JSONObject();
             while (rs.next()) {
-                jsonObject.element("position",rs.getString(1));
+                jsonObject.element("position", rs.getString(1));
                 jsonArray.add(jsonObject);
             }
             response.getWriter().print(jsonArray.toString());
@@ -94,9 +92,9 @@ public class Query {
     }
 
     public void queryCompany(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String job = request.getParameter("job");
+        //String job = request.getParameter("job");
         String address = request.getParameter("address");
-        job = "%" + job + "%";
+        //job = "%" + job + "%";
         address = "%" + address + "%";
         DBManager DBManager = new DBManager();
         Connection conn = DBManager.getConnection();
@@ -113,17 +111,16 @@ public class Query {
                 ps.setString(1, address);
             }
             ResultSet rs = ps.executeQuery();
-            List<Company> list=new ArrayList<Company>();
+            List<Company> list = new ArrayList<>();
             while (rs.next()) {
-                Company company=new Company();
+                Company company = new Company();
                 company.setName(rs.getString(1));
                 company.setPosition(rs.getString(2));
                 company.setAddress(rs.getString(3));
                 company.setTime(rs.getString(4));
                 list.add(company);
-                list=JSONArray.fromObject(list);
             }
-            response.getWriter().print(list.toString());
+            response.getWriter().print(JSONArray.fromObject(list).toString());
             response.getWriter().close();
             rs.close();
             ps.close();

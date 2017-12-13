@@ -16,16 +16,14 @@ public class servletQuery extends HttpServlet {
         response.setContentType("text/html;charset=utf-8");
         String url=request.getRequestURI();
         Query query =new Query();
-        if (url.indexOf("job")!=-1){
-            query.init_filter_job(request,response);
-        }else if (url.indexOf("address")!=-1){
+        if (url.contains("industry")){
+            query.init_filter_industry(request,response);
+        }else if (url.contains("address")){
             query.init_filter_address(request,response);
-        }else if (url.indexOf("position")!=-1){
+        }else if (url.contains("position")){
             query.init_filter_position(request,response);
-        }else if (url.indexOf("company")!=-1){
+        }else if (url.contains("company")){
             query.queryCompany(request,response);
-        }else {
-            return;
         }
     }
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

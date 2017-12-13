@@ -95,9 +95,6 @@ function modify_resume(obj) {
     c_collage=row.children[5].firstChild.value;
     c_specialty=row.children[6].firstChild.value;
     c_degree=row.children[7].firstChild.value;
-    c_collage=row.children[5].firstChild.value;
-    c_specialty=row.children[6].firstChild.value;
-    c_degree=row.children[7].firstChild.value;
     c_admission_data=row.children[8].firstChild.value;
     c_graduation_data=row.children[9].firstChild.value;
     o_resume={};

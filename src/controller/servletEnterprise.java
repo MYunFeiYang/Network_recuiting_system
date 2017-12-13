@@ -12,18 +12,30 @@ import java.io.IOException;
 @WebServlet(name = "/enterprise")
 public class servletEnterprise extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String enterprise_type=request.getParameter("enterprise");
-        Enterprise enterprise=new Enterprise();
-        if (enterprise_type.equals("register")){
-            enterprise.register(request,response);
-        }else if (enterprise_type.equals("modifyUser")){
-            enterprise.modifyUser(request,response);
-        }else if (enterprise_type.equals("initJob")){
-            enterprise.initJob(request,response);
-        }else if (enterprise_type.equals("addJob")){
-            enterprise.addJob(request,response);
-        }else {
-            return;
+        String enterprise_type = request.getParameter("enterprise");
+        Enterprise enterprise = new Enterprise();
+        switch (enterprise_type) {
+            case "register":
+                enterprise.register(request, response);
+                break;
+            case "modifyUser":
+                enterprise.modifyUser(request, response);
+                break;
+            case "initJob":
+                enterprise.initJob(request, response);
+                break;
+            case "addJob":
+                enterprise.addJob(request, response);
+                break;
+            case "manageJob":
+                enterprise.manageJob(request, response);
+                break;
+            case "modifyJob":
+                enterprise.modifyJob(request,response);
+                break;
+            case "deleteJob":
+                enterprise.deleteJob(request,response);
+                break;
         }
     }
 }

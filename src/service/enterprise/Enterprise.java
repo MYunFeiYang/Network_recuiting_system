@@ -1,6 +1,8 @@
 package service.enterprise;
 
 import model.DBManager;
+import model.enterprise.Job;
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 import javax.servlet.ServletException;
@@ -11,6 +13,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public class Enterprise {
     public void register(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -18,17 +23,17 @@ public class Enterprise {
         response.setContentType("text/xml; charset=UTF-8");
         response.setHeader("Cache-Control", "no-cache");
         response.setHeader("Pragma", "no-cache");
-        String nickname=request.getParameter("nickname");
-        String password=request.getParameter("password");
-        String name=request.getParameter("name");
-        String industry=request.getParameter("industry");
-        String telephone=request.getParameter("telephone");
-        String email=request.getParameter("email");
-        String address=request.getParameter("address");
+        String nickname = request.getParameter("nickname");
+        String password = request.getParameter("password");
+        String name = request.getParameter("name");
+        String industry = request.getParameter("industry");
+        String telephone = request.getParameter("telephone");
+        String email = request.getParameter("email");
+        String address = request.getParameter("address");
 
-        DBManager conndb=new DBManager();
-        Connection conn=conndb.getConnection();
-        String sql="insert into occupy_company (nickname,password,name,industry,telephone,email,address) values(?,?,?,?,?,?,?)";
+        DBManager conndb = new DBManager();
+        Connection conn = conndb.getConnection();
+        String sql = "insert into occupy_company (nickname,password,name,industry,telephone,email,address) values(?,?,?,?,?,?,?)";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, nickname);
@@ -40,12 +45,12 @@ public class Enterprise {
             ps.setString(7, address);
             int tag = ps.executeUpdate();
             ps.close();
-            if(tag==1){
+            if (tag == 1) {
                 String str = "{\"msg\":\"success\"}";
                 response.getWriter().print(str);
                 response.getWriter().flush();
                 response.getWriter().close();
-            }else{
+            } else {
                 String str = "{\"msg\":\"fail\"}";
                 response.getWriter().print(str);
                 response.getWriter().flush();
@@ -57,22 +62,23 @@ public class Enterprise {
             e.printStackTrace();
         }
     }
+
     public void modifyUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/xml; charset=UTF-8");
         //以下两句为取消在本地的缓存
         response.setHeader("Cache-Control", "no-cache");
         response.setHeader("Pragma", "no-cache");
-        String telephone=request.getParameter("telephone");
-        String nickname=request.getParameter("nickname");
-        String name=request.getParameter("nickname");
-        String industry=request.getParameter("industry");
-        String address=request.getParameter("address");
-        String password=request.getParameter("password");
+        String telephone = request.getParameter("telephone");
+        String nickname = request.getParameter("nickname");
+        String name = request.getParameter("nickname");
+        String industry = request.getParameter("industry");
+        String address = request.getParameter("address");
+        String password = request.getParameter("password");
 
-        DBManager conndb=new DBManager();
-        Connection conn=conndb.getConnection();
-        String sql="update occupy_company set nickname=?,password=?,name=?,industry=?,telephone=?,address=? where nickname=? AND password=?";
+        DBManager conndb = new DBManager();
+        Connection conn = conndb.getConnection();
+        String sql = "update occupy_company set nickname=?,password=?,name=?,industry=?,telephone=?,address=? where nickname=? AND password=?";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, nickname);
@@ -84,16 +90,16 @@ public class Enterprise {
             ps.setString(7, nickname);
             ps.setString(8, password);
             boolean tag = ps.execute();
-            if(!tag){
+            if (!tag) {
                 String str = "{\"msg\":\"modify_user_success\"}";
                 response.getWriter().print(str);
-                response.getWriter().flush();;
-                response.getWriter().close();;
-            }else{
+                response.getWriter().flush();
+                response.getWriter().close();
+            } else {
                 String str = "{\"msg\":\"modify_user_fail\"}";
                 response.getWriter().print(str);
-                response.getWriter().flush();;
-                response.getWriter().close();;
+                response.getWriter().flush();
+                response.getWriter().close();
             }
             ps.close();
             conn.close();
@@ -102,8 +108,8 @@ public class Enterprise {
             e.printStackTrace();
         }
     }
-    public void initJob(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+
+    public void initJob(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/xml; charset=UTF-8");
         // 以下两句为取消在本地的缓存
@@ -111,7 +117,6 @@ public class Enterprise {
         response.setHeader("Pragma", "no-cache");
         String nickname = request.getParameter("nickname");
         String password = request.getParameter("password");
-        System.out.println(nickname);
         DBManager conndb = new DBManager();
         Connection conn = conndb.getConnection();
         try {
@@ -143,47 +148,54 @@ public class Enterprise {
         }
 
     }
+
     public void addJob(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/xml; charset=UTF-8");
         //以下两句为取消在本地的缓存
         response.setHeader("Cache-Control", "no-cache");
         response.setHeader("Pragma", "no-cache");
+        String nickname = request.getParameter("nickname");
+        String password = request.getParameter("password");
+        Random random = new Random();
+        String identification = nickname + password + random.nextInt(50);
+        String name = request.getParameter("name");
+        String address = request.getParameter("address");
+        String industry = request.getParameter("industry");
+        String position = request.getParameter("job_name");
+        String number = request.getParameter("number");
+        String salary = request.getParameter("salary");
+        String publish_time = request.getParameter("publish_time");
+        String effective_time = request.getParameter("effective_time");
+        String telephone = request.getParameter("telephone");
+        String email = request.getParameter("email");
 
-        String name=request.getParameter("name");
-        String address=request.getParameter("address");
-        String industry=request.getParameter("industry");
-        String job=request.getParameter("job_name");
-        String number=request.getParameter("number");
-        String salary=request.getParameter("salary");
-        String publish_time=request.getParameter("publish_time");
-        String effective_time=request.getParameter("effective_time");
-        String telephone=request.getParameter("telephone");
-        String email=request.getParameter("email");
-
-        DBManager conndb=new DBManager();
-        Connection conn=conndb.getConnection();
-        String sql="insert into occupy_jobs (telephone,name,address,industry,job,number,salary,publish_time,"
-                + "effective_time,email) values(?,?,?,?,?,?,?,?,?,?)";
+        DBManager conndb = new DBManager();
+        Connection conn = conndb.getConnection();
+        String sql = "insert into job (identification,nickname,password,name,address,industry,position,number,salary,publish_time,"
+                + "effective_time,email,telephone) values(?,?,?,?,?,?,?,?,?,?,?,?,?)";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1, telephone);
-            ps.setString(2, name);
-            ps.setString(3, address);
-            ps.setString(4,industry);
-            ps.setString(5, job);
-            ps.setString(6, number);
-            ps.setString(7, salary);
-            ps.setString(8, publish_time);
-            ps.setString(9, effective_time);
-            ps.setString(10, email);
+            ps.setString(1, identification);
+            ps.setString(2, nickname);
+            ps.setString(3, password);
+            ps.setString(4, name);
+            ps.setString(5, address);
+            ps.setString(6, industry);
+            ps.setString(7, position);
+            ps.setString(8, number);
+            ps.setString(9, salary);
+            ps.setString(10, publish_time);
+            ps.setString(11, effective_time);
+            ps.setString(12, email);
+            ps.setString(13, telephone);
             int tag = ps.executeUpdate();
-            if(tag==1){
+            if (tag == 1) {
                 String str = "{\"msg\":\"add_job_success\"}";
                 response.getWriter().print(str);
                 response.getWriter().flush();
                 response.getWriter().close();
-            }else{
+            } else {
                 String str = "{\"msg\":\"add_job_fail\"}";
                 response.getWriter().print(str);
                 response.getWriter().flush();
@@ -197,4 +209,119 @@ public class Enterprise {
         }
     }
 
+    public void manageJob(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/xml; charset=UTF-8");
+        // 以下两句为取消在本地的缓存
+        response.setHeader("Cache-Control", "no-cache");
+        response.setHeader("Pragma", "no-cache");
+        String nickname = request.getParameter("nickname");
+        String password = request.getParameter("password");
+        DBManager conndb = new DBManager();
+        Connection conn = conndb.getConnection();
+        List<Job> jobList = new ArrayList<>();
+        try {
+            String sql = "select identification,name,address,industry,position,number,salary,publish_time,effective_time from job where (nickname=? and password=?)";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, nickname);
+            ps.setString(2, password);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Job job=new Job();
+                job.setIdentification(rs.getString(1));
+                job.setName(rs.getString(2));
+                job.setAddress(rs.getString(3));
+                job.setIndustry(rs.getString(4));
+                job.setPosition(rs.getString(5));
+                job.setNumber(rs.getString(6));
+                job.setSalary(rs.getString(7));
+                job.setPublish_time(rs.getString(8));
+                job.setEffective_time(rs.getString(9));
+                jobList.add(job);
+            }
+            response.getWriter().print(JSONArray.fromObject(jobList).toString());
+            rs.close();
+            ps.close();
+            conn.close();
+        } catch (SQLException e) {
+            // TODO 自动生成的 catch 块
+            e.printStackTrace();
+        }
+
+    }
+
+    public void modifyJob(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/xml; charset=UTF-8");
+        //以下两句为取消在本地的缓存
+        response.setHeader("Cache-Control", "no-cache");
+        response.setHeader("Pragma", "no-cache");
+        String identification = request.getParameter("identification");
+        String address = request.getParameter("address");
+        String number = request.getParameter("number");
+        String salary = request.getParameter("salary");
+        String effective_time = request.getParameter("effective_time");
+
+        DBManager conndb = new DBManager();
+        Connection conn = conndb.getConnection();
+        String sql = "UPDATE job SET address=?,number=?,salary=?,effective_time=? WHERE identification=?";
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1,address);
+            ps.setString(2,number);
+            ps.setString(3,salary);
+            ps.setString(4,effective_time);
+            ps.setString(5,identification);
+            int tag = ps.executeUpdate();
+            if (tag == 1) {
+                String str = "{\"msg\":\"modify_job_success\"}";
+                response.getWriter().print(str);
+                response.getWriter().flush();
+                response.getWriter().close();
+            } else {
+                String str = "{\"msg\":\"modify_job_fail\"}";
+                response.getWriter().print(str);
+                response.getWriter().flush();
+                response.getWriter().close();
+            }
+            ps.close();
+            conn.close();
+        } catch (SQLException e) {
+            // TODO 自动生成的 catch 块
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteJob(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/xml; charset=UTF-8");
+        // 以下两句为取消在本地的缓存
+        response.setHeader("Cache-Control", "no-cache");
+        response.setHeader("Pragma", "no-cache");
+        String identification = request.getParameter("identification");
+        DBManager conndb = new DBManager();
+        Connection conn = conndb.getConnection();
+        try {
+            String sql = "DELETE job WHERE identification=?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, identification);
+            int tag = ps.executeUpdate();
+            if (tag == 1) {
+                String str = "{\"msg\":\"delete_job_success\"}";
+                response.getWriter().print(str);
+                response.getWriter().flush();
+                response.getWriter().close();
+            } else {
+                String str = "{\"msg\":\"delete_job_fail\"}";
+                response.getWriter().print(str);
+                response.getWriter().flush();
+                response.getWriter().close();
+            }
+            ps.close();
+            conn.close();
+        } catch (SQLException e) {
+            // TODO 自动生成的 catch 块
+            e.printStackTrace();
+        }
+    }
 }
