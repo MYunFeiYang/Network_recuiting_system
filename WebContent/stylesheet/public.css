@@ -3,7 +3,7 @@
     html {
         font-size: 62.5%;
     }
-    #job_class,#filter_address,#filter_position{
+    #industry,#address,#position{
         margin: 5px 0;
         width: 100%;
         height: 60px;
@@ -12,7 +12,7 @@
         box-shadow: 1px 1px 1px 1px gainsboro;
         background: rgba(255,255,255,0.5);
     }
-    #job_class ul li{
+    #industry ul li{
         float: left;
     }
 }
@@ -21,7 +21,7 @@
     html{
         font-size: 62.5%;
     }
-    #job_class,#filter_address,#filter_position{
+    #industry,#address,#position{
         margin: 5px 0;
         width: 100%;
         height: 60px;
@@ -30,7 +30,7 @@
         box-shadow: 1px 1px 1px 1px gainsboro;
         background: rgba(255,255,255,0.5);
     }
-    #job_class ul li{
+    #industry ul li{
         float: left;
     }
 }
@@ -39,7 +39,7 @@
     html{
         font-size: 80%;
     }
-    #job_class ul li{
+    #industry ul li{
        padding: 5px;
     }
 }
@@ -59,7 +59,7 @@ body{
     overflow-y: auto;
     background: rgba(255,255,255, 0.1);
 }
-.marquee ul ,.marquee,#filter ul li,#job_class ul li,#hotRecurit ul li{
+.marquee ul ,.marquee,#filter ul li,#industry ul li,#hotRecurit ul li{
     list-style: none;
     padding: 1px 5px;
 }
@@ -74,33 +74,33 @@ body{
     background: rgba(255,255,255, 0.5);
 }
 
-#job_class,#filter_position,#filter_address{
+#industry,#position,#address{
     display: block;
     background: rgba(220,220,220,0.8);
 }
-#job_class ul,#filter_position ul,#filter_address ul{
+#industry ul,#position ul,#address ul{
     padding-left: 0;
 }
-#job_class ul li,#filter_position ul li,#filter_address ul li{
+#industry ul li,#position ul li,#address ul li{
     margin: 5px;
     text-align: center;
     padding:0;
     box-shadow: 1px 1px 1px 1px gainsboro;
     border-radius: 5px;
 }
-#job_class ul li:hover,#filter_position ul li:hover,#filter_address ul li:hover{
+#industry ul li:hover,#position ul li:hover,#address ul li:hover{
     background-color: white;
 }
-#job_class ul li a{
+#industry ul li a{
     display: inline-block;
     width: auto;
     font-size: 1.5rem;
 }
-#filter ul li a,#job_class a{
+#filter ul li a,#industry a{
     text-decoration: none;
     color: black;
 }
-#filter_position ul li,#filter_address ul li{
+#position ul li,#address ul li{
     float: left;
 }
 table tbody tr{

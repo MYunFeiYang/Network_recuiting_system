@@ -1,8 +1,10 @@
 "use strict";
-let job_class;
-let filter_address;
-let filter_position;
-let company;
+let n_industry;
+let n_address;
+let n_position;
+let n_company;
+let ul;
+let li;
 function get_news(user_type) {
     let user = {};
     user.user_type = user_type;
@@ -54,10 +56,10 @@ function query_industry() {
 }
 
 function insert_industry(data) {
-    job_class = document.getElementById("industry");
-    job_class.innerHTML = "";
+    n_industry = document.getElementById("industry");
+    n_industry.innerHTML = "";
     let ul = document.createElement("ul");
-    job_class.appendChild(ul);
+    n_industry.appendChild(ul);
     for (let i = 0; i < data.length; i++) {
         let href = data[i].href;
         let text = data[i].text;
@@ -69,9 +71,9 @@ function insert_industry(data) {
         a.setAttribute("href", href);
         a.setAttribute("onclick", "return false");
         li.onclick = function () {
-            change_checked(event, 'job_class');
-            get_address(insert_filter_address);
-            query_filter_position(this.innerText)
+            change_checked(event, 'industry');
+            get_address(insert_address);
+            query_position(this.innerText)
         };
     }
     ul.children[0].setAttribute("class", "checked");
@@ -91,13 +93,13 @@ function get_address(event) {
     });
 }
 
-function insert_filter_address(data) {
+function insert_address(data) {
     document.getElementById("filter").style.display = "block";
-    filter_address = document.getElementById("filter_address");
-    filter_address.classList.remove("hidden");
-    filter_address.innerHTML = "";
+    n_address = document.getElementById("address");
+    n_address.classList.remove("hidden");
+    n_address.innerHTML = "";
     let ul = document.createElement("ul");
-    filter_address.appendChild(ul);
+    n_address.appendChild(ul);
     for (let i = 0; i < data.length; i++) {
         let href = data[i].href;
         let text = data[i].text;
@@ -106,7 +108,7 @@ function insert_filter_address(data) {
         let a = document.createElement("a");
         li.appendChild(a);
         li.onclick=function(){
-            change_checked(event,'filter_address');
+            change_checked(event,'address');
             paging(1);
         };
         a.setAttribute("href", href);
@@ -116,7 +118,7 @@ function insert_filter_address(data) {
     ul.children[0].setAttribute("class", "checked");
 }
 
-function query_filter_position(text) {
+function query_position(text) {
     let job = {};
     job.job_name = text;
     $.ajax({
@@ -125,7 +127,7 @@ function query_filter_position(text) {
         data: job,
         dataType: "JSON",
         success: function (data) {
-            insert_filter_position(data);
+            insert_position(data);
         },
         fail: function () {
 
@@ -133,19 +135,19 @@ function query_filter_position(text) {
     });
 }
 
-function insert_filter_position(data) {
+function insert_position(data) {
     document.getElementById("filter").style.display = "block";
-    filter_position = document.getElementById("filter_position");
-    filter_position.classList.remove("hidden");
-    filter_position.innerHTML = "";
+    n_position = document.getElementById("position");
+    n_position.classList.remove("hidden");
+    n_position.innerHTML = "";
     let ul = document.createElement("ul");
-    filter_position.appendChild(ul);
+    n_position.appendChild(ul);
     if (data.length>0) {
         for (let i = 0; i < data.length; i++) {
             let li = document.createElement("li");
             ul.appendChild(li);
             li.onclick = function () {
-                change_checked(event, 'filter_position');
+                change_checked(event, 'position');
                 paging(1);
             };
             li.innerHTML = data[i].position;
@@ -158,18 +160,18 @@ function paging(pageNum) {
     let page = {};
     page.pageSize = 12;
     page.pageNum = pageNum;
-    filter_position = document.getElementById("filter_position");
-    let position = filter_position.getElementsByTagName("li");
-    for (let i = 0; i < position.length; i++) {
-        if (position[i].classList.toString().indexOf("checked") !== -1) {
-            page.position = position[i].firstChild.text;
+    n_position = document.getElementById("position");
+    li = position.getElementsByTagName("li");
+    for (let i = 0; i < li.length; i++) {
+        if (li[i].classList.toString().indexOf("checked") !== -1) {
+            page.position = li[i].firstChild.text;
         }
     }
-    filter_address = document.getElementById("filter_address");
-    let address = filter_address.getElementsByTagName("li");
-    for (let i = 0; i < address.length; i++) {
-        if (address[i].classList.toString().indexOf("checked") !== -1) {
-            page.address = address[i].firstChild.text;
+    n_address = document.getElementById("address");
+    li = n_address.getElementsByTagName("li");
+    for (let i = 0; i < li.length; i++) {
+        if (li[i].classList.toString().indexOf("checked") !== -1) {
+            page.address = li[i].firstChild.text;
         }
     }
     $.ajax({
@@ -189,7 +191,7 @@ function paging(pageNum) {
 function pagingResult(data) {
     let start = data[0].start;
     let end = data[0].end;
-    let ul = document.getElementsByClassName("pagination")[0];
+    ul = document.getElementsByClassName("pagination")[0];
     ul.innerHTML = "";
     for (let i = start; i <= end; i++) {
         let li = document.createElement("li");
@@ -200,15 +202,15 @@ function pagingResult(data) {
         a.text = i;
     }
     let list = data[0].list;
-    company = document.getElementById("company");
-    company.innerHTML = "";
+    n_company = document.getElementById("company");
+    n_company.innerHTML = "";
     for (let i = 0; i < list.length; i++) {
         let tr = document.createElement("tr");
         let td1 = document.createElement("td");
         let td2 = document.createElement("td");
         let td3 = document.createElement("td");
         let td4 = document.createElement("td");
-        company.appendChild(tr);
+        n_company.appendChild(tr);
         tr.appendChild(td1);
         tr.appendChild(td2);
         tr.appendChild(td3);
@@ -235,8 +237,8 @@ function pagingResult(data) {
 }
 
 function change_checked(event, id) {
-    let job_class = document.getElementById(id);
-    let ul = job_class.getElementsByTagName("ul");
+    let industry = document.getElementById(id);
+    let ul = industry.getElementsByTagName("ul");
     let li = ul[0].getElementsByTagName("li");
     let i = 0;
     for (; i < li.length; i++) {

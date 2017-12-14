@@ -119,7 +119,7 @@ function login_session_result(data) {
             modify_user.text="修改注册信息";
             modify_user.setAttribute("data-toggle","modal");
             modify_user.setAttribute("data-target","#register-enterprise");
-            modify_user.setAttribute("onclick","modify_user_enterprise()");
+            modify_user.onclick=modify_user_enterprise();
             let add_job=document.createElement("li");
             let add_job_a=document.createElement("a");
             user_center.appendChild(add_job);

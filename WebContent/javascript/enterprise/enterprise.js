@@ -43,7 +43,7 @@ function modify_user_enterprise() {
     document.getElementById("myregister-enterprise").innerHTML = "修改企业注册信息";
     document.getElementById("enterprise_telephone_group").style.display = "none";
     document.getElementById("reg_btu").value = "提交修改";
-    document.getElementById("reg_btu").setAttribute("onclick", "modify_enterprise()");
+    document.getElementById("reg_btu").setAttribute("onclick","modify_enterprise()");
 }
 
 function modify_enterprise() {

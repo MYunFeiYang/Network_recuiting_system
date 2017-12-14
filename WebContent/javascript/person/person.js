@@ -1,4 +1,5 @@
 "use strict";
+let n_confirm_box_p;
 function register_person() {
     let user={};
     user.nickname=document.getElementById("person_nickname").value;
@@ -6,10 +7,6 @@ function register_person() {
     user.name=document.getElementById("person_name").value;
     user.telephone=document.getElementById("person_telephone").value;
     user.email=document.getElementById("person_email").value;
-    //alert(JSON.stringify(user));
-    ajax_register(user);
-}
-function ajax_register(user) {
     $.ajax({
         url:"/person?person=register",
         data:user,
@@ -17,19 +14,15 @@ function ajax_register(user) {
         type:"POST",
         dataType:"JSON",
         success:function (data) {
-            register_result(data);
-            //setTimeout('register_success(data)', 3000);
+            if (data.msg==="success"){
+                n_confirm_box_p=document.getElementById("register-person");
+                n_confirm_box_p.getElementsByClassName("modal-content")[0].innerHTML="注册成功";
+            }
         },
         fail:function (data) {
             alert(data);
         },
     });
-}
-function register_result(data) {
-    if (data.msg==="success"){
-        let div=document.getElementById("register-person");
-        div.getElementsByClassName("modal-content")[0].innerHTML="注册成功";
-    }
 }
 function modify_user_person() {
     document.getElementById("myregister-person").innerHTML="修改个人注册信息";
@@ -47,56 +40,46 @@ function modify_person() {
     modify_user.telephone=telephone;
     modify_user.nickname=nickname;
     modify_user.password=password;
-    modify_person_ajax(modify_user);
-}
-function modify_person_ajax(user) {
     $.ajax({
         url: '/person?person=modifyUser',
-        data: user,
+        data: modify_user,
         type: 'POST',
         dataType: 'JSON',
         success: function (data) {
-            modify_person_result(data,"confirm_person_box");
+            n_confirm_box_p=document.getElementById(confirm_info_box);
+            if (data.msg==="modify_user_success"){
+                n_confirm_box_p.innerHTML="信息修改成功";
+                n_confirm_box_p.setAttribute("class","alert-success");
+            }else {
+                n_confirm_box_p.innerHTML="信息修改失败";
+                n_confirm_box_p.setAttribute("class","alert-warning");
+            }
         },
         fail: function () {
 
         }
     })
 }
-function modify_person_result(data,confirm_info_box) {
-    let m_confirm_info_box=document.getElementById(confirm_info_box);
-    if (data.msg==="modify_user_success"){
-        m_confirm_info_box.innerHTML="信息修改成功";
-        m_confirm_info_box.setAttribute("class","alert-success");
-    }else {
-        m_confirm_info_box.innerHTML="信息修改失败";
-        m_confirm_info_box.setAttribute("class","alert-warning");
-    }
-}
 function init_resume() {
     document.getElementById("resume").style.display = "block";
     let user_string = document.cookie.split(";")[0].split("=")[1];
     let user = JSON.parse(user_string);
-    init_resume_ajax(user);
-}
-function init_resume_ajax(user) {
     $.ajax({
         url: '/person?person=initResume',
         data: user,
         type: 'POST',
         dataType: 'JSON',
         success: function (data) {
-            init_resume_result(data);
+            if (data.length>0) {
+                document.getElementById("resume_name").value = data.name;
+                document.getElementById("telephone").value = data.telephone;
+                document.getElementById("resume_email").value = data.email;
+            }
         },
         fail: function () {
 
         }
     })
-}
-function init_resume_result(data) {
-    document.getElementById("resume_name").value = data.name;
-    document.getElementById("telephone").value = data.telephone;
-    document.getElementById("resume_email").value = data.email;
 }
 function add_resume() {
     let user_string = document.cookie.split(";")[0].split("=")[1];
@@ -114,29 +97,29 @@ function add_resume() {
     let graduation_data = document.getElementById("graduation_data").value;
     let telephone = document.getElementById("telephone").value;
     let email = document.getElementById("resume_email").value;
-    let confirm_resume_box = document.getElementById("confirm_resume_box");
+    n_confirm_box_p = document.getElementById("n_confirm_box_p");
     if (age === "") {
-        confirm_resume_box.innerHTML = "请输入年龄";
-        confirm_resume_box.setAttribute("class", "alert-warning");
+        n_confirm_box_p.innerHTML = "请输入年龄";
+        n_confirm_box_p.setAttribute("class", "alert-warning");
     } else if (origin === "") {
-        confirm_resume_box.innerHTML = "请输入籍贯";
-        confirm_resume_box.setAttribute("class", "alert-warning");
+        n_confirm_box_p.innerHTML = "请输入籍贯";
+        n_confirm_box_p.setAttribute("class", "alert-warning");
     } else if (collage === "") {
-        confirm_resume_box.innerHTML = "请输入毕业学校";
-        confirm_resume_box.setAttribute("class", "alert-warning");
+        n_confirm_box_p.innerHTML = "请输入毕业学校";
+        n_confirm_box_p.setAttribute("class", "alert-warning");
     } else if (specialty === "") {
-        confirm_resume_box.innerHTML = "请输入专业";
-        confirm_resume_box.setAttribute("class", "alert-warning");
+        n_confirm_box_p.innerHTML = "请输入专业";
+        n_confirm_box_p.setAttribute("class", "alert-warning");
     }  else if (admission_data === "") {
-        confirm_resume_box.innerHTML = "请输入入学时间";
-        confirm_resume_box.setAttribute("class", "alert-warning");
+        n_confirm_box_p.innerHTML = "请输入入学时间";
+        n_confirm_box_p.setAttribute("class", "alert-warning");
     } else if(graduation_data === "")
     {
-        confirm_resume_box.innerHTML = "请输入毕业时间";
-        confirm_resume_box.setAttribute("class", "alert-warning");
+        n_confirm_box_p.innerHTML = "请输入毕业时间";
+        n_confirm_box_p.setAttribute("class", "alert-warning");
     }else {
-        confirm_resume_box.innerHTML = "通过验证";
-        confirm_resume_box.setAttribute("class", "alert-success");
+        n_confirm_box_p.innerHTML = "通过验证";
+        n_confirm_box_p.setAttribute("class", "alert-success");
         let resume = {};
         resume.nickname = nickname;
         resume.password = password;
@@ -151,30 +134,24 @@ function add_resume() {
         resume.graduation_data = graduation_data;
         resume.telephone = telephone;
         resume.email = email;
-        add_resume_ajax(resume);
-    }
-}
-function add_resume_ajax(data) {
-    $.ajax({
-        url: '/person?person=addResume',
-        data: data,
-        type: 'POST',
-        dataType: 'JSON',
-        success: function (data) {
-            add_resume_result(data);
-        },
-        fail: function () {
+        $.ajax({
+            url: '/person?person=addResume',
+            data: resume,
+            type: 'POST',
+            dataType: 'JSON',
+            success: function (data) {
+                n_confirm_box_p=document.getElementById("n_confirm_box_p");
+                if (data.msg==="add_resume_success"){
+                    n_confirm_box_p.innerHTML="简历添加成功";
+                    n_confirm_box_p.setAttribute("class","alert-success");
+                }else {
+                    n_confirm_box_p.innerHTML="简历添加失败";
+                    n_confirm_box_p.setAttribute("class","alert-warning");
+                }
+            },
+            fail: function () {
 
-        }
-    })
-}
-function add_resume_result(data) {
-    let confirm_resume_box=document.getElementById("confirm_resume_box");
-    if (data.msg==="add_resume_success"){
-        confirm_resume_box.innerHTML="简历添加成功";
-        confirm_resume_box.setAttribute("class","alert-success");
-    }else {
-        confirm_resume_box.innerHTML="简历添加失败";
-        confirm_resume_box.setAttribute("class","alert-warning");
+            }
+        })
     }
 }

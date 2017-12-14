@@ -41,12 +41,11 @@ iframe{
     border-radius: 5px;
     margin-bottom: 2px;
 }
-.modal{
-    margin-top: 20px;
+.modal-dialog{
+    width: 360px;
 }
 .modal-content{
-    background-color: gainsboro;
-    opacity: 0.9;
+    background: rgba(255,255,255,0.6);
 }
 #preselected_search ul li{
     list-style: none;
