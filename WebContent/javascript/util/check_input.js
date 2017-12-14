@@ -73,7 +73,7 @@ function reg_pwd(password,confirm_box) {
 }
 function reg_telephone(telephone,confirm_box) {
     c_telephone=document.getElementById(telephone).value;
-    let mPattern = /^1[3|4|5|8][0-9]\d{4,8}$/;
+    let mPattern = '/^1[3|4|5|8][0-9]\d{4,8}$/';
     n_confirm_box_c=document.getElementById(confirm_box);
     if (mPattern.test(c_telephone)){
         n_confirm_box_c.innerHTML="";
@@ -99,7 +99,7 @@ function reg_email(email,confirm_box) {
         return btu_register_status=true;
     }else {
         n_confirm_box_c.setAttribute("style","color:red");
-        n_confirm_box_c.innerHTML="请输入正确邮箱";
+        n_confirm_box_c.innerHTML="请输入email邮箱";
         return btu_register_status=false;
     }
 }

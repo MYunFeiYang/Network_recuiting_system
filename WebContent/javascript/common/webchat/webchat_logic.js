@@ -1,10 +1,11 @@
 "use strict";
 //向客户端发送消息，这里定义了一些参数用来设置消息的颜色字体，不过暂时没用到有兴趣的可以自己实现
+let name;
 function emit() {
 
     //encodeScript方法用来转义<>标签，防止脚本输入，方法内容在core.js里面
     let text = encodeScript($("#content").val());
-    if (text==""){
+    if (text===""){
 
     }else {
         let nickname=getnickname();
@@ -23,15 +24,17 @@ function emit() {
 }
 
 //按下回车键时触发发送消息方法
-document.onkeydown = function (event) {
-    var e = event || window.event || arguments.callee.caller.arguments[0];
-    if (e && e.keyCode == 13) { // enter 键
+document.onkeyup = function (e) {
+    if (window.event)//如果window.event对象存在，就以此事件对象为准
+        e = window.event;
+    let code = e.charCode || e.keyCode;
+    if (code === 13) {
         emit();
     }
 };
 //过滤信息
 function encodeScript(data) {
-    if (null == data || "" == data) {
+    if (null === data || "" === data) {
         return "";
     }
     return data.replace("<", "&lt;").replace(">", "&gt;");
@@ -39,7 +42,7 @@ function encodeScript(data) {
 
 function getnickname() {
     let user = document.cookie.split(";")[0].split("=")[1];
-    let name = JSON.parse(user).nickname;
+    name = JSON.parse(user).nickname;
     return name;
 }
 function refresh_online_list() {
@@ -53,16 +56,16 @@ function refresh_online_list() {
 }
 function show_status() {
     let status=document.getElementById("status");
-    if (socket.readyState==0){
+    if (socket.readyState===0){
         status.innerHTML="登录中";
         status.style.color="green"
-    }else if (socket.readyState==1){
+    }else if (socket.readyState===1){
         status.innerHTML="在线";
         status.style.color="green";
-    }else if (socket.readyState==2){
+    }else if (socket.readyState===2){
         status.innerHTML="断开中";
         status.style.color="red";
-    }else if (socket.readyState==3){
+    }else if (socket.readyState===3){
         status.innerHTML="离线";
         status.style.color="red";
     }

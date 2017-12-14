@@ -18,7 +18,7 @@
 <body>
 <div class="container-fluid">
     <div class="row" id="mylist">
-        <div class="col-md-2 col-lg-2 col-sm-3 col-xs-6 user_center">
+        <div class="col-md-2 col-lg-2 col-sm-3 col-xs-12 user_center">
             <ul>
                 <li onclick="show_status()">登录状态 <span id="status"></span></li>
                 <li type="button" onclick="init()">打开连接
@@ -52,7 +52,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-3 col-lg-3 col-sm-3 col-xs-6 person_list">
+        <div class="col-md-3 col-lg-3 col-sm-3 col-xs-12 person_list">
             <h2>在线人员列表</h2>
             <ul id="list">
 
@@ -64,8 +64,11 @@
             </div>
         </div>
     </div>
-    <button class="hidden" id="btu_left" onclick="mypre()"></button>
-    <button class="hidden" id="btu_right" onclick="mynext()"></button>
+    <div class="btn_group hidden">
+        <button onclick="Carousel_figure(0)">个人中心</button>
+        <button onclick="Carousel_figure(1)">聊天室</button>
+        <button onclick="Carousel_figure(2)">在线列表</button>
+    </div>
 </div>
 </body>
 <script>

@@ -276,9 +276,6 @@ function add_preselected_search_to_search(i) {
     let a=document.getElementById("preselected_search").children[0].children[i].children[0];
     document.getElementById("search-con").value=a.text;
 }
-function close_preselected_search() {
-    document.getElementById("preselected_search").style.display="none";
-}
 function query() {
     close_preselected_search();
     let search_con=document.getElementById("search-con").value;

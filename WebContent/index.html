@@ -18,9 +18,9 @@
     <script src="javascript/person/person.js"></script>
     <script src="javascript/enterprise/enterprise.js"></script>
 </head>
-<body id="top" onclick="close_share();close_search();close_preselected_search()">
+<body id="top" onclick="close_share()">
 <div class="container-fluid">
-    <nav class="navbar navbar-default">
+    <nav class="navbar navbar-default"  onmouseout="close_search()">
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
@@ -107,16 +107,14 @@
                         </ul>
                     </li>
                 </ul>
-                <form class="navbar-form navbar-right" role="search" id="search">
-                    <div class="form-group navbar-left">
-                        <input type="text" class="form-control" id="search-con" onkeyup="complete_content()"
-                               title="搜索">
-                        <div id="preselected_search" onkeyup="query()">
-                        </div>
+                <form class="navbar-form navbar-right hidden" role="search">
+                    <div class="form-group">
+                        <input type="text" title="搜索" class="form-control" id="search-con" onkeyup="complete_content()">
+                        <div id="preselected_search" onkeyup="query()"></div>
+                        <button type="button" class="navbar-right btn btn-default glyphicon glyphicon-search"
+                                onmouseover="open_search('search-con','550px')" onclick="query()">
+                        </button>
                     </div>
-                    <button type="button" class="navbar-right btn btn-default glyphicon glyphicon-search"
-                            onmouseover="open_search('search-con','550px')" onclick="query()">
-                    </button>
                 </form>
                 <div class="bdsharebuttonbox hidden">
                     <a class="bds_mshare" data-cmd="mshare"></a>
@@ -242,7 +240,7 @@
                                 <div id="confirm_person_box"></div>
                             </div>
                         </div>
-                        <div class="center-block" onmouseover="btu_able('person_reg_btu','confirm_person_box')">
+                        <div onmouseover="btu_able('person_reg_btu','confirm_person_box')">
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="input-group">
@@ -250,7 +248,7 @@
                         <button type="button" class="btn btn-default glyphicon glyphicon-user">用户昵称</button>
                     </span>
                                         <input type="text" class="form-control" id="person_nickname" placeholder="用户名"
-                                               onmouseout="reg_username('person_nickname','btu_person_username')">
+                                               onkeyup="reg_username('person_nickname','btu_person_username')">
                                         <span class="input-group-btn">
                         <button type="button" class="btn btn-default " id="btu_person_username">填</button>
                     </span>
@@ -265,7 +263,7 @@
                     </span>
                                         <input type="password" class="form-control" id="person_password"
                                                placeholder="密码"
-                                               onmouseout="reg_pwd('person_password','btu_person_password')">
+                                               onkeyup="reg_pwd('person_password','btu_person_password')">
                                         <span class="input-group-btn">
                         <button type="button" class="btn btn-default " id="btu_person_password">完</button>
                     </span>
@@ -280,7 +278,7 @@
                     </span>
                                         <input type="password" class="form-control" id="person_confirm_password"
                                                placeholder="确认密码"
-                                               onmouseout="conf_pwd('person_password','person_confirm_password','btu_person_conf_password')">
+                                               onkeyup="conf_pwd('person_password','person_confirm_password','btu_person_conf_password')">
                                         <span class="input-group-btn">
                         <button type="button" class="btn btn-default" id="btu_person_conf_password">整</button>
                     </span>
@@ -304,7 +302,7 @@
                         <button type="button" class="btn btn-default glyphicon glyphicon-erase">电子邮件</button>
                     </span>
                                         <input type="email" class="form-control" placeholder="电子邮件"
-                                               onmouseout="reg_email('person_email','btu_person_email')"
+                                               onkeyup="reg_email('person_email','btu_person_email')"
                                                id="person_email">
                                         <span class="input-group-btn">
                         <button type="button" class="btn btn-default " id="btu_person_email">@</button>
@@ -323,7 +321,7 @@
                         <button type="button" class="btn btn-default glyphicon glyphicon-envelope">手机号码</button>
                     </span>
                                         <input type="text" class="form-control" id="person_telephone" placeholder="手机号码"
-                                               onmouseout="reg_telephone('person_telephone','btu_person_telephone')">
+                                               onkeyup="reg_telephone('person_telephone','btu_person_telephone')">
                                         <span class="input-group-btn">
                         <button type="button" class="btn btn-default " id="btu_person_telephone">哦</button>
                     </span>
@@ -374,7 +372,7 @@
                         <button type="button" class="btn btn-default glyphicon glyphicon-user">&nbsp;用户名</button>
                     </span>
                                     <input type="text" class="form-control" id="enterprise_nickname" placeholder="用户名"
-                                           onmouseout="reg_username('enterprise_nickname','btu_enterprise_username')">
+                                           onkeyup="reg_username('enterprise_nickname','btu_enterprise_username')">
                                     <span class="input-group-btn">
                         <button type="button" class="btn btn-default" id="btu_enterprise_username">填</button>
                     </span>
@@ -388,7 +386,7 @@
                         <button type="button" class="btn btn-default glyphicon glyphicon-lock">密&nbsp;&nbsp;码</button>
                     </span>
                                     <input type="password" class="form-control" placeholder="密码"
-                                           onmouseout="reg_pwd('enterprise_password','btu_enterprise_password')"
+                                           onkeyup="reg_pwd('enterprise_password','btu_enterprise_password')"
                                            id="enterprise_password">
                                     <span class="input-group-btn">
                         <button type="button" class="btn btn-default" id="btu_enterprise_password">完</button>
@@ -404,7 +402,7 @@
                     </span>
                                     <input type="password" class="form-control" id="confirm_enterprise_password"
                                            placeholder="确认密码"
-                                           onmouseout="conf_pwd('enterprise_password','confirm_enterprise_password','btu_enterprise_conf_password')">
+                                           onkeyup="conf_pwd('enterprise_password','confirm_enterprise_password','btu_enterprise_conf_password')">
                                     <span class="input-group-btn">
                         <button type="button" class="btn btn-default" id="btu_enterprise_conf_password">整</button>
                     </span>
@@ -440,7 +438,7 @@
                         <button type="button" class="btn btn-default glyphicon glyphicon-erase">电子邮箱</button>
                     </span>
                                     <input type="email" class="form-control" placeholder="电子邮箱"
-                                           onmouseout="reg_email('enterprise_email','btu_enterprise_email')"
+                                           onkeyup="reg_email('enterprise_email','btu_enterprise_email')"
                                            id="enterprise_email">
                                     <span class="input-group-btn">
                         <button type="button" class="btn btn-default " id="btu_enterprise_email">@</button>
@@ -460,7 +458,7 @@
                         <button type="button" class="btn btn-default glyphicon glyphicon-envelope">手机电话</button>
                     </span>
                                     <input type="text" class="form-control" placeholder="手机电话"
-                                           onmouseout="reg_telephone('enterprise_telephone','btu_enterprise_telephone')"
+                                           onkeyup="reg_telephone('enterprise_telephone','btu_enterprise_telephone')"
                                            id="enterprise_telephone">
                                     <span class="input-group-btn">
                         <button type="button" class="btn btn-default" id="btu_enterprise_telephone">哦</button>
@@ -805,15 +803,17 @@
             </div>
         </div>
     </div>
-    <iframe frameborder="0" marginheight="0" src="">
-
-    </iframe>
+    <div class="row">
+        <div class="col-md-12">
+            <iframe frameborder="0" marginheight="0" src=""></iframe>
+        </div>
+    </div>
     <div id="toTop">
         <a href="#top"></a>
     </div>
-    <footer id="footer">
+    <footer>
         <div class="row">
-            <div class="col-sm-3 col-md-3 col-lg-3 hidden-xs">
+            <div class="col-md-3 col-lg-3 hidden-xs hidden-sm">
                 <address>
                     Written by <a target="_blank"
                                   href="https://github.com/MYunFeiYang/Network_recuiting_system">think道</a><br>
@@ -823,15 +823,15 @@
                     CHINA
                 </address>
             </div>
-            <div class="col-sm-3 col-md-3 col-lg-3 hidden-xs">
+            <div class="col-md-3 col-lg-3 hidden-xs hidden-sm">
                 <address>
                     网站运营：<br>
-                    <a target="_blank" href="http://www.chinaz.com/tags/yunyinggongju.shtml">站长之家</a><br>
+                    <a target="_blank" href="http://tool.chinaz.com/">站长工具</a><br>
                     <a target="_blank" href="http://union.baidu.com/">百度联盟</a><br>
                     CHINA
                 </address>
             </div>
-            <div class="col-sm-3 col-md-3 col-lg-3 hidden-xs">
+            <div class="col-md-3 col-lg-3 hidden-xs hidden-sm">
                 <address>
                     项目部署：<br>
                     <a target="_blank" href="https://www.aliyun.com/">阿里云计算</a><br>
@@ -839,11 +839,11 @@
                     CHINA
                 </address>
             </div>
-            <div class="col-sm-3 col-md-3 col-lg-3 hidden-xs">
+            <div class="col-md-3 col-lg-3 hidden-xs hidden-sm">
                 <address>
                     友情链接：<br>
                     <a target="_blank" href="http://v3.bootcss.com/">bootstrap中文网</a><br>
-                    <a target="_blank" href="http://glyphicons.com/">Glyphicons </a>Halflings字体图标<br>
+                    <a target="_blank" href="http://glyphicons.com/">Halflings字体图标</a><br>
                     CHINA
                 </address>
             </div>

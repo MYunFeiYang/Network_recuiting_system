@@ -1,12 +1,13 @@
 "use strict";
 //创建一个连接，这里的参数是服务端的链接
-let socket=new WebSocket("ws://localhost/init");
+let socket = new WebSocket("ws://localhost/init");
 $(function () {
     //初始化加载listen方法
     listen();
 });
+
 function init() {
-    if (socket.readyState===1) {
+    if (socket.readyState === 1) {
 
     } else {
         socket = new WebSocket("ws://localhost/init");
@@ -30,7 +31,10 @@ function listen() {
     //打开连接时触发
     socket.onopen = function () {
         let nickname = getnickname();
-        let msg = {"nickname": nickname};
+        let msg = {
+            "nickname": nickname,
+            "message": ""
+        };
         socket.send(JSON.stringify(msg));
         show_system_message_to_self("欢迎加入群聊");
     };
@@ -41,10 +45,10 @@ function listen() {
             //展示在线列表
             show_online_list(data);
         } else if (Object.prototype.toString.call(data) === "[object Object]") {
-            if (data.nickname===undefined){
+            if (data.nickname === undefined) {
                 //系统消息
                 show_system_message(data);
-            }else {
+            } else {
                 //群发消息
                 show_chat_message(data);
             }

@@ -5,6 +5,7 @@ function open_search(target,width) {
 function close_search() {
     document.getElementById("search-con").value="";
     document.getElementById("search-con").style.width="40px";
+    document.getElementById("preselected_search").style.display="none";
 }
 
 function open_share() {

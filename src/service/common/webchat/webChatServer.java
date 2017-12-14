@@ -15,7 +15,7 @@ public class webChatServer {
     // 静态变量，用来记录当前在线连接数。应该把它设计成线程安全的。
     private  static final AtomicInteger onlineCount = new AtomicInteger(0);
     // concurrent包的线程安全Set，用来存放每个客户端对应的MyWebSocket对象。若要实现服务端与单一客户端通信的话，可以使用Map来存放，其中Key可以为用户标识
-    private static CopyOnWriteArraySet<webChatServer> webSocketSet = new CopyOnWriteArraySet<webChatServer>();
+    private static CopyOnWriteArraySet<webChatServer> webSocketSet = new CopyOnWriteArraySet<>();
     //定义一个记录客户端的聊天nickname
     private String nickname;
     // 与某个客户端的连接会话，需要通过它来给客户端发送数据
@@ -48,7 +48,7 @@ public class webChatServer {
         //请求最新在线列表（refresh）
         try{
             //如果信息中有message字段则是群聊信息
-            if (message.indexOf("message")==-1){
+            if (message.contains("message")){
                 for (webChatServer w:webSocketSet){
                     if (w.session==session){
                         JSONObject jsonObject=JSONObject.fromObject(message);
@@ -62,7 +62,7 @@ public class webChatServer {
                     }
                 }
             }else {
-                if (message.indexOf("refresh")!=-1) {
+                if (message.contains("refresh")) {
                     session.getBasicRemote().sendText(users.toString());
                 }else {
                     broadcast(message);
@@ -89,7 +89,7 @@ public class webChatServer {
         for(webChatServer w:webSocketSet){
             try {
                 synchronized (webChatServer.class) {
-                    if (w.nickname!=nickname) {
+                    if (!w.nickname.equals(nickname)) {
                         w.session.getBasicRemote().sendText(info);
                     }
                 }
@@ -97,7 +97,9 @@ public class webChatServer {
                 webSocketSet.remove(w);
                 try {
                     w.session.close();
-                } catch (IOException e1) {}
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
                 JSONObject message=new JSONObject();
                 message.put("message",w.nickname+"断开了连接");
                 broadcast(message.toString());
@@ -106,7 +108,7 @@ public class webChatServer {
         }
     }
     //对用户的消息可以做一些过滤请求，如屏蔽关键字等等。。。
-    public static String filter(String message){
+    private static String filter(String message){
         if(message==null){
             return null;
         }
@@ -118,13 +120,13 @@ public class webChatServer {
 //        t.printStackTrace();
         deleteUserFormJson(session);
     }
-    public void addNicknameToJson(String nickname,Session session){
+    private void addNicknameToJson(String nickname,Session session){
         JSONObject user=new JSONObject();
         user.element("session",session.toString());
         user.element("nickname",nickname);
         users.add(user);
     }
-    public void deleteUserFormJson(Session session){
+    private void deleteUserFormJson(Session session){
         for (int i=0;i<users.size();i++){
             if (session.toString().equals(users.getJSONObject(i).getString("session"))){
                 users.remove(users.getJSONObject(i));
