@@ -129,8 +129,8 @@ function login_session_result(data) {
             add_job_a.setAttribute("data-target","#jobs");
             add_job_a.onclick=function () {
                 init_job();
-                get_address();
-                get_industry();
+                get_address("address");
+                get_industry("industry");
             };
             let modify_job=document.createElement("li");
             let modify_job_a=document.createElement("a");

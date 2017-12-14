@@ -68,7 +68,7 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown" id="register_btu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                           aria-haspopup="true"
+                           aria-haspopup="true" onclick="get_industry('enterprise_industry');get_address('enterprise_address')"
                            aria-expanded="false">注册<span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li>
@@ -427,7 +427,9 @@
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-default glyphicon glyphicon-user">所属行业</button>
                     </span>
-                                    <input type="text" class="form-control" id="enterprise_industry" placeholder="所属行业">
+                                    <select class="form-control" id="enterprise_industry" title="所属行业">
+
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -472,8 +474,9 @@
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-default glyphicon glyphicon-modal-window">企业地址</button>
                     </span>
-                                    <input type="text" class="form-control" id="enterprise_address"
-                                           placeholder="企业地址">
+                                    <select class="form-control" id="enterprise_address" title="企业地址">
+
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -684,7 +687,7 @@
                     <span class="input-group-btn">
                         <button class="btn btn-default">所属行业</button>
                     </span>
-                                <select class="form-control" id="industry" onchange="get_position()" title="行业">
+                                <select class="form-control" id="industry" onchange="get_position('industry','position')" title="行业">
 
                                 </select>
                             </div>

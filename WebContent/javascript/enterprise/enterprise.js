@@ -1,7 +1,10 @@
 "use strict";
 let confirm_box = "confirm_enterprise_box";
 let n_confirm_box;
-let name;
+let n_industry;
+let n_address;
+let n_position;
+let c_name_e;
 let success_info;
 let fail_info;
 function register_enterprise() {
@@ -13,10 +16,6 @@ function register_enterprise() {
     company.telephone = document.getElementById("enterprise_telephone").value;
     company.email = document.getElementById("enterprise_email").value;
     company.address = document.getElementById("enterprise_address").value;
-    ajax_register_enterprise(company);
-}
-
-function ajax_register_enterprise(company) {
     $.ajax({
         url: "/enterprise?enterprise=register",
         data: company,
@@ -24,19 +23,14 @@ function ajax_register_enterprise(company) {
         type: "POST",
         dataType: "JSON",
         success: function (data) {
-            register_result_enterprise(data);
-            //setTimeout('register_success(data)', 3000);
+            if (data.msg === "success") {
+                location.href = "index.html";
+            }
         },
         fail: function (data) {
             alert(data);
         },
     });
-}
-
-function register_result_enterprise(data) {
-    if (data.msg === "success") {
-        location.href = "index.html";
-    }
 }
 
 function modify_user_enterprise() {
@@ -60,35 +54,27 @@ function modify_enterprise() {
     modify_user.industry = industry;
     modify_user.address = address;
     modify_user.password = password;
-    modify_enterprise_ajax(modify_user);
-}
-
-function modify_enterprise_ajax(user) {
     $.ajax({
         url: '/enterprise?enterprise=modifyUser',
-        data: user,
+        data: modify_user,
         type: 'POST',
         dataType: 'JSON',
         success: function (data) {
-            modify_enterprise_result(data);
+            n_confirm_box = document.getElementById(confirm_box);
+            if (data.msg === "modify_user_success") {
+                success_info = "信息修改成功";
+                n_confirm_box.innerHTML = success_info;
+                n_confirm_box.setAttribute("class", "alert-success");
+            } else {
+                fail_info = "信息修改失败";
+                n_confirm_box.innerHTML = fail_info;
+                n_confirm_box.setAttribute("class", "alert-warning");
+            }
         },
         fail: function () {
 
         }
     })
-}
-
-function modify_enterprise_result(data) {
-    n_confirm_box = document.getElementById(confirm_box);
-    if (data.msg === "modify_user_success") {
-        success_info = "信息修改成功";
-        n_confirm_box.innerHTML = success_info;
-        n_confirm_box.setAttribute("class", "alert-success");
-    } else {
-        fail_info = "信息修改失败";
-        n_confirm_box.innerHTML = fail_info;
-        n_confirm_box.setAttribute("class", "alert-warning");
-    }
 }
 
 function init_job() {
@@ -114,13 +100,19 @@ function init_job() {
     })
 }
 
-function get_address() {
+function get_address(address) {
     $.ajax({
         url: "/query/address",
         type: "POST",
         dataType: "JSON",
         success: function (data) {
-            infilling_address(data);
+            n_address = document.getElementById(address);
+            for (let i = 1; i < data.length; i++) {
+                let option = document.createElement("option");
+                n_address.appendChild(option);
+                option.value = data[i].text;
+                option.innerHTML = data[i].text;
+            }
         },
         fail: function () {
 
@@ -128,23 +120,19 @@ function get_address() {
     });
 }
 
-function infilling_address(data) {
-    let address = document.getElementById("address");
-    for (let i = 1; i < data.length; i++) {
-        let option = document.createElement("option");
-        address.appendChild(option);
-        option.value = data[i].text;
-        option.innerHTML = data[i].text;
-    }
-}
-
-function get_industry() {
+function get_industry(industry) {
     $.ajax({
         url: "/query/industry",
         type: "POST",
         dataType: "JSON",
         success: function (data) {
-            infilling_industry(data);
+            n_industry = document.getElementById(industry);
+            for (let i = 1; i < data.length; i++) {
+                let option = document.createElement("option");
+                n_industry.appendChild(option);
+                option.value = data[i].text;
+                option.innerHTML = data[i].text;
+            }
         },
         fail: function () {
 
@@ -152,43 +140,29 @@ function get_industry() {
     });
 }
 
-function infilling_industry(data) {
-    let position = document.getElementById("industry");
-    for (let i = 1; i < data.length; i++) {
-        let option = document.createElement("option");
-        position.appendChild(option);
-        option.value = data[i].text;
-        option.innerHTML = data[i].text;
-    }
-}
-
-function get_position() {
+function get_position(industry,position) {
     let job = {};
-    name = document.getElementById("industry").value;
-    job.job_name = name;
+    c_name_e = document.getElementById(industry).value;
+    job.job_name = c_name_e;
     $.ajax({
         url: "/query/position",
         type: "POST",
         data: job,
         dataType: "JSON",
         success: function (data) {
-            infilling_position(data);
+            n_position = document.getElementById(position);
+            n_position.innerHTML = "";
+            for (let i = 1; i < data.length; i++) {
+                let option = document.createElement("option");
+                n_position.appendChild(option);
+                option.value = data[i].position;
+                option.innerHTML = data[i].position;
+            }
         },
         fail: function () {
 
         }
     });
-}
-
-function infilling_position(data) {
-    let position = document.getElementById("job");
-    position.innerHTML = "";
-    for (let i = 1; i < data.length; i++) {
-        let option = document.createElement("option");
-        position.appendChild(option);
-        option.value = data[i].position;
-        option.innerHTML = data[i].position;
-    }
 }
 
 function add_job() {

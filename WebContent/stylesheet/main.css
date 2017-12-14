@@ -1,5 +1,6 @@
+
 /*超小屏幕*/
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 768px){
     html {
         font-size: 62.5%;
     }
@@ -9,17 +10,26 @@
     html{
         font-size: 62.5%;
     }
+    .modal-dialog{
+        width: 480px;
+    }
 }
 /*中等屏幕*/
 @media screen and (min-width: 992px)and (max-width: 1200px){
     html{
         font-size: 80%;
     }
+    .modal-dialog{
+        width: 540px;
+    }
 }
 /*大屏幕*/
 @media screen and (min-width: 1200px){
     html {
         font-size: 100%;
+    }
+    .modal-dialog{
+        width: 640px;
     }
 }
 html,body{
@@ -41,11 +51,11 @@ iframe{
     border-radius: 5px;
     margin-bottom: 2px;
 }
-.modal-dialog{
-    width: 360px;
-}
 .modal-content{
     background: rgba(255,255,255,0.6);
+}
+.modal-dialog{
+    width: 360px;
 }
 #preselected_search ul li{
     list-style: none;
