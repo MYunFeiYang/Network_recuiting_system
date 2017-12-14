@@ -12,12 +12,263 @@
     <script src="javascript/jquery-3.2.1.js"></script>
     <script src="bootstrap-3.3.7-dist/js/bootstrap.js"></script>
     <script src="javascript/person/resume.js"></script>
+    <script src="javascript/util/night.js"></script>
 </head>
 <body>
+<div class="modal fade" id="addresume" tabindex="-1" role="dialog" aria-labelledby="myaddresume"
+     onkeyup="direction_key_event('addresume')">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">创建个人简历</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="input-group input-group-sm">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default">姓名</button>
+                    </span>
+                            <input type="text" class="form-control" id="resume_name" placeholder="姓名">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="input-group input-group-sm">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default">年龄</button>
+                    </span>
+                            <input type="text" class="form-control" id="age" placeholder="年龄">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="input-group input-group-sm">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default">性别</button>
+                    </span>
+                            <select class="form-control" id="sex" title="性别">
+                                <option value="man">男</option>
+                                <option value="woman">女</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="input-group input-group-sm">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default">籍贯</button>
+                    </span>
+                            <input type="text" class="form-control" id="origin" placeholder="籍贯">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="input-group input-group-sm">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default">毕业学校</button>
+                    </span>
+                            <input type="text" class="form-control" id="collage" placeholder="毕业学校">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="input-group input-group-sm">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default">专业</button>
+                    </span>
+                            <input type="text" class="form-control" id="specialty" placeholder="专业">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="input-group input-group-sm">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default">教育程度</button>
+                    </span>
+                            <select class="form-control" id="degree" title="教育程度">
+                                <option value="小学">小学</option>
+                                <option value="初中">初中</option>
+                                <option value="高中">高中</option>
+                                <option value="专科">专科</option>
+                                <option value="本科">本科</option>
+                                <option value="硕士">硕士</option>
+                                <option value="博士">博士</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="input-group input-group-sm">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default">入学时间</button>
+                    </span>
+                            <input type="date" class="form-control" id="admission_data" placeholder="入学时间">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="input-group input-group-sm">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default">毕业时间</button>
+                    </span>
+                            <input type="date" class="form-control" id="graduation_data" placeholder="毕业时间">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="input-group input-group-sm">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default">联系电话</button>
+                    </span>
+                            <input type="text" class="form-control" id="telephone" placeholder="联系电话">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="input-group input-group-sm">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default">电子邮箱</button>
+                    </span>
+                            <input type="text" class="form-control" id="resume_email" placeholder="电子邮箱">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div id="confirm_resume_box"></div>
+                    </div>
+                </div>
+                <div class="row margin-bottom">
+                    <div class="col-md-12">
+                        <input class="btn btn-sm btn-primary center-block"
+                               type="button" value="确定创建" onclick="add_resume()">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="upload" tabindex="-1" role="dialog" aria-labelledby="myupload"
+     style="margin-top: 100px">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myupload">上传本地简历</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <form action="/upload" enctype="multipart/form-data"
+                              method="post">
+
+                            <input type="file" class="form-control" name="file1">
+                            <span class="input-group-btn">
+        							<input type="submit" class="btn btn-default" value="提交">
+        						</span>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <table class="table table-striped table-bordered table-hover table-condensed table-responsive">
+        <div class="col-md-2 col-lg-2 col-sm-4 col-xs-6 menu">
+            <div class="panel-group table-responsive" role="tablist">
+                <div class="panel panel-primary leftMenu">
+                    <!-- 利用data-target指定要折叠的分组列表 -->
+                    <div class="panel-heading" id="collapseListGroupHeading4" data-toggle="collapse" data-target="#collapseListGroup4" role="tab" >
+                        <h4 class="panel-title">
+                            简历
+                            <span class="glyphicon glyphicon-chevron-up right"></span>
+                        </h4>
+                    </div>
+                    <!-- .panel-collapse和.collapse标明折叠元素 .in表示要显示出来 -->
+                    <div id="collapseListGroup4" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="collapseListGroupHeading4">
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <!-- 利用data-target指定URL -->
+                                <button class="menu-item-left" data-toggle="modal" data-target="#addresume" onclick="init_resume()">
+                                    <span class="glyphicon glyphicon-triangle-right"></span>添加简历
+                                </button>
+                            </li>
+                            <li class="list-group-item">
+                                <!-- 利用data-target指定URL -->
+                                <button class="menu-item-left" onclick="get_resume1()">
+                                    <span class="glyphicon glyphicon-triangle-right"></span>简历管理
+                                </button>
+                            </li>
+                            <li class="list-group-item">
+                                <!-- 利用data-target指定URL -->
+                                <button class="menu-item-left" data-toggle="modal" data-target="#upload">
+                                    <span class="glyphicon glyphicon-triangle-right"></span>上传简历
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="panel panel-primary leftMenu">
+                    <div class="panel-heading" id="collapseListGroupHeading3" data-toggle="collapse" data-target="#collapseListGroup3" role="tab" >
+                        <h4 class="panel-title">
+                            设置
+                            <span class="glyphicon glyphicon-chevron-down right"></span>
+                        </h4>
+                    </div>
+                    <div id="collapseListGroup3" class="panel-collapse collapse" role="tabpanel" aria-labelledby="collapseListGroupHeading3">
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <button class="menu-item-left" onclick="open_night()">
+                                    <span class="glyphicon glyphicon-triangle-right"></span>开启夜间模式
+                                </button>
+                            </li>
+                            <li class="list-group-item">
+                                <button class="menu-item-left" onclick="close_night()">
+                                    <span class="glyphicon glyphicon-triangle-right"></span>关闭夜间模式
+                                </button>
+                            </li>
+                            <li class="list-group-item">
+                                <button class="menu-item-left" onclick="bigger()">
+                                    <span class="glyphicon glyphicon-triangle-right"></span>调高亮度
+                                </button>
+                            </li>
+                            <li class="list-group-item">
+                                <button class="menu-item-left" onclick="smaller()">
+                                    <span class="glyphicon glyphicon-triangle-right"></span>调低亮度
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
+            <ol class="breadcrumb">
+                <li><a>问道网</a></li>
+                <li><a>个人中心</a></li>
+            </ol>
+            <table class="table table-striped table-bordered table-hover table-condensed table-responsive hidden">
                 <thead>
                 <tr>
                     <td>标识号</td>
@@ -41,9 +292,4 @@
     </div>
 </div>
 </body>
-<script>
-    window.onload=function () {
-        init_resume_ajax();
-    }
-</script>
 </html>

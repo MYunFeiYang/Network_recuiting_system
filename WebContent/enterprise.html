@@ -12,12 +12,209 @@
     <script src="javascript/jquery-3.2.1.js"></script>
     <script src="bootstrap-3.3.7-dist/js/bootstrap.js"></script>
     <script src="javascript/enterprise/job.js"></script>
+    <script src="javascript/util/night.js"></script>
 </head>
 <body>
 <div class="container-fluid">
+    <div class="modal fade" id="jobs" tabindex="-1" role="dialog" aria-labelledby="myjobs"
+         onkeyup="direction_key_event('jobs')">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">发布招聘岗位</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="input-group input-group-sm">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default">公司名称</button>
+                    </span>
+                                <input type="text" class="form-control" id="name" placeholder="公司名称">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="input-group input-group-sm">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default">招聘地点</button>
+                    </span>
+                                <select class="form-control" id="address" title="地址">
+
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="input-group input-group-sm">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default">所属行业</button>
+                    </span>
+                                <select class="form-control" id="industry" onchange="get_position('industry','position')" title="行业">
+
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="input-group input-group-sm">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default">招聘职位</button>
+                    </span>
+                                <select class="form-control" id="position" title="职位">
+
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="input-group input-group-sm">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default">招聘人数</button>
+                    </span>
+                                <input type="text" class="form-control" id="number" placeholder="招聘人数">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="input-group input-group-sm">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default">薪资情况</button>
+                    </span>
+                                <input type="text" class="form-control" id="salary" placeholder="薪资情况">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="input-group input-group-sm">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default">发布岗位时间</button>
+                    </span>
+                                <input type="date" class="form-control" id="publish_time" placeholder="岗位发布时间">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="input-group input-group-sm">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default">有效时间</button>
+                    </span>
+                                <input type="text" class="form-control" id="effective_time" placeholder="有效时间">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="input-group input-group-sm">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default">电子邮箱</button>
+                    </span>
+                                <input type="text" class="form-control" id="email" placeholder="电子邮箱">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="input-group input-group-sm">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default">电话号码</button>
+                    </span>
+                                <input type="text" class="form-control" id="c_telephone" placeholder="电话号码">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div id="confirm_job_box"></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <input class="btn btn-sm btn-primary center-block"
+                                   type="button" value="确定发布" onclick="add_job()">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="row">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <table class="table table-striped table-bordered table-hover table-condensed table-responsive">
+        <div class="col-md-2 col-lg-2 col-sm-4 col-xs-6 menu">
+            <div class="panel-group table-responsive" role="tablist">
+                <div class="panel panel-primary leftMenu">
+                    <!-- 利用data-target指定要折叠的分组列表 -->
+                    <div class="panel-heading" id="collapseListGroupHeading4" data-toggle="collapse" data-target="#collapseListGroup4" role="tab" >
+                        <h4 class="panel-title">
+                            岗位
+                            <span class="glyphicon glyphicon-chevron-up right"></span>
+                        </h4>
+                    </div>
+                    <!-- .panel-collapse和.collapse标明折叠元素 .in表示要显示出来 -->
+                    <div id="collapseListGroup4" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="collapseListGroupHeading4">
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <!-- 利用data-target指定URL -->
+                                <button class="menu-item-left" data-toggle="modal" data-target="#jobs" onclick="init_job();get_address('address');get_industry('industry');">
+                                    <span class="glyphicon glyphicon-triangle-right"></span>岗位发布
+                                </button>
+                            </li>
+                            <li class="list-group-item">
+                                <!-- 利用data-target指定URL -->
+                                <button class="menu-item-left" onclick="get_job1()">
+                                    <span class="glyphicon glyphicon-triangle-right"></span>岗位管理
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="panel panel-primary leftMenu">
+                    <div class="panel-heading" id="collapseListGroupHeading3" data-toggle="collapse" data-target="#collapseListGroup3" role="tab" >
+                        <h4 class="panel-title">
+                            设置
+                            <span class="glyphicon glyphicon-chevron-down right"></span>
+                        </h4>
+                    </div>
+                    <div id="collapseListGroup3" class="panel-collapse collapse" role="tabpanel" aria-labelledby="collapseListGroupHeading3">
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <button class="menu-item-left" onclick="open_night()">
+                                    <span class="glyphicon glyphicon-triangle-right"></span>开启夜间模式
+                                </button>
+                            </li>
+                            <li class="list-group-item">
+                                <button class="menu-item-left" onclick="close_night()">
+                                    <span class="glyphicon glyphicon-triangle-right"></span>关闭夜间模式
+                                </button>
+                            </li>
+                            <li class="list-group-item ">
+                                <button class="menu-item-left" onclick="bigger()">
+                                    <span class="glyphicon glyphicon-triangle-right"></span>调高亮度
+                                </button>
+                            </li>
+                            <li class="list-group-item " onclick="path_navigation(this)">
+                                <button class="menu-item-left" onclick="smaller()">
+                                    <span class="glyphicon glyphicon-triangle-right"></span>调低亮度
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
+            <table class="table table-striped table-bordered table-hover table-condensed table-responsive hidden">
                 <thead>
                 <tr>
                     <td>标识号</td>
@@ -40,9 +237,4 @@
     </div>
 </div>
 </body>
-<script>
-    window.onload=function () {
-        init_job_ajax();
-    }
-</script>
 </html>
