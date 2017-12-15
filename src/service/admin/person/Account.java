@@ -16,16 +16,68 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Account {
-    public void init_person_account(HttpServletResponse response) throws ServletException,IOException{
+    public void init_assessment(HttpServletResponse response) throws ServletException, IOException {
+        DBManager dbManager = new DBManager();
+        Connection conn = dbManager.getConnection();
+        List<User> userList = new ArrayList<>();
+        try {
+            String sql = "SELECT nickname,password,name,telephone,email,assessment FROM person";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                if (rs.getInt(6) == 0) {
+                    User user = new User();
+                    user.setNickname(rs.getString(1));
+                    user.setPassword(rs.getString(2));
+                    user.setName(rs.getString(3));
+                    user.setEmail(rs.getString(5));
+                    user.setTelephone(rs.getString(4));
+                    userList.add(user);
+                }
+            }
+            response.getWriter().print(JSONArray.fromObject(userList).toString());
+            rs.close();
+            ps.close();
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void pass_assessment(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String nickname = request.getParameter("nickname");
+        String password = request.getParameter("password");
+        int assessment = 1;
+        DBManager dbManager = new DBManager();
+        Connection conn = dbManager.getConnection();
+        try {
+            String sql = "UPDATE person SET assessment=? WHERE (nickname=? AND password=?)";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, assessment);
+            ps.setString(2, nickname);
+            ps.setString(3, password);
+            int rs = ps.executeUpdate();
+            if (rs == 1) {
+                String str = "{\"msg\":\"person_assessment_pass\"}";
+                response.getWriter().print(str);
+            }
+            ps.close();
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void init_person_account(HttpServletResponse response) throws ServletException, IOException {
         DBManager dbManager = new DBManager();
         Connection conn = dbManager.getConnection();
         List<User> adminList = new ArrayList<>();
         try {
-            String sql = "SELECT nickname,password,login_time FROM occupy_person";
+            String sql = "SELECT nickname,password,login_time FROM person";
             PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                User user=new User();
+                User user = new User();
                 user.setNickname(rs.getString(1));
                 user.setPassword(rs.getString(2));
                 user.setLogin_time(rs.getString(3));
@@ -39,6 +91,7 @@ public class Account {
             e.printStackTrace();
         }
     }
+
     public void add_account(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String nickname = request.getParameter("nickname");
         String password = request.getParameter("password");
@@ -46,7 +99,7 @@ public class Account {
         DBManager dbManager = new DBManager();
         Connection conn = dbManager.getConnection();
         try {
-            String sql = "INSERT INTO occupy_person (nickname,password,login_time) VALUES (?,?,?)";
+            String sql = "INSERT INTO person (nickname,password,login_time) VALUES (?,?,?)";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, nickname);
             ps.setString(2, password);
@@ -61,13 +114,14 @@ public class Account {
             e.printStackTrace();
         }
     }
+
     public void delete_account(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String nickname = request.getParameter("nickname");
         String password = request.getParameter("password");
         DBManager dbManager = new DBManager();
         Connection conn = dbManager.getConnection();
         try {
-            String sql = "DELETE FROM occupy_person WHERE (nickname=? and password=?)";
+            String sql = "DELETE FROM person WHERE (nickname=? and password=?)";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, nickname);
             ps.setString(2, password);

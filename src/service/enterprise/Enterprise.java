@@ -30,10 +30,10 @@ public class Enterprise {
         String telephone = request.getParameter("telephone");
         String email = request.getParameter("email");
         String address = request.getParameter("address");
-
+        int assessment=0;
         DBManager conndb = new DBManager();
         Connection conn = conndb.getConnection();
-        String sql = "insert into occupy_company (nickname,password,name,industry,telephone,email,address) values(?,?,?,?,?,?,?)";
+        String sql = "insert into company (nickname,password,name,industry,telephone,email,address,assessment) values(?,?,?,?,?,?,?,?)";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, nickname);
@@ -43,10 +43,11 @@ public class Enterprise {
             ps.setString(5, telephone);
             ps.setString(6, email);
             ps.setString(7, address);
+            ps.setInt(8,assessment);
             int tag = ps.executeUpdate();
             ps.close();
             if (tag == 1) {
-                String str = "{\"msg\":\"success\"}";
+                String str = "{\"msg\":\"assessing\"}";
                 response.getWriter().print(str);
                 response.getWriter().flush();
                 response.getWriter().close();
@@ -78,7 +79,7 @@ public class Enterprise {
 
         DBManager conndb = new DBManager();
         Connection conn = conndb.getConnection();
-        String sql = "update occupy_company set nickname=?,password=?,name=?,industry=?,telephone=?,address=? where nickname=? AND password=?";
+        String sql = "update company set nickname=?,password=?,name=?,industry=?,telephone=?,address=? where nickname=? AND password=?";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, nickname);
@@ -120,7 +121,7 @@ public class Enterprise {
         DBManager conndb = new DBManager();
         Connection conn = conndb.getConnection();
         try {
-            String sql = "select name,address,industry,email from occupy_company where nickname=? and password=?";
+            String sql = "select name,address,industry,email from company where nickname=? and password=?";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, nickname);
             ps.setString(2, password);

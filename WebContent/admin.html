@@ -16,8 +16,8 @@
     <script src="bootstrap-3.3.7-dist/js/bootstrap.js"></script>
     <script src="javascript/admin/admin.js"></script>
     <script src="javascript/admin/admin_power.js"></script>
-    <script src="javascript/admin/person_account.js"></script>
-    <script src="javascript/admin/enterprise_account.js"></script>
+    <script src="javascript/admin/person.js"></script>
+    <script src="javascript/admin/enterprise.js"></script>
     <script src="javascript/util/night.js"></script>
 </head>
 <body>
@@ -58,7 +58,13 @@
                             <ul class="list-group">
                                 <li class="list-group-item">
                                     <!-- 利用data-target指定URL -->
-                                    <button class="menu-item-left path2" onclick="change_div('person_account');init_person_account_ajax();path_navigation(this)">
+                                    <button class="menu-item-left path2" onclick="change_div('person_assessment');path_navigation(this);init_person_assessment()">
+                                        <span class="glyphicon glyphicon-triangle-right"></span>注册审核
+                                    </button>
+                                </li>
+                                <li class="list-group-item">
+                                    <!-- 利用data-target指定URL -->
+                                    <button class="menu-item-left path2" onclick="change_div('person_account');init_person_account();path_navigation(this)">
                                         <span class="glyphicon glyphicon-triangle-right"></span>账号管理
                                     </button>
                                 </li>
@@ -75,7 +81,12 @@
                         <div id="collapseListGroup2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="collapseListGroupHeading2">
                             <ul class="list-group">
                                 <li class="list-group-item">
-                                    <button class="menu-item-left path2" onclick="change_div('enterprise_account');init_enterprise_account_ajax();path_navigation(this)">
+                                    <button class="menu-item-left path2" onclick="change_div('enterprise_assessment');init_enterprise_assessment();path_navigation(this)">
+                                        <span class="glyphicon glyphicon-triangle-right"></span>注册审核
+                                    </button>
+                                </li>
+                                <li class="list-group-item">
+                                    <button class="menu-item-left path2" onclick="change_div('enterprise_account');init_enterprise_account();path_navigation(this)">
                                         <span class="glyphicon glyphicon-triangle-right"></span>账号管理
                                     </button>
                                 </li>
@@ -157,6 +168,22 @@
 
                     </tbody>
                 </table>
+                <table id="person_assessment" class="hidden table table-striped table-bordered table-hover table-condensed table-responsive">
+                    <thead>
+                    <tr>
+                        <td>#</td>
+                        <td>用户名</td>
+                        <td>密码</td>
+                        <td>姓名</td>
+                        <td>电话号码</td>
+                        <td>email</td>
+                        <td>操作</td>
+                    </tr>
+                    </thead>
+                    <tbody id="person_assess">
+
+                    </tbody>
+                </table>
                 <table id="person_account" class="hidden table table-striped table-bordered table-hover table-condensed table-responsive">
                     <thead>
                     <tr>
@@ -168,6 +195,24 @@
                     </tr>
                     </thead>
                     <tbody id="person">
+
+                    </tbody>
+                </table>
+                <table id="enterprise_assessment" class="hidden table table-striped table-bordered table-hover table-condensed table-responsive">
+                    <thead>
+                    <tr>
+                        <td>#</td>
+                        <td>用户名</td>
+                        <td>密码</td>
+                        <td>公司名</td>
+                        <td>行业</td>
+                        <td>地址</td>
+                        <td>电话号码</td>
+                        <td>email</td>
+                        <td>操作</td>
+                    </tr>
+                    </thead>
+                    <tbody id="enterprise_assess">
 
                     </tbody>
                 </table>

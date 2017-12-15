@@ -35,7 +35,7 @@ public class Common {
         DBManager conndb = new DBManager();
         Connection conn = conndb.getConnection();
         try {
-            String sql = "select occupy_person.email,occupy_company.email from occupy_person,occupy_company where occupy_person.email=? OR occupy_company.email=?";
+            String sql = "select person.email,company.email from person,company where person.email=? OR company.email=?";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, email);
             ps.setString(2, email);
@@ -77,12 +77,12 @@ public class Common {
         String sql1 = null;
         switch (login_type) {
             case "person":
-                sql = "select email from occupy_person where nickname=? and password=?";
-                sql1 = "UPDATE occupy_person SET login_time=? WHERE (nickname=? AND password=?)";
+                sql = "select assessment from person where nickname=? and password=?";
+                sql1 = "UPDATE person SET login_time=? WHERE (nickname=? AND password=?)";
                 break;
             case "enterprise":
-                sql = "select name from occupy_company where nickname=? and password=?";
-                sql1 = "UPDATE occupy_company SET login_time=? WHERE (nickname=? AND password=?)";
+                sql = "select assessment from company where nickname=? and password=?";
+                sql1 = "UPDATE company SET login_time=? WHERE (nickname=? AND password=?)";
                 break;
             case "admin":
                 sql = "select nickname from admin where nickname=? and password=?";
@@ -98,6 +98,20 @@ public class Common {
                     ps.setString(1, nickname);
                     ps.setString(2, password);
                     rs = ps.executeQuery();
+                    if (rs.next()) {
+                        nickname=rs.getString(1);
+                        if (!nickname.equals("")){
+                            String str = "{\"msg\":\"login_success\"}";
+                            response.getWriter().print(str);
+                            response.getWriter().flush();
+                            response.getWriter().close();
+                        }else {
+                            String str = "{\"msg\":\"login_fail\"}";
+                            response.getWriter().print(str);
+                            response.getWriter().flush();
+                            response.getWriter().close();
+                        }
+                    }
                     break;
                 default:
                     ps = conn.prepareStatement(sql);
@@ -109,17 +123,20 @@ public class Common {
                     ps1.setString(3, password);
                     rs = ps.executeQuery();
                     ps1.executeUpdate();
-            }
-            if (rs.next()) {
-                String str = "{\"msg\":\"login_success\"}";
-                response.getWriter().print(str);
-                response.getWriter().flush();
-                response.getWriter().close();
-            } else {
-                String str = "{\"msg\":\"login_fail\"}";
-                response.getWriter().print(str);
-                response.getWriter().flush();
-                response.getWriter().close();
+                    if (rs.next()) {
+                        int assessment=rs.getInt(1);
+                        if (assessment==1){
+                            String str = "{\"msg\":\"login_success\"}";
+                            response.getWriter().print(str);
+                            response.getWriter().flush();
+                            response.getWriter().close();
+                        }else {
+                            String str = "{\"msg\":\"login_fail\"}";
+                            response.getWriter().print(str);
+                            response.getWriter().flush();
+                            response.getWriter().close();
+                        }
+                    }
             }
             rs.close();
             ps1.close();
@@ -177,7 +194,7 @@ public class Common {
         DBManager conndb = new DBManager();
         Connection conn = conndb.getConnection();
         try {
-            String sql = "select occupy_person.email,occupy_company.email from occupy_person,occupy_company where occupy_person.email=? OR occupy_company.email=?";
+            String sql = "select person.email,company.email from person,company where person.email=? OR company.email=?";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, email);
             ps.setString(2, email);
@@ -253,8 +270,8 @@ public class Common {
         DBManager conndb = new DBManager();
         Connection conn = conndb.getConnection();
         try {
-            String sql1 = "UPDATE occupy_person SET password=? WHERE email=?";
-            String sql2 = "UPDATE occupy_company SET password=? WHERE email=?";
+            String sql1 = "UPDATE person SET password=? WHERE email=?";
+            String sql2 = "UPDATE company SET password=? WHERE email=?";
             PreparedStatement ps1 = conn.prepareStatement(sql1);
             PreparedStatement ps2 = conn.prepareStatement(sql2);
             ps1.setString(1, password);

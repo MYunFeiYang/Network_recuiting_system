@@ -20,7 +20,7 @@ public class Account {
         Connection conn = dbManager.getConnection();
         List<model.enterprise.Enterprise> adminList = new ArrayList<>();
         try {
-            String sql = "SELECT nickname,password,login_time FROM occupy_company";
+            String sql = "SELECT nickname,password,login_time FROM company";
             PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -39,6 +39,61 @@ public class Account {
         }
     }
 
+    public void pass_assessment(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String nickname = request.getParameter("nickname");
+        String password = request.getParameter("password");
+        int assessment = 1;
+        DBManager dbManager = new DBManager();
+        Connection conn = dbManager.getConnection();
+        try {
+            String sql = "UPDATE company SET assessment=? WHERE (nickname=? AND password=?)";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, assessment);
+            ps.setString(2, nickname);
+            ps.setString(3, password);
+            int rs = ps.executeUpdate();
+            if (rs == 1) {
+                String str = "{\"msg\":\"enterprise_assessment_pass\"}";
+                response.getWriter().print(str);
+            }
+            ps.close();
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void init_assessment(HttpServletResponse response) throws ServletException, IOException {
+        DBManager dbManager = new DBManager();
+        Connection conn = dbManager.getConnection();
+        List<model.enterprise.Enterprise> adminList = new ArrayList<>();
+        try {
+            String sql = "SELECT nickname,password,name,industry,address,email,telephone,assessment FROM company";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                if (rs.getInt(8) == 0) {
+                    model.enterprise.Enterprise enterprise = new model.enterprise.Enterprise();
+                    enterprise.setNickname(rs.getString(1));
+                    enterprise.setPassword(rs.getString(2));
+                    enterprise.setName(rs.getString(3));
+                    enterprise.setIndustry(rs.getString(4));
+                    enterprise.setAddress(rs.getString(5));
+                    enterprise.setEmail(rs.getString(6));
+                    enterprise.setTelephone(rs.getString(7));
+                    adminList.add(enterprise);
+                }
+            }
+            response.getWriter().print(JSONArray.fromObject(adminList).toString());
+            rs.close();
+            ps.close();
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
     public void add_account(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String nickname = request.getParameter("nickname");
         String password = request.getParameter("password");
@@ -46,7 +101,7 @@ public class Account {
         DBManager dbManager = new DBManager();
         Connection conn = dbManager.getConnection();
         try {
-            String sql = "INSERT INTO occupy_company (nickname,password,login_time) VALUES (?,?,?)";
+            String sql = "INSERT INTO company (nickname,password,login_time) VALUES (?,?,?)";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, nickname);
             ps.setString(2, password);
@@ -68,7 +123,7 @@ public class Account {
         DBManager dbManager = new DBManager();
         Connection conn = dbManager.getConnection();
         try {
-            String sql = "DELETE FROM occupy_company WHERE (nickname=? and password=?)";
+            String sql = "DELETE FROM company WHERE (nickname=? and password=?)";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, nickname);
             ps.setString(2, password);

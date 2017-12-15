@@ -1,7 +1,6 @@
 "use strict";
 let confirm_box = "confirm_enterprise_box";
 let n_confirm_box;
-let c_name_e;
 let success_info;
 let fail_info;
 function register_enterprise() {
@@ -20,8 +19,9 @@ function register_enterprise() {
         type: "POST",
         dataType: "JSON",
         success: function (data) {
-            if (data.msg === "success") {
-                location.href = "index.html";
+            if (data.msg==="assessing"){
+                n_confirm_box_p=document.getElementById("register-enterprise");
+                n_confirm_box_p.getElementsByClassName("modal-content")[0].innerHTML="正在审核中";
             }
         },
         fail: function (data) {

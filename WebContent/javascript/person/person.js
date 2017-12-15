@@ -14,9 +14,9 @@ function register_person() {
         type:"POST",
         dataType:"JSON",
         success:function (data) {
-            if (data.msg==="success"){
+            if (data.msg==="assessing"){
                 n_confirm_box_p=document.getElementById("register-person");
-                n_confirm_box_p.getElementsByClassName("modal-content")[0].innerHTML="注册成功";
+                n_confirm_box_p.getElementsByClassName("modal-content")[0].innerHTML="正在审核中";
             }
         },
         fail:function (data) {

@@ -33,11 +33,11 @@ public class Person {
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");//设置日期格式
         String dataString = df.format(new Date());// new Date()为获取当前系统时间
         String email = request.getParameter("email");
-
+        int assessment=0;
         DBManager conndb = new DBManager();
         Connection conn = conndb.getConnection();
-        String sql = "insert into occupy_person (nickname,password,"
-                + "name,telephone,email,regrime) values(?,?,?,?,?,?)";
+        String sql = "insert into person (nickname,password,"
+                + "name,telephone,email,regrime,assessment) values(?,?,?,?,?,?,?)";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, nickname);
@@ -46,9 +46,10 @@ public class Person {
             ps.setString(4, telephone);
             ps.setString(5, email);
             ps.setString(6, dataString);
+            ps.setInt(7,assessment);
             int tag = ps.executeUpdate();
             if (tag == 1) {
-                String str = "{\"msg\":\"success\"}";
+                String str = "{\"msg\":\"assessing\"}";
                 response.getWriter().print(str);
                 response.getWriter().flush();
                 response.getWriter().close();
@@ -78,7 +79,7 @@ public class Person {
 
         DBManager conndb = new DBManager();
         Connection conn = conndb.getConnection();
-        String sql = "update occupy_person set nickname=?,password=?,telephone=? where nickname=? AND password=?";
+        String sql = "update person set nickname=?,password=?,telephone=? where nickname=? AND password=?";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, nickname);
@@ -118,7 +119,7 @@ public class Person {
         DBManager conndb = new DBManager();
         Connection conn = conndb.getConnection();
         try {
-            String sql = "select name,telephone,email from occupy_person where nickname=? and password=?";
+            String sql = "select name,telephone,email from person where nickname=? and password=?";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, nickname);
             ps.setString(2, password);

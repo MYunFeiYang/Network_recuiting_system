@@ -14,6 +14,12 @@
     html{
         font-size: 62.5%;
     }
+    .panel-group{
+        height: 45px;
+    }
+    .panel-group:hover{
+        height: auto;
+    }
 }
 /*中等屏幕*/
 @media screen and (min-width: 992px)and (max-width: 1200px){
