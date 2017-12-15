@@ -15,17 +15,32 @@
     html{
         font-size: 62.5%;
     }
+    .panel-group{
+        height: 45px;
+    }
+    .panel-group:hover{
+        height: auto;
+    }
+    .modal-dialog{
+        width: 450px !important;
+    }
 }
 /*中等屏幕*/
 @media screen and (min-width: 992px)and (max-width: 1200px){
     html{
         font-size: 80%;
     }
+    .modal-dialog{
+        width: 480px !important;
+    }
 }
 /*大屏幕*/
 @media screen and (min-width: 1200px){
     html {
         font-size: 100%;
+    }
+    .modal-dialog{
+        width: 540px !important;
     }
 }
 html,body{

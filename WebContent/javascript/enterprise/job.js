@@ -1,5 +1,7 @@
+"use strict";
 let n_job;
 let row;
+let confirm_job_box;
 let n_identification;
 let n_name;
 let n_number;
@@ -7,9 +9,6 @@ let n_salary;
 let n_publish_time;
 let n_effective_time;
 let n_operate;
-let n_industry;
-let n_address;
-let n_position;
 let c_identification;
 let c_name;
 let c_address;
@@ -44,71 +43,6 @@ function init_job() {
     })
 }
 
-function get_address(address) {
-    $.ajax({
-        url: "/query/address",
-        type: "POST",
-        dataType: "JSON",
-        success: function (data) {
-            n_address = document.getElementById(address);
-            for (let i = 1; i < data.length; i++) {
-                let option = document.createElement("option");
-                n_address.appendChild(option);
-                option.value = data[i].text;
-                option.innerHTML = data[i].text;
-            }
-        },
-        fail: function () {
-
-        }
-    });
-}
-
-function get_industry(industry) {
-    $.ajax({
-        url: "/query/industry",
-        type: "POST",
-        dataType: "JSON",
-        success: function (data) {
-            n_industry = document.getElementById(industry);
-            for (let i = 1; i < data.length; i++) {
-                let option = document.createElement("option");
-                n_industry.appendChild(option);
-                option.value = data[i].text;
-                option.innerHTML = data[i].text;
-            }
-        },
-        fail: function () {
-
-        }
-    });
-}
-
-function get_position(industry, position) {
-    let job = {};
-    c_name_e = document.getElementById(industry).value;
-    job.job_name = c_name_e;
-    $.ajax({
-        url: "/query/position",
-        type: "POST",
-        data: job,
-        dataType: "JSON",
-        success: function (data) {
-            n_position = document.getElementById(position);
-            n_position.innerHTML = "";
-            for (let i = 1; i < data.length; i++) {
-                let option = document.createElement("option");
-                n_position.appendChild(option);
-                option.value = data[i].position;
-                option.innerHTML = data[i].position;
-            }
-        },
-        fail: function () {
-
-        }
-    });
-}
-
 function add_job() {
     let job = {};
     let user_string = document.cookie.split(";")[0].split("=")[1];
@@ -125,37 +59,48 @@ function add_job() {
     let effective_time = document.getElementById("effective_time").value;
     let email = document.getElementById("email").value;
     let telephone = document.getElementById("c_telephone").value;
-    job.nickname = nickname;
-    job.password = password;
-    job.name = name;
-    job.address = address;
-    job.industry = industry;
-    job.job_name = job_name;
-    job.number = number;
-    job.salary = salary;
-    job.publish_time = publish_time;
-    job.effective_time = effective_time;
-    job.email = email;
-    job.telephone = telephone;
-    $.ajax({
-        url: '/enterprise?enterprise=addJob',
-        data: job,
-        type: 'POST',
-        dataType: 'JSON',
-        success: function (data) {
-            let confirm_job_box = document.getElementById("confirm_job_box");
-            if (data.msg === "add_job_success") {
-                confirm_job_box.innerHTML = "岗位发布成功";
-                confirm_job_box.setAttribute("class", "alert-success");
-            } else {
-                confirm_job_box.innerHTML = "岗位发布失败";
-                confirm_job_box.setAttribute("class", "alert-warning");
-            }
-        },
-        fail: function () {
+    confirm_job_box = document.getElementById("confirm_job_box");
+    if (name===""){
+        confirm_job_box.innerHTML = "公司名称不能为空";
+        confirm_job_box.setAttribute("class", "alert-warning");
+    }else if (number===""){
+        confirm_job_box.innerHTML = "招聘人数不能为空";
+        confirm_job_box.setAttribute("class", "alert-warning");
+    }else if (effective_time===""){
+        confirm_job_box.innerHTML = "有效时间不能为空";
+        confirm_job_box.setAttribute("class", "alert-warning");
+    }else {
+        job.nickname = nickname;
+        job.password = password;
+        job.name = name;
+        job.address = address;
+        job.industry = industry;
+        job.job_name = job_name;
+        job.number = number;
+        job.salary = salary;
+        job.publish_time = publish_time;
+        job.effective_time = effective_time;
+        job.email = email;
+        job.telephone = telephone;
+        $.ajax({
+            url: '/enterprise?enterprise=addJob',
+            data: job,
+            type: 'POST',
+            dataType: 'JSON',
+            success: function (data) {
+                if (data.msg === "add_job_success") {
+                    confirm_job_box.innerHTML = "岗位发布成功";
+                    confirm_job_box.setAttribute("class", "alert-success");
+                } else {
+                    confirm_job_box.innerHTML = "岗位发布失败";
+                    confirm_job_box.setAttribute("class", "alert-warning");
+                }
+            },
+            fail: function () {
 
-        }
-    })
+            }
+        })
+    }
 
 }
 

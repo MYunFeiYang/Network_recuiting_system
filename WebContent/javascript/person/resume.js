@@ -1,5 +1,6 @@
 let n_resume;
 let row;
+let n_confirm_box_p;
 let n_identification;
 let n_name;
 let n_age;
@@ -23,7 +24,6 @@ let c_admission_data;
 let c_graduation_data;
 let o_resume;
 function init_resume() {
-    document.getElementById("resume").style.display = "block";
     let user_string = document.cookie.split(";")[0].split("=")[1];
     let user = JSON.parse(user_string);
     $.ajax({
@@ -59,7 +59,7 @@ function add_resume() {
     let graduation_data = document.getElementById("graduation_data").value;
     let telephone = document.getElementById("telephone").value;
     let email = document.getElementById("resume_email").value;
-    n_confirm_box_p = document.getElementById("n_confirm_box_p");
+    n_confirm_box_p = document.getElementById("confirm_resume_box");
     if (age === "") {
         n_confirm_box_p.innerHTML = "请输入年龄";
         n_confirm_box_p.setAttribute("class", "alert-warning");
@@ -82,27 +82,26 @@ function add_resume() {
     }else {
         n_confirm_box_p.innerHTML = "通过验证";
         n_confirm_box_p.setAttribute("class", "alert-success");
-        let resume = {};
-        resume.nickname = nickname;
-        resume.password = password;
-        resume.name = name;
-        resume.age = age;
-        resume.sex = sex;
-        resume.origin = origin;
-        resume.collage = collage;
-        resume.specialty = specialty;
-        resume.degree = degree;
-        resume.admission_data = admission_data;
-        resume.graduation_data = graduation_data;
-        resume.telephone = telephone;
-        resume.email = email;
+        o_resume = {};
+        o_resume.nickname = nickname;
+        o_resume.password = password;
+        o_resume.name = name;
+        o_resume.age = age;
+        o_resume.sex = sex;
+        o_resume.origin = origin;
+        o_resume.collage = collage;
+        o_resume.specialty = specialty;
+        o_resume.degree = degree;
+        o_resume.admission_data = admission_data;
+        o_resume.graduation_data = graduation_data;
+        o_resume.telephone = telephone;
+        o_resume.email = email;
         $.ajax({
             url: '/person?person=addResume',
-            data: resume,
+            data: o_resume,
             type: 'POST',
             dataType: 'JSON',
             success: function (data) {
-                n_confirm_box_p=document.getElementById("n_confirm_box_p");
                 if (data.msg==="add_resume_success"){
                     n_confirm_box_p.innerHTML="简历添加成功";
                     n_confirm_box_p.setAttribute("class","alert-success");

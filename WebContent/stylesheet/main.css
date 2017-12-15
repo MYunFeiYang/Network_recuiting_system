@@ -196,44 +196,6 @@ footer address{
     left: 0;
     z-index: 0;
 }
-.alert-warning {
-    margin: auto;
-    text-align: center;
-    color: red;
-    border: 1px solid red;
-    padding: 5px;
-    border-radius:5px;
-}
-.alert-success{
-    margin: auto;
-    text-align: center;
-    color: lightseagreen;
-    border: 1px solid lightseagreen;
-    padding: 5px;
-    border-radius:5px;
-}
-.alert-warning {
-    animation: move 1s 3;
-}
-
-@keyframes move {
-    0% {
-        transform: translate(0px, 0px);
-    }
-    25% {
-        transform: translate(10px, 0px);
-    }
-    50% {
-        transform: translate(0px, 10px);
-    }
-    75% {
-        transform: translate(-10px, 0px);
-    }
-    100% {
-        transform: translate(0px, 0px);
-    }
-}
-
 .bdsharebuttonbox{
     padding: 10px;
     text-align: center;
