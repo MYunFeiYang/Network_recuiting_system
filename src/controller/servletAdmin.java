@@ -42,6 +42,8 @@ public class servletAdmin extends HttpServlet {
                 account.init_person_account(response);
             }else if (url.contains("add")){
                 account.add_account(request,response);
+            }else if (url.contains("delete")){
+                account.delete_account(request,response);
             }
         }else if (url.contains("enterprise_assessment")){
             service.admin.enterprise.Account account=new service.admin.enterprise.Account();

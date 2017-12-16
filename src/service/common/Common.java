@@ -77,20 +77,20 @@ public class Common {
         String sql1 = null;
         switch (login_type) {
             case "person":
-                sql = "select assessment from person where nickname=? and password=?";
+                sql = "SELECT assessment FROM person WHERE (nickname=? AND password=?)";
                 sql1 = "UPDATE person SET login_time=? WHERE (nickname=? AND password=?)";
                 break;
             case "enterprise":
-                sql = "select assessment from company where nickname=? and password=?";
+                sql = "SELECT assessment FROM company WHERE (nickname=? AND password=?)";
                 sql1 = "UPDATE company SET login_time=? WHERE (nickname=? AND password=?)";
                 break;
             case "admin":
-                sql = "select nickname from admin where nickname=? and password=?";
+                sql = "SELECT nickname FROM admin WHERE (nickname=? AND password=?)";
                 break;
         }
         try {
             PreparedStatement ps;
-            PreparedStatement ps1=null;
+            PreparedStatement ps1 = null;
             ResultSet rs;
             switch (login_type) {
                 case "admin":
@@ -99,18 +99,16 @@ public class Common {
                     ps.setString(2, password);
                     rs = ps.executeQuery();
                     if (rs.next()) {
-                        nickname=rs.getString(1);
-                        if (!nickname.equals("")){
-                            String str = "{\"msg\":\"login_success\"}";
-                            response.getWriter().print(str);
-                            response.getWriter().flush();
-                            response.getWriter().close();
-                        }else {
-                            String str = "{\"msg\":\"login_fail\"}";
-                            response.getWriter().print(str);
-                            response.getWriter().flush();
-                            response.getWriter().close();
-                        }
+                        String str = "{\"msg\":\"login_success\"}";
+                        response.getWriter().print(str);
+                        response.getWriter().flush();
+                        response.getWriter().close();
+
+                    } else {
+                        String str = "{\"msg\":\"login_fail\"}";
+                        response.getWriter().print(str);
+                        response.getWriter().flush();
+                        response.getWriter().close();
                     }
                     break;
                 default:
@@ -124,18 +122,23 @@ public class Common {
                     rs = ps.executeQuery();
                     ps1.executeUpdate();
                     if (rs.next()) {
-                        int assessment=rs.getInt(1);
-                        if (assessment==1){
+                        int assessment = rs.getInt(1);
+                        if (assessment == 1) {
                             String str = "{\"msg\":\"login_success\"}";
                             response.getWriter().print(str);
                             response.getWriter().flush();
                             response.getWriter().close();
-                        }else {
-                            String str = "{\"msg\":\"login_fail\"}";
+                        } else {
+                            String str = "{\"msg\":\"assessing\"}";
                             response.getWriter().print(str);
                             response.getWriter().flush();
                             response.getWriter().close();
                         }
+                    } else {
+                        String str = "{\"msg\":\"login_fail\"}";
+                        response.getWriter().print(str);
+                        response.getWriter().flush();
+                        response.getWriter().close();
                     }
             }
             rs.close();
