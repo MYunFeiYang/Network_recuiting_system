@@ -36,6 +36,8 @@ public class servletPerson extends HttpServlet {
             case "deleteResume":
                 person.deleteResume(request, response);
                 break;
+            case "auto_match":
+                person.auto_match(request,response);
         }
     }
 }

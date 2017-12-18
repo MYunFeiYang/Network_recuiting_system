@@ -7,11 +7,3 @@ function close_search() {
     document.getElementById("search-con").style.width="40px";
     document.getElementById("preselected_search").style.display="none";
 }
-
-function open_share() {
-    document.getElementsByClassName("bdsharebuttonbox")[0].classList.remove("hidden");
-}
-function close_share() {
-    document.getElementsByClassName("bdsharebuttonbox")[0].classList.add("hidden");
-
-}

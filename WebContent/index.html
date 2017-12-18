@@ -15,12 +15,13 @@
     <script src="javascript/util/cookie_and_session.js"></script>
     <script src="javascript/util/check_input.js"></script>
     <script src="javascript/util/div_operate.js"></script>
+    <script src="javascript/util/key_event.js"></script>
     <script src="javascript/common/common.js"></script>
-    <script src="javascript/person/person.js"></script>
-    <script src="javascript/enterprise/enterprise.js"></script>
+    <script src="javascript/person/register_and_modify.js"></script>
+    <script src="javascript/enterprise/register_and_modify.js"></script>
     <script src="javascript/enterprise/address_industry_position.js"></script>
 </head>
-<body id="top" onclick="close_share()">
+<body id="top">
 <div class="container-fluid">
     <nav class="navbar navbar-default"  onmouseout="close_search()">
         <div class="container-fluid">
@@ -88,27 +89,6 @@
                         </ul>
                     </li>
                 </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="dropdown" id="collection">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                           aria-haspopup="true"
-                           aria-expanded="false"><span class="glyphicon glyphicon-star"></span></a>
-                        <ul class="dropdown-menu">
-
-                        </ul>
-                    </li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="dropdown" id="share">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                           aria-haspopup="true"
-                           aria-expanded="false">
-                            <span class="glyphicon glyphicon-share" onmouseover="open_share()"></span></a>
-                        <ul class="dropdown-menu">
-
-                        </ul>
-                    </li>
-                </ul>
                 <form class="navbar-form navbar-right hidden" role="search">
                     <div class="form-group">
                         <input type="text" title="搜索" class="form-control" id="search-con" onkeyup="complete_content()">
@@ -118,18 +98,19 @@
                         </button>
                     </div>
                 </form>
-                <div class="bdsharebuttonbox hidden">
-                    <a class="bds_mshare" data-cmd="mshare"></a>
-                    <a class="bds_qzone" data-cmd="qzone" href="#"></a>
-                    <a class="bds_tsina" data-cmd="tsina"></a>
-                    <a class="bds_baidu" data-cmd="baidu"></a>
-                    <a class="bds_renren" data-cmd="renren"></a>
-                    <a class="bds_tqq" data-cmd="tqq"></a>
-                    <a href="#" class="bds_more" data-cmd="more">更多</a>
-                </div>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
     </nav>
+    <div class="bdsharebuttonbox" id="share">
+        <a class="bds_mshare" data-cmd="mshare"></a>
+        <a class="bds_weixin" data-cmd="weixin"></a>
+        <a class="bds_qzone" data-cmd="qzone" href="#"></a>
+        <a class="bds_tsina" data-cmd="tsina"></a>
+        <a class="bds_baidu" data-cmd="baidu"></a>
+        <a class="bds_tqq" data-cmd="tqq"></a>
+        <a class="bds_more" data-cmd="more"></a>
+        <a class="bds_count" data-cmd="count"></a>
+    </div>
     <!-- Modal start -->
     <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="mylogin"
          onkeyup="key_down_event('login')">
@@ -183,7 +164,7 @@
                     <div class="row">
                         <div class="col-md-4 col-sm-12">
                             <a href="resetPassword.html" target="_top" class="btn btn-primary"
-                               onclick="return change_iframe_src(this)">找回密码</a>
+                               onclick="close_login();return change_iframe_src(this)">找回密码</a>
                         </div>
                     </div>
                 </div>
@@ -510,7 +491,6 @@
                     Visit me at:<br>
                     <a target="_blank"
                        href="https://github.com/MYunFeiYang/Network_recuiting_system">MYunFeiYang</a><br>
-                    CHINA
                 </address>
             </div>
             <div class="col-md-3 col-lg-3 hidden-xs hidden-sm">
@@ -518,7 +498,6 @@
                     网站运营：<br>
                     <a target="_blank" href="http://tool.chinaz.com/">站长工具</a><br>
                     <a target="_blank" href="http://union.baidu.com/">百度联盟</a><br>
-                    CHINA
                 </address>
             </div>
             <div class="col-md-3 col-lg-3 hidden-xs hidden-sm">
@@ -526,7 +505,6 @@
                     项目部署：<br>
                     <a target="_blank" href="https://www.aliyun.com/">阿里云计算</a><br>
                     <a target="_blank" href="http://www.miitbeian.gov.cn/">鄂ICP备17029283号</a><br>
-                    CHINA
                 </address>
             </div>
             <div class="col-md-3 col-lg-3 hidden-xs hidden-sm">
@@ -534,7 +512,6 @@
                     友情链接：<br>
                     <a target="_blank" href="http://v3.bootcss.com/">bootstrap中文网</a><br>
                     <a target="_blank" href="http://glyphicons.com/">Halflings字体图标</a><br>
-                    CHINA
                 </address>
             </div>
         </div>
@@ -545,20 +522,20 @@
         show_user('login_nickname', 'login_password');
         login_session('refresh');
     };
-    //    window._bd_share_config = {
-    //        "common": {
-    //            "bdSnsKey": {},
-    //            "bdText": "",
-    //            "bdMini": "2",
-    //            "bdPic": "",
-    //            "bdStyle": "0",
-    //            "bdSize": "16"
-    //        },
-    //        "share": {},
-    //        "image": {"viewList": ["qzone", "tsina", "tqq", "renren", "weixin"], "viewText": "分享到：", "viewSize": "16"},
-    //        "selectShare": {"bdContainerClass": null, "bdSelectMiniList": ["qzone", "tsina", "tqq", "renren", "weixin"]}
-    //    };
-    //    with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];
+        window._bd_share_config = {
+            "common": {
+                "bdSnsKey": {},
+                "bdText": "",
+                "bdMini": "2",
+                "bdPic": "",
+                "bdStyle": "0",
+                "bdSize": "16"
+            },
+            "share": {},
+            "image": {"viewList": ["qzone", "tsina", "tqq", "renren", "weixin"], "viewText": "分享到：", "viewSize": "16"},
+            "selectShare": {"bdContainerClass": null, "bdSelectMiniList": ["qzone", "tsina", "tqq", "renren", "weixin"]}
+        };
+        with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];
 </script>
 </body>
 </html>

@@ -11,7 +11,7 @@
         font-size: 62.5%;
     }
     .modal-dialog{
-        width: 450px !important;
+        width: 480px !important;
     }
 }
 /*中等屏幕*/
@@ -29,7 +29,7 @@
         font-size: 100%;
     }
     .modal-dialog{
-        width: 540px !important;
+        width: 480px !important;
     }
 }
 html,body{
@@ -104,8 +104,6 @@ nav{
     z-index: 99999;
     font-size: 20px;
     color: black;
-    border-bottom: 1px solid gray;
-    margin: 0;
 }
 .navbar{
     margin-bottom: 0;
@@ -156,11 +154,11 @@ footer{
     z-index: 9999;
     background:rgba(255,255,255,0.8);
     color: black;
-    font-size: 1rem;
+    font-size: 0.8rem;
     border-radius: 5px;
 }
 footer address{
-    padding: 25px 25px 0 25px;
+    padding: 15px 25px 0 25px;
     border-right: 1px solid gainsboro;
     border-left: 1px solid gainsboro;
 }
@@ -196,19 +194,15 @@ footer address{
     left: 0;
     z-index: 0;
 }
-.bdsharebuttonbox{
-    padding: 10px;
-    text-align: center;
-    position: fixed;
-    top: 7rem;
-    right: 140px;
-    height: auto;
-    background-color: gainsboro;
+#share{
+    padding: 5px;
     border-radius: 5px;
-    border: 1px solid gray;
-    box-shadow: 2px 2px 2px 2px gray;
-    font-size: 1.40rem;
+    background: rgba(255,255,255,0.9);
+    position: relative;
+    z-index: 9999;
 }
-
+#share a{
+    margin: 5px 15px;
+}
 
 

@@ -9,10 +9,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -33,9 +30,9 @@ public class Enterprise {
         int assessment=0;
         DBManager conndb = new DBManager();
         Connection conn = conndb.getConnection();
-        String sql = "insert into company (nickname,password,name,industry,telephone,email,address,assessment) values(?,?,?,?,?,?,?,?)";
+        String sql = "{call enterprise_register(?,?,?,?,?,?,?,?)}";
         try {
-            PreparedStatement ps = conn.prepareStatement(sql);
+            CallableStatement ps = conn.prepareCall(sql);
             ps.setString(1, nickname);
             ps.setString(2, password);
             ps.setString(3, name);
@@ -79,7 +76,7 @@ public class Enterprise {
 
         DBManager conndb = new DBManager();
         Connection conn = conndb.getConnection();
-        String sql = "update company set nickname=?,password=?,name=?,industry=?,telephone=?,address=? where nickname=? AND password=?";
+        String sql = "{call modifyEnterprise(?,?,?,?,?,?)}";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, nickname);
@@ -88,8 +85,6 @@ public class Enterprise {
             ps.setString(4, industry);
             ps.setString(5, telephone);
             ps.setString(6, address);
-            ps.setString(7, nickname);
-            ps.setString(8, password);
             boolean tag = ps.execute();
             if (!tag) {
                 String str = "{\"msg\":\"modify_user_success\"}";
@@ -121,16 +116,20 @@ public class Enterprise {
         DBManager conndb = new DBManager();
         Connection conn = conndb.getConnection();
         try {
-            String sql = "select name,address,industry,email from company where nickname=? and password=?";
-            PreparedStatement ps = conn.prepareStatement(sql);
+            String sql = "{call ininJobByCompany(?,?,?,?,?,?)}";
+            CallableStatement ps = conn.prepareCall(sql);
             ps.setString(1, nickname);
             ps.setString(2, password);
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                String name = rs.getString("name");
-                String address = rs.getString("address");
-                String industry = rs.getString("industry");
-                String email = rs.getString("email");
+            ps.registerOutParameter(3,Types.VARCHAR);
+            ps.registerOutParameter(4,Types.VARCHAR);
+            ps.registerOutParameter(5,Types.VARCHAR);
+            ps.registerOutParameter(6,Types.VARCHAR);
+            ps.execute();
+            if (ps.getString(3)!=null) {
+                String name = ps.getString(3);
+                String address = ps.getString(4);
+                String industry = ps.getString(5);
+                String email = ps.getString(6);
                 JSONObject job = new JSONObject();
                 job.put("name", name);
                 job.put("address", address);
@@ -139,7 +138,6 @@ public class Enterprise {
                 response.getWriter().print(job.toString());
                 response.getWriter().flush();
                 response.getWriter().close();
-                rs.close();
                 ps.close();
                 conn.close();
             }

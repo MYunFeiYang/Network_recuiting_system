@@ -16,12 +16,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.Date;
 
 public class Common {
     public void CheckEmail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -74,31 +72,27 @@ public class Common {
         DBManager conndb = new DBManager();
         Connection conn = conndb.getConnection();
         String sql = null;
-        String sql1 = null;
         switch (login_type) {
             case "person":
-                sql = "SELECT assessment FROM person WHERE (nickname=? AND password=?)";
-                sql1 = "UPDATE person SET login_time=? WHERE (nickname=? AND password=?)";
+                sql = "{call person_login(?,?,?,?)}";
                 break;
             case "enterprise":
-                sql = "SELECT assessment FROM company WHERE (nickname=? AND password=?)";
-                sql1 = "UPDATE company SET login_time=? WHERE (nickname=? AND password=?)";
+                sql = "{call enterprise_login(?,?,?,?)}";
                 break;
             case "admin":
-                sql = "SELECT nickname FROM admin WHERE (nickname=? AND password=?)";
+                sql = "{call admin_login(?,?,?)}";
                 break;
         }
         try {
-            PreparedStatement ps;
-            PreparedStatement ps1 = null;
-            ResultSet rs;
+            CallableStatement ps;
             switch (login_type) {
                 case "admin":
-                    ps = conn.prepareStatement(sql);
+                    ps = conn.prepareCall(sql);
                     ps.setString(1, nickname);
                     ps.setString(2, password);
-                    rs = ps.executeQuery();
-                    if (rs.next()) {
+                    ps.registerOutParameter(3,Types.VARCHAR);
+                    ps.execute();
+                    if (ps.getString(3)!=null) {
                         String str = "{\"msg\":\"login_success\"}";
                         response.getWriter().print(str);
                         response.getWriter().flush();
@@ -112,18 +106,14 @@ public class Common {
                     }
                     break;
                 default:
-                    ps = conn.prepareStatement(sql);
-                    ps1 = conn.prepareStatement(sql1);
+                    ps = conn.prepareCall(sql);
+                    ps.registerOutParameter(4, Types.BIT);
                     ps.setString(1, nickname);
                     ps.setString(2, password);
-                    ps1.setString(1, dataString);
-                    ps1.setString(2, nickname);
-                    ps1.setString(3, password);
-                    rs = ps.executeQuery();
-                    ps1.executeUpdate();
-                    if (rs.next()) {
-                        int assessment = rs.getInt(1);
-                        if (assessment == 1) {
+                    ps.setString(3,dataString);
+                    ps.execute();
+                    if (ps.getInt(4)!=-1) {
+                        if (ps.getInt(4)==1) {
                             String str = "{\"msg\":\"login_success\"}";
                             response.getWriter().print(str);
                             response.getWriter().flush();
@@ -141,13 +131,12 @@ public class Common {
                         response.getWriter().close();
                     }
             }
-            rs.close();
-            ps1.close();
             ps.close();
             conn.close();
         } catch (SQLException e) {
             // TODO 自动生成的 catch 块
             e.printStackTrace();
+            response.getWriter().print("{\"msg\":"+e+"}");
         }
     }
 

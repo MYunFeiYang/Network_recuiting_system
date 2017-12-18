@@ -30,7 +30,7 @@ function init_job() {
         type: 'POST',
         dataType: 'JSON',
         success: function (data) {
-            if (data.length > 0) {
+            if (data!==null) {
                 document.getElementById("name").value = data.name;
                 document.getElementById("address").value = data.address;
                 document.getElementById("industry").value = data.industry;

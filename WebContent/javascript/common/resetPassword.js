@@ -114,3 +114,6 @@ function updatePassword_result(data) {
         document.getElementById("btu_resetPassword").innerHTML="<a href='index.html' style='color: white'>返回登录</a>"
     }
 }
+function close_parent(obj) {
+    obj.parentNode.style.display="none";
+}

@@ -32,7 +32,7 @@ function init_resume() {
         type: 'POST',
         dataType: 'JSON',
         success: function (data) {
-            if (data.length>0) {
+            if (data!==null) {
                 document.getElementById("resume_name").value = data.name;
                 document.getElementById("telephone").value = data.telephone;
                 document.getElementById("resume_email").value = data.email;

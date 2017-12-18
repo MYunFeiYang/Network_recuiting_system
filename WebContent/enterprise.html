@@ -15,6 +15,8 @@
     <script src="javascript/enterprise/job.js"></script>
     <script src="javascript/enterprise/address_industry_position.js"></script>
     <script src="javascript/util/night.js"></script>
+    <script src="javascript/util/key_event.js"></script>
+    <script src="javascript/admin/admin.js"></script>
 </head>
 <body>
 <div class="container-fluid">
@@ -110,7 +112,14 @@
                     <span class="input-group-btn">
                         <button class="btn btn-default">有效时间</button>
                     </span>
-                                <input type="text" class="form-control" id="effective_time" placeholder="有效时间">
+                                <select class="form-control" id="effective_time" title="有效时间">
+                                    <option value="3">三天</option>
+                                    <option value="7">七天</option>
+                                    <option value="15">十五天</option>
+                                    <option value="30">一个月</option>
+                                    <option value="90">三个月</option>
+                                    <option value="180">半年</option>
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -158,7 +167,7 @@
                 <div class="panel panel-primary leftMenu">
                     <!-- 利用data-target指定要折叠的分组列表 -->
                     <div class="panel-heading" id="collapseListGroupHeading4" data-toggle="collapse" data-target="#collapseListGroup4" role="tab" >
-                        <h4 class="panel-title">
+                        <h4 class="panel-title path1" onclick="path_navigation(this)">
                             岗位
                             <span class="glyphicon glyphicon-chevron-up right"></span>
                         </h4>
@@ -168,13 +177,13 @@
                         <ul class="list-group">
                             <li class="list-group-item">
                                 <!-- 利用data-target指定URL -->
-                                <button class="menu-item-left" data-toggle="modal" data-target="#jobs" onclick="init_job();get_address('address');get_industry('industry');">
+                                <button class="menu-item-left path2" data-toggle="modal" data-target="#jobs" onclick="init_job();get_address('address');get_industry('industry');path_navigation(this)">
                                     <span class="glyphicon glyphicon-triangle-right"></span>岗位发布
                                 </button>
                             </li>
                             <li class="list-group-item">
                                 <!-- 利用data-target指定URL -->
-                                <button class="menu-item-left" onclick="get_job1()">
+                                <button class="menu-item-left path2" onclick="get_job1();path_navigation(this)">
                                     <span class="glyphicon glyphicon-triangle-right"></span>岗位管理
                                 </button>
                             </li>
@@ -183,7 +192,7 @@
                 </div>
                 <div class="panel panel-primary leftMenu">
                     <div class="panel-heading" id="collapseListGroupHeading3" data-toggle="collapse" data-target="#collapseListGroup3" role="tab" >
-                        <h4 class="panel-title">
+                        <h4 class="panel-title path1" onclick="path_navigation(this)">
                             设置
                             <span class="glyphicon glyphicon-chevron-down right"></span>
                         </h4>
@@ -191,22 +200,22 @@
                     <div id="collapseListGroup3" class="panel-collapse collapse" role="tabpanel" aria-labelledby="collapseListGroupHeading3">
                         <ul class="list-group">
                             <li class="list-group-item">
-                                <button class="menu-item-left" onclick="open_night()">
+                                <button class="menu-item-left path2" onclick="open_night();path_navigation(this)">
                                     <span class="glyphicon glyphicon-triangle-right"></span>开启夜间模式
                                 </button>
                             </li>
                             <li class="list-group-item">
-                                <button class="menu-item-left" onclick="close_night()">
+                                <button class="menu-item-left path2" onclick="close_night();path_navigation(this)">
                                     <span class="glyphicon glyphicon-triangle-right"></span>关闭夜间模式
                                 </button>
                             </li>
                             <li class="list-group-item ">
-                                <button class="menu-item-left" onclick="bigger()">
+                                <button class="menu-item-left path2" onclick="bigger();path_navigation(this)">
                                     <span class="glyphicon glyphicon-triangle-right"></span>调高亮度
                                 </button>
                             </li>
-                            <li class="list-group-item " onclick="path_navigation(this)">
-                                <button class="menu-item-left" onclick="smaller()">
+                            <li class="list-group-item ">
+                                <button class="menu-item-left path2" onclick="smaller();path_navigation(this)">
                                     <span class="glyphicon glyphicon-triangle-right"></span>调低亮度
                                 </button>
                             </li>
@@ -216,6 +225,10 @@
             </div>
         </div>
         <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
+            <ol class="breadcrumb">
+                <li><a>问道网</a></li>
+                <li><a>企业中心</a></li>
+            </ol>
             <table class="table table-striped table-bordered table-hover table-condensed table-responsive hidden">
                 <thead>
                 <tr>

@@ -43,7 +43,7 @@
        padding: 5px;
     }
     .marquee{
-        height: 420px !important;
+        height: 360px !important;
     }
 }
 /*大屏幕*/
@@ -52,7 +52,7 @@
         font-size: 100% !important;
     }
     .marquee{
-        height: 480px !important;
+        height: 420px !important;
     }
 }
 body{
@@ -151,7 +151,7 @@ table tbody tr td a{
 .marquee {
     margin:0;
     width:100%;
-    height:360px;
+    height:320px;
     overflow: hidden;
     padding: 10px;
 }

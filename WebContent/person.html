@@ -12,8 +12,11 @@
     <!--javascript-->
     <script src="javascript/jquery-3.2.1.js"></script>
     <script src="bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+    <script src="javascript/person/person.js"></script>
     <script src="javascript/person/resume.js"></script>
+    <script src="javascript/admin/admin.js"></script>
     <script src="javascript/util/night.js"></script>
+    <script src="javascript/util/key_event.js"></script>
 </head>
 <body>
 <div class="modal fade" id="addresume" tabindex="-1" role="dialog" aria-labelledby="myaddresume"
@@ -201,7 +204,7 @@
                 <div class="panel panel-primary leftMenu">
                     <!-- 利用data-target指定要折叠的分组列表 -->
                     <div class="panel-heading" id="collapseListGroupHeading4" data-toggle="collapse" data-target="#collapseListGroup4" role="tab" >
-                        <h4 class="panel-title">
+                        <h4 class="panel-title path1" onclick="path_navigation(this)">
                             简历
                             <span class="glyphicon glyphicon-chevron-up right"></span>
                         </h4>
@@ -211,19 +214,19 @@
                         <ul class="list-group">
                             <li class="list-group-item">
                                 <!-- 利用data-target指定URL -->
-                                <button class="menu-item-left" data-toggle="modal" data-target="#addresume" onclick="init_resume()">
+                                <button class="menu-item-left path2" data-toggle="modal" data-target="#addresume" onclick="init_resume();path_navigation(this)">
                                     <span class="glyphicon glyphicon-triangle-right"></span>添加简历
                                 </button>
                             </li>
                             <li class="list-group-item">
                                 <!-- 利用data-target指定URL -->
-                                <button class="menu-item-left" onclick="get_resume1()">
+                                <button class="menu-item-left path2" onclick="get_resume1();path_navigation(this)">
                                     <span class="glyphicon glyphicon-triangle-right"></span>简历管理
                                 </button>
                             </li>
                             <li class="list-group-item">
                                 <!-- 利用data-target指定URL -->
-                                <button class="menu-item-left" data-toggle="modal" data-target="#upload">
+                                <button class="menu-item-left path2" data-toggle="modal" data-target="#upload" onclick="path_navigation(this)">
                                     <span class="glyphicon glyphicon-triangle-right"></span>上传简历
                                 </button>
                             </li>
@@ -232,7 +235,7 @@
                 </div>
                 <div class="panel panel-primary leftMenu">
                     <div class="panel-heading" id="collapseListGroupHeading3" data-toggle="collapse" data-target="#collapseListGroup3" role="tab" >
-                        <h4 class="panel-title">
+                        <h4 class="panel-title path1" onclick="path_navigation(this)">
                             设置
                             <span class="glyphicon glyphicon-chevron-down right"></span>
                         </h4>
@@ -240,22 +243,22 @@
                     <div id="collapseListGroup3" class="panel-collapse collapse" role="tabpanel" aria-labelledby="collapseListGroupHeading3">
                         <ul class="list-group">
                             <li class="list-group-item">
-                                <button class="menu-item-left" onclick="open_night()">
+                                <button class="menu-item-left path2" onclick="open_night();path_navigation(this)">
                                     <span class="glyphicon glyphicon-triangle-right"></span>开启夜间模式
                                 </button>
                             </li>
                             <li class="list-group-item">
-                                <button class="menu-item-left" onclick="close_night()">
+                                <button class="menu-item-left path2" onclick="close_night();path_navigation(this)">
                                     <span class="glyphicon glyphicon-triangle-right"></span>关闭夜间模式
                                 </button>
                             </li>
                             <li class="list-group-item">
-                                <button class="menu-item-left" onclick="bigger()">
+                                <button class="menu-item-left path2" onclick="bigger();path_navigation(this)">
                                     <span class="glyphicon glyphicon-triangle-right"></span>调高亮度
                                 </button>
                             </li>
                             <li class="list-group-item">
-                                <button class="menu-item-left" onclick="smaller()">
+                                <button class="menu-item-left path2" onclick="smaller();path_navigation(this)">
                                     <span class="glyphicon glyphicon-triangle-right"></span>调低亮度
                                 </button>
                             </li>
@@ -265,6 +268,10 @@
             </div>
         </div>
         <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
+            <ol class="breadcrumb">
+                <li><a>问道网</a></li>
+                <li><a>个人中心</a></li>
+            </ol>
             <table class="table table-striped table-bordered table-hover table-condensed table-responsive hidden">
                 <thead>
                 <tr>
@@ -289,4 +296,9 @@
     </div>
 </div>
 </body>
+<script>
+    window.onload=function () {
+        auto_match();
+    }
+</script>
 </html>
