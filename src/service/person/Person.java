@@ -2,6 +2,7 @@ package service.person;
 
 import model.DBManager;
 import model.person.Resume;
+import model.person.User;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
@@ -30,9 +31,9 @@ public class Person {
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");//设置日期格式
         String dataString = df.format(new Date());// new Date()为获取当前系统时间
         String email = request.getParameter("email");
-        int assessment=0;
-        DBManager conndb = new DBManager();
-        Connection conn = conndb.getConnection();
+        int assessment = 0;
+        DBManager dbmanager = new DBManager();
+        Connection conn = dbmanager.getConnection();
         String sql = "{call person_register(?,?,?,?,?,?,?)}";
         try {
             CallableStatement ps = conn.prepareCall(sql);
@@ -42,18 +43,55 @@ public class Person {
             ps.setString(4, telephone);
             ps.setString(5, email);
             ps.setString(6, dataString);
-            ps.setInt(7,assessment);
+            ps.setInt(7, assessment);
+            ps.execute();
             int tag = ps.executeUpdate();
             if (tag == 1) {
                 String str = "{\"msg\":\"assessing\"}";
                 response.getWriter().print(str);
                 response.getWriter().flush();
                 response.getWriter().close();
-            } else {
-                String str = "{\"msg\":\"fail\"}";
-                response.getWriter().print(str);
-                response.getWriter().flush();
-                response.getWriter().close();
+            }
+            ps.close();
+            conn.close();
+        } catch (SQLException e) {
+            // TODO 自动生成的 catch 块
+            e.printStackTrace();
+            String str = "{\"msg\":\"fail\"}";
+            response.getWriter().print(str);
+            response.getWriter().flush();
+            response.getWriter().close();
+        }
+    }
+
+    public void modifyUserBeforeSelect(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/xml; charset=UTF-8");
+        //以下两句为取消在本地的缓存
+        response.setHeader("Cache-Control", "no-cache");
+        response.setHeader("Pragma", "no-cache");
+        String nickname = request.getParameter("nickname");
+        String password = request.getParameter("password");
+
+        DBManager dbmanager = new DBManager();
+        Connection conn = dbmanager.getConnection();
+        String sql = "{call modifyPerosnBeforeSelect(?,?,?,?,?)}";
+        try {
+            CallableStatement ps = conn.prepareCall(sql);
+            ps.setString(1, nickname);
+            ps.setString(2, password);
+            ps.registerOutParameter(3, Types.VARCHAR);
+            ps.registerOutParameter(4, Types.VARCHAR);
+            ps.registerOutParameter(5, Types.VARCHAR);
+            ps.execute();
+            if (ps.getString(3) != null) {
+                User user = new User();
+                user.setNickname(nickname);
+                user.setPassword(password);
+                user.setName(ps.getString(3));
+                user.setTelephone(ps.getString(4));
+                user.setEmail(ps.getString(5));
+                response.getWriter().print(JSONObject.fromObject(user).toString());
             }
             ps.close();
             conn.close();
@@ -69,35 +107,40 @@ public class Person {
         //以下两句为取消在本地的缓存
         response.setHeader("Cache-Control", "no-cache");
         response.setHeader("Pragma", "no-cache");
-        String telephone = request.getParameter("telephone");
         String nickname = request.getParameter("nickname");
         String password = request.getParameter("password");
+        String name = request.getParameter("name");
+        String telephone = request.getParameter("telephone");
+        String email = request.getParameter("email");
+        String oldNickname = request.getParameter("oldnickname");
+        String oldPassword = request.getParameter("oldpassword");
 
-        DBManager conndb = new DBManager();
-        Connection conn = conndb.getConnection();
-        String sql = "{call modifyPerosn(?,?,?)}";
+        DBManager dbmanager = new DBManager();
+        Connection conn = dbmanager.getConnection();
+        String sql = "{call modifyPerson(?,?,?,?,?,?,?)}";
         try {
             CallableStatement ps = conn.prepareCall(sql);
             ps.setString(1, nickname);
             ps.setString(2, password);
-            ps.setString(3, telephone);
-            boolean tag = ps.execute();
-            if (!tag) {
-                String str = "{\"msg\":\"modify_user_success\"}";
-                response.getWriter().print(str);
-                response.getWriter().flush();
-                response.getWriter().close();
-            } else {
-                String str = "{\"msg\":\"modify_user_fail\"}";
-                response.getWriter().print(str);
-                response.getWriter().flush();
-                response.getWriter().close();
-            }
+            ps.setString(3, name);
+            ps.setString(4, telephone);
+            ps.setString(5, email);
+            ps.setString(6, oldNickname);
+            ps.setString(7, oldPassword);
+            ps.execute();
+            String str = "{\"msg\":\"modify_user_success\"}";
+            response.getWriter().print(str);
+            response.getWriter().flush();
+            response.getWriter().close();
             ps.close();
             conn.close();
         } catch (SQLException e) {
             // TODO 自动生成的 catch 块
             e.printStackTrace();
+            String str = "{\"msg\":\"modify_user_fail\"}";
+            response.getWriter().print(str);
+            response.getWriter().flush();
+            response.getWriter().close();
         }
     }
 
@@ -110,18 +153,18 @@ public class Person {
         String nickname = request.getParameter("nickname");
         String password = request.getParameter("password");
         // System.out.println(nickname);
-        DBManager conndb = new DBManager();
-        Connection conn = conndb.getConnection();
+        DBManager dbmanager = new DBManager();
+        Connection conn = dbmanager.getConnection();
         try {
             String sql = "{call initResumeByPerson(?,?,?,?,?)}";
             CallableStatement ps = conn.prepareCall(sql);
             ps.setString(1, nickname);
             ps.setString(2, password);
-            ps.registerOutParameter(3,Types.VARCHAR);
-            ps.registerOutParameter(4,Types.VARCHAR);
-            ps.registerOutParameter(5,Types.VARCHAR);
+            ps.registerOutParameter(3, Types.VARCHAR);
+            ps.registerOutParameter(4, Types.VARCHAR);
+            ps.registerOutParameter(5, Types.VARCHAR);
             ps.execute();
-            if (ps.getString(3)!=null) {
+            if (ps.getString(3) != null) {
                 String name = ps.getString(3);
                 String telephone = ps.getString(4);
                 String email = ps.getString(5);
@@ -163,8 +206,8 @@ public class Person {
         String email = request.getParameter("email");
         Random r = new Random();
         String identification = nickname + password + r.nextInt(100);
-        DBManager conndb = new DBManager();
-        Connection conn = conndb.getConnection();
+        DBManager dbmanager = new DBManager();
+        Connection conn = dbmanager.getConnection();
         String sql = "call addResume(?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
         try {
             CallableStatement ps = conn.prepareCall(sql);
@@ -182,23 +225,20 @@ public class Person {
             ps.setString(12, graduation_data);
             ps.setString(13, telephone);
             ps.setString(14, email);
-            int tag = ps.executeUpdate();
-            if (tag == 1) {
-                String str = "{\"msg\":\"add_resume_success\"}";
-                response.getWriter().print(str);
-                response.getWriter().flush();
-                response.getWriter().close();
-            } else {
-                String str = "{\"msg\":\"add_resume_fail\"}";
-                response.getWriter().print(str);
-                response.getWriter().flush();
-                response.getWriter().close();
-            }
+            ps.executeUpdate();
+            String str = "{\"msg\":\"add_resume_success\"}";
+            response.getWriter().print(str);
+            response.getWriter().flush();
+            response.getWriter().close();
             ps.close();
             conn.close();
         } catch (SQLException e) {
             // TODO 自动生成的 catch 块
             e.printStackTrace();
+            String str = "{\"msg\":\"add_resume_fail\"}";
+            response.getWriter().print(str);
+            response.getWriter().flush();
+            response.getWriter().close();
         }
     }
 
@@ -210,15 +250,16 @@ public class Person {
         response.setHeader("Pragma", "no-cache");
         String nickname = request.getParameter("nickname");
         String password = request.getParameter("password");
-        DBManager conndb = new DBManager();
-        Connection conn = conndb.getConnection();
+        DBManager dbmanager = new DBManager();
+        Connection conn = dbmanager.getConnection();
         List<Resume> resumeList = new ArrayList<>();
         try {
-            String sql = "select identification,name,age,sex,origin,collage,specialty,degree,admission_data,graduation_data from resume where (nickname=? and password=?)";
-            PreparedStatement ps = conn.prepareStatement(sql);
+            String sql = "{call manageResumeBeforeSelect(?,?)}";
+            CallableStatement ps = conn.prepareCall(sql);
             ps.setString(1, nickname);
             ps.setString(2, password);
-            ResultSet rs = ps.executeQuery();
+            ps.execute();
+            ResultSet rs=ps.getResultSet();
             while (rs.next()) {
                 Resume resume = new Resume();
                 resume.setIdentification(rs.getString(1));
@@ -258,12 +299,11 @@ public class Person {
         String admission_data = request.getParameter("admission_data");
         String graduation_data = request.getParameter("graduation_data");
 
-        DBManager conndb = new DBManager();
-        Connection conn = conndb.getConnection();
-        String sql = "UPDATE resume SET age=?,collage=?,specialty=?,"
-                + "degree=?,admission_data=?,graduation_data=? WHERE identification=?";
+        DBManager dbmanager = new DBManager();
+        Connection conn = dbmanager.getConnection();
+        String sql = "{call modifyResume(?,?,?,?,?,?,?)}";
         try {
-            PreparedStatement ps = conn.prepareStatement(sql);
+            CallableStatement ps = conn.prepareCall(sql);
             ps.setString(1, age);
             ps.setString(2, collage);
             ps.setString(3, specialty);
@@ -271,23 +311,21 @@ public class Person {
             ps.setString(5, admission_data);
             ps.setString(6, graduation_data);
             ps.setString(7, identification);
-            int tag = ps.executeUpdate();
-            if (tag == 1) {
-                String str = "{\"msg\":\"modify_resume_success\"}";
-                response.getWriter().print(str);
-                response.getWriter().flush();
-                response.getWriter().close();
-            } else {
-                String str = "{\"msg\":\"modify_resume_fail\"}";
-                response.getWriter().print(str);
-                response.getWriter().flush();
-                response.getWriter().close();
-            }
+            ps.executeUpdate();
+            String str = "{\"msg\":\"modify_resume_success\"}";
+            response.getWriter().print(str);
+            response.getWriter().flush();
+            response.getWriter().close();
+
             ps.close();
             conn.close();
         } catch (SQLException e) {
             // TODO 自动生成的 catch 块
             e.printStackTrace();
+            String str = "{\"msg\":\"modify_resume_fail\"}";
+            response.getWriter().print(str);
+            response.getWriter().flush();
+            response.getWriter().close();
         }
     }
 
@@ -298,47 +336,44 @@ public class Person {
         response.setHeader("Cache-Control", "no-cache");
         response.setHeader("Pragma", "no-cache");
         String identification = request.getParameter("identification");
-        DBManager conndb = new DBManager();
-        Connection conn = conndb.getConnection();
+        DBManager dbmanager = new DBManager();
+        Connection conn = dbmanager.getConnection();
         try {
-            String sql = "DELETE resume WHERE identification=?";
+            String sql = "{call deleteResume(?)}";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, identification);
-            int tag = ps.executeUpdate();
-            if (tag == 1) {
-                String str = "{\"msg\":\"delete_resume_success\"}";
-                response.getWriter().print(str);
-                response.getWriter().flush();
-                response.getWriter().close();
-            } else {
-                String str = "{\"msg\":\"delete_resume_fail\"}";
-                response.getWriter().print(str);
-                response.getWriter().flush();
-                response.getWriter().close();
-            }
+            ps.executeUpdate();
+            String str = "{\"msg\":\"delete_resume_success\"}";
+            response.getWriter().print(str);
+            response.getWriter().flush();
+            response.getWriter().close();
             ps.close();
             conn.close();
         } catch (SQLException e) {
             // TODO 自动生成的 catch 块
             e.printStackTrace();
+            String str = "{\"msg\":\"delete_resume_fail\"}";
+            response.getWriter().print(str);
+            response.getWriter().flush();
+            response.getWriter().close();
         }
     }
 
-    public void auto_match(HttpServletRequest request,HttpServletResponse response)throws ServletException,IOException{
-        String nickname=request.getParameter("nickname");
-        String password=request.getParameter("password");
-        DBManager dbManager=new DBManager();
-        Connection conn=dbManager.getConnection();
+    public void auto_match(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String nickname = request.getParameter("nickname");
+        String password = request.getParameter("password");
+        DBManager dbManager = new DBManager();
+        Connection conn = dbManager.getConnection();
         try {
-            String sql="SELECT origin,degree FROM resume WHERE (nickname=? AND password=?)";
-            PreparedStatement ps=conn.prepareStatement(sql);
-            ps.setString(1,nickname);
-            ps.setString(2,password);
-            ResultSet rs=ps.executeQuery();
-            while (rs.next()){
+            String sql = "SELECT origin,degree FROM resume WHERE (nickname=? AND password=?)";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, nickname);
+            ps.setString(2, password);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
 
             }
-        }catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }

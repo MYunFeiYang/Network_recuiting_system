@@ -18,6 +18,9 @@ public class servletPerson extends HttpServlet {
             case "register":
                 person.register(request, response);
                 break;
+            case "modifyUserBeforeSelect":
+                person.modifyUserBeforeSelect(request,response);
+                break;
             case "modifyUser":
                 person.modifyUser(request, response);
                 break;

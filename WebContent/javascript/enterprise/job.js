@@ -52,7 +52,7 @@ function add_job() {
     let name = document.getElementById("name").value;
     let address = document.getElementById("address").value;
     let industry = document.getElementById("industry").value;
-    let job_name = document.getElementById("position").value;
+    let position = document.getElementById("position").value;
     let number = document.getElementById("number").value;
     let salary = document.getElementById("salary").value;
     let publish_time = document.getElementById("publish_time").value;
@@ -75,7 +75,7 @@ function add_job() {
         job.name = name;
         job.address = address;
         job.industry = industry;
-        job.job_name = job_name;
+        job.position = position;
         job.number = number;
         job.salary = salary;
         job.publish_time = publish_time;

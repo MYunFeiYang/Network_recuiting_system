@@ -8,6 +8,66 @@ function setCookie(c_name, value, expireDays) {
         ((expireDays === null) ? "" : ";expires=" + existDate.toGMTString());
 }
 
+function register_person() {
+    let user = {};
+    user.nickname = document.getElementById("person_nickname").value;
+    user.password = document.getElementById("person_password").value;
+    user.name = document.getElementById("person_name").value;
+    user.telephone = document.getElementById("person_telephone").value;
+    user.email = document.getElementById("person_email").value;
+    $.ajax({
+        url: "/person?person=register",
+        data: user,
+        async: true,
+        type: "POST",
+        dataType: "JSON",
+        success: function (data) {
+            confirm_box_c = document.getElementById("confirm_person_box");
+            if (data.msg === "assessing") {
+                confirm_box_c.innerHTML = "正在审核中";
+                confirm_box_c.setAttribute("class","alert-success");
+            }else {
+                confirm_box_c.innerHTML = "用户名和密码已存在";
+                confirm_box_c.setAttribute("class","alert-warning");
+            }
+        },
+        fail: function (data) {
+            alert(data);
+        },
+    });
+}
+
+function register_enterprise() {
+    let company = {};
+    company.nickname = document.getElementById("enterprise_nickname").value;
+    company.password = document.getElementById("enterprise_password").value;
+    company.name = document.getElementById("enterprise_name").value;
+    company.industry = document.getElementById("enterprise_industry").value;
+    company.telephone = document.getElementById("enterprise_telephone").value;
+    company.email = document.getElementById("enterprise_email").value;
+    company.address = document.getElementById("enterprise_address").value;
+    $.ajax({
+        url: "/enterprise?enterprise=register",
+        data: company,
+        async: true,
+        type: "POST",
+        dataType: "JSON",
+        success: function (data) {
+            confirm_box_c=document.getElementById("confirm_enterprise_box");
+            if (data.msg==="assessing"){
+                confirm_box_c.innerHTML="正在审核中";
+                confirm_box_c.setAttribute('class', 'alert-success');
+            }else {
+                confirm_box_c.innerHTML="该用户名和密码已存在";
+                confirm_box_c.setAttribute('class', 'alert-warning');
+            }
+        },
+        fail: function (data) {
+            alert(data);
+        },
+    });
+}
+
 function login() {
     let user = {};
     user.login_type = document.getElementById('login_type').value;
@@ -37,9 +97,11 @@ function login() {
         }
     })
 }
+
 function close_login() {
     document.getElementById("close_login").click();
 }
+
 function login_session(data) {
     let user = {};
     user.login = data;
@@ -66,14 +128,6 @@ function login_session_result(data) {
         init_user(data.nickname);
         let user_center = document.getElementById("user_center");
         if (data.login_type === "person") {
-            let li2 = document.createElement("li");
-            let modify_user = document.createElement("a");
-            user_center.appendChild(li2);
-            li2.appendChild(modify_user);
-            modify_user.text = "信息修改";
-            modify_user.setAttribute("data-toggle", "modal");
-            modify_user.setAttribute("data-target", "#register-person");
-            modify_user.setAttribute("onclick", "modify_user_person()");
             let modify_resume = document.createElement("li");
             let modify_resume_a = document.createElement("a");
             user_center.appendChild(modify_resume);
@@ -98,14 +152,6 @@ function login_session_result(data) {
             log_out.setAttribute("href", "index.html");
         }
         else if (data.login_type === "enterprise") {
-            let li2 = document.createElement("li");
-            let modify_user = document.createElement("a");
-            user_center.appendChild(li2);
-            li2.appendChild(modify_user);
-            modify_user.text = "信息修改";
-            modify_user.setAttribute("data-toggle", "modal");
-            modify_user.setAttribute("data-target", "#register-enterprise");
-            modify_user.onclick = modify_user_enterprise();
             let modify_job = document.createElement("li");
             let modify_job_a = document.createElement("a");
             user_center.appendChild(modify_job);

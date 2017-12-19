@@ -168,6 +168,102 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="modifyInfo" tabindex="-1" role="dialog" aria-labelledby="mymodifyInfo"
+     onkeyup="direction_key_event('modifyInfo')">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">修改注册信息</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div id="confirm_person_box"></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="input-group">
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default glyphicon glyphicon-user">用户名</button>
+                    </span>
+                                <input type="text" class="form-control" class="nickname" placeholder="用户名">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="input-group">
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default glyphicon glyphicon-lock">密&nbsp;&nbsp;码</button>
+                    </span>
+                                <input type="password" class="form-control" class="password"
+                                       placeholder="密码">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="input-group">
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default glyphicon glyphicon-lock">确认密码</button>
+                    </span>
+                                <input type="password" class="form-control" class="confirm_password"
+                                       placeholder="确认密码">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" id="person_name_group">
+                        <div class="col-md-12">
+                            <div class="input-group">
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default glyphicon glyphicon-user">真实姓名</button>
+                    </span>
+                                <input type="text" class="form-control" class="name" placeholder="真实姓名">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" id="person_email_group">
+                        <div class="col-md-12">
+                            <div class="input-group">
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default glyphicon glyphicon-erase">电子邮件</button>
+                    </span>
+                                <input type="email" class="form-control" placeholder="电子邮件" class="email">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="input-group">
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default glyphicon glyphicon-envelope">手机号码</button>
+                    </span>
+                                <input type="text" class="form-control" class="telephone" placeholder="手机号码">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6">
+                            <input class="btn btn-sm btn-primary center-block" id="person_reg_btu"
+                                   type="button" value="保存" onclick="modify_person('confirm_person_box')">
+                        </div>
+                        <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6">
+                            <input class="btn btn-sm btn-danger center-block" type="reset" value="重置">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="modal fade" id="upload" tabindex="-1" role="dialog" aria-labelledby="myupload"
      style="margin-top: 100px">
     <div class="modal-dialog" role="document">
@@ -203,18 +299,44 @@
             <div class="panel-group table-responsive" role="tablist">
                 <div class="panel panel-primary leftMenu">
                     <!-- 利用data-target指定要折叠的分组列表 -->
-                    <div class="panel-heading" id="collapseListGroupHeading4" data-toggle="collapse" data-target="#collapseListGroup4" role="tab" >
+                    <div class="panel-heading" id="collapseListGroupHeading1" data-toggle="collapse"
+                         data-target="#collapseListGroup1" role="tab">
                         <h4 class="panel-title path1" onclick="path_navigation(this)">
-                            简历
+                            个人
                             <span class="glyphicon glyphicon-chevron-up right"></span>
                         </h4>
                     </div>
                     <!-- .panel-collapse和.collapse标明折叠元素 .in表示要显示出来 -->
-                    <div id="collapseListGroup4" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="collapseListGroupHeading4">
+                    <div id="collapseListGroup1" class="panel-collapse collapse in" role="tabpanel"
+                         aria-labelledby="collapseListGroupHeading1">
                         <ul class="list-group">
                             <li class="list-group-item">
                                 <!-- 利用data-target指定URL -->
-                                <button class="menu-item-left path2" data-toggle="modal" data-target="#addresume" onclick="init_resume();path_navigation(this)">
+                                <button class="menu-item-left path2" data-toggle="modal" data-target="#modifyInfo"
+                                        onclick="path_navigation(this);modify_person_before_select()">
+                                    <span class="glyphicon glyphicon-triangle-right"></span>修改注册信息
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="panel panel-primary leftMenu">
+                    <!-- 利用data-target指定要折叠的分组列表 -->
+                    <div class="panel-heading" id="collapseListGroupHeading4" data-toggle="collapse"
+                         data-target="#collapseListGroup4" role="tab">
+                        <h4 class="panel-title path1" onclick="path_navigation(this)">
+                            简历
+                            <span class="glyphicon glyphicon-chevron-down right"></span>
+                        </h4>
+                    </div>
+                    <!-- .panel-collapse和.collapse标明折叠元素 .in表示要显示出来 -->
+                    <div id="collapseListGroup4" class="panel-collapse collapse" role="tabpanel"
+                         aria-labelledby="collapseListGroupHeading4">
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <!-- 利用data-target指定URL -->
+                                <button class="menu-item-left path2" data-toggle="modal" data-target="#addresume"
+                                        onclick="init_resume();path_navigation(this)">
                                     <span class="glyphicon glyphicon-triangle-right"></span>添加简历
                                 </button>
                             </li>
@@ -226,7 +348,8 @@
                             </li>
                             <li class="list-group-item">
                                 <!-- 利用data-target指定URL -->
-                                <button class="menu-item-left path2" data-toggle="modal" data-target="#upload" onclick="path_navigation(this)">
+                                <button class="menu-item-left path2" data-toggle="modal" data-target="#upload"
+                                        onclick="path_navigation(this)">
                                     <span class="glyphicon glyphicon-triangle-right"></span>上传简历
                                 </button>
                             </li>
@@ -234,13 +357,15 @@
                     </div>
                 </div>
                 <div class="panel panel-primary leftMenu">
-                    <div class="panel-heading" id="collapseListGroupHeading3" data-toggle="collapse" data-target="#collapseListGroup3" role="tab" >
+                    <div class="panel-heading" id="collapseListGroupHeading3" data-toggle="collapse"
+                         data-target="#collapseListGroup3" role="tab">
                         <h4 class="panel-title path1" onclick="path_navigation(this)">
                             设置
                             <span class="glyphicon glyphicon-chevron-down right"></span>
                         </h4>
                     </div>
-                    <div id="collapseListGroup3" class="panel-collapse collapse" role="tabpanel" aria-labelledby="collapseListGroupHeading3">
+                    <div id="collapseListGroup3" class="panel-collapse collapse" role="tabpanel"
+                         aria-labelledby="collapseListGroupHeading3">
                         <ul class="list-group">
                             <li class="list-group-item">
                                 <button class="menu-item-left path2" onclick="open_night();path_navigation(this)">
@@ -297,7 +422,7 @@
 </div>
 </body>
 <script>
-    window.onload=function () {
+    window.onload = function () {
         auto_match();
     }
 </script>

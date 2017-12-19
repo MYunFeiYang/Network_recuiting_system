@@ -7,12 +7,14 @@ import java.sql.SQLException;
 
 public class DBManager {
     private static DataSource datasource;
-    Connection conn = null;
+    private Connection conn = null;
     public Connection getConnection() {
         setupJdbcPool();
         try {
             conn = datasource.getConnection();
-        } catch (SQLException e) { }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return conn;
     }
     private static void  setupJdbcPool() {
@@ -23,7 +25,7 @@ public class DBManager {
         p.setPassword("420222aaAA");
         p.setMaxActive(20);
         p.setInitialSize(5);
-        p.setMaxWait(30000);
+        p.setMaxWait(10000);
         p.setMaxIdle(10);
         p.setMinIdle(2);
         p.setDefaultAutoCommit(true);

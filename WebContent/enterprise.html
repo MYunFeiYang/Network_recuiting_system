@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>职位管理</title>
+    <title>企业中心</title>
     <link rel="shortcut icon" href="image/brand.jpg">
     <!--stylesheet-->
     <link type="text/css" rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.css">
@@ -12,6 +12,7 @@
     <!--javascript-->
     <script src="javascript/jquery-3.2.1.js"></script>
     <script src="bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+    <script src="javascript/enterprise/enterprise.js"></script>
     <script src="javascript/enterprise/job.js"></script>
     <script src="javascript/enterprise/address_industry_position.js"></script>
     <script src="javascript/util/night.js"></script>
@@ -58,7 +59,8 @@
                     <span class="input-group-btn">
                         <button class="btn btn-default">所属行业</button>
                     </span>
-                                <select class="form-control" id="industry" onchange="get_position('industry','position')" title="行业">
+                                <select class="form-control" id="industry"
+                                        onchange="get_position('industry','position')" title="行业">
 
                                 </select>
                             </div>
@@ -161,23 +163,168 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="modify-enterprise" tabindex="-1" role="dialog" aria-labelledby="mymodify-enterprise"
+         onkeyup="direction_key_event('modify-enterprise')">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myregister-enterprise">修改注册信息</h4>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div id="confirm_enterprise_box"></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="input-group">
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default glyphicon glyphicon-user">&nbsp;用户名</button>
+                    </span>
+                                    <input type="text" class="form-control" id="enterprise_nickname" placeholder="用户名">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="input-group">
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default glyphicon glyphicon-lock">密&nbsp;&nbsp;码</button>
+                    </span>
+                                    <input type="password" class="form-control" placeholder="密码"
+                                           id="enterprise_password">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="input-group">
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default glyphicon glyphicon-lock">确认密码</button>
+                    </span>
+                                    <input type="password" class="form-control" id="confirm_enterprise_password"
+                                           placeholder="确认密码">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="input-group">
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default glyphicon glyphicon-user">企业名称</button>
+                    </span>
+                                    <input type="text" class="form-control" id="enterprise_name" placeholder="企业名称">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="input-group">
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default glyphicon glyphicon-user">所属行业</button>
+                    </span>
+                                    <input class="form-control" id="enterprise_industry" placeholder="所属行业">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" id="enterprise_telephone_group">
+                            <div class="col-md-12">
+                                <div class="input-group">
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default glyphicon glyphicon-erase">电子邮箱</button>
+                    </span>
+                                    <input type="email" class="form-control" placeholder="电子邮箱">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="input-group">
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default glyphicon glyphicon-envelope">手机电话</button>
+                    </span>
+                                    <input type="text" class="form-control" placeholder="手机电话"
+                                           id="enterprise_telephone">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="input-group">
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default glyphicon glyphicon-modal-window">企业地址</button>
+                    </span>
+                                    <input class="form-control" id="enterprise_address" placeholder="企业地址">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6">
+                                <input class="btn btn-sm btn-primary center-block" type="button"
+                                       id="reg_btu" value="保存" onclick="modify_enterprise()">
+                            </div>
+                            <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6">
+                                <input type="reset" class="btn btn-sm btn-danger center-block"
+                                       value="重置">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-2 col-lg-2 col-sm-4 col-xs-6 menu">
             <div class="panel-group table-responsive" role="tablist">
                 <div class="panel panel-primary leftMenu">
                     <!-- 利用data-target指定要折叠的分组列表 -->
-                    <div class="panel-heading" id="collapseListGroupHeading4" data-toggle="collapse" data-target="#collapseListGroup4" role="tab" >
+                    <div class="panel-heading" id="collapseListGroupHeading1" data-toggle="collapse"
+                         data-target="#collapseListGroup1" role="tab">
                         <h4 class="panel-title path1" onclick="path_navigation(this)">
-                            岗位
+                            企业
                             <span class="glyphicon glyphicon-chevron-up right"></span>
                         </h4>
                     </div>
                     <!-- .panel-collapse和.collapse标明折叠元素 .in表示要显示出来 -->
-                    <div id="collapseListGroup4" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="collapseListGroupHeading4">
+                    <div id="collapseListGroup1" class="panel-collapse collapse in" role="tabpanel"
+                         aria-labelledby="collapseListGroupHeading1">
                         <ul class="list-group">
                             <li class="list-group-item">
                                 <!-- 利用data-target指定URL -->
-                                <button class="menu-item-left path2" data-toggle="modal" data-target="#jobs" onclick="init_job();get_address('address');get_industry('industry');path_navigation(this)">
+                                <button class="menu-item-left path2" data-toggle="modal"
+                                        data-target="#modify-enterprise"
+                                        onclick="path_navigation(this);modify_enterprise_before_select()">
+                                    <span class="glyphicon glyphicon-triangle-right"></span>修改信息
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="panel panel-primary leftMenu">
+                    <!-- 利用data-target指定要折叠的分组列表 -->
+                    <div class="panel-heading" id="collapseListGroupHeading4" data-toggle="collapse"
+                         data-target="#collapseListGroup4" role="tab">
+                        <h4 class="panel-title path1" onclick="path_navigation(this)">
+                            岗位
+                            <span class="glyphicon glyphicon-chevron-down right"></span>
+                        </h4>
+                    </div>
+                    <!-- .panel-collapse和.collapse标明折叠元素 .in表示要显示出来 -->
+                    <div id="collapseListGroup4" class="panel-collapse collapse" role="tabpanel"
+                         aria-labelledby="collapseListGroupHeading4">
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <!-- 利用data-target指定URL -->
+                                <button class="menu-item-left path2" data-toggle="modal" data-target="#jobs"
+                                        onclick="init_job();get_address('address');get_industry('industry');path_navigation(this)">
                                     <span class="glyphicon glyphicon-triangle-right"></span>岗位发布
                                 </button>
                             </li>
@@ -191,13 +338,15 @@
                     </div>
                 </div>
                 <div class="panel panel-primary leftMenu">
-                    <div class="panel-heading" id="collapseListGroupHeading3" data-toggle="collapse" data-target="#collapseListGroup3" role="tab" >
+                    <div class="panel-heading" id="collapseListGroupHeading3" data-toggle="collapse"
+                         data-target="#collapseListGroup3" role="tab">
                         <h4 class="panel-title path1" onclick="path_navigation(this)">
                             设置
                             <span class="glyphicon glyphicon-chevron-down right"></span>
                         </h4>
                     </div>
-                    <div id="collapseListGroup3" class="panel-collapse collapse" role="tabpanel" aria-labelledby="collapseListGroupHeading3">
+                    <div id="collapseListGroup3" class="panel-collapse collapse" role="tabpanel"
+                         aria-labelledby="collapseListGroupHeading3">
                         <ul class="list-group">
                             <li class="list-group-item">
                                 <button class="menu-item-left path2" onclick="open_night();path_navigation(this)">

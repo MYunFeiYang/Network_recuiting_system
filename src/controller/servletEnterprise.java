@@ -18,6 +18,9 @@ public class servletEnterprise extends HttpServlet {
             case "register":
                 enterprise.register(request, response);
                 break;
+            case "modifyEnterpriseBeforeSelect":
+                enterprise.modifyUserBeforeSelect(request,response);
+                break;
             case "modifyUser":
                 enterprise.modifyUser(request, response);
                 break;

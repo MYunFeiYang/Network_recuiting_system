@@ -27,9 +27,9 @@ public class Enterprise {
         String telephone = request.getParameter("telephone");
         String email = request.getParameter("email");
         String address = request.getParameter("address");
-        int assessment=0;
-        DBManager conndb = new DBManager();
-        Connection conn = conndb.getConnection();
+        int assessment = 0;
+        DBManager dbmanager = new DBManager();
+        Connection conn = dbmanager.getConnection();
         String sql = "{call enterprise_register(?,?,?,?,?,?,?,?)}";
         try {
             CallableStatement ps = conn.prepareCall(sql);
@@ -40,7 +40,7 @@ public class Enterprise {
             ps.setString(5, telephone);
             ps.setString(6, email);
             ps.setString(7, address);
-            ps.setInt(8,assessment);
+            ps.setInt(8, assessment);
             int tag = ps.executeUpdate();
             ps.close();
             if (tag == 1) {
@@ -48,15 +48,52 @@ public class Enterprise {
                 response.getWriter().print(str);
                 response.getWriter().flush();
                 response.getWriter().close();
-            } else {
-                String str = "{\"msg\":\"fail\"}";
-                response.getWriter().print(str);
-                response.getWriter().flush();
-                response.getWriter().close();
             }
             ps.close();
             conn.close();
         } catch (SQLException e) {
+            e.printStackTrace();
+            String str = "{\"msg\":\"该用户名和密码已存在\"}";
+            response.getWriter().print(str);
+            response.getWriter().flush();
+            response.getWriter().close();
+        }
+    }
+
+    public void modifyUserBeforeSelect(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/xml; charset=UTF-8");
+        String nickname = request.getParameter("nickname");
+        String password = request.getParameter("password");
+
+        DBManager dbmanager = new DBManager();
+        Connection conn = dbmanager.getConnection();
+        String sql = "{call modifyEnterpriseBeforeSelect(?,?,?,?,?,?,?)}";
+        try {
+            CallableStatement ps = conn.prepareCall(sql);
+            ps.setString(1, nickname);
+            ps.setString(2, password);
+            ps.registerOutParameter(3, Types.VARCHAR);
+            ps.registerOutParameter(4, Types.VARCHAR);
+            ps.registerOutParameter(5, Types.VARCHAR);
+            ps.registerOutParameter(6, Types.VARCHAR);
+            ps.registerOutParameter(7, Types.VARCHAR);
+            ps.execute();
+            if (ps.getString(3) != null) {
+                model.enterprise.Enterprise enterprise = new model.enterprise.Enterprise();
+                enterprise.setNickname(nickname);
+                enterprise.setPassword(password);
+                enterprise.setName(ps.getString(3));
+                enterprise.setIndustry(ps.getString(4));
+                enterprise.setAddress(ps.getString(5));
+                enterprise.setTelephone(ps.getString(6));
+                enterprise.setEmail(ps.getString(7));
+                response.getWriter().print(JSONObject.fromObject(enterprise).toString());
+            }
+            ps.close();
+            conn.close();
+        } catch (SQLException e) {
+            // TODO 自动生成的 catch 块
             e.printStackTrace();
         }
     }
@@ -67,40 +104,43 @@ public class Enterprise {
         //以下两句为取消在本地的缓存
         response.setHeader("Cache-Control", "no-cache");
         response.setHeader("Pragma", "no-cache");
-        String telephone = request.getParameter("telephone");
         String nickname = request.getParameter("nickname");
+        String password = request.getParameter("password");
         String name = request.getParameter("nickname");
         String industry = request.getParameter("industry");
+        String email = request.getParameter("email");
+        String telephone = request.getParameter("telephone");
         String address = request.getParameter("address");
-        String password = request.getParameter("password");
+        String oldNickname = request.getParameter("oldnickname");
+        String oldPassword = request.getParameter("oldpassword");
 
-        DBManager conndb = new DBManager();
-        Connection conn = conndb.getConnection();
-        String sql = "{call modifyEnterprise(?,?,?,?,?,?)}";
+        DBManager dbmanager = new DBManager();
+        Connection conn = dbmanager.getConnection();
+        String sql = "{call modifyEnterprise(?,?,?,?,?,?,?,?,?)}";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, nickname);
             ps.setString(2, password);
             ps.setString(3, name);
             ps.setString(4, industry);
-            ps.setString(5, telephone);
-            ps.setString(6, address);
-            boolean tag = ps.execute();
-            if (!tag) {
-                String str = "{\"msg\":\"modify_user_success\"}";
-                response.getWriter().print(str);
-                response.getWriter().flush();
-                response.getWriter().close();
-            } else {
-                String str = "{\"msg\":\"modify_user_fail\"}";
-                response.getWriter().print(str);
-                response.getWriter().flush();
-                response.getWriter().close();
-            }
+            ps.setString(5, email);
+            ps.setString(6, telephone);
+            ps.setString(7, address);
+            ps.setString(8, oldNickname);
+            ps.setString(9, oldPassword);
+            ps.execute();
+            String str = "{\"msg\":\"modify_user_success\"}";
+            response.getWriter().print(str);
+            response.getWriter().flush();
+            response.getWriter().close();
             ps.close();
             conn.close();
         } catch (SQLException e) {
             // TODO 自动生成的 catch 块
+            String str = "{\"msg\":\"modify_user_fail\"}";
+            response.getWriter().print(str);
+            response.getWriter().flush();
+            response.getWriter().close();
             e.printStackTrace();
         }
     }
@@ -113,19 +153,19 @@ public class Enterprise {
         response.setHeader("Pragma", "no-cache");
         String nickname = request.getParameter("nickname");
         String password = request.getParameter("password");
-        DBManager conndb = new DBManager();
-        Connection conn = conndb.getConnection();
+        DBManager dbmanager = new DBManager();
+        Connection conn = dbmanager.getConnection();
         try {
-            String sql = "{call ininJobByCompany(?,?,?,?,?,?)}";
+            String sql = "{call initJobByCompany(?,?,?,?,?,?)}";
             CallableStatement ps = conn.prepareCall(sql);
             ps.setString(1, nickname);
             ps.setString(2, password);
-            ps.registerOutParameter(3,Types.VARCHAR);
-            ps.registerOutParameter(4,Types.VARCHAR);
-            ps.registerOutParameter(5,Types.VARCHAR);
-            ps.registerOutParameter(6,Types.VARCHAR);
+            ps.registerOutParameter(3, Types.VARCHAR);
+            ps.registerOutParameter(4, Types.VARCHAR);
+            ps.registerOutParameter(5, Types.VARCHAR);
+            ps.registerOutParameter(6, Types.VARCHAR);
             ps.execute();
-            if (ps.getString(3)!=null) {
+            if (ps.getString(3) != null) {
                 String name = ps.getString(3);
                 String address = ps.getString(4);
                 String industry = ps.getString(5);
@@ -157,11 +197,11 @@ public class Enterprise {
         String nickname = request.getParameter("nickname");
         String password = request.getParameter("password");
         Random random = new Random();
-        String identification = nickname + password + random.nextInt(50);
+        String identification = nickname + password + random.nextInt(500);
         String name = request.getParameter("name");
         String address = request.getParameter("address");
         String industry = request.getParameter("industry");
-        String position = request.getParameter("job_name");
+        String position = request.getParameter("position");
         String number = request.getParameter("number");
         String salary = request.getParameter("salary");
         String publish_time = request.getParameter("publish_time");
@@ -169,12 +209,11 @@ public class Enterprise {
         String telephone = request.getParameter("telephone");
         String email = request.getParameter("email");
 
-        DBManager conndb = new DBManager();
-        Connection conn = conndb.getConnection();
-        String sql = "insert into job (identification,nickname,password,name,address,industry,position,number,salary,publish_time,"
-                + "effective_time,email,telephone) values(?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        DBManager dbmanager = new DBManager();
+        Connection conn = dbmanager.getConnection();
+        String sql = "{call addJob(?,?,?,?,?,?,?,?,?,?,?,?,?)}";
         try {
-            PreparedStatement ps = conn.prepareStatement(sql);
+            CallableStatement ps = conn.prepareCall(sql);
             ps.setString(1, identification);
             ps.setString(2, nickname);
             ps.setString(3, password);
@@ -188,14 +227,10 @@ public class Enterprise {
             ps.setString(11, effective_time);
             ps.setString(12, email);
             ps.setString(13, telephone);
-            int tag = ps.executeUpdate();
-            if (tag == 1) {
+            ps.execute();
+            int tag=ps.executeUpdate();
+            if (tag==1) {
                 String str = "{\"msg\":\"add_job_success\"}";
-                response.getWriter().print(str);
-                response.getWriter().flush();
-                response.getWriter().close();
-            } else {
-                String str = "{\"msg\":\"add_job_fail\"}";
                 response.getWriter().print(str);
                 response.getWriter().flush();
                 response.getWriter().close();
@@ -205,6 +240,10 @@ public class Enterprise {
         } catch (SQLException e) {
             // TODO 自动生成的 catch 块
             e.printStackTrace();
+            String str = "{\"msg\":\"add_job_fail\"}";
+            response.getWriter().print(str);
+            response.getWriter().flush();
+            response.getWriter().close();
         }
     }
 
@@ -216,17 +255,18 @@ public class Enterprise {
         response.setHeader("Pragma", "no-cache");
         String nickname = request.getParameter("nickname");
         String password = request.getParameter("password");
-        DBManager conndb = new DBManager();
-        Connection conn = conndb.getConnection();
+        DBManager dbmanager = new DBManager();
+        Connection conn = dbmanager.getConnection();
         List<Job> jobList = new ArrayList<>();
         try {
-            String sql = "select identification,name,address,industry,position,number,salary,publish_time,effective_time from job where (nickname=? and password=?)";
-            PreparedStatement ps = conn.prepareStatement(sql);
+            String sql = "{call manageJobBeforeSelect(?,?)}";
+            CallableStatement ps = conn.prepareCall(sql);
             ps.setString(1, nickname);
             ps.setString(2, password);
-            ResultSet rs = ps.executeQuery();
+            ps.execute();
+            ResultSet rs = ps.getResultSet();
             while (rs.next()) {
-                Job job=new Job();
+                Job job = new Job();
                 job.setIdentification(rs.getString(1));
                 job.setName(rs.getString(2));
                 job.setAddress(rs.getString(3));
@@ -261,16 +301,16 @@ public class Enterprise {
         String salary = request.getParameter("salary");
         String effective_time = request.getParameter("effective_time");
 
-        DBManager conndb = new DBManager();
-        Connection conn = conndb.getConnection();
-        String sql = "UPDATE job SET address=?,number=?,salary=?,effective_time=? WHERE identification=?";
+        DBManager dbmanager = new DBManager();
+        Connection conn = dbmanager.getConnection();
+        String sql = "{call modifyJob(?,?,?,?,?)}";
         try {
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1,address);
-            ps.setString(2,number);
-            ps.setString(3,salary);
-            ps.setString(4,effective_time);
-            ps.setString(5,identification);
+            CallableStatement ps = conn.prepareCall(sql);
+            ps.setString(1, address);
+            ps.setString(2, number);
+            ps.setString(3, salary);
+            ps.setString(4, effective_time);
+            ps.setString(5, identification);
             int tag = ps.executeUpdate();
             if (tag == 1) {
                 String str = "{\"msg\":\"modify_job_success\"}";
@@ -298,10 +338,10 @@ public class Enterprise {
         response.setHeader("Cache-Control", "no-cache");
         response.setHeader("Pragma", "no-cache");
         String identification = request.getParameter("identification");
-        DBManager conndb = new DBManager();
-        Connection conn = conndb.getConnection();
+        DBManager dbmanager = new DBManager();
+        Connection conn = dbmanager.getConnection();
         try {
-            String sql = "DELETE job WHERE identification=?";
+            String sql = "{call deleteJob(?)}";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, identification);
             int tag = ps.executeUpdate();
