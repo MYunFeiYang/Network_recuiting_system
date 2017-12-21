@@ -1,6 +1,11 @@
 package model.common;
 
 public class Company {
+    private String name;
+    private String position;
+    private String address;
+    private String time;
+
     public String getName() {
         return name;
     }
@@ -32,9 +37,4 @@ public class Company {
     public void setTime(String time) {
         this.time = time;
     }
-
-    private String name;
-    private String position;
-    private String address;
-    private String time;
 }

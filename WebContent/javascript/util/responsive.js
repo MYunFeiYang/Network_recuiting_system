@@ -2,9 +2,10 @@
 let mylist;
 let mydiv;
 let body_width;
+
 function Carousel_figure(count) {
     body_width = document.body.offsetWidth;
-    if (body_width <768) {
+    if (body_width < 768) {
         mylist = document.getElementById("mylist");
         mydiv = mylist.children;
         for (let i = 0; i < mydiv.length; i++) {

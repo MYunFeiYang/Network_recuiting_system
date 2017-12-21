@@ -4,6 +4,7 @@ public class Admin {
     private String nickname;
     private String password;
     private String power;
+
     public String getNickname() {
         return nickname;
     }

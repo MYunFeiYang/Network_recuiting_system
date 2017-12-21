@@ -5,6 +5,7 @@ let n_position;
 let n_company;
 let ul;
 let li;
+
 function get_news(user_type) {
     let user = {};
     user.user_type = user_type;
@@ -107,8 +108,8 @@ function insert_address(data) {
         ul.appendChild(li);
         let a = document.createElement("a");
         li.appendChild(a);
-        li.onclick=function(){
-            change_checked(event,'address');
+        li.onclick = function () {
+            change_checked(event, 'address');
             paging(1);
         };
         a.setAttribute("href", href);
@@ -142,7 +143,7 @@ function insert_position(data) {
     n_position.innerHTML = "";
     let ul = document.createElement("ul");
     n_position.appendChild(ul);
-    if (data.length>0) {
+    if (data.length > 0) {
         for (let i = 0; i < data.length; i++) {
             let li = document.createElement("li");
             ul.appendChild(li);
@@ -225,14 +226,14 @@ function pagingResult(data) {
         a2.innerHTML = list[i].position;
         a3.innerHTML = list[i].address;
         td4.innerHTML = list[i].time;
-        td1.width="16%";
-        td2.width="64%";
-        td3.width="10%";
-        td4.width="10%";
-        td1.height="20px";
-        td2.height="20px";
-        td2.height="20px";
-        td2.height="20px";
+        td1.width = "16%";
+        td2.width = "64%";
+        td3.width = "10%";
+        td4.width = "10%";
+        td1.height = "20px";
+        td2.height = "20px";
+        td2.height = "20px";
+        td2.height = "20px";
     }
 }
 
@@ -246,7 +247,7 @@ function change_checked(event, id) {
             li[i].classList.remove("checked");
         }
     }
-    if (event.target.toString().indexOf("a") !==-1) {
+    if (event.target.toString().indexOf("a") !== -1) {
         event.target.parentNode.classList.add("checked");
     } else {
         event.target.classList.add("checked");

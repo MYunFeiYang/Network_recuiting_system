@@ -15,6 +15,7 @@ public class Resume {
     private String graduation_data;
     private String telephone;
     private String email;
+
     public String getIdentification() {
         return identification;
     }

@@ -3,90 +3,109 @@
         font-size: 62.5%;
     }
 }
+
 /*小屏幕*/
-@media screen and (min-width: 768px)and (max-width: 992px){
-    html{
+@media screen and (min-width: 768px)and (max-width: 992px) {
+    html {
         font-size: 62.5%;
     }
 }
+
 /*中等屏幕*/
-@media screen and (min-width: 992px)and (max-width: 1200px){
-    html{
+@media screen and (min-width: 992px)and (max-width: 1200px) {
+    html {
         font-size: 80%;
     }
 }
+
 /*大屏幕*/
-@media screen and (min-width: 1200px){
+@media screen and (min-width: 1200px) {
     html {
         font-size: 100%;
     }
 }
-html,body{
+
+html, body {
     margin: 0;
     padding: 0;
     height: 100%;
 }
-body{
+
+body {
     overflow-x: hidden;
     overflow-y: auto;
-    background: rgba(255,255,255, 0.5);
+    background: rgba(255, 255, 255, 0.5);
 }
-.container-fluid ,.container-fluid .row{
+
+.container-fluid, .container-fluid .row {
     height: 100%;
 }
-.container-fluid .row{
+
+.container-fluid .row {
     margin-bottom: 33px;
 }
-.person_list,.chat_content,.user_center{
-    overflow-y:scroll;
+
+.person_list, .chat_content, .user_center {
+    overflow-y: scroll;
     border: 1px solid white;
     height: 100%;
 }
-.person_list::-webkit-scrollbar,.chat_content::-webkit-scrollbar,.user_center::-webkit-scrollbar,body::-webkit-scrollbar{
+
+.person_list::-webkit-scrollbar, .chat_content::-webkit-scrollbar, .user_center::-webkit-scrollbar, body::-webkit-scrollbar {
     width: 0;
 }
-.user_center ul li:hover,.person_list ul li:hover{
-    background: rgba(255,255,255,0.8);
+
+.user_center ul li:hover, .person_list ul li:hover {
+    background: rgba(255, 255, 255, 0.8);
 }
-.user_center{
+
+.user_center {
     padding: 5px;
 }
-.user_center ul,#list{
+
+.user_center ul, #list {
     list-style-type: none;
     padding: 5px;
 }
-.user_center ul li{
+
+.user_center ul li {
     display: block;
     margin: 2px;
     border-radius: 5px;
     border: none;
     box-shadow: 1px 1px 1px 1px white;
     padding: 5px 15px;
-    background: rgba(255,255,255,0.6);
+    background: rgba(255, 255, 255, 0.6);
 }
-.user_center ul li span{
+
+.user_center ul li span {
     float: right;
     color: #2aabd2;
 }
-.person_list h2{
-    background: rgba(255,255,255,0.8);
+
+.person_list h2 {
+    background: rgba(255, 255, 255, 0.8);
     border-bottom: 1px solid grey;
     font-size: 10px;
     padding: 5px;
     margin: 5px;
- }
-.person_list ul li{
-    margin:5px;
-    background: rgba(255,255,255,0.6);
-    padding:5px
 }
-.person_list ul li a{
+
+.person_list ul li {
+    margin: 5px;
+    background: rgba(255, 255, 255, 0.6);
+    padding: 5px
+}
+
+.person_list ul li a {
     text-decoration: none;
 }
-#show_content{
+
+#show_content {
     height: 80%;
 }
-#show_content .system_message,#show_content .self,#show_content .message{
+
+#show_content .system_message, #show_content .self, #show_content .message {
     display: block;
     padding: 5px;
     border-radius: 5px;
@@ -95,75 +114,91 @@ body{
     border: none;
     opacity: 0.8;
 }
-#show_content .system_message{
+
+#show_content .system_message {
     width: 30%;
     margin: 10px 35%;
 }
-#show_content .self{
+
+#show_content .self {
     clear: both;
     padding: 5px;
     margin-top: 10px;
     float: right;
 }
-#show_content .chatBox{
+
+#show_content .chatBox {
     margin-top: 10px;
     margin-left: 1%;
 }
-#show_content .photo{
+
+#show_content .photo {
     font-size: 30px;
 }
-#show_content .photo,#show_content .username{
+
+#show_content .photo, #show_content .username {
     color: white;
 }
 
-#show_content .username,#show_content .message{
+#show_content .username, #show_content .message {
     padding: 5px;
 }
-#editor{
+
+#editor {
     height: 20%;
     padding: 0;
 }
-#editor textarea{
+
+#editor textarea {
     width: 100%;
     height: 100%;
     border: 1px solid dodgerblue;
     border-radius: 0.30px;
     padding: 5px 15px;
 }
-#editor button{
+
+#editor button {
     position: absolute;
     bottom: 2px;
     right: 2px;
 }
-#refresh{
+
+#refresh {
     position: absolute;
     bottom: 30px;
-    right:10px;
+    right: 10px;
 }
-#refresh span{
+
+#refresh span {
     font-size: 2.4rem;
     color: white;
 }
-#refresh span:hover{
+
+#refresh span:hover {
     color: #2aabd2;
 }
+
 /*旋转*/
-@keyframes  go{
+@keyframes go {
     0% {
         transform: rotateZ(0);
     }
-    100% {transform: rotateZ(360deg); }
+    100% {
+        transform: rotateZ(360deg);
+    }
 }
-.btn_group{
+
+.btn_group {
     position: fixed;
     left: 0;
     bottom: 0;
     z-index: 9999;
     width: 100%;
-    background: rgba(0,0,0,0.9);
+    background: rgba(0, 0, 0, 0.9);
     margin: 0;
 }
-.btn_group button{
+
+.btn_group button {
     padding: 5px;
     text-align: center;
     width: 33%;
@@ -171,6 +206,6 @@ body{
     outline: none;
     font-size: 15px;
     float: left;
-    background: rgba(0,0,0,0.9);
+    background: rgba(0, 0, 0, 0.9);
     color: white;
 }

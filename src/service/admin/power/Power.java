@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Power {
-    public void init_admin( HttpServletResponse response) throws ServletException, IOException {
+    public void init_admin(HttpServletResponse response) throws ServletException, IOException {
         DBManager dbManager = new DBManager();
         Connection conn = dbManager.getConnection();
         List<Admin> adminList = new ArrayList<>();

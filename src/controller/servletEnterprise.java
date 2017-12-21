@@ -19,7 +19,7 @@ public class servletEnterprise extends HttpServlet {
                 enterprise.register(request, response);
                 break;
             case "modifyEnterpriseBeforeSelect":
-                enterprise.modifyUserBeforeSelect(request,response);
+                enterprise.modifyUserBeforeSelect(request, response);
                 break;
             case "modifyUser":
                 enterprise.modifyUser(request, response);
@@ -34,10 +34,10 @@ public class servletEnterprise extends HttpServlet {
                 enterprise.manageJob(request, response);
                 break;
             case "modifyJob":
-                enterprise.modifyJob(request,response);
+                enterprise.modifyJob(request, response);
                 break;
             case "deleteJob":
-                enterprise.deleteJob(request,response);
+                enterprise.deleteJob(request, response);
                 break;
         }
     }

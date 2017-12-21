@@ -3,115 +3,138 @@
     html {
         font-size: 62.5%;
     }
-    #industry,#address,#position{
+
+    #industry, #address, #position {
         margin: 5px 0;
         width: 100%;
         height: 60px;
         overflow-y: hidden;
         overflow-x: scroll;
         box-shadow: 1px 1px 1px 1px gainsboro;
-        background: rgba(255,255,255,0.5);
+        background: rgba(255, 255, 255, 0.5);
     }
-    #industry ul li,#filter ul li{
+
+    #industry ul li, #filter ul li {
         float: left;
     }
 }
+
 /*小屏幕*/
-@media screen and (min-width: 768px)and (max-width: 992px){
-    html{
+@media screen and (min-width: 768px)and (max-width: 992px) {
+    html {
         font-size: 62.5%;
     }
-    #industry,#address,#position{
+
+    #industry, #address, #position {
         margin: 5px 0;
         width: 100%;
         height: 60px;
         overflow-y: hidden;
         overflow-x: scroll;
         box-shadow: 1px 1px 1px 1px gainsboro;
-        background: rgba(255,255,255,0.5);
+        background: rgba(255, 255, 255, 0.5);
     }
-    #industry ul li,#filter ul li{
+
+    #industry ul li, #filter ul li {
         float: left;
     }
 }
+
 /*中等屏幕*/
-@media screen and (min-width: 992px)and (max-width: 1200px){
-    html{
-        font-size: 72%!important;
+@media screen and (min-width: 992px)and (max-width: 1200px) {
+    html {
+        font-size: 72% !important;
     }
-    #industry ul li{
-       padding: 5px;
+
+    #industry ul li {
+        padding: 5px;
     }
-    .marquee{
+
+    .marquee {
         height: 360px !important;
     }
 }
+
 /*大屏幕*/
-@media screen and (min-width: 1200px){
+@media screen and (min-width: 1200px) {
     html {
         font-size: 100% !important;
     }
-    .marquee{
+
+    .marquee {
         height: 420px !important;
     }
 }
-body{
+
+body {
     overflow-x: hidden;
     overflow-y: auto;
-    background: rgba(255,255,255, 0.1);
+    background: rgba(255, 255, 255, 0.1);
 }
-.marquee ul ,.marquee,#filter ul li,#industry ul li,#hotRecurit ul li{
+
+.marquee ul, .marquee, #filter ul li, #industry ul li, #hotRecurit ul li {
     list-style: none;
     padding: 1px 5px;
 }
-.marquee,#hotRecurit{
+
+.marquee, #hotRecurit {
     width: 100%;
     height: auto;
     box-shadow: 1px 1px 1px 1px black;
     border-radius: 5px;
 }
-#marquee,#filter{
+
+#marquee, #filter {
     display: none;
-    background: rgba(255,255,255, 0.5);
+    background: rgba(255, 255, 255, 0.2);
 }
 
-#industry,#position,#address{
+#industry, #position, #address {
     display: block;
-    background: rgba(220,220,220,0.8);
+    background: rgba(220, 220, 220, 0.5);
 }
-#industry ul,#position ul,#address ul{
+
+#industry ul, #position ul, #address ul {
     padding-left: 0;
 }
-#industry ul li,#position ul li,#address ul li{
+
+#industry ul li, #position ul li, #address ul li {
     margin: 5px;
     text-align: center;
-    padding:0;
+    padding: 0;
     box-shadow: 1px 1px 1px 1px gainsboro;
     border-radius: 5px;
 }
-#industry ul li:hover,#position ul li:hover,#address ul li:hover{
-    background-color: white;
+
+#industry ul li:hover, #position ul li:hover, #address ul li:hover {
+    background: rgba(255, 255, 255, 0.4);
 }
-#industry ul li a{
+
+#industry ul li a {
     display: inline-block;
     width: auto;
     font-size: 1rem;
 }
-#filter ul li a,#industry a{
+
+#filter ul li a, #industry a {
     text-decoration: none;
     color: black;
 }
-#position ul li,#address ul li{
+
+#position ul li, #address ul li {
     float: left;
 }
-table tbody tr{
+
+table tbody tr {
     padding: 0 3px !important;
 }
-table tbody tr td{
+
+table tbody tr td {
     padding: 1px 5px !important;
     height: 20px;
 }
-table tbody tr td a{
+
+table tbody tr td a {
     display: inline-block;
     width: 100%;
     overflow: hidden;
@@ -122,62 +145,75 @@ table tbody tr td a{
     text-decoration: none;
     font-size: 0.8rem;
 }
+
 /*right*/
-#hotRecurit{
-    background:rgba(255,255,255,0.6);
+#hotRecurit {
+    background: rgba(255, 255, 255, 0.3);
     opacity: 0.9;
     border: 5px solid white;
     padding: 0;
 }
-#hotRecurit h3{
+
+#hotRecurit h3 {
     margin: 0.15rem;
-    background:rgba(255,255,255,0.8);
+    background: rgba(255, 255, 255, 0.6);
     padding: 5px;
 }
-#hotRecurit ul{
+
+#hotRecurit ul {
     padding: 0 0 0 5%;
     height: auto;
     overflow: auto;
 }
-#hotRecurit ul li{
+
+#hotRecurit ul li {
     width: 31%;
     float: left;
     padding: 2%;
 }
-#hotRecurit ul li img{
+
+#hotRecurit ul li img {
     width: 100%;
     height: 100%;
 }
+
 .marquee {
-    margin:0;
-    width:100%;
-    height:320px;
+    margin: 0;
+    width: 100%;
+    height: 320px;
     overflow: hidden;
     padding: 10px;
 }
-.marquee ul{
+
+.marquee ul {
     padding: 10px;
-    background-color: white;
+    background: rgba(255, 255, 255, 0.3);
 }
-.marquee ul li{
+
+.marquee ul li {
     position: relative;
-    top:0;
-    padding:3px ;
+    top: 0;
+    padding: 3px;
     font-size: 0.5rem;
 }
-.marquee ul li a:link{
+
+.marquee ul li a:link {
     color: black;
 }
+
 .marquee ul li a:visited {
     color: red;
 }
-.marquee ul li a:hover{
+
+.marquee ul li a:hover {
     color: green;
 }
-.marquee ul li a:active{
-    color:blueviolet;
+
+.marquee ul li a:active {
+    color: blueviolet;
 }
-.checked{
+
+.checked {
     background-color: #2b669a;
     box-shadow: 1px 1px 1px 1px dodgerblue;
 }

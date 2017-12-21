@@ -19,7 +19,7 @@ public class servletPerson extends HttpServlet {
                 person.register(request, response);
                 break;
             case "modifyUserBeforeSelect":
-                person.modifyUserBeforeSelect(request,response);
+                person.modifyUserBeforeSelect(request, response);
                 break;
             case "modifyUser":
                 person.modifyUser(request, response);
@@ -40,7 +40,7 @@ public class servletPerson extends HttpServlet {
                 person.deleteResume(request, response);
                 break;
             case "auto_match":
-                person.auto_match(request,response);
+                person.auto_match(request, response);
         }
     }
 }

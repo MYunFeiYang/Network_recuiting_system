@@ -70,22 +70,22 @@ function init_person_assessment() {
 }
 
 function pass_person_assessment(obj) {
-    row=obj.parentNode.parentNode;
-    c_nickname_p=row.childNodes[1].firstChild.value;
-    c_password_p=row.childNodes[2].firstChild.value;
-    ob_person.nickname=c_nickname_p;
-    ob_person.password=c_password_p;
+    row = obj.parentNode.parentNode;
+    c_nickname_p = row.childNodes[1].firstChild.value;
+    c_password_p = row.childNodes[2].firstChild.value;
+    ob_person.nickname = c_nickname_p;
+    ob_person.password = c_password_p;
     $.ajax({
-        url:"admin/person_assessment/pass",
-        data:ob_person,
-        type:"POST",
-        dataType:"JSON",
-        success:function (data) {
-            if (data.msg==="person_assessment_pass"){
+        url: "admin/person_assessment/pass",
+        data: ob_person,
+        type: "POST",
+        dataType: "JSON",
+        success: function (data) {
+            if (data.msg === "person_assessment_pass") {
                 row.classList.add("success");
             }
         },
-        fail:function () {
+        fail: function () {
 
         }
     })

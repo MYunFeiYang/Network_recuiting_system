@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="baidu-site-verification" content="9fafb17b50ec81fa1c31c782370dd7be"/>
     <title>问道网</title>
     <link rel="shortcut icon" href="image/brand.jpg">
     <!--stylesheet-->
@@ -14,7 +15,6 @@
     <script src="bootstrap-3.3.7-dist/js/bootstrap.js"></script>
     <script src="javascript/util/cookie_and_session.js"></script>
     <script src="javascript/util/check_input.js"></script>
-    <script src="javascript/util/div_operate.js"></script>
     <script src="javascript/util/key_event.js"></script>
     <script src="javascript/common/common.js"></script>
     <script src="javascript/enterprise/enterprise.js"></script>
@@ -22,7 +22,7 @@
 </head>
 <body id="top">
 <div class="container-fluid">
-    <nav class="navbar navbar-default"  onmouseout="close_search()">
+    <nav class="navbar navbar-default">
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
@@ -70,7 +70,8 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown" id="register_btu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                           aria-haspopup="true" onclick="get_industry('enterprise_industry');get_address('enterprise_address')"
+                           aria-haspopup="true"
+                           onclick="get_industry('enterprise_industry');get_address('enterprise_address')"
                            aria-expanded="false">注册<span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li>
@@ -100,16 +101,6 @@
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
     </nav>
-    <div class="bdsharebuttonbox" id="share">
-        <a class="bds_mshare" data-cmd="mshare"></a>
-        <a class="bds_weixin" data-cmd="weixin"></a>
-        <a class="bds_qzone" data-cmd="qzone" href="#"></a>
-        <a class="bds_tsina" data-cmd="tsina"></a>
-        <a class="bds_baidu" data-cmd="baidu"></a>
-        <a class="bds_tqq" data-cmd="tqq"></a>
-        <a class="bds_more" data-cmd="more"></a>
-        <a class="bds_count" data-cmd="count"></a>
-    </div>
     <!-- Modal start -->
     <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="mylogin"
          onkeyup="key_down_event('login')">
@@ -287,7 +278,7 @@
                                 <input class="btn btn-sm btn-primary center-block" id="person_reg_btu"
                                        type="button" value="注册"
                                        onmouseover="btu_disable_person('person_reg_btu','confirm_person_box')"
-                                       onclick="remember_user('person_nickname','person_password','person_email');register_person()">
+                                       onclick="remember_user('person_nickname','person_password');register_person()">
                             </div>
                             <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6">
                                 <input class="btn btn-sm btn-danger center-block" type="reset" value="重置">
@@ -437,7 +428,7 @@
                             <input class="btn btn-sm btn-primary center-block" type="button"
                                    id="reg_btu" value="注册"
                                    onmouseover="btu_disable_enterprise('reg_btu','confirm_enterprise_box')"
-                                   onclick="remember_user('enterprise_nickname','enterprise_password','enterprise_email');register_enterprise()">
+                                   onclick="remember_user('enterprise_nickname','enterprise_password');register_enterprise()">
                         </div>
                         <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6">
                             <input type="reset" class="btn btn-sm btn-danger center-block"
@@ -483,7 +474,7 @@
     </div>
     <footer>
         <div class="row">
-            <div class="col-md-3 col-lg-3 hidden-xs hidden-sm">
+            <div class="col-md-3 col-lg-3 col-sm-3 col-xs-6">
                 <address>
                     Written by <a target="_blank"
                                   href="https://github.com/MYunFeiYang/Network_recuiting_system">think道</a><br>
@@ -492,21 +483,21 @@
                        href="https://github.com/MYunFeiYang/Network_recuiting_system">MYunFeiYang</a><br>
                 </address>
             </div>
-            <div class="col-md-3 col-lg-3 hidden-xs hidden-sm">
+            <div class="col-md-3 col-lg-3 col-sm-3 col-xs-6">
                 <address>
                     网站运营：<br>
                     <a target="_blank" href="http://tool.chinaz.com/">站长工具</a><br>
                     <a target="_blank" href="http://union.baidu.com/">百度联盟</a><br>
                 </address>
             </div>
-            <div class="col-md-3 col-lg-3 hidden-xs hidden-sm">
+            <div class="col-md-3 col-lg-3 col-sm-3 col-xs-6">
                 <address>
                     项目部署：<br>
                     <a target="_blank" href="https://www.aliyun.com/">阿里云计算</a><br>
                     <a target="_blank" href="http://www.miitbeian.gov.cn/">鄂ICP备17029283号</a><br>
                 </address>
             </div>
-            <div class="col-md-3 col-lg-3 hidden-xs hidden-sm">
+            <div class="col-md-3 col-lg-3 col-sm-3 col-xs-6">
                 <address>
                     友情链接：<br>
                     <a target="_blank" href="http://v3.bootcss.com/">bootstrap中文网</a><br>
@@ -521,20 +512,25 @@
         show_user('login_nickname', 'login_password');
         login_session('refresh');
     };
-        window._bd_share_config = {
-            "common": {
-                "bdSnsKey": {},
-                "bdText": "",
-                "bdMini": "2",
-                "bdPic": "",
-                "bdStyle": "0",
-                "bdSize": "16"
-            },
-            "share": {},
-            "image": {"viewList": ["qzone", "tsina", "tqq", "renren", "weixin"], "viewText": "分享到：", "viewSize": "16"},
-            "selectShare": {"bdContainerClass": null, "bdSelectMiniList": ["qzone", "tsina", "tqq", "renren", "weixin"]}
-        };
-        with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];
+    window._bd_share_config = {
+        "common": {
+            "bdSnsKey": {},
+            "bdText": "",
+            "bdMini": "2",
+            "bdPic": "",
+            "bdStyle": "0",
+            "bdSize": "16"
+        },
+        "slide": [{
+            "bdImg": 8,
+            "bdPos": "right",
+            "bdTop": 100
+        }],
+        "share": {},
+        "image": {"viewList": ["qzone", "tsina", "tqq", "renren", "weixin"], "viewText": "分享到：", "viewSize": "16"},
+        "selectShare": {"bdContainerClass": null, "bdSelectMiniList": ["qzone", "tsina", "tqq", "renren", "weixin"]}
+    };
+    with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];
 </script>
 </body>
 </html>

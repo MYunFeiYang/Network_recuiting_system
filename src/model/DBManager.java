@@ -2,22 +2,15 @@ package model;
 
 import org.apache.tomcat.jdbc.pool.DataSource;
 import org.apache.tomcat.jdbc.pool.PoolProperties;
+
 import java.sql.Connection;
 import java.sql.SQLException;
 
 public class DBManager {
     private static DataSource datasource;
     private Connection conn = null;
-    public Connection getConnection() {
-        setupJdbcPool();
-        try {
-            conn = datasource.getConnection();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return conn;
-    }
-    private static void  setupJdbcPool() {
+
+    private static void setupJdbcPool() {
         PoolProperties p = new PoolProperties();
         p.setDriverClassName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
         p.setUrl("jdbc:sqlserver://localhost:1433;databaseName=Network-recuiting-system");
@@ -31,6 +24,16 @@ public class DBManager {
         p.setDefaultAutoCommit(true);
         datasource = new DataSource();
         datasource.setPoolProperties(p);
+    }
+
+    public Connection getConnection() {
+        setupJdbcPool();
+        try {
+            conn = datasource.getConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return conn;
     }
 
 }

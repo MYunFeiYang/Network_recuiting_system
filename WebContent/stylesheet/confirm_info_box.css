@@ -4,16 +4,18 @@
     color: red;
     border: 1px solid red;
     padding: 5px;
-    border-radius:5px;
+    border-radius: 5px;
 }
-.alert-success{
+
+.alert-success {
     margin: auto;
     text-align: center;
     color: lightseagreen;
     border: 1px solid lightseagreen;
     padding: 5px;
-    border-radius:5px;
+    border-radius: 5px;
 }
+
 .alert-warning {
     animation: move 1s 3;
 }

@@ -3,63 +3,75 @@
     html {
         font-size: 62.5%;
     }
-    .panel-group{
+
+    .panel-group {
         height: 45px;
     }
-    .panel-group:hover{
+
+    .panel-group:hover {
         height: auto;
     }
 }
+
 /*小屏幕*/
-@media screen and (min-width: 768px)and (max-width: 992px){
-    html{
+@media screen and (min-width: 768px)and (max-width: 992px) {
+    html {
         font-size: 62.5%;
     }
-    .panel-group{
+
+    .panel-group {
         height: 45px;
     }
-    .panel-group:hover{
+
+    .panel-group:hover {
         height: auto;
     }
-    .modal-dialog{
+
+    .modal-dialog {
         width: 450px !important;
     }
 }
+
 /*中等屏幕*/
-@media screen and (min-width: 992px)and (max-width: 1200px){
-    html{
+@media screen and (min-width: 992px)and (max-width: 1200px) {
+    html {
         font-size: 80%;
     }
-    .modal-dialog{
+
+    .modal-dialog {
         width: 480px !important;
     }
 }
+
 /*大屏幕*/
-@media screen and (min-width: 1200px){
+@media screen and (min-width: 1200px) {
     html {
         font-size: 100%;
     }
-    .modal-dialog{
+
+    .modal-dialog {
         width: 480px !important;
     }
 }
-html,body{
+
+html, body {
     margin: 0;
     padding: 0;
     height: 100%;
 }
-.modal-content{
-    background: rgba(255,255,255,0.8);
-}
-.modal-dialog{
+
+.modal-dialog {
     width: 360px;
 }
-body{
-    background: rgba(255,255,255,0.3);
+
+body {
+    background: rgba(255, 255, 255, 0.3);
 }
-.menu{
+
+.menu {
     overflow-y: scroll;
 }
+
 .panel-group {
     max-height: 50rem;
     overflow: auto;
@@ -101,10 +113,12 @@ body{
     background: grey;
     border: 0.1rem solid grey;
 }
-table{
-    background: rgba(255,255,255,0.5);
+
+table {
+    background: rgba(255, 255, 255, 0.5);
 }
-table tr td input{
+
+table tr td input {
     border: 1px solid grey;
     border-radius: 5px 10px;
     padding: 5px;

@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+
 @WebServlet("/fileDownload")
 public class FileDownload extends HttpServlet {
 
@@ -32,7 +33,7 @@ public class FileDownload extends HttpServlet {
                     i = bis.read(buffer);
                 }
             } catch (IOException ex) {
-                System.out.println (ex.toString());
+                System.out.println(ex.toString());
             } finally {
                 if (bis != null) {
                     bis.close();
@@ -43,6 +44,7 @@ public class FileDownload extends HttpServlet {
             }
         }
     }
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);
     }

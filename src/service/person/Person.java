@@ -259,7 +259,7 @@ public class Person {
             ps.setString(1, nickname);
             ps.setString(2, password);
             ps.execute();
-            ResultSet rs=ps.getResultSet();
+            ResultSet rs = ps.getResultSet();
             while (rs.next()) {
                 Resume resume = new Resume();
                 resume.setIdentification(rs.getString(1));

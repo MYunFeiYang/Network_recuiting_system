@@ -1,8 +1,8 @@
 package model.common;
 
 public class Address {
-    String href;
-    String text;
+    private String href;
+    private String text;
 
     public String getHref() {
         return href;
@@ -12,12 +12,12 @@ public class Address {
         this.href = href;
     }
 
-    public void setText(String text) {
-        this.text = text;
-    }
-
     public String getText() {
 
         return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
     }
 }

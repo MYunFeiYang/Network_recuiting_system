@@ -25,10 +25,10 @@ function register_person() {
             confirm_box_c = document.getElementById("confirm_person_box");
             if (data.msg === "assessing") {
                 confirm_box_c.innerHTML = "正在审核中";
-                confirm_box_c.setAttribute("class","alert-success");
-            }else {
+                confirm_box_c.setAttribute("class", "alert-success");
+            } else {
                 confirm_box_c.innerHTML = "用户名和密码已存在";
-                confirm_box_c.setAttribute("class","alert-warning");
+                confirm_box_c.setAttribute("class", "alert-warning");
             }
         },
         fail: function (data) {
@@ -53,12 +53,12 @@ function register_enterprise() {
         type: "POST",
         dataType: "JSON",
         success: function (data) {
-            confirm_box_c=document.getElementById("confirm_enterprise_box");
-            if (data.msg==="assessing"){
-                confirm_box_c.innerHTML="正在审核中";
+            confirm_box_c = document.getElementById("confirm_enterprise_box");
+            if (data.msg === "assessing") {
+                confirm_box_c.innerHTML = "正在审核中";
                 confirm_box_c.setAttribute('class', 'alert-success');
-            }else {
-                confirm_box_c.innerHTML="该用户名和密码已存在";
+            } else {
+                confirm_box_c.innerHTML = "该用户名和密码已存在";
                 confirm_box_c.setAttribute('class', 'alert-warning');
             }
         },

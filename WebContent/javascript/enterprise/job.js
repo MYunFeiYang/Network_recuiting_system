@@ -30,7 +30,7 @@ function init_job() {
         type: 'POST',
         dataType: 'JSON',
         success: function (data) {
-            if (data!==null) {
+            if (data !== null) {
                 document.getElementById("name").value = data.name;
                 document.getElementById("address").value = data.address;
                 document.getElementById("industry").value = data.industry;
@@ -60,16 +60,16 @@ function add_job() {
     let email = document.getElementById("email").value;
     let telephone = document.getElementById("c_telephone").value;
     confirm_job_box = document.getElementById("confirm_job_box");
-    if (name===""){
+    if (name === "") {
         confirm_job_box.innerHTML = "公司名称不能为空";
         confirm_job_box.setAttribute("class", "alert-warning");
-    }else if (number===""){
+    } else if (number === "") {
         confirm_job_box.innerHTML = "招聘人数不能为空";
         confirm_job_box.setAttribute("class", "alert-warning");
-    }else if (effective_time===""){
+    } else if (effective_time === "") {
         confirm_job_box.innerHTML = "有效时间不能为空";
         confirm_job_box.setAttribute("class", "alert-warning");
-    }else {
+    } else {
         job.nickname = nickname;
         job.password = password;
         job.name = name;

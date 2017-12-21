@@ -228,8 +228,8 @@ public class Enterprise {
             ps.setString(12, email);
             ps.setString(13, telephone);
             ps.execute();
-            int tag=ps.executeUpdate();
-            if (tag==1) {
+            int tag = ps.executeUpdate();
+            if (tag == 1) {
                 String str = "{\"msg\":\"add_job_success\"}";
                 response.getWriter().print(str);
                 response.getWriter().flush();

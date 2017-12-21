@@ -24,27 +24,28 @@ let c_email_e;
 let c_time_e;
 let ob_enterprise = {};
 let k = 0;
+
 function init_enterprise_assessment() {
     $.ajax({
-        url:"/admin/enterprise_assessment/init",
-        type:"POST",
-        dataType:"JSON",
-        success:function (data) {
-            if (data.length>0){
-                n_enterprise_assess=document.getElementById("enterprise_assess");
-                n_enterprise_assess.innerHTML="";
-                for (assess_e=0;assess_e<data.length;assess_e++){
-                    row_e=document.createElement("tr");
+        url: "/admin/enterprise_assessment/init",
+        type: "POST",
+        dataType: "JSON",
+        success: function (data) {
+            if (data.length > 0) {
+                n_enterprise_assess = document.getElementById("enterprise_assess");
+                n_enterprise_assess.innerHTML = "";
+                for (assess_e = 0; assess_e < data.length; assess_e++) {
+                    row_e = document.createElement("tr");
                     n_enterprise_assess.appendChild(row_e);
-                    n_xuhao_e=document.createElement("td");
-                    n_nickname_e=document.createElement("td");
-                    n_password_e=document.createElement("td");
-                    n_name_e=document.createElement("td");
-                    n_industry=document.createElement("td");
-                    n_address=document.createElement("td");
-                    n_email_e=document.createElement("td");
-                    n_telephone_e=document.createElement("td");
-                    n_operate_e=document.createElement("td");
+                    n_xuhao_e = document.createElement("td");
+                    n_nickname_e = document.createElement("td");
+                    n_password_e = document.createElement("td");
+                    n_name_e = document.createElement("td");
+                    n_industry = document.createElement("td");
+                    n_address = document.createElement("td");
+                    n_email_e = document.createElement("td");
+                    n_telephone_e = document.createElement("td");
+                    n_operate_e = document.createElement("td");
                     row_e.appendChild(n_xuhao_e);
                     row_e.appendChild(n_nickname_e);
                     row_e.appendChild(n_password_e);
@@ -54,14 +55,14 @@ function init_enterprise_assessment() {
                     row_e.appendChild(n_email_e);
                     row_e.appendChild(n_telephone_e);
                     row_e.appendChild(n_operate_e);
-                    c_xuhao_e=assess_e+1;
-                    c_nickname_e=data[assess_e].nickname;
-                    c_password_e=data[assess_e].password;
-                    c_name_e=data[assess_e].name;
-                    c_industry_e=data[assess_e].industry;
-                    c_address_e=data[assess_e].address;
-                    c_email_e=data[assess_e].email;
-                    c_telephone_e=data[assess_e].telephone;
+                    c_xuhao_e = assess_e + 1;
+                    c_nickname_e = data[assess_e].nickname;
+                    c_password_e = data[assess_e].password;
+                    c_name_e = data[assess_e].name;
+                    c_industry_e = data[assess_e].industry;
+                    c_address_e = data[assess_e].address;
+                    c_email_e = data[assess_e].email;
+                    c_telephone_e = data[assess_e].telephone;
                     n_xuhao_e.innerHTML = c_xuhao_e;
                     n_nickname_e.innerHTML = `<input type='text' readonly="readonly" class=\"form-control input-sm\" value=${c_nickname_e}>`;
                     n_password_e.innerHTML = `<input type='text' readonly="readonly" class=\"form-control input-sm\" value=${c_password_e}>`;
@@ -74,33 +75,34 @@ function init_enterprise_assessment() {
                 }
             }
         },
-        fail:function () {
-            
+        fail: function () {
+
         }
     })
 }
 
 function pass_enterprise_assessment(obj) {
-    row_e=obj.parentNode.parentNode;
-    c_nickname_e=row_e.childNodes[1].firstChild.value;
-    c_password_e=row_e.childNodes[2].firstChild.value;
-    ob_enterprise.nickname=c_nickname_e;
-    ob_enterprise.password=c_password_e;
+    row_e = obj.parentNode.parentNode;
+    c_nickname_e = row_e.childNodes[1].firstChild.value;
+    c_password_e = row_e.childNodes[2].firstChild.value;
+    ob_enterprise.nickname = c_nickname_e;
+    ob_enterprise.password = c_password_e;
     $.ajax({
-        url:"admin/enterprise_assessment/pass",
-        data:ob_enterprise,
-        type:"POST",
-        dataType:"JSON",
-        success:function (data) {
-            if (data.msg==="enterprise_assessment_pass"){
+        url: "admin/enterprise_assessment/pass",
+        data: ob_enterprise,
+        type: "POST",
+        dataType: "JSON",
+        success: function (data) {
+            if (data.msg === "enterprise_assessment_pass") {
                 row_e.classList.add("success");
             }
         },
-        fail:function () {
+        fail: function () {
 
         }
     })
 }
+
 function init_enterprise_account() {
     $.ajax({
         url: "/admin/enterprise_account/init",
@@ -109,9 +111,9 @@ function init_enterprise_account() {
         success: function (data) {
             n_enterprise = document.getElementById("enterprise");
             n_enterprise.innerHTML = "";
-            if (data.length===0){
+            if (data.length === 0) {
                 add_row_e();
-            }else {
+            } else {
                 for (k = 0; k < data.length; k++) {
                     let tr = document.createElement("tr");
                     n_enterprise.appendChild(tr);

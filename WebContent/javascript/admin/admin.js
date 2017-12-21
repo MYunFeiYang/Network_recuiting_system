@@ -23,7 +23,7 @@ function change_div(id) {
 function path_navigation(obj) {
     path = document.getElementsByClassName("breadcrumb")[0];
     lis = path.getElementsByTagName("li");
-    for (let j=lis.length-1;j>1;j--) {
+    for (let j = lis.length - 1; j > 1; j--) {
         path.removeChild(lis[j]);
     }
     if (obj.classList.contains("path1")) {

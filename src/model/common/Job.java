@@ -1,8 +1,8 @@
 package model.common;
 
 public class Job {
-    String href;
-    String text;
+    private String href;
+    private String text;
 
     public String getHref() {
         return href;
@@ -12,12 +12,12 @@ public class Job {
         this.href = href;
     }
 
-    public void setText(String text) {
-        this.text = text;
-    }
-
     public String getText() {
 
         return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
     }
 }

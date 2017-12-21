@@ -22,6 +22,47 @@ import java.util.*;
 import java.util.Date;
 
 public class Common {
+    private static boolean sendMail(String to, HttpServletResponse response) {
+        try {
+            Properties props = new Properties();
+            props.put("username", "m_YunfeiYang@163.com");
+            props.put("password", "420222AA");
+            props.put("mail.transport.protocol", "smtp");
+            props.put("mail.smtp.host", "smtp.163.com");
+            props.put("mail.smtp.port", "25");
+
+            Session mailSession = Session.getDefaultInstance(props);
+            //生成随机激活码
+            String base = "abcdefghijklmnopqrstuvwxyz0123456789";
+            Random random = new Random();
+            StringBuffer sb = new StringBuffer();
+            for (int i = 0; i < 6; i++) {
+                int number = random.nextInt(base.length());
+                sb.append(base.charAt(number));
+            }
+            Message msg = new MimeMessage(mailSession);
+            msg.setFrom(new InternetAddress("m_YunFeiYang@163.com"));
+            msg.addRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
+            msg.setSubject("重置密码邮件");
+            msg.setContent("<h1>此邮件为官方重置密码邮件</h1>密码重置验证码:" + sb, "text/html;charset=UTF-8");
+
+            msg.saveChanges();
+
+            Transport transport = mailSession.getTransport("smtp");
+            transport.connect(props.getProperty("mail.smtp.host"), props
+                    .getProperty("username"), props.getProperty("password"));
+            transport.sendMessage(msg, msg.getAllRecipients());
+            transport.close();
+            JSONObject mag = new JSONObject();
+            mag.put("msg", sb.toString());
+            response.getWriter().print(mag.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
     public void CheckEmail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/xml; charset=UTF-8");
@@ -90,9 +131,9 @@ public class Common {
                     ps = conn.prepareCall(sql);
                     ps.setString(1, nickname);
                     ps.setString(2, password);
-                    ps.registerOutParameter(3,Types.VARCHAR);
+                    ps.registerOutParameter(3, Types.VARCHAR);
                     ps.execute();
-                    if (ps.getString(3)!=null) {
+                    if (ps.getString(3) != null) {
                         String str = "{\"msg\":\"login_success\"}";
                         response.getWriter().print(str);
                         response.getWriter().flush();
@@ -110,10 +151,10 @@ public class Common {
                     ps.registerOutParameter(4, Types.BIT);
                     ps.setString(1, nickname);
                     ps.setString(2, password);
-                    ps.setString(3,dataString);
+                    ps.setString(3, dataString);
                     ps.execute();
-                    if (ps.getInt(4)!=-1) {
-                        if (ps.getInt(4)==1) {
+                    if (ps.getInt(4) != -1) {
+                        if (ps.getInt(4) == 1) {
                             String str = "{\"msg\":\"login_success\"}";
                             response.getWriter().print(str);
                             response.getWriter().flush();
@@ -136,7 +177,7 @@ public class Common {
         } catch (SQLException e) {
             // TODO 自动生成的 catch 块
             e.printStackTrace();
-            response.getWriter().print("{\"msg\":"+e+"}");
+            response.getWriter().print("{\"msg\":" + e + "}");
         }
     }
 
@@ -207,47 +248,6 @@ public class Common {
             // TODO 自动生成的 catch 块
             e.printStackTrace();
         }
-    }
-
-    private static boolean sendMail(String to, HttpServletResponse response) {
-        try {
-            Properties props = new Properties();
-            props.put("username", "m_YunfeiYang@163.com");
-            props.put("password", "420222AA");
-            props.put("mail.transport.protocol", "smtp");
-            props.put("mail.smtp.host", "smtp.163.com");
-            props.put("mail.smtp.port", "25");
-
-            Session mailSession = Session.getDefaultInstance(props);
-            //生成随机激活码
-            String base = "abcdefghijklmnopqrstuvwxyz0123456789";
-            Random random = new Random();
-            StringBuffer sb = new StringBuffer();
-            for (int i = 0; i < 6; i++) {
-                int number = random.nextInt(base.length());
-                sb.append(base.charAt(number));
-            }
-            Message msg = new MimeMessage(mailSession);
-            msg.setFrom(new InternetAddress("m_YunFeiYang@163.com"));
-            msg.addRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
-            msg.setSubject("重置密码邮件");
-            msg.setContent("<h1>此邮件为官方重置密码邮件</h1>密码重置验证码:" + sb, "text/html;charset=UTF-8");
-
-            msg.saveChanges();
-
-            Transport transport = mailSession.getTransport("smtp");
-            transport.connect(props.getProperty("mail.smtp.host"), props
-                    .getProperty("username"), props.getProperty("password"));
-            transport.sendMessage(msg, msg.getAllRecipients());
-            transport.close();
-            JSONObject mag = new JSONObject();
-            mag.put("msg", sb.toString());
-            response.getWriter().print(mag.toString());
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-        return true;
     }
 
     public void updatePassword(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -14,6 +14,7 @@ public class Job {
     private String effective_time;
     private String email;
     private String telephone;
+
     public String getIdentification() {
         return identification;
     }

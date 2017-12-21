@@ -1,115 +1,101 @@
-
 /*超小屏幕*/
-@media screen and (max-width: 768px){
+@media screen and (max-width: 768px) {
     html {
         font-size: 62.5%;
     }
 }
+
 /*小屏幕*/
-@media screen and (min-width: 768px)and (max-width: 992px){
-    html{
+@media screen and (min-width: 768px)and (max-width: 992px) {
+    html {
         font-size: 62.5%;
     }
-    .modal-dialog{
+
+    .modal-dialog {
         width: 480px !important;
     }
 }
+
 /*中等屏幕*/
-@media screen and (min-width: 992px)and (max-width: 1200px){
-    html{
+@media screen and (min-width: 992px)and (max-width: 1200px) {
+    html {
         font-size: 80%;
     }
-    .modal-dialog{
+
+    .modal-dialog {
         width: 480px !important;
     }
 }
+
 /*大屏幕*/
-@media screen and (min-width: 1200px){
+@media screen and (min-width: 1200px) {
     html {
         font-size: 100%;
     }
-    .modal-dialog{
+
+    .modal-dialog {
         width: 480px !important;
     }
 }
-html,body{
+
+html, body {
     padding: 0;
     margin: 0;
     height: 100%;
+    color: white;
 }
-body::-webkit-scrollbar{
+
+body::-webkit-scrollbar {
     width: 10px;
-    background: rgba(0,0,0,0.6);
+    background: rgba(0, 0, 0, 0.6);
 }
-.container-fluid ,.container-fluid .row .col-md-12{
+
+.container-fluid, .container-fluid .row .col-md-12 {
     height: 100%;
 }
+
 .container-fluid .row {
     height: 90%;
 }
+
 /*public*/
-iframe{
+iframe {
     width: 100%;
     height: 100%;
     position: relative;
     left: 0;
-    z-index: 999;
-    background: rgba(255,255,255, 0.1);
+    z-index: 1;
+    background: rgba(255, 255, 255, 0.1);
     border-radius: 5px;
 }
-iframe::-webkit-scrollbar{
-    width: 10px;
-    background: rgba(255,255,255,0.3);
-}
-iframe::-webkit-scrollbar-track{
-    width: 10px;
-    background: rgba(255,255,255,0.3);
-}
-iframe::-webkit-scrollbar-thumb{
-    width: 10px;
-    background: rgba(255,255,255,0.6);
-}
-iframe::-webkit-scrollbar-button{
-    width: 10px;
-    height: 10px;
-    border-radius: 5px;
-    background: rgba(255,255,255,0.9);
-}
-.modal-content{
-    background: rgba(255,255,255,0.8);
-}
-.modal-dialog{
+
+.modal-dialog {
     width: 360px;
 }
-#preselected_search ul li{
+
+#preselected_search ul li {
     list-style: none;
     padding: 1px 5px;
 }
-.main，footer,header,#carousel-example-generic{
+
+.main，footer, header, #carousel-example-generic {
     width: 100%;
     height: auto;
     box-shadow: 1px 1px 1px 1px;
     border-radius: 5px;
 }
 
-#preselected_search ul li:hover{
+#preselected_search ul li:hover {
     background-color: grey;
 }
-#preselected_search ul li a{
+
+#preselected_search ul li a {
     color: black;
 }
+
 /*header*/
-nav{
-    position: relative;
+nav {
     z-index: 99999;
-    font-size: 20px;
-    color: black;
-}
-.navbar{
-    margin-bottom: 0;
-}
-nav ul li{
-    padding-left:5px ;
 }
 
 #search-con {
@@ -118,59 +104,69 @@ nav ul li{
     border-radius: 20px;
     margin-right: -20px;
 }
-.navbar-form button{
+
+.navbar-form button {
     width: 40px;
     height: 40px;
-    border-radius:20px;
+    border-radius: 20px;
     margin-left: -20px;
     margin-top: -40px;
-    background: rgba(255,255,255,0);
+    background: rgba(255, 255, 255, 0);
 }
-#preselected_search{
+
+#preselected_search {
     background-color: white;
     width: 95%;
     margin-left: 5%;
     height: auto;
     display: none;
-    border:solid 5px gainsboro;
-    border-top:none ;
+    border: solid 5px gainsboro;
+    border-top: none;
     overflow-y: scroll;
 }
-#preselected_search ul li a{
+
+#preselected_search ul li a {
     font-size: 1rem;
     text-decoration: none;
     color: black;
 }
-#share span:hover,#setting span:hover,#collection span:hover{
+
+#share span:hover, #setting span:hover, #collection span:hover {
     color: #2aabd2;
 }
 
 /*footer*/
-footer{
-    width: 100%;
+footer {
     position: relative;
-    bottom: 0;
-    margin: 0;
     z-index: 9999;
-    background:rgba(255,255,255,0.8);
-    color: black;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
     font-size: 0.8rem;
     border-radius: 5px;
 }
-footer address{
+
+footer address {
     padding: 15px 25px 0 25px;
-    border-right: 1px solid gainsboro;
-    border-left: 1px solid gainsboro;
 }
 
-#toTop a{
+footer address a {
+    color: white;
+    text-decoration: none;
+}
+
+footer address a:hover {
+    text-decoration: none;
+}
+
+#toTop a {
     position: fixed;
     right: 0;
     bottom: 36px;
     z-index: 99999;
     background-color: white;
 }
-#toTop a{
+
+#toTop a {
     width: 6px;
     height: 50px;
     border-radius: 50px;
@@ -178,31 +174,24 @@ footer address{
     overflow: hidden;
     box-shadow: 1px 1px 1px 1px grey;
 }
-#toTop a:hover{
+
+#toTop a:hover {
     width: 50px;
     box-shadow: 2px 2px 2px 2px slategray;
 }
+
 /*otherwise*/
-.carousel-inner,.item,img{
+.carousel-inner, .item, img {
     width: 100%;
     height: 100%;
 }
-#carousel-example-generic{
+
+#carousel-example-generic {
     position: fixed;
     top: 0;
     bottom: 0;
     left: 0;
     z-index: 0;
-}
-#share{
-    padding: 5px;
-    border-radius: 5px;
-    background: rgba(255,255,255,0.9);
-    position: relative;
-    z-index: 9999;
-}
-#share a{
-    margin: 5px 15px;
 }
 
 
