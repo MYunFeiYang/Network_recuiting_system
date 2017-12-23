@@ -27,10 +27,10 @@ public class Enterprise {
         String telephone = request.getParameter("telephone");
         String email = request.getParameter("email");
         String address = request.getParameter("address");
-        int assessment = 0;
+        int assessment = 1;
         DBManager dbmanager = new DBManager();
         Connection conn = dbmanager.getConnection();
-        String sql = "{call enterprise_register(?,?,?,?,?,?,?,?)}";
+        String sql = "{call enterpriseRegister(?,?,?,?,?,?,?,?)}";
         try {
             CallableStatement ps = conn.prepareCall(sql);
             ps.setString(1, nickname);
@@ -41,19 +41,16 @@ public class Enterprise {
             ps.setString(6, email);
             ps.setString(7, address);
             ps.setInt(8, assessment);
-            int tag = ps.executeUpdate();
-            ps.close();
-            if (tag == 1) {
-                String str = "{\"msg\":\"assessing\"}";
-                response.getWriter().print(str);
-                response.getWriter().flush();
-                response.getWriter().close();
-            }
+            ps.execute();
+            String str = "{\"msg\":\"assessing\"}";
+            response.getWriter().print(str);
+            response.getWriter().flush();
+            response.getWriter().close();
             ps.close();
             conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
-            String str = "{\"msg\":\"该用户名和密码已存在\"}";
+            String str = "{\"msg\":\"register_fail\"}";
             response.getWriter().print(str);
             response.getWriter().flush();
             response.getWriter().close();
@@ -68,7 +65,7 @@ public class Enterprise {
 
         DBManager dbmanager = new DBManager();
         Connection conn = dbmanager.getConnection();
-        String sql = "{call modifyEnterpriseBeforeSelect(?,?,?,?,?,?,?)}";
+        String sql = "{call enterpriseModifyBeforeSelect(?,?,?,?,?,?,?)}";
         try {
             CallableStatement ps = conn.prepareCall(sql);
             ps.setString(1, nickname);
@@ -116,7 +113,7 @@ public class Enterprise {
 
         DBManager dbmanager = new DBManager();
         Connection conn = dbmanager.getConnection();
-        String sql = "{call modifyEnterprise(?,?,?,?,?,?,?,?,?)}";
+        String sql = "{call enterpriseModify(?,?,?,?,?,?,?,?,?)}";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, nickname);
@@ -156,7 +153,7 @@ public class Enterprise {
         DBManager dbmanager = new DBManager();
         Connection conn = dbmanager.getConnection();
         try {
-            String sql = "{call initJobByCompany(?,?,?,?,?,?)}";
+            String sql = "{call jobInit(?,?,?,?,?,?)}";
             CallableStatement ps = conn.prepareCall(sql);
             ps.setString(1, nickname);
             ps.setString(2, password);
@@ -211,7 +208,7 @@ public class Enterprise {
 
         DBManager dbmanager = new DBManager();
         Connection conn = dbmanager.getConnection();
-        String sql = "{call addJob(?,?,?,?,?,?,?,?,?,?,?,?,?)}";
+        String sql = "{call jobAdd(?,?,?,?,?,?,?,?,?,?,?,?,?)}";
         try {
             CallableStatement ps = conn.prepareCall(sql);
             ps.setString(1, identification);
@@ -228,13 +225,10 @@ public class Enterprise {
             ps.setString(12, email);
             ps.setString(13, telephone);
             ps.execute();
-            int tag = ps.executeUpdate();
-            if (tag == 1) {
-                String str = "{\"msg\":\"add_job_success\"}";
-                response.getWriter().print(str);
-                response.getWriter().flush();
-                response.getWriter().close();
-            }
+            String str = "{\"msg\":\"add_job_success\"}";
+            response.getWriter().print(str);
+            response.getWriter().flush();
+            response.getWriter().close();
             ps.close();
             conn.close();
         } catch (SQLException e) {
@@ -259,7 +253,7 @@ public class Enterprise {
         Connection conn = dbmanager.getConnection();
         List<Job> jobList = new ArrayList<>();
         try {
-            String sql = "{call manageJobBeforeSelect(?,?)}";
+            String sql = "{call jobManageBeforeSelect(?,?)}";
             CallableStatement ps = conn.prepareCall(sql);
             ps.setString(1, nickname);
             ps.setString(2, password);
@@ -303,7 +297,7 @@ public class Enterprise {
 
         DBManager dbmanager = new DBManager();
         Connection conn = dbmanager.getConnection();
-        String sql = "{call modifyJob(?,?,?,?,?)}";
+        String sql = "{call jobManage(?,?,?,?,?)}";
         try {
             CallableStatement ps = conn.prepareCall(sql);
             ps.setString(1, address);
@@ -341,7 +335,7 @@ public class Enterprise {
         DBManager dbmanager = new DBManager();
         Connection conn = dbmanager.getConnection();
         try {
-            String sql = "{call deleteJob(?)}";
+            String sql = "{call jobDelete(?)}";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, identification);
             int tag = ps.executeUpdate();

@@ -8,8 +8,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.CallableStatement;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -21,9 +21,10 @@ public class Power {
         Connection conn = dbManager.getConnection();
         List<Admin> adminList = new ArrayList<>();
         try {
-            String sql = "SELECT nickname,password,power FROM admin";
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
+            String sql = "{call adminInit()}";
+            CallableStatement ps = conn.prepareCall(sql);
+            ps.execute();
+            ResultSet rs = ps.getResultSet();
             while (rs.next()) {
                 Admin admin = new Admin();
                 admin.setNickname(rs.getString(1));
@@ -48,15 +49,13 @@ public class Power {
         DBManager dbManager = new DBManager();
         Connection conn = dbManager.getConnection();
         try {
-            String sql = "UPDATE admin SET power=? WHERE (nickname=? AND password=?)";
-            PreparedStatement ps = conn.prepareStatement(sql);
+            String sql = "{call adminModify(?,?,?)}";
+            CallableStatement ps = conn.prepareCall(sql);
             ps.setString(1, power);
             ps.setString(2, nickname);
             ps.setString(3, password);
-            int rs = ps.executeUpdate();
-            if (rs > 0) {
-                response.getWriter().print("{\"msg\":\"modify_power_success\"}");
-            }
+            ps.execute();
+            response.getWriter().print("{\"msg\":\"modify_power_success\"}");
             ps.close();
             conn.close();
         } catch (SQLException e) {
@@ -71,15 +70,13 @@ public class Power {
         DBManager dbManager = new DBManager();
         Connection conn = dbManager.getConnection();
         try {
-            String sql = "INSERT INTO admin (nickname,password,power) VALUES (?,?,?)";
-            PreparedStatement ps = conn.prepareStatement(sql);
+            String sql = "{call adminAdd(?,?,?)}";
+            CallableStatement ps = conn.prepareCall(sql);
             ps.setString(1, nickname);
             ps.setString(2, password);
             ps.setString(3, power);
-            int rs = ps.executeUpdate();
-            if (rs == 1) {
-                response.getWriter().print("{\"msg\":\"add_power_success\"}");
-            }
+            ps.execute();
+            response.getWriter().print("{\"msg\":\"add_power_success\"}");
             ps.close();
             conn.close();
         } catch (SQLException e) {
@@ -94,14 +91,12 @@ public class Power {
         DBManager dbManager = new DBManager();
         Connection conn = dbManager.getConnection();
         try {
-            String sql = "DELETE FROM admin WHERE (nickname=? and password=?)";
-            PreparedStatement ps = conn.prepareStatement(sql);
+            String sql = "{call adminDelete(?,?)}";
+            CallableStatement ps = conn.prepareCall(sql);
             ps.setString(1, nickname);
             ps.setString(2, password);
-            int rs = ps.executeUpdate();
-            if (rs == 1) {
-                response.getWriter().print("{\"msg\":\"delete_power_success\"}");
-            }
+            ps.execute();
+            response.getWriter().print("{\"msg\":\"delete_power_success\"}");
             ps.close();
             conn.close();
         } catch (SQLException e) {

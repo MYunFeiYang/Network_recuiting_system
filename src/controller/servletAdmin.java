@@ -35,6 +35,8 @@ public class servletAdmin extends HttpServlet {
                 account.pass_assessment(request, response);
             } else if (url.contains("delete")) {
                 account.delete_account(request, response);
+            }else if (url.contains("registerCount")) {
+                account.getRegisterCount(response);
             }
         } else if (url.contains("person_account")) {
             Account account = new Account();
@@ -51,6 +53,8 @@ public class servletAdmin extends HttpServlet {
                 account.init_assessment(response);
             } else if (url.contains("pass")) {
                 account.pass_assessment(request, response);
+            }else if (url.contains("registerCount")) {
+                account.getRegisterCount(response);
             }
         } else if (url.contains("enterprise_account")) {
             service.admin.enterprise.Account account = new service.admin.enterprise.Account();

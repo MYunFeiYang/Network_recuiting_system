@@ -1,0 +1,83 @@
+@media screen and (max-width: 768px) {
+    html {
+        font-size: 62.5%;
+    }
+
+    .panel-group {
+        height: 36px;
+    }
+
+    .panel-group:hover {
+        height: auto;
+    }
+}
+
+/*小屏幕*/
+@media screen and (min-width: 768px)and (max-width: 992px) {
+    html {
+        font-size: 62.5%;
+    }
+
+    .panel-group {
+        height: 36px;
+    }
+
+    .panel-group:hover {
+        height: auto;
+    }
+}
+
+/*中等屏幕*/
+@media screen and (min-width: 992px)and (max-width: 1200px) {
+    html {
+        font-size: 80%;
+    }
+}
+
+/*大屏幕*/
+@media screen and (min-width: 1200px) {
+    html {
+        font-size: 100%;
+    }
+}
+
+.panel-group {
+    max-height: 500px;
+    overflow: auto;
+    font-size: 10px;
+}
+
+.leftMenu {
+    margin-top: 1px;
+    font-size: 0.5rem;
+}
+
+.leftMenu .panel-heading {
+    font-size: 1rem;
+    padding-left: 10px;
+    height: 36px;
+    line-height: 36px;
+    color: white;
+    position: relative;
+    cursor: pointer;
+    background:rgba(0,0,0,0.9);
+}
+
+/*转成手形图标*/
+.leftMenu .panel-heading span {
+    position: absolute;
+    right: 10px;
+    top: 12px;
+}
+
+.leftMenu .menu-item-left {
+    padding: 2px;
+    background: transparent;
+    border: 1px solid rgba(0,0,0,0.6);
+    border-radius: 6px;
+}
+
+.leftMenu .menu-item-left:hover {
+    background: rgba(255,255,255,0.5);
+    border: 1px solid rgba(255,255,255,0.7);
+}

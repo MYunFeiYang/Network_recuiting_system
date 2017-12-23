@@ -21,6 +21,20 @@ let c_time;
 let ob_person = {};
 let j = 0;
 
+function get_register_person_count() {
+    $.ajax({
+        url: "/admin/person_assessment/registerCount",
+        type: "POST",
+        dataType: "JSON",
+        success: function (data) {
+            document.getElementsByClassName("leftMenu")[1].getElementsByClassName("badge")[0].innerText = data.count;
+        },
+        fail: function () {
+
+        }
+    })
+}
+
 function init_person_assessment() {
     $.ajax({
         url: "/admin/person_assessment/init",

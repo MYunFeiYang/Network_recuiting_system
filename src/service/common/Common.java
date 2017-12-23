@@ -74,11 +74,11 @@ public class Common {
         DBManager conndb = new DBManager();
         Connection conn = conndb.getConnection();
         try {
-            String sql = "select person.email,company.email from person,company where person.email=? OR company.email=?";
+            String sql = "{call emailCheck(?)}";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, email);
-            ps.setString(2, email);
-            ResultSet rs = ps.executeQuery();
+            ps.execute();
+            ResultSet rs = ps.getResultSet();
             if (rs.next()) {
                 String str = "{\"msg\":\"email_exist\"}";
                 response.getWriter().print(str);
@@ -115,13 +115,13 @@ public class Common {
         String sql = null;
         switch (login_type) {
             case "person":
-                sql = "{call person_login(?,?,?,?)}";
+                sql = "{call personLogin(?,?,?,?)}";
                 break;
             case "enterprise":
-                sql = "{call enterprise_login(?,?,?,?)}";
+                sql = "{call enterpriseLogin(?,?,?,?)}";
                 break;
             case "admin":
-                sql = "{call admin_login(?,?,?)}";
+                sql = "{call adminLogin(?,?,?)}";
                 break;
         }
         try {
@@ -148,13 +148,13 @@ public class Common {
                     break;
                 default:
                     ps = conn.prepareCall(sql);
-                    ps.registerOutParameter(4, Types.BIT);
+                    ps.registerOutParameter(4, Types.BIGINT);
                     ps.setString(1, nickname);
                     ps.setString(2, password);
                     ps.setString(3, dataString);
                     ps.execute();
-                    if (ps.getInt(4) != -1) {
-                        if (ps.getInt(4) == 1) {
+                    if (ps.getInt(4) != 0) {
+                        if (ps.getInt(4) == 2) {
                             String str = "{\"msg\":\"login_success\"}";
                             response.getWriter().print(str);
                             response.getWriter().flush();
@@ -177,7 +177,6 @@ public class Common {
         } catch (SQLException e) {
             // TODO 自动生成的 catch 块
             e.printStackTrace();
-            response.getWriter().print("{\"msg\":" + e + "}");
         }
     }
 
@@ -223,15 +222,14 @@ public class Common {
         response.setHeader("Cache-Control", "no-cache");
         response.setHeader("Pragma", "no-cache");
         String email = request.getParameter("email");
-
         DBManager conndb = new DBManager();
         Connection conn = conndb.getConnection();
         try {
-            String sql = "select person.email,company.email from person,company where person.email=? OR company.email=?";
+            String sql = "{call passwordSelect(?)}";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, email);
-            ps.setString(2, email);
-            ResultSet rs = ps.executeQuery();
+            ps.execute();
+            ResultSet rs = ps.getResultSet();
             if (rs.next()) {
                 //邮箱匹配成功，向邮箱发邮件以重置密码
                 sendMail(email, response);
@@ -262,33 +260,24 @@ public class Common {
         DBManager conndb = new DBManager();
         Connection conn = conndb.getConnection();
         try {
-            String sql1 = "UPDATE person SET password=? WHERE email=?";
-            String sql2 = "UPDATE company SET password=? WHERE email=?";
-            PreparedStatement ps1 = conn.prepareStatement(sql1);
-            PreparedStatement ps2 = conn.prepareStatement(sql2);
+            String sql1 = "{call passwordUpdate(?,?)}";
+            CallableStatement ps1 = conn.prepareCall(sql1);
             ps1.setString(1, password);
             ps1.setString(2, email);
-            ps2.setString(1, password);
-            ps2.setString(2, email);
-            int rs1 = ps1.executeUpdate();
-            int rs2 = ps2.executeUpdate();
-            if (rs1 == 1 || rs2 == 1) {
-                String str = "{\"msg\":\"updatePassword_success\"}";
-                response.getWriter().print(str);
-                response.getWriter().flush();
-                response.getWriter().close();
-            } else {
-                String str = "{\"msg\":\"updatePassword_fail\"}";
-                response.getWriter().print(str);
-                response.getWriter().flush();
-                response.getWriter().close();
-            }
+            ps1.execute();
+            String str = "{\"msg\":\"updatePassword_success\"}";
+            response.getWriter().print(str);
+            response.getWriter().flush();
+            response.getWriter().close();
             ps1.close();
-            ps2.close();
             conn.close();
         } catch (SQLException e) {
             // TODO 自动生成的 catch 块
             e.printStackTrace();
+            String str = "{\"msg\":\"updatePassword_fail\"}";
+            response.getWriter().print(str);
+            response.getWriter().flush();
+            response.getWriter().close();
         }
     }
 
@@ -301,15 +290,12 @@ public class Common {
         String user_login = request.getParameter("user_type");
         DBManager conndb = new DBManager();
         Connection conn = conndb.getConnection();
-        String sql;
-        if (user_login.equals("service/person")) {
-            sql = "SELECT company,href FROM (SELECT ROW_NUMBER() OVER(ORDER BY id ASC) AS ROWID,* FROM Hot_recruitment)AS TEMP WHERE ROWID<=30";
-        } else {
-            sql = "SELECT company,href FROM (SELECT ROW_NUMBER() OVER(ORDER BY id ASC) AS ROWID,* FROM Hot_recruitment)AS TEMP WHERE ROWID<=30";
-        }
+        String sql = "{call initNews(?)}";
         try {
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
+            CallableStatement ps = conn.prepareCall(sql);
+            ps.setString(1, user_login);
+            ps.execute();
+            ResultSet rs = ps.getResultSet();
             JSONArray companys = new JSONArray();
             JSONObject company = new JSONObject();
             while (rs.next()) {
@@ -366,6 +352,8 @@ public class Common {
         response.setHeader("Pragma", "no-cache");
         int pageSize = Integer.parseInt(request.getParameter("pageSize"));
         int pageNum = Integer.parseInt(request.getParameter("pageNum"));
+        int bottom = (pageNum - 1) * pageSize;
+        int top = pageNum * pageSize;
         //String position = request.getParameter("position");
         String address = request.getParameter("address");
         //position = "%" + position + "%";
@@ -374,38 +362,31 @@ public class Common {
         Connection conn = dbManager.getConnection();
         List<Company> companyList = new ArrayList<>();
         List<PageBean> pageBeanList = new ArrayList<>();
-        String sql1 = "SELECT COUNT (company) FROM school_rercuit WHERE address LIKE ?";
-        String sql = "SELECT company,position, address,time FROM (SELECT ROW_NUMBER() OVER(ORDER BY id ASC) AS ROWID,* FROM school_rercuit WHERE address LIKE ?)AS TEMP WHERE (ROWID>? AND ROWID<=?)";
         try {
-            PreparedStatement ps1 = conn.prepareStatement(sql1);
-            ps1.setString(1, address);
-            ResultSet rs1 = ps1.executeQuery();
-            int rowCount = 0;
-            while (rs1.next()) {
-                rowCount = rs1.getInt(1);
-            }
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1, address);
-            ps.setString(2, (pageNum - 1) * pageSize + "");
-            ps.setString(3, pageNum * pageSize + "");
-            ResultSet rs = ps.executeQuery();
+            String sql = "{call enterprisePaging(?,?,?,?)}";
+            CallableStatement ps = conn.prepareCall(sql);
+            ps.registerOutParameter(1, Types.INTEGER);
+            ps.setString(2, address);
+            ps.setInt(3, bottom);
+            ps.setInt(4, top);
+            ps.execute();
+            ResultSet rs = ps.getResultSet();
             while (rs.next()) {
                 Company company = new Company();
-                company.setName(rs.getString(1));
-                company.setPosition(rs.getString(2));
-                company.setAddress(rs.getString(3));
-                company.setTime(rs.getString(4));
+                company.setName(rs.getString("company"));
+                company.setPosition(rs.getString("position"));
+                company.setAddress(rs.getString("address"));
+                company.setTime(rs.getString("time"));
                 companyList.add(company);
             }
+            int rowCount = ps.getInt(1);
             PageBean pageBean = new PageBean(pageNum, pageSize, rowCount);
             pageBean.setPageNum(pageNum);
             pageBean.setPageSize(pageSize);
             pageBean.setList(companyList);
             pageBeanList.add(pageBean);
             response.getWriter().print(JSONArray.fromObject(pageBeanList).toString());
-            rs1.close();
             rs.close();
-            ps1.close();
             ps.close();
             conn.close();
         } catch (SQLException e) {

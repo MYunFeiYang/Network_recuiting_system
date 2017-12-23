@@ -124,7 +124,9 @@ body {
 #position ul li, #address ul li {
     float: left;
 }
-
+table{
+    background: rgba(255,255,255,0.5);
+}
 table tbody tr {
     padding: 0 3px !important;
 }

@@ -25,6 +25,20 @@ let c_time_e;
 let ob_enterprise = {};
 let k = 0;
 
+function get_register_enetrprise_count() {
+    $.ajax({
+        url: "/admin/enterprise_assessment/registerCount",
+        type: "POST",
+        dataType: "JSON",
+        success: function (data) {
+            document.getElementsByClassName("leftMenu")[2].getElementsByClassName("badge")[0].innerText = data.count;
+        },
+        fail: function () {
+
+        }
+    })
+}
+
 function init_enterprise_assessment() {
     $.ajax({
         url: "/admin/enterprise_assessment/init",

@@ -31,10 +31,10 @@ public class Person {
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");//设置日期格式
         String dataString = df.format(new Date());// new Date()为获取当前系统时间
         String email = request.getParameter("email");
-        int assessment = 0;
+        int assessment = 1;
         DBManager dbmanager = new DBManager();
         Connection conn = dbmanager.getConnection();
-        String sql = "{call person_register(?,?,?,?,?,?,?)}";
+        String sql = "{call personRegister(?,?,?,?,?,?,?)}";
         try {
             CallableStatement ps = conn.prepareCall(sql);
             ps.setString(1, nickname);
@@ -45,13 +45,10 @@ public class Person {
             ps.setString(6, dataString);
             ps.setInt(7, assessment);
             ps.execute();
-            int tag = ps.executeUpdate();
-            if (tag == 1) {
-                String str = "{\"msg\":\"assessing\"}";
-                response.getWriter().print(str);
-                response.getWriter().flush();
-                response.getWriter().close();
-            }
+            String str = "{\"msg\":\"assessing\"}";
+            response.getWriter().print(str);
+            response.getWriter().flush();
+            response.getWriter().close();
             ps.close();
             conn.close();
         } catch (SQLException e) {
@@ -75,7 +72,7 @@ public class Person {
 
         DBManager dbmanager = new DBManager();
         Connection conn = dbmanager.getConnection();
-        String sql = "{call modifyPerosnBeforeSelect(?,?,?,?,?)}";
+        String sql = "{call personModifyBeforeSelect(?,?,?,?,?)}";
         try {
             CallableStatement ps = conn.prepareCall(sql);
             ps.setString(1, nickname);
@@ -117,7 +114,7 @@ public class Person {
 
         DBManager dbmanager = new DBManager();
         Connection conn = dbmanager.getConnection();
-        String sql = "{call modifyPerson(?,?,?,?,?,?,?)}";
+        String sql = "{call personModify(?,?,?,?,?,?,?)}";
         try {
             CallableStatement ps = conn.prepareCall(sql);
             ps.setString(1, nickname);
@@ -156,7 +153,7 @@ public class Person {
         DBManager dbmanager = new DBManager();
         Connection conn = dbmanager.getConnection();
         try {
-            String sql = "{call initResumeByPerson(?,?,?,?,?)}";
+            String sql = "{call resumeInit(?,?,?,?,?)}";
             CallableStatement ps = conn.prepareCall(sql);
             ps.setString(1, nickname);
             ps.setString(2, password);
@@ -208,7 +205,7 @@ public class Person {
         String identification = nickname + password + r.nextInt(100);
         DBManager dbmanager = new DBManager();
         Connection conn = dbmanager.getConnection();
-        String sql = "call addResume(?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
+        String sql = "{call resumeAdd(?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
         try {
             CallableStatement ps = conn.prepareCall(sql);
             ps.setString(1, identification);
@@ -225,7 +222,7 @@ public class Person {
             ps.setString(12, graduation_data);
             ps.setString(13, telephone);
             ps.setString(14, email);
-            ps.executeUpdate();
+            ps.execute();
             String str = "{\"msg\":\"add_resume_success\"}";
             response.getWriter().print(str);
             response.getWriter().flush();
@@ -254,7 +251,7 @@ public class Person {
         Connection conn = dbmanager.getConnection();
         List<Resume> resumeList = new ArrayList<>();
         try {
-            String sql = "{call manageResumeBeforeSelect(?,?)}";
+            String sql = "{call resumeManageBeforeSelect(?,?)}";
             CallableStatement ps = conn.prepareCall(sql);
             ps.setString(1, nickname);
             ps.setString(2, password);
@@ -301,7 +298,7 @@ public class Person {
 
         DBManager dbmanager = new DBManager();
         Connection conn = dbmanager.getConnection();
-        String sql = "{call modifyResume(?,?,?,?,?,?,?)}";
+        String sql = "{call resumeModify(?,?,?,?,?,?,?)}";
         try {
             CallableStatement ps = conn.prepareCall(sql);
             ps.setString(1, age);
@@ -339,7 +336,7 @@ public class Person {
         DBManager dbmanager = new DBManager();
         Connection conn = dbmanager.getConnection();
         try {
-            String sql = "{call deleteResume(?)}";
+            String sql = "{call resumeDelete(?)}";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, identification);
             ps.executeUpdate();

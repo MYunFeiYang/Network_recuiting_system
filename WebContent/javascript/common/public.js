@@ -15,30 +15,26 @@ function get_news(user_type) {
         type: "POST",
         dataType: "JSON",
         success: function (data) {
-            show_news(data)
+            document.getElementById("marquee").style.display = "block";
+            let ul = document.getElementById("marquee").children[0];
+            ul.innerHTML = "";
+            for (let i = 0; i < data.length; i++) {
+                let li = document.createElement("li");
+                ul.appendChild(li);
+                let a = document.createElement("a");
+                li.appendChild(a);
+                a.text = data[i].company;
+                a.href = data[i].href;
+                let span = document.createElement("span");
+                span.setAttribute("class", "glyphicon glyphicon-log-in");
+                li.appendChild(span);
+                span.setAttribute("style", "float:right")
+            }
         },
         fail: function () {
 
         }
     })
-}
-
-function show_news(data) {
-    document.getElementById("marquee").style.display = "block";
-    let ul = document.getElementById("marquee").children[0];
-    ul.innerHTML = "";
-    for (let i = 0; i < data.length; i++) {
-        let li = document.createElement("li");
-        ul.appendChild(li);
-        let a = document.createElement("a");
-        li.appendChild(a);
-        a.text = data[i].company;
-        a.href = data[i].href;
-        let span = document.createElement("span");
-        span.setAttribute("class", "glyphicon glyphicon-log-in");
-        li.appendChild(span);
-        span.setAttribute("style", "float:right")
-    }
 }
 
 //filter query
@@ -48,7 +44,27 @@ function query_industry() {
         type: "POST",
         dataType: "JSON",
         success: function (data) {
-            insert_industry(data);
+            n_industry = document.getElementById("industry");
+            n_industry.innerHTML = "";
+            let ul = document.createElement("ul");
+            n_industry.appendChild(ul);
+            for (let i = 0; i < data.length; i++) {
+                let href = data[i].href;
+                let text = data[i].text;
+                let li = document.createElement("li");
+                ul.appendChild(li);
+                let a = document.createElement("a");
+                li.appendChild(a);
+                a.text = text;
+                a.setAttribute("href", href);
+                a.setAttribute("onclick", "return false");
+                li.onclick = function () {
+                    change_checked(event, 'industry');
+                    query_address();
+                    query_position(this.innerText)
+                };
+            }
+            ul.children[0].setAttribute("class", "checked");
         },
         fail: function () {
 
@@ -56,67 +72,39 @@ function query_industry() {
     });
 }
 
-function insert_industry(data) {
-    n_industry = document.getElementById("industry");
-    n_industry.innerHTML = "";
-    let ul = document.createElement("ul");
-    n_industry.appendChild(ul);
-    for (let i = 0; i < data.length; i++) {
-        let href = data[i].href;
-        let text = data[i].text;
-        let li = document.createElement("li");
-        ul.appendChild(li);
-        let a = document.createElement("a");
-        li.appendChild(a);
-        a.text = text;
-        a.setAttribute("href", href);
-        a.setAttribute("onclick", "return false");
-        li.onclick = function () {
-            change_checked(event, 'industry');
-            get_address(insert_address);
-            query_position(this.innerText)
-        };
-    }
-    ul.children[0].setAttribute("class", "checked");
-}
-
-function get_address(event) {
+function query_address() {
     $.ajax({
         url: "/query/address",
         type: "POST",
         dataType: "JSON",
         success: function (data) {
-            event(data);
+            document.getElementById("filter").style.display = "block";
+            n_address = document.getElementById("address");
+            n_address.classList.remove("hidden");
+            n_address.innerHTML = "";
+            let ul = document.createElement("ul");
+            n_address.appendChild(ul);
+            for (let i = 0; i < data.length; i++) {
+                let href = data[i].href;
+                let text = data[i].text;
+                let li = document.createElement("li");
+                ul.appendChild(li);
+                let a = document.createElement("a");
+                li.appendChild(a);
+                li.onclick = function () {
+                    change_checked(event, 'address');
+                    paging(1);
+                };
+                a.setAttribute("href", href);
+                a.setAttribute("onclick", "return false");
+                a.text = text;
+            }
+            ul.children[0].setAttribute("class", "checked");
         },
         fail: function () {
 
         }
     });
-}
-
-function insert_address(data) {
-    document.getElementById("filter").style.display = "block";
-    n_address = document.getElementById("address");
-    n_address.classList.remove("hidden");
-    n_address.innerHTML = "";
-    let ul = document.createElement("ul");
-    n_address.appendChild(ul);
-    for (let i = 0; i < data.length; i++) {
-        let href = data[i].href;
-        let text = data[i].text;
-        let li = document.createElement("li");
-        ul.appendChild(li);
-        let a = document.createElement("a");
-        li.appendChild(a);
-        li.onclick = function () {
-            change_checked(event, 'address');
-            paging(1);
-        };
-        a.setAttribute("href", href);
-        a.setAttribute("onclick", "return false");
-        a.text = text;
-    }
-    ul.children[0].setAttribute("class", "checked");
 }
 
 function query_position(text) {
@@ -128,7 +116,24 @@ function query_position(text) {
         data: job,
         dataType: "JSON",
         success: function (data) {
-            insert_position(data);
+            document.getElementById("filter").style.display = "block";
+            n_position = document.getElementById("position");
+            n_position.classList.remove("hidden");
+            n_position.innerHTML = "";
+            let ul = document.createElement("ul");
+            n_position.appendChild(ul);
+            if (data.length > 0) {
+                for (let i = 0; i < data.length; i++) {
+                    let li = document.createElement("li");
+                    ul.appendChild(li);
+                    li.onclick = function () {
+                        change_checked(event, 'position');
+                        paging(1);
+                    };
+                    li.innerHTML = data[i].position;
+                }
+                ul.children[0].setAttribute("class", "checked");
+            }
         },
         fail: function () {
 
@@ -136,33 +141,12 @@ function query_position(text) {
     });
 }
 
-function insert_position(data) {
-    document.getElementById("filter").style.display = "block";
-    n_position = document.getElementById("position");
-    n_position.classList.remove("hidden");
-    n_position.innerHTML = "";
-    let ul = document.createElement("ul");
-    n_position.appendChild(ul);
-    if (data.length > 0) {
-        for (let i = 0; i < data.length; i++) {
-            let li = document.createElement("li");
-            ul.appendChild(li);
-            li.onclick = function () {
-                change_checked(event, 'position');
-                paging(1);
-            };
-            li.innerHTML = data[i].position;
-        }
-        ul.children[0].setAttribute("class", "checked");
-    }
-}
-
 function paging(pageNum) {
     let page = {};
     page.pageSize = 12;
     page.pageNum = pageNum;
     n_position = document.getElementById("position");
-    li = position.getElementsByTagName("li");
+    li = n_position.getElementsByTagName("li");
     for (let i = 0; i < li.length; i++) {
         if (li[i].classList.toString().indexOf("checked") !== -1) {
             page.position = li[i].firstChild.text;

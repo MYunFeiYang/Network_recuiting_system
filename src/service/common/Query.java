@@ -10,10 +10,7 @@ import net.sf.json.JSONObject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,11 +18,12 @@ public class Query {
     public void init_filter_industry(HttpServletRequest request, HttpServletResponse response) throws IOException {
         DBManager DBManager = new DBManager();
         Connection conn = DBManager.getConnection();
-        String sql = "SELECT href,text FROM industry";
+        String sql = "{call initIndustry()}";
         List<Job> list = new ArrayList<>();
         try {
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
+            CallableStatement ps = conn.prepareCall(sql);
+            ps.execute();
+            ResultSet rs = ps.getResultSet();
             while (rs.next()) {
                 Job job = new Job();
                 job.setHref(rs.getString(1));
@@ -45,11 +43,12 @@ public class Query {
     public void init_filter_address(HttpServletRequest request, HttpServletResponse response) throws IOException {
         DBManager DBManager = new DBManager();
         Connection conn = DBManager.getConnection();
-        String sql = "SELECT href,text FROM address";
+        String sql = "{call initAddres()}";
         List<Address> list = new ArrayList<>();
         try {
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
+            CallableStatement ps = conn.prepareCall(sql);
+            ps.execute();
+            ResultSet rs = ps.getResultSet();
             while (rs.next()) {
                 Address address = new Address();
                 address.setHref(rs.getString(1));
@@ -70,11 +69,12 @@ public class Query {
         DBManager DBManager = new DBManager();
         Connection conn = DBManager.getConnection();
         String job = request.getParameter("job_name");
-        String sql = "SELECT position FROM position WHERE job=?";
+        String sql = "{call initPosition(?)}";
         try {
-            PreparedStatement ps = conn.prepareStatement(sql);
+            CallableStatement ps = conn.prepareCall(sql);
             ps.setString(1, job);
-            ResultSet rs = ps.executeQuery();
+            ps.execute();
+            ResultSet rs = ps.getResultSet();
             JSONArray jsonArray = new JSONArray();
             JSONObject jsonObject = new JSONObject();
             while (rs.next()) {

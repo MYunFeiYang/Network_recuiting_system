@@ -3227,7 +3227,7 @@ output {
     font-size: 14px;
     line-height: 1.42857143;
     color: #555;
-    background-color: #fff;
+    background: rgba(255,255,255,0.7)!important;
     background-image: none;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -3817,7 +3817,7 @@ fieldset[disabled] a.btn {
 
 .btn-default {
     color: #333;
-    background-color: #fff;
+    background:rgba(255,255,255,0.5);
     border-color: #ccc;
 }
 
@@ -4362,9 +4362,9 @@ tbody.collapse.in {
     -webkit-background-clip: padding-box;
     background-clip: padding-box;
     border: 1px solid #ccc;
-    border: 1px solid rgba(0, 0, 0, .15);
+    border: 1px solid rgba(0, 0, 0, 0.15);
     border-radius: 4px;
-    -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+    -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
     box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
 }
 
@@ -5735,7 +5735,7 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
     padding: 8px 15px;
     margin-bottom: 20px;
     list-style: none;
-    background-color: #f5f5f5;
+    background: rgba(255,255,255,0.3);
     border-radius: 4px;
 }
 
@@ -6002,7 +6002,7 @@ a.label:focus {
     text-align: center;
     white-space: nowrap;
     vertical-align: middle;
-    background-color: white;
+    background-color: red;
     border-radius: 10px;
 }
 
@@ -6931,9 +6931,6 @@ button.list-group-item-danger.active:focus {
     border-bottom-color: #ddd;
 }
 
-.panel-primary {
-    border-color: #337ab7;
-}
 
 .panel-primary > .panel-heading {
     color: #fff;
@@ -7177,7 +7174,7 @@ button.close {
 
 .modal-content {
     position: relative;
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.5);
     -webkit-background-clip: padding-box;
     background-clip: padding-box;
     border: 1px solid #999;

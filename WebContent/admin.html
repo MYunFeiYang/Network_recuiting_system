@@ -11,6 +11,7 @@
     <!--stylesheet-->
     <link type="text/css" rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.css">
     <link type="text/css" rel="stylesheet" href="stylesheet/admin.css">
+    <link type="text/css" rel="stylesheet" href="stylesheet/LeftMeau.css">
     <!--javascript-->
     <script src="javascript/jquery-3.2.1.js"></script>
     <script src="bootstrap-3.3.7-dist/js/bootstrap.js"></script>
@@ -66,6 +67,7 @@
                                 <button class="menu-item-left path2"
                                         onclick="change_div('person_assessment');path_navigation(this);init_person_assessment()">
                                     <span class="glyphicon glyphicon-triangle-right"></span>注册审核
+                                    <span class="badge"></span>
                                 </button>
                             </li>
                             <li class="list-group-item">
@@ -93,6 +95,7 @@
                                 <button class="menu-item-left path2"
                                         onclick="change_div('enterprise_assessment');init_enterprise_assessment();path_navigation(this)">
                                     <span class="glyphicon glyphicon-triangle-right"></span>注册审核
+                                    <span class="badge"></span>
                                 </button>
                             </li>
                             <li class="list-group-item">
@@ -254,4 +257,10 @@
     </div>
 </div>
 </body>
+<script>
+    window.onload=function () {
+        get_register_person_count();
+        get_register_enetrprise_count();
+    }
+</script>
 </html>
