@@ -13,7 +13,7 @@ public class DBManager {
     private static void setupJdbcPool() {
         PoolProperties p = new PoolProperties();
         p.setDriverClassName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-        p.setUrl("jdbc:sqlserver://localhost:1433;databaseName=Network-recuiting-system");
+        p.setUrl("jdbc:sqlserver://106.14.178.194:1433;databaseName=Network-recuiting-system");
         p.setUsername("sa");
         p.setPassword("420222aaAA");
         p.setMaxActive(20);

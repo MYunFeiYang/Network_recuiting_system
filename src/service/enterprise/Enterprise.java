@@ -338,23 +338,20 @@ public class Enterprise {
             String sql = "{call jobDelete(?)}";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, identification);
-            int tag = ps.executeUpdate();
-            if (tag == 1) {
-                String str = "{\"msg\":\"delete_job_success\"}";
-                response.getWriter().print(str);
-                response.getWriter().flush();
-                response.getWriter().close();
-            } else {
-                String str = "{\"msg\":\"delete_job_fail\"}";
-                response.getWriter().print(str);
-                response.getWriter().flush();
-                response.getWriter().close();
-            }
+            ps.execute();
+            String str = "{\"msg\":\"delete_job_success\"}";
+            response.getWriter().print(str);
+            response.getWriter().flush();
+            response.getWriter().close();
             ps.close();
             conn.close();
         } catch (SQLException e) {
             // TODO 自动生成的 catch 块
             e.printStackTrace();
+            String str = "{\"msg\":\"delete_job_fail\"}";
+            response.getWriter().print(str);
+            response.getWriter().flush();
+            response.getWriter().close();
         }
     }
 }

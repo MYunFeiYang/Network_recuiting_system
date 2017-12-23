@@ -20,7 +20,7 @@
     <script src="javascript/enterprise/enterprise.js"></script>
     <script src="javascript/enterprise/address_industry_position.js"></script>
 </head>
-<body id="top">
+<body id="top" onclick="cleardata()">
 <div class="container-fluid">
     <nav class="navbar navbar-default">
         <div class="container-fluid">
@@ -152,7 +152,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-4 col-sm-12">
+                        <div class="col-md-4 col-sm-12 padding_top">
                             <a href="resetPassword.html" target="_top" class="btn btn-primary"
                                onclick="close_login();return change_iframe_src(this)">找回密码</a>
                         </div>
@@ -235,7 +235,10 @@
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-default glyphicon glyphicon-user">真实姓名</button>
                     </span>
-                                        <input type="text" class="form-control" id="person_name" placeholder="真实姓名">
+                                        <input type="text" class="form-control" id="person_name" placeholder="真实姓名" onkeyup="reg_name('person_name','btu_person_name')">
+                                        <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" id="btu_person_name">信</button>
+                    </span>
                                     </div>
                                 </div>
                             </div>
@@ -267,20 +270,20 @@
                                         <input type="text" class="form-control" id="person_telephone" placeholder="手机号码"
                                                onkeyup="reg_telephone('person_telephone','btu_person_telephone')">
                                         <span class="input-group-btn">
-                        <button type="button" class="btn btn-default " id="btu_person_telephone">哦</button>
+                        <button type="button" class="btn btn-default " id="btu_person_telephone">息</button>
                     </span>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6">
+                            <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6 padding_top">
                                 <input class="btn btn-sm btn-primary center-block" id="person_reg_btu"
                                        type="button" value="注册"
                                        onmouseover="btu_disable_person('person_reg_btu','confirm_person_box')"
                                        onclick="remember_user('person_nickname','person_password');register_person()">
                             </div>
-                            <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6">
+                            <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6 padding_top">
                                 <input class="btn btn-sm btn-danger center-block" type="reset" value="重置">
                             </div>
                         </div>
@@ -424,13 +427,13 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6">
+                        <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6 padding_top">
                             <input class="btn btn-sm btn-primary center-block" type="button"
                                    id="reg_btu" value="注册"
                                    onmouseover="btu_disable_enterprise('reg_btu','confirm_enterprise_box')"
                                    onclick="remember_user('enterprise_nickname','enterprise_password');register_enterprise()">
                         </div>
-                        <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6">
+                        <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6 padding_top">
                             <input type="reset" class="btn btn-sm btn-danger center-block"
                                    value="重置">
                         </div>

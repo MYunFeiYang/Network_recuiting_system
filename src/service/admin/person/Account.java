@@ -39,7 +39,7 @@ public class Account {
         Connection conn = dbManager.getConnection();
         List<User> userList = new ArrayList<>();
         try {
-            String sql = "{call personAssessmentInit(?,?,?,?,?)}";
+            String sql = "{call personAssessmentInit()}";
             CallableStatement ps = conn.prepareCall(sql);
             ps.execute();
             ResultSet rs = ps.getResultSet();

@@ -61,7 +61,8 @@ function query_industry() {
                 li.onclick = function () {
                     change_checked(event, 'industry');
                     query_address();
-                    query_position(this.innerText)
+                    query_position(this.innerText);
+                    paging(1);
                 };
             }
             ul.children[0].setAttribute("class", "checked");

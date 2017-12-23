@@ -42,7 +42,7 @@ function check_email(id, confirm_box) {
 }
 
 function reg_username(nickname, confirm_box) {
-    let uPattern = /^[a-zA-Z0-9_-]{4,16}$/;
+    let uPattern = /^[\u4e00-\u9fff\w]{5,16}$/;
     c_nickname = document.getElementById(nickname).value;
     n_confirm_box_c = document.getElementById(confirm_box);
     if (uPattern.test(c_nickname)) {
@@ -53,7 +53,7 @@ function reg_username(nickname, confirm_box) {
         return btu_register_status = true;
     } else {
         n_confirm_box_c.setAttribute("style", "color:red");
-        n_confirm_box_c.innerHTML = "4到16位（字母，数字，下划线，减号）";
+        n_confirm_box_c.innerHTML = "5-16位由字母、数字、_或汉字";
         return btu_register_status = false
     }
 }
@@ -71,6 +71,22 @@ function reg_pwd(password, confirm_box) {
     } else {
         n_confirm_box_c.setAttribute("style", "color:red");
         n_confirm_box_c.innerHTML = "密码必须是6到20位数字字母组合";
+        return btu_register_status = false;
+    }
+}
+function reg_name(password, confirm_box) {
+    c_password = document.getElementById(password).value;
+    let reg = /^[\u4E00-\u9FA5A-Za-z]+$/;
+    n_confirm_box_c = document.getElementById(confirm_box);
+    if (reg.test(c_password)) {
+        n_confirm_box_c.innerHTML = "";
+        n_confirm_box_c.classList.add("glyphicon");
+        n_confirm_box_c.classList.add("glyphicon-ok");
+        n_confirm_box_c.setAttribute("style", "color:blue");
+        return btu_register_status = true;
+    } else {
+        n_confirm_box_c.setAttribute("style", "color:red");
+        n_confirm_box_c.innerHTML = "请输入正确姓名";
         return btu_register_status = false;
     }
 }

@@ -274,3 +274,8 @@ function query() {
         }
     })
 }
+function cleardata() {
+    $('#register-person').on('hidden.bs.modal', function (e) {
+        $(this).removeData("bs.modal");
+    })
+}

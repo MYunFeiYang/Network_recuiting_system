@@ -107,7 +107,7 @@ function add_resume() {
                     n_confirm_box_p.innerHTML = "简历添加成功";
                     n_confirm_box_p.setAttribute("class", "alert-success");
                 } else {
-                    n_confirm_box_p.innerHTML = "简历添加失败";
+                    n_confirm_box_p.innerHTML = "请不要重复添加相同的简历";
                     n_confirm_box_p.setAttribute("class", "alert-warning");
                 }
             },

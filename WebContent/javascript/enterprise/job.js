@@ -92,7 +92,7 @@ function add_job() {
                     confirm_job_box.innerHTML = "岗位发布成功";
                     confirm_job_box.setAttribute("class", "alert-success");
                 } else {
-                    confirm_job_box.innerHTML = "岗位发布失败";
+                    confirm_job_box.innerHTML = "请不要发布重复的岗位";
                     confirm_job_box.setAttribute("class", "alert-warning");
                 }
             },

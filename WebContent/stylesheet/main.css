@@ -95,7 +95,7 @@ iframe {
 
 /*header*/
 nav {
-    z-index: 99999;
+    z-index: 999;
 }
 
 #search-con {
@@ -193,5 +193,7 @@ footer address a:hover {
     left: 0;
     z-index: 0;
 }
-
+.padding_top{
+   padding-top:10px;
+}
 
