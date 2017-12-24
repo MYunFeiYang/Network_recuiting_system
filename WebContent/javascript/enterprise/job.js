@@ -118,60 +118,57 @@ function get_job1() {
         type: 'POST',
         dataType: 'JSON',
         success: function (data) {
-            get_job2(data);
+            n_job = document.getElementById("job");
+            n_job.innerHTML=""
+            n_job.parentNode.classList.remove("hidden");
+            for (let i = 0; i < data.length; i++) {
+                row = document.createElement("tr");
+                n_job.appendChild(row);
+                n_identification = document.createElement("td");
+                n_name = document.createElement("td");
+                n_address = document.createElement("td");
+                n_industry = document.createElement("td");
+                n_position = document.createElement("td");
+                n_number = document.createElement("td");
+                n_salary = document.createElement("td");
+                n_publish_time = document.createElement("td");
+                n_effective_time = document.createElement("td");
+                n_operate = document.createElement("td");
+                row.appendChild(n_identification);
+                row.appendChild(n_name);
+                row.appendChild(n_address);
+                row.appendChild(n_industry);
+                row.appendChild(n_position);
+                row.appendChild(n_number);
+                row.appendChild(n_salary);
+                row.appendChild(n_publish_time);
+                row.appendChild(n_effective_time);
+                row.appendChild(n_operate);
+                c_identification = data[i].identification;
+                c_name = data[i].name;
+                c_address = data[i].address;
+                c_industry = data[i].industry;
+                c_position = data[i].position;
+                c_number = data[i].number;
+                c_salary = data[i].salary;
+                c_publish_time = data[i].publish_time;
+                c_effective_time = data[i].effective_time;
+                n_identification.innerHTML = `<input type="text" size="6" maxlength="20" disabled="disabled" value="${c_identification}">`;
+                n_name.innerHTML = `<input type="text" size="6" maxlength="8" disabled="disabled" value="${c_name}">`;
+                n_address.innerHTML = `<input type="text" size="3" maxlength="3" value="${c_address}">`;
+                n_industry.innerHTML = `<input type="text" size="3" maxlength="5" disabled="disabled" value="${c_industry}">`;
+                n_position.innerHTML = `<input type="text" size="10" maxlength="20" disabled="disabled" value="${c_position}">`;
+                n_number.innerHTML = `<input type="text" size="10" maxlength="20" value="${c_number}">`;
+                n_salary.innerHTML = `<input type="text" size="10" maxlength="20" value="${c_salary}">`;
+                n_publish_time.innerHTML = `<input type="text" size="8" maxlength="8" disabled="disabled" value="${c_publish_time}">`;
+                n_effective_time.innerHTML = `<input type="text" size="10" maxlength="20" value="${c_effective_time}">`;
+                n_operate.innerHTML = `<button class="btn btn-primary btn-sm" onclick="modify_job(this)">保存</button><button class="btn btn-danger btn-sm" onclick="delete_job(this)">删除</button>`
+            }
         },
         fail: function () {
 
         }
     })
-}
-
-function get_job2(data) {
-    n_job = document.getElementById("job");
-    n_job.parentNode.classList.remove("hidden");
-    for (let i = 0; i < data.length; i++) {
-        row = document.createElement("tr");
-        n_job.appendChild(row);
-        n_identification = document.createElement("td");
-        n_name = document.createElement("td");
-        n_address = document.createElement("td");
-        n_industry = document.createElement("td");
-        n_position = document.createElement("td");
-        n_number = document.createElement("td");
-        n_salary = document.createElement("td");
-        n_publish_time = document.createElement("td");
-        n_effective_time = document.createElement("td");
-        n_operate = document.createElement("td");
-        row.appendChild(n_identification);
-        row.appendChild(n_name);
-        row.appendChild(n_address);
-        row.appendChild(n_industry);
-        row.appendChild(n_position);
-        row.appendChild(n_number);
-        row.appendChild(n_salary);
-        row.appendChild(n_publish_time);
-        row.appendChild(n_effective_time);
-        row.appendChild(n_operate);
-        c_identification = data[i].identification;
-        c_name = data[i].name;
-        c_address = data[i].address;
-        c_industry = data[i].industry;
-        c_position = data[i].position;
-        c_number = data[i].number;
-        c_salary = data[i].salary;
-        c_publish_time = data[i].publish_time;
-        c_effective_time = data[i].effective_time;
-        n_identification.innerHTML = `<input type="text" size="6" maxlength="20" disabled="disabled" value="${c_identification}">`;
-        n_name.innerHTML = `<input type="text" size="6" maxlength="8" disabled="disabled" value="${c_name}">`;
-        n_address.innerHTML = `<input type="text" size="3" maxlength="3" value="${c_address}">`;
-        n_industry.innerHTML = `<input type="text" size="3" maxlength="5" disabled="disabled" value="${c_industry}">`;
-        n_position.innerHTML = `<input type="text" size="10" maxlength="20" disabled="disabled" value="${c_position}">`;
-        n_number.innerHTML = `<input type="text" size="10" maxlength="20" value="${c_number}">`;
-        n_salary.innerHTML = `<input type="text" size="10" maxlength="20" value="${c_salary}">`;
-        n_publish_time.innerHTML = `<input type="text" size="8" maxlength="8" disabled="disabled" value="${c_publish_time}">`;
-        n_effective_time.innerHTML = `<input type="text" size="10" maxlength="20" value="${c_effective_time}">`;
-        n_operate.innerHTML = `<button class="btn btn-primary btn-sm" onclick="modify_job(this)">保存</button><button class="btn btn-danger btn-sm" onclick="delete_job(this)">删除</button>`
-    }
 }
 
 function modify_job(obj) {

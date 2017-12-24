@@ -20,8 +20,8 @@ function modify_person_before_select() {
                 input[1].value = data.password;
                 input[2].value = data.password;
                 input[3].value = data.name;
-                input[4].value = data.telephone;
-                input[5].value = data.email;
+                input[4].value = data.email;
+                input[5].value = data.telephone;
             }
         },
         fail: function () {

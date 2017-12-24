@@ -138,6 +138,7 @@ function get_resume1() {
         success: function (data) {
             n_resume = document.getElementById("resume");
             n_resume.parentNode.classList.remove("hidden");
+            n_resume.innerHTML="";
             for (let i = 0; i < data.length; i++) {
                 row = document.createElement("tr");
                 n_resume.appendChild(row);
