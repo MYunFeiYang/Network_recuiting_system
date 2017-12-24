@@ -61,12 +61,15 @@ function add_job() {
     let telephone = document.getElementById("c_telephone").value;
     confirm_job_box = document.getElementById("confirm_job_box");
     if (name === "") {
+        confirm_job_box.classList.remove("hidden");
         confirm_job_box.innerHTML = "公司名称不能为空";
         confirm_job_box.setAttribute("class", "alert-warning");
     } else if (number === "") {
+        confirm_job_box.classList.remove("hidden");
         confirm_job_box.innerHTML = "招聘人数不能为空";
         confirm_job_box.setAttribute("class", "alert-warning");
     } else if (effective_time === "") {
+        confirm_job_box.classList.remove("hidden");
         confirm_job_box.innerHTML = "有效时间不能为空";
         confirm_job_box.setAttribute("class", "alert-warning");
     } else {
@@ -89,9 +92,11 @@ function add_job() {
             dataType: 'JSON',
             success: function (data) {
                 if (data.msg === "add_job_success") {
+                    confirm_job_box.classList.remove("hidden");
                     confirm_job_box.innerHTML = "岗位发布成功";
                     confirm_job_box.setAttribute("class", "alert-success");
                 } else {
+                    confirm_job_box.classList.remove("hidden");
                     confirm_job_box.innerHTML = "请不要发布重复的岗位";
                     confirm_job_box.setAttribute("class", "alert-warning");
                 }

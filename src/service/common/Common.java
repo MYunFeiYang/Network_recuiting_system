@@ -154,17 +154,10 @@ public class Common {
                     ps.setString(3, dataString);
                     ps.execute();
                     if (ps.getInt(4) != 0) {
-                        if (ps.getInt(4) == 2) {
-                            String str = "{\"msg\":\"login_success\"}";
-                            response.getWriter().print(str);
-                            response.getWriter().flush();
-                            response.getWriter().close();
-                        } else {
-                            String str = "{\"msg\":\"assessing\"}";
-                            response.getWriter().print(str);
-                            response.getWriter().flush();
-                            response.getWriter().close();
-                        }
+                        String str = "{\"msg\":\"login_success\"}";
+                        response.getWriter().print(str);
+                        response.getWriter().flush();
+                        response.getWriter().close();
                     } else {
                         String str = "{\"msg\":\"login_fail\"}";
                         response.getWriter().print(str);

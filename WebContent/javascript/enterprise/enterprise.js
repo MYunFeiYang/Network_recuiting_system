@@ -58,10 +58,12 @@ function modify_enterprise() {
         success: function (data) {
             n_confirm_box = document.getElementById(confirm_box);
             if (data.msg === "modify_user_success") {
+                n_confirm_box.classList.remove("hidden");
                 success_info = "信息修改成功";
                 n_confirm_box.innerHTML = success_info;
                 n_confirm_box.setAttribute("class", "alert-success");
             } else {
+                n_confirm_box.classList.remove("hidden");
                 fail_info = "信息修改失败";
                 n_confirm_box.innerHTML = fail_info;
                 n_confirm_box.setAttribute("class", "alert-warning");
@@ -71,4 +73,8 @@ function modify_enterprise() {
 
         }
     })
+}
+
+function clearData(obj) {
+    obj.getElementsByTagName("form")[0].reset();
 }

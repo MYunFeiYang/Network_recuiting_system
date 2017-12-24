@@ -51,9 +51,11 @@ function modify_person(confirm_info_box) {
         success: function (data) {
             confirm_box_p = document.getElementById(confirm_info_box);
             if (data.msg === "modify_user_success") {
+                confirm_box_p.classList.remove("hidden");
                 confirm_box_p.innerHTML = "信息修改成功";
                 confirm_box_p.setAttribute("class", "alert-success");
             } else {
+                confirm_box_p.classList.remove("hidden");
                 confirm_box_p.innerHTML = "信息修改失败";
                 confirm_box_p.setAttribute("class", "alert-warning");
             }
@@ -78,4 +80,8 @@ function auto_match() {
 
         }
     })
+}
+
+function clearData(obj) {
+    obj.getElementsByTagName("form")[0].reset();
 }

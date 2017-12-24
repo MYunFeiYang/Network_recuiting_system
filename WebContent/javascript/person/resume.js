@@ -63,24 +63,31 @@ function add_resume() {
     let email = document.getElementById("resume_email").value;
     n_confirm_box_p = document.getElementById("confirm_resume_box");
     if (age === "") {
+        n_confirm_box_p.classList.remove("hidden");
         n_confirm_box_p.innerHTML = "请输入年龄";
         n_confirm_box_p.setAttribute("class", "alert-warning");
     } else if (origin === "") {
+        n_confirm_box_p.classList.remove("hidden");
         n_confirm_box_p.innerHTML = "请输入籍贯";
         n_confirm_box_p.setAttribute("class", "alert-warning");
     } else if (collage === "") {
+        n_confirm_box_p.classList.remove("hidden");
         n_confirm_box_p.innerHTML = "请输入毕业学校";
         n_confirm_box_p.setAttribute("class", "alert-warning");
     } else if (specialty === "") {
+        n_confirm_box_p.classList.remove("hidden");
         n_confirm_box_p.innerHTML = "请输入专业";
         n_confirm_box_p.setAttribute("class", "alert-warning");
     } else if (admission_data === "") {
+        n_confirm_box_p.classList.remove("hidden");
         n_confirm_box_p.innerHTML = "请输入入学时间";
         n_confirm_box_p.setAttribute("class", "alert-warning");
     } else if (graduation_data === "") {
+        n_confirm_box_p.classList.remove("hidden");
         n_confirm_box_p.innerHTML = "请输入毕业时间";
         n_confirm_box_p.setAttribute("class", "alert-warning");
     } else {
+        n_confirm_box_p.classList.remove("hidden");
         n_confirm_box_p.innerHTML = "通过验证";
         n_confirm_box_p.setAttribute("class", "alert-success");
         o_resume = {};
@@ -104,9 +111,11 @@ function add_resume() {
             dataType: 'JSON',
             success: function (data) {
                 if (data.msg === "add_resume_success") {
+                    n_confirm_box_p.classList.remove("hidden");
                     n_confirm_box_p.innerHTML = "简历添加成功";
                     n_confirm_box_p.setAttribute("class", "alert-success");
                 } else {
+                    n_confirm_box_p.classList.remove("hidden");
                     n_confirm_box_p.innerHTML = "请不要重复添加相同的简历";
                     n_confirm_box_p.setAttribute("class", "alert-warning");
                 }
@@ -127,64 +136,60 @@ function get_resume1() {
         type: 'POST',
         dataType: 'JSON',
         success: function (data) {
-            get_resume2(data);
+            n_resume = document.getElementById("resume");
+            n_resume.parentNode.classList.remove("hidden");
+            for (let i = 0; i < data.length; i++) {
+                row = document.createElement("tr");
+                n_resume.appendChild(row);
+                n_identification = document.createElement("td");
+                n_name = document.createElement("td");
+                n_age = document.createElement("td");
+                n_sex = document.createElement("td");
+                n_origin = document.createElement("td");
+                n_collage = document.createElement("td");
+                n_specialty = document.createElement("td");
+                n_degree = document.createElement("td");
+                n_admission_data = document.createElement("td");
+                n_graduation_data = document.createElement("td");
+                n_operate = document.createElement("td");
+                row.appendChild(n_identification);
+                row.appendChild(n_name);
+                row.appendChild(n_age);
+                row.appendChild(n_sex);
+                row.appendChild(n_origin);
+                row.appendChild(n_collage);
+                row.appendChild(n_specialty);
+                row.appendChild(n_degree);
+                row.appendChild(n_admission_data);
+                row.appendChild(n_graduation_data);
+                row.appendChild(n_operate);
+                c_identification = data[i].identification;
+                c_name = data[i].name;
+                c_age = data[i].age;
+                c_sex = data[i].sex;
+                c_origin = data[i].origin;
+                c_collage = data[i].collage;
+                c_specialty = data[i].specialty;
+                c_degree = data[i].degree;
+                c_admission_data = data[i].admission_data;
+                c_graduation_data = data[i].graduation_data;
+                n_identification.innerHTML = `<input type="text" size="6" maxlength="20" disabled="disabled" value="${c_identification}">`;
+                n_name.innerHTML = `<input type="text" size="6" maxlength="8" disabled="disabled" value="${c_name}">`;
+                n_age.innerHTML = `<input type="text" size="3" maxlength="3" value="${c_age}">`;
+                n_sex.innerHTML = `<input type="text" size="3" maxlength="5" disabled="disabled" value="${c_sex}">`;
+                n_origin.innerHTML = `<input type="text" size="10" maxlength="20" disabled="disabled" value="${c_origin}">`;
+                n_collage.innerHTML = `<input type="text" size="10" maxlength="20" value="${c_collage}">`;
+                n_specialty.innerHTML = `<input type="text" size="10" maxlength="20" value="${c_specialty}">`;
+                n_degree.innerHTML = `<input type="text" size="8" maxlength="8" value="${c_degree}">`;
+                n_admission_data.innerHTML = `<input type="text" size="10" maxlength="20" value="${c_admission_data}">`;
+                n_graduation_data.innerHTML = `<input type="text" size="10" maxlength="20" value="${c_graduation_data}">`;
+                n_operate.innerHTML = `<button class="btn btn-primary btn-sm" onclick="modify_resume(this)">保存</button><button class="btn btn-danger btn-sm" onclick="delete_resume(this)">删除</button>`
+            }
         },
         fail: function () {
 
         }
     })
-}
-
-function get_resume2(data) {
-    n_resume = document.getElementById("resume");
-    n_resume.parentNode.classList.remove("hidden");
-    for (let i = 0; i < data.length; i++) {
-        row = document.createElement("tr");
-        n_resume.appendChild(row);
-        n_identification = document.createElement("td");
-        n_name = document.createElement("td");
-        n_age = document.createElement("td");
-        n_sex = document.createElement("td");
-        n_origin = document.createElement("td");
-        n_collage = document.createElement("td");
-        n_specialty = document.createElement("td");
-        n_degree = document.createElement("td");
-        n_admission_data = document.createElement("td");
-        n_graduation_data = document.createElement("td");
-        n_operate = document.createElement("td");
-        row.appendChild(n_identification);
-        row.appendChild(n_name);
-        row.appendChild(n_age);
-        row.appendChild(n_sex);
-        row.appendChild(n_origin);
-        row.appendChild(n_collage);
-        row.appendChild(n_specialty);
-        row.appendChild(n_degree);
-        row.appendChild(n_admission_data);
-        row.appendChild(n_graduation_data);
-        row.appendChild(n_operate);
-        c_identification = data[i].identification;
-        c_name = data[i].name;
-        c_age = data[i].age;
-        c_sex = data[i].sex;
-        c_origin = data[i].origin;
-        c_collage = data[i].collage;
-        c_specialty = data[i].specialty;
-        c_degree = data[i].degree;
-        c_admission_data = data[i].admission_data;
-        c_graduation_data = data[i].graduation_data;
-        n_identification.innerHTML = `<input type="text" size="6" maxlength="20" disabled="disabled" value="${c_identification}">`;
-        n_name.innerHTML = `<input type="text" size="6" maxlength="8" disabled="disabled" value="${c_name}">`;
-        n_age.innerHTML = `<input type="text" size="3" maxlength="3" value="${c_age}">`;
-        n_sex.innerHTML = `<input type="text" size="3" maxlength="5" disabled="disabled" value="${c_sex}">`;
-        n_origin.innerHTML = `<input type="text" size="10" maxlength="20" disabled="disabled" value="${c_origin}">`;
-        n_collage.innerHTML = `<input type="text" size="10" maxlength="20" value="${c_collage}">`;
-        n_specialty.innerHTML = `<input type="text" size="10" maxlength="20" value="${c_specialty}">`;
-        n_degree.innerHTML = `<input type="text" size="8" maxlength="8" value="${c_degree}">`;
-        n_admission_data.innerHTML = `<input type="text" size="10" maxlength="20" value="${c_admission_data}">`;
-        n_graduation_data.innerHTML = `<input type="text" size="10" maxlength="20" value="${c_graduation_data}">`;
-        n_operate.innerHTML = `<button class="btn btn-primary btn-sm" onclick="modify_resume(this)">保存</button><button class="btn btn-danger btn-sm" onclick="delete_resume(this)">删除</button>`
-    }
 }
 
 function modify_resume(obj) {

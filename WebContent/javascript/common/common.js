@@ -24,8 +24,11 @@ function register_person() {
         success: function (data) {
             confirm_box_c = document.getElementById("confirm_person_box");
             if (data.msg === "assessing") {
-                confirm_box_c.innerHTML = "正在审核中";
+                confirm_box_c.innerHTML = "账号在审核，您可以先登录";
                 confirm_box_c.setAttribute("class", "alert-success");
+                setTimeout(function () {
+                    window.location.href="index.html"
+                },3000);
             } else {
                 confirm_box_c.innerHTML = "用户名和密码已存在";
                 confirm_box_c.setAttribute("class", "alert-warning");
@@ -55,8 +58,11 @@ function register_enterprise() {
         success: function (data) {
             confirm_box_c = document.getElementById("confirm_enterprise_box");
             if (data.msg === "assessing") {
-                confirm_box_c.innerHTML = "正在审核中";
+                confirm_box_c.innerHTML = "账号在审核，您可以先登录";
                 confirm_box_c.setAttribute('class', 'alert-success');
+                setTimeout(function () {
+                    window.location.href="index.html"
+                },3000);
             } else {
                 confirm_box_c.innerHTML = "该用户名和密码已存在";
                 confirm_box_c.setAttribute('class', 'alert-warning');
@@ -83,9 +89,6 @@ function login() {
             if (data.msg === "login_success") {
                 document.getElementById("close_login").click();
                 login_session('login');
-            } else if (data.msg === "assessing") {
-                confirm_box_c.innerHTML = "该用户正在审核中";
-                confirm_box_c.setAttribute('class', 'alert-warning');
             }
             else {
                 confirm_box_c.innerHTML = "用户名或密码错误";
@@ -272,10 +275,5 @@ function query() {
         fail: function () {
 
         }
-    })
-}
-function cleardata() {
-    $('#register-person').on('hidden.bs.modal', function (e) {
-        $(this).removeData("bs.modal");
     })
 }
