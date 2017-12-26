@@ -44,23 +44,23 @@ public class PageBean<T> {
         this.end = 5;
         //显示页数的算法
 
-        if (totalPage <= 5) {
+        if (totalPage <= 9) {
             //总页数都小于5，那么end就为总页数的值了。
             this.end = this.totalPage;
         } else {
             //总页数大于5，那么就要根据当前是第几页，来判断start和end为多少了，
-            this.start = pageNum - 2;
-            this.end = pageNum + 2;
+            this.start = pageNum - 4;
+            this.end = pageNum + 4;
 
             if (start < 0) {
                 //比如当前页是第1页，或者第2页，那么就不如和这个规则，
                 this.start = 1;
-                this.end = 5;
+                this.end = 9;
             }
             if (end > this.totalPage) {
                 //比如当前页是倒数第2页或者最后一页，也同样不符合上面这个规则
                 this.end = totalPage;
-                this.start = end - 5;
+                this.start = end - 9;
             }
         }
     }

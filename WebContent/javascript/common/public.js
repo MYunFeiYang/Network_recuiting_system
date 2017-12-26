@@ -10,7 +10,7 @@ function get_news(user_type) {
     let user = {};
     user.user_type = user_type;
     $.ajax({
-        url: "../public?public=get_news",
+        url: "/public?public=get_news",
         data: user,
         type: "POST",
         dataType: "JSON",
@@ -59,7 +59,7 @@ function query_industry() {
                 a.setAttribute("href", href);
                 a.setAttribute("onclick", "return false");
                 li.onclick = function () {
-                    change_checked(event, 'industry');
+                    change_checked(this);
                     query_address();
                     query_position(this.innerText);
                     paging(1);
@@ -93,7 +93,7 @@ function query_address() {
                 let a = document.createElement("a");
                 li.appendChild(a);
                 li.onclick = function () {
-                    change_checked(event, 'address');
+                    change_checked(this);
                     paging(1);
                 };
                 a.setAttribute("href", href);
@@ -128,7 +128,7 @@ function query_position(text) {
                     let li = document.createElement("li");
                     ul.appendChild(li);
                     li.onclick = function () {
-                        change_checked(event, 'position');
+                        change_checked(this);
                         paging(1);
                     };
                     li.innerHTML = data[i].position;
@@ -222,19 +222,14 @@ function pagingResult(data) {
     }
 }
 
-function change_checked(event, id) {
-    let industry = document.getElementById(id);
-    let ul = industry.getElementsByTagName("ul");
-    let li = ul[0].getElementsByTagName("li");
+function change_checked(obj) {
+    let ul = obj.parentNode;
+    let li = ul.children;
     let i = 0;
     for (; i < li.length; i++) {
         if (li[i].classList.toString().indexOf("checked") !== -1) {
             li[i].classList.remove("checked");
         }
     }
-    if (event.target.toString().indexOf("a") !== -1) {
-        event.target.parentNode.classList.add("checked");
-    } else {
-        event.target.classList.add("checked");
-    }
+    obj.classList.add("checked");
 }

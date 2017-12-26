@@ -1,6 +1,6 @@
 "use strict";
 //创建一个连接，这里的参数是服务端的链接
-let socket = new WebSocket("ws://localhost/init");
+let socket = new WebSocket("ws://www.myunfeiyang.xin/init");
 $(function () {
     //初始化加载listen方法
     listen();
@@ -10,7 +10,7 @@ function init() {
     if (socket.readyState === 1) {
 
     } else {
-        socket = new WebSocket("ws://localhost/init");
+        socket = new WebSocket("ws://www.myunfeiyang.xin/init");
         $(function () {
             //重连接加载listen方法
             listen();

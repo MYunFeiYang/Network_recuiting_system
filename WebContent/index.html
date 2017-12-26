@@ -47,7 +47,7 @@
                            aria-expanded="false">招聘<span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a href="public.html" onclick="return change_iframe_src(this)">校招</a></li>
+                                <a href="public.html" onclick="close_nav();return change_iframe_src(this)">校招</a></li>
                             <li role="separator" class="divider"></li>
                         </ul>
                     </li>
@@ -60,7 +60,7 @@
                         <ul class="dropdown-menu" id="user_center">
                             <li>
                                 <!-- Button trigger modal -->
-                                <a data-toggle="modal" data-target="#login">
+                                <a data-toggle="modal" data-target="#login" onclick="close_nav()">
                                     登录
                                 </a>
                             </li>
@@ -76,13 +76,13 @@
                         <ul class="dropdown-menu">
                             <li>
                                 <!-- Button trigger modal -->
-                                <a data-toggle="modal" data-target="#register-person">
+                                <a data-toggle="modal" data-target="#register-person" onclick="close_nav()">
                                     个人注册
                                 </a>
                             </li>
                             <li role="separator" class="divider"></li>
                             <li>
-                                <a data-toggle="modal" data-target="#register-enterprise">
+                                <a data-toggle="modal" data-target="#register-enterprise" onclick="close_nav()">
                                     企业注册
                                 </a>
                             </li>
@@ -162,7 +162,7 @@
                     <button type="button" class="btn btn-default" data-dismiss="modal" id="close_login">关闭
                     </button>
                     <button type="button" class="btn btn-primary"
-                            onclick="reset_user();login()">登录
+                            onclick="login();reset_user()">登录
                     </button>
                 </div>
             </div>
@@ -278,7 +278,7 @@
                                 <input class="btn btn-sm btn-primary center-block" id="person_reg_btu"
                                        type="button" value="注册"
                                        onmouseover="btu_disable_person('person_reg_btu','confirm_person_box')"
-                                       onclick="remember_user('person_nickname','person_password');register_person()">
+                                       onclick="register_person();remember_user('person_nickname','person_password')">
                             </div>
                             <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6 padding_top">
                                 <input class="btn btn-sm btn-danger center-block" type="reset" value="重置">
@@ -428,7 +428,7 @@
                             <input class="btn btn-sm btn-primary center-block" type="button"
                                    id="reg_btu" value="注册"
                                    onmouseover="btu_disable_enterprise('reg_btu','confirm_enterprise_box')"
-                                   onclick="remember_user('enterprise_nickname','enterprise_password');register_enterprise()">
+                                   onclick="register_enterprise();remember_user('enterprise_nickname','enterprise_password')">
                         </div>
                         <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6 padding_top">
                             <input type="reset" class="btn btn-sm btn-danger center-block"
@@ -512,6 +512,9 @@
         show_user('login_nickname', 'login_password');
         login_session('refresh');
     };
+    function close_nav() {
+        document.getElementById("bs-example-navbar-collapse-1").classList.remove("in");
+    }
     window._bd_share_config = {
         "common": {
             "bdSnsKey": {},

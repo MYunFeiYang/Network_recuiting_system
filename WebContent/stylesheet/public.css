@@ -13,8 +13,10 @@
         box-shadow: 1px 1px 1px 1px gainsboro;
         background: rgba(255, 255, 255, 0.5);
     }
-
-    #industry ul li, #filter ul li {
+    #industry::-webkit-scrollbar,#position::-webkit-scrollbar,#address::-webkit-scrollbar{
+        display: none;
+    }
+    #industry ul li,#filter ul li {
         float: left;
     }
 }
@@ -35,7 +37,7 @@
         background: rgba(255, 255, 255, 0.5);
     }
 
-    #industry ul li, #filter ul li {
+    #industry ul li,#filter ul li {
         float: left;
     }
 }
@@ -72,7 +74,7 @@ body {
     background: rgba(255, 255, 255, 0.1);
 }
 
-.marquee ul, .marquee, #filter ul li, #industry ul li, #hotRecurit ul li {
+.marquee ul, .marquee, #filter ul li,#industry ul li, #hotRecurit ul li {
     list-style: none;
     padding: 1px 5px;
 }
@@ -94,31 +96,33 @@ body {
     background: rgba(220, 220, 220, 0.5);
 }
 
-#industry ul, #position ul, #address ul {
+#filter ul,#industry ul {
     padding-left: 0;
 }
 
-#industry ul li, #position ul li, #address ul li {
-    margin: 5px;
+#filter ul li,#industry ul li {
+    margin: 2px 5px;
     text-align: center;
-    padding: 0;
-    box-shadow: 1px 1px 1px 1px gainsboro;
+    padding: 2px 8px;
+    box-shadow: 1px 1px 1px 1px rgba(255,255,255,0.7);
     border-radius: 5px;
+    cursor: pointer;
+    color: white;
 }
 
-#industry ul li:hover, #position ul li:hover, #address ul li:hover {
+#filter ul li:hover,#industry ul li:hover {
     background: rgba(255, 255, 255, 0.4);
 }
 
-#industry ul li a {
+#industry ul li a{
     display: inline-block;
     width: auto;
     font-size: 1rem;
 }
 
-#filter ul li a, #industry a {
+#filter ul li a,#industry ul li a {
     text-decoration: none;
-    color: black;
+    color: white;
 }
 
 #position ul li, #address ul li {
@@ -145,7 +149,7 @@ table tbody tr td a {
     text-align: center;
     color: black;
     text-decoration: none;
-    font-size: 0.8rem;
+    font-size: 1rem;
 }
 
 /*right*/
@@ -196,7 +200,7 @@ table tbody tr td a {
     position: relative;
     top: 0;
     padding: 3px;
-    font-size: 0.5rem;
+    font-size: 1rem;
 }
 
 .marquee ul li a:link {

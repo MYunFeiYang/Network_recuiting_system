@@ -5762,6 +5762,7 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
 
 .pagination > li {
     display: inline;
+    cursor: pointer;
 }
 
 .pagination > li > a,
@@ -5773,8 +5774,8 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
     line-height: 1.42857143;
     color: #337ab7;
     text-decoration: none;
-    background-color: #fff;
-    border: 1px solid #ddd;
+    background : rgba(255,255,255,0.2);
+    border: 1px solid rgba(255,255,255,0.5);
 }
 
 .pagination > li:first-child > a,
@@ -7174,7 +7175,7 @@ button.close {
 
 .modal-content {
     position: relative;
-    background: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.7);
     -webkit-background-clip: padding-box;
     background-clip: padding-box;
     border: 1px solid #999;
