@@ -1,6 +1,6 @@
 "use strict";
 //创建一个连接，这里的参数是服务端的链接
-let socket = new WebSocket("ws://www.myunfeiyang.xin/init");
+let socket = new WebSocket("ws://localhost/init");
 $(function () {
     //初始化加载listen方法
     listen();
@@ -10,7 +10,7 @@ function init() {
     if (socket.readyState === 1) {
 
     } else {
-        socket = new WebSocket("ws://www.myunfeiyang.xin/init");
+        socket = new WebSocket("ws://localhost/init");
         $(function () {
             //重连接加载listen方法
             listen();
@@ -30,16 +30,17 @@ function closeSocket() {
 function listen() {
     //打开连接时触发
     socket.onopen = function () {
+        show_system_message_to_self("欢迎加入群聊");
         let nickname = getnickname();
         let msg = {
             "nickname": nickname,
-            "message": ""
         };
         socket.send(JSON.stringify(msg));
-        show_system_message_to_self("欢迎加入群聊");
     };
     //收到消息时触发
     socket.onmessage = function (evt) {
+        //群聊信息（nickname，message）
+        //在线列表（nickname，session）
         let data = JSON.parse(evt.data);
         if (Object.prototype.toString.call(data) === "[object Array]") {
             //展示在线列表
