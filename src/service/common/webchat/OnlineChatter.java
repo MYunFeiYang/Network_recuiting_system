@@ -38,7 +38,6 @@ public class OnlineChatter {
             ResultSet rs=cast.getResultSet();
             while (rs.next()){
                 model.common.OnlineChatter onlineChatter=new model.common.OnlineChatter();
-                onlineChatter.setSession(rs.getString(1));
                 onlineChatter.setNickname(rs.getString(2));
                 onlineChatterList.add(onlineChatter);
             }

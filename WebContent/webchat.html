@@ -18,7 +18,7 @@
 <body>
 <div class="container-fluid">
     <div class="row" id="mylist">
-        <div class="col-md-2 col-lg-2 col-sm-3 col-xs-12 user_center">
+        <div class="col-md-2 col-lg-2 col-sm-3 col-xs-8 col-xs-offset-2 user_center">
             <ul>
                 <li onclick="show_status()">登录状态 <span id="status"></span></li>
                 <li type="button" onclick="init()">打开连接
@@ -42,7 +42,8 @@
         <div class="col-md-7 col-lg-7 col-sm-6 col-xs-12 chat_content">
             <div class="row">
                 <div class="col-md-12" id="show_content">
-
+                    <a style="display: block;text-align: center;text-decoration: none;cursor: pointer" onclick="get_chat_record()">
+                        更多记录</a>
                 </div>
                 <div class="col-md-12" id="editor">
                     <textarea id="content" placeholder="输入聊天内容"></textarea>
@@ -52,7 +53,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-3 col-lg-3 col-sm-3 col-xs-12 person_list">
+        <div class="col-md-3 col-lg-3 col-sm-3 col-xs-8 col-xs-offset-2 person_list">
             <h2>在线人员列表</h2>
             <ul id="list">
 
@@ -73,7 +74,6 @@
 </body>
 <script>
     window.onload = function () {
-        init();
         show_status();
         Carousel_figure(1);
     }

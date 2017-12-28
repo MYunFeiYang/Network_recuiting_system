@@ -1,6 +1,7 @@
 "use strict";
 //向客户端发送消息，这里定义了一些参数用来设置消息的颜色字体，不过暂时没用到有兴趣的可以自己实现
 let name;
+let record;
 
 function emit() {
 
@@ -48,14 +49,46 @@ function getnickname() {
     return name;
 }
 
-function refresh_online_list() {
-    let refresh = document.getElementById("refresh");
-    refresh.style = "";
-    refresh.style = "animation-name:go;\n" +
-        "    animation-duration:2s;\n" +
-        "    animation-iteration-count: 3;";
-    let msg = {"refresh": refresh};
+function get_chat_record() {
+    record = 1;
+    let msg = {"record": record};
     socket.send(JSON.stringify(msg));
+    record++;
+}
+
+function show_chat_record(data) {
+    let nickname = getnickname();
+    let show_content = document.getElementById("show_content");
+    let a = show_content.getElementsByTagName("a")[0];
+    for (let i = 0; i < data.length; i++) {
+        if (data[i].nickname === nickname) {
+            let div = document.createElement("div");
+            show_content.insertBefore(div, a.nextSibling);
+            div.setAttribute("class", "self");
+            div.innerHTML = data[i].record;
+        } else {
+            let chatBox = document.createElement("div");
+            show_content.insertBefore(chatBox, a.nextSibling);
+            chatBox.setAttribute("class", "chatBox");
+            let left = document.createElement("div");
+            let right = document.createElement("div");
+            chatBox.appendChild(left);
+            chatBox.appendChild(right);
+            left.setAttribute("style", "display: inline-block;");
+            right.setAttribute("style", "display: inline-block;");
+            let photo = document.createElement("span");
+            let username = document.createElement("span");
+            let message = document.createElement("span");
+            left.appendChild(photo);
+            right.appendChild(username);
+            right.appendChild(message);
+            photo.setAttribute("class", "glyphicon glyphicon-user photo");
+            username.setAttribute("class", "username");
+            message.setAttribute("class", "message");
+            username.innerHTML = data[i].nickname;
+            message.innerHTML = data[i].record;
+        }
+    }
 }
 
 function show_status() {
@@ -73,6 +106,16 @@ function show_status() {
         status.innerHTML = "离线";
         status.style.color = "red";
     }
+}
+
+function refresh_online_list() {
+    let refresh = document.getElementById("refresh");
+    refresh.style = "";
+    refresh.style = "animation-name:go;\n" +
+        "    animation-duration:2s;\n" +
+        "    animation-iteration-count: 3;";
+    let msg = {"refresh": ""};
+    socket.send(JSON.stringify(msg));
 }
 
 function show_online_list(data) {
