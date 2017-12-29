@@ -13,7 +13,7 @@ function remember_user(nickname, password) {
 }
 
 function show_user(nickname, password) {
-    if (document.cookie.indexOf("user")) {
+    if (document.cookie.indexOf("user")!==-1) {
         let user= JSON.parse(document.cookie.split(";")[0].split("=")[1]);
         document.getElementById(nickname).value = user.nickname;
         document.getElementById(password).value = user.password;
@@ -22,7 +22,7 @@ function show_user(nickname, password) {
 function reset_user() {
     let nickname = document.getElementById("login_nickname").value;
     let password = document.getElementById("login_password").value;
-    if (document.cookie.indexOf("user")) {
+    if (document.cookie.indexOf("user")!==-1) {
         let user = JSON.parse(document.cookie.split(";")[0].split("=")[1]);
         user.nickname = nickname;
         user.password = password;

@@ -84,6 +84,12 @@ function login() {
         data: user,
         type: 'POST',
         dataType: 'JSON',
+        // xhr:function () {
+        //     let xhr = jQuery.ajaxSettings.xhr();
+        //     if (xhr.readyState===1){
+        //         console.log("1");
+        //     }
+        // },
         success: function (data) {
             confirm_box_c = document.getElementById("confirm_login_box");
             if (data.msg === "login_success") {

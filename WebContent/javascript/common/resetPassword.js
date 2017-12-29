@@ -29,7 +29,7 @@ function resetPassword() {
                 confirm_box.setAttribute("class", "alert-warning");
                 confirm_box.innerHTML = "注意接收重置密码邮件";
                 document.getElementById("basic-addon1").innerHTML = "请输入验证码";
-                if (document.cookie.indexOf("user")) {
+                if (document.cookie.indexOf("user")!==-1) {
                     let user_string = document.cookie.split(";")[0].split("=")[1];
                     user = JSON.parse(user_string);
                 } else {
@@ -79,7 +79,7 @@ function updatePassword() {
     } else {
         confirm_box.setAttribute("class", "alert-success");
         confirm_box.innerHTML = "密码通过";
-        if (document.cookie !== "") {
+        if (document.cookie.indexOf("user")!==-1) {
             let user_string = document.cookie.split(";")[0].split("=")[1];
             let user = JSON.parse(user_string);
             user.password = password;
