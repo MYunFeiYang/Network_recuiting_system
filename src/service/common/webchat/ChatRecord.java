@@ -30,13 +30,19 @@ public class ChatRecord {
             e.printStackTrace();
         }
     }
-    public String getRecord(){
+    public String getRecord(String message){
+        JSONObject jsonObject=JSONObject.fromObject(message);
+        int record=jsonObject.getInt("record");
+        int top=20*record;
+        int bottom=20*(record-1);
         DBManager dbManager=new DBManager();
         Connection conn=dbManager.getConnection();
         List<model.common.ChatRecord> chatRecordList=new ArrayList<>();
         try {
-            String sql="{call recordGet()}";
+            String sql="{call recordGet(?,?)}";
             CallableStatement cast=conn.prepareCall(sql);
+            cast.setInt(1,bottom);
+            cast.setInt(2,top);
             cast.execute();
             ResultSet rs=cast.getResultSet();
             while (rs.next()){

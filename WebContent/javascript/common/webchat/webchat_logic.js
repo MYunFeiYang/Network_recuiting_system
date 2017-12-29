@@ -1,7 +1,7 @@
 "use strict";
 //向客户端发送消息，这里定义了一些参数用来设置消息的颜色字体，不过暂时没用到有兴趣的可以自己实现
 let name;
-let record;
+let record=1;
 
 function emit() {
 
@@ -50,7 +50,6 @@ function getnickname() {
 }
 
 function get_chat_record() {
-    record = 1;
     let msg = {"record": record};
     socket.send(JSON.stringify(msg));
     record++;

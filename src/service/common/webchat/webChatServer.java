@@ -55,7 +55,7 @@ public class webChatServer {
                     session.getBasicRemote().sendText(onlineChatter.selectUser());
                 }else if(message.contains("record")){
                     //获得聊天记录
-                    session.getBasicRemote().sendText(chatRecord.getRecord());
+                    session.getBasicRemote().sendText(chatRecord.getRecord(message));
                 } else {
                     //添加新加入用户到在线列表
                     JSONObject jsonObject=JSONObject.fromObject(message);
