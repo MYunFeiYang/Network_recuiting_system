@@ -22,4 +22,7 @@ public class servletFileLoad extends HttpServlet {
             fileLoad.FileDownload(request,response);
         }
     }
+    protected void doGet(HttpServletRequest request,HttpServletResponse response) throws ServletException,IOException{
+        doPost(request,response);
+    }
 }

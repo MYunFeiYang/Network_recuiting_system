@@ -90,8 +90,8 @@ public class FileLoad {
         } catch (Exception e) {
             message.element("message","fail");
             e.printStackTrace();
-
         }
+        response.getWriter().print(message);
     }
     public void FileDownload(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String dataDirectory = request.

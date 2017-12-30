@@ -13,13 +13,14 @@
     <!--javascript-->
     <script src="javascript/jquery-3.2.1.js"></script>
     <script src="bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+    <script src="http://malsup.github.io/jquery.form.js"></script>
     <script src="javascript/util/cookie_and_session.js"></script>
     <script src="javascript/util/check_input.js"></script>
     <script src="javascript/util/key_event.js"></script>
     <script src="javascript/common/common.js"></script>
     <script src="javascript/enterprise/enterprise.js"></script>
     <script src="javascript/enterprise/address_industry_position.js"></script>
-    <script src="javascript/util/file_check.js"></script>
+    <script src="javascript/util/preview_picture.js"></script>
 </head>
 <body id="top">
 <div class="container-fluid">
@@ -453,22 +454,14 @@
                     <h4 class="modal-title" id="myupload">修改头像</h4>
                 </div>
                 <div class="modal-body">
-                    <form enctype="multipart/form-data" method="POST" id="file_load" onsubmit="return HasChecked;" action="/fileLoad/upload">
-                        <fieldset style="width: 100%;padding:5px;">
-                            <legend><font color="#FF0000">来源</font></legend>
-                            <input type="radio" name="radio1" checked onclick="SwitchUpType(true);">本地
-                            <input type="radio" name="radio1" onclick="SwitchUpType(false);">远程
-                            <input type="file" name="file1" class="form-control" onchange="CheckExt(this)">
-                            <div style="border:1px solid #808080;width:100%;height:auto;padding:5px;">
-                                <table border="0">
-                                    <tr>
-                                        <td id="PreviewImg">预览区</td>
-                                        <td id="MsgList" valign="top"></td>
-                                    </tr>
-                                </table>
-                            </div>
-                            <input type="submit" class="btn btn-default" id="UploadButton" value="开始上传" disabled>
-                        </fieldset>
+                    <form enctype="multipart/form-data" method="post" id="picture_load" action="/fileLoad/upload" onsubmit="return sub()">
+                        <input id="f" class="form-control" type="file" name="f" onchange="fileType='head_picture';change()" />
+                        <p>预览:</p>
+                        <p>
+                            <img id="preview" alt="" name="pic" />
+                            <div id="warning"></div>
+                        </p>
+                        <input type="submit" class="form-control" id="UploadButton" value="上传头像" disabled>
                     </form>
                 </div>
                 <div class="modal-footer">

@@ -13,6 +13,7 @@
     <!--javascript-->
     <script src="javascript/jquery-3.2.1.js"></script>
     <script src="bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+    <script src="http://malsup.github.io/jquery.form.js"></script>
     <script src="javascript/person/person.js"></script>
     <script src="javascript/person/resume.js"></script>
     <script src="javascript/admin/admin.js"></script>
@@ -279,17 +280,14 @@
                 <h4 class="modal-title" id="myupload">上传本地简历</h4>
             </div>
             <div class="modal-body">
-                <form enctype="multipart/form-data" method="POST" id="file_load" onsubmit="return HasChecked;" action="/fileLoad/upload">
+                <form enctype="multipart/form-data" method="POST" id="file_load" action="/fileLoad/upload" onsubmit="return sub()">
                     <fieldset style="width: 100%;padding:5px;">
-                        <legend><font color="#FF0000">来源</font></legend>
-                        <input type="radio" name="radio1" checked onclick="SwitchUpType(true);">本地
-                        <input type="radio" name="radio1" onclick="SwitchUpType(false);">远程
-                        <input type="file" name="file1" class="form-control" onchange="CheckExt(this)">
+                        <input type="file" name="file1" class="form-control" onchange="checkInput(this)">
                         <div style="border:1px solid #808080;width:100%;height:auto;padding:5px;">
                             <table border="0">
                                 <tr>
-                                    <td id="PreviewImg">预览区</td>
-                                    <td id="MsgList" valign="top"></td>
+                                    <td>提示信息:</td>
+                                    <td id="massage" valign="top"></td>
                                 </tr>
                             </table>
                         </div>
@@ -359,7 +357,7 @@
                             <li class="list-group-item">
                                 <!-- 利用data-target指定URL -->
                                 <button class="menu-item-left path2" data-toggle="modal" data-target="#upload"
-                                        onclick="path_navigation(this)">
+                                        onclick="path_navigation(this);userType='person';fileType='resume'">
                                     <span class="glyphicon glyphicon-triangle-right"></span>上传简历
                                 </button>
                             </li>
@@ -430,7 +428,6 @@
         </div>
     </div>
 </div>
-${message}
 </body>
 <script>
     $(function () {

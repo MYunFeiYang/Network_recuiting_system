@@ -137,6 +137,14 @@ function login_session_result(data) {
         init_user(data.nickname);
         let user_center = document.getElementById("user_center");
         if (data.login_type === "person") {
+            let head_sculpture = document.createElement("li");
+            let head_sculpture_a = document.createElement("a");
+            user_center.appendChild(head_sculpture);
+            head_sculpture.appendChild(head_sculpture_a);
+            head_sculpture_a.text = "修改头像";
+            head_sculpture_a.setAttribute("data-toggle","modal");
+            head_sculpture_a.setAttribute("data-target","#head_sculpture");
+            head_sculpture_a.setAttribute("onclick","close_nav();userType='person'");
             let modify_resume = document.createElement("li");
             let modify_resume_a = document.createElement("a");
             user_center.appendChild(modify_resume);
@@ -161,6 +169,14 @@ function login_session_result(data) {
             log_out.setAttribute("href", "index.html");
         }
         else if (data.login_type === "enterprise") {
+            let head_sculpture = document.createElement("li");
+            let head_sculpture_a = document.createElement("a");
+            user_center.appendChild(head_sculpture);
+            head_sculpture.appendChild(head_sculpture_a);
+            head_sculpture_a.text = "修改头像";
+            head_sculpture_a.setAttribute("data-toggle","modal");
+            head_sculpture_a.setAttribute("data-target","#head_sculpture");
+            head_sculpture_a.setAttribute("onclick","close_nav();userType='enterprise'");
             let modify_job = document.createElement("li");
             let modify_job_a = document.createElement("a");
             user_center.appendChild(modify_job);
