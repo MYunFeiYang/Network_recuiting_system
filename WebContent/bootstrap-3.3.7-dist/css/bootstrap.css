@@ -4358,7 +4358,7 @@ tbody.collapse.in {
     font-size: 14px;
     text-align: left;
     list-style: none;
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.7);
     -webkit-background-clip: padding-box;
     background-clip: padding-box;
     border: 1px solid #ccc;
@@ -4386,7 +4386,7 @@ tbody.collapse.in {
     clear: both;
     font-weight: normal;
     line-height: 1.42857143;
-    color: white;
+    color: black !important;
     white-space: nowrap;
     cursor: pointer;
 }

@@ -1,33 +1,35 @@
-package controller;
+package service.common;
 
+import model.DBManager;
+import net.sf.json.JSONObject;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.List;
 
-@WebServlet(name = "fileupload")
-public class FileUpload extends HttpServlet {
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+public class FileLoad {
+    public void FileUpload(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String email=request.getParameter("email");
+        String fileType=request.getParameter("fileType");
         //得到上传文件的保存目录，将上传的文件存放于WEB-INF目录下，不允许外界直接访问，保证上传文件的安全
-        String savePath = this.getServletContext().getRealPath("/WEB-INF/files");
+        String selfPath="/WEB-INF/files"+"/"+email+"/"+fileType;
+        String savePath =request.getServletContext().getRealPath(selfPath);
         File file = new File(savePath);
         //判断上传文件的保存目录是否存在
         if (!file.exists() && !file.isDirectory()) {
             //创建目录
-            file.mkdir();
+            file.mkdirs();
         }
         //消息提示
-        String message = "";
+        JSONObject message=new JSONObject();
         try {
             //使用Apache文件上传组件处理文件上传步骤：
             //1、创建一个DiskFileItemFactory工厂
@@ -40,7 +42,6 @@ public class FileUpload extends HttpServlet {
             //每一个FileItem对应一个Form表单的输入项
             //@SuppressWarnings("unchecked")
             List<FileItem> list = upload.parseRequest(request);
-            System.out.println(savePath);
             for (FileItem item : list) {
                 //如果fileitem中封装的是普通输入项的数据
                 if (item.isFormField()) {
@@ -53,7 +54,6 @@ public class FileUpload extends HttpServlet {
                     //如果fileitem中封装的是上传文件
                     //得到上传的文件名称，
                     String filename = item.getName();
-                    System.out.println(filename);
                     if (filename == null || filename.trim().equals("")) {
                         continue;
                     }
@@ -61,6 +61,9 @@ public class FileUpload extends HttpServlet {
                     //如：  c:\a\b\1.txt，而有些只是单纯的文件名，如：1.txt
                     //处理获取到的上传文件的文件名的路径部分，只保留文件名部分
                     filename = filename.substring(filename.lastIndexOf("\\") + 1);
+                    //上传文件信息存到数据库
+                    service.common.FileLoad fileload=new service.common.FileLoad();
+                    fileload.addFile(email,fileType,filename);
                     //获取item中的上传文件的输入流
                     InputStream in = item.getInputStream();
                     //创建一个文件输出流
@@ -81,15 +84,63 @@ public class FileUpload extends HttpServlet {
                     out.close();
                     //删除处理文件上传时生成的临时文件
                     item.delete();
-                    message = "文件上传成功！";
+                    message.element("message","success");
                 }
             }
         } catch (Exception e) {
-            message = "文件上传失败！";
+            message.element("message","fail");
             e.printStackTrace();
 
         }
-        request.setAttribute("message", message);
-        request.getRequestDispatcher("/redirect.jsp").forward(request, response);
+    }
+    public void FileDownload(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String dataDirectory = request.
+                getServletContext().getRealPath("/WEB-INF/files");
+        String filename = "火烧人.fla";
+        File file = new File(dataDirectory, filename);
+        if (file.exists()) {
+            response.setContentType("application/fla");
+            response.addHeader("Content-Disposition",
+                    "attachment; filename=\"" + filename + "\"");
+            byte[] buffer = new byte[1024];
+            FileInputStream fis = null;
+            BufferedInputStream bis = null;
+
+            try {
+                fis = new FileInputStream(file);
+                bis = new BufferedInputStream(fis);
+                OutputStream os = response.getOutputStream();
+                int i = bis.read(buffer);
+                while (i != -1) {
+                    os.write(buffer, 0, i);
+                    i = bis.read(buffer);
+                }
+            } catch (IOException ex) {
+                System.out.println(ex.toString());
+            } finally {
+                if (bis != null) {
+                    bis.close();
+                }
+                if (fis != null) {
+                    fis.close();
+                }
+            }
+        }
+    }
+    private void addFile(String email,String fileType,String fileName){
+        DBManager dbManager=new DBManager();
+        Connection conn=dbManager.getConnection();
+        try {
+            String sql="{call fileloadAdd(?,?,?)}";
+            CallableStatement cast=conn.prepareCall(sql);
+            cast.setString(1,email);
+            cast.setString(2,fileType);
+            cast.setString(3,fileName);
+            cast.execute();
+            cast.close();
+            cast.close();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
     }
 }

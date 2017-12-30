@@ -52,20 +52,11 @@
         <url-pattern>/admin/*</url-pattern>
     </servlet-mapping>
     <servlet>
-        <servlet-name>fileupload</servlet-name>
-        <servlet-class>controller.FileUpload</servlet-class>
+        <servlet-name>fileLoad</servlet-name>
+        <servlet-class>controller.servletFileLoad</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>fileupload</servlet-name>
-        <url-pattern>/upload</url-pattern>
+        <servlet-name>fileLoad</servlet-name>
+        <url-pattern>/fileLoad/*</url-pattern>
     </servlet-mapping>
-    <servlet>
-        <servlet-name>fileDownload</servlet-name>
-        <servlet-class>controller.FileDownload</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>fileDownload</servlet-name>
-        <url-pattern>/download</url-pattern>
-    </servlet-mapping>
-
 </web-app>

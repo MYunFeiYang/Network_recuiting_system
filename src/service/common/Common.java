@@ -386,4 +386,36 @@ public class Common {
             e.printStackTrace();
         }
     }
+
+    public void getEmail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/xml; charset=UTF-8");
+        //以下两句为取消在本地的缓存
+        response.setHeader("Cache-Control", "no-cache");
+        response.setHeader("Pragma", "no-cache");
+        String nickname = request.getParameter("nickname");
+        String password = request.getParameter("password");
+        String userType=request.getParameter("userType");
+        DBManager conndb = new DBManager();
+        Connection conn = conndb.getConnection();
+        try {
+            String sql = "{call emailGet(?,?,?)}";
+            CallableStatement ps = conn.prepareCall(sql);
+            ps.setString(1, nickname);
+            ps.setString(2, password);
+            ps.setString(3,userType);
+            ps.execute();
+            ResultSet rs=ps.getResultSet();
+            if (rs.next()) {
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.element("email", rs.getString(1));
+                response.getWriter().print(jsonObject.toString());
+            }
+            ps.close();
+            conn.close();
+        } catch (SQLException e) {
+            // TODO 自动生成的 catch 块
+            e.printStackTrace();
+        }
+    }
 }

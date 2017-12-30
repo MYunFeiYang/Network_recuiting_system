@@ -17,6 +17,9 @@ function show_user(nickname, password) {
         let user= JSON.parse(document.cookie.split(";")[0].split("=")[1]);
         document.getElementById(nickname).value = user.nickname;
         document.getElementById(password).value = user.password;
+    }else {
+        document.getElementById(nickname).value = "";
+        document.getElementById(password).value = "";
     }
 }
 function reset_user() {

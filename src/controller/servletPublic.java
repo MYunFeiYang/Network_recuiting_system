@@ -39,6 +39,8 @@ public class servletPublic extends HttpServlet {
             case "paging":
                 common.Paging(request, response);
                 break;
+            case "getEmail":
+                common.getEmail(request,response);
         }
     }
 

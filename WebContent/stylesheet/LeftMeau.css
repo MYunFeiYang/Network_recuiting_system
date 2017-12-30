@@ -75,6 +75,7 @@
     background: transparent;
     border: 1px solid rgba(0,0,0,0.6);
     border-radius: 6px;
+    font-size: 1rem;
 }
 
 .leftMenu .menu-item-left:hover {

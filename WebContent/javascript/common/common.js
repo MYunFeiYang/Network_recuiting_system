@@ -156,7 +156,7 @@ function login_session_result(data) {
             let log_out = document.createElement("a");
             li1.appendChild(log_out);
             log_out.text = "退出";
-            log_out.setAttribute("style", "color:red");
+            log_out.setAttribute("style", "color:red !important");
             log_out.setAttribute("onclick", "login_session('delete')");
             log_out.setAttribute("href", "index.html");
         }
@@ -180,7 +180,7 @@ function login_session_result(data) {
             let log_out = document.createElement("a");
             li1.appendChild(log_out);
             log_out.text = "退出";
-            log_out.setAttribute("style", "color:red");
+            log_out.setAttribute("style", "color:red !important");
             log_out.setAttribute("onclick", "login_session('delete')");
             log_out.setAttribute("href", "index.html");
         }
@@ -204,7 +204,7 @@ function login_session_result(data) {
             let log_out = document.createElement("a");
             li1.appendChild(log_out);
             log_out.text = "退出";
-            log_out.setAttribute("style", "color:red");
+            log_out.setAttribute("style", "color:red !important");
             log_out.setAttribute("onclick", "login_session('delete')");
             log_out.setAttribute("href", "index.html");
         }

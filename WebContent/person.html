@@ -18,6 +18,7 @@
     <script src="javascript/admin/admin.js"></script>
     <script src="javascript/util/night.js"></script>
     <script src="javascript/util/key_event.js"></script>
+    <script src="javascript/util/file_check.js"></script>
 </head>
 <body>
 <div class="modal fade" id="addresume" tabindex="-1" role="dialog" aria-labelledby="myaddresume"
@@ -278,19 +279,22 @@
                 <h4 class="modal-title" id="myupload">上传本地简历</h4>
             </div>
             <div class="modal-body">
-                <form>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <form action="/upload" enctype="multipart/form-data"
-                                  method="post">
-
-                                <input type="file" class="form-control" name="file1">
-                                <span class="input-group-btn padding_top">
-        							<input type="submit" class="btn btn-default" value="提交">
-        						</span>
-                            </form>
+                <form enctype="multipart/form-data" method="POST" id="file_load" onsubmit="return HasChecked;" action="/fileLoad/upload">
+                    <fieldset style="width: 100%;padding:5px;">
+                        <legend><font color="#FF0000">来源</font></legend>
+                        <input type="radio" name="radio1" checked onclick="SwitchUpType(true);">本地
+                        <input type="radio" name="radio1" onclick="SwitchUpType(false);">远程
+                        <input type="file" name="file1" class="form-control" onchange="CheckExt(this)">
+                        <div style="border:1px solid #808080;width:100%;height:auto;padding:5px;">
+                            <table border="0">
+                                <tr>
+                                    <td id="PreviewImg">预览区</td>
+                                    <td id="MsgList" valign="top"></td>
+                                </tr>
+                            </table>
                         </div>
-                    </div>
+                        <input type="submit" class="btn btn-default" id="UploadButton" value="开始上传" disabled>
+                    </fieldset>
                 </form>
             </div>
             <div class="modal-footer">
@@ -426,6 +430,7 @@
         </div>
     </div>
 </div>
+${message}
 </body>
 <script>
     $(function () {
