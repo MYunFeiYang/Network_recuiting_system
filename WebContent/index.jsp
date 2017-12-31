@@ -17,6 +17,7 @@
     <script src="javascript/util/check_input.js"></script>
     <script src="javascript/util/key_event.js"></script>
     <script src="javascript/common/common.js"></script>
+    <script src="javascript/common/quick_query.js"></script>
     <script src="javascript/enterprise/enterprise.js"></script>
     <script src="javascript/enterprise/address_industry_position.js"></script>
     <script src="javascript/util/preview_picture.js"></script>
@@ -95,24 +96,38 @@
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li>
+                        <a data-toggle="modal" data-target="#search" onclick="close_nav()">
+                            <span class="glyphicon glyphicon-search"></span>
+                        </a>
+                    </li>
+                    <li>
                         <a data-toggle="modal" data-target="#setting" onclick="close_nav()">
                             <span class="glyphicon glyphicon-cog"></span>
                         </a>
                     </li>
                 </ul>
-                <form class="navbar-form navbar-right hidden" role="search">
-                    <div class="form-group">
-                        <input type="text" title="搜索" class="form-control" id="search-con" onkeyup="complete_content()">
-                        <div id="preselected_search" onkeyup="query()"></div>
-                        <button type="button" class="navbar-right btn btn-default glyphicon glyphicon-search"
-                                onmouseover="open_search('search-con','550px')" onclick="query()">
-                        </button>
-                    </div>
-                </form>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
     </nav>
     <!-- Modal start -->
+    <div class="modal fade" id="search" tabindex="-1" role="dialog" aria-labelledby="searchLabel">
+        <div class="modal-dialog" role="document" style="min-width: 420px;max-height: 480px">
+            <div class="modal-content">
+                <div class="modal-body" style="height:320px;">
+                    <div class="input-group">
+                        <input type="text" class="form-control" title="搜索" id="search-con" onkeyup="complete_content()"
+                               aria-describedby="basic-addon2">
+                        <span class="input-group-addon glyphicon glyphicon-search" id="basic-addon2"
+                              onclick="query()"></span>
+                    </div>
+                    <div id="preselected_search"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="modal fade" id="setting" tabindex="-1" role="dialog" aria-labelledby="settingLabel">
         <div class="modal-dialog" role="document" style="min-width: 420px;max-height: 480px">
             <div class="modal-content">
@@ -121,12 +136,13 @@
                             aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title" id="settingLabel">设置中心</h4>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body" style="height:320px;">
                     <div class="row">
                         <div class="col-md-3">
                             <div class="btn-group-vertical" role="group">
                                 <div class="btn-group" role="group">
-                                    <button type="button" class="btn btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <button type="button" class="btn btn-sm dropdown-toggle" data-toggle="dropdown"
+                                            aria-haspopup="true" aria-expanded="false">
                                         夜间模式
                                         <span class="caret"></span>
                                     </button>
