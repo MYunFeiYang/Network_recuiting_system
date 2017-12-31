@@ -18,6 +18,7 @@
     <script src="javascript/util/key_event.js"></script>
     <script src="javascript/common/common.js"></script>
     <script src="javascript/common/quick_query.js"></script>
+    <script src="javascript/common/video.js"></script>
     <script src="javascript/enterprise/enterprise.js"></script>
     <script src="javascript/enterprise/address_industry_position.js"></script>
     <script src="javascript/util/preview_picture.js"></script>
@@ -44,29 +45,34 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li><a href="index.jsp">首页</a></li>
-                    <li class="dropdown" id="recurit">
+                    <li><a href="index.jsp">
+                        <img src="image/home.png" style="width:30px;height: 30px">
+                    </a></li>
+                    <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                           aria-expanded="false">招聘<span class="caret"></span></a>
+                           aria-expanded="false">
+                            <img src="image/recruit.png" style="width:30px;height: 30px"></a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a href="public.html" onclick="close_nav();return change_iframe_src(this)">校招</a></li>
+                                <a href="public.html" onclick="close_nav();return change_iframe_src(this)">
+                                    校招<img src="image/school.png" style="width:20px;height: 20px;float: right">
+                                </a></li>
                             <li role="separator" class="divider"></li>
                         </ul>
                     </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <img style="width:40px;height: 40px;border-radius:20px;margin: 5px" class="hidden" src=""
-                         id="head_picture">
+                    <img style="width:40px;height: 40px;border-radius:20px;margin: 5px" class="hidden" src="" id="head_picture">
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" id="login_btu" data-toggle="dropdown" role="button"
                            aria-haspopup="true" aria-expanded="false">
-                            登录<span class="caret"></span></a>
+                            <img src="image/login.png" style="width:30px;height: 30px">
+                            </a>
                         <ul class="dropdown-menu" id="user_center">
                             <li>
                                 <!-- Button trigger modal -->
                                 <a data-toggle="modal" data-target="#login" onclick="close_nav()">
-                                    登录
+                                    <img src="image/login1.png" style="width:80%;height: 30px">
                                 </a>
                             </li>
                         </ul>
@@ -77,18 +83,20 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                            aria-haspopup="true"
                            onclick="get_industry('enterprise_industry');get_address('enterprise_address')"
-                           aria-expanded="false">注册<span class="caret"></span></a>
+                           aria-expanded="false">
+                            <img src="image/register.png" style="width:30px;height: 30px">
+                            </a>
                         <ul class="dropdown-menu">
                             <li>
                                 <!-- Button trigger modal -->
                                 <a data-toggle="modal" data-target="#register-person" onclick="close_nav()">
-                                    个人注册
+                                    个人注册<img src="image/person.png" style="width:20px;height: 20px;float: right">
                                 </a>
                             </li>
                             <li role="separator" class="divider"></li>
                             <li>
                                 <a data-toggle="modal" data-target="#register-enterprise" onclick="close_nav()">
-                                    企业注册
+                                    企业注册<img src="image/company.png" style="width:20px;height: 20px;float: right">
                                 </a>
                             </li>
                         </ul>
@@ -96,13 +104,18 @@
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li>
+                        <a data-toggle="modal" data-target="#video" onclick="close_nav()">
+                            <img src="image/video.png" style="width:30px;height: 30px">
+                        </a>
+                    </li>
+                    <li>
                         <a data-toggle="modal" data-target="#search" onclick="close_nav()">
-                            <span class="glyphicon glyphicon-search"></span>
+                            <img src="image/search.png" style="width:30px;height: 30px">
                         </a>
                     </li>
                     <li>
                         <a data-toggle="modal" data-target="#setting" onclick="close_nav()">
-                            <span class="glyphicon glyphicon-cog"></span>
+                            <img src="image/setting.png" style="width:30px;height: 30px">
                         </a>
                     </li>
                 </ul>
@@ -110,8 +123,23 @@
         </div><!-- /.container-fluid -->
     </nav>
     <!-- Modal start -->
+    <div class="modal fade" id="video" tabindex="-1" role="dialog" aria-labelledby="videoLabel">
+        <div class="modal-dialog" role="document" style="min-width: 360px;max-height: 480px">
+            <div class="modal-content">
+                <div class="modal-body" style="height:320px;">
+                    <div class="input-group">
+                        <input type="text" class="form-control" title="电影地址" aria-describedby="basic-addon2" id="video_src">
+                        <span class="input-group-addon glyphicon glyphicon-search" onclick="get_video_src()"></span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="modal fade" id="search" tabindex="-1" role="dialog" aria-labelledby="searchLabel">
-        <div class="modal-dialog" role="document" style="min-width: 420px;max-height: 480px">
+        <div class="modal-dialog" role="document" style="min-width: 360px;max-height: 480px">
             <div class="modal-content">
                 <div class="modal-body" style="height:320px;">
                     <div class="input-group">
@@ -129,7 +157,7 @@
         </div>
     </div>
     <div class="modal fade" id="setting" tabindex="-1" role="dialog" aria-labelledby="settingLabel">
-        <div class="modal-dialog" role="document" style="min-width: 420px;max-height: 480px">
+        <div class="modal-dialog" role="document" style="min-width: 360px;max-height: 480px">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
@@ -138,24 +166,32 @@
                 </div>
                 <div class="modal-body" style="height:320px;">
                     <div class="row">
-                        <div class="col-md-3">
+                        <div class="col-md-4 col-lg-4 col-sm-4 col-xs-4">
                             <div class="btn-group-vertical" role="group">
                                 <div class="btn-group" role="group">
-                                    <button type="button" class="btn btn-sm dropdown-toggle" data-toggle="dropdown"
+                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
                                             aria-haspopup="true" aria-expanded="false">
-                                        夜间模式
+                                        <img src="image/lantern.png" style="width:20px;height: 20px;float: left">模式
                                         <span class="caret"></span>
                                     </button>
                                     <ul class="dropdown-menu">
-                                        <li><a onclick="open_night()">开启</a></li>
-                                        <li><a onclick="close_night()">关闭</a></li>
-                                        <li><a onclick="bigger()">变亮</a></li>
-                                        <li><a onclick="smaller()">变暗</a></li>
+                                        <li><a onclick="open_night()">
+                                            夜间<img src="image/night.png" style="width:20px;height: 20px;float: right">
+                                        </a></li>
+                                        <li><a onclick="close_night()">
+                                            白天<img src="image/day.png" style="width:20px;height: 20px;float: right">
+                                        </a></li>
+                                        <li><a onclick="bigger()">
+                                            变亮<img src="image/bigger.png" style="width:20px;height: 20px;float: right">
+                                        </a></li>
+                                        <li><a onclick="smaller()">
+                                            变暗<img src="image/smaller.png" style="width:20px;height: 20px;float: right">
+                                        </a></li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-9">
+                        <div class="col-md-8 col-lg-8 col-sm-8 col-xs-8">
 
                         </div>
                     </div>

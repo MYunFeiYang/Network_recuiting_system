@@ -45,6 +45,9 @@ public class servletPublic extends HttpServlet {
             case "getHeadPicture":
                 common.getHeadPicture(request,response);
                 break;
+            case "getVideoSrc":
+                common.getVideoSrc(request,response);
+                break;
         }
     }
 

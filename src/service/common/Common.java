@@ -5,6 +5,9 @@ import model.common.Company;
 import model.common.PageBean;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
 
 import javax.mail.Message;
 import javax.mail.Session;
@@ -441,5 +444,13 @@ public class Common {
         }catch (SQLException e){
             e.printStackTrace();
         }
+    }
+
+    public void getVideoSrc(HttpServletRequest request,HttpServletResponse response) throws ServletException,IOException{
+        String src=request.getParameter("src");
+        org.jsoup.Connection conn = Jsoup.connect(src).timeout(10000).ignoreContentType(true); // 建立与url中页面的连接
+        Document doc = Jsoup.parse(conn.get().toString()); // 解析页面
+        Elements video=doc.getElementsByTag("video");
+        System.out.println(doc);
     }
 }

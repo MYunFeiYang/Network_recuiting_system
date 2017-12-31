@@ -12,7 +12,7 @@ import java.io.IOException;
 public class Table {
     public static void main(String args[]) throws IOException {
         Table table = new Table();
-        table.school_rercuit();
+        table.getAiqiyiSrc();
     }
 
     private void school_rercuit() throws IOException {
@@ -90,5 +90,13 @@ public class Table {
             System.out.println(job + position);
             db_table.setPosition(job, position);
         }
+    }
+
+    private void getAiqiyiSrc()throws IOException{
+        String url = "http://m.iqiyi.com/v_19rreixzio.html";
+        Connection conn = Jsoup.connect(url).timeout(10000).userAgent("Mozilla/5.0 (Windows NT 5.1; zh-CN) AppleWebKit/535.12 (KHTML, like Gecko) Chrome/22.0.1229.79 Safari/535.12").ignoreContentType(true); // 建立与url中页面的连接
+        Document doc = Jsoup.parse(conn.get().toString()); // 解析页面
+        Elements video=doc.getElementsByClass("videoArea");
+        System.out.println(video);
     }
 }
