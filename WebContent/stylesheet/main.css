@@ -50,18 +50,10 @@ body::-webkit-scrollbar {
     background: rgba(0, 0, 0, 0.6);
 }
 
-.container-fluid, .container-fluid .row .col-md-12 {
-    height: 100%;
-}
-
-.container-fluid .row {
-    height: 90%;
-}
-
 /*public*/
 iframe {
     width: 100%;
-    height: 100%;
+    height: 90%;
     position: relative;
     left: 0;
     z-index: 1;

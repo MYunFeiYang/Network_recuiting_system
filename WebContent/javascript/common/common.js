@@ -1,6 +1,5 @@
 "use strict";
 let confirm_box_c;
-
 function setCookie(c_name, value, expireDays) {
     let existDate = new Date();
     existDate.setDate(existDate.getDate() + expireDays);
@@ -27,8 +26,8 @@ function register_person() {
                 confirm_box_c.innerHTML = "账号在审核，您可以先登录";
                 confirm_box_c.setAttribute("class", "alert-success");
                 setTimeout(function () {
-                    window.location.href="index.html"
-                },3000);
+                    window.location.href = "../../index.jsp"
+                }, 3000);
             } else {
                 confirm_box_c.innerHTML = "用户名和密码已存在";
                 confirm_box_c.setAttribute("class", "alert-warning");
@@ -61,8 +60,8 @@ function register_enterprise() {
                 confirm_box_c.innerHTML = "账号在审核，您可以先登录";
                 confirm_box_c.setAttribute('class', 'alert-success');
                 setTimeout(function () {
-                    window.location.href="index.html"
-                },3000);
+                    window.location.href = "../../index.jsp"
+                }, 3000);
             } else {
                 confirm_box_c.innerHTML = "该用户名和密码已存在";
                 confirm_box_c.setAttribute('class', 'alert-warning');
@@ -84,27 +83,45 @@ function login() {
         data: user,
         type: 'POST',
         dataType: 'JSON',
-        // xhr:function () {
-        //     let xhr = jQuery.ajaxSettings.xhr();
-        //     if (xhr.readyState===1){
-        //         console.log("1");
-        //     }
-        // },
         success: function (data) {
             confirm_box_c = document.getElementById("confirm_login_box");
-            if (data.msg === "login_success") {
-                document.getElementById("close_login").click();
-                login_session('login');
-            }
-            else {
+            if (data.msg === "login_fail") {
                 confirm_box_c.innerHTML = "用户名或密码错误";
                 confirm_box_c.setAttribute('class', 'alert-warning');
+            }
+            else if (data.msg === "login_success") {
+                document.getElementById("close_login").click();
+                login_session('login');
             }
         },
         fail: function () {
 
         }
     })
+}
+
+function get_head_picture(user) {
+    $.ajax({
+        url: '/public?public=getHeadPicture',
+        data: user,
+        type: "POST",
+        dataType: "JSON",
+        success: function (data) {
+            if (data!==null){
+                show_head_picture(data)
+            }
+        }
+    })
+}
+
+function show_head_picture(data) {
+    let email = data.email;
+    let fileType = data.fileType;
+    let fileName = data.fileName;
+    let src = "/resource/files" + "/" + email + "/" + fileType + "/" + fileName;
+    document.all.head_picture.src = src;
+    document.all.head_picture.classList.remove("hidden");
+
 }
 
 function close_login() {
@@ -134,6 +151,7 @@ function login_session(data) {
 
 function login_session_result(data) {
     if (data !== null) {
+        get_head_picture(data);
         init_user(data.nickname);
         let user_center = document.getElementById("user_center");
         if (data.login_type === "person") {
@@ -142,9 +160,9 @@ function login_session_result(data) {
             user_center.appendChild(head_sculpture);
             head_sculpture.appendChild(head_sculpture_a);
             head_sculpture_a.text = "修改头像";
-            head_sculpture_a.setAttribute("data-toggle","modal");
-            head_sculpture_a.setAttribute("data-target","#head_sculpture");
-            head_sculpture_a.setAttribute("onclick","close_nav();userType='person'");
+            head_sculpture_a.setAttribute("data-toggle", "modal");
+            head_sculpture_a.setAttribute("data-target", "#head_sculpture");
+            head_sculpture_a.setAttribute("onclick", "close_nav();userType='person'");
             let modify_resume = document.createElement("li");
             let modify_resume_a = document.createElement("a");
             user_center.appendChild(modify_resume);
@@ -166,7 +184,7 @@ function login_session_result(data) {
             log_out.text = "退出";
             log_out.setAttribute("style", "color:red !important");
             log_out.setAttribute("onclick", "login_session('delete')");
-            log_out.setAttribute("href", "index.html");
+            log_out.setAttribute("href", "index.jsp");
         }
         else if (data.login_type === "enterprise") {
             let head_sculpture = document.createElement("li");
@@ -174,9 +192,9 @@ function login_session_result(data) {
             user_center.appendChild(head_sculpture);
             head_sculpture.appendChild(head_sculpture_a);
             head_sculpture_a.text = "修改头像";
-            head_sculpture_a.setAttribute("data-toggle","modal");
-            head_sculpture_a.setAttribute("data-target","#head_sculpture");
-            head_sculpture_a.setAttribute("onclick","close_nav();userType='enterprise'");
+            head_sculpture_a.setAttribute("data-toggle", "modal");
+            head_sculpture_a.setAttribute("data-target", "#head_sculpture");
+            head_sculpture_a.setAttribute("onclick", "close_nav();userType='enterprise'");
             let modify_job = document.createElement("li");
             let modify_job_a = document.createElement("a");
             user_center.appendChild(modify_job);
@@ -198,7 +216,7 @@ function login_session_result(data) {
             log_out.text = "退出";
             log_out.setAttribute("style", "color:red !important");
             log_out.setAttribute("onclick", "login_session('delete')");
-            log_out.setAttribute("href", "index.html");
+            log_out.setAttribute("href", "index.jsp");
         }
         else if (data.login_type === "admin") {
             let admin = document.createElement("li");
@@ -222,7 +240,7 @@ function login_session_result(data) {
             log_out.text = "退出";
             log_out.setAttribute("style", "color:red !important");
             log_out.setAttribute("onclick", "login_session('delete')");
-            log_out.setAttribute("href", "index.html");
+            log_out.setAttribute("href", "index.jsp");
         }
     }
 }

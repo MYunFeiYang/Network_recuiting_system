@@ -418,4 +418,32 @@ public class Common {
             e.printStackTrace();
         }
     }
+
+    public void getHeadPicture(HttpServletRequest request,HttpServletResponse response) throws ServletException,IOException{
+        String login_type = request.getParameter("login_type");
+        String nickname = request.getParameter("nickname");
+        String password = request.getParameter("password");
+        DBManager dbManager=new DBManager();
+        Connection conn=dbManager.getConnection();
+        try {
+            String sql="{call fileHeadPictureGet(?,?,?)}";
+            CallableStatement cast=conn.prepareCall(sql);
+            cast.setString(1,nickname);
+            cast.setString(2,password);
+            cast.setString(3,login_type);
+            cast.execute();
+            ResultSet rs=cast.getResultSet();
+            JSONObject jsonObject=new JSONObject();
+            if (rs.next()){
+                jsonObject.element("email",rs.getString(1));
+                jsonObject.element("fileType",rs.getString(2));
+                jsonObject.element("fileName",rs.getString(3));
+            }else {
+                jsonObject.element("msg","login_success");
+            }
+            response.getWriter().print(jsonObject.toString());
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
 }

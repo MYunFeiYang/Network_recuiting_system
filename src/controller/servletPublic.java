@@ -41,6 +41,10 @@ public class servletPublic extends HttpServlet {
                 break;
             case "getEmail":
                 common.getEmail(request,response);
+                break;
+            case "getHeadPicture":
+                common.getHeadPicture(request,response);
+                break;
         }
     }
 

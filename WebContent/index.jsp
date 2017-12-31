@@ -1,7 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
 <head>
-    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta name="baidu-site-verification" content="9fafb17b50ec81fa1c31c782370dd7be"/>
     <title>问道网</title>
@@ -43,7 +42,7 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li><a href="index.html">首页</a></li>
+                    <li><a href="index.jsp">首页</a></li>
                     <li class="dropdown" id="recurit">
                         <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                            aria-expanded="false">招聘<span class="caret"></span></a>
@@ -55,6 +54,8 @@
                     </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
+                    <img style="width:40px;height: 40px;border-radius:20px;margin: 5px" class="hidden" src=""
+                         id="head_picture">
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" id="login_btu" data-toggle="dropdown" role="button"
                            aria-haspopup="true" aria-expanded="false">
@@ -444,8 +445,7 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="head_sculpture" tabindex="-1" role="dialog" aria-labelledby="myhead_sculpture"
-         style="margin-top: 100px">
+    <div class="modal fade" id="head_sculpture" tabindex="-1" role="dialog" aria-labelledby="myhead_sculpture">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -454,12 +454,14 @@
                     <h4 class="modal-title" id="myupload">修改头像</h4>
                 </div>
                 <div class="modal-body">
-                    <form enctype="multipart/form-data" method="post" id="picture_load" action="/fileLoad/upload" onsubmit="return sub()">
-                        <input id="f" class="form-control" type="file" name="f" onchange="fileType='head_picture';change()" />
+                    <form enctype="multipart/form-data" method="post" id="picture_load" action="/fileLoad/upload"
+                          onsubmit="return sub()">
+                        <input id="f" class="form-control" type="file" name="f"
+                               onchange="fileType='head_picture';change()"/>
                         <p>预览:</p>
                         <p>
-                            <img id="preview" alt="" name="pic" />
-                            <div id="warning"></div>
+                        <div id="warning"></div>
+                        <img id="preview" alt="" name="pic" style="height: 200px"/>
                         </p>
                         <input type="submit" class="form-control" id="UploadButton" value="上传头像" disabled>
                     </form>
@@ -540,9 +542,11 @@
         show_user('login_nickname', 'login_password');
         login_session('refresh');
     };
+
     function close_nav() {
         document.getElementById("bs-example-navbar-collapse-1").classList.remove("in");
     }
+
     window._bd_share_config = {
         "common": {
             "bdSnsKey": {},

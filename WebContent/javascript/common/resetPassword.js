@@ -94,7 +94,7 @@ function updatePassword() {
                     if (data.msg === "updatePassword_success") {
                         confirm_box.setAttribute("class", "alert-success");
                         confirm_box.innerHTML = "密码修改成功";
-                        document.getElementById("btu_resetPassword").innerHTML = "<a href='index.html' style='color: white'>返回登录</a>"
+                        document.getElementById("btu_resetPassword").innerHTML = "<a href='index.jsp' style='color: white'>返回登录</a>"
                     }
                 },
                 fail: function () {

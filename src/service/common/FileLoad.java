@@ -20,7 +20,7 @@ public class FileLoad {
         String email=request.getParameter("email");
         String fileType=request.getParameter("fileType");
         //得到上传文件的保存目录，将上传的文件存放于WEB-INF目录下，不允许外界直接访问，保证上传文件的安全
-        String selfPath="/WEB-INF/files"+"/"+email+"/"+fileType;
+        String selfPath="/resource/files"+"/"+email+"/"+fileType;
         String savePath =request.getServletContext().getRealPath(selfPath);
         File file = new File(savePath);
         //判断上传文件的保存目录是否存在
@@ -61,6 +61,11 @@ public class FileLoad {
                     //如：  c:\a\b\1.txt，而有些只是单纯的文件名，如：1.txt
                     //处理获取到的上传文件的文件名的路径部分，只保留文件名部分
                     filename = filename.substring(filename.lastIndexOf("\\") + 1);
+                    //如果是头像就重命名
+                    if (fileType.equals("head_picture")){
+                        filename = filename.substring(filename.lastIndexOf(".") + 1);
+                        filename=fileType+"."+filename;
+                    }
                     //上传文件信息存到数据库
                     service.common.FileLoad fileload=new service.common.FileLoad();
                     fileload.addFile(email,fileType,filename);

@@ -3,10 +3,8 @@ function sub() {
     // jquery 表单提交
     $("#picture_load").ajaxSubmit(function(message) {
         if (JSON.parse(message).message=="success"){
-            pic.src="";
             document.all.warning.innerHTML="头像更换成功";
         }else {
-            pic.src="";
             document.all.warning.innerHTML="头像更换失败";
         }
     });
@@ -16,6 +14,7 @@ function sub() {
 function change() {
     pic = document.getElementById("preview");
     pic.src="";
+    pic.style.height="auto !important";
         file = document.getElementById("f");
     let ext=file.value.substring(file.value.lastIndexOf(".")+1).toLowerCase();
     // gif在IE浏览器暂时无法显示

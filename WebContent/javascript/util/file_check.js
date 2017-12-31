@@ -6,9 +6,9 @@ function sub() {
     // jquery 表单提交
     $("#file_load").ajaxSubmit(function(message) {
         if (JSON.parse(message).message=="success"){
-            document.all.massage.innerHTML="头像更换成功";
+            document.all.massage.innerHTML="简历上传成功";
         }else {
-            document.all.massage.innerHTML="头像更换失败";
+            document.all.massage.innerHTML="简历上传失败";
         }
     });
 
