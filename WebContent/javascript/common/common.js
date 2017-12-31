@@ -107,7 +107,7 @@ function get_head_picture(user) {
         type: "POST",
         dataType: "JSON",
         success: function (data) {
-            if (data!==null){
+            if (data.email!==undefined){
                 show_head_picture(data)
             }
         }

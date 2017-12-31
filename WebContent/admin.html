@@ -7,7 +7,7 @@
     <meta name="keywords" content="侧边导航菜单(可分组折叠)">
     <meta name="description" content="侧边导航菜单(可分组折叠)"/>
     <meta name="HandheldFriendly" content="True"/>
-    <link rel="shortcut icon" href="image/brand.jpg">
+    <link rel="shortcut icon" href="image/brand.png">
     <!--stylesheet-->
     <link type="text/css" rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.css">
     <link type="text/css" rel="stylesheet" href="stylesheet/admin.css">
@@ -19,7 +19,6 @@
     <script src="javascript/admin/admin_power.js"></script>
     <script src="javascript/admin/person.js"></script>
     <script src="javascript/admin/enterprise.js"></script>
-    <script src="javascript/util/night.js"></script>
 </head>
 <body>
 <div class="container-fluid">
@@ -126,40 +125,6 @@
                             <li class="list-group-item path2" onclick="path_navigation(this)">
                                 <button class="menu-item-left">
                                     <span class="glyphicon glyphicon-triangle-right"></span>企业使用分析
-                                </button>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="panel panel-primary leftMenu">
-                    <div class="panel-heading" id="collapseListGroupHeading3" data-toggle="collapse"
-                         data-target="#collapseListGroup3" role="tab">
-                        <h4 class="panel-title path1" onclick="path_navigation(this)">
-                            设置
-                            <span class="glyphicon glyphicon-chevron-down right"></span>
-                        </h4>
-                    </div>
-                    <div id="collapseListGroup3" class="panel-collapse collapse" role="tabpanel"
-                         aria-labelledby="collapseListGroupHeading3">
-                        <ul class="list-group">
-                            <li class="list-group-item path2" onclick="path_navigation(this)">
-                                <button class="menu-item-left" onclick="open_night()">
-                                    <span class="glyphicon glyphicon-triangle-right"></span>开启夜间模式
-                                </button>
-                            </li>
-                            <li class="list-group-item path2" onclick="path_navigation(this)">
-                                <button class="menu-item-left" onclick="close_night()">
-                                    <span class="glyphicon glyphicon-triangle-right"></span>关闭夜间模式
-                                </button>
-                            </li>
-                            <li class="list-group-item path2" onclick="path_navigation(this)">
-                                <button class="menu-item-left" onclick="bigger()">
-                                    <span class="glyphicon glyphicon-triangle-right"></span>调高亮度
-                                </button>
-                            </li>
-                            <li class="list-group-item path2" onclick="path_navigation(this)">
-                                <button class="menu-item-left" onclick="smaller()">
-                                    <span class="glyphicon glyphicon-triangle-right"></span>调低亮度
                                 </button>
                             </li>
                         </ul>

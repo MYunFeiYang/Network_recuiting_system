@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>简历管理</title>
-    <link rel="shortcut icon" href="image/brand.jpg">
+    <link rel="shortcut icon" href="image/brand.png">
     <!--stylesheet-->
     <link type="text/css" rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.css">
     <link type="text/css" rel="stylesheet" href="stylesheet/person.css">
@@ -13,7 +13,7 @@
     <!--javascript-->
     <script src="javascript/jquery-3.2.1.js"></script>
     <script src="bootstrap-3.3.7-dist/js/bootstrap.js"></script>
-    <script src="http://malsup.github.io/jquery.form.js"></script>
+    <script src="javascript/jquery.form.js"></script>
     <script src="javascript/person/person.js"></script>
     <script src="javascript/person/resume.js"></script>
     <script src="javascript/admin/admin.js"></script>
@@ -358,40 +358,6 @@
                                 <button class="menu-item-left path2" data-toggle="modal" data-target="#upload"
                                         onclick="path_navigation(this);userType='person';fileType='resume'">
                                     <span class="glyphicon glyphicon-triangle-right"></span>上传简历
-                                </button>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="panel panel-primary leftMenu">
-                    <div class="panel-heading" id="collapseListGroupHeading3" data-toggle="collapse"
-                         data-target="#collapseListGroup3" role="tab">
-                        <h4 class="panel-title path1" onclick="path_navigation(this)">
-                            设置
-                            <span class="glyphicon glyphicon-chevron-down right"></span>
-                        </h4>
-                    </div>
-                    <div id="collapseListGroup3" class="panel-collapse collapse" role="tabpanel"
-                         aria-labelledby="collapseListGroupHeading3">
-                        <ul class="list-group">
-                            <li class="list-group-item">
-                                <button class="menu-item-left path2" onclick="open_night();path_navigation(this)">
-                                    <span class="glyphicon glyphicon-triangle-right"></span>开启夜间模式
-                                </button>
-                            </li>
-                            <li class="list-group-item">
-                                <button class="menu-item-left path2" onclick="close_night();path_navigation(this)">
-                                    <span class="glyphicon glyphicon-triangle-right"></span>关闭夜间模式
-                                </button>
-                            </li>
-                            <li class="list-group-item">
-                                <button class="menu-item-left path2" onclick="bigger();path_navigation(this)">
-                                    <span class="glyphicon glyphicon-triangle-right"></span>调高亮度
-                                </button>
-                            </li>
-                            <li class="list-group-item">
-                                <button class="menu-item-left path2" onclick="smaller();path_navigation(this)">
-                                    <span class="glyphicon glyphicon-triangle-right"></span>调低亮度
                                 </button>
                             </li>
                         </ul>

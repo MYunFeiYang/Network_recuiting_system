@@ -22,7 +22,7 @@ import java.util.*;
 import java.util.Date;
 
 public class Common {
-    private static boolean sendMail(String to, HttpServletResponse response) {
+    private static void sendMail(String to, HttpServletResponse response) {
         try {
             Properties props = new Properties();
             props.put("username", "m_YunfeiYang@163.com");
@@ -58,9 +58,7 @@ public class Common {
             response.getWriter().print(mag.toString());
         } catch (Exception e) {
             e.printStackTrace();
-            return false;
         }
-        return true;
     }
 
     public void CheckEmail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -438,8 +436,6 @@ public class Common {
                 jsonObject.element("email",rs.getString(1));
                 jsonObject.element("fileType",rs.getString(2));
                 jsonObject.element("fileName",rs.getString(3));
-            }else {
-                jsonObject.element("msg","login_success");
             }
             response.getWriter().print(jsonObject.toString());
         }catch (SQLException e){
