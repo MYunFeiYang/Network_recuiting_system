@@ -6,12 +6,19 @@
 
     #industry, #address, #position {
         margin: 5px 0;
-        width: 100%;
-        height: 60px;
         overflow-y: hidden;
         overflow-x: scroll;
         box-shadow: 1px 1px 1px 1px gainsboro;
         background: rgba(255, 255, 255, 0.5);
+    }
+    #industry ul, #address ul, #position ul{
+        overflow: auto;
+        width: 1024px;
+        height: 64px;
+    }
+    #industry ul li, #address ul li, #position ul li{
+        padding: 3px 5px !important;
+        margin: 3px !important;
     }
     #industry::-webkit-scrollbar,#position::-webkit-scrollbar,#address::-webkit-scrollbar{
         display: none;
