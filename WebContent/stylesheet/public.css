@@ -45,7 +45,7 @@
 /*中等屏幕*/
 @media screen and (min-width: 992px)and (max-width: 1200px) {
     html {
-        font-size: 72% !important;
+        font-size: 62.5% !important;
     }
 
     #industry ul li {
@@ -60,7 +60,7 @@
 /*大屏幕*/
 @media screen and (min-width: 1200px) {
     html {
-        font-size: 100% !important;
+        font-size: 62.5% !important;
     }
 
     .marquee {
@@ -107,7 +107,7 @@ body {
     box-shadow: 1px 1px 1px 1px rgba(255,255,255,0.7);
     border-radius: 5px;
     cursor: pointer;
-    color: white;
+    color: black;
 }
 
 #filter ul li:hover,#industry ul li:hover {
@@ -117,12 +117,12 @@ body {
 #industry ul li a{
     display: inline-block;
     width: auto;
-    font-size: 1rem;
+    font-size: 1.2rem;
 }
 
 #filter ul li a,#industry ul li a {
     text-decoration: none;
-    color: white;
+    color: black;
 }
 
 #position ul li, #address ul li {
@@ -156,7 +156,7 @@ table tbody tr td a {
 #hotRecurit {
     background: rgba(255, 255, 255, 0.3);
     opacity: 0.9;
-    border: 5px solid white;
+    border: 5px solid black;
     padding: 0;
 }
 

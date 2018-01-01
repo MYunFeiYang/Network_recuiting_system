@@ -11,9 +11,9 @@ let c_con_password;
 let c_email;
 let c_telephone;
 
-function check_email(id, confirm_box) {
+function check_email(email, confirm_box) {
     o_user = {};
-    c_email = document.getElementById(id).value;
+    c_email = document.getElementById(email).value;
     o_user.email = c_email;
     $.ajax({
         url: '/public?public=checkemail',
@@ -98,10 +98,7 @@ function reg_email(email, confirm_box) {
     let ePattern = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
     n_confirm_box_c = document.getElementById(confirm_box);
     if (ePattern.test(c_email)) {
-        n_confirm_box_c.innerHTML = "";
-        n_confirm_box_c.setAttribute("style", "color:red");
-        n_confirm_box_c.innerHTML = "请验证邮箱是否存在";
-        return btu_register_status = true;
+        check_email(email,confirm_box)
     } else {
         n_confirm_box_c.setAttribute("style", "color:red");
         n_confirm_box_c.innerHTML = "请输入email邮箱";

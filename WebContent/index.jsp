@@ -4,7 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta name="baidu-site-verification" content="9fafb17b50ec81fa1c31c782370dd7be"/>
     <title>问道网</title>
-    <link rel="shortcut icon" href="image/brand.png">
+    <link rel="shortcut icon" href="image/enterprise/brand.png">
     <!--stylesheet-->
     <link type="text/css" rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.css">
     <link type="text/css" rel="stylesheet" href="stylesheet/main.css">
@@ -32,51 +32,47 @@
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
                         data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
+                    <a>
+                        <img src="image/enterprise/brand.png" style="width: 30px;height: 30px">
+                    </a>
                 </button>
-                <a class="navbar-brand" href="#">
-                    <img class="img-circle" alt="Brand" src="image/brand.png">
-                </a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li><a href="index.jsp">
-                        <img src="image/home.png" style="width:30px;height: 30px">
+                        <img src="image/common/home.png" style="width:30px;height: 30px">
                     </a></li>
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                            aria-expanded="false">
-                            <img src="image/recruit.png" style="width:30px;height: 30px"></a>
+                            <img src="image/common/recruit.png" style="width:30px;height: 30px"></a>
                         <ul class="dropdown-menu">
                             <li>
                                 <a href="public.html" onclick="close_nav();return change_iframe_src(this)">
-                                    校招<img src="image/school.png" style="width:20px;height: 20px;float: right">
+                                    校招<img src="image/person/school.png" style="width:20px;height: 20px;float: right">
                                 </a></li>
                             <li role="separator" class="divider"></li>
                         </ul>
                     </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li style="position: absolute;right: 35px;">
-                        <a>
-                            <img style="width:30px;height: 30px;border-radius:15px" class="hidden" src="" id="head_picture">
-                        </a>
-                    </li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" id="login_btu" data-toggle="dropdown" role="button"
-                           aria-haspopup="true" aria-expanded="false" style="line-height: 30px">
-                            <img src="image/login.png" style="width:30px;height: 30px">
-                            </a>
+                           aria-haspopup="true" aria-expanded="false" style="line-height: 30px;float: left">
+                            <img src="image/common/login.png" style="width:30px;height: 30px">
+                        </a>
+                        <a class="dropdown-toggle" data-toggle="dropdown" role="button"
+                           aria-haspopup="true" aria-expanded="false" style="float: left">
+                            <img style="width:30px;height: 30px;border-radius:15px" class="hidden" src=""
+                                 id="head_picture">
+                        </a>
                         <ul class="dropdown-menu" id="user_center">
                             <li>
                                 <!-- Button trigger modal -->
                                 <a data-toggle="modal" data-target="#login" onclick="close_nav()">
-                                    <img src="image/login1.png" style="width:73px;height: 30px">
+                                    <img src="image/common/login1.png" style="width:73px;height: 30px">
                                 </a>
                             </li>
                         </ul>
@@ -88,19 +84,19 @@
                            aria-haspopup="true"
                            onclick="get_industry('enterprise_industry');get_address('enterprise_address')"
                            aria-expanded="false">
-                            <img src="image/register.png" style="width:30px;height: 30px">
-                            </a>
+                            <img src="image/common/register.png" style="width:30px;height: 30px">
+                        </a>
                         <ul class="dropdown-menu">
                             <li>
                                 <!-- Button trigger modal -->
                                 <a data-toggle="modal" data-target="#register-person" onclick="close_nav()">
-                                    个人注册<img src="image/person.png" style="width:20px;height: 20px;float: right">
+                                    个人注册<img src="image/person/person.png" style="width:20px;height: 20px;float: right">
                                 </a>
                             </li>
                             <li role="separator" class="divider"></li>
                             <li>
                                 <a data-toggle="modal" data-target="#register-enterprise" onclick="close_nav()">
-                                    企业注册<img src="image/company.png" style="width:20px;height: 20px;float: right">
+                                    企业注册<img src="image/enterprise/company.png" style="width:20px;height: 20px;float: right">
                                 </a>
                             </li>
                         </ul>
@@ -109,17 +105,17 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li>
                         <a data-toggle="modal" data-target="#video" onclick="close_nav()">
-                            <img src="image/video.png" style="width:30px;height: 30px">
+                            <img src="image/common/video.png" style="width:30px;height: 30px">
                         </a>
                     </li>
                     <li>
                         <a data-toggle="modal" data-target="#search" onclick="close_nav()">
-                            <img src="image/search.png" style="width:30px;height: 30px">
+                            <img src="image/common/search.png" style="width:30px;height: 30px">
                         </a>
                     </li>
                     <li>
                         <a data-toggle="modal" data-target="#setting" onclick="close_nav()">
-                            <img src="image/setting.png" style="width:30px;height: 30px">
+                            <img src="image/setting/setting.png" style="width:30px;height: 30px">
                         </a>
                     </li>
                 </ul>
@@ -128,11 +124,12 @@
     </nav>
     <!-- Modal start -->
     <div class="modal fade" id="video" tabindex="-1" role="dialog" aria-labelledby="videoLabel">
-        <div class="modal-dialog" role="document" style="min-width: 360px;max-height: 480px">
+        <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="modal-body" style="height:320px;">
+                <div class="modal-body" style="min-height: 420px">
                     <div class="input-group">
-                        <input type="text" class="form-control" title="电影地址" aria-describedby="basic-addon2" id="video_src">
+                        <input type="text" class="form-control" title="电影地址" aria-describedby="basic-addon2"
+                               id="video_src">
                         <span class="input-group-addon glyphicon glyphicon-search" onclick="get_video_src()"></span>
                     </div>
                 </div>
@@ -143,9 +140,9 @@
         </div>
     </div>
     <div class="modal fade" id="search" tabindex="-1" role="dialog" aria-labelledby="searchLabel">
-        <div class="modal-dialog" role="document" style="min-width: 360px;max-height: 480px">
+        <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="modal-body" style="height:320px;">
+                <div class="modal-body" style="min-height: 420px">
                     <div class="input-group">
                         <input type="text" class="form-control" title="搜索" id="search-con" onkeyup="complete_content()"
                                aria-describedby="basic-addon2">
@@ -161,41 +158,94 @@
         </div>
     </div>
     <div class="modal fade" id="setting" tabindex="-1" role="dialog" aria-labelledby="settingLabel">
-        <div class="modal-dialog" role="document" style="min-width: 360px;max-height: 480px">
+        <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                             aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title" id="settingLabel">设置中心</h4>
                 </div>
-                <div class="modal-body" style="height:320px;">
+                <div class="modal-body" style="min-height:420px;">
                     <div class="row">
-                        <div class="col-md-4 col-lg-4 col-sm-4 col-xs-4">
+                        <div class="col-md-3 col-lg-3 col-sm-3 col-xs-3">
                             <div class="btn-group-vertical" role="group">
                                 <div class="btn-group" role="group">
                                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
                                             aria-haspopup="true" aria-expanded="false">
-                                        <img src="image/lantern.png" style="width:20px;height: 20px;float: left">模式
-                                        <span class="caret"></span>
+                                        模式<span class="caret"></span>
+                                        <img src="image/setting/lantern.png" style="width:20px;height: 20px;margin-left: 5px">
                                     </button>
                                     <ul class="dropdown-menu">
                                         <li><a onclick="open_night()">
-                                            夜间<img src="image/night.png" style="width:20px;height: 20px;float: right">
+                                            夜间<img src="image/setting/night.png" style="width:20px;height: 20px;float: right">
                                         </a></li>
                                         <li><a onclick="close_night()">
-                                            白天<img src="image/day.png" style="width:20px;height: 20px;float: right">
+                                            白天<img src="image/setting/day.png" style="width:20px;height: 20px;float: right">
                                         </a></li>
                                         <li><a onclick="bigger()">
-                                            变亮<img src="image/bigger.png" style="width:20px;height: 20px;float: right">
+                                            变亮<img src="image/setting/bigger.png" style="width:20px;height: 20px;float: right">
                                         </a></li>
                                         <li><a onclick="smaller()">
-                                            变暗<img src="image/smaller.png" style="width:20px;height: 20px;float: right">
+                                            变暗<img src="image/setting/smaller.png" style="width:20px;height: 20px;float: right">
                                         </a></li>
                                     </ul>
+                                    <button type="button" class="btn btn-default">
+                                        主题<img src="image/setting/theme.png" style="width:20px;height: 20px;margin-left: 15px">
+                                    </button>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-8 col-lg-8 col-sm-8 col-xs-8">
+                        <div class="col-md-9 col-lg-9 col-sm-9 col-xs-9">
+                            <div class="row" id="theme">
+                                <div class="col-xs-4 col-sm-4 col-lg-4 col-md-4">
+                                    <a href="#" class="thumbnail">
+                                        <img src="image/theme/1.jpg" onclick="change_theme(this)">
+                                    </a>
+                                    <div class="caption">
+                                        <p style="text-align: center">星空粒子</p>
+                                    </div>
+                                </div>
+                                <div class="col-xs-4 col-sm-4 col-lg-4 col-md-4">
+                                    <a href="#" class="thumbnail">
+                                        <img src="image/theme/2.jpg" onclick="change_theme(this)">
+                                    </a>
+                                    <div class="caption">
+                                        <p style="text-align: center">大气科技</p>
+                                    </div>
+                                </div>
+                                <div class="col-xs-4 col-sm-4 col-lg-4 col-md-4">
+                                    <a href="#" class="thumbnail">
+                                        <img src="image/theme/3.jpg" onclick="change_theme(this)">
+                                    </a>
+                                    <div class="caption">
+                                        <p style="text-align: center">黑金科技</p>
+                                    </div>
+                                </div>
+                                <div class="col-xs-4 col-sm-4 col-lg-4 col-md-4">
+                                    <a href="#" class="thumbnail">
+                                        <img src="image/theme/4.png" onclick="change_theme(this)">
+                                    </a>
+                                    <div class="caption">
+                                        <p style="text-align: center">月亮之上</p>
+                                    </div>
+                                </div>
+                                <div class="col-xs-4 col-sm-4 col-lg-4 col-md-4">
+                                    <a href="#" class="thumbnail">
+                                        <img src="image/theme/5.png" onclick="change_theme(this)">
+                                    </a>
+                                    <div class="caption">
+                                        <p style="text-align: center">煦日和风</p>
+                                    </div>
+                                </div>
+                                <div class="col-xs-4 col-sm-4 col-lg-4 col-md-4">
+                                    <a href="#" class="thumbnail">
+                                        <img src="image/theme/6.png" onclick="change_theme(this)">
+                                    </a>
+                                    <div class="caption">
+                                        <p style="text-align: center">春日暖阳</p>
+                                    </div>
+                                </div>
+                            </div>
 
                         </div>
                     </div>
@@ -224,7 +274,7 @@
                     <div class="row">
                         <div class="col-md-12 padding_top">
                             <div class="input-group">
-                                <span class="input-group-addon" style="background: url('image/userType.png')"></span>
+                                <span class="input-group-addon" style="background: url('image/common/userType.png')"></span>
                                 <select id="login_type" class="form-control" title="用户类型">
                                     <option value="admin">管理员</option>
                                     <option value="person">个人用户</option>
@@ -236,7 +286,8 @@
                     <div class="row">
                         <div class="col-md-12 padding_top">
                             <div class="input-group">
-                                <span class="input-group-addon" style="background: url('image/nickname.png') no-repeat"></span>
+                                <span class="input-group-addon"
+                                      style="background: url('image/common/nickname.png') no-repeat"></span>
                                 <input type="text" id="login_nickname" class="form-control" placeholder="用户名">
                             </div>
                         </div>
@@ -244,7 +295,8 @@
                     <div class="row">
                         <div class="col-md-12 padding_top">
                             <div class="input-group">
-                                <span class="input-group-addon" style="background: url('image/password.png') no-repeat"></span>
+                                <span class="input-group-addon"
+                                      style="background: url('image/common/password.png') no-repeat"></span>
                                 <input type="password" id="login_password" class="form-control"
                                        placeholder="密码">
                             </div>
@@ -292,45 +344,43 @@
                             <div class="row">
                                 <div class="col-md-12 padding_top">
                                     <div class="input-group">
-                                        <span class="input-group-addon" style="background: url('image/nickname.png')"></span>
+                                        <span class="input-group-addon"
+                                              style="background: url('image/common/nickname.png')"></span>
                                         <input type="text" class="form-control" id="person_nickname" placeholder="用户名"
                                                onkeyup="reg_username('person_nickname','btu_person_username')">
-                                        <span class="input-group-btn">
-                        <button type="button" class="btn btn-default " id="btu_person_username">填</button>
-                    </span>
+                                        <span class="input-group-addon" id="btu_person_username">填</span>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12 padding_top">
                                     <div class="input-group">
-                                        <span class="input-group-addon" style="background: url('image/password.png')"></span>
+                                        <span class="input-group-addon"
+                                              style="background: url('image/common/password.png')"></span>
                                         <input type="password" class="form-control" id="person_password"
                                                placeholder="密码"
                                                onkeyup="reg_pwd('person_password','btu_person_password')">
-                                        <span class="input-group-btn">
-                        <button type="button" class="btn btn-default " id="btu_person_password">完</button>
-                    </span>
+                                        <span class="input-group-addon" id="btu_person_password">完</span>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12 padding_top">
                                     <div class="input-group">
-                                        <span class="input-group-addon" style="background: url('image/password.png')"></span>
+                                        <span class="input-group-addon"
+                                              style="background: url('image/common/password.png')"></span>
                                         <input type="password" class="form-control" id="person_confirm_password"
                                                placeholder="确认密码"
                                                onkeyup="conf_pwd('person_password','person_confirm_password','btu_person_conf_password')">
-                                        <span class="input-group-btn">
-                        <button type="button" class="btn btn-default" id="btu_person_conf_password">整</button>
-                    </span>
+                                        <span class="input-group-addon" id="btu_person_conf_password">整</span>
                                     </div>
                                 </div>
                             </div>
                             <div class="row" id="person_name_group">
                                 <div class="col-md-12 padding_top">
                                     <div class="input-group">
-                                        <span class="input-group-addon" style="background: url('image/nickname.png')"></span>
+                                        <span class="input-group-addon"
+                                              style="background: url('image/common/nickname.png')"></span>
                                         <input type="text" class="form-control" id="person_name" placeholder="真实姓名">
                                     </div>
                                 </div>
@@ -338,29 +388,23 @@
                             <div class="row" id="person_email_group">
                                 <div class="col-md-12 padding_top">
                                     <div class="input-group">
-                                        <span class="input-group-addon" style="background: url('image/email.png')"></span>
+                                        <span class="input-group-addon"
+                                              style="background: url('image/common/email.png')"></span>
                                         <input type="email" class="form-control" placeholder="电子邮件"
                                                onkeyup="reg_email('person_email','btu_person_email')"
                                                id="person_email">
-                                        <span class="input-group-btn">
-                        <button type="button" class="btn btn-default " id="btu_person_email">@</button>
-                    </span>
-                                        <span class="input-group-btn">
-                        <button type="button" class="btn btn-default"
-                                onclick="check_email('person_email','btu_person_email')">验证</button>
-                    </span>
+                                        <span class="input-group-addon" id="btu_person_email">@</span>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12 padding_top">
                                     <div class="input-group">
-                                        <span class="input-group-addon" style="background: url('image/telephone.png')"></span>
+                                        <span class="input-group-addon"
+                                              style="background: url('image/person/telephone.png')"></span>
                                         <input type="text" class="form-control" id="person_telephone" placeholder="手机号码"
                                                onkeyup="reg_telephone('person_telephone','btu_person_telephone')">
-                                        <span class="input-group-btn">
-                        <button type="button" class="btn btn-default " id="btu_person_telephone">哦</button>
-                    </span>
+                                        <span class="input-group-addon" id="btu_person_telephone">哦</span>
                                     </div>
                                 </div>
                             </div>
@@ -396,61 +440,60 @@
                 </div>
                 <div class="modal-body">
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-12 padding_top">
                             <div id="confirm_enterprise_box"></div>
                         </div>
                     </div>
                     <div onmouseover="btu_able('reg_btu','confirm_enterprise_box')">
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-12 padding_top">
                                 <div class="input-group">
-                                    <span class="input-group-addon" style="background: url('image/nickname.png')"></span>
+                                    <span class="input-group-addon"
+                                          style="background: url('image/common/nickname.png')"></span>
                                     <input type="text" class="form-control" id="enterprise_nickname" placeholder="用户名"
                                            onkeyup="reg_username('enterprise_nickname','btu_enterprise_username')">
-                                    <span class="input-group-btn">
-                        <button type="button" class="btn btn-default" id="btu_enterprise_username">填</button>
-                    </span>
+                                    <span class="input-group-addon" id="btu_enterprise_username">填</span>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-12 padding_top">
                                 <div class="input-group">
-                                    <span class="input-group-addon" style="background: url('image/password.png')"></span>
+                                    <span class="input-group-addon"
+                                          style="background: url('image/common/password.png')"></span>
                                     <input type="password" class="form-control" placeholder="密码"
                                            onkeyup="reg_pwd('enterprise_password','btu_enterprise_password')"
                                            id="enterprise_password">
-                                    <span class="input-group-btn">
-                        <button type="button" class="btn btn-default" id="btu_enterprise_password">完</button>
-                    </span>
+                                    <span class="input-group-addon" id="btu_enterprise_password">完</span>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-12 padding_top">
                                 <div class="input-group">
-                                    <span class="input-group-addon" style="background: url('image/password.png')"></span>
+                                    <span class="input-group-addon"
+                                          style="background: url('image/common/password.png')"></span>
                                     <input type="password" class="form-control" id="confirm_enterprise_password"
                                            placeholder="确认密码"
                                            onkeyup="conf_pwd('enterprise_password','confirm_enterprise_password','btu_enterprise_conf_password')">
-                                    <span class="input-group-btn">
-                        <button type="button" class="btn btn-default" id="btu_enterprise_conf_password">整</button>
-                    </span>
+                                    <span class="input-group-addon" id="btu_enterprise_conf_password">整</span>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-12 padding_top">
                                 <div class="input-group">
-                                    <span class="input-group-addon" style="background: url('image/enterprise.png')"></span>
+                                    <span class="input-group-addon"
+                                          style="background: url('image/enterprise/enterprise.png')"></span>
                                     <input type="text" class="form-control" id="enterprise_name" placeholder="企业名称">
                                 </div>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-12 padding_top">
                                 <div class="input-group">
-                                    <span class="input-group-addon" style="background: url('image/industry.png')"></span>
+                                    <span class="input-group-addon"
+                                          style="background: url('image/enterprise/industry.png')"></span>
                                     <select class="form-control" id="enterprise_industry" title="所属行业">
 
                                     </select>
@@ -458,40 +501,31 @@
                             </div>
                         </div>
                         <div class="row" id="enterprise_telephone_group">
-                            <div class="col-md-12">
+                            <div class="col-md-12 padding_top">
                                 <div class="input-group">
-                                    <span class="input-group-addon" style="background: url('image/email.png')"></span>
+                                    <span class="input-group-addon" style="background: url('image/common/email.png')"></span>
                                     <input type="email" class="form-control" placeholder="电子邮箱"
                                            onkeyup="reg_email('enterprise_email','btu_enterprise_email')"
                                            id="enterprise_email">
-                                    <span class="input-group-btn">
-                        <button type="button" class="btn btn-default " id="btu_enterprise_email">@</button>
-                    </span>
-                                    <span class="input-group-btn">
-                        <button type="button"
-                                onclick="check_email('enterprise_email','btu_enterprise_email')"
-                                class="btn btn-default">验证</button>
-                    </span>
+                                    <span class="input-group-addon" id="btu_enterprise_email">@</span>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-12 padding_top">
                                 <div class="input-group">
-                                    <span class="input-group-addon" style="background: url('image/phone.png')"></span>
+                                    <span class="input-group-addon" style="background: url('image/enterprise/phone.png')"></span>
                                     <input type="text" class="form-control" placeholder="电话号码"
                                            onkeyup="reg_telephone('enterprise_telephone','btu_enterprise_telephone')"
                                            id="enterprise_telephone">
-                                    <span class="input-group-btn">
-                        <button type="button" class="btn btn-default" id="btu_enterprise_telephone">哦</button>
-                    </span>
+                                    <span class="input-group-addon" id="btu_enterprise_telephone">哦</span>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-12 padding_top">
                                 <div class="input-group">
-                                    <span class="input-group-addon" style="background: url('image/address.png')"></span>
+                                    <span class="input-group-addon" style="background: url('image/common/address.png')"></span>
                                     <select class="form-control" id="enterprise_address" title="企业地址">
 
                                     </select>
@@ -546,27 +580,6 @@
         </div>
     </div>
     <!--end Modal-->
-    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-
-        <!-- Wrapper for slides -->
-        <div class="carousel-inner" role="listbox">
-            <div class="item active">
-                <img class="img-responsive center-block" src="image/3.jpg" alt="...">
-                <div class="carousel-caption">
-                </div>
-            </div>
-            <div class="item">
-                <img class="img-responsive center-block" src="image/2.jpg" alt="...">
-                <div class="carousel-caption">
-                </div>
-            </div>
-            <div class="item">
-                <img class="img-responsive center-block" src="image/1.jpg" alt="...">
-                <div class="carousel-caption">
-                </div>
-            </div>
-        </div>
-    </div>
     <div class="row">
         <div class="col-md-12">
             <iframe frameborder="0" marginheight="0" src=""></iframe>

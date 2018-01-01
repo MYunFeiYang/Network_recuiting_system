@@ -1021,8 +1021,13 @@ if (typeof jQuery === 'undefined') {
             //使模态框垂直居中显示
             var $dialog = that.$element.find("div.modal-dialog"),
                 top = (document.body.offsetHeight - $dialog.height()) / 2;
-            $dialog.css({"margin": +top + "px auto"});
-            that.$element.addClass('in')
+            if ($dialog.height()>480){
+                $dialog.css({"margin": +70 + "px auto"});
+                that.$element.addClass('in')
+            }else {
+                $dialog.css({"margin": +top + "px auto"});
+                that.$element.addClass('in')
+            }
 
             that.enforceFocus()
 

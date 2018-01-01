@@ -30,14 +30,14 @@
 /*中等屏幕*/
 @media screen and (min-width: 992px)and (max-width: 1200px) {
     html {
-        font-size: 80%;
+        font-size: 72%;
     }
 }
 
 /*大屏幕*/
 @media screen and (min-width: 1200px) {
     html {
-        font-size: 100%;
+        font-size: 80%;
     }
 }
 

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>问道空间</title>
-    <link rel="shortcut icon" href="image/brand.jpg">
+    <link rel="shortcut icon" href="image/enterprise/brand.png">
     <!--stylesheet-->
     <link type="text/css" rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.css">
     <link type="text/css" rel="stylesheet" href="stylesheet/webchat.css">
@@ -12,7 +12,6 @@
     <script src="bootstrap-3.3.7-dist/js/bootstrap.js"></script>
     <script src="javascript/common/webchat/webchat_listen.js"></script>
     <script src="javascript/common/webchat/webchat_logic.js"></script>
-    <script src="javascript/util/night.js"></script>
     <script src="javascript/util/responsive.js"></script>
 </head>
 <body>
@@ -22,19 +21,14 @@
             <ul>
                 <li onclick="show_status()">登录状态 <span id="status"></span></li>
                 <li type="button" onclick="init()">打开连接
-                    <span class="glyphicon glyphicon-ok"></span></li>
+                    <img src="image/webchat/open.png" style="width: 20px;height: 20px;float: right">
+                </li>
                 <li type="button" onclick="closeSocket()">关闭连接
-                    <span class="glyphicon glyphicon-remove"></span></li>
-                <li type="button" onclick="open_night()">打开夜间模式
-                    <span class="glyphicon glyphicon-resize-full"></span></li>
-                <li type="button" onclick="close_night()">关闭夜间模式
-                    <span class="glyphicon glyphicon-resize-small"></span></li>
-                <li type="button" onclick="bigger()">增加亮度
-                    <span class="glyphicon glyphicon-arrow-up"></span></li>
-                <li type="button" onclick="smaller()">降低亮度
-                    <span class="glyphicon glyphicon-arrow-down"></span></li>
-                <li type="button" onclick="smaller()">我的好友
-                    <span class="glyphicon glyphicon-user"></span></li>
+                    <img src="image/webchat/close.png" style="width: 20px;height: 20px;float: right">
+                </li>
+                <li type="button">我的好友
+                    <img src="image/webchat/friend.png" style="width: 20px;height: 20px;float: right">
+                </li>
             </ul>
         </div>
         <div class="col-md-7 col-lg-7 col-sm-6 col-xs-12 chat_content">
@@ -47,13 +41,15 @@
                 <div class="col-md-12" id="editor">
                     <textarea id="content" placeholder="输入聊天内容"></textarea>
                     <button class="btn btn-default" type="button" onclick="emit()">
-                        发送
+
                     </button>
                 </div>
             </div>
         </div>
         <div class="col-md-3 col-lg-3 col-sm-3 col-xs-8 person_list">
-            <h2>在线人员列表</h2>
+            <h2>在线人员列表
+                <img src="image/webchat/friend.png" style="width: 20px;height: 20px;float: right">
+            </h2>
             <ul id="list">
 
             </ul>
