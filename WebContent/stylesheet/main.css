@@ -44,9 +44,11 @@ html, body {
     height: 100%;
     color: black;
 }
-body{
-    background:url(../image/theme/1.jpg) no-repeat left top;
-    background-size:100%;
+#background{
+    position: fixed;
+    z-index: 0;
+    top:0;
+    left: 0;
 }
 
 body::-webkit-scrollbar {

@@ -11,9 +11,9 @@ let c_con_password;
 let c_email;
 let c_telephone;
 
-function check_email(email, confirm_box) {
+function check_email(obj) {
     o_user = {};
-    c_email = document.getElementById(email).value;
+    c_email = obj.value;
     o_user.email = c_email;
     $.ajax({
         url: '/public?public=checkemail',
@@ -22,7 +22,7 @@ function check_email(email, confirm_box) {
         type: "POST",
         dataType: "JSON",
         success: function (data) {
-            n_confirm_box_c = document.getElementById(confirm_box);
+            n_confirm_box_c = obj.nextElementSibling;
             if (data.msg === "email_exist") {
                 n_confirm_box_c.setAttribute("style", "color:red");
                 n_confirm_box_c.innerHTML = "请邮箱已被注册";
@@ -41,10 +41,10 @@ function check_email(email, confirm_box) {
     });
 }
 
-function reg_username(nickname, confirm_box) {
+function reg_username(obj) {
     let uPattern =  /^[\u4e00-\u9fff\w]{5,16}$/;
-    c_nickname = document.getElementById(nickname).value;
-    n_confirm_box_c = document.getElementById(confirm_box);
+    c_nickname = obj.value;
+    n_confirm_box_c = obj.nextElementSibling;
     if (uPattern.test(c_nickname)) {
         n_confirm_box_c.innerHTML = "";
         n_confirm_box_c.classList.add("glyphicon");
@@ -58,10 +58,10 @@ function reg_username(nickname, confirm_box) {
     }
 }
 
-function reg_pwd(password, confirm_box) {
-    c_password = document.getElementById(password).value;
+function reg_pwd(obj) {
+    c_password = obj.value;
     let reg = /^[A-Za-z0-9]{6,20}$/;
-    n_confirm_box_c = document.getElementById(confirm_box);
+    n_confirm_box_c = obj.nextElementSibling;
     if (reg.test(c_password)) {
         n_confirm_box_c.innerHTML = "";
         n_confirm_box_c.classList.add("glyphicon");
@@ -75,10 +75,10 @@ function reg_pwd(password, confirm_box) {
     }
 }
 
-function reg_telephone(telephone, confirm_box) {
-    c_telephone = document.getElementById(telephone).value;
+function reg_telephone(obj) {
+    c_telephone = obj.value;
     let mPattern = /^1[3|4|5|8][0-9]\d{4,8}$/;
-    n_confirm_box_c = document.getElementById(confirm_box);
+    n_confirm_box_c = obj.nextElementSibling;
     if (mPattern.test(c_telephone)) {
         n_confirm_box_c.innerHTML = "";
         n_confirm_box_c.classList.add("glyphicon");
@@ -93,12 +93,12 @@ function reg_telephone(telephone, confirm_box) {
     }
 }
 
-function reg_email(email, confirm_box) {
-    c_email = document.getElementById(email).value;
+function reg_email(obj) {
+    c_email = obj.value;
     let ePattern = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
-    n_confirm_box_c = document.getElementById(confirm_box);
+    n_confirm_box_c = obj.nextElementSibling;
     if (ePattern.test(c_email)) {
-        check_email(email,confirm_box)
+        check_email(obj)
     } else {
         n_confirm_box_c.setAttribute("style", "color:red");
         n_confirm_box_c.innerHTML = "请输入email邮箱";
@@ -106,11 +106,10 @@ function reg_email(email, confirm_box) {
     }
 }
 
-function conf_pwd(password, confirm_password, confirm_box) {
-    c_password = document.getElementById(password).value;
-    c_con_password = document.getElementById(confirm_password).value;
-    n_confirm_box_c = document.getElementById(confirm_box);
-    //alert(confirm_password);
+function conf_pwd(obj,id) {
+    c_con_password = obj.value;
+    c_password = document.getElementById(id).value;
+    n_confirm_box_c = obj.nextElementSibling;
     if (c_password === c_con_password) {
         n_confirm_box_c.innerHTML = "";
         n_confirm_box_c.classList.add("glyphicon");

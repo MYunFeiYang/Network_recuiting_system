@@ -25,6 +25,7 @@
     <script src="javascript/util/night.js"></script>
 </head>
 <body id="top">
+<img src="image/theme/l-1.jpg" id="background">
 <div class="container-fluid">
     <nav class="navbar navbar-default">
         <div class="container-fluid">
@@ -50,7 +51,7 @@
                             <img src="image/common/recruit.png" style="width:30px;height: 30px"></a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a href="public.html" onclick="close_nav();return change_iframe_src(this)">
+                                <a data-href="public.html" onclick="close_nav();change_iframe_src(this)">
                                     校招<img src="image/person/school.png" style="width:20px;height: 20px;float: right">
                                 </a></li>
                             <li role="separator" class="divider"></li>
@@ -96,7 +97,8 @@
                             <li role="separator" class="divider"></li>
                             <li>
                                 <a data-toggle="modal" data-target="#register-enterprise" onclick="close_nav()">
-                                    企业注册<img src="image/enterprise/company.png" style="width:20px;height: 20px;float: right">
+                                    企业注册<img src="image/enterprise/company.png"
+                                             style="width:20px;height: 20px;float: right">
                                 </a>
                             </li>
                         </ul>
@@ -173,24 +175,30 @@
                                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
                                             aria-haspopup="true" aria-expanded="false">
                                         模式<span class="caret"></span>
-                                        <img src="image/setting/lantern.png" style="width:20px;height: 20px;margin-left: 5px">
+                                        <img src="image/setting/lantern.png"
+                                             style="width:20px;height: 20px;margin-left: 5px">
                                     </button>
                                     <ul class="dropdown-menu">
                                         <li><a onclick="open_night()">
-                                            夜间<img src="image/setting/night.png" style="width:20px;height: 20px;float: right">
+                                            夜间<img src="image/setting/night.png"
+                                                   style="width:20px;height: 20px;float: right">
                                         </a></li>
                                         <li><a onclick="close_night()">
-                                            白天<img src="image/setting/day.png" style="width:20px;height: 20px;float: right">
+                                            白天<img src="image/setting/day.png"
+                                                   style="width:20px;height: 20px;float: right">
                                         </a></li>
                                         <li><a onclick="bigger()">
-                                            变亮<img src="image/setting/bigger.png" style="width:20px;height: 20px;float: right">
+                                            变亮<img src="image/setting/bigger.png"
+                                                   style="width:20px;height: 20px;float: right">
                                         </a></li>
                                         <li><a onclick="smaller()">
-                                            变暗<img src="image/setting/smaller.png" style="width:20px;height: 20px;float: right">
+                                            变暗<img src="image/setting/smaller.png"
+                                                   style="width:20px;height: 20px;float: right">
                                         </a></li>
                                     </ul>
                                     <button type="button" class="btn btn-default">
-                                        主题<img src="image/setting/theme.png" style="width:20px;height: 20px;margin-left: 15px">
+                                        主题<img src="image/setting/theme.png"
+                                               style="width:20px;height: 20px;margin-left: 15px">
                                     </button>
                                 </div>
                             </div>
@@ -199,7 +207,7 @@
                             <div class="row" id="theme">
                                 <div class="col-xs-4 col-sm-4 col-lg-4 col-md-4">
                                     <a href="#" class="thumbnail">
-                                        <img src="image/theme/1.jpg" onclick="change_theme(this)">
+                                        <img src="image/theme/l-1.jpg" onclick="change_theme(this)">
                                     </a>
                                     <div class="caption">
                                         <p style="text-align: center">星空粒子</p>
@@ -207,7 +215,7 @@
                                 </div>
                                 <div class="col-xs-4 col-sm-4 col-lg-4 col-md-4">
                                     <a href="#" class="thumbnail">
-                                        <img src="image/theme/2.jpg" onclick="change_theme(this)">
+                                        <img src="image/theme/l-2.jpg" onclick="change_theme(this)">
                                     </a>
                                     <div class="caption">
                                         <p style="text-align: center">大气科技</p>
@@ -215,7 +223,7 @@
                                 </div>
                                 <div class="col-xs-4 col-sm-4 col-lg-4 col-md-4">
                                     <a href="#" class="thumbnail">
-                                        <img src="image/theme/3.jpg" onclick="change_theme(this)">
+                                        <img src="image/theme/l-3.jpg" onclick="change_theme(this)">
                                     </a>
                                     <div class="caption">
                                         <p style="text-align: center">黑金科技</p>
@@ -223,7 +231,7 @@
                                 </div>
                                 <div class="col-xs-4 col-sm-4 col-lg-4 col-md-4">
                                     <a href="#" class="thumbnail">
-                                        <img src="image/theme/4.png" onclick="change_theme(this)">
+                                        <img src="image/theme/l-4.jpg" onclick="change_theme(this)">
                                     </a>
                                     <div class="caption">
                                         <p style="text-align: center">月亮之上</p>
@@ -231,7 +239,7 @@
                                 </div>
                                 <div class="col-xs-4 col-sm-4 col-lg-4 col-md-4">
                                     <a href="#" class="thumbnail">
-                                        <img src="image/theme/5.png" onclick="change_theme(this)">
+                                        <img src="image/theme/l-5.jpg" onclick="change_theme(this)">
                                     </a>
                                     <div class="caption">
                                         <p style="text-align: center">煦日和风</p>
@@ -239,7 +247,7 @@
                                 </div>
                                 <div class="col-xs-4 col-sm-4 col-lg-4 col-md-4">
                                     <a href="#" class="thumbnail">
-                                        <img src="image/theme/6.png" onclick="change_theme(this)">
+                                        <img src="image/theme/l-6.jpg" onclick="change_theme(this)">
                                     </a>
                                     <div class="caption">
                                         <p style="text-align: center">春日暖阳</p>
@@ -274,7 +282,8 @@
                     <div class="row">
                         <div class="col-md-12 padding_top">
                             <div class="input-group">
-                                <span class="input-group-addon" style="background: url('image/common/userType.png')"></span>
+                                <span class="input-group-addon"
+                                      style="background: url('image/common/userType.png')"></span>
                                 <select id="login_type" class="form-control" title="用户类型">
                                     <option value="admin">管理员</option>
                                     <option value="person">个人用户</option>
@@ -308,17 +317,19 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-4 col-sm-12 padding_top">
-                            <a href="resetPassword.html" target="_top" class="btn btn-primary"
-                               onclick="close_login();return change_iframe_src(this)">找回密码</a>
+                        <div class="col-md-6 col-sm-6 col-lg-6 col-xs-6 padding_top">
+                            <button data-href="resetPassword.html" class="btn btn-primary center-block"
+                                    onclick="close_login();change_iframe_src(this)">找回密码
+                            </button>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-lg-6 col-xs-6 padding_top">
+                            <button type="button" class="btn btn-primary center-block" onclick="login();reset_user()">登录
+                            </button>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal" id="close_login">关闭
-                    </button>
-                    <button type="button" class="btn btn-primary"
-                            onclick="login();reset_user()">登录
                     </button>
                 </div>
             </div>
@@ -347,8 +358,8 @@
                                         <span class="input-group-addon"
                                               style="background: url('image/common/nickname.png')"></span>
                                         <input type="text" class="form-control" id="person_nickname" placeholder="用户名"
-                                               onkeyup="reg_username('person_nickname','btu_person_username')">
-                                        <span class="input-group-addon" id="btu_person_username">填</span>
+                                               onkeyup="reg_username(this)">
+                                        <span class="input-group-addon">填</span>
                                     </div>
                                 </div>
                             </div>
@@ -359,8 +370,8 @@
                                               style="background: url('image/common/password.png')"></span>
                                         <input type="password" class="form-control" id="person_password"
                                                placeholder="密码"
-                                               onkeyup="reg_pwd('person_password','btu_person_password')">
-                                        <span class="input-group-addon" id="btu_person_password">完</span>
+                                               onkeyup="reg_pwd(this)">
+                                        <span class="input-group-addon">完</span>
                                     </div>
                                 </div>
                             </div>
@@ -371,8 +382,8 @@
                                               style="background: url('image/common/password.png')"></span>
                                         <input type="password" class="form-control" id="person_confirm_password"
                                                placeholder="确认密码"
-                                               onkeyup="conf_pwd('person_password','person_confirm_password','btu_person_conf_password')">
-                                        <span class="input-group-addon" id="btu_person_conf_password">整</span>
+                                               onkeyup="conf_pwd(this,'person_password')">
+                                        <span class="input-group-addon">整</span>
                                     </div>
                                 </div>
                             </div>
@@ -391,9 +402,9 @@
                                         <span class="input-group-addon"
                                               style="background: url('image/common/email.png')"></span>
                                         <input type="email" class="form-control" placeholder="电子邮件"
-                                               onkeyup="reg_email('person_email','btu_person_email')"
+                                               onkeyup="reg_email(this)"
                                                id="person_email">
-                                        <span class="input-group-addon" id="btu_person_email">@</span>
+                                        <span class="input-group-addon">@</span>
                                     </div>
                                 </div>
                             </div>
@@ -403,8 +414,8 @@
                                         <span class="input-group-addon"
                                               style="background: url('image/person/telephone.png')"></span>
                                         <input type="text" class="form-control" id="person_telephone" placeholder="手机号码"
-                                               onkeyup="reg_telephone('person_telephone','btu_person_telephone')">
-                                        <span class="input-group-addon" id="btu_person_telephone">哦</span>
+                                               onkeyup="reg_telephone(this)">
+                                        <span class="input-group-addon">哦</span>
                                     </div>
                                 </div>
                             </div>
@@ -451,8 +462,8 @@
                                     <span class="input-group-addon"
                                           style="background: url('image/common/nickname.png')"></span>
                                     <input type="text" class="form-control" id="enterprise_nickname" placeholder="用户名"
-                                           onkeyup="reg_username('enterprise_nickname','btu_enterprise_username')">
-                                    <span class="input-group-addon" id="btu_enterprise_username">填</span>
+                                           onkeyup="reg_username(this)">
+                                    <span class="input-group-addon">填</span>
                                 </div>
                             </div>
                         </div>
@@ -462,9 +473,9 @@
                                     <span class="input-group-addon"
                                           style="background: url('image/common/password.png')"></span>
                                     <input type="password" class="form-control" placeholder="密码"
-                                           onkeyup="reg_pwd('enterprise_password','btu_enterprise_password')"
+                                           onkeyup="reg_pwd(this)"
                                            id="enterprise_password">
-                                    <span class="input-group-addon" id="btu_enterprise_password">完</span>
+                                    <span class="input-group-addon">完</span>
                                 </div>
                             </div>
                         </div>
@@ -475,8 +486,8 @@
                                           style="background: url('image/common/password.png')"></span>
                                     <input type="password" class="form-control" id="confirm_enterprise_password"
                                            placeholder="确认密码"
-                                           onkeyup="conf_pwd('enterprise_password','confirm_enterprise_password','btu_enterprise_conf_password')">
-                                    <span class="input-group-addon" id="btu_enterprise_conf_password">整</span>
+                                           onkeyup="conf_pwd(this,'enterprise_password')">
+                                    <span class="input-group-addon">整</span>
                                 </div>
                             </div>
                         </div>
@@ -503,29 +514,32 @@
                         <div class="row" id="enterprise_telephone_group">
                             <div class="col-md-12 padding_top">
                                 <div class="input-group">
-                                    <span class="input-group-addon" style="background: url('image/common/email.png')"></span>
+                                    <span class="input-group-addon"
+                                          style="background: url('image/common/email.png')"></span>
                                     <input type="email" class="form-control" placeholder="电子邮箱"
-                                           onkeyup="reg_email('enterprise_email','btu_enterprise_email')"
+                                           onkeyup="reg_email(this)"
                                            id="enterprise_email">
-                                    <span class="input-group-addon" id="btu_enterprise_email">@</span>
+                                    <span class="input-group-addon">@</span>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12 padding_top">
                                 <div class="input-group">
-                                    <span class="input-group-addon" style="background: url('image/enterprise/phone.png')"></span>
+                                    <span class="input-group-addon"
+                                          style="background: url('image/enterprise/phone.png')"></span>
                                     <input type="text" class="form-control" placeholder="电话号码"
-                                           onkeyup="reg_telephone('enterprise_telephone','btu_enterprise_telephone')"
+                                           onkeyup="reg_telephone(this)"
                                            id="enterprise_telephone">
-                                    <span class="input-group-addon" id="btu_enterprise_telephone">哦</span>
+                                    <span class="input-group-addon">哦</span>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12 padding_top">
                                 <div class="input-group">
-                                    <span class="input-group-addon" style="background: url('image/common/address.png')"></span>
+                                    <span class="input-group-addon"
+                                          style="background: url('image/common/address.png')"></span>
                                     <select class="form-control" id="enterprise_address" title="企业地址">
 
                                     </select>
@@ -627,6 +641,7 @@
     window.onload = function () {
         show_user('login_nickname', 'login_password');
         login_session('refresh');
+        response_background();
     };
 
     function close_nav() {

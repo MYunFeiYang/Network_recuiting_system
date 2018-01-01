@@ -7166,7 +7166,7 @@ button.close {
 
 .modal-content {
     position: relative;
-    background: rgba(255, 255, 255, 0.7);
+    background: rgba(255, 255, 255, 0.9);
     -webkit-background-clip: padding-box;
     background-clip: padding-box;
     border: 1px solid #999;
