@@ -62,17 +62,21 @@
                     </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <img style="width:40px;height: 40px;border-radius:20px;margin: 5px" class="hidden" src="" id="head_picture">
+                    <li style="position: absolute;right: 35px;">
+                        <a>
+                            <img style="width:30px;height: 30px;border-radius:15px" class="hidden" src="" id="head_picture">
+                        </a>
+                    </li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" id="login_btu" data-toggle="dropdown" role="button"
-                           aria-haspopup="true" aria-expanded="false">
+                           aria-haspopup="true" aria-expanded="false" style="line-height: 30px">
                             <img src="image/login.png" style="width:30px;height: 30px">
                             </a>
                         <ul class="dropdown-menu" id="user_center">
                             <li>
                                 <!-- Button trigger modal -->
                                 <a data-toggle="modal" data-target="#login" onclick="close_nav()">
-                                    <img src="image/login1.png" style="width:80%;height: 30px">
+                                    <img src="image/login1.png" style="width:73px;height: 30px">
                                 </a>
                             </li>
                         </ul>
@@ -213,14 +217,14 @@
                 </div>
                 <div class="modal-body">
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-12 padding_top">
                             <div id="confirm_login_box"></div>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-12 padding_top">
                             <div class="input-group">
-                                <span class="input-group-addon glyphicon glyphicon-user">用户类型</span>
+                                <span class="input-group-addon" style="background: url('image/userType.png')"></span>
                                 <select id="login_type" class="form-control" title="用户类型">
                                     <option value="admin">管理员</option>
                                     <option value="person">个人用户</option>
@@ -230,24 +234,24 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-12 padding_top">
                             <div class="input-group">
-                                <span class="input-group-addon glyphicon glyphicon-user">用户昵称</span>
+                                <span class="input-group-addon" style="background: url('image/nickname.png') no-repeat"></span>
                                 <input type="text" id="login_nickname" class="form-control" placeholder="用户名">
                             </div>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-12 padding_top">
                             <div class="input-group">
-                                <span class="input-group-addon glyphicon glyphicon-lock">密&nbsp;&nbsp;码</span>
+                                <span class="input-group-addon" style="background: url('image/password.png') no-repeat"></span>
                                 <input type="password" id="login_password" class="form-control"
                                        placeholder="密码">
                             </div>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-12 padding_top">
                             <input type="radio" checked="checked" id="remember_user" placeholder="记住密码">选中我记住登录状态
                         </div>
                     </div>
@@ -280,17 +284,15 @@
                 <div class="modal-body">
                     <form>
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-12 padding_top">
                                 <div id="confirm_person_box"></div>
                             </div>
                         </div>
                         <div onmouseover="btu_able('person_reg_btu','confirm_person_box')">
                             <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-md-12 padding_top">
                                     <div class="input-group">
-                    <span class="input-group-btn">
-                        <button type="button" class="btn btn-default glyphicon glyphicon-user">用户昵称</button>
-                    </span>
+                                        <span class="input-group-addon" style="background: url('image/nickname.png')"></span>
                                         <input type="text" class="form-control" id="person_nickname" placeholder="用户名"
                                                onkeyup="reg_username('person_nickname','btu_person_username')">
                                         <span class="input-group-btn">
@@ -300,11 +302,9 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-md-12 padding_top">
                                     <div class="input-group">
-                    <span class="input-group-btn">
-                        <button type="button" class="btn btn-default glyphicon glyphicon-lock">密&nbsp;&nbsp;码</button>
-                    </span>
+                                        <span class="input-group-addon" style="background: url('image/password.png')"></span>
                                         <input type="password" class="form-control" id="person_password"
                                                placeholder="密码"
                                                onkeyup="reg_pwd('person_password','btu_person_password')">
@@ -315,11 +315,9 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-md-12 padding_top">
                                     <div class="input-group">
-                    <span class="input-group-btn">
-                        <button type="button" class="btn btn-default glyphicon glyphicon-lock">确认密码</button>
-                    </span>
+                                        <span class="input-group-addon" style="background: url('image/password.png')"></span>
                                         <input type="password" class="form-control" id="person_confirm_password"
                                                placeholder="确认密码"
                                                onkeyup="conf_pwd('person_password','person_confirm_password','btu_person_conf_password')">
@@ -330,21 +328,17 @@
                                 </div>
                             </div>
                             <div class="row" id="person_name_group">
-                                <div class="col-md-12">
+                                <div class="col-md-12 padding_top">
                                     <div class="input-group">
-                    <span class="input-group-btn">
-                        <button type="button" class="btn btn-default glyphicon glyphicon-user">真实姓名</button>
-                    </span>
+                                        <span class="input-group-addon" style="background: url('image/nickname.png')"></span>
                                         <input type="text" class="form-control" id="person_name" placeholder="真实姓名">
                                     </div>
                                 </div>
                             </div>
                             <div class="row" id="person_email_group">
-                                <div class="col-md-12">
+                                <div class="col-md-12 padding_top">
                                     <div class="input-group">
-                    <span class="input-group-btn">
-                        <button type="button" class="btn btn-default glyphicon glyphicon-erase">电子邮件</button>
-                    </span>
+                                        <span class="input-group-addon" style="background: url('image/email.png')"></span>
                                         <input type="email" class="form-control" placeholder="电子邮件"
                                                onkeyup="reg_email('person_email','btu_person_email')"
                                                id="person_email">
@@ -359,11 +353,9 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-md-12 padding_top">
                                     <div class="input-group">
-                    <span class="input-group-btn">
-                        <button type="button" class="btn btn-default glyphicon glyphicon-envelope">手机号码</button>
-                    </span>
+                                        <span class="input-group-addon" style="background: url('image/telephone.png')"></span>
                                         <input type="text" class="form-control" id="person_telephone" placeholder="手机号码"
                                                onkeyup="reg_telephone('person_telephone','btu_person_telephone')">
                                         <span class="input-group-btn">
@@ -412,9 +404,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="input-group">
-                    <span class="input-group-btn">
-                        <button type="button" class="btn btn-default glyphicon glyphicon-user">&nbsp;用户名</button>
-                    </span>
+                                    <span class="input-group-addon" style="background: url('image/nickname.png')"></span>
                                     <input type="text" class="form-control" id="enterprise_nickname" placeholder="用户名"
                                            onkeyup="reg_username('enterprise_nickname','btu_enterprise_username')">
                                     <span class="input-group-btn">
@@ -426,9 +416,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="input-group">
-                    <span class="input-group-btn">
-                        <button type="button" class="btn btn-default glyphicon glyphicon-lock">密&nbsp;&nbsp;码</button>
-                    </span>
+                                    <span class="input-group-addon" style="background: url('image/password.png')"></span>
                                     <input type="password" class="form-control" placeholder="密码"
                                            onkeyup="reg_pwd('enterprise_password','btu_enterprise_password')"
                                            id="enterprise_password">
@@ -441,9 +429,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="input-group">
-                    <span class="input-group-btn">
-                        <button type="button" class="btn btn-default glyphicon glyphicon-lock">确认密码</button>
-                    </span>
+                                    <span class="input-group-addon" style="background: url('image/password.png')"></span>
                                     <input type="password" class="form-control" id="confirm_enterprise_password"
                                            placeholder="确认密码"
                                            onkeyup="conf_pwd('enterprise_password','confirm_enterprise_password','btu_enterprise_conf_password')">
@@ -456,9 +442,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="input-group">
-                    <span class="input-group-btn">
-                        <button type="button" class="btn btn-default glyphicon glyphicon-user">企业名称</button>
-                    </span>
+                                    <span class="input-group-addon" style="background: url('image/enterprise.png')"></span>
                                     <input type="text" class="form-control" id="enterprise_name" placeholder="企业名称">
                                 </div>
                             </div>
@@ -466,9 +450,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="input-group">
-                    <span class="input-group-btn">
-                        <button type="button" class="btn btn-default glyphicon glyphicon-user">所属行业</button>
-                    </span>
+                                    <span class="input-group-addon" style="background: url('image/industry.png')"></span>
                                     <select class="form-control" id="enterprise_industry" title="所属行业">
 
                                     </select>
@@ -478,9 +460,7 @@
                         <div class="row" id="enterprise_telephone_group">
                             <div class="col-md-12">
                                 <div class="input-group">
-                    <span class="input-group-btn">
-                        <button type="button" class="btn btn-default glyphicon glyphicon-erase">电子邮箱</button>
-                    </span>
+                                    <span class="input-group-addon" style="background: url('image/email.png')"></span>
                                     <input type="email" class="form-control" placeholder="电子邮箱"
                                            onkeyup="reg_email('enterprise_email','btu_enterprise_email')"
                                            id="enterprise_email">
@@ -498,10 +478,8 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="input-group">
-                    <span class="input-group-btn">
-                        <button type="button" class="btn btn-default glyphicon glyphicon-envelope">手机电话</button>
-                    </span>
-                                    <input type="text" class="form-control" placeholder="手机电话"
+                                    <span class="input-group-addon" style="background: url('image/phone.png')"></span>
+                                    <input type="text" class="form-control" placeholder="电话号码"
                                            onkeyup="reg_telephone('enterprise_telephone','btu_enterprise_telephone')"
                                            id="enterprise_telephone">
                                     <span class="input-group-btn">
@@ -513,9 +491,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="input-group">
-                    <span class="input-group-btn">
-                        <button type="button" class="btn btn-default glyphicon glyphicon-modal-window">企业地址</button>
-                    </span>
+                                    <span class="input-group-addon" style="background: url('image/address.png')"></span>
                                     <select class="form-control" id="enterprise_address" title="企业地址">
 
                                     </select>

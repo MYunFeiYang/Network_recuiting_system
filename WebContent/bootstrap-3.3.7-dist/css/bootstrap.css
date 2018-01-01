@@ -3227,7 +3227,7 @@ output {
     font-size: 14px;
     line-height: 1.42857143;
     color: #555;
-    background: rgba(255,255,255,0.7)!important;
+    background: rgba(255,255,255,0.5)!important;
     background-image: none;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -4796,7 +4796,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
     line-height: 1;
     color: #555;
     text-align: center;
-    background-color: #eee;
+    min-width: 34px;
     border: 1px solid #ccc;
     border-radius: 4px;
 }
@@ -5295,10 +5295,6 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
     .navbar-toggle {
         display: none;
     }
-}
-
-.navbar-nav {
-    margin: 7.5px -15px;
 }
 
 .navbar-nav > li > a {
