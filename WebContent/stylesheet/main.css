@@ -89,7 +89,7 @@ iframe {
 
 /*header*/
 nav {
-    z-index: 999;
+    z-index: 1;
 }
 #login_btu,#myVideo,#mySearch,#settingLabel,#mylogin,#myregister-person,#myregister-enterprise{
     text-shadow: 0 1px 0 #ccc,
@@ -127,7 +127,7 @@ nav {
 /*footer*/
 footer {
     position: relative;
-    z-index: 9999;
+    z-index: 1;
     background: rgba(255, 255, 255, 0.2);
     font-size: 0.8rem;
     border-radius: 5px;

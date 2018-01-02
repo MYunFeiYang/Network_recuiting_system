@@ -25,7 +25,7 @@
     <script src="javascript/util/night.js"></script>
 </head>
 <body id="top">
-<img src="image/theme/l-1.jpg" id="background">
+<img src="" id="background">
 <div class="container-fluid">
     <nav class="navbar navbar-default">
         <div class="container-fluid">
@@ -217,7 +217,7 @@
                             <div class="row" id="theme">
                                 <div class="col-xs-4 col-sm-4 col-lg-4 col-md-4">
                                     <a href="#" class="thumbnail">
-                                        <img src="image/theme/l-1.jpg" onclick="change_theme(this)">
+                                        <img src="" onclick="change_theme(this)">
                                     </a>
                                     <div class="caption">
                                         <p style="text-align: center">星空粒子</p>
@@ -225,7 +225,7 @@
                                 </div>
                                 <div class="col-xs-4 col-sm-4 col-lg-4 col-md-4">
                                     <a href="#" class="thumbnail">
-                                        <img src="image/theme/l-2.jpg" onclick="change_theme(this)">
+                                        <img src="" onclick="change_theme(this)">
                                     </a>
                                     <div class="caption">
                                         <p style="text-align: center">大气科技</p>
@@ -233,7 +233,7 @@
                                 </div>
                                 <div class="col-xs-4 col-sm-4 col-lg-4 col-md-4">
                                     <a href="#" class="thumbnail">
-                                        <img src="image/theme/l-3.jpg" onclick="change_theme(this)">
+                                        <img src="" onclick="change_theme(this)">
                                     </a>
                                     <div class="caption">
                                         <p style="text-align: center">黑金科技</p>
@@ -241,7 +241,7 @@
                                 </div>
                                 <div class="col-xs-4 col-sm-4 col-lg-4 col-md-4">
                                     <a href="#" class="thumbnail">
-                                        <img src="image/theme/l-4.jpg" onclick="change_theme(this)">
+                                        <img src="" onclick="change_theme(this)">
                                     </a>
                                     <div class="caption">
                                         <p style="text-align: center">月亮之上</p>
@@ -249,7 +249,7 @@
                                 </div>
                                 <div class="col-xs-4 col-sm-4 col-lg-4 col-md-4">
                                     <a href="#" class="thumbnail">
-                                        <img src="image/theme/l-5.jpg" onclick="change_theme(this)">
+                                        <img src="" onclick="change_theme(this)">
                                     </a>
                                     <div class="caption">
                                         <p style="text-align: center">煦日和风</p>
@@ -257,7 +257,7 @@
                                 </div>
                                 <div class="col-xs-4 col-sm-4 col-lg-4 col-md-4">
                                     <a href="#" class="thumbnail">
-                                        <img src="image/theme/l-6.jpg" onclick="change_theme(this)">
+                                        <img src="" onclick="change_theme(this)">
                                     </a>
                                     <div class="caption">
                                         <p style="text-align: center">春日暖阳</p>

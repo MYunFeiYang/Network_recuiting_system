@@ -229,4 +229,11 @@ function response_background() {
             img[i].src = "image/theme/" + (i + 1) + ".jpg";
         }
     }
+    else {
+        document.all.background.src = "image/theme/l-1.jpg";
+        let img = document.all.theme.getElementsByTagName("img");
+        for (let i = 0; i < img.length; i++) {
+            img[i].src = "image/theme/l-" + (i + 1) + ".jpg";
+        }
+    }
 }
