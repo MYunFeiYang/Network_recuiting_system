@@ -21,7 +21,7 @@ let c_effective_time;
 let o_job;
 
 function init_job() {
-    document.getElementById("jobs").style.display = "block";
+    $("#jobs").css("display:block");
     let user_string = document.cookie.split(";")[0].split("=")[1];
     let user = JSON.parse(user_string);
     $.ajax({
@@ -31,14 +31,11 @@ function init_job() {
         dataType: 'JSON',
         success: function (data) {
             if (data !== null) {
-                document.getElementById("name").value = data.name;
-                document.getElementById("address").value = data.address;
-                document.getElementById("industry").value = data.industry;
-                document.getElementById("email").value = data.email;
+                $("#name").val(data.name);
+                $("#address").val(data.address);
+                $("#industry").val(data.industry);
+                $("#email").val(data.email);
             }
-        },
-        fail: function () {
-
         }
     })
 }
@@ -49,29 +46,29 @@ function add_job() {
     let user = JSON.parse(user_string);
     let nickname = user.nickname;
     let password = user.password;
-    let name = document.getElementById("name").value;
-    let address = document.getElementById("address").value;
-    let industry = document.getElementById("industry").value;
-    let position = document.getElementById("position").value;
-    let number = document.getElementById("number").value;
-    let salary = document.getElementById("salary").value;
-    let publish_time = document.getElementById("publish_time").value;
-    let effective_time = document.getElementById("effective_time").value;
-    let email = document.getElementById("email").value;
-    let telephone = document.getElementById("c_telephone").value;
-    confirm_job_box = document.getElementById("confirm_job_box");
+    let name = $("#name").val();
+    let address = $("#address").val();
+    let industry = $("#industry").val();
+    let position = $("#position").val();
+    let number = $("#number").val();
+    let salary = $("#salary").val();
+    let publish_time = $("#publish_time").val();
+    let effective_time = $("#effective_time").val();
+    let email = $("#email").val();
+    let telephone = $("#c_telephone").val();
+    confirm_job_box = $("#confirm_job_box");
     if (name === "") {
-        confirm_job_box.classList.remove("hidden");
-        confirm_job_box.innerHTML = "公司名称不能为空";
-        confirm_job_box.setAttribute("class", "alert-warning");
+        confirm_job_box.removeClass("hidden");
+        confirm_job_box.html("公司名称不能为空");
+        confirm_job_box.attr("class", "alert-warning");
     } else if (number === "") {
-        confirm_job_box.classList.remove("hidden");
-        confirm_job_box.innerHTML = "招聘人数不能为空";
-        confirm_job_box.setAttribute("class", "alert-warning");
+        confirm_job_box.removeClass("hidden");
+        confirm_job_box.html("招聘人数不能为空");
+        confirm_job_box.attr("class", "alert-warning");
     } else if (effective_time === "") {
-        confirm_job_box.classList.remove("hidden");
-        confirm_job_box.innerHTML = "有效时间不能为空";
-        confirm_job_box.setAttribute("class", "alert-warning");
+        confirm_job_box.removeClass("hidden");
+        confirm_job_box.html("有效时间不能为空");
+        confirm_job_box.attr("class", "alert-warning");
     } else {
         job.nickname = nickname;
         job.password = password;
@@ -92,17 +89,14 @@ function add_job() {
             dataType: 'JSON',
             success: function (data) {
                 if (data.msg === "add_job_success") {
-                    confirm_job_box.classList.remove("hidden");
-                    confirm_job_box.innerHTML = "岗位发布成功";
-                    confirm_job_box.setAttribute("class", "alert-success");
+                    confirm_job_box.removeClass("hidden");
+                    confirm_job_box.html("岗位发布成功");
+                    confirm_job_box.attr("class", "alert-success");
                 } else {
-                    confirm_job_box.classList.remove("hidden");
-                    confirm_job_box.innerHTML = "请不要发布重复的岗位";
-                    confirm_job_box.setAttribute("class", "alert-warning");
+                    confirm_job_box.removeClass("hidden");
+                    confirm_job_box.html("请不要发布重复的岗位");
+                    confirm_job_box.attr("class", "alert-warning");
                 }
-            },
-            fail: function () {
-
             }
         })
     }
@@ -118,12 +112,12 @@ function get_job1() {
         type: 'POST',
         dataType: 'JSON',
         success: function (data) {
-            n_job = document.getElementById("job");
-            n_job.innerHTML=""
-            n_job.parentNode.classList.remove("hidden");
+            n_job = $("#job");
+            n_job.html("");
+            n_job.parent().removeClass("hidden");
             for (let i = 0; i < data.length; i++) {
                 row = document.createElement("tr");
-                n_job.appendChild(row);
+                n_job.append(row);
                 n_identification = document.createElement("td");
                 n_name = document.createElement("td");
                 n_address = document.createElement("td");
@@ -153,20 +147,17 @@ function get_job1() {
                 c_salary = data[i].salary;
                 c_publish_time = data[i].publish_time;
                 c_effective_time = data[i].effective_time;
-                n_identification.innerHTML = `<input type="text" size="6" maxlength="20" disabled="disabled" value="${c_identification}">`;
-                n_name.innerHTML = `<input type="text" size="6" maxlength="8" disabled="disabled" value="${c_name}">`;
-                n_address.innerHTML = `<input type="text" size="3" maxlength="3" value="${c_address}">`;
-                n_industry.innerHTML = `<input type="text" size="3" maxlength="5" disabled="disabled" value="${c_industry}">`;
-                n_position.innerHTML = `<input type="text" size="10" maxlength="20" disabled="disabled" value="${c_position}">`;
-                n_number.innerHTML = `<input type="text" size="10" maxlength="20" value="${c_number}">`;
-                n_salary.innerHTML = `<input type="text" size="10" maxlength="20" value="${c_salary}">`;
-                n_publish_time.innerHTML = `<input type="text" size="8" maxlength="8" disabled="disabled" value="${c_publish_time}">`;
-                n_effective_time.innerHTML = `<input type="text" size="10" maxlength="20" value="${c_effective_time}">`;
-                n_operate.innerHTML = `<button class="btn btn-primary btn-sm" onclick="modify_job(this)">保存</button><button class="btn btn-danger btn-sm" onclick="delete_job(this)">删除</button>`
+                n_identification.innerHTML=`<input type="text" size="6" maxlength="20" disabled="disabled" value="${c_identification}">`;
+                n_name.innerHTML=`<input type="text" size="6" maxlength="8" disabled="disabled" value="${c_name}">`;
+                n_address.innerHTML=`<input type="text" size="3" maxlength="3" value="${c_address}">`;
+                n_industry.innerHTML=`<input type="text" size="3" maxlength="5" disabled="disabled" value="${c_industry}">`;
+                n_position.innerHTML=`<input type="text" size="10" maxlength="20" disabled="disabled" value="${c_position}">`;
+                n_number.innerHTML=`<input type="text" size="10" maxlength="20" value="${c_number}">`;
+                n_salary.innerHTML=`<input type="text" size="10" maxlength="20" value="${c_salary}">`;
+                n_publish_time.innerHTML=`<input type="text" size="8" maxlength="8" disabled="disabled" value="${c_publish_time}">`;
+                n_effective_time.innerHTML=`<input type="text" size="10" maxlength="20" value="${c_effective_time}">`;
+                n_operate.innerHTML=`<button class="btn btn-primary btn-sm" onclick="modify_job(this)">保存</button><button class="btn btn-danger btn-sm" onclick="delete_job(this)">删除</button>`;
             }
-        },
-        fail: function () {
-
         }
     })
 }
@@ -195,9 +186,6 @@ function modify_job(obj) {
             } else {
                 row.classList.add("warning");
             }
-        },
-        fail: function () {
-
         }
     })
 }
@@ -216,9 +204,6 @@ function delete_job(obj) {
             if (data.msg === "delete_job_success") {
                 row.classList.add("hidden");
             }
-        },
-        fail: function () {
-
         }
     })
 }

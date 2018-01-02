@@ -1,13 +1,18 @@
 "use strict";
 let confirm_box_c;
-
+let logout;
+let logout_a;
+let chat;
+let chat_a;
+let head_sculpture;
+let head_sculpture_a;
 function register_person() {
     let user = {};
-    user.nickname = document.getElementById("person_nickname").value;
-    user.password = document.getElementById("person_password").value;
-    user.name = document.getElementById("person_name").value;
-    user.telephone = document.getElementById("person_telephone").value;
-    user.email = document.getElementById("person_email").value;
+    user.nickname = $("#person_nickname").val();
+    user.password = $("#person_password").val();
+    user.name = $("#person_name").val();
+    user.telephone = $("#person_telephone").val();
+    user.email = $("#person_email").val();
     $.ajax({
         url: "/person?person=register",
         data: user,
@@ -15,16 +20,16 @@ function register_person() {
         type: "POST",
         dataType: "JSON",
         success: function (data) {
-            confirm_box_c = document.getElementById("confirm_person_box");
+            confirm_box_c = $("#confirm_person_box");
             if (data.msg === "assessing") {
-                confirm_box_c.innerHTML = "账号在审核，您可以先登录";
-                confirm_box_c.setAttribute("class", "alert-success");
+                confirm_box_c.html("账号在审核，您可以先登录");
+                confirm_box_c.attr("class", "alert-success");
                 setTimeout(function () {
                     window.location.href = "../../index.jsp"
                 }, 3000);
             } else {
-                confirm_box_c.innerHTML = "用户名和密码已存在";
-                confirm_box_c.setAttribute("class", "alert-warning");
+                confirm_box_c.html("用户名和密码已存在");
+                confirm_box_c.attr("class", "alert-warning");
             }
         },
         fail: function (data) {
@@ -35,13 +40,13 @@ function register_person() {
 
 function register_enterprise() {
     let company = {};
-    company.nickname = document.getElementById("enterprise_nickname").value;
-    company.password = document.getElementById("enterprise_password").value;
-    company.name = document.getElementById("enterprise_name").value;
-    company.industry = document.getElementById("enterprise_industry").value;
-    company.telephone = document.getElementById("enterprise_telephone").value;
-    company.email = document.getElementById("enterprise_email").value;
-    company.address = document.getElementById("enterprise_address").value;
+    company.nickname = $("#enterprise_nickname").val();
+    company.password = $("#enterprise_password").val();
+    company.name = $("#enterprise_name").val();
+    company.industry = $("#enterprise_industry").val();
+    company.telephone = $("#enterprise_telephone").val();
+    company.email = $("#enterprise_email").val();
+    company.address = $("#enterprise_address").val();
     $.ajax({
         url: "/enterprise?enterprise=register",
         data: company,
@@ -49,16 +54,16 @@ function register_enterprise() {
         type: "POST",
         dataType: "JSON",
         success: function (data) {
-            confirm_box_c = document.getElementById("confirm_enterprise_box");
+            confirm_box_c = $("#confirm_enterprise_box");
             if (data.msg === "assessing") {
-                confirm_box_c.innerHTML = "账号在审核，您可以先登录";
-                confirm_box_c.setAttribute('class', 'alert-success');
+                confirm_box_c.html("账号在审核，您可以先登录");
+                confirm_box_c.attr('class', 'alert-success');
                 setTimeout(function () {
                     window.location.href = "../../index.jsp"
                 }, 3000);
             } else {
-                confirm_box_c.innerHTML = "该用户名和密码已存在";
-                confirm_box_c.setAttribute('class', 'alert-warning');
+                confirm_box_c.html("该用户名和密码已存在");
+                confirm_box_c.attr('class', 'alert-warning');
             }
         },
         fail: function (data) {
@@ -69,22 +74,22 @@ function register_enterprise() {
 
 function login() {
     let user = {};
-    user.login_type = document.getElementById('login_type').value;
-    user.nickname = document.getElementById('login_nickname').value;
-    user.password = document.getElementById('login_password').value;
+    user.login_type = $('#login_type').val();
+    user.nickname = $('#login_nickname').val();
+    user.password = $('#login_password').val();
     $.ajax({
         url: '/public?public=login',
         data: user,
         type: 'POST',
         dataType: 'JSON',
         success: function (data) {
-            confirm_box_c = document.getElementById("confirm_login_box");
+            confirm_box_c = $("#confirm_login_box");
             if (data.msg === "login_fail") {
-                confirm_box_c.innerHTML = "用户名或密码错误";
-                confirm_box_c.setAttribute('class', 'alert-warning');
+                confirm_box_c.html("用户名或密码错误");
+                confirm_box_c.attr('class', 'alert-warning');
             }
             else if (data.msg === "login_success") {
-                document.getElementById("close_login").click();
+                $("#close_login").click();
                 login_session('login');
             }
         },
@@ -113,21 +118,21 @@ function show_head_picture(data) {
     let fileType = data.fileType;
     let fileName = data.fileName;
     let src = "/resource/files" + "/" + email + "/" + fileType + "/" + fileName;
-    document.all.head_picture.src = src;
-    document.all.head_picture.classList.remove("hidden");
+    $("#head_picture").attr("src",src);
+    $("#head_picture").removeClass("hidden");
 
 }
 
 function close_login() {
-    document.getElementById("close_login").click();
+    $("#close_login").click();
 }
 
 function login_session(data) {
     let user = {};
     user.login = data;
-    user.nickname = document.getElementById("login_nickname").value;
-    user.password = document.getElementById("login_password").value;
-    user.login_type = document.getElementById("login_type").value;
+    user.nickname = $("#login_nickname").val();
+    user.password = $("#login_password").val();
+    user.login_type = $("#login_type").val();
     $.ajax({
         url: '/public?public=loginSession',
         async: true,
@@ -147,117 +152,73 @@ function login_session_result(data) {
     if (data !== null) {
         get_head_picture(data);
         init_user(data.nickname);
-        let user_center = document.getElementById("user_center");
+        let user_center = $("#user_center");
+        head_sculpture = document.createElement("li");
+        head_sculpture_a = document.createElement("a");
+        chat = document.createElement("li");
+        chat_a = document.createElement("a");
+        logout = document.createElement("li");
+        logout_a = document.createElement("a");
+        head_sculpture.append(head_sculpture_a);
+        head_sculpture_a.text = "修改头像";
+        head_sculpture_a.setAttribute("data-toggle", "modal");
+        head_sculpture_a.setAttribute("data-target", "#head_sculpture");
+        head_sculpture_a.setAttribute("onclick", "close_nav();userType='person'");
+        head_sculpture_a.innerHTML="修改头像<img src=\"image/common/head.png\" style=\"width:20px;height: 20px;float: right\">";
+        chat.append(chat_a);
+        chat_a.text = "问道空间";
+        chat_a.setAttribute("data-href", "webchat.html");
+        chat_a.setAttribute("onclick", "close_nav();return change_iframe_src(this)");
+        chat_a.innerHTML="问道空间<img src=\"image/common/chat.png\" style=\"width:20px;height: 20px;float: right\">";
+        logout.append(logout_a);
+        logout_a.text = "退出";
+        logout_a.setAttribute("style", "color:red !important");
+        logout_a.setAttribute("onclick", "login_session('delete')");
+        logout_a.setAttribute("href", "index.jsp");
+        logout_a.innerHTML="退出<img src=\"image/common/logout.png\" style=\"width:20px;height: 20px;float: right\">";
         if (data.login_type === "person") {
-            let head_sculpture = document.createElement("li");
-            let head_sculpture_a = document.createElement("a");
-            user_center.appendChild(head_sculpture);
-            head_sculpture.appendChild(head_sculpture_a);
-            head_sculpture_a.text = "修改头像";
-            head_sculpture_a.setAttribute("data-toggle", "modal");
-            head_sculpture_a.setAttribute("data-target", "#head_sculpture");
-            head_sculpture_a.setAttribute("onclick", "close_nav();userType='person'");
-            head_sculpture_a.innerHTML = "修改头像<img src=\"image/common/head.png\" style=\"width:20px;height: 20px;float: right\">";
-            let modify_resume = document.createElement("li");
-            let modify_resume_a = document.createElement("a");
-            user_center.appendChild(modify_resume);
-            modify_resume.appendChild(modify_resume_a);
-            modify_resume_a.text = "个人中心";
-            modify_resume_a.setAttribute("data-href", "person.html");
-            modify_resume_a.setAttribute("onclick", "close_nav();change_iframe_src(this)");
-            modify_resume_a.innerHTML = "个人中心<img src=\"image/person/person.png\" style=\"width:20px;height: 20px;float: right\">";
-            let chat = document.createElement("li");
-            user_center.appendChild(chat);
-            let chat_a = document.createElement("a");
-            chat.appendChild(chat_a);
-            chat_a.text = "问道空间";
-            chat_a.setAttribute("data-href", "webchat.html");
-            chat_a.setAttribute("onclick", "close_nav();change_iframe_src(this)");
-            chat_a.innerHTML = "问道空间<img src=\"image/comon/chat.png\" style=\"width:20px;height: 20px;float: right\">";
-            let li1 = document.createElement("li");
-            user_center.appendChild(li1);
-            let log_out = document.createElement("a");
-            li1.appendChild(log_out);
-            log_out.text = "退出";
-            log_out.setAttribute("style", "color:red !important");
-            log_out.setAttribute("onclick", "login_session('delete')");
-            log_out.setAttribute("href", "index.jsp");
-            log_out.innerHTML = "退出<img src=\"image/common/logout.png\" style=\"width:20px;height: 20px;float: right\">"
+            let person_center = document.createElement("li");
+            user_center.append(head_sculpture,person_center,chat,logout);
+            let person_center_a = document.createElement("a");
+            person_center.append(person_center_a);
+            person_center_a.text = "个人中心";
+            person_center_a.setAttribute("data-href", "person.html");
+            person_center_a.setAttribute("onclick", "close_nav();change_iframe_src(this)");
+            person_center_a.innerHTML="个人中心<img src=\"image/person/person.png\" style=\"width:20px;height: 20px;float: right\">";
         }
         else if (data.login_type === "enterprise") {
-            let head_sculpture = document.createElement("li");
-            let head_sculpture_a = document.createElement("a");
-            user_center.appendChild(head_sculpture);
-            head_sculpture.appendChild(head_sculpture_a);
-            head_sculpture_a.setAttribute("data-toggle", "modal");
-            head_sculpture_a.setAttribute("data-target", "#head_sculpture");
-            head_sculpture_a.setAttribute("onclick", "close_nav();userType='enterprise'");
-            head_sculpture_a.innerHTML = "修改头像<img src=\"image/common/head.png\" style=\"width:20px;height: 20px;float: right\">";
-            let modify_job = document.createElement("li");
-            let modify_job_a = document.createElement("a");
-            user_center.appendChild(modify_job);
-            modify_job.appendChild(modify_job_a);
-            modify_job_a.setAttribute("data-href", "enterprise.html");
-            modify_job_a.setAttribute("onclick", "close_nav();change_iframe_src(this)");
-            modify_job_a.innerHTML = "企业中心<img src=\"image/enterprise/enterprise.png\" style=\"width:20px;height: 20px;float: right\">";
-            let chat = document.createElement("li");
-            user_center.appendChild(chat);
-            let chat_a = document.createElement("a");
-            chat.appendChild(chat_a);
-            chat_a.setAttribute("data-href", "webchat.html");
-            chat_a.setAttribute("onclick", "close_nav();change_iframe_src(this)");
-            chat_a.innerHTML = "问道空间<img src=\"image/common/chat.png\" style=\"width:20px;height: 20px;float: right\">";
-            let li1 = document.createElement("li");
-            user_center.appendChild(li1);
-            let log_out = document.createElement("a");
-            li1.appendChild(log_out);
-            log_out.setAttribute("style", "color:red !important");
-            log_out.setAttribute("onclick", "login_session('delete')");
-            log_out.setAttribute("href", "index.jsp");
-            log_out.innerHTML = "退出<img src=\"image/common/logout.png\" style=\"width:20px;height: 20px;float: right\">";
+            let enterprise_center = document.createElement("li");
+            let enterprise_center_a = document.createElement("a");
+            user_center.append(head_sculpture,enterprise_center,chat,logout);
+            enterprise_center.append(enterprise_center_a);
+            enterprise_center_a.setAttribute("data-href", "enterprise.html");
+            enterprise_center_a.setAttribute("onclick", "close_nav();change_iframe_src(this)");
+            enterprise_center_a.innerHTML="企业中心<img src=\"image/enterprise/enterprise.png\" style=\"width:20px;height: 20px;float: right\">";
         }
         else if (data.login_type === "admin") {
             let admin = document.createElement("li");
-            user_center.appendChild(admin);
             let admin_a = document.createElement("a");
-            admin.appendChild(admin_a);
+            user_center.append(admin,chat,logout);
+            admin.append(admin_a);
             admin_a.setAttribute("data-href", "admin.html");
             admin_a.setAttribute("onclick", "close_nav();change_iframe_src(this)");
-            admin_a.innerHTML = "后台管理<img src=\"image/common/admin.png\" style=\"width:20px;height: 20px;float: right\">";
-            let chat = document.createElement("li");
-            user_center.appendChild(chat);
-            let chat_a = document.createElement("a");
-            chat.appendChild(chat_a);
-            chat_a.text = "问道空间";
-            chat_a.setAttribute("data-href", "webchat.html");
-            chat_a.setAttribute("onclick", "close_nav();return change_iframe_src(this)");
-            chat_a.innerHTML = "问道空间<img src=\"image/common/chat.png\" style=\"width:20px;height: 20px;float: right\">";
-            let li1 = document.createElement("li");
-            user_center.appendChild(li1);
-            let log_out = document.createElement("a");
-            li1.appendChild(log_out);
-            log_out.text = "退出";
-            log_out.setAttribute("style", "color:red !important");
-            log_out.setAttribute("onclick", "login_session('delete')");
-            log_out.setAttribute("href", "index.jsp");
-            log_out.innerHTML = "退出<img src=\"image/common/logout.png\" style=\"width:20px;height: 20px;float: right\">"
+            admin_a.innerHTML="后台管理<img src=\"image/common/admin.png\" style=\"width:20px;height: 20px;float: right\">";
         }
     }
 }
 
 function init_user(nickname) {
-    document.getElementById("register_btu").innerHTML = "";
-    document.getElementById("login_btu").text = nickname;
-    let user_center = document.getElementById("user_center");
-    user_center.innerHTML = "";
+    $("#register_btu").html("");
+    $("#login_btu").html(nickname);
+    $("#user_center").html("");
 }
 
 function change_iframe_src(obj) {
-    document.getElementsByTagName("iframe")[0].src = obj.getAttribute("data-href");
+    $("iframe:first").attr("src",obj.getAttribute("data-href"));
 }
 
 function change_theme(obj) {
-    document.all.background.src = obj.src;
+    $("#background").attr("src",obj.src);
 }
 
 function response_background() {

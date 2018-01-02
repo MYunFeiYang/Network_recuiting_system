@@ -297,7 +297,7 @@ public class Enterprise {
 
         DBManager dbmanager = new DBManager();
         Connection conn = dbmanager.getConnection();
-        String sql = "{call jobManage(?,?,?,?,?)}";
+        String sql = "{call jobModify(?,?,?,?,?)}";
         try {
             CallableStatement ps = conn.prepareCall(sql);
             ps.setString(1, address);
@@ -305,23 +305,20 @@ public class Enterprise {
             ps.setString(3, salary);
             ps.setString(4, effective_time);
             ps.setString(5, identification);
-            int tag = ps.executeUpdate();
-            if (tag == 1) {
-                String str = "{\"msg\":\"modify_job_success\"}";
-                response.getWriter().print(str);
-                response.getWriter().flush();
-                response.getWriter().close();
-            } else {
-                String str = "{\"msg\":\"modify_job_fail\"}";
-                response.getWriter().print(str);
-                response.getWriter().flush();
-                response.getWriter().close();
-            }
+            ps.execute();
+            String str = "{\"msg\":\"modify_job_success\"}";
+            response.getWriter().print(str);
+            response.getWriter().flush();
+            response.getWriter().close();
             ps.close();
             conn.close();
         } catch (SQLException e) {
             // TODO 自动生成的 catch 块
             e.printStackTrace();
+            String str = "{\"msg\":\"modify_job_fail\"}";
+            response.getWriter().print(str);
+            response.getWriter().flush();
+            response.getWriter().close();
         }
     }
 

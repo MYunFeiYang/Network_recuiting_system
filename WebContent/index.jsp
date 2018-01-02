@@ -345,87 +345,80 @@
                     <h4 class="modal-title" id="myregister-person">个人注册</h4>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form onclick="check_black_person()">
                         <div class="row">
                             <div class="col-md-12 padding_top">
-                                <div id="confirm_person_box"></div>
+                                <div class="input-group">
+                                        <span class="input-group-addon"
+                                              style="background: url('image/common/nickname.png')"></span>
+                                    <input type="text" class="form-control" id="person_nickname" placeholder="用户名"
+                                           onkeyup="reg_username(this)">
+                                    <span class="input-group-addon"></span>
+                                </div>
                             </div>
                         </div>
-                        <div onmouseover="btu_able('person_reg_btu','confirm_person_box')">
-                            <div class="row">
-                                <div class="col-md-12 padding_top">
-                                    <div class="input-group">
-                                        <span class="input-group-addon"
-                                              style="background: url('image/common/nickname.png')"></span>
-                                        <input type="text" class="form-control" id="person_nickname" placeholder="用户名"
-                                               onkeyup="reg_username(this)">
-                                        <span class="input-group-addon">填</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12 padding_top">
-                                    <div class="input-group">
+                        <div class="row">
+                            <div class="col-md-12 padding_top">
+                                <div class="input-group">
                                         <span class="input-group-addon"
                                               style="background: url('image/common/password.png')"></span>
-                                        <input type="password" class="form-control" id="person_password"
-                                               placeholder="密码"
-                                               onkeyup="reg_pwd(this)">
-                                        <span class="input-group-addon">完</span>
-                                    </div>
+                                    <input type="password" class="form-control" id="person_password"
+                                           placeholder="密码"
+                                           onkeyup="reg_pwd(this)">
+                                    <span class="input-group-addon"></span>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-12 padding_top">
-                                    <div class="input-group">
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 padding_top">
+                                <div class="input-group">
                                         <span class="input-group-addon"
                                               style="background: url('image/common/password.png')"></span>
-                                        <input type="password" class="form-control" id="person_confirm_password"
-                                               placeholder="确认密码"
-                                               onkeyup="conf_pwd(this,'person_password')">
-                                        <span class="input-group-addon">整</span>
-                                    </div>
+                                    <input type="password" class="form-control" id="person_confirm_password"
+                                           placeholder="确认密码"
+                                           onkeyup="conf_pwd(this,'person_password')">
+                                    <span class="input-group-addon"></span>
                                 </div>
                             </div>
-                            <div class="row" id="person_name_group">
-                                <div class="col-md-12 padding_top">
-                                    <div class="input-group">
+                        </div>
+                        <div class="row" id="person_name_group">
+                            <div class="col-md-12 padding_top">
+                                <div class="input-group">
                                         <span class="input-group-addon"
                                               style="background: url('image/common/nickname.png')"></span>
-                                        <input type="text" class="form-control" id="person_name" placeholder="真实姓名">
-                                    </div>
+                                    <input type="text" class="form-control" id="person_name" placeholder="真实姓名"
+                                           onkeyup="reg_name(this)">
+                                    <span class="input-group-addon"></span>
                                 </div>
                             </div>
-                            <div class="row" id="person_email_group">
-                                <div class="col-md-12 padding_top">
-                                    <div class="input-group">
+                        </div>
+                        <div class="row" id="person_email_group">
+                            <div class="col-md-12 padding_top">
+                                <div class="input-group">
                                         <span class="input-group-addon"
                                               style="background: url('image/common/email.png')"></span>
-                                        <input type="email" class="form-control" placeholder="电子邮件"
-                                               onkeyup="reg_email(this)"
-                                               id="person_email">
-                                        <span class="input-group-addon">@</span>
-                                    </div>
+                                    <input type="email" class="form-control" placeholder="电子邮件"
+                                           onkeyup="reg_email(this)"
+                                           id="person_email">
+                                    <span class="input-group-addon"></span>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-12 padding_top">
-                                    <div class="input-group">
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 padding_top">
+                                <div class="input-group">
                                         <span class="input-group-addon"
                                               style="background: url('image/person/telephone.png')"></span>
-                                        <input type="text" class="form-control" id="person_telephone" placeholder="手机号码"
-                                               onkeyup="reg_telephone(this)">
-                                        <span class="input-group-addon">哦</span>
-                                    </div>
+                                    <input type="text" class="form-control" id="person_telephone" placeholder="手机号码"
+                                           onkeyup="reg_telephone(this)">
+                                    <span class="input-group-addon"></span>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6 padding_top">
-                                <input class="btn btn-sm btn-primary center-block" id="person_reg_btu"
-                                       type="button" value="注册"
-                                       onmouseover="btu_disable_person('person_reg_btu','confirm_person_box')"
-                                       onclick="register_person();remember_user('person_nickname','person_password')">
+                                <input class="btn btn-sm btn-primary center-block" type="button" value="注册" disabled
+                                    onclick="register_person();remember_user('person_nickname','person_password')">
                             </div>
                             <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6 padding_top">
                                 <input class="btn btn-sm btn-danger center-block" type="reset" value="重置">
@@ -449,109 +442,100 @@
                             aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title" id="myregister-enterprise">企业用户注册</h4>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body" onclick="check_black_enterprise()">
                     <div class="row">
                         <div class="col-md-12 padding_top">
-                            <div id="confirm_enterprise_box"></div>
-                        </div>
-                    </div>
-                    <div onmouseover="btu_able('reg_btu','confirm_enterprise_box')">
-                        <div class="row">
-                            <div class="col-md-12 padding_top">
-                                <div class="input-group">
+                            <div class="input-group">
                                     <span class="input-group-addon"
                                           style="background: url('image/common/nickname.png')"></span>
-                                    <input type="text" class="form-control" id="enterprise_nickname" placeholder="用户名"
-                                           onkeyup="reg_username(this)">
-                                    <span class="input-group-addon">填</span>
-                                </div>
+                                <input type="text" class="form-control" id="enterprise_nickname" placeholder="用户名"
+                                       onkeyup="reg_username(this)">
+                                <span class="input-group-addon"></span>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-12 padding_top">
-                                <div class="input-group">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 padding_top">
+                            <div class="input-group">
                                     <span class="input-group-addon"
                                           style="background: url('image/common/password.png')"></span>
-                                    <input type="password" class="form-control" placeholder="密码"
-                                           onkeyup="reg_pwd(this)"
-                                           id="enterprise_password">
-                                    <span class="input-group-addon">完</span>
-                                </div>
+                                <input type="password" class="form-control" placeholder="密码"
+                                       onkeyup="reg_pwd(this)"
+                                       id="enterprise_password">
+                                <span class="input-group-addon"></span>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-12 padding_top">
-                                <div class="input-group">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 padding_top">
+                            <div class="input-group">
                                     <span class="input-group-addon"
                                           style="background: url('image/common/password.png')"></span>
-                                    <input type="password" class="form-control" id="confirm_enterprise_password"
-                                           placeholder="确认密码"
-                                           onkeyup="conf_pwd(this,'enterprise_password')">
-                                    <span class="input-group-addon">整</span>
-                                </div>
+                                <input type="password" class="form-control" id="confirm_enterprise_password"
+                                       placeholder="确认密码"
+                                       onkeyup="conf_pwd(this,'enterprise_password')">
+                                <span class="input-group-addon"></span>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-12 padding_top">
-                                <div class="input-group">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 padding_top">
+                            <div class="input-group">
                                     <span class="input-group-addon"
                                           style="background: url('image/enterprise/enterprise.png')"></span>
-                                    <input type="text" class="form-control" id="enterprise_name" placeholder="企业名称">
-                                </div>
+                                <input type="text" class="form-control" id="enterprise_name" placeholder="企业名称">
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-12 padding_top">
-                                <div class="input-group">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 padding_top">
+                            <div class="input-group">
                                     <span class="input-group-addon"
                                           style="background: url('image/enterprise/industry.png')"></span>
-                                    <select class="form-control" id="enterprise_industry" title="所属行业">
+                                <select class="form-control" id="enterprise_industry" title="所属行业">
 
-                                    </select>
-                                </div>
+                                </select>
                             </div>
                         </div>
-                        <div class="row" id="enterprise_telephone_group">
-                            <div class="col-md-12 padding_top">
-                                <div class="input-group">
+                    </div>
+                    <div class="row" id="enterprise_telephone_group">
+                        <div class="col-md-12 padding_top">
+                            <div class="input-group">
                                     <span class="input-group-addon"
                                           style="background: url('image/common/email.png')"></span>
-                                    <input type="email" class="form-control" placeholder="电子邮箱"
-                                           onkeyup="reg_email(this)"
-                                           id="enterprise_email">
-                                    <span class="input-group-addon">@</span>
-                                </div>
+                                <input type="email" class="form-control" placeholder="电子邮箱"
+                                       onkeyup="reg_email(this)"
+                                       id="enterprise_email">
+                                <span class="input-group-addon"></span>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-12 padding_top">
-                                <div class="input-group">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 padding_top">
+                            <div class="input-group">
                                     <span class="input-group-addon"
                                           style="background: url('image/enterprise/phone.png')"></span>
-                                    <input type="text" class="form-control" placeholder="电话号码"
-                                           onkeyup="reg_telephone(this)"
-                                           id="enterprise_telephone">
-                                    <span class="input-group-addon">哦</span>
-                                </div>
+                                <input type="text" class="form-control" placeholder="电话号码"
+                                       onkeyup="reg_telephone(this)"
+                                       id="enterprise_telephone">
+                                <span class="input-group-addon"></span>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-12 padding_top">
-                                <div class="input-group">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 padding_top">
+                            <div class="input-group">
                                     <span class="input-group-addon"
                                           style="background: url('image/common/address.png')"></span>
-                                    <select class="form-control" id="enterprise_address" title="企业地址">
+                                <select class="form-control" id="enterprise_address" title="企业地址">
 
-                                    </select>
-                                </div>
+                                </select>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6 padding_top">
-                            <input class="btn btn-sm btn-primary center-block" type="button"
-                                   id="reg_btu" value="注册"
-                                   onmouseover="btu_disable_enterprise('reg_btu','confirm_enterprise_box')"
+                            <input class="btn btn-sm btn-primary center-block" type="button" value="注册" disabled
                                    onclick="register_enterprise();remember_user('enterprise_nickname','enterprise_password')">
                         </div>
                         <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6 padding_top">

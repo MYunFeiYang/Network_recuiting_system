@@ -1,7 +1,5 @@
 "use strict";
 let confirm_box_p;
-let n_modify_person;
-let form;
 let input;
 
 function modify_person_before_select() {
@@ -13,9 +11,7 @@ function modify_person_before_select() {
         dataType: "JSON",
         success: function (data) {
             if (data !== null) {
-                n_modify_person = document.getElementById("modifyInfo");
-                form = n_modify_person.getElementsByTagName("form")[0];
-                input = form.getElementsByTagName("input");
+                input = $("#modifyInfo form:first input");
                 input[0].value = data.nickname;
                 input[1].value = data.password;
                 input[2].value = data.password;
@@ -23,17 +19,12 @@ function modify_person_before_select() {
                 input[4].value = data.email;
                 input[5].value = data.telephone;
             }
-        },
-        fail: function () {
-
         }
     })
 }
 
 function modify_person(confirm_info_box) {
-    n_modify_person = document.getElementById("modifyInfo");
-    form = n_modify_person.getElementsByTagName("form")[0];
-    input = form.getElementsByTagName("input");
+    input = $("#modifyInfo form:first input");
     let user = JSON.parse(document.cookie.split(";")[0].split("=")[1]);
     let modify_user = {};
     modify_user.nickname = input[0].value;
@@ -59,9 +50,6 @@ function modify_person(confirm_info_box) {
                 confirm_box_p.innerHTML = "信息修改失败";
                 confirm_box_p.setAttribute("class", "alert-warning");
             }
-        },
-        fail: function () {
-
         }
     })
 }
@@ -74,9 +62,6 @@ function auto_match() {
         type: "POST",
         dataType: "JSON",
         success: function () {
-
-        },
-        fail: function () {
 
         }
     })
