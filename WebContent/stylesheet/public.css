@@ -13,12 +13,12 @@
     }
     #industry ul, #address ul, #position ul{
         overflow: auto;
-        width: 1024px;
+        width: 960px;
         height: 64px;
     }
     #industry ul li, #address ul li, #position ul li{
-        padding: 3px 5px !important;
-        margin: 3px !important;
+        padding: 3px 10px !important;
+        margin: 3px 5px !important;
     }
     #industry::-webkit-scrollbar,#position::-webkit-scrollbar,#address::-webkit-scrollbar{
         display: none;

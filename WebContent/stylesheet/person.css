@@ -1,5 +1,4 @@
 
-
 html, body {
     margin: 0;
     padding: 0;
@@ -7,11 +6,7 @@ html, body {
 }
 
 .modal-dialog {
-    width: 360px;
-}
-
-body {
-    background: rgba(255, 255, 255, 0.3);
+    width: 320px;
 }
 table {
     background: rgba(255, 255, 255, 0.5);

@@ -128,6 +128,11 @@
     <div class="modal fade" id="video" tabindex="-1" role="dialog" aria-labelledby="videoLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myVideo">问道影音</h4>
+                </div>
                 <div class="modal-body" style="min-height: 420px">
                     <div class="input-group">
                         <input type="text" class="form-control" title="电影地址" aria-describedby="basic-addon2"
@@ -144,6 +149,11 @@
     <div class="modal fade" id="search" tabindex="-1" role="dialog" aria-labelledby="searchLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="mySearch">问道搜索</h4>
+                </div>
                 <div class="modal-body" style="min-height: 420px">
                     <div class="input-group">
                         <input type="text" class="form-control" title="搜索" id="search-con" onkeyup="complete_content()"
@@ -442,7 +452,8 @@
                             aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title" id="myregister-enterprise">企业用户注册</h4>
                 </div>
-                <div class="modal-body" onclick="check_black_enterprise()">
+                <div class="modal-body">
+                    <form onclick="check_black_enterprise()">
                     <div class="row">
                         <div class="col-md-12 padding_top">
                             <div class="input-group">
@@ -543,6 +554,7 @@
                                    value="重置">
                         </div>
                     </div>
+                    </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>

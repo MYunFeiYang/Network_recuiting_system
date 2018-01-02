@@ -6,12 +6,9 @@ html, body {
     height: 100%;
 }
 
-body {
-    background: rgba(255, 255, 255, 0.3);
-}
 
 .modal-dialog {
-    width: 360px;
+    width: 320px;
 }
 
 
