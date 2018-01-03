@@ -9,6 +9,7 @@
     <link type="text/css" rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.css">
     <link type="text/css" rel="stylesheet" href="stylesheet/main.css">
     <link type="text/css" rel="stylesheet" href="stylesheet/confirm_info_box.css">
+    <link type="text/css" rel="stylesheet" href="stylesheet/audio.css">
     <!--javascript-->
     <script src="javascript/jquery-3.2.1.js"></script>
     <script src="bootstrap-3.3.7-dist/js/bootstrap.js"></script>
@@ -19,6 +20,7 @@
     <script src="javascript/common/common.js"></script>
     <script src="javascript/common/quick_query.js"></script>
     <script src="javascript/common/video.js"></script>
+    <script src="javascript/common/audio.js"></script>
     <script src="javascript/enterprise/enterprise.js"></script>
     <script src="javascript/enterprise/address_industry_position.js"></script>
     <script src="javascript/util/preview_picture.js"></script>
@@ -106,6 +108,11 @@
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li>
+                        <a data-toggle="modal" data-target="#myaudio" onclick="close_nav()">
+                            <img src="image/common/audio.png" style="width:30px;height: 30px">
+                        </a>
+                    </li>
+                    <li>
                         <a data-toggle="modal" data-target="#video" onclick="close_nav()">
                             <img src="image/common/video.png" style="width:30px;height: 30px">
                         </a>
@@ -125,6 +132,86 @@
         </div><!-- /.container-fluid -->
     </nav>
     <!-- Modal start -->
+    <div class="modal fade" id="myaudio" tabindex="-1" role="dialog" aria-labelledby="audioLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="audioLabel">问道播放器</h4>
+                </div>
+                <div class="modal-body" style="min-height: 420px">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <ol id="m-list">
+
+                                </ol>
+                            </div>
+                            <div class="col-md-12">
+                                <div id="playArea">
+                                    <div class="Audio">
+                                        正在播放: <strong id="rmusic"></strong>
+                                        <audio id="audio"></audio>
+                                        <div class="pgs">
+                                            <div class="pgs-play" id="progress"></div>
+                                        </div>
+                                        <div class="controls">
+                                            <div class="row">
+                                                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                                                    <span class="played-time">00:00</span>
+                                                </div>
+                                                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                                                    <button class="btn_pre" id="btn-pre">
+                                                        <span class="icon-btn icon-pre"></span>
+                                                    </button>
+                                                </div>
+                                                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                                                    <button class="play-pause" id="playPause">
+                                                        <span class="icon-btn icon-pause"></span>
+                                                    </button>
+                                                </div>
+                                                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                                                    <button class="btn_next" id="btn-next">
+                                                        <span class="icon-btn icon-next"></span>
+                                                    </button>
+                                                </div>
+                                                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                                                    <span class="audio-time" id="audioTime">0</span>
+                                                </div>
+                                                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                                                    <div class="btn-group">
+                                                        <button type="button" class="btn_playModal dropdown-toggle" data-toggle="dropdown">
+                                                            <img id="playModal" src="image/order.png" style="width: 40px;height: 40px">
+                                                        </button>
+                                                        <ul class="dropdown-menu" role="menu">
+                                                            <li>
+                                                                <a href="#" id="btn-loop">
+                                                                    单曲循环<img src="image/loop.png" style="width: 20px;height: 20px">
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="#" id="btn-order">
+                                                                    顺序播放<img src="image/order.png" style="width: 20px;height: 20px">
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="#" id="btn-random">
+                                                                    随机播放<img src="image/random.png" style="width: 20px;height: 20px">
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="modal fade" id="video" tabindex="-1" role="dialog" aria-labelledby="videoLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -428,7 +515,7 @@
                         <div class="row">
                             <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6 padding_top">
                                 <input class="btn btn-sm btn-primary center-block" type="button" value="注册" disabled
-                                    onclick="register_person();remember_user('person_nickname','person_password')">
+                                       onclick="register_person();remember_user('person_nickname','person_password')">
                             </div>
                             <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6 padding_top">
                                 <input class="btn btn-sm btn-danger center-block" type="reset" value="重置">
@@ -454,106 +541,106 @@
                 </div>
                 <div class="modal-body">
                     <form onclick="check_black_enterprise()">
-                    <div class="row">
-                        <div class="col-md-12 padding_top">
-                            <div class="input-group">
+                        <div class="row">
+                            <div class="col-md-12 padding_top">
+                                <div class="input-group">
                                     <span class="input-group-addon"
                                           style="background: url('image/common/nickname.png')"></span>
-                                <input type="text" class="form-control" id="enterprise_nickname" placeholder="用户名"
-                                       onkeyup="reg_username(this)">
-                                <span class="input-group-addon"></span>
+                                    <input type="text" class="form-control" id="enterprise_nickname" placeholder="用户名"
+                                           onkeyup="reg_username(this)">
+                                    <span class="input-group-addon"></span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12 padding_top">
-                            <div class="input-group">
+                        <div class="row">
+                            <div class="col-md-12 padding_top">
+                                <div class="input-group">
                                     <span class="input-group-addon"
                                           style="background: url('image/common/password.png')"></span>
-                                <input type="password" class="form-control" placeholder="密码"
-                                       onkeyup="reg_pwd(this)"
-                                       id="enterprise_password">
-                                <span class="input-group-addon"></span>
+                                    <input type="password" class="form-control" placeholder="密码"
+                                           onkeyup="reg_pwd(this)"
+                                           id="enterprise_password">
+                                    <span class="input-group-addon"></span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12 padding_top">
-                            <div class="input-group">
+                        <div class="row">
+                            <div class="col-md-12 padding_top">
+                                <div class="input-group">
                                     <span class="input-group-addon"
                                           style="background: url('image/common/password.png')"></span>
-                                <input type="password" class="form-control" id="confirm_enterprise_password"
-                                       placeholder="确认密码"
-                                       onkeyup="conf_pwd(this,'enterprise_password')">
-                                <span class="input-group-addon"></span>
+                                    <input type="password" class="form-control" id="confirm_enterprise_password"
+                                           placeholder="确认密码"
+                                           onkeyup="conf_pwd(this,'enterprise_password')">
+                                    <span class="input-group-addon"></span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12 padding_top">
-                            <div class="input-group">
+                        <div class="row">
+                            <div class="col-md-12 padding_top">
+                                <div class="input-group">
                                     <span class="input-group-addon"
                                           style="background: url('image/enterprise/enterprise.png')"></span>
-                                <input type="text" class="form-control" id="enterprise_name" placeholder="企业名称">
+                                    <input type="text" class="form-control" id="enterprise_name" placeholder="企业名称">
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12 padding_top">
-                            <div class="input-group">
+                        <div class="row">
+                            <div class="col-md-12 padding_top">
+                                <div class="input-group">
                                     <span class="input-group-addon"
                                           style="background: url('image/enterprise/industry.png')"></span>
-                                <select class="form-control" id="enterprise_industry" title="所属行业">
+                                    <select class="form-control" id="enterprise_industry" title="所属行业">
 
-                                </select>
+                                    </select>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row" id="enterprise_telephone_group">
-                        <div class="col-md-12 padding_top">
-                            <div class="input-group">
+                        <div class="row" id="enterprise_telephone_group">
+                            <div class="col-md-12 padding_top">
+                                <div class="input-group">
                                     <span class="input-group-addon"
                                           style="background: url('image/common/email.png')"></span>
-                                <input type="email" class="form-control" placeholder="电子邮箱"
-                                       onkeyup="reg_email(this)"
-                                       id="enterprise_email">
-                                <span class="input-group-addon"></span>
+                                    <input type="email" class="form-control" placeholder="电子邮箱"
+                                           onkeyup="reg_email(this)"
+                                           id="enterprise_email">
+                                    <span class="input-group-addon"></span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12 padding_top">
-                            <div class="input-group">
+                        <div class="row">
+                            <div class="col-md-12 padding_top">
+                                <div class="input-group">
                                     <span class="input-group-addon"
                                           style="background: url('image/enterprise/phone.png')"></span>
-                                <input type="text" class="form-control" placeholder="电话号码"
-                                       onkeyup="reg_telephone(this)"
-                                       id="enterprise_telephone">
-                                <span class="input-group-addon"></span>
+                                    <input type="text" class="form-control" placeholder="电话号码"
+                                           onkeyup="reg_telephone(this)"
+                                           id="enterprise_telephone">
+                                    <span class="input-group-addon"></span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12 padding_top">
-                            <div class="input-group">
+                        <div class="row">
+                            <div class="col-md-12 padding_top">
+                                <div class="input-group">
                                     <span class="input-group-addon"
                                           style="background: url('image/common/address.png')"></span>
-                                <select class="form-control" id="enterprise_address" title="企业地址">
+                                    <select class="form-control" id="enterprise_address" title="企业地址">
 
-                                </select>
+                                    </select>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6 padding_top">
-                            <input class="btn btn-sm btn-primary center-block" type="button" value="注册" disabled
-                                   onclick="register_enterprise();remember_user('enterprise_nickname','enterprise_password')">
+                        <div class="row">
+                            <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6 padding_top">
+                                <input class="btn btn-sm btn-primary center-block" type="button" value="注册" disabled
+                                       onclick="register_enterprise();remember_user('enterprise_nickname','enterprise_password')">
+                            </div>
+                            <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6 padding_top">
+                                <input type="reset" class="btn btn-sm btn-danger center-block"
+                                       value="重置">
+                            </div>
                         </div>
-                        <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6 padding_top">
-                            <input type="reset" class="btn btn-sm btn-danger center-block"
-                                   value="重置">
-                        </div>
-                    </div>
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -656,7 +743,7 @@
         "slide": [{
             "bdImg": 8,
             "bdPos": "right",
-            "bdTop": 100
+            "bdTop": 300
         }],
         "share": {},
         "image": {"viewList": ["qzone", "tsina", "tqq", "renren", "weixin"], "viewText": "分享到：", "viewSize": "16"},

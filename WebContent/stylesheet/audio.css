@@ -1,0 +1,99 @@
+#playArea{
+    position: fixed;
+    bottom: 10px;
+    left: 0;
+    width: 100%;
+}
+.Audio {
+    position: relative;
+    width: 90%;
+    margin: 0 auto;
+}
+
+.pgs {
+    width: 100%;
+    margin: 0 auto 10px;
+    background-color: #E3E8EE;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    height: 6px;
+    border-radius: 3px;
+}
+
+.pgs-play {
+    width:0;
+    height: 100%;
+    z-index: 1;
+    background-color: #2aabd2;
+}
+
+.controls {
+    width: 100%;
+    height: 40px;
+    padding: 0;
+    text-align: center;
+}
+
+.play-pause,.btn_pre,.btn_next ,.btn_playModal{
+    border: 0;
+    outline: 0;
+    padding: 0;
+    width: 40px;
+    height: 40px;
+    background: none;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.icon-play {
+    width: 40px;
+    height: 40px;
+    background: url(../image/play.png) no-repeat;
+    display: block;
+    color: #478f59;
+}
+
+.icon-pause {
+    width: 40px;
+    height: 40px;
+    background: url(../image/pause.png) no-repeat;
+    display: block;
+    color: #478f59;
+}
+.icon-pre {
+    width: 40px;
+    height: 40px;
+    background: url(../image/pre.png) no-repeat;
+    display: block;
+    color: #478f59;
+}
+
+.icon-next {
+    width: 40px;
+    height: 40px;
+    background: url(../image/next.png) no-repeat;
+    display: block;
+    color: #478f59;
+}
+
+.controls span {
+    color: #b3b5b7;
+    font-size: 12px;
+    display: inline-block;
+    width: 34px;
+    height: 40px;
+    line-height:40px;
+}
+
+.audio-time {
+    display: inline-block;
+    vertical-align: middle;
+}
+#playArea .dropdown-menu{
+    position: absolute;
+    top: auto;
+    left: auto;
+    right: 0;
+    bottom: 40px;
+}
