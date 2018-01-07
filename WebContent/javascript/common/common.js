@@ -167,8 +167,9 @@ function login_session_result(data) {
         head_sculpture_a.innerHTML="修改头像<img src=\"image/common/head.png\" style=\"width:20px;height: 20px;float: right\">";
         chat.append(chat_a);
         chat_a.text = "问道空间";
-        chat_a.setAttribute("data-href", "webchat.html");
-        chat_a.setAttribute("onclick", "close_nav();return change_iframe_src(this)");
+        chat_a.setAttribute("href", "webchat.html");
+        chat_a.setAttribute("target","myiframe");
+        chat_a.setAttribute("onclick", "close_nav()");
         chat_a.innerHTML="问道空间<img src=\"image/common/chat.png\" style=\"width:20px;height: 20px;float: right\">";
         logout.append(logout_a);
         logout_a.text = "退出";
@@ -182,8 +183,9 @@ function login_session_result(data) {
             let person_center_a = document.createElement("a");
             person_center.append(person_center_a);
             person_center_a.text = "个人中心";
-            person_center_a.setAttribute("data-href", "person.html");
-            person_center_a.setAttribute("onclick", "close_nav();change_iframe_src(this)");
+            person_center_a.setAttribute("href", "person.html");
+            person_center_a.setAttribute("target","myiframe");
+            person_center_a.setAttribute("onclick", "close_nav()");
             person_center_a.innerHTML="个人中心<img src=\"image/person/person.png\" style=\"width:20px;height: 20px;float: right\">";
         }
         else if (data.login_type === "enterprise") {
@@ -191,8 +193,9 @@ function login_session_result(data) {
             let enterprise_center_a = document.createElement("a");
             user_center.append(head_sculpture,enterprise_center,chat,logout);
             enterprise_center.append(enterprise_center_a);
-            enterprise_center_a.setAttribute("data-href", "enterprise.html");
-            enterprise_center_a.setAttribute("onclick", "close_nav();change_iframe_src(this)");
+            enterprise_center_a.setAttribute("href", "enterprise.html");
+            enterprise_center_a.setAttribute("target","myiframe");
+            enterprise_center_a.setAttribute("onclick", "close_nav()");
             enterprise_center_a.innerHTML="企业中心<img src=\"image/enterprise/enterprise.png\" style=\"width:20px;height: 20px;float: right\">";
         }
         else if (data.login_type === "admin") {
@@ -200,8 +203,9 @@ function login_session_result(data) {
             let admin_a = document.createElement("a");
             user_center.append(admin,chat,logout);
             admin.append(admin_a);
-            admin_a.setAttribute("data-href", "admin.html");
-            admin_a.setAttribute("onclick", "close_nav();change_iframe_src(this)");
+            admin_a.setAttribute("href", "admin.html");
+            admin_a.setAttribute("onclick", "close_nav()");
+            admin_a.setAttribute("target","myiframe");
             admin_a.innerHTML="后台管理<img src=\"image/common/admin.png\" style=\"width:20px;height: 20px;float: right\">";
         }
     }
@@ -211,10 +215,6 @@ function init_user(nickname) {
     $("#register_btu").html("");
     $("#login_btu").html(nickname);
     $("#user_center").html("");
-}
-
-function change_iframe_src(obj) {
-    $("iframe:first").attr("src",obj.getAttribute("data-href"));
 }
 
 function change_theme(obj) {

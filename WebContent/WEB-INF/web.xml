@@ -59,4 +59,12 @@
         <servlet-name>fileLoad</servlet-name>
         <url-pattern>/fileLoad/*</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>ValidateCodeServlet</servlet-name>
+        <servlet-class>controller.ValidateCodeServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ValidateCodeServlet</servlet-name>
+        <url-pattern>/ValidateCodeServlet</url-pattern>
+    </servlet-mapping>
 </web-app>

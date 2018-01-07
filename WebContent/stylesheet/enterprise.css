@@ -5,12 +5,17 @@ html, body {
     padding: 0;
     height: 100%;
 }
+body{
+    background: rgba(255,255,255,0);
+}
 
 
 .modal-dialog {
     width: 320px;
 }
-
+.input-group-addon{
+    min-width:34px ;
+}
 
 
 table {

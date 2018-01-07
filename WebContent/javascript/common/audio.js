@@ -1,4 +1,4 @@
-$(function () {
+function audioPlayer() {
     // 播放器
     let Player = {
         // 歌曲路径
@@ -146,8 +146,7 @@ $(function () {
     };
     Player.init();
     Player.ready();
-
-});
+}
 //转换音频时长显示
 function transTime(time) {
     let duration = parseInt(time);

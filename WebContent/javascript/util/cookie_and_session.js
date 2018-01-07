@@ -25,13 +25,13 @@ function show_user(nickname, password) {
 function reset_user() {
     let nickname = document.getElementById("login_nickname").value;
     let password = document.getElementById("login_password").value;
-    if (document.cookie.indexOf("user")!==-1) {
-        let user = JSON.parse(document.cookie.split(";")[0].split("=")[1]);
+    let user = JSON.parse(document.cookie.split(";")[0].split("=")[1]);
+    if (user.nickname!==undefined) {
         user.nickname = nickname;
         user.password = password;
         setCookie("user", JSON.stringify(user), 180);
     } else {
-        let user = {};
+        user = {};
         user.nickname = nickname;
         user.password = password;
         setCookie("user", JSON.stringify(user), 180);

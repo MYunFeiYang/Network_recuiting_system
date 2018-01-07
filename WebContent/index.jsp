@@ -1,6 +1,11 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%
+    String path = request.getContextPath();
+    String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <html>
 <head>
+    <base href="<%=basePath%>">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta name="baidu-site-verification" content="9fafb17b50ec81fa1c31c782370dd7be"/>
     <title>问道网</title>
@@ -10,6 +15,7 @@
     <link type="text/css" rel="stylesheet" href="stylesheet/main.css">
     <link type="text/css" rel="stylesheet" href="stylesheet/confirm_info_box.css">
     <link type="text/css" rel="stylesheet" href="stylesheet/audio.css">
+    <link type="text/css" rel="stylesheet" href="stylesheet/video.css">
     <!--javascript-->
     <script src="javascript/jquery-3.2.1.js"></script>
     <script src="bootstrap-3.3.7-dist/js/bootstrap.js"></script>
@@ -33,14 +39,16 @@
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                        data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                    <a>
-                        <img src="image/enterprise/brand.png" style="width: 30px;height: 30px">
-                    </a>
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
                 </button>
+                <a class="navbar-brand" href="#">
+                    <img class="brand" src="image/enterprise/brand.png" style="width: 20px">
+                </a>
             </div>
-
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
@@ -53,7 +61,7 @@
                             <img src="image/common/recruit.png" style="width:30px;height: 30px"></a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a data-href="public.html" onclick="close_nav();change_iframe_src(this)">
+                                <a href="public.html" target="myiframe">
                                     校招<img src="image/person/school.png" style="width:20px;height: 20px;float: right">
                                 </a></li>
                             <li role="separator" class="divider"></li>
@@ -108,12 +116,12 @@
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a data-toggle="modal" data-target="#myaudio" onclick="close_nav()">
+                        <a data-toggle="modal" data-target="#myaudio" onclick="close_nav();audioPlayer()">
                             <img src="image/common/audio.png" style="width:30px;height: 30px">
                         </a>
                     </li>
                     <li>
-                        <a data-toggle="modal" data-target="#video" onclick="close_nav()">
+                        <a data-toggle="modal" data-target="#video" onclick="close_nav();videoPlayer()">
                             <img src="image/common/video.png" style="width:30px;height: 30px">
                         </a>
                     </li>
@@ -141,66 +149,70 @@
                     <h4 class="modal-title" id="audioLabel">问道播放器</h4>
                 </div>
                 <div class="modal-body" style="min-height: 420px">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <ol id="m-list">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <ol id="m-list">
 
-                                </ol>
-                            </div>
-                            <div class="col-md-12">
-                                <div id="playArea">
-                                    <div class="Audio">
-                                        正在播放: <strong id="rmusic"></strong>
-                                        <audio id="audio"></audio>
-                                        <div class="pgs">
-                                            <div class="pgs-play" id="progress"></div>
-                                        </div>
-                                        <div class="controls">
-                                            <div class="row">
-                                                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                                                    <span class="played-time">00:00</span>
-                                                </div>
-                                                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                                                    <button class="btn_pre" id="btn-pre">
-                                                        <span class="icon-btn icon-pre"></span>
+                            </ol>
+                        </div>
+                        <div class="col-md-12">
+                            <div id="playArea">
+                                <div class="Audio">
+                                    正在播放: <strong id="rmusic"></strong>
+                                    <audio id="audio"></audio>
+                                    <div class="pgs">
+                                        <div class="pgs-play" id="progress"></div>
+                                    </div>
+                                    <div class="controls">
+                                        <div class="row">
+                                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                                                <span class="played-time">00:00</span>
+                                            </div>
+                                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                                                <button class="btn_pre" id="btn-pre">
+                                                    <span class="icon-btn icon-pre"></span>
+                                                </button>
+                                            </div>
+                                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                                                <button class="play-pause" id="playPause">
+                                                    <span class="icon-btn icon-pause"></span>
+                                                </button>
+                                            </div>
+                                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                                                <button class="btn_next" id="btn-next">
+                                                    <span class="icon-btn icon-next"></span>
+                                                </button>
+                                            </div>
+                                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                                                <span class="audio-time" id="audioTime">0</span>
+                                            </div>
+                                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                                                <div class="btn-group">
+                                                    <button type="button" class="btn_playModal dropdown-toggle"
+                                                            data-toggle="dropdown">
+                                                        <img id="playModal" src="image/order.png"
+                                                             style="width: 40px;height: 40px">
                                                     </button>
-                                                </div>
-                                                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                                                    <button class="play-pause" id="playPause">
-                                                        <span class="icon-btn icon-pause"></span>
-                                                    </button>
-                                                </div>
-                                                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                                                    <button class="btn_next" id="btn-next">
-                                                        <span class="icon-btn icon-next"></span>
-                                                    </button>
-                                                </div>
-                                                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                                                    <span class="audio-time" id="audioTime">0</span>
-                                                </div>
-                                                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                                                    <div class="btn-group">
-                                                        <button type="button" class="btn_playModal dropdown-toggle" data-toggle="dropdown">
-                                                            <img id="playModal" src="image/order.png" style="width: 40px;height: 40px">
-                                                        </button>
-                                                        <ul class="dropdown-menu" role="menu">
-                                                            <li>
-                                                                <a href="#" id="btn-loop">
-                                                                    单曲循环<img src="image/loop.png" style="width: 20px;height: 20px">
-                                                                </a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#" id="btn-order">
-                                                                    顺序播放<img src="image/order.png" style="width: 20px;height: 20px">
-                                                                </a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#" id="btn-random">
-                                                                    随机播放<img src="image/random.png" style="width: 20px;height: 20px">
-                                                                </a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
+                                                    <ul class="dropdown-menu" role="menu">
+                                                        <li>
+                                                            <a href="#" id="btn-loop">
+                                                                单曲循环<img src="image/loop.png"
+                                                                         style="width: 20px;height: 20px">
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#" id="btn-order">
+                                                                顺序播放<img src="image/order.png"
+                                                                         style="width: 20px;height: 20px">
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#" id="btn-random">
+                                                                随机播放<img src="image/random.png"
+                                                                         style="width: 20px;height: 20px">
+                                                            </a>
+                                                        </li>
+                                                    </ul>
                                                 </div>
                                             </div>
                                         </div>
@@ -208,6 +220,7 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -218,17 +231,26 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                             aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myVideo">问道影音</h4>
+                    <h4 class="modal-title" id="videoLabel">问道影音</h4>
                 </div>
                 <div class="modal-body" style="min-height: 420px">
-                    <div class="input-group">
-                        <input type="text" class="form-control" title="电影地址" aria-describedby="basic-addon2"
-                               id="video_src">
-                        <span class="input-group-addon glyphicon glyphicon-search" onclick="get_video_src()"></span>
+                    <div id="video_container">
+                        <video controls>
+                            <source src="http://nettuts.s3.amazonaws.com/763_sammyJSIntro/trailer_test.mp4"
+                                    type="video/mp4">
+                            <source src="http://nettuts.s3.amazonaws.com/763_sammyJSIntro/trailer_test.ogg"
+                                    type="video/ogg">
+                        </video>
+                        <div id="videoControls">
+                            <button id="play" title="Play"> &#x25BA;</button>
+                            <button id="fullScreen" title="FullScreen Toggle"> FS</button>
+                            <div id="videoProgress">
+                                <div id="progress_box">
+                                    <span id="play_progress"></span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
@@ -410,14 +432,23 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12 padding_top">
+                            <div class="input-group">
+                                <input type="password" class="form-control"
+                                       placeholder="请输入正确验证码">
+                                <img src=ValidateCodeServlet onclick="this.src='ValidateCodeServlet';"  title="点击更换">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 padding_top">
                             <input type="radio" checked="checked" id="remember_user" placeholder="记住密码">选中我记住登录状态
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6 col-sm-6 col-lg-6 col-xs-6 padding_top">
-                            <button data-href="resetPassword.html" class="btn btn-primary center-block"
-                                    onclick="close_login();change_iframe_src(this)">找回密码
-                            </button>
+                            <a href="resetPassword.html" target="myiframe" class="btn btn-primary center-block"
+                                    onclick="close_login()">找回密码
+                            </a>
                         </div>
                         <div class="col-md-6 col-sm-6 col-lg-6 col-xs-6 padding_top">
                             <button type="button" class="btn btn-primary center-block" onclick="login();reset_user()">登录
@@ -679,7 +710,7 @@
     <!--end Modal-->
     <div class="row">
         <div class="col-md-12">
-            <iframe frameborder="0" marginheight="0" src=""></iframe>
+            <iframe id="myiframe" name="myiframe" frameborder="0" marginheight="0" src=""></iframe>
         </div>
     </div>
     <div id="toTop">
@@ -743,7 +774,7 @@
         "slide": [{
             "bdImg": 8,
             "bdPos": "right",
-            "bdTop": 300
+            "bdTop": 250
         }],
         "share": {},
         "image": {"viewList": ["qzone", "tsina", "tqq", "renren", "weixin"], "viewText": "分享到：", "viewSize": "16"},
