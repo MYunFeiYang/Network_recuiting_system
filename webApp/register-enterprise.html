@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css">
+    <link type="text/css" rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.css">
+    <script src="javascript/jquery-3.2.1.js"></script>
+    <script src="bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+    <script src="javascript/enterprise/register.js"></script>
+    <script src="javascript/util/key_event.js"></script>
+    <script src="javascript/enterprise/address_industry_position.js"></script>
+    <script src="javascript/util/cookie_and_session.js"></script>
+</head>
+<style type="text/css">
+    html,body{
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(255,255,255,0);
+    }
+    .padding_top{
+        padding-top:10px;
+    }
+    .modal-dialog{
+        min-width: 320px;
+        min-width: 360px;
+    }
+</style>
+<body>
+<div class="modal fade" id="register-enterprise" tabindex="-1" role="dialog"
+     aria-labelledby="myregister-enterprise" onkeyup="direction_key_event('register-enterprise')">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myregister-enterprise">企业用户注册</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="row">
+                        <div class="col-md-12 padding_top">
+                            <div class="input-group">
+                                    <span class="input-group-addon fa fa-user-circle-o"></span>
+                                <input type="text" class="form-control" id="enterprise_nickname" placeholder="用户名"
+                                       onkeyup="reg_username(this)">
+                                <span class="input-group-addon"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 padding_top">
+                            <div class="input-group">
+                                    <span class="input-group-addon fa fa-unlock-alt"></span>
+                                <input type="password" class="form-control" placeholder="密码"
+                                       onkeyup="reg_pwd(this)"
+                                       id="enterprise_password">
+                                <span class="input-group-addon"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 padding_top">
+                            <div class="input-group">
+                                    <span class="input-group-addon fa fa-lock"></span>
+                                <input type="password" class="form-control" id="confirm_enterprise_password"
+                                       placeholder="确认密码"
+                                       onkeyup="conf_pwd(this,'enterprise_password')">
+                                <span class="input-group-addon"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 padding_top">
+                            <div class="input-group">
+                                    <span class="input-group-addon"
+                                          style="background: url('image/enterprise/enterprise.png')"></span>
+                                <input type="text" class="form-control" id="enterprise_name" placeholder="企业名称">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 padding_top">
+                            <div class="input-group">
+                                    <span class="input-group-addon"
+                                          style="background: url('image/enterprise/industry.png')"></span>
+                                <select class="form-control" id="enterprise_industry" title="所属行业">
+
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" id="enterprise_telephone_group">
+                        <div class="col-md-12 padding_top">
+                            <div class="input-group">
+                                    <span class="input-group-addon fa fa-envelope"></span>
+                                <input type="email" class="form-control" placeholder="电子邮箱"
+                                       onkeyup="reg_email(this)"
+                                       id="enterprise_email">
+                                <span class="input-group-addon"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 padding_top">
+                            <div class="input-group">
+                                    <span class="input-group-addon fa fa-phone-square"></span>
+                                <input type="text" class="form-control" placeholder="电话号码"
+                                       onkeyup="reg_telephone(this)"
+                                       id="enterprise_telephone">
+                                <span class="input-group-addon"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 padding_top">
+                            <div class="input-group">
+                                    <span class="input-group-addon"
+                                          style="background: url('image/common/address.png')"></span>
+                                <select class="form-control" id="enterprise_address" title="企业地址">
+
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6 padding_top">
+                            <input class="btn btn-sm btn-primary center-block" type="button" value="注册" disabled
+                                   onclick="register_enterprise();remember_user('enterprise_nickname','enterprise_password')">
+                        </div>
+                        <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6 padding_top">
+                            <input type="reset" class="btn btn-sm btn-danger center-block"
+                                   value="重置">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    $(document).ready(function () {
+        $("#register-enterprise").modal({backdrop: 'static', keyboard: false});
+        $("#register-enterprise").on('shown.bs.modal', function () {
+            get_address("enterprise_address");
+            get_industry("enterprise_industry");
+        })
+    })
+</script>
+</html>

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>问道网后台管理系统</title>
+    <meta name="keywords" content="侧边导航菜单(可分组折叠)">
+    <meta name="description" content="侧边导航菜单(可分组折叠)"/>
+    <meta name="HandheldFriendly" content="True"/>
+    <!--stylesheet-->
+    <link type="text/css" rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.css">
+    <link type="text/css" rel="stylesheet" href="stylesheet/admin.css">
+    <link type="text/css" rel="stylesheet" href="stylesheet/LeftMeau.css">
+    <!--javascript-->
+    <script src="javascript/jquery-3.2.1.js"></script>
+    <script src="bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+    <script src="javascript/admin/admin.js"></script>
+    <script src="javascript/admin/admin_power.js"></script>
+    <script src="javascript/admin/person.js"></script>
+    <script src="javascript/admin/enterprise.js"></script>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2 col-lg-2 col-sm-4 col-xs-6 menu">
+            <div class="panel-group table-responsive" role="tablist">
+                <div class="panel panel-primary leftMenu">
+                    <!-- 利用data-target指定要折叠的分组列表 -->
+                    <div class="panel-heading" id="collapseListGroupHeading4" data-toggle="collapse"
+                         data-target="#collapseListGroup4" role="tab">
+                        <h4 class="panel-title path1" onclick="path_navigation(this)">
+                            管理员
+                            <span class="glyphicon glyphicon-chevron-up right"></span>
+                        </h4>
+                    </div>
+                    <!-- .panel-collapse和.collapse标明折叠元素 .in表示要显示出来 -->
+                    <div id="collapseListGroup4" class="panel-collapse collapse in" role="tabpanel"
+                         aria-labelledby="collapseListGroupHeading4">
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <!-- 利用data-target指定URL -->
+                                <button class="menu-item-left path2"
+                                        onclick="init_admin_ajax();change_div('power');path_navigation(this)">
+                                    <span class="glyphicon glyphicon-triangle-right"></span>权限管理
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="panel panel-primary leftMenu">
+                    <!-- 利用data-target指定要折叠的分组列表 -->
+                    <div class="panel-heading" id="collapseListGroupHeading1" data-toggle="collapse"
+                         data-target="#collapseListGroup1" role="tab">
+                        <h4 class="panel-title path1" onclick="path_navigation(this)">
+                            个人管理
+                            <span class="glyphicon glyphicon-chevron-down right"></span>
+                        </h4>
+                    </div>
+                    <!-- .panel-collapse和.collapse标明折叠元素 .in表示要显示出来 -->
+                    <div id="collapseListGroup1" class="panel-collapse collapse" role="tabpanel"
+                         aria-labelledby="collapseListGroupHeading1">
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <!-- 利用data-target指定URL -->
+                                <button class="menu-item-left path2"
+                                        onclick="change_div('person_assessment');path_navigation(this);init_person_assessment()">
+                                    <span class="glyphicon glyphicon-triangle-right"></span>注册审核
+                                    <span class="badge"></span>
+                                </button>
+                            </li>
+                            <li class="list-group-item">
+                                <!-- 利用data-target指定URL -->
+                                <button class="menu-item-left path2"
+                                        onclick="change_div('person_account');init_person_account();path_navigation(this)">
+                                    <span class="glyphicon glyphicon-triangle-right"></span>账号管理
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="panel panel-primary leftMenu">
+                    <div class="panel-heading" id="collapseListGroupHeading2" data-toggle="collapse"
+                         data-target="#collapseListGroup2" role="tab">
+                        <h4 class="panel-title path1" onclick="path_navigation(this)">
+                            企业管理
+                            <span class="glyphicon glyphicon-chevron-down right"></span>
+                        </h4>
+                    </div>
+                    <div id="collapseListGroup2" class="panel-collapse collapse" role="tabpanel"
+                         aria-labelledby="collapseListGroupHeading2">
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <button class="menu-item-left path2"
+                                        onclick="change_div('enterprise_assessment');init_enterprise_assessment();path_navigation(this)">
+                                    <span class="glyphicon glyphicon-triangle-right"></span>注册审核
+                                    <span class="badge"></span>
+                                </button>
+                            </li>
+                            <li class="list-group-item">
+                                <button class="menu-item-left path2"
+                                        onclick="change_div('enterprise_account');init_enterprise_account();path_navigation(this)">
+                                    <span class="glyphicon glyphicon-triangle-right"></span>账号管理
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="panel panel-primary leftMenu">
+                    <div class="panel-heading" id="collapseListGroupHeading5" data-toggle="collapse"
+                         data-target="#collapseListGroup5" role="tab">
+                        <h4 class="panel-title path1" onclick="path_navigation(this)">
+                            推广管理
+                            <span class="glyphicon glyphicon-chevron-down right"></span>
+                        </h4>
+                    </div>
+                    <div id="collapseListGroup5" class="panel-collapse collapse" role="tabpanel"
+                         aria-labelledby="collapseListGroupHeading5">
+                        <ul class="list-group">
+                            <li class="list-group-item path2" onclick="path_navigation(this)">
+                                <button class="menu-item-left">
+                                    <span class="glyphicon glyphicon-triangle-right"></span>个人使用分析
+                                </button>
+                            </li>
+                            <li class="list-group-item path2" onclick="path_navigation(this)">
+                                <button class="menu-item-left">
+                                    <span class="glyphicon glyphicon-triangle-right"></span>企业使用分析
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-10 col-lg-10 col-sm-12 col-xs-12">
+            <ol class="breadcrumb">
+                <li><a>问道网</a></li>
+                <li><a>后台管理</a></li>
+            </ol>
+            <table id="power"
+                   class="hidden table table-striped table-bordered table-hover table-condensed table-responsive">
+                <thead>
+                <tr>
+                    <td>#</td>
+                    <td>账号</td>
+                    <td>密码</td>
+                    <td>权限</td>
+                    <td>操作</td>
+                </tr>
+                </thead>
+                <tbody id="admin">
+
+                </tbody>
+            </table>
+            <table id="person_assessment"
+                   class="hidden table table-striped table-bordered table-hover table-condensed table-responsive">
+                <thead>
+                <tr>
+                    <td>#</td>
+                    <td>用户名</td>
+                    <td>密码</td>
+                    <td>姓名</td>
+                    <td>电话号码</td>
+                    <td>email</td>
+                    <td>操作</td>
+                </tr>
+                </thead>
+                <tbody id="person_assess">
+
+                </tbody>
+            </table>
+            <table id="person_account"
+                   class="hidden table table-striped table-bordered table-hover table-condensed table-responsive">
+                <thead>
+                <tr>
+                    <td>#</td>
+                    <td>账号</td>
+                    <td>密码</td>
+                    <td>最后登录时间</td>
+                    <td>操作</td>
+                </tr>
+                </thead>
+                <tbody id="person">
+
+                </tbody>
+            </table>
+            <table id="enterprise_assessment"
+                   class="hidden table table-striped table-bordered table-hover table-condensed table-responsive">
+                <thead>
+                <tr>
+                    <td>#</td>
+                    <td>用户名</td>
+                    <td>密码</td>
+                    <td>公司名</td>
+                    <td>行业</td>
+                    <td>地址</td>
+                    <td>电话号码</td>
+                    <td>email</td>
+                    <td>操作</td>
+                </tr>
+                </thead>
+                <tbody id="enterprise_assess">
+
+                </tbody>
+            </table>
+            <table id="enterprise_account"
+                   class="hidden table table-striped table-bordered table-hover table-condensed table-responsive">
+                <thead>
+                <tr>
+                    <td>#</td>
+                    <td>账号</td>
+                    <td>密码</td>
+                    <td>最后登录时间</td>
+                    <td>操作</td>
+                </tr>
+                </thead>
+                <tbody id="enterprise">
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    window.onload=function () {
+        get_register_person_count();
+        get_register_enetrprise_count();
+    }
+</script>
+</html>

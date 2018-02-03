@@ -1,0 +1,236 @@
+html, body {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    color: black;
+    overflow-x: hidden;
+}
+#background{
+    position: fixed;
+    z-index: 0;
+    top:0;
+    left: 0;
+    margin: 0;
+}
+
+body::-webkit-scrollbar {
+    width: 10px;
+    background: rgba(0, 0, 0, 0);
+}
+.navbar-nav li a{
+    font-size: 1.4rem;
+}
+.navbar-nav .dropdown .dropdown-menu li a i{
+    font-size: 1.1rem;
+    float: right;
+}
+/*public*/
+iframe {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 1;
+    background: rgba(255, 255, 255, 0);
+    padding-top: 70px;
+}
+#loading .modal-dialog{
+    width: 78px;
+}
+#loading .modal-content{
+    background-color: rgba(255,255,255,0);
+    box-shadow: none;
+    border: none;
+}
+.main，footer, header, #carousel-example-generic {
+    width: 100%;
+    height: auto;
+    box-shadow: 1px 1px 1px 1px;
+    border-radius: 5px;
+}
+
+/*header*/
+#login_btu{
+    text-shadow: 0 1px 0 #ccc,
+    0 2px 0 #c9c9c9,
+    0 3px 0 #bbb,
+    0 4px 0 #b9b9b9,
+    0 5px 0 #aaa,
+    0 6px 1px rgba(0,0,0,.1),
+    0 0 5px rgba(0,0,0,.1),
+    0 1px 3px rgba(0,0,0,.3),
+    0 3px 5px rgba(0,0,0,.2),
+    0 5px 10px rgba(0,0,0,.25),
+    0 10px 10px rgba(0,0,0,.2),
+    0 20px 20px rgba(0,0,0,.15);
+}
+#suspend {
+    list-style-type: none;
+    position: fixed;
+    z-index: 3;
+    right: 30px;
+    bottom: 50px;
+}
+
+#suspend button {
+    width: 40px;
+    height: 40px;
+    border: 1px solid gainsboro;
+    background-color: rgba(255,255,255,0);
+    padding: 6px;
+}
+#suspend button i{
+    font-size: 2rem;
+    color: white;
+}
+#suspend button i:hover{
+    color: #00a0e9;
+}
+main ul {
+    list-style-type: none;
+    display: none;
+    width: auto;
+    padding: 0;
+    background-color: white;
+    position: fixed;
+    top: 150px;
+    right: 0;
+    z-index: 999;
+}
+main ul li {
+    width: 270px;
+    border-bottom: 1px solid gainsboro;
+}
+main ul li i,ul li h3,ul li h2{
+    display: inline-block;
+}
+mian ul li i{
+    font-size: 2rem;
+}
+
+mian ul .li1 {
+    background-color: #00a0e9;
+    padding: 30px;
+    font-size: 30px;
+    color: white;
+}
+main ul .li1 i{
+    float: right;
+}
+main ul .li2 {
+    padding: 10px 30px;
+}
+mian ul .li3 {
+    padding: 10px 30px;
+}
+#wechat .modal-dialog{
+    width: 200px;
+    height: 200px;
+}
+#wechat .modal-dialog img{
+    width: 100%;
+    height: 100%;
+}
+/*footer*/
+footer {
+    width: 100%;
+    position: absolute;
+    background: rgba(255, 255, 255, 0.2);
+    font-size: 0.8rem;
+}
+
+footer address {
+    padding: 15px 25px 0 25px;
+}
+
+footer address a {
+    text-decoration: none;
+}
+/*otherwise*/
+.carousel-inner, .item, img {
+    width: 100%;
+    height: 100%;
+}
+
+#carousel-example-generic {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 0;
+}
+/*超小屏幕*/
+@media screen and (max-width: 768px){
+    html {
+        font-size: 62.5%;
+    }
+    #suspend{
+        display: block;
+        width: 210px;
+        bottom: 30px;
+        left:50%;
+        background-color: rgba(236,236,236,0.5);
+        margin-left: -115px;
+        border-radius: 25px;
+        overflow: hidden;
+    }
+    #suspend button{
+        float: left;
+        border: none;
+        width: 70px;
+        outline: none;
+    }
+    main ul li{
+        width: 200px;
+    }
+    main ul .li1 {
+        background-color: #00a0e9;
+        padding: 20px;
+        font-size: 20px;
+        color: white;
+    }
+    main ul li img{
+        width: 20px;
+        height: 20px;
+        margin-right: 10px;
+    }
+    h2{
+        font-size: 18px;
+    }
+    h3,h4{
+        font-size: 16px;
+    }
+}
+
+/*小屏幕*/
+@media screen and (min-width: 768px)and (max-width: 992px) {
+    html {
+        font-size: 62.5%;
+    }
+
+    .modal-dialog {
+        width: 480px ;
+    }
+}
+
+/*中等屏幕*/
+@media screen and (min-width: 992px)and (max-width: 1200px) {
+    html {
+        font-size: 14px;
+    }
+
+    .modal-dialog {
+        width: 480px ;
+    }
+}
+
+/*大屏幕*/
+@media screen and (min-width: 1200px) {
+    html {
+        font-size: 14px;
+    }
+
+    .modal-dialog {
+        width: 480px ;
+    }
+}
+

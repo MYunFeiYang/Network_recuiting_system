@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>问道空间</title>
+    <!--stylesheet-->
+    <link type="text/css" rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.css">
+    <link type="text/css" rel="stylesheet" href="stylesheet/webchat.css">
+    <!--javascript-->
+    <script src="javascript/jquery-3.2.1.js"></script>
+    <script src="bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+    <script src="javascript/common/webchat/webchat_listen.js"></script>
+    <script src="javascript/common/webchat/webchat_logic.js"></script>
+    <script src="javascript/util/responsive.js"></script>
+</head>
+<body style="background-color: rgba(255,255,255,0)">
+<div class="container-fluid">
+    <div class="row" id="mylist">
+        <div class="col-md-2 col-lg-2 col-sm-3 col-xs-8 user_center">
+            <ul>
+                <li onclick="show_status()">登录状态 <span id="status"></span></li>
+                <li type="button" onclick="init()">打开连接
+                    <i class=""></i>
+                </li>
+                <li type="button" onclick="closeSocket()">关闭连接
+                    <i class=""></i>
+                </li>
+                <li type="button">我的好友
+                    <i class=""></i>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-7 col-lg-7 col-sm-6 col-xs-12 chat_content">
+            <div class="row">
+                <div class="col-md-12" id="show_content">
+                    <a style="display: block;text-align: center;text-decoration: none;cursor: pointer"
+                       onclick="get_chat_record()">
+                        更多记录</a>
+                </div>
+                <div class="col-md-12" id="editor">
+                    <textarea id="content" placeholder="输入聊天内容"></textarea>
+                    <button class="btn btn-default" type="button" onclick="emit()">
+                        <i class=""></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-lg-3 col-sm-3 col-xs-8 person_list">
+            <h2>在线人员列表
+                <i class=""></i>
+            </h2>
+            <ul id="list">
+
+            </ul>
+            <div id="refresh">
+                <span class="glyphicon glyphicon-refresh" onclick="refresh_online_list()">
+
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="btn_group hidden">
+        <div class="row">
+            <div class="col-xs-4">
+                <button onclick="Carousel_figure(0)">个人中心</button>
+            </div>
+            <div class="col-xs-4">
+                <button onclick="Carousel_figure(1)">聊天室</button>
+            </div>
+            <div class="col-xs-4">
+                <button onclick="Carousel_figure(2)">在线列表</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    window.onload = function () {
+        show_status();
+        Carousel_figure(1);
+    }
+</script>
+</html>

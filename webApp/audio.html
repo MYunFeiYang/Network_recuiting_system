@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link type="text/css" rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css">
+    <link type="text/css" rel="stylesheet" href="stylesheet/audio.css">
+    <script src="javascript/jquery-3.2.1.js"></script>
+    <script src="bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+    <script src="javascript/common/audio.js"></script>
+</head>
+<style type="text/css">
+    html,body{
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(255,255,255,0);
+    }
+    .input-group-addon{
+        padding: 6px 17px;
+    }
+    .padding_top{
+        padding-top:10px;
+    }
+    .modal-dialog{
+        min-width: 320px;
+        min-width: 360px;
+    }
+</style>
+<body>
+<div class="modal fade" id="myaudio" tabindex="-1" role="dialog" aria-labelledby="audioLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="audioLabel">问道播放器</h4>
+            </div>
+            <div class="modal-body" style="min-height: 420px">
+                <div class="row">
+                    <div class="col-md-12">
+                        <ol id="m-list">
+
+                        </ol>
+                    </div>
+                    <div class="col-md-12">
+                        <div id="playArea">
+                            <div class="Audio">
+                                正在播放: <strong id="rmusic"></strong>
+                                <audio id="audio"></audio>
+                                <div class="pgs">
+                                    <div class="pgs-play" id="progress"></div>
+                                </div>
+                                <div class="controls">
+                                    <div class="row">
+                                        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                                            <span class="played-time">00:00</span>
+                                        </div>
+                                        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                                            <button class="btn_pre" id="btn-pre">
+                                                <i class="icon-btn icon-pre fa fa-step-backward"></i>
+                                            </button>
+                                        </div>
+                                        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                                            <button class="play-pause" id="playPause">
+                                                <i class="icon-btn icon-pause fa fa-play-circle-o"></i>
+                                            </button>
+                                        </div>
+                                        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                                            <button class="btn_next" id="btn-next">
+                                                <i class="icon-btn icon-next fa fa-step-forward"></i>
+                                            </button>
+                                        </div>
+                                        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                                            <span class="audio-time" id="audioTime">0</span>
+                                        </div>
+                                        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                                            <div class="btn-group">
+                                                <button type="button" class="btn_playModal dropdown-toggle"
+                                                        data-toggle="dropdown">
+                                                    <img id="playModal" src="image/video/order.png"
+                                                         style="width: 40px;height: 40px">
+                                                </button>
+                                                <ul class="dropdown-menu" role="menu">
+                                                    <li>
+                                                        <a href="#" id="btn-loop">
+                                                            单曲循环<i class="fa fa-recycle"></i>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#" id="btn-order">
+                                                            顺序播放<img src="image/video/order.png"
+                                                                     style="width: 20px;height: 20px">
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#" id="btn-random">
+                                                            随机播放<i class="fa fa-random"></i>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    $(document).ready(function () {
+        $("#myaudio").modal({backdrop: 'static', keyboard: false});
+        $("#myaudio").on('shown.bs.modal', function () {
+            audioPlayer();
+        })
+    })
+</script>
+</html>

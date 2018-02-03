@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link type="text/css" rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.css">
+    <link type="text/css" rel="stylesheet" href="stylesheet/video.css">
+    <script src="javascript/jquery-3.2.1.js"></script>
+    <script src="bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+    <script src="javascript/common/video.js"></script>
+</head>
+<style type="text/css">
+    html,body{
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(255,255,255,0);
+    }
+    .input-group-addon{
+        padding: 6px 17px;
+    }
+    .padding_top{
+        padding-top:10px;
+    }
+    .modal-dialog{
+        min-width: 320px;
+        min-width: 360px;
+    }
+</style>
+<body>
+<div class="modal fade" id="video" tabindex="-1" role="dialog" aria-labelledby="videoLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="videoLabel">问道影音</h4>
+            </div>
+            <div class="modal-body" style="min-height: 420px">
+                <div id="video_container">
+                    <video controls>
+                        <source src="http://nettuts.s3.amazonaws.com/763_sammyJSIntro/trailer_test.mp4"
+                                type="video/mp4">
+                        <source src="http://nettuts.s3.amazonaws.com/763_sammyJSIntro/trailer_test.ogg"
+                                type="video/ogg">
+                    </video>
+                    <div id="videoControls">
+                        <button id="play" title="Play"> &#x25BA;</button>
+                        <button id="fullScreen" title="FullScreen Toggle"> FS</button>
+                        <div id="videoProgress">
+                            <div id="progress_box">
+                                <span id="play_progress"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    $(document).ready(function () {
+        $("#video").modal({backdrop: 'static', keyboard: false});
+        $("#video").on('shown.bs.modal', function () {
+            videoPlayer();
+        })
+    })
+</script>
+</html>
