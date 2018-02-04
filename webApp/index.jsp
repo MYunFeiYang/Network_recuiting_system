@@ -17,8 +17,8 @@
     <link type="text/css" rel="stylesheet" href="https://unpkg.com/animate.css@3.5.2/animate.min.css">
     <!--javascript-->
     <script src="javascript/jquery-3.2.1.js"></script>
-    <script src="bootstrap-3.3.7-dist/js/bootstrap.js"></script>
     <script src="javascript/jquery.form.js"></script>
+    <script src="bootstrap-3.3.7-dist/js/bootstrap.js"></script>
     <script src="javascript/common/common.js"></script>
     <script src="javascript/common/login-session.js"></script>
     <script src="javascript/common/quick_query.js"></script>

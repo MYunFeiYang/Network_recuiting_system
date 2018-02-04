@@ -40,7 +40,7 @@ function hidden_telephone(obj) {
 }
 
 function wechat() {
-    $("#wechat .modal-body:first").html(`<img src="image/suspend/footer.png">`)
+    $("#wechat .modal-body:first").html(`<img src="image/weixin.jpg">`)
     if ($(window).width()>=768){
         $("#wechat_btn").addClass('animated slideOutRight');
     }

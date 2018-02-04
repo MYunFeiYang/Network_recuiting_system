@@ -20,8 +20,10 @@ body::-webkit-scrollbar {
 .navbar-nav li a{
     font-size: 1.4rem;
 }
+.navbar-nav .dropdown .dropdown-menu li a{
+    font-size: 20px;
+}
 .navbar-nav .dropdown .dropdown-menu li a i{
-    font-size: 1.1rem;
     float: right;
 }
 /*public*/
@@ -31,7 +33,7 @@ iframe {
     position: relative;
     z-index: 1;
     background: rgba(255, 255, 255, 0);
-    padding-top: 70px;
+    padding-top: 54px;
 }
 #loading .modal-dialog{
     width: 78px;
@@ -103,11 +105,11 @@ main ul li {
 main ul li i,ul li h3,ul li h2{
     display: inline-block;
 }
-mian ul li i{
+main ul li i{
     font-size: 2rem;
 }
 
-mian ul .li1 {
+main ul .li1 {
     background-color: #00a0e9;
     padding: 30px;
     font-size: 30px;
@@ -119,7 +121,7 @@ main ul .li1 i{
 main ul .li2 {
     padding: 10px 30px;
 }
-mian ul .li3 {
+main ul .li3 {
     padding: 10px 30px;
 }
 #wechat .modal-dialog{

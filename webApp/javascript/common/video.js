@@ -1,148 +1,119 @@
-function videoPlayer() {
-    let video = document.getElementsByTagName('video')[0],
-        videoControls = document.getElementById('videoControls'),
-        play = document.getElementById('play'),
-        //progressContainer = document.getElementById("videoProgress"),
-        progressHolder = document.getElementById("progress_box"),
-        playProgressBar = document.getElementById("play_progress"),
-        fullScreenToggleButton = document.getElementById("fullScreen"),
-        playProgressInterval,
-        isVideoFullScreen = false;
-    let videoPlayer = {
-            init: function () {
-                // this is equal to the videoPlayer object.
-                let that = this;
-                // Helpful CSS trigger for JS.
-                document.documentElement.className = 'js';
-                // Get rid of the default controls, because we'll use our own.
-                //video.removeAttribute('controls');
-                // When meta data is ready, show the controls
-                video.addEventListener('loadeddata', this.initializeControls, false);
-                this.handleButtonPresses();
-                // When the full screen button is pressed...
-                fullScreenToggleButton.addEventListener("click", function () {
-                    isVideoFullScreen ? that.fullScreenOff() : that.fullScreenOn();
-                }, true);
-                // Listen for escape key. If pressed, close fullscreen.
-                document.addEventListener('keydown', this.checkKeyCode, false);
-                this.videoScrubbing();
-            },
-            initializeControls: function () {
-                // When all meta information has loaded, show controls
-                videoPlayer.showHideControls();
-            },
-            showHideControls: function () {
-                // Shows and hides the video player.
-                video.addEventListener('mouseover', function () {
-                    videoControls.style.opacity = 1;
-                }, false);
-                videoControls.addEventListener('mouseover', function () {
-                    videoControls.style.opacity = 1;
-                }, false);
-                video.addEventListener('mouseout', function () {
-                    videoControls.style.opacity = 0;
-                }, false);
-                videoControls.addEventListener('mouseout', function () {
-                    videoControls.style.opacity = 0;
-                }, false);
-            },
-            handleButtonPresses: function () {
-                // When the video or play button is clicked, play/pause the video.
-                video.addEventListener('click', this.playPause, false);
-                play.addEventListener('click', this.playPause, false);
-                // When the play button is pressed, // switch to the "Pause" symbol.
-                video.addEventListener('play', function () {
-                    play.title = 'Pause';
-                    play.innerHTML = '<span id="pauseButton">&#x2590;&#x2590;</span>';
-                    // Begin tracking video's progress.
-                    videoPlayer.trackPlayProgress();
-                }, false);
-                // When the pause button is pressed, // switch to the "Play" symbol.
-                video.addEventListener('pause', function () {
-                    play.title = 'Play';
-                    play.innerHTML = '&#x25BA;';
-                    // Video was paused, stop tracking progress.
-                    videoPlayer.stopTrackingPlayProgress();
-                }, false);
-                // When the video has concluded, pause it.
-                video.addEventListener('ended', function () {
-                    this.currentTime = 0;
-                    this.pause();
-                }, false);
-            },
-            playPause: function () {
-                if (video.paused || video.ended) {
-                    if (video.ended) {
-                        video.currentTime = 0;
-                    }
-                    video.play();
-                } else {
-                    video.pause();
-                }
-            },
-            fullScreenOn: function () {
-                isVideoFullScreen = true;
-                // Set new width according to window width
-                video.style.cssText = 'position: fixed; width:' + document.body.offsetWidth + 'px; height: ' + document.body.offsetHeight + 'px;';
-                // Apply a classname to the video and controls, if the designer needs it...
-                video.className = 'fullsizeVideo';
-                videoControls.className = 'fs-control';
-                fullScreenToggleButton.className = "fs-active control";
-                // Listen for escape key. If pressed, close fullscreen.
-                document.addEventListener('keydown', this.checkKeyCode, false);
-            },
-            fullScreenOff: function () {
-                isVideoFullScreen = false;
-                video.style.position = 'static';
-                video.className = '';
-                fullScreenToggleButton.className = "control";
-                videoControls.className = '';
-            },
-            checkKeyCode: function (e) {
-                e = e || window.event;
-                if ((e.keyCode || e.which) === 27) videoPlayer.fullScreenOff();
-            },
-            trackPlayProgress: function () {
-                (function progressTrack() {
-                    videoPlayer.updatePlayProgress();
-                    playProgressInterval = setTimeout(progressTrack, 50);
-                })();
-            },
-            updatePlayProgress: function () {
-                playProgressBar.style.width = ( (video.currentTime / video.duration) * (progressHolder.offsetWidth) ) + "px";
-            },
-            stopTrackingPlayProgress: function () {
-                clearTimeout(playProgressInterval);
-            },
-            videoScrubbing: function () {
-                progressHolder.addEventListener("mousedown", function () {
-                    videoPlayer.stopTrackingPlayProgress();
-                    videoPlayer.playPause();
-                    document.onmousemove = function (e) {
-                        videoPlayer.setPlayProgress(e.pageX);
-                    };
-                    progressHolder.onmouseup = function (e) {
-                        document.onmouseup = null;
-                        document.onmousemove = null;
-                        video.play();
-                        videoPlayer.setPlayProgress(e.pageX);
-                        videoPlayer.trackPlayProgress();
-                    }
-                }, true);
-            },
-            setPlayProgress: function (clickX) {
-                let newPercent = Math.max(0, Math.min(1, (clickX - this.findPosX(progressHolder)) / progressHolder.offsetWidth));
-                video.currentTime = newPercent * video.duration;
-                playProgressBar.style.width = newPercent * (progressHolder.offsetWidth) + "px";
-            },
-            findPosX: function (progressHolder) {
-                let curleft = progressHolder.offsetLeft;
-                while (progressHolder = progressHolder.offsetParent) {
-                    curleft += progressHolder.offsetLeft;
-                }
-                return curleft;
+let videoPlayer = {
+    init: function () {
+        $("#video").removeAttr("controls");
+    },
+    ready: function () {
+        $("#play").click(function () {
+            //监听播放时间并更新进度条
+            $("#video").get(0).addEventListener('timeupdate', function () {
+                updateProgress();
+            }, false);
+            //监听播放完成事件
+            $("#video").get(0).onended = function () {
+                $("#video").get(0).currentTime = 0;
+                $("#video").get(0).pause();
+                $('#play i:first').removeClass("fa-pause").addClass("fa-play");
+            };
+            if ($("#video").get(0).paused) {
+                $("#video").get(0).play();
+                $(this).find("i:first").removeClass("fa-play").addClass("fa-pause");
+            } else {
+                $("#video").get(0).pause();
+                $(this).find("i:first").removeClass("fa-pause").addClass("fa-play");
             }
-        }
-    ;
-    videoPlayer.init();
+        });
+        $('#video').on("loadedmetadata", function () {
+            //alert(audio.duration)
+            let t = this.duration;
+            $('#videoTime').text(Math.floor(t / 60) + ":" + (t % 60 / 100).toFixed(2).slice(-2));
+        });
+        let progress_time = $('.progress-time').width();
+        //点击进度条跳到指定点播放
+        $('.progress-time').click(function (e) {
+            let rate = (e.offsetX) / progress_time;
+            $("#video").get(0).currentTime = $("#video").get(0).duration * rate;
+            updateProgress();
+        });
+        $("#voice").parent().click(function () {
+            if ($("#video").get(0).muted) {
+                $("#video").get(0).muted = false;
+                $("#voice").removeClass("fa-volume-off").addClass("fa-volume-up");
+            } else {
+                $("#video").get(0).muted = true;
+                $("#voice").removeClass("fa-volume-up").addClass("fa-volume-off");
+            }
+        });
+        let progress_voice = $('.progress-voice').width();
+        $(".progress-voice").click(function (e) {
+            let rate = (e.offsetX) / progress_voice;
+            $("#video").get(0).volume = rate;
+            $(".pgs-voice").css("width", `${rate * 100}%`)
+        });
+        $("#fullScreen").click(function () {
+            if (isFullscreen()) {
+                let video = document.getElementById("video_container");
+                fullscreen(video);
+            } else {
+                exitFullscreen();
+            }
+        });
+        //鼠标在视频播放区控制条显示，否则隐藏
+        $("#video_container").hover(function () {
+            $("#videoControls").css("opacity",1);
+            $("#videoControls").css("transition-duration","0.3s");
+        },function () {
+            $("#videoControls").css("opacity",0);
+            $("#videoControls").css("transition-duration","1s")
+        })
+    }
+}
+window.onresize = function() {
+    if (isFullscreen()) {
+        $(this).find("i:first").removeClass("fa-arrows-alt").addClass("fa-compress");
+    } else {
+        $(this).find("i:first").removeClass("fa-compress").addClass("fa-arrows-alt");
+    }
+}
+function updateProgress() {
+    let value = Math.round((Math.floor($("#video").get(0).currentTime) / Math.floor($("#video").get(0).duration)) * 100, 0);
+    $('.pgs-play').css('width', value + '%');
+    let t = $("#video").get(0).currentTime
+    $('.played-time').html(Math.floor(t / 60) + ":" + (t % 60 / 100).toFixed(2).slice(-2));
+}
+
+function isFullscreen() {
+    var ableFullscreen = document.fullscreenEnabled ||
+        window.fullScreen ||
+        document.webkitIsFullScreen ||
+        document.msFullscreenEnabled;
+    if (ableFullscreen) {
+        var fullscreenEle = document.fullscreenElement ||
+            document.mozFullScreenElement ||
+            document.webkitFullscreenElement;
+        return fullscreenEle == null;
+    }
+}
+
+function fullscreen(element) {
+    if (element.requestFullscreen) {
+        element.requestFullscreen();
+    } else if (element.webkitRequestFullscreen) {
+        element.webkitRequestFullscreen();
+    } else if (element.mozRequestFullScreen) {
+        element.mozRequestFullScreen();
+    } else if (element.msRequestFullscreen) {
+        element.msRequestFullscreen();
+    }
+}
+
+function exitFullscreen() {
+    if (document.exitFullscreen) {
+        document.exitFullscreen();
+    } else if (document.webkitExitFullscreen) {
+        document.webkitExitFullscreen();
+    } else if (document.mozCancelFullScreen) {
+        document.mozCancelFullScreen();
+    } else if (document.msExitFullscreen) {
+        document.msExitFullscreen();
+    }
 }

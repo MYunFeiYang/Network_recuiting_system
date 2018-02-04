@@ -46,37 +46,17 @@
     vertical-align: middle;
 }
 
-.icon-play {
+.icon-play, .icon-pause ,.icon-pre,.icon-next,.btn_playModal{
     width: 40px;
     height: 40px;
     display: block;
     color: black;
-    font-size: 40px;
+    font-size: 30px;
+    padding: 5px;
 }
-
-.icon-pause {
-    width: 40px;
-    height: 40px;
-    display: block;
-    color: black;
-    font-size: 40px;
+.dropdown-menu li a i{
+    float: right;
 }
-.icon-pre {
-    width: 40px;
-    height: 40px;
-    display: block;
-    color: black;
-    font-size: 40px;
-}
-
-.icon-next {
-    width: 40px;
-    height: 40px;
-    display: block;
-    color: black;
-    font-size: 40px;
-}
-
 .controls span {
     color: #b3b5b7;
     font-size: 12px;
@@ -89,6 +69,7 @@
 .audio-time {
     display: inline-block;
     vertical-align: middle;
+    font-size: 30px;
 }
 #playArea .dropdown-menu{
     position: absolute;

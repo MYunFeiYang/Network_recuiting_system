@@ -8,7 +8,6 @@ function sub() {
             document.all.warning.innerHTML="头像更换失败";
         }
     });
-
     return false; // 必须返回false，否则表单会自己再做一次提交操作，并且页面跳转
 }
 function change() {
