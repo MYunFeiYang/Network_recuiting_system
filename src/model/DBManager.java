@@ -9,11 +9,10 @@ import java.sql.SQLException;
 public class DBManager {
     private static DataSource datasource;
     private Connection conn = null;
-
     private static void setupJdbcPool() {
         PoolProperties p = new PoolProperties();
         p.setDriverClassName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-        p.setUrl("jdbc:sqlserver://m");
+        p.setUrl("jdbc:sqlserver://localhost:1433;DatabaseName=Network-recuiting-system");
         p.setUsername("sa");
         p.setPassword("420222aaAA");
         p.setMaxActive(20);
@@ -25,7 +24,6 @@ public class DBManager {
         datasource = new DataSource();
         datasource.setPoolProperties(p);
     }
-
     public Connection getConnection() {
         setupJdbcPool();
         try {

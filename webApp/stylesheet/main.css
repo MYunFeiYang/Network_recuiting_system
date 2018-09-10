@@ -5,6 +5,10 @@ html, body {
     color: black;
     overflow-x: hidden;
 }
+main{
+    width: 100%;
+    height: 100%;
+}
 #background{
     position: fixed;
     z-index: 0;
@@ -12,10 +16,13 @@ html, body {
     left: 0;
     margin: 0;
 }
-
-body::-webkit-scrollbar {
-    width: 10px;
-    background: rgba(0, 0, 0, 0);
+.navbar{
+    margin-bottom: 0;
+    z-index: 999999;
+}
+.navbar-collapse{
+    padding-left: 40px;
+    padding-right: 40px;
 }
 .navbar-nav li a{
     font-size: 1.4rem;
@@ -132,20 +139,26 @@ main ul .li3 {
     width: 100%;
     height: 100%;
 }
+::-webkit-scrollbar{
+    width: 0;
+}
 /*footer*/
 footer {
     width: 100%;
-    position: absolute;
     background: rgba(255, 255, 255, 0.2);
     font-size: 0.8rem;
+    position: relative;
+    z-index: 99999;
 }
 
 footer address {
     padding: 15px 25px 0 25px;
+    color: white;
 }
 
 footer address a {
     text-decoration: none;
+    color: white;
 }
 /*otherwise*/
 .carousel-inner, .item, img {
@@ -159,6 +172,18 @@ footer address a {
     bottom: 0;
     left: 0;
     z-index: 0;
+}
+@-webkit-keyframes rotation{
+    from {-webkit-transform: rotate(0deg);}
+    to {-webkit-transform: rotate(360deg);}
+}
+
+.Rotation{
+    -webkit-transform: rotate(360deg);
+    animation: rotation 3s linear infinite;
+    -moz-animation: rotation 3s linear infinite;
+    -webkit-animation: rotation 3s linear infinite;
+    -o-animation: rotation 3s linear infinite;
 }
 /*超小屏幕*/
 @media screen and (max-width: 768px){
@@ -180,6 +205,9 @@ footer address a {
         border: none;
         width: 70px;
         outline: none;
+    }
+    #suspend button i{
+        color: #00a0e9;
     }
     main ul li{
         width: 200px;

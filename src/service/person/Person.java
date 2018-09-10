@@ -1,6 +1,7 @@
 package service.person;
 
 import model.DBManager;
+import model.enterprise.Jobs;
 import model.person.Resume;
 import model.person.User;
 import net.sf.json.JSONArray;
@@ -370,6 +371,34 @@ public class Person {
             while (rs.next()) {
 
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    public void jobReg(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        DBManager dbManager = new DBManager();
+        Connection conn = dbManager.getConnection();
+        List<Jobs> jobList=new ArrayList<>();
+        try {
+            String sql = "{call jobReg()}";
+            CallableStatement ps=conn.prepareCall(sql);
+            ResultSet rs=ps.executeQuery();
+            while (rs.next()) {
+                Jobs job=new Jobs();
+                job.setName(rs.getString("name"));
+                job.setAddress(rs.getString("address"));
+                job.setIndustry(rs.getString("industry"));
+                job.setPosition(rs.getString("position"));
+                job.setEffective_time(rs.getString("effective_time"));
+                job.setPublish_time(rs.getString("publish_time"));
+                job.setEmail(rs.getString("email"));
+                job.setTelephone(rs.getString("telephone"));
+                jobList.add(job);
+            }
+            response.getWriter().print(JSONArray.fromObject(jobList).toString());
+            rs.close();
+            ps.close();
+            conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }

@@ -56,6 +56,7 @@ public class ValidateCodeServlet extends HttpServlet {
 
         //响应用户请求，绘制图形
         response.setContentType("image/jpeg");
+//        response.getWriter().print("{\"image\":"+image+"}");
         OutputStream ops=response.getOutputStream();
         ImageIO.write(image, "jpeg",ops);
         ops.close();

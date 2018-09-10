@@ -12,6 +12,8 @@ import java.io.IOException;
 @WebServlet(name = "/person")
 public class servletPerson extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setCharacterEncoding("utf-8");
+        request.setCharacterEncoding("utf-8");
         String person_type = request.getParameter("person");
         Person person = new Person();
         switch (person_type) {
@@ -41,6 +43,11 @@ public class servletPerson extends HttpServlet {
                 break;
             case "auto_match":
                 person.auto_match(request, response);
+            case "jobReg":
+                person.jobReg(request, response);
         }
+    }
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doPost(request,response);
     }
 }

@@ -28,7 +28,6 @@ public class PageBean<T> {
         this.pageNum = pageNum;
         this.pageSize = pageSize;
         this.totalRecord = totalRecord;
-
         //totalPage 总页数
         if (totalRecord % pageSize == 0) {
             //说明整除，正好每页显示pageSize条数据，没有多余一页要显示少于pageSize条数据的
@@ -43,7 +42,6 @@ public class PageBean<T> {
         this.start = 1;
         this.end = 5;
         //显示页数的算法
-
         if (totalPage <= 9) {
             //总页数都小于5，那么end就为总页数的值了。
             this.end = this.totalPage;

@@ -67,6 +67,7 @@ let videoPlayer = {
         })
     }
 }
+//窗口变化触发
 window.onresize = function() {
     if (isFullscreen()) {
         $(this).find("i:first").removeClass("fa-arrows-alt").addClass("fa-compress");
@@ -74,13 +75,14 @@ window.onresize = function() {
         $(this).find("i:first").removeClass("fa-compress").addClass("fa-arrows-alt");
     }
 }
+//更新进度条
 function updateProgress() {
     let value = Math.round((Math.floor($("#video").get(0).currentTime) / Math.floor($("#video").get(0).duration)) * 100, 0);
     $('.pgs-play').css('width', value + '%');
     let t = $("#video").get(0).currentTime
     $('.played-time').html(Math.floor(t / 60) + ":" + (t % 60 / 100).toFixed(2).slice(-2));
 }
-
+//判断是否全屏
 function isFullscreen() {
     var ableFullscreen = document.fullscreenEnabled ||
         window.fullScreen ||
@@ -93,7 +95,7 @@ function isFullscreen() {
         return fullscreenEle == null;
     }
 }
-
+//全屏
 function fullscreen(element) {
     if (element.requestFullscreen) {
         element.requestFullscreen();
@@ -105,7 +107,7 @@ function fullscreen(element) {
         element.msRequestFullscreen();
     }
 }
-
+//退出全屏
 function exitFullscreen() {
     if (document.exitFullscreen) {
         document.exitFullscreen();

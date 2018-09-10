@@ -19,7 +19,7 @@ function register_enterprise() {
                 confirm_box_c.html("账号在审核，您可以先登录");
                 confirm_box_c.attr('class', 'alert-success');
                 setTimeout(function () {
-                    window.location.href = "../../index.jsp"
+                    window.location.href = "../../index.html"
                 }, 3000);
             } else {
                 confirm_box_c.html("该用户名和密码已存在");

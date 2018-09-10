@@ -1,7 +1,8 @@
 package service.enterprise;
 
 import model.DBManager;
-import model.enterprise.Job;
+import model.enterprise.Jobs;
+import model.person.Resume;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
@@ -251,7 +252,7 @@ public class Enterprise {
         String password = request.getParameter("password");
         DBManager dbmanager = new DBManager();
         Connection conn = dbmanager.getConnection();
-        List<Job> jobList = new ArrayList<>();
+        List<Jobs> jobsList = new ArrayList<>();
         try {
             String sql = "{call jobManageBeforeSelect(?,?)}";
             CallableStatement ps = conn.prepareCall(sql);
@@ -260,19 +261,19 @@ public class Enterprise {
             ps.execute();
             ResultSet rs = ps.getResultSet();
             while (rs.next()) {
-                Job job = new Job();
-                job.setIdentification(rs.getString(1));
-                job.setName(rs.getString(2));
-                job.setAddress(rs.getString(3));
-                job.setIndustry(rs.getString(4));
-                job.setPosition(rs.getString(5));
-                job.setNumber(rs.getString(6));
-                job.setSalary(rs.getString(7));
-                job.setPublish_time(rs.getString(8));
-                job.setEffective_time(rs.getString(9));
-                jobList.add(job);
+                Jobs jobs = new Jobs();
+                jobs.setIdentification(rs.getString(1));
+                jobs.setName(rs.getString(2));
+                jobs.setAddress(rs.getString(3));
+                jobs.setIndustry(rs.getString(4));
+                jobs.setPosition(rs.getString(5));
+                jobs.setNumber(rs.getString(6));
+                jobs.setSalary(rs.getString(7));
+                jobs.setPublish_time(rs.getString(8));
+                jobs.setEffective_time(rs.getString(9));
+                jobsList.add(jobs);
             }
-            response.getWriter().print(JSONArray.fromObject(jobList).toString());
+            response.getWriter().print(JSONArray.fromObject(jobsList).toString());
             rs.close();
             ps.close();
             conn.close();
@@ -349,6 +350,37 @@ public class Enterprise {
             response.getWriter().print(str);
             response.getWriter().flush();
             response.getWriter().close();
+        }
+    }
+
+    public void resumeReg(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        DBManager dbManager = new DBManager();
+        Connection conn = dbManager.getConnection();
+        List<Resume> resumeList=new ArrayList<>();
+        try {
+            String sql = "{call resumeReg()}";
+            CallableStatement ps=conn.prepareCall(sql);
+            ResultSet rs=ps.executeQuery();
+            while (rs.next()) {
+                Resume resume=new Resume();
+                resume.setName(rs.getString("name"));
+                resume.setAge(rs.getString("age"));
+                resume.setSex(rs.getString("sex"));
+                resume.setOrigin(rs.getString("origin"));
+                resume.setCollage(rs.getString("collage"));
+                resume.setSpecialty(rs.getString("specialty"));
+                resume.setDegree(rs.getString("degree"));
+                resume.setGraduation_data(rs.getString("graduation_data"));
+                resume.setTelephone(rs.getString("telephone"));
+                resume.setEmail(rs.getString("email"));
+                resumeList.add(resume);
+            }
+            response.getWriter().print(JSONArray.fromObject(resumeList).toString());
+            rs.close();
+            ps.close();
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 }

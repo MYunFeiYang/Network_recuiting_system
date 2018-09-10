@@ -3,30 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.css">
     <link type="text/css" rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.css">
+    <link type="text/css" rel="stylesheet" href="stylesheet/confirm_info_box.css">
     <script src="javascript/jquery-3.2.1.js"></script>
     <script src="bootstrap-3.3.7-dist/js/bootstrap.js"></script>
     <script src="javascript/util/cookie_and_session.js"></script>
     <script src="javascript/util/key_event.js"></script>
     <script src="javascript/common/login.js"></script>
-    <script src="javascript/common/login-session.js"></script>
 </head>
 <style type="text/css">
-    html,body{
+    html, body {
         margin: 0;
         padding: 0;
         height: 100%;
-        background-color: rgba(255,255,255,0);
+        background-color: rgba(255, 255, 255, 0);
     }
-    .input-group-addon{
-        padding: 6px 17px;
+
+    .padding_top {
+        padding-top: 10px;
     }
-    .padding_top{
-        padding-top:10px;
-    }
-    .modal-dialog{
-        min-width: 320px;
-        min-width: 360px;
+
+    .modal-dialog {
+        width: 320px;
     }
 </style>
 <body>
@@ -47,20 +46,17 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12 padding_top">
-                        <div class="input-group">
-                                <span class="input-group-addon"></span>
-                            <select id="login_type" class="form-control" title="用户类型">
-                                <option value="admin">管理员</option>
-                                <option value="person">个人用户</option>
-                                <option value="enterprise">企业用户</option>
-                            </select>
-                        </div>
+                        <select id="login_type" class="form-control" title="用户类型">
+                            <option value="admin">管理员</option>
+                            <option value="person">个人用户</option>
+                            <option value="enterprise">企业用户</option>
+                        </select>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12 padding_top">
                         <div class="input-group">
-                                <span class="input-group-addon fa fa-user-circle-o"></span>
+                            <span class="input-group-addon fa fa-user-circle-o"></span>
                             <input type="text" id="login_nickname" class="form-control" placeholder="用户名">
                         </div>
                     </div>
@@ -68,7 +64,7 @@
                 <div class="row">
                     <div class="col-md-12 padding_top">
                         <div class="input-group">
-                                <span class="input-group-addon  fa fa-lock"></span>
+                            <span class="input-group-addon  fa fa-lock"></span>
                             <input type="password" id="login_password" class="form-control"
                                    placeholder="密码">
                         </div>
@@ -79,7 +75,8 @@
                         <div class="input-group">
                             <input type="password" class="form-control"
                                    placeholder="请输入正确验证码">
-                            <img src=ValidateCodeServlet onclick="this.src='ValidateCodeServlet';"  title="点击更换">
+                            <img src=ValidateCodeServlet title="点击更换">
+                            <a onclick="ValidateCode()">看不清楚，再来一张</a>
                         </div>
                     </div>
                 </div>
@@ -91,7 +88,7 @@
                 <div class="row">
                     <div class="col-md-6 col-sm-6 col-lg-6 col-xs-6 padding_top">
                         <a href="resetPassword.html" target="myiframe" class="btn btn-primary center-block">
-                        找回密码
+                            找回密码
                         </a>
                     </div>
                     <div class="col-md-6 col-sm-6 col-lg-6 col-xs-6 padding_top">
@@ -113,8 +110,13 @@
     $(document).ready(function () {
         $("#login").modal({backdrop: 'static', keyboard: false});
         $("#login").on('shown.bs.modal', function () {
-            show_user("login_nickname","login_password");
-        })
-    })
+            show_user("login_nickname", "login_password");
+        });
+        ValidateCode();
+    });
+
+    function ValidateCode() {
+        $("img:first").attr("src", "ValidateCodeServlet??flag=" + Math.random());
+    }
 </script>
 </html>

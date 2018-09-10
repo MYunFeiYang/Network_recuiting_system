@@ -8,6 +8,7 @@ let c_con_password;
 let c_email;
 let c_telephone;
 let check_status;
+//检测邮箱是否已注册
 function check_email(obj) {
     o_user = {};
     c_email = obj.value;
@@ -34,7 +35,7 @@ function check_email(obj) {
         },
     });
 }
-
+//正则匹配用户名是否符合要求
 function reg_username(obj) {
     let uPattern = /^[\u4e00-\u9fff\w]{5,16}$/;
     c_nickname = obj.value;
@@ -51,7 +52,7 @@ function reg_username(obj) {
         return check_status=false;
     }
 }
-
+//正则匹配密码是否符合要求
 function reg_pwd(obj) {
     c_password = obj.value;
     let reg = /^[A-Za-z0-9]{6,20}$/;
@@ -68,7 +69,7 @@ function reg_pwd(obj) {
         return check_status=false;
     }
 }
-
+//正则匹配姓名是否胡乱输入
 function reg_name(obj) {
     c_name = obj.value;
     let reg = /^[\u4E00-\u9FA5A-Za-z]+$/;
@@ -85,7 +86,7 @@ function reg_name(obj) {
         return check_status=false;
     }
 }
-
+//正则匹配电话号码是否符合要求
 function reg_telephone(obj) {
     c_telephone = obj.value;
     let mPattern = /^1[3|4|5|8][0-9]\d{4,8}$/;
@@ -103,7 +104,7 @@ function reg_telephone(obj) {
         return check_status=false;
     }
 }
-
+//正则匹配邮箱是否符合要求
 function reg_email(obj) {
     c_email = obj.value;
     let ePattern = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
@@ -116,7 +117,7 @@ function reg_email(obj) {
         return check_status=false;
     }
 }
-
+//验证两次密码是否一致
 function conf_pwd(obj, id) {
     c_con_password = obj.value;
     c_password = document.getElementById(id).value;
@@ -134,6 +135,7 @@ function conf_pwd(obj, id) {
         return check_status=false;
     }
 }
+
 $(document).ready(function () {
     $("form .row:last").mouseenter(function () {
         if (check_status){

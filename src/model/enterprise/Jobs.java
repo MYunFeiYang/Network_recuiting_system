@@ -1,6 +1,6 @@
 package model.enterprise;
 
-public class Job {
+public class Jobs {
     private String identification;
     private String nickname;
     private String password;

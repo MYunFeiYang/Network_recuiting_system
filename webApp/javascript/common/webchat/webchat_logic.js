@@ -42,19 +42,19 @@ function encodeScript(data) {
     }
     return data.replace("<", "&lt;").replace(">", "&gt;");
 }
-
+//获得用户名
 function getnickname() {
     let user = document.cookie.split(";")[0].split("=")[1];
     name = JSON.parse(user).nickname;
     return name;
 }
-
+//获取聊天记录
 function get_chat_record() {
     let msg = {"record": record};
     socket.send(JSON.stringify(msg));
     record++;
 }
-
+//显示聊天记录
 function show_chat_record(data) {
     let nickname = getnickname();
     let show_content = document.getElementById("show_content");
@@ -89,7 +89,7 @@ function show_chat_record(data) {
         }
     }
 }
-
+//显示登录状态
 function show_status() {
     let status = document.getElementById("status");
     if (socket.readyState === 0) {
@@ -106,7 +106,7 @@ function show_status() {
         status.style.color = "red";
     }
 }
-
+//更新在线列表
 function refresh_online_list() {
     let refresh = document.getElementById("refresh");
     refresh.style = "";
@@ -116,7 +116,7 @@ function refresh_online_list() {
     let msg = {"refresh": ""};
     socket.send(JSON.stringify(msg));
 }
-
+//显示在线列表
 function show_online_list(data) {
     let ul = document.getElementById("list");
     ul.innerHTML = "";
@@ -126,7 +126,7 @@ function show_online_list(data) {
         li.innerHTML = `<span class="glyphicon glyphicon-user"></span><a>${data[i].nickname}</a><span style="float: right" class="glyphicon glyphicon-star-empty"></span>`
     }
 }
-
+//显示系统信息
 function show_system_message(data) {
     let show_content = document.getElementById("show_content");
     let div = document.createElement("div");
@@ -135,7 +135,7 @@ function show_system_message(data) {
     span.setAttribute("class", "message");
     span.innerHTML = data.message;
 }
-
+//显示聊天信息
 function show_chat_message(data) {
     let show_content = document.getElementById("show_content");
     let chatBox = document.createElement("div");
@@ -159,7 +159,7 @@ function show_chat_message(data) {
     username.innerHTML = data.nickname;
     message.innerHTML = data.message;
 }
-
+//添加自己的信息
 function add_self_message(text) {
     let show_content = document.getElementById("show_content");
     let div = document.createElement("div");
@@ -167,7 +167,7 @@ function add_self_message(text) {
     div.setAttribute("class", "self");
     div.innerHTML = text;
 }
-
+//显示系统聊天信息向自己
 function show_system_message_to_self(text) {
     let show_content = document.getElementById("show_content");
     let div = document.createElement("div");

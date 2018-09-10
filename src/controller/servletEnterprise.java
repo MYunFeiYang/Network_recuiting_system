@@ -12,6 +12,8 @@ import java.io.IOException;
 @WebServlet(name = "/enterprise")
 public class servletEnterprise extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setCharacterEncoding("utf-8");
+        request.setCharacterEncoding("utf-8");
         String enterprise_type = request.getParameter("enterprise");
         Enterprise enterprise = new Enterprise();
         switch (enterprise_type) {
@@ -39,6 +41,12 @@ public class servletEnterprise extends HttpServlet {
             case "deleteJob":
                 enterprise.deleteJob(request, response);
                 break;
+            case "resumeReg":
+                enterprise.resumeReg(request, response);
+                break;
         }
+    }
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doPost(request,response);
     }
 }
