@@ -1,11 +1,15 @@
-import React, { Component } from 'react';
-import Header from './component/Header'
+import React, { Component, Fragment } from 'react';
+import Header from './component/Header';
+import Footer from './component/Footer';
 import './style/App.css';
 
 class App extends Component {
   render() {
     return (
-      <Header></Header>
+      <Fragment>
+        <Header></Header>
+        <Footer></Footer>
+      </Fragment>
     );
   }
 }

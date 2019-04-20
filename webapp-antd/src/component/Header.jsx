@@ -1,7 +1,8 @@
 import React from 'react';
 import { Menu } from 'antd';
-import Login from './login/Login'
-import Register from './register/Register'
+import Login from './login/Login';
+import Register from './register/Register';
+import Audio from './audio'
 import '../style/App.css'
 
 const SubMenu = Menu.SubMenu;
@@ -35,17 +36,20 @@ class Header extends React.Component {
         <SubMenu title={<span className="submenu-title-wrapper">
           注册</span>}>
           <MenuItemGroup title="个人注册">
-            <Menu.Item key="alipay">
+            <Menu.Item key="register-p">
               <Register type="个人注册"></Register>
             </Menu.Item>
           </MenuItemGroup>
           <MenuItemGroup title="企业注册">
-          <Menu.Item key="alipay">
+          <Menu.Item key="register-e">
               <Register type="企业注册"></Register>
             </Menu.Item>
           </MenuItemGroup>
         </SubMenu>
-        <Menu.Item key="alipay" className="float-right">
+        <Menu.Item key="music">
+          <Audio></Audio>
+        </Menu.Item>
+        <Menu.Item key="login" className="float-right">
           <Login></Login>
         </Menu.Item>
 
