@@ -215,7 +215,7 @@ class Audio extends React.Component {
         return (
             <div>
                 <Button type="primary" onClick={this.showModal}>
-                    音乐播放器
+                    <Icon type="customer-service" theme="filled" />音乐播放器
         </Button>
                 <Modal
                     visible={visible}

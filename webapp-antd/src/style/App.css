@@ -8,3 +8,14 @@
 .center{
     text-align: center
 }
+.video-progress-background{
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 2px;
+    position:absolute;
+    bottom:5px;
+    width:100%;
+    color:white;
+}
+.vertical-center{
+   margin-top:10px;
+}
