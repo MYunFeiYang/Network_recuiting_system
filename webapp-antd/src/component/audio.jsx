@@ -6,7 +6,7 @@ class Audio extends React.Component {
     constructor() {
         super();
         this.state = {
-            visible: false,
+            visible: true,
             data: [
                 {
                     name: "爱拼才会赢(闽).mp3",
@@ -214,9 +214,9 @@ class Audio extends React.Component {
         );
         return (
             <div>
-                <Button type="primary" onClick={this.showModal}>
+                {/* <Button type="primary" onClick={this.showModal}>
                     <Icon type="customer-service" theme="filled" />音乐播放器
-        </Button>
+        </Button> */}
                 <Modal
                     visible={visible}
                     title="问道播放器"

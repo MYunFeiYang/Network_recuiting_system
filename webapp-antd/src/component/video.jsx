@@ -1,12 +1,12 @@
 import React from 'react';
-import { Modal, Button, Row, Col, Icon, Slider } from 'antd';
+import { Modal, Row, Col, Icon, Slider } from 'antd';
 import '../style/App.css'
 
 class Video extends React.Component {
     constructor() {
         super();
         this.state = {
-            visible: false,
+            visible: true,
             video: {
                 url: "http://nettuts.s3.amazonaws.com/763_sammyJSIntro/trailer_test.mp4"
             },
@@ -16,7 +16,7 @@ class Video extends React.Component {
             playedTime: '00:00:00',
             totalTime: '00:00:00',
             playPause: 'play-circle',
-            screen:'fullscreen'
+            screen: 'fullscreen'
         }
     }
 
@@ -63,22 +63,22 @@ class Video extends React.Component {
         let video = document.getElementsByTagName('video')[0];
         video.currentTime = 0;
         this.setState({
-                playPause:"play-circle"
-            })
+            playPause: "play-circle"
+        })
         video.pause();
     }
     changePlayPause = () => {
         let video = document.getElementById('video');
         if (video.paused) {
-            const totalTime=this.transTime(video.duration);
+            const totalTime = this.transTime(video.duration);
             this.setState({
                 totalTime,
-                playPause:"pause-circle"
+                playPause: "pause-circle"
             })
             video.play();
         } else {
-this.setState({
-                playPause:"play-circle"
+            this.setState({
+                playPause: "play-circle"
             })
             video.pause();
         }
@@ -138,64 +138,58 @@ this.setState({
             document.msExitFullscreen();
         }
     }
-    changeScreen=()=>{
-        let screen=this.state.screen;
-        if(screen==='fullscreen'){
+    changeScreen = () => {
+        let screen = this.state.screen;
+        if (screen === 'fullscreen') {
             this.setState({
-                screen:'fullscreen-exit'
+                screen: 'fullscreen-exit'
             })
             this.fullscreen(document.getElementById('fullScreen'));
-        }else{
+        } else {
             this.setState({
-                screen:'fullscreen'
+                screen: 'fullscreen'
             })
             this.exitFullscreen();
         }
     }
     render() {
         const { visible } = this.state;
-        return (
-            <div>
-                <Button type="primary" onClick={this.showModal}>
-                    <Icon type="video-camera" />视频播放器
-        </Button>
-                <Modal
-                    visible={visible}
-                    title="问道播放器"
-                    onOk={this.handleOk}
-                    onCancel={this.handleCancel}
-                    footer={null}>
-                    <Row id="fullScreen" style={{position:'relative'}}>
-                        <Col span={24}>
-                            <video src={this.state.video.url} onTimeUpdate={this.updateProgress}
-                                onEnded={this.videoEnded} ref="video" id="video" style={{ width: '100%' }}></video>
-                            <Row className="video-progress-background">
-                                <Col span={1} className="vertical-center" onClick={this.changePlayPause}>
-                                    <Icon type={this.state.playPause} />
-                                </Col>
-                                <Col span={6} className="vertical-center">
-                                    <span>{this.state.playedTime}</span>
-                                    <span>/</span>
-                                    <span>{this.state.totalTime}</span>
-                                </Col>
-                                
-                                <Col span={11}>
-                                    <Slider value={this.state.pgsPlay} onChange={this.handleClickVideoProgress} />
-                                </Col>
-                                <Col span={1} className="vertical-center" onClick={this.handleClickVolume}>
-                                    <Icon type="sound" />
-                                </Col>
-                                <Col span={4}>
-                                    <Slider value={this.state.volume} onChange={this.handleClickVolumeProgress} />
-                                </Col>
-                                <Col span={1} className="vertical-center" onClick={this.changeScreen}>
-                                    <Icon type={this.state.screen} />
-                                </Col>
-                            </Row>
+        return (<Modal
+            visible={visible}
+            title="问道播放器"
+            onOk={this.handleOk}
+            onCancel={this.handleCancel}
+            footer={null}>
+            <Row id="fullScreen" style={{ position: 'relative' }}>
+                <Col span={24}>
+                    <video src={this.state.video.url} onTimeUpdate={this.updateProgress}
+                        onEnded={this.videoEnded} ref="video" id="video" style={{ width: '100%' }}></video>
+                    <Row className="video-progress-background">
+                        <Col span={1} className="vertical-center" onClick={this.changePlayPause}>
+                            <Icon type={this.state.playPause} />
+                        </Col>
+                        <Col span={6} className="vertical-center">
+                            <span>{this.state.playedTime}</span>
+                            <span>/</span>
+                            <span>{this.state.totalTime}</span>
+                        </Col>
+
+                        <Col span={11}>
+                            <Slider value={this.state.pgsPlay} onChange={this.handleClickVideoProgress} />
+                        </Col>
+                        <Col span={1} className="vertical-center" onClick={this.handleClickVolume}>
+                            <Icon type="sound" />
+                        </Col>
+                        <Col span={4}>
+                            <Slider value={this.state.volume} onChange={this.handleClickVolumeProgress} />
+                        </Col>
+                        <Col span={1} className="vertical-center" onClick={this.changeScreen}>
+                            <Icon type={this.state.screen} />
                         </Col>
                     </Row>
-                </Modal>
-            </div >
+                </Col>
+            </Row>
+        </Modal>
         );
     }
 }
