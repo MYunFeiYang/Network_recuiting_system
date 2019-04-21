@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal, Button,Icon } from 'antd';
+import { Modal, Button, Icon } from 'antd';
 import Enterprise from './Enterprise';
 import Person from './Person'
 import '../../style/App.css'
@@ -30,8 +30,8 @@ class Login extends React.Component {
         return (
             <div>
                 <Button type="primary" onClick={this.showModal}>
-                   <Icon type="user-add" />注册
-        </Button>
+                    {this.props.type === '个人注册' ? <span><Icon type="user-add" />注册</span> : <span><Icon type="usergroup-add" />注册</span>}
+                </Button>
                 <Modal
                     visible={visible}
                     title={this.props.type}

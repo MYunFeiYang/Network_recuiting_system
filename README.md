@@ -8,11 +8,11 @@
 简历和岗位之间用推荐算法双向推荐给应聘者和招聘方<br/>
 另外提供级联查询子系统给用户使用。<br/>
 ## 系统架构
-前端：基于bootstrap（响应式布局）<br/>
-后台：原生Java（MVC、restful）<br/>
+前端：基于bootstrap（响应式布局）、jQuery（在用react技术栈重构）<br/>
+后台:Java（MVC、restful）<br/>
 数据库：SQL server（存储过程、触发器）<br/>
-前后端交互：Ajax<br/>
+前后端交互：Ajax、serverlet、websocket<br/>
 后台连接数据库：tomcat自带链接池<br/>
 版本控制： Git<br/>
-编辑器：IDEA<br/>
+编辑器：IDEA、vscode<br/>
 服务器：Tomcat<br/>

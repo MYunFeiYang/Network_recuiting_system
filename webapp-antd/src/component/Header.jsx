@@ -1,5 +1,5 @@
 import React from 'react';
-import { Menu, Icon } from 'antd';
+import { Menu, Icon, Affix } from 'antd';
 import Login from './login/Login';
 import Register from './register/Register';
 import Audio from './audio'
@@ -22,40 +22,44 @@ class Header extends React.Component {
 
   render() {
     return (
-      <Menu theme="dark"
-        onClick={this.handleClick}
-        selectedKeys={[this.state.current]}
-        mode="horizontal"
-      >
-        <Menu.Item key="mail">
-          <Icon type="home" />首页
+      <header>
+        <Affix offsetTop={1}>
+          <Menu theme="dark"
+            onClick={this.handleClick}
+            selectedKeys={[this.state.current]}
+            mode="horizontal"
+          >
+            <Menu.Item key="mail">
+              <Icon type="home" />首页
         </Menu.Item>
-        <Menu.Item key="app">
-          校招
+            <Menu.Item key="app">
+              校招
         </Menu.Item>
-        <Menu.Item key="music">
-          <Audio></Audio>
-        </Menu.Item>
-        <Menu.Item key="video">
-          <Video></Video>
-        </Menu.Item>
-        <Menu.Item key="login" className="float-right">
-          <Login></Login>
-        </Menu.Item>
-        <SubMenu  className="float-right" title={<span className="submenu-title-wrapper">
-          <Icon type="user-add" />注册</span>}>
-          <MenuItemGroup title={"个人注册"}>
-            <Menu.Item key="register-p">
-              <Register type="个人注册"></Register>
+            <Menu.Item key="music">
+              <Audio></Audio>
             </Menu.Item>
-          </MenuItemGroup>
-          <MenuItemGroup title="企业注册">
-            <Menu.Item key="register-e">
-              <Register type="企业注册"></Register>
+            <Menu.Item key="video">
+              <Video></Video>
             </Menu.Item>
-          </MenuItemGroup>
-        </SubMenu>
-      </Menu>
+            <Menu.Item key="login" className="float-right">
+              <Login></Login>
+            </Menu.Item>
+            <SubMenu className="float-right" title={<span className="submenu-title-wrapper">
+              <Icon type="user-add" />注册</span>}>
+              <MenuItemGroup title={"个人注册"}>
+                <Menu.Item key="register-p">
+                  <Register type="个人注册"></Register>
+                </Menu.Item>
+              </MenuItemGroup>
+              <MenuItemGroup title="企业注册">
+                <Menu.Item key="register-e">
+                  <Register type="企业注册"></Register>
+                </Menu.Item>
+              </MenuItemGroup>
+            </SubMenu>
+          </Menu>
+        </Affix>
+      </header>
     );
   }
 }

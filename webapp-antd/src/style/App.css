@@ -1,21 +1,45 @@
-
-.float-right{
+.float-right {
     float: right;
 }
-.margin-top{
+
+.margin-top {
     margin-top: 20px;
 }
-.center{
+
+.center {
     text-align: center
 }
-.video-progress-background{
+
+.video-progress-background {
     background-color: rgba(0, 0, 0, 0.7);
     padding: 2px;
-    position:absolute;
-    bottom:5px;
-    width:100%;
-    color:white;
+    position: absolute;
+    bottom: 5px;
+    width: 100%;
+    color: white;
 }
-.vertical-center{
-   margin-top:10px;
+
+.vertical-center {
+    margin-top: 10px;
+    text-align: center;
+}
+
+main {
+    display: block;
+    min-height: 100%;
+}
+
+main ul {
+    position: fixed;
+    right: 30px;
+    bottom: 30px;
+    list-style-type: none;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+    padding: 5px;
+}
+
+main ul li {
+    padding: 5px;
+    color: green;
 }

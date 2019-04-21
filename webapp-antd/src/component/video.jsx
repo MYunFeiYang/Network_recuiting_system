@@ -173,16 +173,13 @@ this.setState({
                                 <Col span={1} className="vertical-center" onClick={this.changePlayPause}>
                                     <Icon type={this.state.playPause} />
                                 </Col>
-                                <Col span={3} className="vertical-center">
+                                <Col span={6} className="vertical-center">
                                     <span>{this.state.playedTime}</span>
-                                </Col>
-                                <Col span={1} className="vertical-center">
                                     <span>/</span>
-                                </Col>
-                                <Col span={3} className="vertical-center">
                                     <span>{this.state.totalTime}</span>
                                 </Col>
-                                <Col span={10}>
+                                
+                                <Col span={11}>
                                     <Slider value={this.state.pgsPlay} onChange={this.handleClickVideoProgress} />
                                 </Col>
                                 <Col span={1} className="vertical-center" onClick={this.handleClickVolume}>
