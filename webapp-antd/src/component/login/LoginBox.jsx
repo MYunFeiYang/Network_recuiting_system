@@ -2,13 +2,35 @@ import React from 'react'
 import {
     Form, Icon, Input, Checkbox, Radio, Button
 } from 'antd';
+import axios from 'axios';
+import qs from 'qs'
+import { LoginSession } from '../../util'
 
+const path = 'http://localhost:80'
 class NormalLoginForm extends React.Component {
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
-                console.log('Received values of form: ', values);
+                const { login_type, nickname, password } = values;
+                const user = { login_type, nickname, password };
+                    axios({
+                        method: 'post',
+                        url: `${path}/public?public=login`,
+                        data: qs.stringify(user),
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
+                        },
+                    }).then(function (response) {
+                        if (response.data.msg === "login_fail") {
+
+                        }
+                        else if (response.data.msg === "login_success") {
+                            LoginSession('login',user)
+                        }
+                    }).catch(function (error) {
+                        console.log(error);
+                    });
             }
         });
     }
@@ -18,18 +40,18 @@ class NormalLoginForm extends React.Component {
             <Form onSubmit={this.handleSubmit} className="login-form">
                 <Form.Item
                     label="用户类型">
-                    {getFieldDecorator('userType', {
+                    {getFieldDecorator('login_type', {
                         rules: [{ required: true, message: 'Please input your userType!' }],
                     })(
                         <Radio.Group>
-                            <Radio value="管理员">管理员</Radio>
-                            <Radio value="个人用户">个人用户</Radio>
-                            <Radio value="企业用户">企业用户</Radio>
+                            <Radio value="admin">管理员</Radio>
+                            <Radio value="person">个人用户</Radio>
+                            <Radio value="enterprise">企业用户</Radio>
                         </Radio.Group>
                     )}
                 </Form.Item>
                 <Form.Item>
-                    {getFieldDecorator('userName', {
+                    {getFieldDecorator('nickname', {
                         rules: [{ required: true, message: 'Please input your username!' }],
                     })(
                         <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Username" />
@@ -49,10 +71,10 @@ class NormalLoginForm extends React.Component {
                     })(
                         <Checkbox>Remember me</Checkbox>
                     )}
-                    <a className="login-form-forgot" href="#1" style={{float:'right'}}>Forgot password</a>
+                    <a className="login-form-forgot" href="#1" style={{ float: 'right' }}>Forgot password</a>
                 </Form.Item>
                 <Form.Item>
-                    <Button type="primary" htmlType="submit" className="login-form-button" style={{width:'100%'}}>
+                    <Button type="primary" htmlType="submit" className="login-form-button" style={{ width: '100%' }}>
                         Log in
                     </Button>
                     Or <a href="#3">register now!</a>

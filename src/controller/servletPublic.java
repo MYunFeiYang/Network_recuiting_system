@@ -12,6 +12,18 @@ import java.io.IOException;
 @WebServlet(name = "public")
 public class servletPublic extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // 允许该域发起跨域请
+        response.setHeader("Access-Control-Allow-Origin", "*");//*允许任何域
+        response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, PATCH, OPTIONS");
+        response.setHeader("Access-Control-Max-Age", "3628800");
+        response.setHeader("Access-Control-Allow-Headers", "Origin,Content-Type,X-Auth-Token");
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("text/xml; charset=UTF-8");
+        response.setHeader("content-type","text/html;charset=UTF-8");
+        //以下两句为取消在本地的缓存
+        response.setHeader("Cache-Control", "no-cache");
+        response.setHeader("Pragma", "no-cache");
         String public_type = request.getParameter("public");
         Common common = new Common();
         switch (public_type) {

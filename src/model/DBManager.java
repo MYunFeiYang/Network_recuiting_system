@@ -14,7 +14,7 @@ public class DBManager {
         p.setDriverClassName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
         p.setUrl("jdbc:sqlserver://localhost:1433;DatabaseName=Network-recuiting-system");
         p.setUsername("sa");
-        p.setPassword("420222aaAA");
+        p.setPassword("420222aaAA@@");
         p.setMaxActive(20);
         p.setInitialSize(5);
         p.setMaxWait(10000);

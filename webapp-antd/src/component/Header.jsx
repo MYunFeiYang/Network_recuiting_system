@@ -7,6 +7,7 @@ import Audio from './audio'
 import Video from './video'
 import Home from './main/home'
 import '../style/App.css'
+import School from './school';
 
 const SubMenu = Menu.SubMenu;
 const MenuItemGroup = Menu.ItemGroup;
@@ -35,7 +36,7 @@ class Header extends React.Component {
                 <Link to={`/`}><Icon type="home" />首页</Link>
               </Menu.Item>
               <Menu.Item key="school">
-                校招
+              <Link to={`/school/`}>校招</Link>
            </Menu.Item>
               <Menu.Item key="music">
                 <Link to={`/music/`}>
@@ -65,6 +66,7 @@ class Header extends React.Component {
             <Switch>
                     <Route path="/music/" exact component={Audio} />
                     <Route path="/video/" exact component={Video} />
+                    <Route path="/school/" exact component={School} />
                     <Route path="/" exact component={Home} />
                 </Switch>
           </Router>

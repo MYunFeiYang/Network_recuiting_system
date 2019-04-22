@@ -64,11 +64,7 @@ public class Common {
     }
 
     public void CheckEmail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
-        response.setContentType("text/xml; charset=UTF-8");
-        //以下两句为取消在本地的缓存
-        response.setHeader("Cache-Control", "no-cache");
-        response.setHeader("Pragma", "no-cache");
+
         String email = request.getParameter("email");
 
         DBManager conndb = new DBManager();
@@ -100,11 +96,7 @@ public class Common {
     }
 
     public void Login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
-        response.setContentType("text/xml; charset=UTF-8");
-        //以下两句为取消在本地的缓存
-        response.setHeader("Cache-Control", "no-cache");
-        response.setHeader("Pragma", "no-cache");
+
         String login_type = request.getParameter("login_type");
         String nickname = request.getParameter("nickname");
         String password = request.getParameter("password");
@@ -174,8 +166,7 @@ public class Common {
     }
 
     public void LoginSession(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setCharacterEncoding("UTF-8");
-        response.setContentType("text/html;charset=UTF-8");
+
         String login = request.getParameter("login");
         String login_type = request.getParameter("login_type");
         String login_nickname = request.getParameter("nickname");
@@ -209,11 +200,6 @@ public class Common {
     }
 
     public void resetPassword(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
-        response.setContentType("text/xml; charset=UTF-8");
-        //以下两句为取消在本地的缓存
-        response.setHeader("Cache-Control", "no-cache");
-        response.setHeader("Pragma", "no-cache");
         String email = request.getParameter("email");
         DBManager conndb = new DBManager();
         Connection conn = conndb.getConnection();
@@ -307,11 +293,7 @@ public class Common {
     }
 
     public void query(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
-        response.setContentType("text/xml; charset=UTF-8");
-        //以下两句为取消在本地的缓存
-        response.setHeader("Cache-Control", "no-cache");
-        response.setHeader("Pragma", "no-cache");
+
         String content = request.getParameter("content");
         content = "%" + content + "%";
         DBManager conndb = new DBManager();
@@ -338,11 +320,7 @@ public class Common {
     }
 
     public void Paging(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
-        response.setContentType("text/xml; charset=UTF-8");
-        //以下两句为取消在本地的缓存
-        response.setHeader("Cache-Control", "no-cache");
-        response.setHeader("Pragma", "no-cache");
+
         int pageSize = Integer.parseInt(request.getParameter("pageSize"));
         int pageNum = Integer.parseInt(request.getParameter("pageNum"));
         int bottom = (pageNum - 1) * pageSize;
@@ -388,11 +366,7 @@ public class Common {
     }
 
     public void getEmail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
-        response.setContentType("text/xml; charset=UTF-8");
-        //以下两句为取消在本地的缓存
-        response.setHeader("Cache-Control", "no-cache");
-        response.setHeader("Pragma", "no-cache");
+
         String nickname = request.getParameter("nickname");
         String password = request.getParameter("password");
         String userType=request.getParameter("userType");
