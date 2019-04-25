@@ -20,12 +20,6 @@ class Video extends React.Component {
         }
     }
 
-    showModal = () => {
-        this.setState({
-            visible: true,
-        });
-    }
-
     handleCancel = () => {
         this.setState({ visible: false });
     }
@@ -159,7 +153,7 @@ class Video extends React.Component {
             title="问道播放器"
             onOk={this.handleOk}
             onCancel={this.handleCancel}
-            footer={null}>
+            footer={null} closable={false} mask={false}>
             <Row id="fullScreen" style={{ position: 'relative' }}>
                 <Col span={24}>
                     <video src={this.state.video.url} onTimeUpdate={this.updateProgress}

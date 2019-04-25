@@ -37,11 +37,6 @@ class Audio extends React.Component {
             loopType:'循环模式'
         }
     }
-    showModal = () => {
-        this.setState({
-            visible: true,
-        });
-    }
 
     handleCancel = () => {
         this.setState({ visible: false });
@@ -214,15 +209,12 @@ class Audio extends React.Component {
         );
         return (
             <div>
-                {/* <Button type="primary" onClick={this.showModal}>
-                    <Icon type="customer-service" theme="filled" />音乐播放器
-        </Button> */}
                 <Modal
                     visible={visible}
                     title="问道播放器"
                     onOk={this.handleOk}
                     onCancel={this.handleCancel}
-                    footer={null}>
+                    footer={null} closable={false} mask={false}>
                     <Row>
                         <Col span={24}>
                             <ol ref="mlist" onClick={this.playByMe}>

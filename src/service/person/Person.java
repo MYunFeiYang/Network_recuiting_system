@@ -20,11 +20,6 @@ import java.util.Random;
 
 public class Person {
     public void register(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
-        response.setContentType("text/xml; charset=UTF-8");
-        //以下两句为取消在本地的缓存
-        response.setHeader("Cache-Control", "no-cache");
-        response.setHeader("Pragma", "no-cache");
         String nickname = request.getParameter("nickname");
         String password = request.getParameter("password");
         String name = request.getParameter("name");
@@ -63,11 +58,6 @@ public class Person {
     }
 
     public void modifyUserBeforeSelect(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
-        response.setContentType("text/xml; charset=UTF-8");
-        //以下两句为取消在本地的缓存
-        response.setHeader("Cache-Control", "no-cache");
-        response.setHeader("Pragma", "no-cache");
         String nickname = request.getParameter("nickname");
         String password = request.getParameter("password");
 
@@ -100,11 +90,7 @@ public class Person {
     }
 
     public void modifyUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
-        response.setContentType("text/xml; charset=UTF-8");
-        //以下两句为取消在本地的缓存
-        response.setHeader("Cache-Control", "no-cache");
-        response.setHeader("Pragma", "no-cache");
+
         String nickname = request.getParameter("nickname");
         String password = request.getParameter("password");
         String name = request.getParameter("name");
@@ -143,11 +129,7 @@ public class Person {
     }
 
     public void initResume(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
-        response.setContentType("text/xml; charset=UTF-8");
-        // 以下两句为取消在本地的缓存
-        response.setHeader("Cache-Control", "no-cache");
-        response.setHeader("Pragma", "no-cache");
+
         String nickname = request.getParameter("nickname");
         String password = request.getParameter("password");
         // System.out.println(nickname);
@@ -184,11 +166,7 @@ public class Person {
     }
 
     public void addResume(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
-        response.setContentType("text/xml; charset=UTF-8");
-        //以下两句为取消在本地的缓存
-        response.setHeader("Cache-Control", "no-cache");
-        response.setHeader("Pragma", "no-cache");
+
         String nickname = request.getParameter("nickname");
         String password = request.getParameter("password");
         String name = request.getParameter("name");
@@ -241,11 +219,7 @@ public class Person {
     }
 
     public void manageResume(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
-        response.setContentType("text/xml; charset=UTF-8");
-        // 以下两句为取消在本地的缓存
-        response.setHeader("Cache-Control", "no-cache");
-        response.setHeader("Pragma", "no-cache");
+
         String nickname = request.getParameter("nickname");
         String password = request.getParameter("password");
         DBManager dbmanager = new DBManager();
@@ -284,11 +258,7 @@ public class Person {
     }
 
     public void modifyResume(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
-        response.setContentType("text/xml; charset=UTF-8");
-        //以下两句为取消在本地的缓存
-        response.setHeader("Cache-Control", "no-cache");
-        response.setHeader("Pragma", "no-cache");
+
         String identification = request.getParameter("identification");
         String age = request.getParameter("age");
         String collage = request.getParameter("collage");
@@ -328,11 +298,7 @@ public class Person {
     }
 
     public void deleteResume(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
-        response.setContentType("text/xml; charset=UTF-8");
-        // 以下两句为取消在本地的缓存
-        response.setHeader("Cache-Control", "no-cache");
-        response.setHeader("Pragma", "no-cache");
+  
         String identification = request.getParameter("identification");
         DBManager dbmanager = new DBManager();
         Connection conn = dbmanager.getConnection();

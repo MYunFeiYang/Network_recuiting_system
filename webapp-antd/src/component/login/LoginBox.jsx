@@ -2,11 +2,7 @@ import React from 'react'
 import {
     Form, Icon, Input, Checkbox, Radio, Button
 } from 'antd';
-import axios from 'axios';
-import qs from 'qs'
-import { LoginSession } from '../../util'
 
-const path = 'http://localhost:80'
 class NormalLoginForm extends React.Component {
     handleSubmit = (e) => {
         e.preventDefault();
@@ -14,23 +10,7 @@ class NormalLoginForm extends React.Component {
             if (!err) {
                 const { login_type, nickname, password } = values;
                 const user = { login_type, nickname, password };
-                    axios({
-                        method: 'post',
-                        url: `${path}/public?public=login`,
-                        data: qs.stringify(user),
-                        headers: {
-                            'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
-                        },
-                    }).then(function (response) {
-                        if (response.data.msg === "login_fail") {
-
-                        }
-                        else if (response.data.msg === "login_success") {
-                            LoginSession('login',user)
-                        }
-                    }).catch(function (error) {
-                        console.log(error);
-                    });
+                this.props.login(user);
             }
         });
     }
@@ -77,7 +57,6 @@ class NormalLoginForm extends React.Component {
                     <Button type="primary" htmlType="submit" className="login-form-button" style={{ width: '100%' }}>
                         Log in
                     </Button>
-                    Or <a href="#3">register now!</a>
                 </Form.Item>
             </Form>
         );
@@ -85,8 +64,5 @@ class NormalLoginForm extends React.Component {
 }
 
 const WrappedNormalLoginForm = Form.create({ name: 'normal_login' })(NormalLoginForm);
-
-
-
-
-export default WrappedNormalLoginForm;
+// export default WrappedNormalLoginForm;
+export default WrappedNormalLoginForm

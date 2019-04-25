@@ -1,11 +1,12 @@
 import React from 'react'
 import {
-    Form, Input, Tooltip, Icon, Select, Row, Col, Checkbox, Button, AutoComplete,
+    Form, Input, Tooltip, Icon, Select, Button
 } from 'antd';
+import axios from 'axios';
+import qs from 'qs'
 
 const { Option } = Select;
-const AutoCompleteOption = AutoComplete.Option;
-
+const path = 'http://localhost:80'
 class RegistrationForm extends React.Component {
     state = {
         confirmDirty: false,
@@ -16,7 +17,9 @@ class RegistrationForm extends React.Component {
         e.preventDefault();
         this.props.form.validateFieldsAndScroll((err, values) => {
             if (!err) {
-                console.log('Received values of form: ', values);
+                const {nickname,password,name,email,telephone}=values
+                const user={nickname,password,name,email,telephone};
+                this.register(user);
             }
         });
     }
@@ -42,20 +45,27 @@ class RegistrationForm extends React.Component {
         }
         callback();
     }
+    register = (data) => {
+        axios({
+            method: 'post',
+            url: `${path}/person?person=register`,
+            data: qs.stringify(data),
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
+            },
+        }).then(function (response) {
+            if (response.data.msg === "login_fail") {
 
-    handleWebsiteChange = (value) => {
-        let autoCompleteResult;
-        if (!value) {
-            autoCompleteResult = [];
-        } else {
-            autoCompleteResult = ['.com', '.org', '.net'].map(domain => `${value}${domain}`);
-        }
-        this.setState({ autoCompleteResult });
+            }
+            else if (response.data.msg === "login_success") {
+                
+            }
+        }).catch(function (error) {
+            console.log(error);
+        });
     }
-
     render() {
         const { getFieldDecorator } = this.props.form;
-        const { autoCompleteResult } = this.state;
 
         const formItemLayout = {
             labelCol: {
@@ -88,13 +98,9 @@ class RegistrationForm extends React.Component {
             </Select>
         );
 
-        const websiteOptions = autoCompleteResult.map(website => (
-            <AutoCompleteOption key={website}>{website}</AutoCompleteOption>
-        ));
-
         return (
             <Form {...formItemLayout} onSubmit={this.handleSubmit}>
-              <Form.Item
+                <Form.Item
                     label={(
                         <span>
                             Nickname&nbsp;
@@ -110,19 +116,7 @@ class RegistrationForm extends React.Component {
                         <Input />
                     )}
                 </Form.Item>
-                <Form.Item
-                    label="E-mail"
-                >
-                    {getFieldDecorator('email', {
-                        rules: [{
-                            type: 'email', message: 'The input is not valid E-mail!',
-                        }, {
-                            required: true, message: 'Please input your E-mail!',
-                        }],
-                    })(
-                        <Input />
-                    )}
-                </Form.Item>
+
                 <Form.Item
                     label="Password"
                 >
@@ -149,55 +143,39 @@ class RegistrationForm extends React.Component {
                         <Input type="password" onBlur={this.handleConfirmBlur} />
                     )}
                 </Form.Item>
-                
+                <Form.Item
+                    label="Name"
+                >
+                    {getFieldDecorator('name', {
+
+                    })(
+                        <Input />
+                    )}
+                </Form.Item>
+                <Form.Item
+                    label="E-mail"
+                >
+                    {getFieldDecorator('email', {
+                        rules: [{
+                            type: 'email', message: 'The input is not valid E-mail!',
+                        }, {
+                            required: true, message: 'Please input your E-mail!',
+                        }],
+                    })(
+                        <Input />
+                    )}
+                </Form.Item>
                 <Form.Item
                     label="Phone Number"
                 >
-                    {getFieldDecorator('phone', {
+                    {getFieldDecorator('telephone', {
                         rules: [{ required: true, message: 'Please input your phone number!' }],
                     })(
                         <Input addonBefore={prefixSelector} style={{ width: '100%' }} />
                     )}
                 </Form.Item>
-                <Form.Item
-                    label="Website"
-                >
-                    {getFieldDecorator('website', {
-                        rules: [{ required: true, message: 'Please input website!' }],
-                    })(
-                        <AutoComplete
-                            dataSource={websiteOptions}
-                            onChange={this.handleWebsiteChange}
-                            placeholder="website"
-                        >
-                            <Input />
-                        </AutoComplete>
-                    )}
-                </Form.Item>
-                <Form.Item
-                    label="Captcha"
-                    extra="We must make sure that your are a human."
-                >
-                    <Row gutter={8}>
-                        <Col span={12}>
-                            {getFieldDecorator('captcha', {
-                                rules: [{ required: true, message: 'Please input the captcha you got!' }],
-                            })(
-                                <Input />
-                            )}
-                        </Col>
-                        <Col span={12}>
-                            <Button>Get captcha</Button>
-                        </Col>
-                    </Row>
-                </Form.Item>
-                <Form.Item {...tailFormItemLayout}>
-                    {getFieldDecorator('agreement', {
-                        valuePropName: 'checked',
-                    })(
-                        <Checkbox>I have read the <a href="#1">agreement</a></Checkbox>
-                    )}
-                </Form.Item>
+
+
                 <Form.Item {...tailFormItemLayout}>
                     <Button type="primary" htmlType="submit">Register</Button>
                 </Form.Item>

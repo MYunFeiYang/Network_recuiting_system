@@ -4,7 +4,7 @@ import '../style/App.css'
 class Footer extends React.Component {
     render() {
         return (
-            <footer style={{padding:'20px'}}>
+            <footer>
                 <Row>
                     <Col span={6}>
                         <address className="center">
