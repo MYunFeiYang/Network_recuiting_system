@@ -1,6 +1,6 @@
 import React from 'react'
 import {
-    Form, Icon, Input, Checkbox, Radio, Button
+    Form, Icon, Input, Checkbox, Radio, Button, Alert
 } from 'antd';
 
 class NormalLoginForm extends React.Component {
@@ -47,7 +47,16 @@ class NormalLoginForm extends React.Component {
                     })(
                         <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Password" />
                     )}
+
+
                 </Form.Item>
+                {this.props.alertVisible ? (
+                    <Alert
+                        message="用户名或密码错误"
+                        type="error"
+                        closable afterClose={this.props.changeAlertVisible}
+                    />
+                ) : null}
                 <Form.Item>
                     {getFieldDecorator('remember', {
                         valuePropName: 'checked',

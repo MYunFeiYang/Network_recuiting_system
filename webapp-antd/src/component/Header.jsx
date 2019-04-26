@@ -1,5 +1,5 @@
 import React from 'react';
-import { Menu, Icon, Affix, Avatar, Button } from 'antd';
+import { Menu, Icon, Affix, Avatar } from 'antd';
 import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom'
 import Login from './login/Login';
 import Register from './register/Register';
@@ -8,7 +8,11 @@ import Video from './video'
 import Home from './main/home'
 import '../style/App.css'
 import School from './main/school/';
+import axios from 'axios';
+import qs from 'qs';
 import { connect } from 'react-redux';
+import actions from '../redux/actions';
+const path = 'http://localhost:80'
 
 const SubMenu = Menu.SubMenu;
 const MenuItemGroup = Menu.ItemGroup;
@@ -20,14 +24,36 @@ class Header extends React.Component {
       user: {},
     }
   }
-
+  isLogin = (data, user) => {
+    user.login = data;
+    axios({
+      method: 'post',
+      url: `${path}/public?public=loginSession`,
+      data: qs.stringify(user),
+      withCredentials: true,
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+    }).then((response) => {
+      if (typeof response.data.nickname === 'string') {
+        this.props.setUserInformation(response.data);
+        this.props.changeLoginState(true);
+      } else {
+        this.props.setUserInformation({});
+        this.props.changeLoginState(false);
+      }
+    }).catch(function (error) {
+      console.log(error);
+    });
+  }
   handleClick = (e) => {
     this.setState({
       current: e.key,
     });
   }
-
-
+  componentDidMount() {
+    this.isLogin('refresh', {});
+  }
   render() {
     return (
       <header>
@@ -74,22 +100,18 @@ class Header extends React.Component {
               </SubMenu>
               <SubMenu className="float-right" title={<span className="submenu-title-wrapper"
                 style={{ display: (this.props.isLogin === false) ? 'none' : 'block' }}>
-                <Avatar type='user'></Avatar></span>}>
+                <Avatar type='user'></Avatar>{this.props.user.nickname}</span>}>
                 <MenuItemGroup>
                   <Menu.Item>
-                    <Button>
-                      {this.props.user.nickname}
-                    </Button>
+                    <Icon type="desktop" />后台管理
                   </Menu.Item>
                   <Menu.Item>
-                    <Button>
-                      {this.props.user.password}
-                    </Button>
+                    <Icon type="message" />在线交流
                   </Menu.Item>
-                  <Menu.Item>
-                    <Button>
-                      {this.props.user.login_type}
-                    </Button>
+                  <Menu.Item onClick={() => {
+                    this.isLogin('delete', {})
+                  }}>
+                    <Icon type="logout" />退出登录
                   </Menu.Item>
                 </MenuItemGroup>
               </SubMenu>
@@ -109,4 +131,4 @@ class Header extends React.Component {
 }
 export default connect((state) => ({
   ...state
-}))(Header);
+}), actions)(Header);

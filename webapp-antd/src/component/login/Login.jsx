@@ -13,9 +13,20 @@ class Login extends React.Component {
         super();
         this.state = {
             visible: true,
+            alertVisible:false,
         }
     }
-
+    changeAlertVisible=()=>{
+        if(this.state.alertVisible){
+            this.setState({
+                alertVisible:false,
+            })
+        }else{
+            this.setState({
+                alertVisible:true,
+            })
+        }
+    }
     handleCancel = () => {
         this.setState({ visible: false });
     }
@@ -29,12 +40,11 @@ class Login extends React.Component {
             },
         }).then((response) => {
             if (response.data.msg === "login_fail") {
-
+                this.changeAlertVisible();
             }
             else if (response.data.msg === "login_success") {
                 isLogin('login', user);
-                this.props.setUserInformation(user);
-                this.props.changeLoginState(true);
+                window.location.href='http://localhost:3000';
             }
         }).catch(function (error) {
             console.log(error);
@@ -42,7 +52,8 @@ class Login extends React.Component {
     }
     render() {
         return (
-            <LoginBox login={this.login}></LoginBox>
+            <LoginBox login={this.login} alertVisible={this.state.alertVisible}
+            changeAlertVisible={this.changeAlertVisible}></LoginBox>
         );
     }
 }

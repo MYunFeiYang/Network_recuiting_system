@@ -13,7 +13,8 @@ import java.io.IOException;
 public class servletPublic extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // 允许该域发起跨域请
-        response.setHeader("Access-Control-Allow-Origin", "*");//*允许任何域
+        response.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+        response.setHeader("Access-Control-Allow-Credentials", "true");
         response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, PATCH, OPTIONS");
         response.setHeader("Access-Control-Max-Age", "3628800");
         response.setHeader("Access-Control-Allow-Headers", "Origin,Content-Type,X-Auth-Token");
