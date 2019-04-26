@@ -6,6 +6,9 @@ import Register from './register/Register';
 import Audio from './audio'
 import Video from './video'
 import Home from './main/home'
+import Person from './person/'
+import Enterprise from './enterprise/'
+import Admin from './admin/'
 import '../style/App.css'
 import School from './main/school/';
 import axios from 'axios';
@@ -61,7 +64,9 @@ class Header extends React.Component {
       case 'person':
         loginResult = <MenuItemGroup>
           <Menu.Item>
-            <Icon type="desktop" />个人中心
+            <Link to={`/person/`}>
+              <Icon type="desktop" />个人中心
+            </Link>
           </Menu.Item>
           <Menu.Item>
             <Icon type="message" />在线交流
@@ -76,7 +81,9 @@ class Header extends React.Component {
       case 'enterprise':
         loginResult = <MenuItemGroup>
           <Menu.Item>
-            <Icon type="desktop" />企业中心
+            <Link to={`/enterprise/`}>
+              <Icon type="desktop" />企业中心
+            </Link>
           </Menu.Item>
           <Menu.Item>
             <Icon type="message" />在线交流
@@ -91,7 +98,9 @@ class Header extends React.Component {
       default:
         loginResult = <MenuItemGroup>
           <Menu.Item>
-            <Icon type="desktop" />后台管理
+            <Link to={`/admin/`}>
+              <Icon type="desktop" />后台管理
+            </Link>
           </Menu.Item>
           <Menu.Item>
             <Icon type="message" />在线交流
@@ -108,7 +117,7 @@ class Header extends React.Component {
       <header>
         <Router>
           <Affix offsetTop={0}>
-            <Menu theme="dark"
+            <Menu theme="light"
               onClick={this.handleClick}
               selectedKeys={[this.state.current]}
               mode="horizontal">
@@ -159,6 +168,9 @@ class Header extends React.Component {
             <Route path="/video/" exact component={Video} />
             <Route path="/school/" exact component={School} />
             <Route path="/login/" exact component={Login} />
+            <Route path="/person/" exact component={Person} />
+            <Route path="/enterprise/" exact component={Enterprise} />
+            <Route path="/admin/" exact component={Admin} />
             <Route path="/" exact component={Home} />
           </Switch>
         </Router>
