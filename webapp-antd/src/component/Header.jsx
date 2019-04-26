@@ -55,6 +55,55 @@ class Header extends React.Component {
     this.isLogin('refresh', {});
   }
   render() {
+    let loginResult;
+    const loginType = this.props.user.login_type;
+    switch (loginType) {
+      case 'person':
+        loginResult = <MenuItemGroup>
+          <Menu.Item>
+            <Icon type="desktop" />个人中心
+          </Menu.Item>
+          <Menu.Item>
+            <Icon type="message" />在线交流
+          </Menu.Item>
+          <Menu.Item onClick={() => {
+            this.isLogin('delete', {})
+          }}>
+            <Icon type="logout" />退出登录
+          </Menu.Item>
+        </MenuItemGroup>
+        break;
+      case 'enterprise':
+        loginResult = <MenuItemGroup>
+          <Menu.Item>
+            <Icon type="desktop" />企业中心
+          </Menu.Item>
+          <Menu.Item>
+            <Icon type="message" />在线交流
+          </Menu.Item>
+          <Menu.Item onClick={() => {
+            this.isLogin('delete', {})
+          }}>
+            <Icon type="logout" />退出登录
+          </Menu.Item>
+        </MenuItemGroup>
+        break;
+      default:
+        loginResult = <MenuItemGroup>
+          <Menu.Item>
+            <Icon type="desktop" />后台管理
+          </Menu.Item>
+          <Menu.Item>
+            <Icon type="message" />在线交流
+          </Menu.Item>
+          <Menu.Item onClick={() => {
+            this.isLogin('delete', {})
+          }}>
+            <Icon type="logout" />退出登录
+          </Menu.Item>
+        </MenuItemGroup>
+        break
+    }
     return (
       <header>
         <Router>
@@ -101,19 +150,7 @@ class Header extends React.Component {
               <SubMenu className="float-right" title={<span className="submenu-title-wrapper"
                 style={{ display: (this.props.isLogin === false) ? 'none' : 'block' }}>
                 <Avatar type='user'></Avatar>{this.props.user.nickname}</span>}>
-                <MenuItemGroup>
-                  <Menu.Item>
-                    <Icon type="desktop" />后台管理
-                  </Menu.Item>
-                  <Menu.Item>
-                    <Icon type="message" />在线交流
-                  </Menu.Item>
-                  <Menu.Item onClick={() => {
-                    this.isLogin('delete', {})
-                  }}>
-                    <Icon type="logout" />退出登录
-                  </Menu.Item>
-                </MenuItemGroup>
+                {loginResult}
               </SubMenu>
             </Menu>
           </Affix>
