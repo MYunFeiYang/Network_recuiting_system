@@ -44,14 +44,8 @@ main ul li {
     color: green;
 }
 
-main {
-    position: relative;
-}
-
 footer {
-    position: absolute;
-    bottom: 0px;
-    width: 100%;
+    margin-top: 20px;
     background-color: #0000004d;
     padding: 20px 30px 10px 30px
 }
