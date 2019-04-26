@@ -1,12 +1,11 @@
 import React from 'react';
-import { Modal } from 'antd';
 import LoginBox from './LoginBox';
 import '../../style/App.css'
 import axios from 'axios';
 import qs from 'qs';
 import { connect } from 'react-redux';
 import actions from '../../redux/actions';
-import {isLogin} from '../../util';
+import { isLogin } from '../../util';
 
 const path = 'http://localhost:80'
 class Login extends React.Component {
@@ -33,27 +32,17 @@ class Login extends React.Component {
 
             }
             else if (response.data.msg === "login_success") {
-               isLogin('login', user);
+                isLogin('login', user);
                 this.props.setUserInformation(user);
+                this.props.changeLoginState(true);
             }
         }).catch(function (error) {
             console.log(error);
         });
     }
     render() {
-        const { visible } = this.state;
         return (
-            <div>
-                <Modal
-                    visible={visible}
-                    title="系统登录"
-                    onOk={this.handleOk}
-                    onCancel={this.handleCancel}
-                    footer={null}
-                    closable={false} mask={false}>
-                    <LoginBox login={this.login}></LoginBox>
-                </Modal>
-            </div>
+            <LoginBox login={this.login}></LoginBox>
         );
     }
 }

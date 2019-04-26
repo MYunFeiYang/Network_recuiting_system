@@ -1,12 +1,11 @@
 import React from 'react';
-import { Modal, Button, Row, Col, Icon, Menu, Dropdown, Slider } from 'antd';
+import { Button, Row, Col, Icon, Menu, Dropdown, Slider } from 'antd';
 import '../style/App.css'
 
 class Audio extends React.Component {
     constructor() {
         super();
         this.state = {
-            visible: true,
             data: [
                 {
                     name: "爱拼才会赢(闽).mp3",
@@ -34,7 +33,7 @@ class Audio extends React.Component {
             playedTime: '00:00',
             totalTime: '',
             playPause: 'play',
-            loopType:'循环模式'
+            loopType: '循环模式'
         }
     }
 
@@ -137,7 +136,7 @@ class Audio extends React.Component {
         let currentIndex = this.state.currentIndex;
         console.log(this.state.currentIndex)
         if (this.state.currentIndex != null) {
-            if (currentIndex <this.state.data.length-1) {
+            if (currentIndex < this.state.data.length - 1) {
                 currentIndex++;
             }
             const audio = document.getElementById('audio');
@@ -154,40 +153,39 @@ class Audio extends React.Component {
             }
         }
     }
-     // 单曲循环
-     loopPlay=(e)=>{
+    // 单曲循环
+    loopPlay = (e) => {
         this.refs.audio.onended = function () {
             this.refs.audio.load();
             this.refs.audio.play();
         };
-        const loopType=e.target.getAttribute('data-looptype')
+        const loopType = e.target.getAttribute('data-looptype')
         this.setState({
             loopType
         })
     };
     // 列表循环
-    orderPlay=(e)=>{
+    orderPlay = (e) => {
         this.refs.audio.onended = function () {
             this.refs.stepForward.click();
         };
-        const loopType=e.target.getAttribute('data-looptype')
+        const loopType = e.target.getAttribute('data-looptype')
         this.setState({
             loopType
         })
     }
     // 随机播放
-    randomPlay=(e)=>{
+    randomPlay = (e) => {
         this.refs.audio.onended = function () {
             let i = parseInt((this.data.length - 1) * Math.random());
             this.playByMe(i);
         };
-        const loopType=e.target.getAttribute('data-looptype')
+        const loopType = e.target.getAttribute('data-looptype')
         this.setState({
             loopType
         })
     };
     render() {
-        const { visible } = this.state;
         const menu = (
             <Menu>
                 <Menu.Item>
@@ -207,61 +205,52 @@ class Audio extends React.Component {
                 </Menu.Item>
             </Menu>
         );
-        return (
-            <div>
-                <Modal
-                    visible={visible}
-                    title="问道播放器"
-                    onOk={this.handleOk}
-                    onCancel={this.handleCancel}
-                    footer={null} closable={false} mask={false}>
-                    <Row>
-                        <Col span={24}>
-                            <ol ref="mlist" onClick={this.playByMe}>
-                                {this.state.data.map((value, index) => {
-                                    return <li key={index}><a href={value.url} data-index={index}>{value.name}</a></li>
-                                })}
-                            </ol>
-                        </Col>
-                        <Col span={24}>
-                            正在播放: <strong>{this.state.currentMusic.name}</strong>
-                            <audio src={this.state.currentMusic.url} onTimeUpdate={this.updateProgress}
-                                onEnded={this.audioEnded} ref="audio" id="audio"></audio>
-                            <Slider value={this.state.pgsPlay} onChange={this.handleClickProgress} />
-                            <Row>
-                                <Col span={4}>
-                                    <span>{this.state.playedTime}</span>
-                                </Col>
-                                <Col span={3}>
-                                    <Button onClick={this.handleBtuPre}>
-                                        <Icon type="step-backward" />
-                                    </Button>
-                                </Col>
-                                <Col span={4}>
-                                    <Button onClick={this.changePlayPause}>
-                                        {this.state.playPause}
-                                    </Button>
-                                </Col>
-                                <Col span={3}>
-                                    <Button onClick={this.handleBtuNext} refs="stepForward">
-                                        <Icon type="step-forward" />
-                                    </Button>
-                                </Col>
-                                <Col span={4}>
-                                    <span>{this.state.totalTime}</span>
-                                </Col>
-                                <Col span={6}>
-                                    <Dropdown overlay={menu}>
-                                        <Button ref="loopType">
-                                            {this.state.loopType}<Icon type="down" />
-                                        </Button>
-                                    </Dropdown>
-                                </Col>
-                            </Row>
-                        </Col>
-                    </Row>
-                </Modal>
-            </div >
+        return (<Row style={{width:'50%',margin:'10% 25%',padding:'20px',
+        boxShadow: '2px 2px 2px 1px rgba(0, 0, 255, .2)',}}>
+            <Col span={24}>
+                <ol ref="mlist" onClick={this.playByMe}>
+                    {this.state.data.map((value, index) => {
+                        return <li key={index}><a href={value.url} data-index={index}>{value.name}</a></li>
+                    })}
+                </ol>
+            </Col>
+            <Col span={24}>
+                正在播放: <strong>{this.state.currentMusic.name}</strong>
+                <audio src={this.state.currentMusic.url} onTimeUpdate={this.updateProgress}
+                    onEnded={this.audioEnded} ref="audio" id="audio"></audio>
+                <Slider value={this.state.pgsPlay} onChange={this.handleClickProgress} />
+                <Row>
+                    <Col span={4}>
+                        <span>{this.state.playedTime}</span>
+                    </Col>
+                    <Col span={3}>
+                        <Button onClick={this.handleBtuPre}>
+                            <Icon type="step-backward" />
+                        </Button>
+                    </Col>
+                    <Col span={4}>
+                        <Button onClick={this.changePlayPause}>
+                            {this.state.playPause}
+                        </Button>
+                    </Col>
+                    <Col span={3}>
+                        <Button onClick={this.handleBtuNext} refs="stepForward">
+                            <Icon type="step-forward" />
+                        </Button>
+                    </Col>
+                    <Col span={4}>
+                        <span>{this.state.totalTime}</span>
+                    </Col>
+                    <Col span={6}>
+                        <Dropdown overlay={menu}>
+                            <Button ref="loopType">
+                                {this.state.loopType}<Icon type="down" />
+                            </Button>
+                        </Dropdown>
+                    </Col>
+                </Row>
+            </Col>
+        </Row>
         );
     }
 }

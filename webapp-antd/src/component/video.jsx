@@ -1,12 +1,11 @@
 import React from 'react';
-import { Modal, Row, Col, Icon, Slider } from 'antd';
+import { Row, Col, Icon, Slider } from 'antd';
 import '../style/App.css'
 
 class Video extends React.Component {
     constructor() {
         super();
         this.state = {
-            visible: true,
             video: {
                 url: "http://nettuts.s3.amazonaws.com/763_sammyJSIntro/trailer_test.mp4"
             },
@@ -147,44 +146,38 @@ class Video extends React.Component {
         }
     }
     render() {
-        const { visible } = this.state;
-        return (<Modal
-            visible={visible}
-            title="问道播放器"
-            onOk={this.handleOk}
-            onCancel={this.handleCancel}
-            footer={null} closable={false} mask={false}>
-            <Row id="fullScreen" style={{ position: 'relative' }}>
-                <Col span={24}>
-                    <video src={this.state.video.url} onTimeUpdate={this.updateProgress}
-                        onEnded={this.videoEnded} ref="video" id="video" style={{ width: '100%' }}></video>
-                    <Row className="video-progress-background">
-                        <Col span={1} className="vertical-center" onClick={this.changePlayPause}>
-                            <Icon type={this.state.playPause} />
-                        </Col>
-                        <Col span={6} className="vertical-center">
-                            <span>{this.state.playedTime}</span>
-                            <span>/</span>
-                            <span>{this.state.totalTime}</span>
-                        </Col>
+        return <Row id="fullScreen" style={{
+            width: '50%', margin: '5% 25%', padding: '10px',
+            boxShadow: '2px 2px 2px 1px rgba(0, 0, 255, .2)', position: 'relative'
+        }}>
+            <Col span={24}>
+                <video src={this.state.video.url} onTimeUpdate={this.updateProgress}
+                    onEnded={this.videoEnded} ref="video" id="video" style={{ width: '100%' }}></video>
+                <Row className="video-progress-background">
+                    <Col span={1} className="vertical-center" onClick={this.changePlayPause}>
+                        <Icon type={this.state.playPause} />
+                    </Col>
+                    <Col span={6} className="vertical-center">
+                        <span>{this.state.playedTime}</span>
+                        <span>/</span>
+                        <span>{this.state.totalTime}</span>
+                    </Col>
 
-                        <Col span={11}>
-                            <Slider value={this.state.pgsPlay} onChange={this.handleClickVideoProgress} />
-                        </Col>
-                        <Col span={1} className="vertical-center" onClick={this.handleClickVolume}>
-                            <Icon type="sound" />
-                        </Col>
-                        <Col span={4}>
-                            <Slider value={this.state.volume} onChange={this.handleClickVolumeProgress} />
-                        </Col>
-                        <Col span={1} className="vertical-center" onClick={this.changeScreen}>
-                            <Icon type={this.state.screen} />
-                        </Col>
-                    </Row>
-                </Col>
-            </Row>
-        </Modal>
-        );
+                    <Col span={11}>
+                        <Slider value={this.state.pgsPlay} onChange={this.handleClickVideoProgress} />
+                    </Col>
+                    <Col span={1} className="vertical-center" onClick={this.handleClickVolume}>
+                        <Icon type="sound" />
+                    </Col>
+                    <Col span={4}>
+                        <Slider value={this.state.volume} onChange={this.handleClickVolumeProgress} />
+                    </Col>
+                    <Col span={1} className="vertical-center" onClick={this.changeScreen}>
+                        <Icon type={this.state.screen} />
+                    </Col>
+                </Row>
+            </Col>
+        </Row>
     }
 }
 export default Video;

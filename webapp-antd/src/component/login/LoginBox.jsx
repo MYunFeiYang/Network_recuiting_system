@@ -17,7 +17,11 @@ class NormalLoginForm extends React.Component {
     render() {
         const { getFieldDecorator } = this.props.form;
         return (
-            <Form onSubmit={this.handleSubmit} className="login-form">
+            <Form onSubmit={this.handleSubmit} className="login-form"
+                style={{
+                    width: '40%', margin: '5% 30%', padding: '20px',
+                    boxShadow: '2px 2px 2px 1px rgba(0, 0, 255, .2)',
+                }}>
                 <Form.Item
                     label="用户类型">
                     {getFieldDecorator('login_type', {
@@ -64,5 +68,4 @@ class NormalLoginForm extends React.Component {
 }
 
 const WrappedNormalLoginForm = Form.create({ name: 'normal_login' })(NormalLoginForm);
-// export default WrappedNormalLoginForm;
 export default WrappedNormalLoginForm
