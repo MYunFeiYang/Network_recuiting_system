@@ -348,6 +348,7 @@ public class Common {
                 company.setPosition(rs.getString("position"));
                 company.setAddress(rs.getString("address"));
                 company.setTime(rs.getString("time"));
+                company.setKey(rs.getInt("id"));
                 companyList.add(company);
             }
             int rowCount = ps.getInt(1);

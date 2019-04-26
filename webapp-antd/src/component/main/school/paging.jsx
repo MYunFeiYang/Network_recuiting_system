@@ -19,11 +19,11 @@ class Paging extends React.Component {
     }];
     return <Fragment>
       <Table columns={columns} dataSource={this.props.paging[0].list}
-        size="small" pagination={false} rowKey="name"
+        size="small" pagination={false} rowKey="key"
         expandedRowRender={record => <p style={{ margin: 0 }}>{record.position}</p>} />
       <Pagination defaultCurrent={this.props.paging[0].pageNum}
         total={this.props.paging[0].totalPage} onChange={this.props.paginate}
-        hideOnSinglePage={true} />
+        hideOnSinglePage={true} style={{float:"right"}}/>
     </Fragment>
 
   }

@@ -64,16 +64,21 @@ class School extends React.Component {
     let page = {};
     page.pageSize = 10;
     page.pageNum = 1;
-    const pagingType = e.target.getAttribute('data-paging-type');
+    let pagingType;
+    if(typeof e ==='number'){
+      page.pageNum=e;
+    }else{
+      pagingType = e.target.getAttribute('data-paging-type');
+    }
     switch (pagingType) {
       case 'address':
         page.position = this.props.selectedPosition;
         page.address = e.target.innerText;
-        this.props.setSelectedAddress(e.target.value)
+        this.props.setSelectedAddress(e.target.innerText)
         break;
       case 'position':
         page.position = e.target.innerText;
-        this.props.setSelectedPosition(e.target.value)
+        this.props.setSelectedPosition(e.target.innerText)
         page.address = this.props.selectedAddress;
         break;
       default:
@@ -81,7 +86,6 @@ class School extends React.Component {
         page.address = this.props.selectedAddress;
         break;
     }
-    console.log(page)
     axios({
       url: `${path}/public?public=paging`,
       data: qs.stringify(page),

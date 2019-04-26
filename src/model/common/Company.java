@@ -5,6 +5,7 @@ public class Company {
     private String position;
     private String address;
     private String time;
+    private int key;
 
     public String getName() {
         return name;
@@ -36,5 +37,12 @@ public class Company {
 
     public void setTime(String time) {
         this.time = time;
+    }
+    public int getKey() {
+        return key;
+    }
+
+    public void setKey(int key) {
+        this.key = key;
     }
 }
