@@ -7,7 +7,7 @@ import Audio from './audio'
 import Video from './video'
 import Home from './main/home'
 import '../style/App.css'
-import School from './school';
+import School from './main/school/';
 import { connect } from 'react-redux';
 
 const SubMenu = Menu.SubMenu;

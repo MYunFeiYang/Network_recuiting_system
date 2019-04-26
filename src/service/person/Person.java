@@ -298,7 +298,7 @@ public class Person {
     }
 
     public void deleteResume(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-  
+
         String identification = request.getParameter("identification");
         DBManager dbmanager = new DBManager();
         Connection conn = dbmanager.getConnection();
