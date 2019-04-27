@@ -2,12 +2,13 @@ import React from 'react';
 import { Menu, Icon, Affix, Avatar } from 'antd';
 import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom'
 import Login from './login/Login';
-import Register from './register/Register';
 import Audio from './audio'
 import Video from './video'
 import Home from './main/home'
 import Person from './person/'
 import Enterprise from './enterprise/'
+import RegisterPerson from './register/Person'
+import RegisterEnterprise from './register/Enterprise'
 import Admin from './admin/'
 import '../style/App.css'
 import School from './main/school/';
@@ -63,15 +64,15 @@ class Header extends React.Component {
     switch (loginType) {
       case 'person':
         loginResult = <MenuItemGroup>
-          <Menu.Item>
+          <Menu.Item key='person'>
             <Link to={`/person/`}>
               <Icon type="desktop" />个人中心
             </Link>
           </Menu.Item>
-          <Menu.Item>
+          <Menu.Item key='message'>
             <Icon type="message" />在线交流
           </Menu.Item>
-          <Menu.Item onClick={() => {
+          <Menu.Item key='logout' onClick={() => {
             this.isLogin('delete', {})
           }}>
             <Icon type="logout" />退出登录
@@ -80,15 +81,15 @@ class Header extends React.Component {
         break;
       case 'enterprise':
         loginResult = <MenuItemGroup>
-          <Menu.Item>
+          <Menu.Item key='enterprise'>
             <Link to={`/enterprise/`}>
               <Icon type="desktop" />企业中心
             </Link>
           </Menu.Item>
-          <Menu.Item>
+          <Menu.Item key='message'>
             <Icon type="message" />在线交流
           </Menu.Item>
-          <Menu.Item onClick={() => {
+          <Menu.Item key='delete' onClick={() => {
             this.isLogin('delete', {})
           }}>
             <Icon type="logout" />退出登录
@@ -97,15 +98,15 @@ class Header extends React.Component {
         break;
       default:
         loginResult = <MenuItemGroup>
-          <Menu.Item>
+          <Menu.Item key='admin'>
             <Link to={`/admin/`}>
               <Icon type="desktop" />后台管理
             </Link>
           </Menu.Item>
-          <Menu.Item>
+          <Menu.Item key='message'>
             <Icon type="message" />在线交流
           </Menu.Item>
-          <Menu.Item onClick={() => {
+          <Menu.Item key='delete' onClick={() => {
             this.isLogin('delete', {})
           }}>
             <Icon type="logout" />退出登录
@@ -145,14 +146,14 @@ class Header extends React.Component {
               <SubMenu className="float-right" title={<span className="submenu-title-wrapper"
                 style={{ display: (this.props.isLogin === false) ? 'block' : 'none' }}>
                 <Icon type="user-add" />注册</span>}>
-                <MenuItemGroup title={"个人注册"}>
+                <MenuItemGroup >
                   <Menu.Item key="register-p">
-                    <Register type="个人注册"></Register>
+                    <Link to={`/register/person/`}>个人注册</Link>
                   </Menu.Item>
                 </MenuItemGroup>
-                <MenuItemGroup title="企业注册">
+                <MenuItemGroup>
                   <Menu.Item key="register-e">
-                    <Register type="企业注册"></Register>
+                  <Link to={`/register/enterprise/`}>企业注册</Link>
                   </Menu.Item>
                 </MenuItemGroup>
               </SubMenu>
@@ -171,6 +172,8 @@ class Header extends React.Component {
             <Route path="/person/" exact component={Person} />
             <Route path="/enterprise/" exact component={Enterprise} />
             <Route path="/admin/" exact component={Admin} />
+            <Route path="/register/enterprise/" exact component={RegisterEnterprise} />
+            <Route path="/register/person" exact component={RegisterPerson} />
             <Route path="/" exact component={Home} />
           </Switch>
         </Router>

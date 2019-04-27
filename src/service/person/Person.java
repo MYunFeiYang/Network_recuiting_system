@@ -132,7 +132,6 @@ public class Person {
 
         String nickname = request.getParameter("nickname");
         String password = request.getParameter("password");
-        // System.out.println(nickname);
         DBManager dbmanager = new DBManager();
         Connection conn = dbmanager.getConnection();
         try {

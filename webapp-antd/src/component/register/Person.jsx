@@ -3,7 +3,8 @@ import {
     Form, Input, Tooltip, Icon, Select, Button
 } from 'antd';
 import axios from 'axios';
-import qs from 'qs'
+import qs from 'qs';
+import { checkEmail ,nicknameAndPasswordAleadyExist} from '../../util';
 
 const { Option } = Select;
 const path = 'http://localhost:80'
@@ -12,14 +13,15 @@ class RegistrationForm extends React.Component {
         confirmDirty: false,
         autoCompleteResult: [],
     };
-
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.form.validateFieldsAndScroll((err, values) => {
             if (!err) {
-                const {nickname,password,name,email,telephone}=values
-                const user={nickname,password,name,email,telephone};
-                this.register(user);
+                const { nickname, password, name, email, telephone } = values
+                const user = { nickname, password, name, email, telephone };
+                checkEmail(this.props.form.getFieldValue('email'), () => {
+                    this.register(user);
+                })
             }
         });
     }
@@ -32,7 +34,7 @@ class RegistrationForm extends React.Component {
     compareToFirstPassword = (rule, value, callback) => {
         const form = this.props.form;
         if (value && value !== form.getFieldValue('password')) {
-            callback('Two passwords that you enter is inconsistent!');
+            callback('你输入的两次密码不一致!');
         } else {
             callback();
         }
@@ -54,11 +56,11 @@ class RegistrationForm extends React.Component {
                 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
             },
         }).then(function (response) {
-            if (response.data.msg === "login_fail") {
-
+            if (response.data.msg === "assessing") {
+                window.location.href = 'http://localhost:3000/login'
             }
-            else if (response.data.msg === "login_success") {
-                
+            else {
+                nicknameAndPasswordAleadyExist();
             }
         }).catch(function (error) {
             console.log(error);
@@ -94,16 +96,19 @@ class RegistrationForm extends React.Component {
         })(
             <Select style={{ width: 70 }}>
                 <Option value="86">+86</Option>
-                <Option value="87">+87</Option>
             </Select>
         );
 
         return (
-            <Form {...formItemLayout} onSubmit={this.handleSubmit}>
+            <Form {...formItemLayout} onSubmit={this.handleSubmit}
+                style={{
+                    width: '40%', margin: '1% 30%', padding: '20px',
+                    boxShadow: '2px 2px 2px 1px rgba(0, 0, 255, .2)',
+                }}>
                 <Form.Item
                     label={(
                         <span>
-                            Nickname&nbsp;
+                            用户名&nbsp;
                 <Tooltip title="What do you want others to call you?">
                                 <Icon type="question-circle-o" />
                             </Tooltip>
@@ -111,18 +116,18 @@ class RegistrationForm extends React.Component {
                     )}
                 >
                     {getFieldDecorator('nickname', {
-                        rules: [{ required: true, message: 'Please input your nickname!', whitespace: true }],
+                        rules: [{ required: true, message: '请输入你的用户名!', whitespace: true }],
                     })(
                         <Input />
                     )}
                 </Form.Item>
 
                 <Form.Item
-                    label="Password"
+                    label="密码"
                 >
                     {getFieldDecorator('password', {
                         rules: [{
-                            required: true, message: 'Please input your password!',
+                            required: true, message: '请输入你的密码!',
                         }, {
                             validator: this.validateToNextPassword,
                         }],
@@ -131,11 +136,11 @@ class RegistrationForm extends React.Component {
                     )}
                 </Form.Item>
                 <Form.Item
-                    label="Confirm Password"
+                    label="确认密码"
                 >
                     {getFieldDecorator('confirm', {
                         rules: [{
-                            required: true, message: 'Please confirm your password!',
+                            required: true, message: '请确认密码!',
                         }, {
                             validator: this.compareToFirstPassword,
                         }],
@@ -144,7 +149,7 @@ class RegistrationForm extends React.Component {
                     )}
                 </Form.Item>
                 <Form.Item
-                    label="Name"
+                    label="姓名"
                 >
                     {getFieldDecorator('name', {
 
@@ -153,23 +158,23 @@ class RegistrationForm extends React.Component {
                     )}
                 </Form.Item>
                 <Form.Item
-                    label="E-mail"
+                    label="邮件"
                 >
                     {getFieldDecorator('email', {
                         rules: [{
-                            type: 'email', message: 'The input is not valid E-mail!',
+                            type: 'email', message: '请输入有效邮箱!',
                         }, {
-                            required: true, message: 'Please input your E-mail!',
+                            required: true, message: '请输入你的邮箱!',
                         }],
                     })(
                         <Input />
                     )}
                 </Form.Item>
                 <Form.Item
-                    label="Phone Number"
+                    label="电话"
                 >
                     {getFieldDecorator('telephone', {
-                        rules: [{ required: true, message: 'Please input your phone number!' }],
+                        rules: [{ required: true, message: '请输入你的联系电话!' }],
                     })(
                         <Input addonBefore={prefixSelector} style={{ width: '100%' }} />
                     )}
@@ -177,7 +182,7 @@ class RegistrationForm extends React.Component {
 
 
                 <Form.Item {...tailFormItemLayout}>
-                    <Button type="primary" htmlType="submit">Register</Button>
+                    <Button type="primary" htmlType="submit">注册</Button>
                 </Form.Item>
             </Form>
         );
@@ -185,10 +190,4 @@ class RegistrationForm extends React.Component {
 }
 
 const WrappedRegistrationForm = Form.create({ name: 'register' })(RegistrationForm);
-
-
-
-
-
-
 export default WrappedRegistrationForm;
