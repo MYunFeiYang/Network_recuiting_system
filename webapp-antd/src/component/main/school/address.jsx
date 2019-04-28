@@ -6,7 +6,7 @@ class Address extends React.Component {
   constructor() {
     super();
     this.state = {
-      theme: 'dark',
+      theme: 'light',
       current: '1',
     }
   }
