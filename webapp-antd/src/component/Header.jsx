@@ -169,9 +169,9 @@ class Header extends React.Component {
             <Route path="/video/" exact component={Video} />
             <Route path="/school/" exact component={School} />
             <Route path="/login/" exact component={Login} />
-            <Route path="/person/" exact component={Person} />
-            <Route path="/enterprise/" exact component={Enterprise} />
-            <Route path="/admin/" exact component={Admin} />
+            <Route path="/person/" component={Person} />
+            <Route path="/enterprise/" component={Enterprise} />
+            <Route path="/admin/" component={Admin} />
             <Route path="/register/enterprise/" exact component={RegisterEnterprise} />
             <Route path="/register/person" exact component={RegisterPerson} />
             <Route path="/" exact component={Home} />
