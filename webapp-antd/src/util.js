@@ -19,6 +19,20 @@ const emailAleadyExist = () => {
         key,
     });
 };
+export function ModifyUserSuccess  () {
+    const key = `open${Date.now()}`;
+    const btn = (
+        <Button type="primary" size="small" onClick={() => notification.close(key)}>
+            确认
+      </Button>
+    );
+    notification.open({
+        message: '信息修改',
+        description: '用户信息已修改成功',
+        btn,
+        key,
+    });
+};
 export function nicknameAndPasswordAleadyExist () {
     const key = `open${Date.now()}`;
     const btn = (<Button type="primary" size="small" onClick={() => notification.close(key)
