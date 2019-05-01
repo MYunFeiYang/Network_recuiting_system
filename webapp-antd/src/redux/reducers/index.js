@@ -2,7 +2,7 @@ import {
   SET_USER_INFORMATION, SET_INDUSTRY_INFORMATION, SET_ADDRESS_INFORMATION,
   SET_POSITION_INFORMATION, CHANGE_LOGIN_STATE, SET_SELECTED_POSITION,
   SET_SELECTED_ADDRESS, SET_PAGING_INFORMATION, SET_ADMIN_INFORMATION,
-  SET_RESUME_INFORMATION,SET_JOB_INFORMATION
+  SET_RESUME_INFORMATION, SET_JOB_INFORMATION, SET_ASSESS_INFORMATION
 } from '../actions/action_types';
 let initState = {
   user: {
@@ -19,7 +19,8 @@ let initState = {
   paging: [{ list: [] }],
   admin: [],
   resume: [{}],
-  job:[{}],
+  job: [{}],
+  assess: [],
 }
 
 function reducer(state = initState, action) {
@@ -85,10 +86,16 @@ function reducer(state = initState, action) {
         resume: action.payload
       };
       break;
-      case SET_JOB_INFORMATION:
+    case SET_JOB_INFORMATION:
       newState = {
         ...state,
         job: action.payload
+      };
+      break;
+    case SET_ASSESS_INFORMATION:
+      newState = {
+        ...state,
+        assess: action.payload
       };
       break;
     default:

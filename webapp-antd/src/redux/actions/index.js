@@ -1,7 +1,7 @@
 import {SET_USER_INFORMATION,SET_INDUSTRY_INFORMATION,SET_ADDRESS_INFORMATION,
   SET_POSITION_INFORMATION,CHANGE_LOGIN_STATE,SET_SELECTED_POSITION,
 SET_SELECTED_ADDRESS,SET_PAGING_INFORMATION,SET_ADMIN_INFORMATION,
-SET_RESUME_INFORMATION,SET_JOB_INFORMATION} from './action_types';
+SET_RESUME_INFORMATION,SET_JOB_INFORMATION,SET_ASSESS_INFORMATION} from './action_types';
 
 let actions = {
   setUserInformation: function(payload) {
@@ -36,6 +36,9 @@ let actions = {
   },
   setJobInformation: function(payload) {
     return {type: SET_JOB_INFORMATION, payload};
+  },
+  setAssessInformation: function(payload) {
+    return {type: SET_ASSESS_INFORMATION, payload};
   },
 };
 

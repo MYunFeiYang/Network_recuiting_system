@@ -194,3 +194,17 @@ export function checkEmail(value, register) {
         console.log(error);
     });
 }
+export function assessPass () {
+    const key = `open${Date.now()}`;
+    const btn = (<Button type="primary" size="small" onClick={() => notification.close(key)
+    }>
+        确认
+      </Button >
+    );
+    notification.open({
+        message: '注册审核',
+        description: '注册审核痛过',
+        btn,
+        key,
+    });
+};

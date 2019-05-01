@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import {
   Table, Input, Button, Popconfirm, Form,
 } from 'antd';
@@ -113,10 +113,12 @@ class AdminPower extends React.Component {
       dataIndex: 'operation',
       render: (text, record) => (
         this.props.admin.length >= 1
-          ? (
+          ? (<Fragment>
             <Popconfirm title="确定删除该管理员吗?" onConfirm={() => this.handleDelete(record.key)}>
               <Button>删除</Button>
             </Popconfirm>
+            <Button>保存</Button>
+          </Fragment>
           ) : null
       ),
     }];
@@ -129,7 +131,7 @@ class AdminPower extends React.Component {
 
   handleAdd = () => {
     const dataSource = this.props.admin
-    const count=dataSource.length;
+    const count = dataSource.length;
     const newData = {
       key: count,
       nickname: `*****`,
@@ -143,7 +145,7 @@ class AdminPower extends React.Component {
   }
 
   handleSave = (row) => {
-    const newData = [...this.state.dataSource];
+    const newData = [...this.props.admin];
     const index = newData.findIndex(item => row.key === item.key);
     const item = newData[index];
     newData.splice(index, 1, {
@@ -152,7 +154,7 @@ class AdminPower extends React.Component {
     });
     this.props.setAdminInformation(newData);
   }
-  componentDidMount(){
+  componentDidMount() {
     const count = this.props.admin.length;
     this.setState({
       count,
@@ -189,7 +191,7 @@ class AdminPower extends React.Component {
         <Table
           components={components}
           rowClassName={() => 'editable-row'}
-          bordered 
+          bordered
           dataSource={dataSource}
           columns={columns}
         />

@@ -45,7 +45,6 @@ public class Power {
         String nickname = request.getParameter("nickname");
         String password = request.getParameter("password");
         String power = request.getParameter("power");
-        //System.out.println(nickname+password+power);
         DBManager dbManager = new DBManager();
         Connection conn = dbManager.getConnection();
         try {
