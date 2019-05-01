@@ -3,9 +3,11 @@ import { Row, Col, Menu, Icon } from 'antd';
 import axios from 'axios';
 import qs from 'qs';
 import { connect } from 'react-redux';
-import  actions  from '../../redux/actions'
+import actions from '../../redux/actions'
 import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
 import UserInformation from './userInformation'
+import Job from './job'
+import ManageJob from './manageJob'
 
 const SubMenu = Menu.SubMenu;
 const path = 'http://localhost'
@@ -35,6 +37,38 @@ class Enterprise extends React.Component {
 
         })
     }
+    initJob = () => {
+        const { nickname, password } = this.props.user;
+        axios({
+            method: 'post',
+            url: `${path}/enterprise?enterprise=initJob`,
+            data: qs.stringify({ nickname, password }),
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
+            },
+        }).then((responese) => {
+            const jobInformation = [];
+            jobInformation.push(responese.data);
+            this.props.setJobInformation(jobInformation);
+        }).catch((err) => {
+
+        })
+    }
+    manageJob = () => {
+        const { nickname, password } = this.props.user;
+        axios({
+            method: 'post',
+            url: `${path}/enterprise?enterprise=manageJob`,
+            data: qs.stringify({ nickname, password }),
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
+            },
+        }).then((responese) => {
+            this.props.setJobInformation(responese.data);
+        }).catch((err) => {
+
+        })
+    }
     render() {
         return <Row>
             <Router>
@@ -52,8 +86,12 @@ class Enterprise extends React.Component {
                             </Menu.Item>
                         </SubMenu>
                         <SubMenu key="sub2" title={<span><Icon type="appstore" /><span>岗位</span></span>}>
-                            <Menu.Item key="2">岗位发布</Menu.Item>
-                            <Menu.Item key="3">岗位管理</Menu.Item>
+                            <Menu.Item key="2" onClick={this.initJob}>
+                                <Link to={`/enterprise/job/`}>岗位发布</Link>
+                            </Menu.Item>
+                            <Menu.Item key="3" onClick={this.manageJob}>
+                                <Link to={`/enterprise/manageJob/`}>岗位管理</Link>
+                            </Menu.Item>
                         </SubMenu>
                         <SubMenu key="sub3" title={<span><Icon type="appstore" /><span>简历</span></span>}>
                             <Menu.Item key="5">简历推荐</Menu.Item>
@@ -65,6 +103,8 @@ class Enterprise extends React.Component {
                 <Col span={21}>
                     <Switch>
                         <Route exact path='/enterprise/userInformation/' component={UserInformation}></Route>
+                        <Route exact path='/enterprise/job/' component={Job}></Route>
+                        <Route exact path='/enterprise/manageJob/' component={ManageJob}></Route>
                     </Switch>
                 </Col>
             </Router>

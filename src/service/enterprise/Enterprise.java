@@ -144,11 +144,7 @@ public class Enterprise {
     }
 
     public void initJob(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
-        response.setContentType("text/xml; charset=UTF-8");
-        // 以下两句为取消在本地的缓存
-        response.setHeader("Cache-Control", "no-cache");
-        response.setHeader("Pragma", "no-cache");
+
         String nickname = request.getParameter("nickname");
         String password = request.getParameter("password");
         DBManager dbmanager = new DBManager();
@@ -187,11 +183,7 @@ public class Enterprise {
     }
 
     public void addJob(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
-        response.setContentType("text/xml; charset=UTF-8");
-        //以下两句为取消在本地的缓存
-        response.setHeader("Cache-Control", "no-cache");
-        response.setHeader("Pragma", "no-cache");
+        
         String nickname = request.getParameter("nickname");
         String password = request.getParameter("password");
         Random random = new Random();
@@ -243,11 +235,7 @@ public class Enterprise {
     }
 
     public void manageJob(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
-        response.setContentType("text/xml; charset=UTF-8");
-        // 以下两句为取消在本地的缓存
-        response.setHeader("Cache-Control", "no-cache");
-        response.setHeader("Pragma", "no-cache");
+
         String nickname = request.getParameter("nickname");
         String password = request.getParameter("password");
         DBManager dbmanager = new DBManager();
@@ -285,11 +273,6 @@ public class Enterprise {
     }
 
     public void modifyJob(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
-        response.setContentType("text/xml; charset=UTF-8");
-        //以下两句为取消在本地的缓存
-        response.setHeader("Cache-Control", "no-cache");
-        response.setHeader("Pragma", "no-cache");
         String identification = request.getParameter("identification");
         String address = request.getParameter("address");
         String number = request.getParameter("number");
@@ -324,11 +307,7 @@ public class Enterprise {
     }
 
     public void deleteJob(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
-        response.setContentType("text/xml; charset=UTF-8");
-        // 以下两句为取消在本地的缓存
-        response.setHeader("Cache-Control", "no-cache");
-        response.setHeader("Pragma", "no-cache");
+
         String identification = request.getParameter("identification");
         DBManager dbmanager = new DBManager();
         Connection conn = dbmanager.getConnection();

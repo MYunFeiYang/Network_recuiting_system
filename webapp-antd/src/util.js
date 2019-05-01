@@ -33,6 +33,34 @@ export function addResumeSuccess  () {
         key,
     });
 };
+export function addJobSuccess  () {
+    const key = `open${Date.now()}`;
+    const btn = (
+        <Button type="primary" size="small" onClick={() => notification.close(key)}>
+            确认
+      </Button>
+    );
+    notification.open({
+        message: '岗位',
+        description: '岗位已添加成功',
+        btn,
+        key,
+    });
+};
+export function deleteJobSuccess  () {
+    const key = `open${Date.now()}`;
+    const btn = (
+        <Button type="primary" size="small" onClick={() => notification.close(key)}>
+            确认
+      </Button>
+    );
+    notification.open({
+        message: '岗位',
+        description: '岗位已删除成功',
+        btn,
+        key,
+    });
+};
 export function modifyResumeSuccess  () {
     const key = `open${Date.now()}`;
     const btn = (
@@ -43,6 +71,20 @@ export function modifyResumeSuccess  () {
     notification.open({
         message: '简历',
         description: '简历已修改成功',
+        btn,
+        key,
+    });
+};
+export function modifyJobSuccess  () {
+    const key = `open${Date.now()}`;
+    const btn = (
+        <Button type="primary" size="small" onClick={() => notification.close(key)}>
+            确认
+      </Button>
+    );
+    notification.open({
+        message: '岗位',
+        description: '岗位已修改成功',
         btn,
         key,
     });
@@ -71,6 +113,20 @@ export function addResumeFail  () {
     notification.open({
         message: '简历',
         description: '请不要添加重复简历',
+        btn,
+        key,
+    });
+};
+export function addJobFail  () {
+    const key = `open${Date.now()}`;
+    const btn = (
+        <Button type="primary" size="small" onClick={() => notification.close(key)}>
+            确认
+      </Button>
+    );
+    notification.open({
+        message: '岗位',
+        description: '请不要添加重复岗位',
         btn,
         key,
     });
