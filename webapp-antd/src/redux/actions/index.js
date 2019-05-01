@@ -1,6 +1,7 @@
 import {SET_USER_INFORMATION,SET_INDUSTRY_INFORMATION,SET_ADDRESS_INFORMATION,
   SET_POSITION_INFORMATION,CHANGE_LOGIN_STATE,SET_SELECTED_POSITION,
-SET_SELECTED_ADDRESS,SET_PAGING_INFORMATION,SET_ADMIN_INFORMATION} from './action_types';
+SET_SELECTED_ADDRESS,SET_PAGING_INFORMATION,SET_ADMIN_INFORMATION,
+SET_RESUME_INFORMATION,} from './action_types';
 
 let actions = {
   setUserInformation: function(payload) {
@@ -29,6 +30,9 @@ let actions = {
   },
   setAdminInformation: function(payload) {
     return {type: SET_ADMIN_INFORMATION, payload};
+  },
+  setResumeInformation: function(payload) {
+    return {type: SET_RESUME_INFORMATION, payload};
   },
 };
 

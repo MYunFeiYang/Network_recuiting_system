@@ -19,6 +19,62 @@ const emailAleadyExist = () => {
         key,
     });
 };
+export function addResumeSuccess  () {
+    const key = `open${Date.now()}`;
+    const btn = (
+        <Button type="primary" size="small" onClick={() => notification.close(key)}>
+            确认
+      </Button>
+    );
+    notification.open({
+        message: '简历',
+        description: '简历已添加成功',
+        btn,
+        key,
+    });
+};
+export function modifyResumeSuccess  () {
+    const key = `open${Date.now()}`;
+    const btn = (
+        <Button type="primary" size="small" onClick={() => notification.close(key)}>
+            确认
+      </Button>
+    );
+    notification.open({
+        message: '简历',
+        description: '简历已修改成功',
+        btn,
+        key,
+    });
+};
+export function deleteResumeSuccess  () {
+    const key = `open${Date.now()}`;
+    const btn = (
+        <Button type="primary" size="small" onClick={() => notification.close(key)}>
+            确认
+      </Button>
+    );
+    notification.open({
+        message: '简历',
+        description: '简历已删除成功',
+        btn,
+        key,
+    });
+};
+export function addResumeFail  () {
+    const key = `open${Date.now()}`;
+    const btn = (
+        <Button type="primary" size="small" onClick={() => notification.close(key)}>
+            确认
+      </Button>
+    );
+    notification.open({
+        message: '简历',
+        description: '请不要添加重复简历',
+        btn,
+        key,
+    });
+};
 export function ModifyUserSuccess  () {
     const key = `open${Date.now()}`;
     const btn = (

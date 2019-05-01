@@ -1,7 +1,8 @@
 import {
   SET_USER_INFORMATION, SET_INDUSTRY_INFORMATION, SET_ADDRESS_INFORMATION,
   SET_POSITION_INFORMATION, CHANGE_LOGIN_STATE, SET_SELECTED_POSITION,
-  SET_SELECTED_ADDRESS, SET_PAGING_INFORMATION, SET_ADMIN_INFORMATION
+  SET_SELECTED_ADDRESS, SET_PAGING_INFORMATION, SET_ADMIN_INFORMATION,
+  SET_RESUME_INFORMATION,
 } from '../actions/action_types';
 let initState = {
   user: {
@@ -17,6 +18,7 @@ let initState = {
   selectedAddress: '',
   paging: [{ list: [] }],
   admin: [],
+  resume: [],
 }
 
 function reducer(state = initState, action) {
@@ -74,6 +76,12 @@ function reducer(state = initState, action) {
       newState = {
         ...state,
         admin: action.payload
+      };
+      break;
+    case SET_RESUME_INFORMATION:
+      newState = {
+        ...state,
+        resume: action.payload
       };
       break;
     default:
