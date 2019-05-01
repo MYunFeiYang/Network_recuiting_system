@@ -6,7 +6,9 @@ import actions from '../../redux/actions'
 import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
 import AdminPower from './adminPower';
 import PersonAssess from './person/assessment';
-import EnterpriseAssess from './enterprise/assessment'
+import EnterpriseAssess from './enterprise/assessment';
+import PersonAccount from './person/account';
+import EnterpriseAccount from './enterprise/account'
 
 const SubMenu = Menu.SubMenu;
 const path = 'http://localhost'
@@ -84,9 +86,9 @@ class Admin extends React.Component {
                 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
             },
         }).then((response) => {
-            let assess=response.data;
-            assess.map((value,index)=>{
-                return value.key=index;
+            let assess = response.data;
+            assess.map((value, index) => {
+                return value.key = index;
             })
             this.props.setAssessInformation(assess);
         }).catch((err) => {
@@ -102,9 +104,43 @@ class Admin extends React.Component {
                 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
             },
         }).then((response) => {
-            let assess=response.data;
-            assess.map((value,index)=>{
-                return value.key=index;
+            let assess = response.data;
+            assess.map((value, index) => {
+                return value.key = index;
+            })
+            this.props.setAssessInformation(assess);
+        }).catch((err) => {
+
+        })
+    }
+    personAccountInit = () => {
+        axios({
+            method: 'post',
+            url: `${path}/admin/person_account/init`,
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
+            },
+        }).then((response) => {
+            let assess = response.data;
+            assess.map((value, index) => {
+                return value.key = index;
+            })
+            this.props.setAssessInformation(assess);
+        }).catch((err) => {
+
+        })
+    }
+    enterpriseAccountInit = () => {
+        axios({
+            method: 'post',
+            url: `${path}/admin/enterprise_account/init`,
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
+            },
+        }).then((response) => {
+            let assess = response.data;
+            assess.map((value, index) => {
+                return value.key = index;
             })
             this.props.setAssessInformation(assess);
         }).catch((err) => {
@@ -112,7 +148,6 @@ class Admin extends React.Component {
         })
     }
     render() {
-        console.log(this.state)
         return <Row>
             <Router>
                 <Col span={3}>
@@ -132,20 +167,24 @@ class Admin extends React.Component {
                             <SubMenu key="sub2" title={<span><Icon type="appstore" /><span>个人管理</span></span>}>
                                 <Menu.Item key="2" onClick={this.personAssessmentInit}>
                                     <Link to={`/admin/personAssess/`}>
-                                    注册审核 <Badge count={this.state.personRegisterCount}>
-                                    </Badge>
-                                    </Link>                                   
+                                        注册审核 <Badge count={this.state.personRegisterCount}>
+                                        </Badge>
+                                    </Link>
                                 </Menu.Item>
-                                <Menu.Item key="3">账号管理</Menu.Item>
+                                <Menu.Item key="3" onClick={this.personAccountInit}>
+                                    <Link to={`/admin/personAccount`}>账号管理</Link>
+                                </Menu.Item>
                             </SubMenu>
                             <SubMenu key="sub3" title={<span><Icon type="appstore" /><span>企业管理</span></span>}>
                                 <Menu.Item key="5" onClick={this.enterpriseAssessmentInit}>
-                                <Link to={`/admin/enterpriseAssess/`}>
-                                    注册审核  <Badge count={this.state.enterpriseRegisterCount}>
-                                    </Badge>
+                                    <Link to={`/admin/enterpriseAssess/`}>
+                                        注册审核  <Badge count={this.state.enterpriseRegisterCount}>
+                                        </Badge>
                                     </Link>
-                                    </Menu.Item>
-                                <Menu.Item key="6">账号管理</Menu.Item>
+                                </Menu.Item>
+                                <Menu.Item key="6" onClick={this.enterpriseAccountInit}>
+                                    <Link to={`/admin/enterpriseAccount`}>账号管理</Link>
+                                </Menu.Item>
                             </SubMenu>
                             <SubMenu key="sub4" title={<span><Icon type="appstore" /><span>推广管理</span></span>}>
                                 <Menu.Item key="7">个人分析</Menu.Item>
@@ -159,6 +198,8 @@ class Admin extends React.Component {
                         <Route path='/admin/userInformation/' exact component={AdminPower}></Route>
                         <Route path='/admin/personAssess/' exact component={PersonAssess}></Route>
                         <Route path='/admin/enterpriseAssess/' exact component={EnterpriseAssess}></Route>
+                        <Route path='/admin/personAccount/' exact component={PersonAccount}></Route>
+                        <Route path='/admin/enterpriseAccount/' exact component={EnterpriseAccount}></Route>
                     </Switch>
                 </Col>
             </Router>

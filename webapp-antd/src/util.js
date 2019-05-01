@@ -208,3 +208,17 @@ export function assessPass () {
         key,
     });
 };
+export function deleteAccount () {
+    const key = `open${Date.now()}`;
+    const btn = (<Button type="primary" size="small" onClick={() => notification.close(key)
+    }>
+        确认
+      </Button >
+    );
+    notification.open({
+        message: '注销账号',
+        description: '注销账号成功',
+        btn,
+        key,
+    });
+};
