@@ -10,6 +10,7 @@ import Enterprise from './enterprise/'
 import RegisterPerson from './register/Person'
 import RegisterEnterprise from './register/Enterprise'
 import Admin from './admin/'
+import Wechat from './WeChat/'
 import '../style/App.css'
 import School from './main/school/';
 import axios from 'axios';
@@ -70,7 +71,9 @@ class Header extends React.Component {
             </Link>
           </Menu.Item>
           <Menu.Item key='message'>
-            <Icon type="message" />在线交流
+            <Link to={`/wechat/`}>
+              <Icon type="message" />在线交流
+            </Link>
           </Menu.Item>
           <Menu.Item key='logout' onClick={() => {
             this.isLogin('delete', {})
@@ -87,7 +90,9 @@ class Header extends React.Component {
             </Link>
           </Menu.Item>
           <Menu.Item key='message'>
-            <Icon type="message" />在线交流
+          <Link to={`/wechat/`}>
+              <Icon type="message" />在线交流
+            </Link>
           </Menu.Item>
           <Menu.Item key='delete' onClick={() => {
             this.isLogin('delete', {})
@@ -104,7 +109,9 @@ class Header extends React.Component {
             </Link>
           </Menu.Item>
           <Menu.Item key='message'>
-            <Icon type="message" />在线交流
+          <Link to={`/wechat/`}>
+              <Icon type="message" />在线交流
+            </Link>
           </Menu.Item>
           <Menu.Item key='delete' onClick={() => {
             this.isLogin('delete', {})
@@ -153,7 +160,7 @@ class Header extends React.Component {
                 </MenuItemGroup>
                 <MenuItemGroup>
                   <Menu.Item key="register-e">
-                  <Link to={`/register/enterprise/`}>企业注册</Link>
+                    <Link to={`/register/enterprise/`}>企业注册</Link>
                   </Menu.Item>
                 </MenuItemGroup>
               </SubMenu>
@@ -172,6 +179,7 @@ class Header extends React.Component {
             <Route path="/person/" component={Person} />
             <Route path="/enterprise/" component={Enterprise} />
             <Route path="/admin/" component={Admin} />
+            <Route path="/wechat/" component={Wechat} />
             <Route path="/register/enterprise/" exact component={RegisterEnterprise} />
             <Route path="/register/person" exact component={RegisterPerson} />
             <Route path="/" exact component={Home} />
