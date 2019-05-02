@@ -6,7 +6,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot --port=3000",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
   },
   "dependencies": {
@@ -19,6 +19,7 @@
     "not ie <= 8"
   ],
   "devDependencies": {
+    "axios": "^0.18.0",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-plugin-component": "^1.1.1",
@@ -28,6 +29,7 @@
     "cross-env": "^5.0.5",
     "css-loader": "^0.28.7",
     "file-loader": "^1.1.11",
+    "qs": "^6.7.0",
     "ts-loader": "^5.4.5",
     "vue-loader": "^13.0.5",
     "vue-router": "^3.0.6",

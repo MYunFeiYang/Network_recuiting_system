@@ -11,7 +11,12 @@ const store = new Vuex.Store({
         setUserInformation(state, payload) {
             state.user = payload
         }
-    }
+    },
+    actions: {
+        setUserInformation (context,payload) {
+          context.commit('setUserInformation',payload)
+        }
+      }
 })
 
 export default store;

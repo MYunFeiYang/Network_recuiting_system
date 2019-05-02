@@ -7,6 +7,7 @@ Vue.use(VueRouter);
 
 const routes = [{ path: "/login", component: Login }];
 const router = new VueRouter({
-    routes
+    routes,
+    mode:'history'
 });
 export default router
