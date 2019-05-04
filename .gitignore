@@ -7,10 +7,12 @@ WebContent/WEB-INF/classes/
 .classpath
 .project
 *.iml
-webapp-antd/node_modules/
-webapp-antd/build/
+webapp-react/node_modules/
+webapp-react/build/
 webapp-element/node_modules/
+webapp-element/build/
 webapp-angular/node_modules/
+webapp-angular/build/
 .project/
 .classpath/
 node_modules
