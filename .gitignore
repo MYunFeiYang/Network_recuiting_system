@@ -8,5 +8,9 @@ WebContent/WEB-INF/classes/
 .project
 *.iml
 webapp-antd/node_modules/
+webapp-antd/build/
+webapp-element/node_modules/
+webapp-angular/node_modules/
 .project/
 .classpath/
+node_modules
