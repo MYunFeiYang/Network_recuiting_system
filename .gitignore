@@ -10,8 +10,10 @@ WebContent/WEB-INF/classes/
 webapp-antd/node_modules/
 node_modules/
 webapp-element/node_modules/
+webapp-angular/node_modules/
 webapp-antd/debug.log
 webapp-antd/build/
 webapp-element/build/
+webapp-angular/build/
 .project/
 .classpath/
