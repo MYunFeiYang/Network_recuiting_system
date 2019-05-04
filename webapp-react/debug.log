@@ -1,0 +1,14 @@
+[0420/190739.529:ERROR:process_info.cc(359)] UncheckedAllocate
+[0421/205309.041:ERROR:process_info.cc(359)] UncheckedAllocate
+[0422/105107.279:ERROR:process_info.cc(359)] UncheckedAllocate
+[0422/105107.307:ERROR:process_info.cc(359)] UncheckedAllocate
+[0422/105357.628:ERROR:process_info.cc(359)] UncheckedAllocate
+[0422/113054.424:ERROR:process_info.cc(359)] UncheckedAllocate
+[0422/231937.097:ERROR:process_info.cc(359)] UncheckedAllocate
+[0426/125332.839:ERROR:process_info.cc(359)] UncheckedAllocate
+[0426/153638.616:ERROR:process_info.cc(359)] UncheckedAllocate
+[0426/154440.428:ERROR:process_info.cc(359)] UncheckedAllocate
+[0426/190017.916:ERROR:process_info.cc(359)] UncheckedAllocate
+[0428/124355.948:ERROR:process_info.cc(359)] UncheckedAllocate
+[0501/213133.779:ERROR:process_info.cc(359)] UncheckedAllocate
+[0501/213146.527:ERROR:filesystem_win.cc(148)] DeleteFile C:\Users\27283\AppData\Local\Google\Chrome\User Data\Crashpad\reports\49cc4db4-854c-4a87-b87c-e9ce121096eb.dmp: 另一个程序正在使用此文件，进程无法访问。 (0x20)
