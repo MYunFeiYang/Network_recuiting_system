@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Row, Col, Icon, Menu, Dropdown, Slider } from 'antd';
-import '../style/App.css'
+import '../style/App.scss'
 
 class Audio extends React.Component {
     constructor() {
@@ -205,8 +205,7 @@ class Audio extends React.Component {
                 </Menu.Item>
             </Menu>
         );
-        return (<Row style={{width:'50%',margin:'10% 25%',padding:'20px',
-        boxShadow: '2px 2px 2px 1px rgba(0, 0, 255, .2)',}}>
+        return (<Row id="audioBox">
             <Col span={24}>
                 <ol ref="mlist" onClick={this.playByMe}>
                     {this.state.data.map((value, index) => {
@@ -221,7 +220,7 @@ class Audio extends React.Component {
                 <Slider value={this.state.pgsPlay} onChange={this.handleClickProgress} />
                 <Row>
                     <Col span={4}>
-                        <span>{this.state.playedTime}</span>
+                        <span style={{height:'30px',lineHeight:'30px'}}>{this.state.playedTime}</span>
                     </Col>
                     <Col span={3}>
                         <Button onClick={this.handleBtuPre}>

@@ -33,5 +33,8 @@
     "not ie <= 11",
     "not op_mini all"
   ],
-  "proxy": "http://localhost:80/"
+  "proxy": "http://localhost:80/",
+  "devDependencies": {
+    "node-sass": "^4.12.0"
+  }
 }

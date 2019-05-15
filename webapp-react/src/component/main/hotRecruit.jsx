@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import '../../style/App.css';
+import '../../style/App.scss';
 import { Row, Col, Card } from 'antd';
 
 class HotRecruite extends React.Component {
@@ -48,12 +48,12 @@ class HotRecruite extends React.Component {
     }
     render() {
         return (<Fragment>
-            <Row style={{ width: '25%',marginTop:'30px',marginLeft:'50px'}}>
+            <Row id="hotRecruit">
                 {
                     this.state.company.map((value, index) => {
                         return <Col span={8} key={index}>
-                            <Card title={value.name} bordered={false} style={{backgroundColor:'rgba(0,0,0,0.2)'}}>
-                                <img src={value.img} alt={value.name} style={{width:'100%',height:'100%',borderRadius:'50%'}}/>
+                            <Card title={value.name} bordered={false} >
+                                <img src={value.img} alt={value.name} />
                             </Card>
                         </Col>
                     })

@@ -101,10 +101,7 @@ class RegistrationForm extends React.Component {
 
         return (
             <Form {...formItemLayout} onSubmit={this.handleSubmit}
-                style={{
-                    width: '40%', margin: '1% 30%', padding: '20px',
-                    boxShadow: '2px 2px 2px 1px rgba(0, 0, 255, .2)',
-                }}>
+                id="registerEnterprise">
                 <Form.Item
                     label={(
                         <span>

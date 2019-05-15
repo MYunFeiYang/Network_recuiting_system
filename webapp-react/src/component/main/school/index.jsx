@@ -1,5 +1,4 @@
 import React from 'react';
-import { Row, Col } from 'antd';
 import axios from 'axios';
 import { connect } from 'react-redux'
 import actions from '../../../redux/actions'
@@ -8,7 +7,7 @@ import Industry from './industry'
 import Address from './address'
 import Position from './position'
 import Paging from './paging'
-
+import '../../../style/App.scss'
 const path = 'http://localhost:80'
 class School extends React.Component {
 
@@ -65,9 +64,9 @@ class School extends React.Component {
     page.pageSize = 10;
     page.pageNum = 1;
     let pagingType;
-    if(typeof e ==='number'){
-      page.pageNum=e;
-    }else{
+    if (typeof e === 'number') {
+      page.pageNum = e;
+    } else {
       pagingType = e.target.getAttribute('data-paging-type');
     }
     switch (pagingType) {
@@ -102,16 +101,17 @@ class School extends React.Component {
   }
   render() {
     return (
-      <Row>
-        <Col span={3}>
-          <Industry getPosition={this.getPosition}></Industry>
-        </Col>
-        <Col span={21} gutter={2}>
+      <div id="school">
+        <div onClick={this.getPosition}>
+          <Industry ></Industry>
+        </div>
+        <div >
           <Address paginate={this.paginate}></Address>
           <Position paginate={this.paginate}></Position>
           <Paging paginate={this.paginate}></Paging>
-        </Col>
-      </Row>
+        </div>
+        <div></div>
+      </div>
     );
   }
 }

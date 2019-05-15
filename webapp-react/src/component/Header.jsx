@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Menu, Icon, Affix, Avatar } from 'antd';
 import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom'
 import Login from './login/Login';
@@ -11,7 +11,7 @@ import RegisterPerson from './register/Person'
 import RegisterEnterprise from './register/Enterprise'
 import Admin from './admin/'
 import Wechat from './WeChat/'
-import '../style/App.css'
+import '../style/App.scss'
 import School from './main/school/';
 import axios from 'axios';
 import qs from 'qs';
@@ -90,7 +90,7 @@ class Header extends React.Component {
             </Link>
           </Menu.Item>
           <Menu.Item key='message'>
-          <Link to={`/wechat/`}>
+            <Link to={`/wechat/`}>
               <Icon type="message" />在线交流
             </Link>
           </Menu.Item>
@@ -109,7 +109,7 @@ class Header extends React.Component {
             </Link>
           </Menu.Item>
           <Menu.Item key='message'>
-          <Link to={`/wechat/`}>
+            <Link to={`/wechat/`}>
               <Icon type="message" />在线交流
             </Link>
           </Menu.Item>
@@ -121,9 +121,9 @@ class Header extends React.Component {
         </MenuItemGroup>
         break
     }
-    return (
-      <header>
-        <Router>
+    return (<Fragment>
+      <Router>
+        <header>
           <Affix offsetTop={0}>
             <Menu theme="light"
               onClick={this.handleClick}
@@ -143,16 +143,16 @@ class Header extends React.Component {
                 <Link to={`/video/`}>
                   <Icon type="video-camera" />视频播放器</Link>
               </Menu.Item>
-
-              <Menu.Item key="login" className="float-right"
-                style={{ display: (this.props.isLogin === false) ? 'block' : 'none' }}>
-                <Link to={`/login/`}>
-                  <Icon type="login"></Icon> 登录
-                </Link>
-              </Menu.Item>
-              <SubMenu className="float-right" title={<span className="submenu-title-wrapper"
-                style={{ display: (this.props.isLogin === false) ? 'block' : 'none' }}>
-                <Icon type="user-add" />注册</span>}>
+              <SubMenu className="float-right"
+                style={{ display: (this.props.isLogin === false) ? 'none' : 'inline-block' }}
+                title={<span className="submenu-title-wrapper">
+                  <Avatar type='user'></Avatar>{this.props.user.nickname}</span>}>
+                {loginResult}
+              </SubMenu>
+              <SubMenu className="float-right"
+                style={{ display: (this.props.isLogin === false) ? 'inline-block' : 'none' }}
+                title={<span className="submenu-title-wrapper">
+                  <Icon type="user-add" />注册</span>}>
                 <MenuItemGroup >
                   <Menu.Item key="register-p">
                     <Link to={`/register/person/`}>个人注册</Link>
@@ -164,13 +164,16 @@ class Header extends React.Component {
                   </Menu.Item>
                 </MenuItemGroup>
               </SubMenu>
-              <SubMenu className="float-right" title={<span className="submenu-title-wrapper"
-                style={{ display: (this.props.isLogin === false) ? 'none' : 'block' }}>
-                <Avatar type='user'></Avatar>{this.props.user.nickname}</span>}>
-                {loginResult}
-              </SubMenu>
+              <Menu.Item key="login" className="float-right"
+                style={{ display: (this.props.isLogin === false) ? 'inline-block' : 'none' }}>
+                <Link to={`/login/`}>
+                  <Icon type="login"></Icon> 登录
+                </Link>
+              </Menu.Item>
             </Menu>
           </Affix>
+        </header>
+        <main>
           <Switch>
             <Route path="/music/" exact component={Audio} />
             <Route path="/video/" exact component={Video} />
@@ -184,8 +187,9 @@ class Header extends React.Component {
             <Route path="/register/person" exact component={RegisterPerson} />
             <Route path="/" exact component={Home} />
           </Switch>
-        </Router>
-      </header>
+        </main>
+      </Router>
+    </Fragment>
     );
   }
 }

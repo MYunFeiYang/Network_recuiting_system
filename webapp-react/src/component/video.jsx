@@ -1,6 +1,6 @@
 import React from 'react';
 import { Row, Col, Icon, Slider } from 'antd';
-import '../style/App.css'
+import '../style/App.scss'
 
 class Video extends React.Component {
     constructor() {
@@ -146,36 +146,30 @@ class Video extends React.Component {
         }
     }
     render() {
-        return <Row id="fullScreen" style={{
-            width: '50%', margin: '5% 25%', padding: '10px',
-            boxShadow: '2px 2px 2px 1px rgba(0, 0, 255, .2)', position: 'relative'
-        }}>
-            <Col span={24}>
+        return <Row id="fullScreen">
+            <Col span={24} >
                 <video src={this.state.video.url} onTimeUpdate={this.updateProgress}
                     onEnded={this.videoEnded} ref="video" id="video" style={{ width: '100%' }}></video>
-                <Row className="video-progress-background">
-                    <Col span={1} className="vertical-center" onClick={this.changePlayPause}>
-                        <Icon type={this.state.playPause} />
-                    </Col>
-                    <Col span={6} className="vertical-center">
-                        <span>{this.state.playedTime}</span>
-                        <span>/</span>
-                        <span>{this.state.totalTime}</span>
-                    </Col>
-
-                    <Col span={11}>
+                <div className="video-progress-background">
+                    <div>
                         <Slider value={this.state.pgsPlay} onChange={this.handleClickVideoProgress} />
-                    </Col>
-                    <Col span={1} className="vertical-center" onClick={this.handleClickVolume}>
-                        <Icon type="sound" />
-                    </Col>
-                    <Col span={4}>
-                        <Slider value={this.state.volume} onChange={this.handleClickVolumeProgress} />
-                    </Col>
-                    <Col span={1} className="vertical-center" onClick={this.changeScreen}>
-                        <Icon type={this.state.screen} />
-                    </Col>
-                </Row>
+                    </div>
+                    <div>
+                        <div onClick={this.changePlayPause}>
+                            <Icon type={this.state.playPause} />
+                            <span>{this.state.playedTime}</span>
+                            <span>/</span>
+                            <span>{this.state.totalTime}</span>
+                        </div>
+                        <div >
+                            <Icon type="sound" onClick={this.handleClickVolume} />
+                            <Slider value={this.state.volume} onChange={this.handleClickVolumeProgress} />
+                        </div>
+                        <div onClick={this.changeScreen}>
+                            <Icon type={this.state.screen} />
+                        </div>
+                    </div>
+                </div>
             </Col>
         </Row>
     }

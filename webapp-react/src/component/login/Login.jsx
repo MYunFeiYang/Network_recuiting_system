@@ -1,6 +1,6 @@
 import React from 'react';
 import LoginBox from './LoginBox';
-import '../../style/App.css'
+import '../../style/App.scss'
 import axios from 'axios';
 import qs from 'qs';
 import { connect } from 'react-redux';

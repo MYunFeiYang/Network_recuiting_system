@@ -17,22 +17,22 @@ class Address extends React.Component {
   }
   render() {
     return (<div onClick={this.props.paginate}>
-    <Menu theme={this.state.theme}
-      onClick={this.handleClick}
-      style={{ textAlign: 'center' }}
-      defaultOpenKeys={['sub1']}
-      selectedKeys={[this.state.current]}
-      mode="horizontal">
-      {
-        this.props.address.map((value, index) => {
-          return <Menu.Item key={index} style={{ height: '24px', lineHeight: '24px' }}>
-            <span data-paging-type='address'>{value.text}</span>
-          </Menu.Item>
-        })
-      }
-    </Menu>
-        </div >)
-      }
+      <Menu theme={this.state.theme}
+        onClick={this.handleClick}
+        style={{ textAlign: 'center' }}
+        defaultOpenKeys={['sub1']}
+        selectedKeys={[this.state.current]}
+        mode="horizontal">
+        {
+          this.props.address.map((value, index) => {
+            return <Menu.Item key={index} style={{ height: '24px', lineHeight: '24px' }}>
+              <span data-paging-type='address'>{value.text}</span>
+            </Menu.Item>
+          })
+        }
+      </Menu>
+    </div >)
+  }
 }
 export default connect((state) => ({
   ...state

@@ -19,7 +19,7 @@ class NormalLoginForm extends React.Component {
         return (
             <Form onSubmit={this.handleSubmit} className="login-form"
                 style={{
-                    width: '40%', margin: '5% 30%', padding: '20px',
+                    width: '40%', margin: '5% auto', padding: '20px',minWidth:'320px',
                     boxShadow: '2px 2px 2px 1px rgba(0, 0, 255, .2)',
                 }}>
                 <Form.Item

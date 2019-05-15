@@ -23,18 +23,18 @@ class Linkme extends React.Component {
     }
     render() {
         return (<Fragment>
-            <ul>
+            <ul id="linkme">
                 {
                     this.state.icon.map((value,index)=>{
                         return <li key={index}>
                         <a href={this.state.link[index]} alt='添加QQ' target='_black'>
-                        <Icon type={value} style={{fontSize:'30px'}}></Icon>
+                        <Icon type={value} ></Icon>
                         </a>
                         </li>
                     })
                 }
             </ul>
-            <BackTop>
+            <BackTop visibilityHeight="40" style={{right:'10px'}}>
                 <Icon type="up-circle" theme="twoTone" style={{ fontSize: '36px' }} />
             </BackTop>
         </Fragment>
