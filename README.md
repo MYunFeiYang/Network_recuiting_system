@@ -8,7 +8,11 @@
 简历和岗位之间用推荐算法双向推荐给应聘者和招聘方<br/>
 另外提供级联查询子系统给用户使用。<br/>
 ## 系统架构
-前端：基于bootstrap（响应式布局）、jQuery（在用react技术栈重构）<br/>
+前端：第一版：html+css+JavaScript<br/>
+第二版：bootstrap+jQuery<br />
+第三版:react+redux+react-router+axios
+第四版：vue+vuex+vue-router+axios
+第五版：angular
 后台:Java（MVC、restful）<br/>
 数据库：SQL server（存储过程、触发器）<br/>
 前后端交互：Ajax、serverlet、websocket<br/>
