@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Col, Menu, Icon } from 'antd';
+import { Menu, Icon } from 'antd';
 import axios from 'axios';
 import qs from 'qs';
 import { connect } from 'react-redux';
@@ -8,6 +8,8 @@ import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
 import UserInformation from './userInformation'
 import Job from './job'
 import ManageJob from './manageJob'
+import { loginGuart } from '../../util'
+import '../../style/App.scss'
 
 const SubMenu = Menu.SubMenu;
 const path = 'http://localhost'
@@ -15,6 +17,7 @@ class Enterprise extends React.Component {
     state = {
         theme: 'light',
         current: '1',
+        loginRedirect: ''
     }
     handleClick = (e) => {
         this.setState({
@@ -69,10 +72,33 @@ class Enterprise extends React.Component {
 
         })
     }
+    getResumePreference = () => {
+        const { nickname, password } = this.props.user;
+        axios({
+            method: 'post',
+            url: `${path}/enterprise?enterprise=getResumePreference`,
+            data: qs.stringify({ nickname, password }),
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
+            },
+        }).then((responese) => {
+            this.props.setJobInformation(responese.data);
+        }).catch((err) => {
+
+        })
+    }
+    componentWillMount() {
+        const isLogin = this.props.isLogin;
+        const loginRedirect = loginGuart(isLogin)
+        this.setState({
+            loginRedirect
+        })
+    }
     render() {
-        return <Row>
+        return <div id="enterprise_center">
+            {this.state.loginRedirect}
             <Router>
-                <Col span={3}>
+                <div>
                     <Menu
                         theme={this.state.theme}
                         onClick={this.handleClick}
@@ -95,20 +121,20 @@ class Enterprise extends React.Component {
                         </SubMenu>
                         <SubMenu key="sub3" title={<span><Icon type="appstore" /><span>简历</span></span>}>
                             <Menu.Item key="5">简历推荐</Menu.Item>
-                            <Menu.Item key="6">推荐设置</Menu.Item>
+                            <Menu.Item key="6" onClick={this.getResumePreference}>推荐设置</Menu.Item>
                             <Menu.Item key="7">简历收藏</Menu.Item>
                         </SubMenu>
                     </Menu>
-                </Col>
-                <Col span={21}>
+                </div>
+                <div>
                     <Switch>
                         <Route exact path='/enterprise/userInformation/' component={UserInformation}></Route>
                         <Route exact path='/enterprise/job/' component={Job}></Route>
                         <Route exact path='/enterprise/manageJob/' component={ManageJob}></Route>
                     </Switch>
-                </Col>
+                </div>
             </Router>
-        </Row>
+        </div>
     }
 }
 export default connect((state) => ({

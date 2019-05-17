@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { Menu, Icon, Affix, Avatar } from 'antd';
-import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom'
+import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
 import Login from './login/Login';
 import Audio from './audio'
 import Video from './video'
@@ -21,6 +21,7 @@ const path = 'http://localhost:80'
 
 const SubMenu = Menu.SubMenu;
 const MenuItemGroup = Menu.ItemGroup;
+
 class Header extends React.Component {
   constructor() {
     super();
@@ -28,6 +29,7 @@ class Header extends React.Component {
       current: 'home',
       user: {},
     }
+    this.isLogin('refresh', {});
   }
   isLogin = (data, user) => {
     user.login = data;
@@ -55,9 +57,6 @@ class Header extends React.Component {
     this.setState({
       current: e.key,
     });
-  }
-  componentDidMount() {
-    this.isLogin('refresh', {});
   }
   render() {
     let loginResult;
@@ -121,6 +120,7 @@ class Header extends React.Component {
         </MenuItemGroup>
         break
     }
+    let isLogin = this.props.isLogin;
     return (<Fragment>
       <Router>
         <header>
@@ -144,13 +144,13 @@ class Header extends React.Component {
                   <Icon type="video-camera" />视频播放器</Link>
               </Menu.Item>
               <SubMenu className="float-right"
-                style={{ display: (this.props.isLogin === false) ? 'none' : 'inline-block' }}
+                style={{ display: !isLogin ? 'none' : 'inline-block' }}
                 title={<span className="submenu-title-wrapper">
                   <Avatar type='user'></Avatar>{this.props.user.nickname}</span>}>
                 {loginResult}
               </SubMenu>
               <SubMenu className="float-right"
-                style={{ display: (this.props.isLogin === false) ? 'inline-block' : 'none' }}
+                style={{ display: !isLogin ? 'inline-block' : 'none' }}
                 title={<span className="submenu-title-wrapper">
                   <Icon type="user-add" />注册</span>}>
                 <MenuItemGroup >
@@ -165,7 +165,7 @@ class Header extends React.Component {
                 </MenuItemGroup>
               </SubMenu>
               <Menu.Item key="login" className="float-right"
-                style={{ display: (this.props.isLogin === false) ? 'inline-block' : 'none' }}>
+                style={{ display: !isLogin ? 'inline-block' : 'none' }}>
                 <Link to={`/login/`}>
                   <Icon type="login"></Icon> 登录
                 </Link>
@@ -174,7 +174,7 @@ class Header extends React.Component {
           </Affix>
         </header>
         <main>
-          <Switch>
+          <Switch >
             <Route path="/music/" exact component={Audio} />
             <Route path="/video/" exact component={Video} />
             <Route path="/school/" exact component={School} />

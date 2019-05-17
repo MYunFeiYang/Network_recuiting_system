@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Col, Menu, Icon, Badge, Affix } from 'antd';
+import { Menu, Icon, Badge, Affix } from 'antd';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import actions from '../../redux/actions'
@@ -9,6 +9,8 @@ import PersonAssess from './person/assessment';
 import EnterpriseAssess from './enterprise/assessment';
 import PersonAccount from './person/account';
 import EnterpriseAccount from './enterprise/account'
+import { loginGuart } from '../../util'
+import '../../style/App.scss'
 
 const SubMenu = Menu.SubMenu;
 const path = 'http://localhost'
@@ -20,6 +22,7 @@ class Admin extends React.Component {
             current: '1',
             personRegisterCount: 0,
             enterpriseRegisterCount: 0,
+            loginRedirect: ''
         };
         this.personRegisterCount();
         this.enterpriseRegisterCount();
@@ -147,10 +150,18 @@ class Admin extends React.Component {
 
         })
     }
+    componentDidMount() {
+        const isLogin = this.props.isLogin;
+        const loginRedirect = loginGuart(isLogin)
+        this.setState({
+            loginRedirect
+        })
+    }
     render() {
-        return <Row>
+        return <div id="admin_center">
+            {this.state.loginRedirect}
             <Router>
-                <Col span={3}>
+                <div>
                     <Affix offsetTop='50'>
                         <Menu
                             theme={this.state.theme}
@@ -192,8 +203,8 @@ class Admin extends React.Component {
                             </SubMenu>
                         </Menu>
                     </Affix>
-                </Col>
-                <Col span={21}>
+                </div>
+                <div>
                     <Switch>
                         <Route path='/admin/userInformation/' exact component={AdminPower}></Route>
                         <Route path='/admin/personAssess/' exact component={PersonAssess}></Route>
@@ -201,9 +212,9 @@ class Admin extends React.Component {
                         <Route path='/admin/personAccount/' exact component={PersonAccount}></Route>
                         <Route path='/admin/enterpriseAccount/' exact component={EnterpriseAccount}></Route>
                     </Switch>
-                </Col>
+                </div>
             </Router>
-        </Row>
+        </div>
     }
 }
 export default connect((state) => ({

@@ -1,5 +1,7 @@
 import React from 'react';
+import { connect } from 'react-redux'
 import { Row, Col, Icon, Slider } from 'antd';
+import { loginGuart } from '../util'
 import '../style/App.scss'
 
 class Video extends React.Component {
@@ -15,7 +17,8 @@ class Video extends React.Component {
             playedTime: '00:00:00',
             totalTime: '00:00:00',
             playPause: 'play-circle',
-            screen: 'fullscreen'
+            screen: 'fullscreen',
+            loginRedirect: ''
         }
     }
 
@@ -145,8 +148,16 @@ class Video extends React.Component {
             this.exitFullscreen();
         }
     }
+    componentWillMount() {
+        const isLogin = this.props.isLogin;
+        const loginRedirect = loginGuart(isLogin)
+        this.setState({
+            loginRedirect
+        })
+    }
     render() {
         return <Row id="fullScreen">
+            {this.state.loginRedirect}
             <Col span={24} >
                 <video src={this.state.video.url} onTimeUpdate={this.updateProgress}
                     onEnded={this.videoEnded} ref="video" id="video" style={{ width: '100%' }}></video>
@@ -174,4 +185,7 @@ class Video extends React.Component {
         </Row>
     }
 }
-export default Video;
+export default connect((state) => ({
+    ...state
+}))(Video);
+

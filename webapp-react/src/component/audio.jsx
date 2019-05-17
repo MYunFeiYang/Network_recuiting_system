@@ -1,5 +1,7 @@
 import React from 'react';
+import { connect } from 'react-redux'
 import { Button, Row, Col, Icon, Menu, Dropdown, Slider } from 'antd';
+import { loginGuart } from '../util'
 import '../style/App.scss'
 
 class Audio extends React.Component {
@@ -33,7 +35,8 @@ class Audio extends React.Component {
             playedTime: '00:00',
             totalTime: '',
             playPause: 'play',
-            loopType: '循环模式'
+            loopType: '循环模式',
+            loginRedirect: ''
         }
     }
 
@@ -185,6 +188,13 @@ class Audio extends React.Component {
             loopType
         })
     };
+    componentWillMount() {
+        const isLogin = this.props.isLogin;
+        const loginRedirect = loginGuart(isLogin)
+        this.setState({
+            loginRedirect
+        })
+    }
     render() {
         const menu = (
             <Menu>
@@ -206,6 +216,7 @@ class Audio extends React.Component {
             </Menu>
         );
         return (<Row id="audioBox">
+            {this.state.loginRedirect}
             <Col span={24}>
                 <ol ref="mlist" onClick={this.playByMe}>
                     {this.state.data.map((value, index) => {
@@ -220,7 +231,7 @@ class Audio extends React.Component {
                 <Slider value={this.state.pgsPlay} onChange={this.handleClickProgress} />
                 <Row>
                     <Col span={4}>
-                        <span style={{height:'30px',lineHeight:'30px'}}>{this.state.playedTime}</span>
+                        <span style={{ height: '30px', lineHeight: '30px' }}>{this.state.playedTime}</span>
                     </Col>
                     <Col span={3}>
                         <Button onClick={this.handleBtuPre}>
@@ -253,4 +264,6 @@ class Audio extends React.Component {
         );
     }
 }
-export default Audio;
+export default connect((state) => ({
+    ...state
+}))(Audio);

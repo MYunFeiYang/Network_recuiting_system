@@ -1,4 +1,5 @@
 header .ant-menu {
+  width: 100%;
   display: flex;
   flex-direction: row;
 }
@@ -7,7 +8,10 @@ header .ant-menu > li {
 }
 header .ant-menu > li.float-right {
   text-align: right;
-  flex-grow: 20;
+  flex-grow: 10;
+}
+header .ant-menu > li.float-right  ul {
+  width: 50%;
 }
 #fullScreen.ant-row {
   width: 60%;
@@ -16,7 +20,7 @@ header .ant-menu > li.float-right {
   box-shadow: 3px 3px 3xp #ffe1ff;
   background-color: #ffe1ff;
 }
-#audioBox{
+#audioBox {
   width: 50%;
   margin: 50px auto;
   min-width: 360px;
@@ -142,6 +146,20 @@ footer {
 #school .ant-pagination {
   text-align: center;
   margin-top: 10px;
+}
+#person_center,#admin_center,#enterprise_cente{
+  display: flex;
+  flex-direction: row;
+}
+#person_center >div:first-of-type,
+#admin_center >div:first-of-type,
+#enterprise_cente >div:first-of-type{
+  width: 160px;
+}
+#person_center >div:last-of-type,
+#admin_center >div:last-of-type,
+#enterprise_cente >div:first-of-type{
+  flex-grow: 1;
 }
 @media (max-width: 768px) {
   #hotRecruit {
