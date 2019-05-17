@@ -3,15 +3,12 @@ header .ant-menu {
   display: flex;
   flex-direction: row;
 }
-header .ant-menu > li {
-  flex-grow: 1;
-}
 header .ant-menu > li.float-right {
   text-align: right;
-  flex-grow: 10;
 }
-header .ant-menu > li.float-right ul {
-  width: 50%;
+
+header .ant-menu > li:nth-of-type(10) {
+  flex-grow: 1;
 }
 #fullScreen.ant-row {
   width: 60%;

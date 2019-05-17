@@ -144,6 +144,9 @@ class Header extends React.Component {
                 <Link to={`/video/`}>
                   <Icon type="video-camera" />视频播放器</Link>
               </Menu.Item>
+              <Menu.Item key="Placeholder">
+
+              </Menu.Item>
               <SubMenu className="float-right"
                 style={{ display: !isLogin ? 'none' : 'inline-block' }}
                 title={<span className="submenu-title-wrapper">
