@@ -11,6 +11,7 @@ import RegisterPerson from './register/Person'
 import RegisterEnterprise from './register/Enterprise'
 import Admin from './admin/'
 import Wechat from './WeChat/'
+import RetrievePassword from './retrievePassword'
 import '../style/App.scss'
 import School from './main/school/';
 import axios from 'axios';
@@ -183,6 +184,7 @@ class Header extends React.Component {
             <Route path="/enterprise/" component={Enterprise} />
             <Route path="/admin/" component={Admin} />
             <Route path="/wechat/" component={Wechat} />
+            <Route path="/retrievePassword/" component={RetrievePassword} />
             <Route path="/register/enterprise/" exact component={RegisterEnterprise} />
             <Route path="/register/person" exact component={RegisterPerson} />
             <Route path="/" exact component={Home} />

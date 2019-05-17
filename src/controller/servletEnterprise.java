@@ -54,6 +54,9 @@ public class servletEnterprise extends HttpServlet {
             case "resumeReg":
                 enterprise.resumeReg(request, response);
                 break;
+            case "getResumePreference":
+                enterprise.getResumePreference(request, response);
+                break;
         }
     }
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

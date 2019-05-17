@@ -64,7 +64,7 @@ class NormalLoginForm extends React.Component {
                     })(
                         <Checkbox>Remember me</Checkbox>
                     )}
-                    <a className="login-form-forgot" href="#1" style={{ float: 'right' }}>Forgot password</a>
+                    <a className="login-form-forgot" href="../retrievePassword" style={{ float: 'right' }}>Forgot password</a>
                 </Form.Item>
                 <Form.Item>
                     <Button type="primary" htmlType="submit" className="login-form-button" style={{ width: '100%' }}>

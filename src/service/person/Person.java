@@ -340,6 +340,7 @@ public class Person {
             e.printStackTrace();
         }
     }
+
     public void jobReg(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         DBManager dbManager = new DBManager();
         Connection conn = dbManager.getConnection();
@@ -368,4 +369,41 @@ public class Person {
             e.printStackTrace();
         }
     }
+
+    public void getJobPreference(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        String nickname = request.getParameter("nickname");
+        String password = request.getParameter("password");
+        DBManager dbmanager = new DBManager();
+        Connection conn = dbmanager.getConnection();
+        try {
+            String sql = "{call getJobPreference(?,?,?,?,?)}";
+            CallableStatement ps = conn.prepareCall(sql);
+            ps.setString(1, nickname);
+            ps.setString(2, password);
+            ps.registerOutParameter(3, Types.VARCHAR);
+            ps.registerOutParameter(4, Types.VARCHAR);
+            ps.registerOutParameter(5, Types.VARCHAR);
+            ps.execute();
+            if (ps.getString(3) != null) {
+                String positions = ps.getString(3);
+                String salary_rate = ps.getString(4);
+                String cities = ps.getString(5);
+                JSONObject user = new JSONObject();
+                user.put("positions", positions);
+                user.put("salary_rate", salary_rate);
+                user.put("cities", cities);
+                response.getWriter().print(user.toString());
+                response.getWriter().flush();
+                response.getWriter().close();
+            }
+            ps.close();
+            conn.close();
+        } catch (SQLException e) {
+            // TODO 自动生成的 catch 块
+            e.printStackTrace();
+        }
+
+    }
+
 }

@@ -20,8 +20,8 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.*;
 import java.text.SimpleDateFormat;
-import java.util.*;
 import java.util.Date;
+import java.util.*;
 
 public class Common {
     private static void sendMail(String to, HttpServletResponse response) {
@@ -228,21 +228,18 @@ public class Common {
     }
 
     public void updatePassword(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
-        response.setContentType("text/xml; charset=UTF-8");
-        //以下两句为取消在本地的缓存
-        response.setHeader("Cache-Control", "no-cache");
-        response.setHeader("Pragma", "no-cache");
         String email = request.getParameter("email");
         String password = request.getParameter("password");
+        String nickname = request.getParameter("nickname");
 
         DBManager conndb = new DBManager();
         Connection conn = conndb.getConnection();
         try {
-            String sql1 = "{call passwordUpdate(?,?)}";
+            String sql1 = "{call passwordUpdate(?,?,?)}";
             CallableStatement ps1 = conn.prepareCall(sql1);
-            ps1.setString(1, password);
-            ps1.setString(2, email);
+            ps1.setString(1, nickname);
+            ps1.setString(2, password);
+            ps1.setString(3, email);
             ps1.execute();
             String str = "{\"msg\":\"updatePassword_success\"}";
             response.getWriter().print(str);

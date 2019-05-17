@@ -39,6 +39,48 @@ const emailAleadyExist = () => {
     key
   });
 };
+export function emailNotExist  () {
+  const key = `open${Date.now()}`;
+  const btn = (
+    <Button type="primary" size="small" onClick={() => notification.close(key)}>
+      确认
+    </Button>
+  );
+  notification.open({
+    message: "邮件错误",
+    description: "该邮箱还未注册，无法找回密码，请先注册",
+    btn,
+    key
+  });
+};
+export function Inconsistent  () {
+  const key = `open${Date.now()}`;
+  const btn = (
+    <Button type="primary" size="small" onClick={() => notification.close(key)}>
+      确认
+    </Button>
+  );
+  notification.open({
+    message: "信息错误",
+    description: "输入用户名密码不一致",
+    btn,
+    key
+  });
+};
+export function modifyPasswordFail  () {
+  const key = `open${Date.now()}`;
+  const btn = (
+    <Button type="primary" size="small" onClick={() => notification.close(key)}>
+      确认
+    </Button>
+  );
+  notification.open({
+    message: "修改密码",
+    description: "该用户名密码已经存在",
+    btn,
+    key
+  });
+};
 export function addResumeSuccess() {
   const key = `open${Date.now()}`;
   const btn = (

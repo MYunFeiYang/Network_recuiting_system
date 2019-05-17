@@ -10,7 +10,7 @@ header .ant-menu > li.float-right {
   text-align: right;
   flex-grow: 10;
 }
-header .ant-menu > li.float-right  ul {
+header .ant-menu > li.float-right ul {
   width: 50%;
 }
 #fullScreen.ant-row {
@@ -20,10 +20,17 @@ header .ant-menu > li.float-right  ul {
   box-shadow: 3px 3px 3xp #ffe1ff;
   background-color: #ffe1ff;
 }
-#audioBox {
+#audioBox,
+#retrievePassword {
   width: 50%;
-  margin: 50px auto;
+  margin: 100px auto;
   min-width: 360px;
+}
+#retrievePassword form {
+  margin-top: 50px;
+}
+#retrievePassword form button:last-of-type {
+  float: right;
 }
 .video-progress-background {
   padding: 5px;
@@ -75,7 +82,7 @@ header .ant-menu > li.float-right  ul {
 }
 
 main {
-  min-height: 72%;
+  min-height: 60%;
   width: 100%;
 }
 
@@ -147,21 +154,26 @@ footer {
   text-align: center;
   margin-top: 10px;
 }
-#person_center,#admin_center,#enterprise_cente{
+#person_center,
+#admin_center,
+#enterprise_center {
   display: flex;
   flex-direction: row;
 }
-#person_center >div:first-of-type,
-#admin_center >div:first-of-type,
-#enterprise_cente >div:first-of-type{
+#person_center > div:first-of-type,
+#admin_center > div:first-of-type,
+#enterprise_center > div:first-of-type {
   width: 160px;
 }
-#person_center >div:last-of-type,
-#admin_center >div:last-of-type,
-#enterprise_cente >div:first-of-type{
+#person_center > div:last-of-type,
+#admin_center > div:last-of-type,
+#enterprise_center > div:last-of-type {
   flex-grow: 1;
 }
 @media (max-width: 768px) {
+  mian {
+    min-height: 72%;
+  }
   #hotRecruit {
     margin: 30px auto;
   }

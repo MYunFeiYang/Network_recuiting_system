@@ -362,4 +362,40 @@ public class Enterprise {
             e.printStackTrace();
         }
     }
+
+    public void getResumePreference(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        String nickname = request.getParameter("nickname");
+        String password = request.getParameter("password");
+        DBManager dbmanager = new DBManager();
+        Connection conn = dbmanager.getConnection();
+        try {
+            String sql = "{call getResumePreference(?,?,?,?,?)}";
+            CallableStatement ps = conn.prepareCall(sql);
+            ps.setString(1, nickname);
+            ps.setString(2, password);
+            ps.registerOutParameter(3, Types.VARCHAR);
+            ps.registerOutParameter(4, Types.VARCHAR);
+            ps.registerOutParameter(5, Types.VARCHAR);
+            ps.execute();
+            if (ps.getString(3) != null) {
+                String career_objective = ps.getString(3);
+                String expected_salary = ps.getString(4);
+                String expected_city = ps.getString(5);
+                JSONObject resume = new JSONObject();
+                resume.put("career_objective", career_objective);
+                resume.put("expected_salary", expected_salary);
+                resume.put("expected_city", expected_city);
+                response.getWriter().print(resume.toString());
+                response.getWriter().flush();
+                response.getWriter().close();
+                ps.close();
+                conn.close();
+            }
+        } catch (SQLException e) {
+            // TODO 自动生成的 catch 块
+            e.printStackTrace();
+        }
+
+    }
 }

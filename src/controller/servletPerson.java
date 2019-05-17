@@ -53,8 +53,12 @@ public class servletPerson extends HttpServlet {
                 break;
             case "auto_match":
                 person.auto_match(request, response);
+                break;
             case "jobReg":
                 person.jobReg(request, response);
+                break;
+            case "getJobPreference":
+                person.getJobPreference(request, response);
         }
     }
 
