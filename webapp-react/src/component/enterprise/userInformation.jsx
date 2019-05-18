@@ -5,7 +5,7 @@ import {
 import axios from 'axios';
 import qs from 'qs';
 import { connect } from 'react-redux';
-import {ModifyUserSuccess} from '../../util'
+import {messageNotification} from '../../util'
 const { Option } = Select;
 const path = 'http://localhost:80'
 class UserInformation extends React.Component {
@@ -58,7 +58,7 @@ class UserInformation extends React.Component {
             },
         }).then(function (response) {
             if (response.data.msg === "modify_user_success") {
-                ModifyUserSuccess();
+                messageNotification("信息修改","用户信息已修改成功")
             }
             else {
 

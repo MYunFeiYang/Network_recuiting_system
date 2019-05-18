@@ -3,7 +3,7 @@ import { Steps, Input, Form, Button, Icon } from 'antd';
 import '../../style/App.scss'
 import axios from 'axios'
 import qs from 'qs'
-import { emailNotExist, Inconsistent, modifyPasswordFail } from '../../util'
+import { messageNotification } from '../../util'
 const Step = Steps.Step;
 
 const path = 'http://localhost:80'
@@ -43,7 +43,7 @@ class RetrievePassword extends React.Component {
                 }
             }).then(response => {
                 if (response.data.msg === "updatePassword_fail") {
-                    modifyPasswordFail()
+                    messageNotification("修改密码","该用户名密码已经存在")
                 } else {
                     this.setState({
                         current: 4
@@ -54,7 +54,7 @@ class RetrievePassword extends React.Component {
             });
 
         } else {
-            Inconsistent()
+            messageNotification("信息错误","输入用户名密码不一致")
         }
     }
     setUser = (nickname, password) => {
@@ -79,7 +79,7 @@ class RetrievePassword extends React.Component {
                 });
                 this.nextStep()
             } else {
-                emailNotExist();
+                messageNotification("邮箱不存在","改邮箱还未注册，请检查输入或注册邮箱")
             }
         }).catch(error => {
             console.log(error);

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import actios from '../../../redux/actions/';
 import axios from 'axios';
 import qs from 'qs';
-import { deleteAccount } from '../../../util'
+import { messageNotification } from '../../../util'
 
 const path = 'http://localhost'
 
@@ -57,7 +57,7 @@ class PersonAccount extends React.Component {
             },
         }).then((responese) => {
             if (responese.data.msg === 'delete_account_success') {
-                deleteAccount();
+                messageNotification("注销账号","注销账号成功");
                 this.handleDelete(record.key)
             }
         }).catch((err) => {

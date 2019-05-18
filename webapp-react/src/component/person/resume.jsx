@@ -5,7 +5,7 @@ import {
 import axios from 'axios';
 import qs from 'qs';
 import { connect } from 'react-redux';
-import { addResumeSuccess, addResumeFail } from '../../util';
+import { messageNotification } from '../../util';
 
 
 const { Option } = Select;
@@ -66,9 +66,9 @@ class Resume extends React.Component {
             },
         }).then(function (response) {
             if (response.data.msg === "add_resume_success") {
-                addResumeSuccess();
+                messageNotification("添加简历","简历已添加成功");
             } else {
-                addResumeFail();
+                messageNotification("添加简历","请不要添加重复简历");
             }
         }).catch(function (error) {
             console.log(error);

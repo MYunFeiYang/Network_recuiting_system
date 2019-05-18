@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import actions from '../../../redux/actions/';
 import axios from 'axios';
 import qs from 'qs';
-import { assessPass } from '../../../util'
+import { messageNotification } from '../../../util'
 
 const path = 'http://localhost'
 
@@ -69,7 +69,7 @@ class EnterpriseAssess extends React.Component {
             },
         }).then((responese) => {
             if (responese.data.msg === 'enterprise_assessment_pass') {
-                assessPass();
+                messageNotification("注册审核","注册审核痛过");
                 this.handleDelete(record.key)
             }
         }).catch((err) => {

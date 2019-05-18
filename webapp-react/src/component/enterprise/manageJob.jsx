@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import actios from '../../redux/actions';
 import axios from 'axios';
 import qs from 'qs';
-import { modifyJobSuccess, deleteJobSuccess } from '../../util'
+import {messageNotification } from '../../util'
 
 const path = 'http://localhost'
 const FormItem = Form.Item;
@@ -183,7 +183,7 @@ class ManageJob extends React.Component {
             },
         }).then((responese) => {
             if (responese.data.msg === 'modify_job_success') {
-                modifyJobSuccess();
+                messageNotification("岗位管理","岗位已修改成功");
             }
         }).catch((err) => {
 
@@ -200,7 +200,7 @@ class ManageJob extends React.Component {
             },
         }).then((responese) => {
             if (responese.data.msg === 'delete_job_success') {
-                deleteJobSuccess()
+                messageNotification("岗位管理","岗位已删除成功")
             }
         }).catch((err) => {
 

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import actios from '../../redux/actions/';
 import axios from 'axios';
 import qs from 'qs';
-import { modifyResumeSuccess, deleteResumeSuccess } from '../../util'
+import { messageNotification } from '../../util'
 
 const path = 'http://localhost'
 const FormItem = Form.Item;
@@ -190,7 +190,7 @@ class ManageResume extends React.Component {
             },
         }).then((responese) => {
             if (responese.data.msg === 'modify_resume_success') {
-                modifyResumeSuccess();
+                messageNotification( "简历管理","简历已修改成功");
             }
         }).catch((err) => {
 
@@ -207,7 +207,7 @@ class ManageResume extends React.Component {
             },
         }).then((responese) => {
             if (responese.data.msg === 'delete_resume_success') {
-                deleteResumeSuccess()
+                messageNotification("简历管理","简历已删除成功")
             }
         }).catch((err) => {
 
@@ -240,8 +240,7 @@ class ManageResume extends React.Component {
             rowClassName={() => 'editable-row'}
             bordered
             dataSource={this.props.resume}
-            columns={columns}
-            rowKey="identification" />;
+            columns={columns} />;
     }
 }
 export default connect((state) => ({

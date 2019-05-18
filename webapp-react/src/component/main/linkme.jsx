@@ -12,7 +12,6 @@ class Linkme extends React.Component {
                 "qq",
                 "linkedin",
                 "github",
-                "weibo",
             ],
             link:[wechat,
                 'http://wpa.qq.com/msgrd?v=3&uin=2728363142&site=qq&menu=yes',

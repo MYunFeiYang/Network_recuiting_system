@@ -5,7 +5,7 @@ import {
 import axios from 'axios';
 import qs from 'qs';
 import { connect } from 'react-redux';
-import { addJobSuccess, addJobFail } from '../../util';
+import { messageNotification} from '../../util';
 
 
 const path = 'http://localhost:80'
@@ -50,9 +50,9 @@ class Job extends React.Component {
             },
         }).then(function (response) {
             if (response.data.msg === "add_job_success") {
-                addJobSuccess();
+                messageNotification("岗位管理","岗位已添加成功");
             } else {
-                addJobFail();
+                messageNotification("岗位管理","请不要添加重复岗位");
             }
         }).catch(function (error) {
             console.log(error);

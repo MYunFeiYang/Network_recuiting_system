@@ -8,6 +8,7 @@ import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
 import UserInformation from './userInformation';
 import Resume from './resume';
 import manageResume from './manageResume'
+import Preference from './preference'
 import { loginGuart } from '../../util'
 
 
@@ -68,6 +69,10 @@ class Person extends React.Component {
                 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
             },
         }).then((responese) => {
+            responese.data.map((value,index)=>{
+                return value.key=index;
+            })
+            console.log(responese.data)
             this.props.setResumeInformation(responese.data);
         }).catch((err) => {
 
@@ -83,7 +88,7 @@ class Person extends React.Component {
                 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
             },
         }).then((responese) => {
-            this.props.setResumeInformation(responese.data);
+            this.props.setPreferenceInformation(responese.data);
         }).catch((err) => {
 
         })
@@ -124,7 +129,8 @@ class Person extends React.Component {
                             </SubMenu>
                             <SubMenu key="sub3" title={<span><Icon type="appstore" /><span>岗位</span></span>}>
                                 <Menu.Item key="5">岗位推荐</Menu.Item>
-                                <Menu.Item key="6" onClick={this.getJobPreference}> 岗位偏好</Menu.Item>
+                                <Menu.Item key="6" onClick={this.getJobPreference}> 
+                                <Link to={`/person/preference/`}>岗位偏好</Link></Menu.Item>
                                 <Menu.Item key="7">岗位收藏</Menu.Item>
                             </SubMenu>
                         </Menu>
@@ -135,6 +141,7 @@ class Person extends React.Component {
                         <Route exact path='/person/userInformation/' component={UserInformation}></Route>
                         <Route exact path='/person/resume/' component={Resume}></Route>
                         <Route exact path='/person/manageResume/' component={manageResume}></Route>
+                        <Route exact path='/person/preference/' component={Preference}></Route>
                     </Switch>
                 </div>
             </Router>

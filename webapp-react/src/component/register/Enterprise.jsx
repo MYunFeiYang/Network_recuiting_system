@@ -4,7 +4,7 @@ import {
 } from 'antd';
 import axios from 'axios';
 import qs from 'qs'
-import { checkEmail, nicknameAndPasswordAleadyExist } from '../../util'
+import { checkEmail, messageNotification } from '../../util'
 const { Option } = Select;
 const path = 'http://localhost:80'
 class RegistrationForm extends React.Component {
@@ -60,7 +60,7 @@ class RegistrationForm extends React.Component {
                 window.location.href = 'http://localhost:3000/login'
             }
             else {
-                nicknameAndPasswordAleadyExist();
+                messageNotification("注册提醒","用户名和密码已经存在，请重新输入");
             }
         }).catch(function (error) {
             console.log(error);
