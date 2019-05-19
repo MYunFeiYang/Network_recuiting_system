@@ -8,7 +8,6 @@ import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
 import UserInformation from './userInformation'
 import Job from './job'
 import ManageJob from './manageJob'
-import { loginGuart } from '../../util'
 import Preference from './preference'
 import '../../style/App.scss'
 
@@ -88,16 +87,9 @@ class Enterprise extends React.Component {
 
         })
     }
-    componentWillMount() {
-        const isLogin = this.props.isLogin;
-        const loginRedirect = loginGuart(isLogin)
-        this.setState({
-            loginRedirect
-        })
-    }
+
     render() {
         return <div id="enterprise_center">
-            {this.state.loginRedirect}
             <Router>
                 <div>
                     <Menu

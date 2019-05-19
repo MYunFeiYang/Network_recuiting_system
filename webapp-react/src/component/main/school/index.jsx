@@ -8,17 +8,13 @@ import Address from './address'
 import Position from './position'
 import Paging from './paging'
 import '../../../style/App.scss'
-import { loginGuart } from '../../../util'
 const path = 'http://localhost:80'
 
 class School extends React.Component {
-  constructor() {
+  constructor(){
     super();
-    this.state = {
-      loginRedirect: ''
-    }
+    this.getIndustry();
   }
-
   getIndustry = () => {
     axios({
       method: 'post',
@@ -103,21 +99,9 @@ class School extends React.Component {
       console.log(err)
     })
   }
-  componentWillMount() {
-    const isLogin = this.props.isLogin;
-    const loginRedirect = loginGuart(isLogin);
-    if (isLogin) {
-      this.getIndustry();
-    } else {
-      this.setState({
-        loginRedirect
-      });
-    }
-  }
   render() {
     return (
       <div id="school">
-        {this.state.loginRedirect}
         <div onClick={this.getPosition}>
           <Industry ></Industry>
         </div>

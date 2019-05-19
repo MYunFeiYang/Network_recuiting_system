@@ -9,7 +9,6 @@ import PersonAssess from './person/assessment';
 import EnterpriseAssess from './enterprise/assessment';
 import PersonAccount from './person/account';
 import EnterpriseAccount from './enterprise/account'
-import { loginGuart } from '../../util'
 import '../../style/App.scss'
 
 const SubMenu = Menu.SubMenu;
@@ -22,7 +21,6 @@ class Admin extends React.Component {
             current: '1',
             personRegisterCount: 0,
             enterpriseRegisterCount: 0,
-            loginRedirect: ''
         };
         this.personRegisterCount();
         this.enterpriseRegisterCount();
@@ -150,16 +148,9 @@ class Admin extends React.Component {
 
         })
     }
-    componentDidMount() {
-        const isLogin = this.props.isLogin;
-        const loginRedirect = loginGuart(isLogin)
-        this.setState({
-            loginRedirect
-        })
-    }
+    
     render() {
         return <div id="admin_center">
-            {this.state.loginRedirect}
             <Router>
                 <div>
                     <Affix offsetTop='50'>

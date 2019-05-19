@@ -25,7 +25,7 @@ class Address extends React.Component {
         mode="horizontal">
         {
           this.props.address.map((value, index) => {
-            return <Menu.Item key={index} style={{ height: '24px', lineHeight: '24px' }}>
+            return <Menu.Item key={index} >
               <span data-paging-type='address'>{value.text}</span>
             </Menu.Item>
           })

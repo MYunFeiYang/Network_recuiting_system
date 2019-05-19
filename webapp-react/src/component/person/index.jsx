@@ -9,7 +9,6 @@ import UserInformation from './userInformation';
 import Resume from './resume';
 import manageResume from './manageResume'
 import Preference from './preference'
-import { loginGuart } from '../../util'
 
 
 const SubMenu = Menu.SubMenu;
@@ -69,8 +68,8 @@ class Person extends React.Component {
                 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
             },
         }).then((responese) => {
-            responese.data.map((value,index)=>{
-                return value.key=index;
+            responese.data.map((value, index) => {
+                return value.key = index;
             })
             console.log(responese.data)
             this.props.setResumeInformation(responese.data);
@@ -93,16 +92,9 @@ class Person extends React.Component {
 
         })
     }
-    componentWillMount() {
-        const isLogin = this.props.isLogin;
-        const loginRedirect = loginGuart(isLogin)
-        this.setState({
-            loginRedirect
-        })
-    }
+    
     render() {
         return <div id="person_center">
-            {this.state.loginRedirect}
             <Router>
                 <div>
                     <Affix offsetTop='50'>
@@ -129,8 +121,9 @@ class Person extends React.Component {
                             </SubMenu>
                             <SubMenu key="sub3" title={<span><Icon type="appstore" /><span>岗位</span></span>}>
                                 <Menu.Item key="5">岗位推荐</Menu.Item>
-                                <Menu.Item key="6" onClick={this.getJobPreference}> 
-                                <Link to={`/person/preference/`}>岗位偏好</Link></Menu.Item>
+                                <Menu.Item key="6" onClick={this.getJobPreference}>
+                                    <Link to={`/person/preference/`}>岗位偏好</Link>
+                                </Menu.Item>
                                 <Menu.Item key="7">岗位收藏</Menu.Item>
                             </SubMenu>
                         </Menu>

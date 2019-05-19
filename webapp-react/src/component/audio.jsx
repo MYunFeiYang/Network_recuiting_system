@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { Button, Row, Col, Icon, Menu, Dropdown, Slider } from 'antd';
-import { loginGuart } from '../util'
 import '../style/App.scss'
 
 class Audio extends React.Component {
@@ -36,7 +35,6 @@ class Audio extends React.Component {
             totalTime: '',
             playPause: 'play',
             loopType: '循环模式',
-            loginRedirect: ''
         }
     }
 
@@ -188,13 +186,7 @@ class Audio extends React.Component {
             loopType
         })
     };
-    componentWillMount() {
-        const isLogin = this.props.isLogin;
-        const loginRedirect = loginGuart(isLogin)
-        this.setState({
-            loginRedirect
-        })
-    }
+
     render() {
         const menu = (
             <Menu>
@@ -216,7 +208,6 @@ class Audio extends React.Component {
             </Menu>
         );
         return (<Row id="audioBox">
-            {this.state.loginRedirect}
             <Col span={24}>
                 <ol ref="mlist" onClick={this.playByMe}>
                     {this.state.data.map((value, index) => {

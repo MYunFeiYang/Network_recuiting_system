@@ -34,7 +34,7 @@ class Industry extends React.Component {
       mode={this.state.mode}      >
       {
         this.props.industry.map((value, index) => {
-          return <Menu.Item key={index} style={{ height: '24px', lineHeight: '24px' }}>
+          return <Menu.Item key={index} >
             {value.text}
           </Menu.Item>
         })

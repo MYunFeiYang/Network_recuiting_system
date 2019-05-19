@@ -13,17 +13,17 @@ class Login extends React.Component {
         super();
         this.state = {
             visible: true,
-            alertVisible:false,
+            alertVisible: false,
         }
     }
-    changeAlertVisible=()=>{
-        if(this.state.alertVisible){
+    changeAlertVisible = () => {
+        if (this.state.alertVisible) {
             this.setState({
-                alertVisible:false,
+                alertVisible: false,
             })
-        }else{
+        } else {
             this.setState({
-                alertVisible:true,
+                alertVisible: true,
             })
         }
     }
@@ -43,8 +43,21 @@ class Login extends React.Component {
                 this.changeAlertVisible();
             }
             else if (response.data.msg === "login_success") {
+                localStorage.setItem('__config_center_token',true)
                 isLogin('login', user);
-                window.location.href='http://localhost:3000';
+                switch (user.login_type) {
+                    case "person":
+                        window.location.href = 'http://localhost:3000/person';
+                        break;
+                    case "enterprise":
+                        window.location.href = 'http://localhost:3000/enterprise';
+                        break;
+                    case "admin":
+                        window.location.href = 'http://localhost:3000/admin';
+                        break;
+                    default:
+                        break;
+                }
             }
         }).catch(function (error) {
             console.log(error);
@@ -53,7 +66,7 @@ class Login extends React.Component {
     render() {
         return (
             <LoginBox login={this.login} alertVisible={this.state.alertVisible}
-            changeAlertVisible={this.changeAlertVisible}></LoginBox>
+                changeAlertVisible={this.changeAlertVisible}></LoginBox>
         );
     }
 }

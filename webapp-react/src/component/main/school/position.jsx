@@ -26,7 +26,7 @@ class Position extends React.Component {
         mode="horizontal">
         {
           this.props.position.map((value, index) => {
-            return <Menu.Item key={index} style={{ height: '24px', lineHeight: '24px' }}>
+            return <Menu.Item key={index} >
               <span data-paging-type='position'>{value.position}</span>
             </Menu.Item>
           })
