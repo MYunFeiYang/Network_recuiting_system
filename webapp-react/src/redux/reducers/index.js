@@ -1,27 +1,37 @@
 import {
-  SET_USER_INFORMATION, SET_INDUSTRY_INFORMATION, SET_ADDRESS_INFORMATION,
-  SET_POSITION_INFORMATION, CHANGE_LOGIN_STATE, SET_SELECTED_POSITION,
-  SET_SELECTED_ADDRESS, SET_PAGING_INFORMATION, SET_ADMIN_INFORMATION,
-  SET_RESUME_INFORMATION, SET_JOB_INFORMATION, SET_ASSESS_INFORMATION
-} from '../actions/action_types';
+  SET_USER_INFORMATION,
+  SET_INDUSTRY_INFORMATION,
+  SET_ADDRESS_INFORMATION,
+  SET_POSITION_INFORMATION,
+  CHANGE_LOGIN_STATE,
+  SET_SELECTED_POSITION,
+  SET_SELECTED_ADDRESS,
+  SET_PAGING_INFORMATION,
+  SET_ADMIN_INFORMATION,
+  SET_RESUME_INFORMATION,
+  SET_JOB_INFORMATION,
+  SET_ASSESS_INFORMATION,
+  SET_PREFERENCE_INFORMATION
+} from "../actions/action_types";
 let initState = {
   user: {
-    nickname: '',
-    password: '',
-    login_type: ''
+    nickname: "",
+    password: "",
+    login_type: ""
   },
   isLogin: false,
   industry: [],
   address: [],
   position: [],
-  selectedPosition: '',
-  selectedAddress: '',
+  selectedPosition: "",
+  selectedAddress: "",
   paging: [{ list: [] }],
   admin: [],
-  resume: [{}],
-  job: [{}],
+  resume: [],
+  job: [],
   assess: [],
-}
+  preference: {}
+};
 
 function reducer(state = initState, action) {
   let newState;
@@ -96,6 +106,12 @@ function reducer(state = initState, action) {
       newState = {
         ...state,
         assess: action.payload
+      };
+      break;
+    case SET_PREFERENCE_INFORMATION:
+      newState = {
+        ...state,
+        preference: action.payload
       };
       break;
     default:

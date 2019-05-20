@@ -122,11 +122,26 @@ footer {
   font-size: 36px;
 }
 #registerPerson,
-#registerEnterprise {
+#registerEnterprise,
+#preference,
+#person_center form,
+#enterprise_center form,
+#admin_center form,
+#person_center .ant-collapse.ant-collapse-borderless,
+#enterprise_center .ant-collapse.ant-collapse-borderless,
+#admin_center .ant-collapse.ant-collapse-borderless {
   width: 40%;
-  margin: 30px auto;
-  min-width: 320px;
+  margin: 10px auto;
+  min-width: 360px;
   box-shadow: 3px 3px 3px #ffe1ff;
+}
+#person_center .collapse .ant-collapse-item,
+#enterprise_center .collapse .ant-collapse-item,
+#admin_center .collapse .ant-collapse-item {
+  background: "#f7f7f7";
+  border-radius: 4px;
+  margin-bottom: 24px;
+  border: 0;
 }
 #registerPerson button {
   width: 100%;
@@ -165,7 +180,20 @@ footer {
 #person_center > div:last-of-type,
 #admin_center > div:last-of-type,
 #enterprise_center > div:last-of-type {
-  flex-grow: 1;
+  flex: auto;
+}
+#person_center > div:last-of-type .ant-table-wrapper,
+#admin_center > div:last-of-type .ant-table-wrapper,
+#enterprise_center > div:last-of-type .ant-table-wrapper {
+  width: 100%;
+}
+
+#preference button {
+  display: block;
+  margin: 20px auto;
+}
+form {
+  padding: 20px;
 }
 @media (max-width: 768px) {
   mian {

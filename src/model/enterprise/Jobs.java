@@ -9,7 +9,25 @@ public class Jobs {
     private String industry;
     private String position;
     private String number;
-    private String salary;
+
+    public int getMin_salary() {
+        return min_salary;
+    }
+
+    public void setMin_salary(int min_salary) {
+        this.min_salary = min_salary;
+    }
+
+    public int getMax_salary() {
+        return max_salary;
+    }
+
+    public void setMax_salary(int max_salary) {
+        this.max_salary = max_salary;
+    }
+
+    private int min_salary;
+    private int max_salary;
     private String publish_time;
     private String effective_time;
     private String email;
@@ -77,14 +95,6 @@ public class Jobs {
 
     public void setNumber(String number) {
         this.number = number;
-    }
-
-    public String getSalary() {
-        return salary;
-    }
-
-    public void setSalary(String salary) {
-        this.salary = salary;
     }
 
     public String getPublish_time() {

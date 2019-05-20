@@ -144,6 +144,26 @@ class ManageResume extends React.Component {
                 key: 'graduation_data',
                 editable: true,
             }, {
+                title: '求职意向',
+                dataIndex: 'career_objective',
+                key: 'career_objective',
+                editable: true,
+            }, {
+                title: '最低薪资',
+                dataIndex: 'min_salary',
+                key: 'min_slalry',
+                editable: true,
+            }, {
+                title: '最高薪资',
+                dataIndex: 'max_salary',
+                key: 'max_salary',
+                editable: true,
+            }, {
+                title: '意向城市',
+                dataIndex: 'expected_city',
+                key: 'expected_city',
+                editable: true,
+            }, {
                 title: '操作',
                 key: 'action',
                 render: (text, record) => (
@@ -176,15 +196,10 @@ class ManageResume extends React.Component {
         this.props.setResumeInformation(newData);
     }
     modifyResume = (record) => {
-        const { identification, age, collage, specialty, degree, admission_data,
-            graduation_data } = record;
         axios({
             url: `${path}/person?person=modifyResume`,
             method: 'post',
-            data: qs.stringify({
-                identification, age, collage, specialty, degree, admission_data,
-                graduation_data
-            }),
+            data: qs.stringify(record),
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
             },
@@ -240,7 +255,7 @@ class ManageResume extends React.Component {
             rowClassName={() => 'editable-row'}
             bordered
             dataSource={this.props.resume}
-            columns={columns} />;
+            columns={columns} size="small"/>;
     }
 }
 export default connect((state) => ({

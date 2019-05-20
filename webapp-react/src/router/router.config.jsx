@@ -11,7 +11,7 @@ import School from "../component/main/school";
 import ErrorPage from "../component/404";
 
 
-const routerConfig = [
+export const primaryRouterConfig = [
   {
     path: "/",
     component: Home,
@@ -25,21 +25,18 @@ const routerConfig = [
   {
     path: "/music",
     component: Audio,
-    auth: true
   },
   {
     path: "/video",
     component: Video,
-    auth: true
   },
   {
     path: "/school",
     component: School,
-    auth: true
   },
   {
     path: "/login",
-    component: Login
+    component: Login,
   },
   {
     path: "/404",
@@ -72,4 +69,4 @@ const routerConfig = [
   }
 ];
 
-export default routerConfig;
+

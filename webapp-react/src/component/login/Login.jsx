@@ -47,13 +47,13 @@ class Login extends React.Component {
                 isLogin('login', user);
                 switch (user.login_type) {
                     case "person":
-                        window.location.href = 'http://localhost:3000/person';
+                        window.location.href = '/person';
                         break;
                     case "enterprise":
-                        window.location.href = 'http://localhost:3000/enterprise';
+                        window.location.href = '/enterprise';
                         break;
                     case "admin":
-                        window.location.href = 'http://localhost:3000/admin';
+                        window.location.href = '/admin';
                         break;
                     default:
                         break;

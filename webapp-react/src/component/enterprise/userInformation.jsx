@@ -6,6 +6,7 @@ import axios from 'axios';
 import qs from 'qs';
 import { connect } from 'react-redux';
 import {messageNotification} from '../../util'
+import '../../style/App.scss'
 const { Option } = Select;
 const path = 'http://localhost:80'
 class UserInformation extends React.Component {
@@ -101,11 +102,7 @@ class UserInformation extends React.Component {
         );
 
         return (
-            <Form {...formItemLayout} onSubmit={this.handleSubmit}
-                style={{
-                    width: '40%', margin: '1% 30%', padding: '20px',
-                    boxShadow: '2px 2px 2px 1px rgba(0, 0, 255, .2)',
-                }}>
+            <Form {...formItemLayout} onSubmit={this.handleSubmit}>
                 <Form.Item
                     label={(
                         <span>
@@ -152,7 +149,7 @@ class UserInformation extends React.Component {
                             validator: this.compareToFirstPassword,
                         }],
                     })(
-                        <Input type="password" onBlur={this.handleConfirmBlur} disabled />
+                        <Input type="password" onBlur={this.handleConfirmBlur} />
                     )}
                 </Form.Item>
                 <Form.Item
@@ -197,7 +194,7 @@ class UserInformation extends React.Component {
                     )}
                 </Form.Item>
                 <Form.Item
-                    label="公司地址"                >
+                    label="所在城市"                >
                     {getFieldDecorator('address', {
                         initialValue: this.props.user.address,
                     })(

@@ -15,6 +15,45 @@ public class Resume {
     private String graduation_data;
     private String telephone;
     private String email;
+    private String career_objective;
+    private String expected_city;
+
+    public int getMin_salary() {
+        return min_salary;
+    }
+
+    public void setMin_salary(int min_salary) {
+        this.min_salary = min_salary;
+    }
+
+    private int min_salary;
+
+
+    public int getMax_salary() {
+        return max_salary;
+    }
+
+    public void setMax_salary(int max_salary) {
+        this.max_salary = max_salary;
+    }
+
+    private int max_salary;
+
+    public String getCareer_objective() {
+        return career_objective;
+    }
+
+    public void setCareer_objective(String career_objective) {
+        this.career_objective = career_objective;
+    }
+
+    public String getExpected_city() {
+        return expected_city;
+    }
+
+    public void setExpected_city(String expected_city) {
+        this.expected_city = expected_city;
+    }
 
     public String getIdentification() {
         return identification;

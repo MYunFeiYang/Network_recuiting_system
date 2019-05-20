@@ -1,34 +1,41 @@
 import React from 'react'
 import {
-    Form, Input, Select, Button, DatePicker
+    Form, Input, Select, Button, DatePicker, InputNumber
 } from 'antd';
 import axios from 'axios';
 import qs from 'qs';
 import { connect } from 'react-redux';
 import { messageNotification } from '../../util';
+import '../../style/App.scss'
 
 
 const { Option } = Select;
 const path = 'http://localhost:80'
 class Resume extends React.Component {
-    state = {
-        confirmDirty: false,
-        autoCompleteResult: [],
-        admission_data: '',
-        graduation_data: ''
+    constructor() {
+        super();
+        this.state = {
+            confirmDirty: false,
+            autoCompleteResult: [],
+            admission_data: '',
+            graduation_data: '',
+            sex: '男',
+        };
+    }
+
+    onChange = value => {
+        this.setState({
+            sex: value,
+        });
     };
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.form.validateFieldsAndScroll((err, values) => {
             if (!err) {
-                const admission_data = this.state.admission_data;
-                const graduation_data = this.state.graduation_data;
-                const nickname = this.props.user.nickname;
-                const password = this.props.user.password;
-                const { age, sex, name, email, telephone, origin, collage, specialty, degree } = values
+                const { admission_data, graduation_data, sex } = this.state;
+                const { nickname, password } = this.props.user;
                 const resume = {
-                    nickname, password, name, email, age, sex, telephone, origin,
-                    collage, specialty, degree, admission_data, graduation_data
+                    nickname, password, admission_data, graduation_data, sex, ...values
                 };
                 this.addResume(resume);
             }
@@ -40,22 +47,6 @@ class Resume extends React.Component {
         this.setState({ confirmDirty: this.state.confirmDirty || !!value });
     }
 
-    compareToFirstPassword = (rule, value, callback) => {
-        const form = this.props.form;
-        if (value && value !== form.getFieldValue('password')) {
-            callback('你输入的两次密码不一致!');
-        } else {
-            callback();
-        }
-    }
-
-    validateToNextPassword = (rule, value, callback) => {
-        const form = this.props.form;
-        if (value && this.state.confirmDirty) {
-            form.validateFields(['confirm'], { force: true });
-        }
-        callback();
-    }
     addResume = (data) => {
         axios({
             method: 'post',
@@ -66,9 +57,9 @@ class Resume extends React.Component {
             },
         }).then(function (response) {
             if (response.data.msg === "add_resume_success") {
-                messageNotification("添加简历","简历已添加成功");
+                messageNotification("添加简历", "简历已添加成功");
             } else {
-                messageNotification("添加简历","请不要添加重复简历");
+                messageNotification("添加简历", "请不要添加重复简历");
             }
         }).catch(function (error) {
             console.log(error);
@@ -118,13 +109,12 @@ class Resume extends React.Component {
                 <Option value="86">+86</Option>
             </Select>
         );
-        const resume = this.props.resume[0];
+        let resume = this.props.resume[0];
+        if (resume === undefined) {
+            resume = {};
+        }
         return (
-            <Form {...formItemLayout} onSubmit={this.handleSubmit}
-                style={{
-                    width: '40%', margin: '1% 30%', padding: '20px',
-                    boxShadow: '2px 2px 2px 1px rgba(0, 0, 255, .2)',
-                }}>
+            <Form {...formItemLayout} onSubmit={this.handleSubmit}>
 
                 <Form.Item
                     label="姓名"
@@ -140,15 +130,18 @@ class Resume extends React.Component {
                 </Form.Item>
                 <Form.Item
                     label="性别"
-                >
-                    {getFieldDecorator('sex', {
-                        initialValue: resume.sex,
-                        rules: [{
-                            required: true, message: '请输入你的性别!',
-                        }]
-                    })(
-                        <Input />
-                    )}
+                >{getFieldDecorator('sex', {
+                    initialValue: this.state.sex,
+                    rules: [{
+                        required: true, message: '请输入你的年龄!',
+                    }]
+                })(
+                    <Select onChange={this.onChange}>
+                        <Option value="男">男</Option>
+                        <Option value="女">女</Option>
+                    </Select>
+                )}
+
                 </Form.Item>
                 <Form.Item
                     label="年龄"
@@ -159,7 +152,7 @@ class Resume extends React.Component {
                             required: true, message: '请输入你的年龄!',
                         }]
                     })(
-                        <Input />
+                        <InputNumber min={1} max={100} />
                     )}
                 </Form.Item>
                 <Form.Item
@@ -235,6 +228,54 @@ class Resume extends React.Component {
                     )}
                 </Form.Item>
                 <Form.Item
+                    label="求职期望"
+                >
+                    {getFieldDecorator('career_objective', {
+                        initialValue: resume.career_objective,
+                        rules: [{
+                            required: true, message: '请输入求职期望!',
+                        }],
+                    })(
+                        <Input />
+                    )}
+                </Form.Item>
+                <Form.Item
+                    label="最低薪资"
+                >
+                    {getFieldDecorator('min_salary', {
+                        initialValue: resume.min_salary,
+                        rules: [{
+                            required: true, message: '请输入你的期望最低薪资!',
+                        }]
+                    })(
+                        <Input />
+                    )}
+                </Form.Item>
+                <Form.Item
+                    label="最高薪资"
+                >
+                    {getFieldDecorator('max_salary', {
+                        initialValue: resume.max_salary,
+                        rules: [{
+                            required: true, message: '请输入你的期望最高薪资!',
+                        }]
+                    })(
+                        <Input />
+                    )}
+                </Form.Item>
+                <Form.Item
+                    label="期望城市"
+                >
+                    {getFieldDecorator('expected_city', {
+                        initialValue: resume.expected_city,
+                        rules: [{
+                            required: true, message: '请输入期望城市!',
+                        }],
+                    })(
+                        <Input />
+                    )}
+                </Form.Item>
+                <Form.Item
                     label="入学时间"                >
                     <DatePicker onChange={this.handleAdmissionData} />
                 </Form.Item>
@@ -251,7 +292,7 @@ class Resume extends React.Component {
     }
 }
 
-const WrappedresumeInformation = Form.create({ name: 'register' })(Resume);
+const WrappedresumeInformation = Form.create({ name: 'resume' })(Resume);
 export default connect((state) => ({
     ...state
 }))(WrappedresumeInformation);

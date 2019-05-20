@@ -5,7 +5,8 @@ import {
 import axios from 'axios';
 import qs from 'qs';
 import { connect } from 'react-redux';
-import { messageNotification} from '../../util';
+import { messageNotification } from '../../util';
+import '../../style/App.scss'
 
 
 const path = 'http://localhost:80'
@@ -13,23 +14,17 @@ class Job extends React.Component {
     state = {
         confirmDirty: false,
         autoCompleteResult: [],
-        publish_time: '',
         effective_time: ''
     };
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.form.validateFieldsAndScroll((err, values) => {
             if (!err) {
-                const publish_time = this.state.publish_time;
-                const effective_time = this.state.effective_time;
-                const nickname = this.props.user.nickname;
-                const password = this.props.user.password;
-                const { name, address, industry, position, number, salary, telephone, email } = values
+                const { effective_time } = this.state;
+                const { nickname, password } = this.props.user;
                 const job = {
-                    nickname, password, name, address, industry, position, number, salary,
-                    telephone, email, effective_time, publish_time
+                    nickname, password, effective_time, ...values
                 };
-                console.log(job)
                 this.addjob(job);
             }
         });
@@ -50,18 +45,13 @@ class Job extends React.Component {
             },
         }).then(function (response) {
             if (response.data.msg === "add_job_success") {
-                messageNotification("岗位管理","岗位已添加成功");
+                messageNotification("岗位管理", "岗位已添加成功");
             } else {
-                messageNotification("岗位管理","请不要添加重复岗位");
+                messageNotification("岗位管理", "请不要添加重复岗位");
             }
         }).catch(function (error) {
             console.log(error);
         });
-    }
-    handlePublishTime = (date, dateString) => {
-        this.setState({
-            publish_time: dateString,
-        })
     }
     handleEffectiveTime = (date, dateString) => {
         this.setState({
@@ -96,13 +86,12 @@ class Job extends React.Component {
             },
         };
 
-        const job = this.props.job[0];
+        let job = this.props.job[0];
+        if (job === undefined) {
+            job = {};
+        }
         return (
-            <Form {...formItemLayout} onSubmit={this.handleSubmit}
-                style={{
-                    width: '40%', margin: '1% 30%', padding: '20px',
-                    boxShadow: '2px 2px 2px 1px rgba(0, 0, 255, .2)',
-                }}>
+            <Form {...formItemLayout} onSubmit={this.handleSubmit}>
 
                 <Form.Item
                     label="公司名"
@@ -117,12 +106,12 @@ class Job extends React.Component {
                     )}
                 </Form.Item>
                 <Form.Item
-                    label="地址"
+                    label="所在城市"
                 >
                     {getFieldDecorator('address', {
                         initialValue: job.address,
                         rules: [{
-                            required: true, message: '请输入地址!',
+                            required: true, message: '请输入所在城市!',
                         }]
                     })(
                         <Input />
@@ -163,23 +152,31 @@ class Job extends React.Component {
                     )}
                 </Form.Item>
                 <Form.Item
-                    label="薪资"
+                    label="最低薪资"
                 >
-                    {getFieldDecorator('salary', {
+                    {getFieldDecorator('min_salary', {
                         rules: [{
-                            required: true, message: '请输入薪资!',
+                            required: true, message: '请输入最低薪资!',
                         }],
-                        initialValue: job.salary,
+                        initialValue: job.min_salary,
                     })(
                         <Input />
                     )}
                 </Form.Item>
                 <Form.Item
-                    label="发布时间"                >
-                    <DatePicker onChange={this.handlePublishTime} />
+                    label="最高薪资"
+                >
+                    {getFieldDecorator('max_salary', {
+                        rules: [{
+                            required: true, message: '请输入最高薪资!',
+                        }],
+                        initialValue: job.max_salary,
+                    })(
+                        <Input />
+                    )}
                 </Form.Item>
                 <Form.Item
-                    label="有效时间"                >
+                    label="有效期至"                >
                     <DatePicker onChange={this.handleEffectiveTime} />
                 </Form.Item>
                 <Form.Item

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import actios from '../../redux/actions';
 import axios from 'axios';
 import qs from 'qs';
-import {messageNotification } from '../../util'
+import { messageNotification } from '../../util'
 
 const path = 'http://localhost'
 const FormItem = Form.Item;
@@ -102,9 +102,8 @@ class ManageJob extends React.Component {
                 title: '公司名',
                 dataIndex: 'name',
                 key: 'name',
-                editable: true,
             }, {
-                title: '地址',
+                title: '所在城市',
                 dataIndex: 'address',
                 key: 'address',
                 editable: true,
@@ -112,29 +111,31 @@ class ManageJob extends React.Component {
                 title: '行业',
                 dataIndex: 'industry',
                 key: 'industry',
-                editable: true,
             }, {
                 title: '岗位',
                 dataIndex: 'position',
                 key: 'position',
-                editable: true,
             }, {
                 title: '人数',
                 dataIndex: 'number',
                 key: 'number',
                 editable: true,
             }, {
-                title: '薪资',
-                dataIndex: 'salary',
-                key: 'salary',
+                title: '最低薪资',
+                dataIndex: 'min_salary',
+                key: 'min_salary',
+                editable: true,
+            }, {
+                title: '最高薪资',
+                dataIndex: 'max_salary',
+                key: 'max_salary',
                 editable: true,
             }, {
                 title: '发布时间',
                 dataIndex: 'publish_time',
                 key: 'publish_time',
-                editable: true,
             }, {
-                title: '有效时间',
+                title: '有效期至',
                 dataIndex: 'effective_time',
                 key: 'effective_time',
                 editable: true,
@@ -171,19 +172,17 @@ class ManageJob extends React.Component {
         this.props.setJobInformation(newData);
     }
     modifyJob = (record) => {
-        const { identification, number, salary, effective_time,address } = record;
+        const { identification, number, min_salary, max_salary, effective_time, address } = record;
         axios({
             url: `${path}/enterprise?enterprise=modifyJob`,
             method: 'post',
-            data: qs.stringify({
-                identification, number, salary, effective_time,address
-            }),
+            data: qs.stringify({ identification, number, min_salary, max_salary, effective_time, address }),
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
             },
         }).then((responese) => {
             if (responese.data.msg === 'modify_job_success') {
-                messageNotification("岗位管理","岗位已修改成功");
+                messageNotification("岗位管理", "岗位已修改成功");
             }
         }).catch((err) => {
 
@@ -200,7 +199,7 @@ class ManageJob extends React.Component {
             },
         }).then((responese) => {
             if (responese.data.msg === 'delete_job_success') {
-                messageNotification("岗位管理","岗位已删除成功")
+                messageNotification("岗位管理", "岗位已删除成功")
             }
         }).catch((err) => {
 
@@ -234,7 +233,7 @@ class ManageJob extends React.Component {
             bordered
             dataSource={this.props.job}
             columns={columns}
-            rowKey="identification" />;
+        />;
     }
 }
 export default connect((state) => ({

@@ -11,16 +11,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
 public class Enterprise {
     public void register(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
-        response.setContentType("text/xml; charset=UTF-8");
-        response.setHeader("Cache-Control", "no-cache");
-        response.setHeader("Pragma", "no-cache");
+
         String nickname = request.getParameter("nickname");
         String password = request.getParameter("password");
         String name = request.getParameter("name");
@@ -150,7 +149,7 @@ public class Enterprise {
         DBManager dbmanager = new DBManager();
         Connection conn = dbmanager.getConnection();
         try {
-            String sql = "{call jobInit(?,?,?,?,?,?)}";
+            String sql = "{call jobInit(?,?,?,?,?,?,?)}";
             CallableStatement ps = conn.prepareCall(sql);
             ps.setString(1, nickname);
             ps.setString(2, password);
@@ -158,16 +157,19 @@ public class Enterprise {
             ps.registerOutParameter(4, Types.VARCHAR);
             ps.registerOutParameter(5, Types.VARCHAR);
             ps.registerOutParameter(6, Types.VARCHAR);
+            ps.registerOutParameter(7, Types.VARCHAR);
             ps.execute();
             if (ps.getString(3) != null) {
                 String name = ps.getString(3);
                 String address = ps.getString(4);
                 String industry = ps.getString(5);
-                String email = ps.getString(6);
+                String telephone = ps.getString(6);
+                String email = ps.getString(7);
                 JSONObject job = new JSONObject();
                 job.put("name", name);
                 job.put("address", address);
                 job.put("industry", industry);
+                job.put("telephone", telephone);
                 job.put("email", email);
                 response.getWriter().print(job.toString());
                 response.getWriter().flush();
@@ -183,7 +185,7 @@ public class Enterprise {
     }
 
     public void addJob(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        
+
         String nickname = request.getParameter("nickname");
         String password = request.getParameter("password");
         Random random = new Random();
@@ -193,15 +195,17 @@ public class Enterprise {
         String industry = request.getParameter("industry");
         String position = request.getParameter("position");
         String number = request.getParameter("number");
-        String salary = request.getParameter("salary");
-        String publish_time = request.getParameter("publish_time");
+        int min_salary = Integer.parseInt(request.getParameter("min_salary"));
+        int max_salary = Integer.parseInt(request.getParameter("max_salary"));
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");//设置日期格式
+        String publish_time = df.format(new Date());// new Date()为获取当前系统时间
         String effective_time = request.getParameter("effective_time");
         String telephone = request.getParameter("telephone");
         String email = request.getParameter("email");
 
         DBManager dbmanager = new DBManager();
         Connection conn = dbmanager.getConnection();
-        String sql = "{call jobAdd(?,?,?,?,?,?,?,?,?,?,?,?,?)}";
+        String sql = "{call jobAdd(?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
         try {
             CallableStatement ps = conn.prepareCall(sql);
             ps.setString(1, identification);
@@ -212,11 +216,12 @@ public class Enterprise {
             ps.setString(6, industry);
             ps.setString(7, position);
             ps.setString(8, number);
-            ps.setString(9, salary);
-            ps.setString(10, publish_time);
-            ps.setString(11, effective_time);
-            ps.setString(12, email);
-            ps.setString(13, telephone);
+            ps.setInt(9, min_salary);
+            ps.setInt(10, max_salary);
+            ps.setString(11, publish_time);
+            ps.setString(12, effective_time);
+            ps.setString(13, email);
+            ps.setString(14, telephone);
             ps.execute();
             String str = "{\"msg\":\"add_job_success\"}";
             response.getWriter().print(str);
@@ -256,9 +261,10 @@ public class Enterprise {
                 jobs.setIndustry(rs.getString(4));
                 jobs.setPosition(rs.getString(5));
                 jobs.setNumber(rs.getString(6));
-                jobs.setSalary(rs.getString(7));
-                jobs.setPublish_time(rs.getString(8));
-                jobs.setEffective_time(rs.getString(9));
+                jobs.setMin_salary(rs.getInt(7));
+                jobs.setMax_salary(rs.getInt(8));
+                jobs.setPublish_time(rs.getString(9));
+                jobs.setEffective_time(rs.getString(10));
                 jobsList.add(jobs);
             }
             response.getWriter().print(JSONArray.fromObject(jobsList).toString());
@@ -276,19 +282,21 @@ public class Enterprise {
         String identification = request.getParameter("identification");
         String address = request.getParameter("address");
         String number = request.getParameter("number");
-        String salary = request.getParameter("salary");
+        int min_salary = Integer.parseInt(request.getParameter("min_salary"));
+        int max_salary = Integer.parseInt(request.getParameter("max_salary"));
         String effective_time = request.getParameter("effective_time");
 
         DBManager dbmanager = new DBManager();
         Connection conn = dbmanager.getConnection();
-        String sql = "{call jobModify(?,?,?,?,?)}";
+        String sql = "{call jobModify(?,?,?,?,?,?)}";
         try {
             CallableStatement ps = conn.prepareCall(sql);
             ps.setString(1, address);
             ps.setString(2, number);
-            ps.setString(3, salary);
-            ps.setString(4, effective_time);
-            ps.setString(5, identification);
+            ps.setInt(3, min_salary);
+            ps.setInt(4, max_salary);
+            ps.setString(5, effective_time);
+            ps.setString(6, identification);
             ps.execute();
             String str = "{\"msg\":\"modify_job_success\"}";
             response.getWriter().print(str);
@@ -370,28 +378,111 @@ public class Enterprise {
         DBManager dbmanager = new DBManager();
         Connection conn = dbmanager.getConnection();
         try {
-            String sql = "{call getResumePreference(?,?,?,?,?)}";
+            String sql = "{call getResumePreference(?,?,?,?,?,?)}";
             CallableStatement ps = conn.prepareCall(sql);
             ps.setString(1, nickname);
             ps.setString(2, password);
             ps.registerOutParameter(3, Types.VARCHAR);
             ps.registerOutParameter(4, Types.VARCHAR);
             ps.registerOutParameter(5, Types.VARCHAR);
+            ps.registerOutParameter(6, Types.VARCHAR);
             ps.execute();
-            if (ps.getString(3) != null) {
-                String career_objective = ps.getString(3);
-                String expected_salary = ps.getString(4);
-                String expected_city = ps.getString(5);
+            if (ps.getString(3) != null || ps.getString(4) != null || ps.getString(5) != null || ps.getString(6) != null) {
+                String positions = ps.getString(3);
+                String cities = ps.getString(4);
+                int min_salary = ps.getInt(5);
+                int max_salary = ps.getInt(6);
                 JSONObject resume = new JSONObject();
-                resume.put("career_objective", career_objective);
-                resume.put("expected_salary", expected_salary);
-                resume.put("expected_city", expected_city);
+                resume.put("positions", positions);
+                resume.put("cities", cities);
+                resume.put("min_salary", min_salary);
+                resume.put("max_salary", max_salary);
                 response.getWriter().print(resume.toString());
                 response.getWriter().flush();
                 response.getWriter().close();
                 ps.close();
                 conn.close();
             }
+        } catch (SQLException e) {
+            // TODO 自动生成的 catch 块
+            e.printStackTrace();
+        }
+
+    }
+
+    public void updateResumePreference(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        String nickname = request.getParameter("nickname");
+        String password = request.getParameter("password");
+        String positions = request.getParameter("positions");
+        String cities = request.getParameter("cities");
+        int min_salary = Integer.parseInt(request.getParameter("min_salary"));
+        int max_salary = Integer.parseInt(request.getParameter("max_salary"));
+        DBManager dbmanager = new DBManager();
+        Connection conn = dbmanager.getConnection();
+        try {
+            String sql = "{call updateResumePreference(?,?,?,?,?,?)}";
+            CallableStatement ps = conn.prepareCall(sql);
+            ps.setString(1, nickname);
+            ps.setString(2, password);
+            ps.setString(3, positions);
+            ps.setString(4, cities);
+            ps.setInt(5, min_salary);
+            ps.setInt(6, max_salary);
+            ps.execute();
+            String str = "{\"msg\":\"modify_resumePreference_success\"}";
+            response.getWriter().print(str);
+            response.getWriter().flush();
+            response.getWriter().close();
+            ps.close();
+            conn.close();
+
+        } catch (
+                SQLException e) {
+            // TODO 自动生成的 catch 块
+            e.printStackTrace();
+        }
+
+    }
+
+    public void ResumeRecommendation(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        String nickname = request.getParameter("nickname");
+        String password = request.getParameter("password");
+        DBManager dbmanager = new DBManager();
+        Connection conn = dbmanager.getConnection();
+        List<Resume> resumeList = new ArrayList<>();
+        try {
+            String sql = "{call ResumeRecommendation(?,?)}";
+            CallableStatement ps = conn.prepareCall(sql);
+            ps.setString(1, nickname);
+            ps.setString(2, password);
+            ps.execute();
+            ResultSet rs = ps.getResultSet();
+            while (rs.next()) {
+                Resume resume = new Resume();
+                resume.setIdentification(rs.getString("identification"));
+                resume.setName(rs.getString("name"));
+                resume.setAge(rs.getString("age"));
+                resume.setSex(rs.getString("sex"));
+                resume.setOrigin(rs.getString("origin"));
+                resume.setCollage(rs.getString("collage"));
+                resume.setSpecialty(rs.getString("specialty"));
+                resume.setDegree(rs.getString("degree"));
+                resume.setAdmission_data(rs.getString("admission_data"));
+                resume.setGraduation_data(rs.getString("graduation_data"));
+                resume.setCareer_objective(rs.getString("career_objective"));
+                resume.setExpected_city(rs.getString("expected_city"));
+                resume.setMin_salary(rs.getInt("min_salary"));
+                resume.setMax_salary(rs.getInt("max_salary"));
+                resume.setTelephone(rs.getString("telephone"));
+                resume.setEmail(rs.getString("email"));
+                resumeList.add(resume);
+            }
+            response.getWriter().print(JSONArray.fromObject(resumeList).toString());
+            rs.close();
+            ps.close();
+            conn.close();
         } catch (SQLException e) {
             // TODO 自动生成的 catch 块
             e.printStackTrace();

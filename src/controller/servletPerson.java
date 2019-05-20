@@ -59,6 +59,13 @@ public class servletPerson extends HttpServlet {
                 break;
             case "getJobPreference":
                 person.getJobPreference(request, response);
+                break;
+            case "updateJobPreference":
+                person.updateJobPreference(request, response);
+                break;
+            case "JobRecommendation":
+                person.jobRecommendation(request, response);
+                break;
         }
     }
 

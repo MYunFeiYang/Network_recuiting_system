@@ -9,6 +9,7 @@ import UserInformation from './userInformation'
 import Job from './job'
 import ManageJob from './manageJob'
 import Preference from './preference'
+import ResumeRecommendation from './recommendation'
 import '../../style/App.scss'
 
 const SubMenu = Menu.SubMenu;
@@ -67,6 +68,9 @@ class Enterprise extends React.Component {
                 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
             },
         }).then((responese) => {
+            responese.data.map((value, index) => {
+                return value.key = index;
+            })
             this.props.setJobInformation(responese.data);
         }).catch((err) => {
 
@@ -83,6 +87,25 @@ class Enterprise extends React.Component {
             },
         }).then((responese) => {
             this.props.setPreferenceInformation(responese.data);
+        }).catch((err) => {
+
+        })
+    }
+    resumeRecommendation = () => {
+        const { nickname, password } = this.props.user;
+        axios({
+            method: 'post',
+            url: `${path}/enterprise?enterprise=resumeRecommendation`,
+            data: qs.stringify({ nickname, password }),
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
+            },
+        }).then((responese) => {
+            if(responese.data==undefined){
+                return;
+            }else{
+                this.props.setResumeInformation(responese.data);
+            }
         }).catch((err) => {
 
         })
@@ -113,9 +136,10 @@ class Enterprise extends React.Component {
                             </Menu.Item>
                         </SubMenu>
                         <SubMenu key="sub3" title={<span><Icon type="appstore" /><span>简历</span></span>}>
-                            <Menu.Item key="5">简历推荐</Menu.Item>
+                            <Menu.Item key="5" onClick={this.resumeRecommendation}>
+                                <Link to={`/enterprise/recommendation/`}>简历推荐</Link></Menu.Item>
                             <Menu.Item key="6" onClick={this.getResumePreference}>
-                            <Link to={`/enterprise/preference/`}>推荐设置</Link></Menu.Item>
+                                <Link to={`/enterprise/preference/`}>推荐设置</Link></Menu.Item>
                             <Menu.Item key="7">简历收藏</Menu.Item>
                         </SubMenu>
                     </Menu>
@@ -126,6 +150,7 @@ class Enterprise extends React.Component {
                         <Route exact path='/enterprise/job/' component={Job}></Route>
                         <Route exact path='/enterprise/manageJob/' component={ManageJob}></Route>
                         <Route exact path='/enterprise/preference/' component={Preference}></Route>
+                        <Route exact path='/enterprise/recommendation/' component={ResumeRecommendation}></Route>
                     </Switch>
                 </div>
             </Router>

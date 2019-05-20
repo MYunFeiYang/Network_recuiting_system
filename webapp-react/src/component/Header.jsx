@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { Menu, Icon, Affix, Avatar } from 'antd';
 import { BrowserRouter as Router, Link, Switch } from 'react-router-dom';
 import { FrontendAuth } from '../router/FrontendAuth.jsx'
-import routerConfig from '../router/router.config.jsx'
+import {primaryRouterConfig} from '../router/router.config.jsx'
 import '../style/App.scss'
 import axios from 'axios';
 import qs from 'qs';
@@ -172,7 +172,7 @@ class Header extends React.Component {
         </header>
         <main>
           <Switch >
-            <FrontendAuth config={routerConfig} />
+            <FrontendAuth config={primaryRouterConfig} />
           </Switch>
         </main>
       </Router>

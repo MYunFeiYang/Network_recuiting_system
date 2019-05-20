@@ -57,6 +57,12 @@ public class servletEnterprise extends HttpServlet {
             case "getResumePreference":
                 enterprise.getResumePreference(request, response);
                 break;
+            case "updateResumePreference":
+                enterprise.updateResumePreference(request, response);
+                break;
+            case "resumeRecommendation":
+                enterprise.ResumeRecommendation(request, response);
+                break;
         }
     }
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

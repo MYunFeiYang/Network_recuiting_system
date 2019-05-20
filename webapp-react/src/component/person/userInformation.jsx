@@ -9,7 +9,7 @@ import { messageNotification } from '../../util';
 
 const { Option } = Select;
 const path = 'http://localhost:80'
-class UserInformation extends React.Component {
+class PersonUserInformation extends React.Component {
     state = {
         confirmDirty: false,
         autoCompleteResult: [],
@@ -98,11 +98,7 @@ class UserInformation extends React.Component {
         );
 
         return (
-            <Form {...formItemLayout} onSubmit={this.handleSubmit}
-                style={{
-                    width: '40%', margin: '1% 30%', padding: '20px',
-                    boxShadow: '2px 2px 2px 1px rgba(0, 0, 255, .2)',
-                }}>
+            <Form {...formItemLayout} onSubmit={this.handleSubmit}>
                 <Form.Item
                     label={(
                         <span>
@@ -193,7 +189,7 @@ class UserInformation extends React.Component {
     }
 }
 
-const WrappedUserInformation = Form.create({ name: 'register' })(UserInformation);
+const WrappedUserInformation = Form.create({ name: 'register' })(PersonUserInformation);
 export default connect((state) => ({
     ...state
 }))(WrappedUserInformation);
