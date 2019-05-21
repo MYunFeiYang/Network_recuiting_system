@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { Button, Row, Col, Icon, Menu, Dropdown, Slider } from 'antd';
-import '../style/App.scss'
+import '../../style/App.scss'
 
 class Audio extends React.Component {
     constructor() {
@@ -23,6 +23,12 @@ class Audio extends React.Component {
                 {
                     name: "岁月神偷.mp3",
                     url: "http://music.163.com/song/media/outer/url?id=28285910.mp3"
+                }, {
+                    name: "唐人.mp3",
+                    url: "http://music.163.com/song/media/outer/url?id=26524402.mp3"
+                }, {
+                    name: "水手.mp3",
+                    url:"http://music.163.com/song/media/outer/url?id=190381.mp3"
                 }],
             currentIndex: 0,
             currentMusic: {

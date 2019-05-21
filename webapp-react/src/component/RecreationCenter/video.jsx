@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { Row, Col, Icon, Slider } from 'antd';
-import '../style/App.scss'
+import '../../style/App.scss'
 
 class Video extends React.Component {
     constructor() {

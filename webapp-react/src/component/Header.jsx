@@ -129,16 +129,11 @@ class Header extends React.Component {
               <Menu.Item key="school">
                 <Link to={`/school`}>校招</Link>
               </Menu.Item>
-              <Menu.Item key="music">
-                <Link to={`/music`}>
-                  <Icon type="customer-service" theme="filled" />音乐播放器</Link>
-              </Menu.Item>
-              <Menu.Item key="video">
-                <Link to={`/video`}>
-                  <Icon type="video-camera" />视频播放器</Link>
+              <Menu.Item key="recreationCenter">
+                <Link to={`/recreationCenter`}>
+                  <Icon type="customer-service" theme="filled" />轻松一下</Link>
               </Menu.Item>
               <Menu.Item key="Placeholder">
-
               </Menu.Item>
               <SubMenu className="float-right"
                 style={{ display: !isLogin ? 'none' : 'inline-block' }}

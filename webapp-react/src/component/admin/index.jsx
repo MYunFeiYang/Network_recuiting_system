@@ -3,12 +3,10 @@ import { Menu, Icon, Badge, Affix } from 'antd';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import actions from '../../redux/actions'
-import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
-import AdminPower from './adminPower';
-import PersonAssess from './person/assessment';
-import EnterpriseAssess from './enterprise/assessment';
-import PersonAccount from './person/account';
-import EnterpriseAccount from './enterprise/account'
+import { BrowserRouter as Router, Link, Switch } from 'react-router-dom';
+import { FrontendAuth1 } from '../../router/FrontendAuth'
+import { primaryRouterConfig } from '../../router/router.config.jsx'
+
 import '../../style/App.scss'
 
 const SubMenu = Menu.SubMenu;
@@ -148,7 +146,7 @@ class Admin extends React.Component {
 
         })
     }
-    
+
     render() {
         return <div id="admin_center">
             <Router>
@@ -163,12 +161,12 @@ class Admin extends React.Component {
                             mode="inline">
                             <SubMenu key="sub1" title={<span><Icon type="mail" /><span>管理员</span></span>}>
                                 <Menu.Item key="1" onClick={this.getAdminInformation}>
-                                    <Link to={`/admin/userInformation/`}>权限管理</Link>
+                                    <Link to={`/admin/userInformation`}>权限管理</Link>
                                 </Menu.Item>
                             </SubMenu>
                             <SubMenu key="sub2" title={<span><Icon type="appstore" /><span>个人管理</span></span>}>
                                 <Menu.Item key="2" onClick={this.personAssessmentInit}>
-                                    <Link to={`/admin/personAssess/`}>
+                                    <Link to={`/admin/personAssess`}>
                                         注册审核 <Badge count={this.state.personRegisterCount}>
                                         </Badge>
                                     </Link>
@@ -179,7 +177,7 @@ class Admin extends React.Component {
                             </SubMenu>
                             <SubMenu key="sub3" title={<span><Icon type="appstore" /><span>企业管理</span></span>}>
                                 <Menu.Item key="5" onClick={this.enterpriseAssessmentInit}>
-                                    <Link to={`/admin/enterpriseAssess/`}>
+                                    <Link to={`/admin/enterpriseAssess`}>
                                         注册审核  <Badge count={this.state.enterpriseRegisterCount}>
                                         </Badge>
                                     </Link>
@@ -197,11 +195,7 @@ class Admin extends React.Component {
                 </div>
                 <div>
                     <Switch>
-                        <Route path='/admin/userInformation/' exact component={AdminPower}></Route>
-                        <Route path='/admin/personAssess/' exact component={PersonAssess}></Route>
-                        <Route path='/admin/enterpriseAssess/' exact component={EnterpriseAssess}></Route>
-                        <Route path='/admin/personAccount/' exact component={PersonAccount}></Route>
-                        <Route path='/admin/enterpriseAccount/' exact component={EnterpriseAccount}></Route>
+                        <FrontendAuth1 config={primaryRouterConfig}></FrontendAuth1>
                     </Switch>
                 </div>
             </Router>

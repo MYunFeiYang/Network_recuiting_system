@@ -2,6 +2,7 @@ package model.common;
 
 import java.util.List;
 
+
 public class PageBean<T> {
     //已知数据
     private int pageNum;    //当前页,从请求那边传过来。

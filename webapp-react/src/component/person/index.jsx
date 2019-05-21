@@ -4,12 +4,9 @@ import axios from 'axios';
 import qs from 'qs';
 import { connect } from 'react-redux';
 import actions from '../../redux/actions';
-import { BrowserRouter as Router, Link, Switch, Route } from 'react-router-dom';
-import PersonUserInformation from './userInformation';
-import Resume from './resume';
-import manageResume from './manageResume'
-import JobPreference from './preference'
-import JobRecommendation from './recommendation'
+import { BrowserRouter as Router, Link, Switch } from 'react-router-dom';
+import { FrontendAuth1 } from '../../router/FrontendAuth'
+import { primaryRouterConfig } from '../../router/router.config.jsx'
 
 
 const SubMenu = Menu.SubMenu;
@@ -52,7 +49,7 @@ class Person extends React.Component {
                 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
             },
         }).then((responese) => {
-            this.props.setJobInformation( responese.data);
+            this.props.setJobInformation(responese.data);
 
         }).catch((err) => {
 
@@ -137,7 +134,7 @@ class Person extends React.Component {
                         </SubMenu>
                         <SubMenu key="sub3" title={<span><Icon type="appstore" /><span>岗位</span></span>}>
                             <Menu.Item key="5" onClick={this.JobRecommendation}>
-                            <Link to={`/person/recommendation`}>岗位推荐</Link></Menu.Item>
+                                <Link to={`/person/recommendation`}>岗位推荐</Link></Menu.Item>
                             <Menu.Item key="6" onClick={this.getJobPreference}>
                                 <Link to={`/person/preference`}>岗位偏好</Link>
                             </Menu.Item>
@@ -147,11 +144,7 @@ class Person extends React.Component {
                 </div>
                 <div >
                     <Switch>
-                        <Route exact path='/person/userInformation' component={PersonUserInformation}></Route>
-                        <Route exact path='/person/resume' component={Resume}></Route>
-                        <Route exact path='/person/manageResume' component={manageResume}></Route>
-                        <Route exact path='/person/preference' component={JobPreference}></Route>
-                        <Route exact path='/person/recommendation' component={JobRecommendation}></Route>
+                        <FrontendAuth1 config={primaryRouterConfig}></FrontendAuth1>
                     </Switch>
                 </div>
             </Router>

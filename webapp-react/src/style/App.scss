@@ -7,7 +7,7 @@ header .ant-menu > li.float-right {
   text-align: right;
 }
 
-header .ant-menu > li:nth-of-type(10) {
+header .ant-menu > li:nth-of-type(8) {
   flex-grow: 1;
 }
 #fullScreen.ant-row {
@@ -20,8 +20,10 @@ header .ant-menu > li:nth-of-type(10) {
 #audioBox,
 #retrievePassword {
   width: 50%;
-  margin: 100px auto;
+  margin: 30px auto;
   min-width: 360px;
+  padding: 20px;
+  box-shadow: 3px 3px 3px #ffe1ff
 }
 #retrievePassword form {
   margin-top: 50px;
@@ -168,24 +170,22 @@ footer {
 }
 #person_center,
 #admin_center,
-#enterprise_center {
+#enterprise_center,
+#recreation_center {
   display: flex;
   flex-direction: row;
 }
 #person_center > div:first-of-type,
 #admin_center > div:first-of-type,
-#enterprise_center > div:first-of-type {
+#enterprise_center > div:first-of-type,
+#recreation_center> div:first-of-type {
   width: 160px;
 }
 #person_center > div:last-of-type,
 #admin_center > div:last-of-type,
-#enterprise_center > div:last-of-type {
+#enterprise_center > div:last-of-type ,
+#recreation_center > div:last-of-type{
   flex: auto;
-}
-#person_center > div:last-of-type .ant-table-wrapper,
-#admin_center > div:last-of-type .ant-table-wrapper,
-#enterprise_center > div:last-of-type .ant-table-wrapper {
-  width: 100%;
 }
 
 #preference button {
