@@ -1,5 +1,8 @@
 import Home from "../component/main/home";
 import Login from "../component/login/Login";
+import School from "../component/main/school";
+import ErrorPage from "../component/404";
+import Wechat from '../component/WeChat'
 
 import { recreationCenter } from "../component/RecreationCenter/";
 import Audio from '../component/RecreationCenter/audio';
@@ -28,9 +31,6 @@ import PersonAssess from '../component/admin/person/assessment';
 import EnterpriseAssess from '../component/admin/enterprise/assessment';
 import PersonAccount from '../component/admin/person/account';
 import EnterpriseAccount from '../component/admin/enterprise/account'
-
-import School from "../component/main/school";
-import ErrorPage from "../component/404";
 
 
 export const primaryRouterConfig = [
@@ -63,16 +63,21 @@ export const primaryRouterConfig = [
     component: Login,
   },
   {
+    path: "/wechat",
+    component: Wechat,
+    auth: true,
+  },
+  {
     path: "/404",
     component: ErrorPage
   },
   {
-    path: "/register/person",
+    path: "/registerPerson",
     component: RegisterPerson,
     auth: false
   },
   {
-    path: "/register/enterprise",
+    path: "/registerEnterprise",
     component: RegisterEnterprise,
     auth: false
   },

@@ -147,12 +147,12 @@ class Header extends React.Component {
                   <Icon type="user-add" />注册</span>}>
                 <MenuItemGroup >
                   <Menu.Item key="register-p">
-                    <Link to={`/register/person`}>个人注册</Link>
+                    <Link to={`/registerPerson`}>个人注册</Link>
                   </Menu.Item>
                 </MenuItemGroup>
                 <MenuItemGroup>
                   <Menu.Item key="register-e">
-                    <Link to={`/register/enterprise`}>企业注册</Link>
+                    <Link to={`/registerEnterprise`}>企业注册</Link>
                   </Menu.Item>
                 </MenuItemGroup>
               </SubMenu>

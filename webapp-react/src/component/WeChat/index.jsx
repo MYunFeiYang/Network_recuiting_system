@@ -1,6 +1,7 @@
 import React from "react";
-import { Row, Col, Menu, Icon, Input } from "antd";
+import { Menu, Icon, Input, Affix } from "antd";
 import { connect } from 'react-redux';
+import '../../style/App.scss'
 
 const SubMenu = Menu.SubMenu;
 const hostname = window.location.hostname
@@ -13,47 +14,79 @@ class Wechat extends React.Component {
             socket: new WebSocket(url),
             readyState: '',
             message: [],
-            myfriend: [],
+            myfriend: ["风清扬", "云飞扬"],
             onlineList: [],
+            record: []
         }
-    }
-    addContent = (type, content) => {
-        const { message } = this.state;
-        message.push({
-            usertype: type,
-            content: content
-        });
-        this.setState({ message });
+        this.nickname = 0;
     }
     socketListener() {
         const { socket } = this.state;
-        const nickname=this.props.user.nickname;
-        console.log(this.props.user)
-        socket.onopen = () => {
-            this.changeStateReady();
-            this.addContent('system', '欢迎加入群聊');
-            this.refreshOnlineLIst();
-            socket.send(JSON.stringify({nickname}));
+        const nickname = this.nickname;
+        if (typeof nickname === "string") {
+            socket.onopen = () => {
+                this.changeStateReady();
+                socket.send(JSON.stringify({ nickname }));
+            }
         }
         socket.onclose = () => {
             this.changeStateReady();
         }
-        socket.onmessage = () => {
+        socket.onmessage = (evt) => {
+            //群聊信息（nickname，message）
+            //在线列表（nickname，session）
+            //聊天记录(record,nickname)
+            let data = JSON.parse(evt.data);
+            if (Object.prototype.toString.call(data) === "[object Array]") {
+                if (evt.data.indexOf("record") !== -1) {
+                    //聊天记录
+                    // show_chat_record(data);
+                    data.map((value) => {
+                        return value.nickname === this.nickname ? value.usertype = 'self' : value.usertype = 'other'
+                    })
+                    this.setState({
+                        record: data
+                    })
+                } else {
+                    //展示在线列表
+                    this.setState({
+                        onlineList: data
+                    })
+                }
+            } else if (Object.prototype.toString.call(data) === "[object Object]") {
+                if (data.nickname === undefined) {
+                    //系统消息
+                    this.addContent('system', data)
+                } else {
+                    //群发消息
+                    // show_chat_message(data);
+                    this.addContent('other', data)
+                }
 
+            }
         }
         socket.onerror = () => {
-
+            this.changeStateReady();
         }
     }
     closeSocket = () => {
         const { socket } = this.state;
         socket.close();
     }
+
+    reconnect = () => {
+        this.setState({
+            socket: new WebSocket(url),
+        })
+    }
     refreshOnlineLIst = () => {
         const { socket } = this.state;
         socket.send(JSON.stringify({ 'refresh': '' }));
     }
-
+    chatRecord = () => {
+        const { socket } = this.state;
+        socket.send(JSON.stringify({ 'record': 1 }));
+    }
     changeStateReady = () => {
         const { socket } = this.state;
         switch (socket.readyState) {
@@ -93,71 +126,91 @@ class Wechat extends React.Component {
         if (text === " ") {
             return;
         } else {
-            const nickname = this.props.user.nickanem;
+            const nickname = this.nickname;
             let msg = {
                 "message": text,
                 "nickname": nickname
             };
             socket.send(JSON.stringify(msg));
-            this.addContent('self', text);
+            this.addContent('self', msg);
             e.target.value = "";
         }
     }
+    addContent = (type, content) => {
+        const { message } = this.state;
+        message.push({
+            usertype: type,
+            content: content
+        });
+        this.setState({ message });
+    }
     render() {
         const nickname = this.props.user.nickname;
-        if (nickname !== undefined ) {
+        if (nickname !== undefined) {
+            this.nickname = nickname;
             this.socketListener();
         }
-        return <Row style={{ height: '100vh' }}>
-            <Col span={4}>
-                <Menu
-                    style={{ width: '100%' }}
-                    defaultSelectedKeys={['1']}
-                    defaultOpenKeys={['sub1', 'sub2', 'sub3']}
-                    mode="inline"
-                >
-                    <SubMenu key="sub1" title={<span><Icon type="appstore" /><span>登录状态</span></span>}>
-                        <Menu.Item key="1">{this.state.readyState}</Menu.Item>
-                    </SubMenu>
-                    <SubMenu key="sub2" title={<span><Icon type="setting" /><span>连接操作</span></span>}>
-                        <Menu.Item key="2" onClick={this.closeSocket}>关闭连接</Menu.Item>
-                        <Menu.Item key="3">重新连接</Menu.Item>
-                    </SubMenu>
-                    <SubMenu key="sub3" title={<span><Icon type="setting" /><span>我的好友</span></span>}>
-                        <Menu.Item key="4" >风清扬</Menu.Item>
-                        <Menu.Item key="5">云飞扬</Menu.Item>
-                    </SubMenu>
-                </Menu>
-            </Col>
-            <Col span={16} style={{ height: '100%' }}>
-                <div style={{ height: '72%' }}>
-                    {
-                        this.state.message.map((value, index) => {
-                            return <p key={index}>{value.content}</p>;
-                        })
-                    }
-                </div>
-                <TextArea rows={4} onPressEnter={this.emit} />
-            </Col>
-            <Col span={4} style={{ height: '100%' }}>
-                <Menu
-                    style={{ width: '100%' }}
-                    defaultSelectedKeys={['1']}
-                    defaultOpenKeys={['sub1', 'sub2']}
-                    mode="inline"
-                >
-                    <SubMenu key="sub1" title={<span><Icon type="appstore" /><span>在线列表</span></span>}>
+        return <div id="wechat" >
+            <div >
+                <Affix offsetTop={50}>
+                    <Menu
+                        style={{ width: '100%' }}
+                        defaultSelectedKeys={['1']}
+                        defaultOpenKeys={['sub1', 'sub2', 'sub3', 'sub4']}
+                        mode="inline"
+                    >
+                        <SubMenu key="sub1" title={<span><Icon type="appstore" />
+                            <span>登录状态</span></span>}>
+                            <Menu.Item key="1">{this.state.readyState}</Menu.Item>
+                        </SubMenu>
+                        <SubMenu key="sub2" title={<span><Icon type="setting" /><span>连接操作</span></span>}>
+                            <Menu.Item key="2" onClick={this.closeSocket}>关闭连接</Menu.Item>
+                            <Menu.Item key="3" onClick={this.reconnect}>重新连接</Menu.Item>
+                        </SubMenu>
+                        <SubMenu key="sub3" title={<span><Icon type="setting" /><span>我的好友</span></span>}>
+                            {this.state.myfriend.map((value, index) => {
+                                return <Menu.Item key={`friend${index}`} >{value}</Menu.Item>
+                            })}
+                        </SubMenu>
+                        <SubMenu key="sub4" title={<span><Icon type="appstore" />
+                            <span onClick={this.refreshOnlineLIst}>在线列表</span></span>}>
+                            {
+                                this.state.onlineList.map((value, index) => {
+                                    return <Menu.Item key={`online${index}`}>{value.nickname}</Menu.Item>
+                                })
+                            }
+                        </SubMenu>
+                    </Menu>
+                </Affix>
+            </div>
+            <div >
+                <div id="wechat_box">
+                    <div >
+                        <p onClick={this.chatRecord}>
+                            <span>聊天记录</span>
+                        </p>
                         {
-                            this.state.onlineList.map((value, index) => {
-                                return <Menu.Item key={index + 10}>{value}</Menu.Item>
+
+                            this.state.record.map((value, index) => {
+                                return <div className={value.usertype} key={index}>
+                                    <h3>{value.nickname}</h3>
+                                    <p>{value.record}</p>
+                                </div>
                             })
                         }
-                    </SubMenu>
-                </Menu>
-                <Icon type="reload" style={{ fontSize: '30px', position: 'absolute', bottom: '70px', right: '20px' }}
-                    onClick={this.refreshOnlineLIst} />
-            </Col>
-        </Row>
+                        {
+                            this.state.message.map((value, index) => {
+                                return <div className={value.usertype} key={index}>
+                                    <h3>{value.content.nickname}</h3>
+                                    <p>{value.content.message}</p>
+                                </div>
+                            })
+                        }
+                    </div>
+                    <TextArea onPressEnter={this.emit} />
+                </div>
+            </div>
+        </div>
     }
 }
 export default connect((state) => ({

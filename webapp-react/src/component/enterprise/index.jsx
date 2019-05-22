@@ -99,7 +99,7 @@ class Enterprise extends React.Component {
                 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
             },
         }).then((responese) => {
-            if (responese.data == undefined) {
+            if (responese.data === undefined||responese.data === null) {
                 return;
             } else {
                 this.props.setResumeInformation(responese.data);

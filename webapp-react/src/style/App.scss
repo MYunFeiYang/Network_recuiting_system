@@ -23,7 +23,7 @@ header .ant-menu > li:nth-of-type(8) {
   margin: 30px auto;
   min-width: 360px;
   padding: 20px;
-  box-shadow: 3px 3px 3px #ffe1ff
+  box-shadow: 3px 3px 3px #ffe1ff;
 }
 #retrievePassword form {
   margin-top: 50px;
@@ -171,23 +171,59 @@ footer {
 #person_center,
 #admin_center,
 #enterprise_center,
-#recreation_center {
+#recreation_center,
+#wechat {
   display: flex;
   flex-direction: row;
 }
 #person_center > div:first-of-type,
 #admin_center > div:first-of-type,
 #enterprise_center > div:first-of-type,
-#recreation_center> div:first-of-type {
+#recreation_center > div:first-of-type,
+#wechat > div:first-of-type {
   width: 160px;
 }
 #person_center > div:last-of-type,
 #admin_center > div:last-of-type,
-#enterprise_center > div:last-of-type ,
-#recreation_center > div:last-of-type{
+#enterprise_center > div:last-of-type,
+#recreation_center > div:last-of-type,
+#wechat > div:last-of-type {
   flex: auto;
 }
-
+#wechat > div:last-of-type > #wechat_box {
+  width: 50%;
+  min-width: 320px;
+  margin: 1px auto;
+  height: 100%;
+  box-shadow: 3px 3px 3px 3px #ffe1ff;
+  display: flex;
+  flex-direction: column;
+}
+#wechat > div:last-of-type > #wechat_box > textarea {
+  height: 100px;
+  border: 1px solid #ffe1ff
+}
+#wechat > div:last-of-type > #wechat_box > div:first-of-type {
+  flex: auto;
+  border: 1px solid #ffe1ff
+}
+#wechat > div:last-of-type > #wechat_box > div:first-of-type > p {
+  text-align: center;
+}
+#wechat > div:last-of-type > #wechat_box .self,
+#wechat > div:last-of-type > #wechat_box .other {
+  width: 50%;
+}
+#wechat > div:last-of-type > #wechat_box .self {
+  margin-left: 49%;
+  text-align: right;
+  padding-left: 5px;
+}
+#wechat > div:last-of-type > #wechat_box .other {
+  margin-right: 50%;
+  text-align: left;
+  padding-right: 5px;
+}
 #preference button {
   display: block;
   margin: 20px auto;
