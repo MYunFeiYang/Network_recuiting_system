@@ -3,6 +3,8 @@ import Login from "../component/login/Login";
 import School from "../component/main/school";
 import ErrorPage from "../component/404";
 import Wechat from '../component/WeChat'
+import RetrievePassword from '../component/retrievePassword'
+
 
 import { recreationCenter } from "../component/RecreationCenter/";
 import Audio from '../component/RecreationCenter/audio';
@@ -61,6 +63,10 @@ export const primaryRouterConfig = [
   {
     path: "/login",
     component: Login,
+  },
+  {
+    path: "/retrievePassword",
+    component: RetrievePassword,
   },
   {
     path: "/wechat",

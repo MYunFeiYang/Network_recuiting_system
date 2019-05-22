@@ -1,5 +1,5 @@
 import React from 'react';
-import { Menu, Icon } from 'antd';
+import { Menu, Icon, Affix } from 'antd';
 import axios from 'axios';
 import qs from 'qs';
 import { connect } from 'react-redux';
@@ -99,7 +99,7 @@ class Enterprise extends React.Component {
                 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
             },
         }).then((responese) => {
-            if (responese.data === undefined||responese.data === null) {
+            if (responese.data === undefined || responese.data === null) {
                 return;
             } else {
                 this.props.setResumeInformation(responese.data);
@@ -113,6 +113,7 @@ class Enterprise extends React.Component {
         return <div id="enterprise_center">
             <Router>
                 <div>
+                    <Affix offsetTop={50}>
                     <Menu
                         theme={this.state.theme}
                         onClick={this.handleClick}
@@ -141,6 +142,7 @@ class Enterprise extends React.Component {
                             <Menu.Item key="7">简历收藏</Menu.Item>
                         </SubMenu>
                     </Menu>
+                    </Affix>
                 </div>
                 <div>
                     <Switch>

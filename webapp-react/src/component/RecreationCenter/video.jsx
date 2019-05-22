@@ -1,8 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { Row, Col, Icon, Slider } from 'antd';
+import  jsonp from 'jsonp'
+import { Row, Col, Icon, Slider, Input } from 'antd'
 import '../../style/App.scss'
 
+const Search = Input.Search;
 class Video extends React.Component {
     constructor() {
         super();
@@ -147,33 +149,49 @@ class Video extends React.Component {
             this.exitFullscreen();
         }
     }
+    search = (url) => {
+        jsonp(`http://beaacc.com/api.php?url=http://v.youku.com/v_show/id_XMzA0NDExODMyOA==.html`, 
+        null, (err, data) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(data);
+            }
+        });
+    }
     render() {
-        return <Row id="fullScreen">
-            <Col span={24} >
-                <video src={this.state.video.url} onTimeUpdate={this.updateProgress}
-                    onEnded={this.videoEnded} ref="video" id="video" style={{ width: '100%' }}></video>
-                <div className="video-progress-background">
-                    <div>
-                        <Slider value={this.state.pgsPlay} onChange={this.handleClickVideoProgress} />
+        return <div id="video">
+            <Search placeholder="请输入视频地址" onSearch={(value) => {
+                this.search(value)
+            }} enterButton="解析" />
+            <Row id="fullScreen">
+                <Col span={24} >
+                    <video src={this.state.video.url} onTimeUpdate={this.updateProgress}
+                        onEnded={this.videoEnded} ref="video" id="video" style={{ width: '100%' }}></video>
+                    <div className="video-progress-background">
+                        <div>
+                            <Slider value={this.state.pgsPlay} onChange={this.handleClickVideoProgress} />
+                        </div>
+                        <div>
+                            <div onClick={this.changePlayPause}>
+                                <Icon type={this.state.playPause} />
+                                <span>{this.state.playedTime}</span>
+                                <span>/</span>
+                                <span>{this.state.totalTime}</span>
+                            </div>
+                            <div >
+                                <Icon type="sound" onClick={this.handleClickVolume} />
+                                <Slider value={this.state.volume} onChange={this.handleClickVolumeProgress} />
+                            </div>
+                            <div onClick={this.changeScreen}>
+                                <Icon type={this.state.screen} />
+                            </div>
+                        </div>
                     </div>
-                    <div>
-                        <div onClick={this.changePlayPause}>
-                            <Icon type={this.state.playPause} />
-                            <span>{this.state.playedTime}</span>
-                            <span>/</span>
-                            <span>{this.state.totalTime}</span>
-                        </div>
-                        <div >
-                            <Icon type="sound" onClick={this.handleClickVolume} />
-                            <Slider value={this.state.volume} onChange={this.handleClickVolumeProgress} />
-                        </div>
-                        <div onClick={this.changeScreen}>
-                            <Icon type={this.state.screen} />
-                        </div>
-                    </div>
-                </div>
-            </Col>
-        </Row>
+                </Col>
+            </Row>
+        </div>
+
     }
 }
 export default connect((state) => ({

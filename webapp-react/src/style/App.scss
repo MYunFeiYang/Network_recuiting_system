@@ -10,21 +10,7 @@ header .ant-menu > li.float-right {
 header .ant-menu > li:nth-of-type(8) {
   flex-grow: 1;
 }
-#fullScreen.ant-row {
-  width: 60%;
-  margin: 30px auto;
-  padding: 5px;
-  box-shadow: 3px 3px 3xp #ffe1ff;
-  background-color: #ffe1ff;
-}
-#audioBox,
-#retrievePassword {
-  width: 50%;
-  margin: 30px auto;
-  min-width: 360px;
-  padding: 20px;
-  box-shadow: 3px 3px 3px #ffe1ff;
-}
+
 #retrievePassword form {
   margin-top: 50px;
 }
@@ -80,17 +66,6 @@ header .ant-menu > li:nth-of-type(8) {
   bottom: 5px;
 }
 
-main {
-  min-height: 60%;
-  width: 100%;
-}
-
-footer {
-  margin-top: 20px;
-  background-color: rgba(236, 229, 229, 0.5);
-  padding: 20px 30px 10px 30px;
-  text-align: center;
-}
 #hotRecruit {
   width: 25%;
   margin-top: 30px;
@@ -123,19 +98,25 @@ footer {
   list-style-type: none;
   font-size: 36px;
 }
+main > .ant-form.ant-form-horizontal.login-form,
+#retrievePassword,
 #registerPerson,
 #registerEnterprise,
 #preference,
-#person_center form,
-#enterprise_center form,
-#admin_center form,
+#person_center > div > form,
+#enterprise_center > div > form,
+#admin_center > div > form,
 #person_center .ant-collapse.ant-collapse-borderless,
 #enterprise_center .ant-collapse.ant-collapse-borderless,
-#admin_center .ant-collapse.ant-collapse-borderless {
-  width: 40%;
+#admin_center .ant-collapse.ant-collapse-borderless,
+#recreation_center > div:last-of-type > div:first-of-type {
+  width: 50%;
   margin: 10px auto;
   min-width: 360px;
+  max-width: 420px;
   box-shadow: 3px 3px 3px #ffe1ff;
+  padding: 20px;
+  border-radius: 5px;
 }
 #person_center .collapse .ant-collapse-item,
 #enterprise_center .collapse .ant-collapse-item,
@@ -201,11 +182,11 @@ footer {
 }
 #wechat > div:last-of-type > #wechat_box > textarea {
   height: 100px;
-  border: 1px solid #ffe1ff
+  border: 1px solid #ffe1ff;
 }
 #wechat > div:last-of-type > #wechat_box > div:first-of-type {
   flex: auto;
-  border: 1px solid #ffe1ff
+  border: 1px solid #ffe1ff;
 }
 #wechat > div:last-of-type > #wechat_box > div:first-of-type > p {
   text-align: center;
@@ -231,6 +212,12 @@ footer {
 form {
   padding: 20px;
 }
+#video .ant-input-wrapper.ant-input-group {
+  margin-bottom: 20px;
+}
+#audioBox > div > div.ant-row {
+  transform: scale(0.8);
+}
 @media (max-width: 768px) {
   mian {
     min-height: 72%;
@@ -240,12 +227,6 @@ form {
   }
   #hotRecruit .ant-card-head {
     transform: scale(0.7);
-  }
-  #fullScreen.ant-row {
-    width: 360px;
-  }
-  #fullScreen.ant-row span {
-    transform: scale(0.7) !important;
   }
   #school {
     display: flex;

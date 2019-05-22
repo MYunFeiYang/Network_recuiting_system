@@ -17,11 +17,7 @@ class NormalLoginForm extends React.Component {
     render() {
         const { getFieldDecorator } = this.props.form;
         return (
-            <Form onSubmit={this.handleSubmit} className="login-form"
-                style={{
-                    width: '40%', margin: '5% auto', padding: '20px',minWidth:'320px',
-                    boxShadow: '2px 2px 2px 1px rgba(0, 0, 255, .2)',
-                }}>
+            <Form onSubmit={this.handleSubmit} className="login-form">
                 <Form.Item
                     label="用户类型">
                     {getFieldDecorator('login_type', {

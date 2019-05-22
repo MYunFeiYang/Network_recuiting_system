@@ -188,7 +188,7 @@ class RegistrationForm extends React.Component {
                     )}
                 </Form.Item>
                 <Form.Item
-                    label="公司地址"                >
+                    label="所在城市"                >
                     {getFieldDecorator('address', {
 
                     })(

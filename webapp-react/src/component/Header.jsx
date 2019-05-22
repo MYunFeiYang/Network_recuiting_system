@@ -70,6 +70,7 @@ class Header extends React.Component {
           </Menu.Item>
           <Menu.Item key='logout' onClick={() => {
             this.isLogin('delete', {})
+            window.location.href="/login"
           }}>
             <Icon type="logout" />退出登录
           </Menu.Item>
@@ -89,6 +90,7 @@ class Header extends React.Component {
           </Menu.Item>
           <Menu.Item key='delete' onClick={() => {
             this.isLogin('delete', {})
+            window.location.href="/login"
           }}>
             <Icon type="logout" />退出登录
           </Menu.Item>
@@ -108,6 +110,7 @@ class Header extends React.Component {
           </Menu.Item>
           <Menu.Item key='delete' onClick={() => {
             this.isLogin('delete', {})
+            window.location.href="/login"
           }}>
             <Icon type="logout" />退出登录
           </Menu.Item>

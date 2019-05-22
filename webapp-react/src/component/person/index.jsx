@@ -1,5 +1,5 @@
 import React from 'react';
-import { Menu, Icon } from 'antd';
+import { Menu, Icon ,Affix} from 'antd';
 import axios from 'axios';
 import qs from 'qs';
 import { connect } from 'react-redux';
@@ -110,7 +110,7 @@ class Person extends React.Component {
         return <div id="person_center">
             <Router>
                 <div>
-
+                    <Affix offsetTop={50}>
                     <Menu
                         theme={this.state.theme}
                         onClick={this.handleClick}
@@ -141,6 +141,7 @@ class Person extends React.Component {
                             <Menu.Item key="7">岗位收藏</Menu.Item>
                         </SubMenu>
                     </Menu>
+                    </Affix>
                 </div>
                 <div >
                     <Switch>
