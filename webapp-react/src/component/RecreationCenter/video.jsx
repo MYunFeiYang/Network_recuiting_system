@@ -1,9 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import  jsonp from 'jsonp'
-import { Row, Col, Icon, Slider, Input } from 'antd'
+import jsonp from 'jsonp'
+import { Row, Col, Icon, Slider, Input, Select } from 'antd'
 import '../../style/App.scss'
 
+const Option = Select.Option;
 const Search = Input.Search;
 class Video extends React.Component {
     constructor() {
@@ -150,20 +151,26 @@ class Video extends React.Component {
         }
     }
     search = (url) => {
-        jsonp(`http://beaacc.com/api.php?url=http://v.youku.com/v_show/id_XMzA0NDExODMyOA==.html`, 
-        null, (err, data) => {
-            if (err) {
-                console.error(err.message);
-            } else {
-                console.log(data);
-            }
-        });
+        jsonp(`http://fun.sinsyth.com/video/?v=http://v.youku.com/v_show/id_XMzA0NDExODMyOA==.html`,
+            null, (err, data) => {
+                if (err) {
+                    console.error(err.message);
+                } else {
+                    console.log(data);
+                }
+            });
     }
     render() {
         return <div id="video">
-            <Search placeholder="请输入视频地址" onSearch={(value) => {
-                this.search(value)
-            }} enterButton="解析" />
+            <div id="search">
+                <Select defaultValue="lucy" onChange={this.handleChange}>
+                    <Option value="jack">Jack</Option>
+                    <Option value="lucy">Lucy</Option>
+                </Select>
+                <Search placeholder="请输入视频地址" onSearch={(value) => {
+                    this.search(value)
+                }} enterButton="解析" />
+            </div>
             <Row id="fullScreen">
                 <Col span={24} >
                     <video src={this.state.video.url} onTimeUpdate={this.updateProgress}

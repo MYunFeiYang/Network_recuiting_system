@@ -250,7 +250,7 @@ class ManageResume extends React.Component {
                     handleSave: this.handleSave,
                 }),
             };
-        });
+        });      
         return <Table components={components}
             rowClassName={() => 'editable-row'}
             bordered

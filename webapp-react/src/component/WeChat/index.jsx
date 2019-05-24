@@ -1,5 +1,5 @@
 import React from "react";
-import { Menu, Icon, Input, Affix } from "antd";
+import { Menu, Icon, Input, Affix, Button } from "antd";
 import { connect } from 'react-redux';
 import '../../style/App.scss'
 
@@ -207,7 +207,10 @@ class Wechat extends React.Component {
                             })
                         }
                     </div>
-                    <TextArea onPressEnter={this.emit} />
+                    <TextArea onPressEnter={this.emit} >
+                        
+                    </TextArea>
+                    <Button type="primary">发送</Button>
                 </div>
             </div>
         </div>

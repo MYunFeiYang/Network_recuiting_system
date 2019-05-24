@@ -1,8 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { Button, Row, Col, Icon, Menu, Dropdown, Slider } from 'antd';
+import { Button, Row, Col, Icon, Menu, Dropdown, Slider, Input, Select } from 'antd';
+import axios from 'axios'
 import '../../style/App.scss'
 
+const Option = Select.Option;
+const Search = Input.Search;
 class Audio extends React.Component {
     constructor() {
         super();
@@ -28,7 +31,7 @@ class Audio extends React.Component {
                     url: "http://music.163.com/song/media/outer/url?id=26524402.mp3"
                 }, {
                     name: "水手.mp3",
-                    url:"http://music.163.com/song/media/outer/url?id=190381.mp3"
+                    url: "http://music.163.com/song/media/outer/url?id=190381.mp3"
                 }],
             currentIndex: 0,
             currentMusic: {
@@ -41,6 +44,13 @@ class Audio extends React.Component {
             totalTime: '',
             playPause: 'play',
             loopType: '循环模式',
+            interface: [
+                {
+                    name: 'QQ音乐',
+                    url: 'https://www.sinsyth.com/lxapi/ssk/yqq.x'
+                }
+            ],
+            currentInterface: 'https://www.sinsyth.com/lxapi/ssk/yqq.x'
         }
     }
 
@@ -192,7 +202,25 @@ class Audio extends React.Component {
             loopType
         })
     };
-
+    handleChange = (value) => {
+        this.setState({
+            currentInterface: value,
+        })
+    }
+    search = (value) => {
+        const url = this.state.currentInterface
+        axios({
+            method: 'post',
+            url: url,
+            type: 'mp3',
+            surl: value,
+            strkey: 'yqq_18analyze'
+        }).then((Response) => {
+            console.log(Response)
+        }).catch((Response) => {
+            console.log(Response)
+        })
+    }
     render() {
         const menu = (
             <Menu>
@@ -213,51 +241,65 @@ class Audio extends React.Component {
                 </Menu.Item>
             </Menu>
         );
-        return (<Row id="audioBox">
-            <Col span={24}>
-                <ol ref="mlist" onClick={this.playByMe}>
-                    {this.state.data.map((value, index) => {
-                        return <li key={index}><a href={value.url} data-index={index}>{value.name}</a></li>
-                    })}
-                </ol>
-            </Col>
-            <Col span={24}>
-                正在播放: <strong>{this.state.currentMusic.name}</strong>
-                <audio src={this.state.currentMusic.url} onTimeUpdate={this.updateProgress}
-                    onEnded={this.audioEnded} ref="audio" id="audio"></audio>
-                <Slider value={this.state.pgsPlay} onChange={this.handleClickProgress} />
-                <Row>
-                    <Col span={4}>
-                        <span style={{ height: '30px', lineHeight: '30px' }}>{this.state.playedTime}</span>
-                    </Col>
-                    <Col span={3}>
-                        <Button onClick={this.handleBtuPre}>
-                            <Icon type="step-backward" />
-                        </Button>
-                    </Col>
-                    <Col span={4}>
-                        <Button onClick={this.changePlayPause}>
-                            {this.state.playPause}
-                        </Button>
-                    </Col>
-                    <Col span={3}>
-                        <Button onClick={this.handleBtuNext} refs="stepForward">
-                            <Icon type="step-forward" />
-                        </Button>
-                    </Col>
-                    <Col span={4}>
-                        <span>{this.state.totalTime}</span>
-                    </Col>
-                    <Col span={6}>
-                        <Dropdown overlay={menu}>
-                            <Button ref="loopType">
-                                {this.state.loopType}<Icon type="down" />
+        return (<div>
+            <div id="search">
+                <Select defaultValue={this.state.interface[0].name} onChange={this.handleChange}>
+                    {
+                        this.state.interface.map((value, index) => {
+                            return <Option value={value.url} key={index}>{value.name}</Option>
+                        })
+                    }
+                </Select>
+                <Search placeholder="请输入视频地址" onSearch={(value) => {
+                    this.search(value)
+                }} enterButton="解析" />
+            </div>
+            <Row id="audioBox">
+                <Col span={24}>
+                    <ol ref="mlist" onClick={this.playByMe}>
+                        {this.state.data.map((value, index) => {
+                            return <li key={index}><a href={value.url} data-index={index}>{value.name}</a></li>
+                        })}
+                    </ol>
+                </Col>
+                <Col span={24}>
+                    正在播放: <strong>{this.state.currentMusic.name}</strong>
+                    <audio src={this.state.currentMusic.url} onTimeUpdate={this.updateProgress}
+                        onEnded={this.audioEnded} ref="audio" id="audio"></audio>
+                    <Slider value={this.state.pgsPlay} onChange={this.handleClickProgress} />
+                    <Row>
+                        <Col span={3}>
+                            <span style={{ height: '30px', lineHeight: '30px' }}>{this.state.playedTime}</span>
+                        </Col>
+                        <Col span={3}>
+                            <Button onClick={this.handleBtuPre}>
+                                <Icon type="step-backward" />
                             </Button>
-                        </Dropdown>
-                    </Col>
-                </Row>
-            </Col>
-        </Row>
+                        </Col>
+                        <Col span={4}>
+                            <Button onClick={this.changePlayPause}>
+                                {this.state.playPause}
+                            </Button>
+                        </Col>
+                        <Col span={3}>
+                            <Button onClick={this.handleBtuNext} refs="stepForward">
+                                <Icon type="step-forward" />
+                            </Button>
+                        </Col>
+                        <Col span={3}>
+                            <span style={{ height: '30px', lineHeight: '30px' }}>{this.state.totalTime}</span>
+                        </Col>
+                        <Col span={7}>
+                            <Dropdown overlay={menu}>
+                                <Button ref="loopType">
+                                    {this.state.loopType}<Icon type="down" />
+                                </Button>
+                            </Dropdown>
+                        </Col>
+                    </Row>
+                </Col>
+            </Row>
+        </div>
         );
     }
 }

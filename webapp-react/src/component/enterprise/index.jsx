@@ -50,6 +50,7 @@ class Enterprise extends React.Component {
             },
         }).then((responese) => {
             const jobInformation = [];
+            responese.data.key = 1;
             jobInformation.push(responese.data);
             this.props.setJobInformation(jobInformation);
         }).catch((err) => {
@@ -114,34 +115,34 @@ class Enterprise extends React.Component {
             <Router>
                 <div>
                     <Affix offsetTop={50}>
-                    <Menu
-                        theme={this.state.theme}
-                        onClick={this.handleClick}
-                        style={{ width: '100%' }}
-                        defaultOpenKeys={['sub1', 'sub2', 'sub3']}
-                        selectedKeys={[this.state.current]}
-                        mode="inline">
-                        <SubMenu key="sub1" title={<span><Icon type="mail" /><span>企业</span></span>}>
-                            <Menu.Item key="1" onClick={this.getUserInformation}>
-                                <Link to={`/enterprise/userInformation`}>修改注册信息</Link>
-                            </Menu.Item>
-                        </SubMenu>
-                        <SubMenu key="sub2" title={<span><Icon type="appstore" /><span>岗位</span></span>}>
-                            <Menu.Item key="2" onClick={this.initJob}>
-                                <Link to={`/enterprise/job`}>岗位发布</Link>
-                            </Menu.Item>
-                            <Menu.Item key="3" onClick={this.manageJob}>
-                                <Link to={`/enterprise/manageJob`}>岗位管理</Link>
-                            </Menu.Item>
-                        </SubMenu>
-                        <SubMenu key="sub3" title={<span><Icon type="appstore" /><span>简历</span></span>}>
-                            <Menu.Item key="5" onClick={this.resumeRecommendation}>
-                                <Link to={`/enterprise/recommendation`}>简历推荐</Link></Menu.Item>
-                            <Menu.Item key="6" onClick={this.getResumePreference}>
-                                <Link to={`/enterprise/preference`}>推荐设置</Link></Menu.Item>
-                            <Menu.Item key="7">简历收藏</Menu.Item>
-                        </SubMenu>
-                    </Menu>
+                        <Menu
+                            theme={this.state.theme}
+                            onClick={this.handleClick}
+                            style={{ width: '100%' }}
+                            defaultOpenKeys={['sub1', 'sub2', 'sub3']}
+                            selectedKeys={[this.state.current]}
+                            mode="inline">
+                            <SubMenu key="sub1" title={<span><Icon type="mail" /><span>企业</span></span>}>
+                                <Menu.Item key="1" onClick={this.getUserInformation}>
+                                    <Link to={`/enterprise/userInformation`}>修改注册信息</Link>
+                                </Menu.Item>
+                            </SubMenu>
+                            <SubMenu key="sub2" title={<span><Icon type="appstore" /><span>岗位</span></span>}>
+                                <Menu.Item key="2" onClick={this.initJob}>
+                                    <Link to={`/enterprise/job`}>岗位发布</Link>
+                                </Menu.Item>
+                                <Menu.Item key="3" onClick={this.manageJob}>
+                                    <Link to={`/enterprise/manageJob`}>岗位管理</Link>
+                                </Menu.Item>
+                            </SubMenu>
+                            <SubMenu key="sub3" title={<span><Icon type="appstore" /><span>简历</span></span>}>
+                                <Menu.Item key="5" onClick={this.resumeRecommendation}>
+                                    <Link to={`/enterprise/recommendation`}>简历推荐</Link></Menu.Item>
+                                <Menu.Item key="6" onClick={this.getResumePreference}>
+                                    <Link to={`/enterprise/preference`}>推荐设置</Link></Menu.Item>
+                                <Menu.Item key="7">简历收藏</Menu.Item>
+                            </SubMenu>
+                        </Menu>
                     </Affix>
                 </div>
                 <div>

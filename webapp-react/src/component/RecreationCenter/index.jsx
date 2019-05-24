@@ -25,11 +25,11 @@ export class recreationCenter extends React.Component {
           >
             <Menu.Item key="music">
               <Link to={`/recreationCenter/music`}>
-                <Icon type="customer-service" theme="filled" />音乐播放器</Link>
+                <Icon type="customer-service" theme="filled" />音乐解析</Link>
             </Menu.Item>
             <Menu.Item key="video">
               <Link to={`/recreationCenter/video`}>
-                <Icon type="video-camera" />视频播放器</Link>
+                <Icon type="video-camera" />视频解析</Link>
             </Menu.Item>
 
           </Menu>
