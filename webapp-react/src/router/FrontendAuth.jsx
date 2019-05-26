@@ -6,7 +6,8 @@ export class FrontendAuth extends React.Component {
     render() {
         const { location, config } = this.props;
         let { pathname } = location;
-        let isLogin = localStorage.getItem('__config_center_token') === "true" ? true : false;
+        const isLogin = localStorage.getItem('__config_center_token') === "true" ? true : false;
+        const login_type = localStorage.getItem('login_type');
         let targetRouterConfig;
         if ((pathname.split("/").length - 1) === 1) {
             targetRouterConfig = config.find((v) => v.path === pathname)
@@ -25,7 +26,13 @@ export class FrontendAuth extends React.Component {
                 return <Redirect to='/' />
             } else {
                 if (targetRouterConfig) {
-                    return <Route path={targetRouterConfig.path} component={targetRouterConfig.component} />
+                    if(targetRouterConfig.type===undefined){
+                        return <Route path={targetRouterConfig.path} component={targetRouterConfig.component} />
+                    }else if(targetRouterConfig.type!==undefined&targetRouterConfig.type===login_type){
+                        return <Route path={targetRouterConfig.path} component={targetRouterConfig.component} />
+                    }else{
+                        return <Redirect to='/404' />
+                    }
                 } else {
                     return <Redirect to='/404' />
                 }

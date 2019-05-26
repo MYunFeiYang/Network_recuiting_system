@@ -90,77 +90,95 @@ export const primaryRouterConfig = [
   {
     path: "/person",
     component: Person,
-    auth: true
+    auth: true,
+    type:'person'
   }, {
     path: "/person/userInformation",
     component: PersonUserInformation,
-    auth: true
+    auth: true,
+    type:'person'
   }, {
     path: "/person/resume",
     component: Resume,
-    auth: true
+    auth: true,
+    type:'person'
   }, {
     path: "/person/manageResume",
     component: manageResume,
-    auth: true
+    auth: true,
+    type:'person'
   }, {
     path: "/person/preference",
     component: JobPreference,
-    auth: true
+    auth: true,
+    type:'person'
   }, {
     path: "/person/recommendation",
     component: JobRecommendation,
-    auth: true
+    auth: true,
+    type:'person'
   },
   {
     path: "/enterprise",
     component: Enterprise,
-    auth: true
+    auth: true,
+    type:'enterprise'
   }, {
     path: "/enterprise/userInformation",
     component: UserInformation,
-    auth: true
+    auth: true,
+    type:'enterprise'
   }, {
     path: "/enterprise/job",
     component: Job,
-    auth: true
+    auth: true,
+    type:'enterprise'
   }, {
     path: "/enterprise/manageJob",
     component: ManageJob,
-    auth: true
+    auth: true,
+    type:'enterprise'
   }, {
     path: "/enterprise/recommendation",
     component: ResumeRecommendation,
-    auth: true
+    auth: true,
+    type:'enterprise'
   }, {
     path: "/enterprise/preference",
     component: Preference,
-    auth: true
+    auth: true,
+    type:'enterprise'
   },
   {
     path: "/admin",
     component: Admin,
-    auth: true
+    auth: true,
+    type:'admin'
   }, {
     path: "/admin/userInformation",
     component: AdminPower,
-    auth: true
+    auth: true,
+    type:'admin'
   }, {
     path: "/admin/personAssess",
     component: PersonAssess,
-    auth: true
+    auth: true,
+    type:'admin'
   }, {
     path: "/admin/personAccount",
     component: PersonAccount,
-    auth: true
+    auth: true,
+    type:'admin'
   }, {
     path: "/admin/enterpriseAssess",
     component: EnterpriseAssess,
-    auth: true
+    auth: true,
+    type:'admin'
   }, {
     path: "/admin/enterpriseAccount",
     component: EnterpriseAccount,
-    auth: true
+    auth: true,
+    type:'admin'
   }
 ];
 

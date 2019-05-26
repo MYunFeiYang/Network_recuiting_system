@@ -44,6 +44,7 @@ class Login extends React.Component {
             }
             else if (response.data.msg === "login_success") {
                 localStorage.setItem('__config_center_token',true)
+                localStorage.setItem('login_type',user.login_type)
                 isLogin('login', user);
                 switch (user.login_type) {
                     case "person":
