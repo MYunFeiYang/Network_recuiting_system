@@ -161,7 +161,7 @@ class Admin extends React.Component {
                             mode="inline">
                             <SubMenu key="sub1" title={<span><Icon type="mail" /><span>管理员</span></span>}>
                                 <Menu.Item key="1" onClick={this.getAdminInformation}>
-                                    <Link to={`/admin/userInformation`}>权限管理</Link>
+                                    <Link to={`/admin/userInformation`}>信息管理</Link>
                                 </Menu.Item>
                             </SubMenu>
                             <SubMenu key="sub2" title={<span><Icon type="appstore" /><span>个人管理</span></span>}>

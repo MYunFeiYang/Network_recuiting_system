@@ -105,10 +105,6 @@ class AdminPower extends React.Component {
       dataIndex: 'password',
       editable: true,
     }, {
-      title: '权限',
-      dataIndex: 'power',
-      editable: true,
-    }, {
       title: '操作',
       dataIndex: 'operation',
       render: (text, record) => (
@@ -136,7 +132,6 @@ class AdminPower extends React.Component {
       key: count,
       nickname: `*****`,
       password: '****',
-      power: `****`,
     };
     this.setState({
       count: count + 1,
@@ -184,9 +179,9 @@ class AdminPower extends React.Component {
       };
     });
     return (
-      <div>
+      <div id="power">
         <Button onClick={this.handleAdd} type="primary" style={{ marginBottom: 16 }}>
-          Add a row
+          添加用户
           </Button>
         <Table
           components={components}
@@ -194,6 +189,7 @@ class AdminPower extends React.Component {
           bordered
           dataSource={dataSource}
           columns={columns}
+          size="small"
         />
       </div>
     );

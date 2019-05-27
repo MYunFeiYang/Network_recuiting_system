@@ -29,7 +29,6 @@ public class Power {
                 Admin admin = new Admin();
                 admin.setNickname(rs.getString(1));
                 admin.setPassword(rs.getString(2));
-                admin.setPower(rs.getString(3));
                 adminList.add(admin);
             }
             response.getWriter().print(JSONArray.fromObject(adminList).toString());
