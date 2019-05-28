@@ -138,7 +138,7 @@ class Person extends React.Component {
                                 <Menu.Item key="6" onClick={this.getJobPreference}>
                                     <Link to={`/person/preference`}>岗位偏好</Link>
                                 </Menu.Item>
-                                <Menu.Item key="7">岗位收藏</Menu.Item>
+                                <Menu.Item key="7">浏览记录</Menu.Item>
                             </SubMenu>
                         </Menu>
                     </Affix>

@@ -170,7 +170,7 @@ public class Person {
         String password = request.getParameter("password");
         String name = request.getParameter("name");
         int age = Integer.parseInt(request.getParameter("age"));
-        String sex = request.getParameter("sex");
+        byte sex = Byte.parseByte(request.getParameter("sex"));
         String origin = request.getParameter("origin");
         String collage = request.getParameter("collage");
         String specialty = request.getParameter("specialty");
@@ -195,7 +195,7 @@ public class Person {
             ps.setString(3, password);
             ps.setString(4, name);
             ps.setInt(5, age);
-            ps.setString(6, sex);
+            ps.setByte(6, sex);
             ps.setString(7, origin);
             ps.setString(8, collage);
             ps.setString(9, specialty);

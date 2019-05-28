@@ -19,7 +19,7 @@ class Resume extends React.Component {
             autoCompleteResult: [],
             admission_data: '',
             graduation_data: '',
-            sex: '男',
+            sex: '1',
         };
     }
 
@@ -137,8 +137,8 @@ class Resume extends React.Component {
                     }]
                 })(
                     <Select onChange={this.onChange}>
-                        <Option value="男">男</Option>
-                        <Option value="女">女</Option>
+                        <Option value="1">男</Option>
+                        <Option value="0">女</Option>
                     </Select>
                 )}
 
@@ -224,7 +224,14 @@ class Resume extends React.Component {
                             required: true, message: '请输入学历!',
                         }],
                     })(
-                        <Input />
+                        <Select>
+                            <Option value="中专">中专</Option>
+                            <Option value="高中">高中</Option>
+                            <Option value="大专">大专</Option>
+                            <Option value="本科">本科</Option>
+                            <Option value="硕士">硕士</Option>
+                            <Option value="博士">博士</Option>
+                        </Select>
                     )}
                 </Form.Item>
                 <Form.Item
@@ -272,7 +279,13 @@ class Resume extends React.Component {
                             required: true, message: '请输入期望城市!',
                         }],
                     })(
-                        <Input />
+                        <Select>
+                            <Option value="武汉">武汉</Option>
+                            <Option value="北京">北京</Option>
+                            <Option value="上海">上海</Option>
+                            <Option value="广州">广州</Option>
+                            <Option value="深圳">深圳</Option>
+                        </Select>
                     )}
                 </Form.Item>
                 <Form.Item

@@ -140,7 +140,7 @@ class Enterprise extends React.Component {
                                     <Link to={`/enterprise/recommendation`}>简历推荐</Link></Menu.Item>
                                 <Menu.Item key="6" onClick={this.getResumePreference}>
                                     <Link to={`/enterprise/preference`}>推荐设置</Link></Menu.Item>
-                                <Menu.Item key="7">简历收藏</Menu.Item>
+                                <Menu.Item key="7">浏览记录</Menu.Item>
                             </SubMenu>
                         </Menu>
                     </Affix>
